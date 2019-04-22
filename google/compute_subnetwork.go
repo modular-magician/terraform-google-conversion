@@ -100,7 +100,7 @@ func GetComputeSubnetworkApiObject(d TerraformResourceData, config *Config) (map
 	enableFlowLogsProp, err := expandComputeSubnetworkEnableFlowLogs(d.Get("enable_flow_logs"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("enable_flow_logs"); ok || !reflect.DeepEqual(v, enableFlowLogsProp) {
+	} else if v, ok := d.GetOkExists("enable_flow_logs"); !isEmptyValue(reflect.ValueOf(enableFlowLogsProp)) && (ok || !reflect.DeepEqual(v, enableFlowLogsProp)) {
 		obj["enableFlowLogs"] = enableFlowLogsProp
 	}
 	fingerprintProp, err := expandComputeSubnetworkFingerprint(d.Get("fingerprint"), d, config)
