@@ -69,12 +69,6 @@ func GetComputeForwardingRuleApiObject(d TerraformResourceData, config *Config) 
 	} else if v, ok := d.GetOkExists("backend_service"); !isEmptyValue(reflect.ValueOf(backendServiceProp)) && (ok || !reflect.DeepEqual(v, backendServiceProp)) {
 		obj["backendService"] = backendServiceProp
 	}
-	ipVersionProp, err := expandComputeForwardingRuleIpVersion(d.Get("ip_version"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("ip_version"); !isEmptyValue(reflect.ValueOf(ipVersionProp)) && (ok || !reflect.DeepEqual(v, ipVersionProp)) {
-		obj["ipVersion"] = ipVersionProp
-	}
 	loadBalancingSchemeProp, err := expandComputeForwardingRuleLoadBalancingScheme(d.Get("load_balancing_scheme"), d, config)
 	if err != nil {
 		return nil, err
@@ -186,10 +180,6 @@ func expandComputeForwardingRuleBackendService(v interface{}, d TerraformResourc
 	return url + v.(string), nil
 }
 
-func expandComputeForwardingRuleIpVersion(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
-	return v, nil
-}
-
 func expandComputeForwardingRuleLoadBalancingScheme(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
@@ -223,32 +213,11 @@ func expandComputeForwardingRuleSubnetwork(v interface{}, d TerraformResourceDat
 }
 
 func expandComputeForwardingRuleTarget(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
-	// This method returns a full self link from a partial self link.
-	if v == nil || v.(string) == "" {
-		// It does not try to construct anything from empty.
-		return "", nil
-	} else if strings.HasPrefix(v.(string), "https://") {
-		// Anything that starts with a URL scheme is assumed to be a self link worth using.
-		return v, nil
-	} else if strings.HasPrefix(v.(string), "projects/") {
-		// If the self link references a project, we'll just stuck the compute v1 prefix on it.
-		return "https://www.googleapis.com/compute/v1/" + v.(string), nil
-	} else if strings.HasPrefix(v.(string), "regions/") || strings.HasPrefix(v.(string), "zones/") {
-		// For regional or zonal resources which include their region or zone, just put the project in front.
-		url, err := replaceVars(d, config, "https://www.googleapis.com/compute/v1/projects/{{project}}/")
-		if err != nil {
-			return nil, err
-		}
-		return url + v.(string), nil
-	}
-	// Anything else is assumed to be a regional resource, with a partial link that begins with the resource name.
-	// This isn't very likely - it's a last-ditch effort to extract something useful here.  We can do a better job
-	// as soon as MultiResourceRefs are working since we'll know the types that this field is supposed to point to.
-	url, err := replaceVars(d, config, "https://www.googleapis.com/compute/v1/projects/{{project}}/regions/{{region}}/")
+	f, err := parseRegionalFieldValue("targetPools", v.(string), "project", "region", "zone", d, config, true)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Invalid value for target: %s", err)
 	}
-	return url + v.(string), nil
+	return f.RelativeLink(), nil
 }
 
 func expandComputeForwardingRuleAllPorts(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
