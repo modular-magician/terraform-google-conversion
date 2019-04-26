@@ -4,7 +4,6 @@ require (
 	cloud.google.com/go v0.36.0
 	github.com/apparentlymart/go-cidr v1.0.0
 	github.com/blang/semver v3.5.1+incompatible // indirect
-	github.com/hashicorp/errwrap v1.0.0
 	github.com/hashicorp/go-getter v1.0.3 // indirect
 	github.com/hashicorp/go-uuid v1.0.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
