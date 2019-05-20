@@ -476,9 +476,8 @@ func expandComputeBackendServiceCdnPolicySignedUrlCacheMaxAgeSec(v interface{}, 
 	return v, nil
 }
 
-func expandComputeBackendServiceConnectionDraining(d TerraformResourceData, config *Config) (interface{}, error) {
+func expandComputeBackendServiceConnectionDraining(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	transformed := make(map[string]interface{})
-	// Note that nesting flattened objects won't work because we don't handle them properly here.
 	transformedConnection_draining_timeout_sec, err := expandComputeBackendServiceConnectionDrainingConnection_draining_timeout_sec(d.Get("connection_draining_timeout_sec"), d, config)
 	if err != nil {
 		return nil, err
