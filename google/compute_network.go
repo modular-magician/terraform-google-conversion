@@ -97,9 +97,8 @@ func expandComputeNetworkAutoCreateSubnetworks(v interface{}, d TerraformResourc
 	return v, nil
 }
 
-func expandComputeNetworkRoutingConfig(d TerraformResourceData, config *Config) (interface{}, error) {
+func expandComputeNetworkRoutingConfig(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	transformed := make(map[string]interface{})
-	// Note that nesting flattened objects won't work because we don't handle them properly here.
 	transformedRoutingMode, err := expandComputeNetworkRoutingConfigRoutingMode(d.Get("routing_mode"), d, config)
 	if err != nil {
 		return nil, err
