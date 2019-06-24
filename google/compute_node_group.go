@@ -29,8 +29,8 @@ func GetComputeNodeGroupCaiObject(d TerraformResourceData, config *Config) (Asse
 			Name: name,
 			Type: "compute.googleapis.com/NodeGroup",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
+				Version:              "ga",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/ga/rest",
 				DiscoveryName:        "NodeGroup",
 				Data:                 obj,
 			},

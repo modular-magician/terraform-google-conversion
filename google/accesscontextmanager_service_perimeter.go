@@ -26,8 +26,8 @@ func GetAccessContextManagerServicePerimeterCaiObject(d TerraformResourceData, c
 			Name: name,
 			Type: "accesscontextmanager.googleapis.com/ServicePerimeter",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/accesscontextmanager/v1/rest",
+				Version:              "ga",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/accesscontextmanager/ga/rest",
 				DiscoveryName:        "ServicePerimeter",
 				Data:                 obj,
 			},

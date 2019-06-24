@@ -30,8 +30,8 @@ func GetKmsCryptoKeyCaiObject(d TerraformResourceData, config *Config) (Asset, e
 			Name: name,
 			Type: "kms.googleapis.com/CryptoKey",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/kms/v1/rest",
+				Version:              "ga",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/kms/ga/rest",
 				DiscoveryName:        "CryptoKey",
 				Data:                 obj,
 			},

@@ -26,8 +26,8 @@ func GetPubsubTopicCaiObject(d TerraformResourceData, config *Config) (Asset, er
 			Name: name,
 			Type: "pubsub.googleapis.com/Topic",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/pubsub/v1/rest",
+				Version:              "ga",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/pubsub/ga/rest",
 				DiscoveryName:        "Topic",
 				Data:                 obj,
 			},

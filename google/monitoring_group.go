@@ -26,8 +26,8 @@ func GetMonitoringGroupCaiObject(d TerraformResourceData, config *Config) (Asset
 			Name: name,
 			Type: "monitoring.googleapis.com/Group",
 			Resource: &AssetResource{
-				Version:              "v3",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/monitoring/v3/rest",
+				Version:              "ga",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/monitoring/ga/rest",
 				DiscoveryName:        "Group",
 				Data:                 obj,
 			},

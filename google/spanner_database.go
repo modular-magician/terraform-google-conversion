@@ -29,8 +29,8 @@ func GetSpannerDatabaseCaiObject(d TerraformResourceData, config *Config) (Asset
 			Name: name,
 			Type: "spanner.googleapis.com/Database",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/spanner/v1/rest",
+				Version:              "ga",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/spanner/ga/rest",
 				DiscoveryName:        "Database",
 				Data:                 obj,
 			},

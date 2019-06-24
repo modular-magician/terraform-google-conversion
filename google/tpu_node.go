@@ -65,8 +65,8 @@ func GetTpuNodeCaiObject(d TerraformResourceData, config *Config) (Asset, error)
 			Name: name,
 			Type: "tpu.googleapis.com/Node",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/tpu/v1/rest",
+				Version:              "ga",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/tpu/ga/rest",
 				DiscoveryName:        "Node",
 				Data:                 obj,
 			},
