@@ -138,8 +138,8 @@ func GetComputeBackendServiceCaiObject(d TerraformResourceData, config *Config) 
 			Name: name,
 			Type: "compute.googleapis.com/BackendService",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
+				Version:              "backendServices",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/backendServices/rest",
 				DiscoveryName:        "BackendService",
 				Data:                 obj,
 			},

@@ -26,8 +26,8 @@ func GetAccessContextManagerAccessPolicyCaiObject(d TerraformResourceData, confi
 			Name: name,
 			Type: "accesscontextmanager.googleapis.com/AccessPolicy",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/accesscontextmanager/v1/rest",
+				Version:              "accessPolicies",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/accesscontextmanager/accessPolicies/rest",
 				DiscoveryName:        "AccessPolicy",
 				Data:                 obj,
 			},

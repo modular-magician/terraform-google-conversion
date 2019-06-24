@@ -26,8 +26,8 @@ func GetCloudBuildTriggerCaiObject(d TerraformResourceData, config *Config) (Ass
 			Name: name,
 			Type: "cloudbuild.googleapis.com/Trigger",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/cloudbuild/v1/rest",
+				Version:              "triggers",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/cloudbuild/triggers/rest",
 				DiscoveryName:        "Trigger",
 				Data:                 obj,
 			},

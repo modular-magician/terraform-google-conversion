@@ -29,8 +29,8 @@ func GetComputeTargetSslProxyCaiObject(d TerraformResourceData, config *Config) 
 			Name: name,
 			Type: "compute.googleapis.com/TargetSslProxy",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
+				Version:              "targetSslProxies",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/targetSslProxies/rest",
 				DiscoveryName:        "TargetSslProxy",
 				Data:                 obj,
 			},

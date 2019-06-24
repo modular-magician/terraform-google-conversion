@@ -29,8 +29,8 @@ func GetComputeSnapshotCaiObject(d TerraformResourceData, config *Config) (Asset
 			Name: name,
 			Type: "compute.googleapis.com/Snapshot",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
+				Version:              "snapshots",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/snapshots/rest",
 				DiscoveryName:        "Snapshot",
 				Data:                 obj,
 			},

@@ -29,8 +29,8 @@ func GetComputeImageCaiObject(d TerraformResourceData, config *Config) (Asset, e
 			Name: name,
 			Type: "compute.googleapis.com/Image",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
+				Version:              "images",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/images/rest",
 				DiscoveryName:        "Image",
 				Data:                 obj,
 			},

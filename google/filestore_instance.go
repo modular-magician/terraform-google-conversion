@@ -26,8 +26,8 @@ func GetFilestoreInstanceCaiObject(d TerraformResourceData, config *Config) (Ass
 			Name: name,
 			Type: "filestore.googleapis.com/Instance",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/filestore/v1/rest",
+				Version:              "instances?instanceId={{name}}",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/filestore/instances?instanceId={{name}}/rest",
 				DiscoveryName:        "Instance",
 				Data:                 obj,
 			},

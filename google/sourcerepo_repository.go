@@ -26,8 +26,8 @@ func GetSourceRepoRepositoryCaiObject(d TerraformResourceData, config *Config) (
 			Name: name,
 			Type: "sourcerepo.googleapis.com/Repository",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/sourcerepo/v1/rest",
+				Version:              "repos",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/sourcerepo/repos/rest",
 				DiscoveryName:        "Repository",
 				Data:                 obj,
 			},

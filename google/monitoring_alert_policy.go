@@ -26,8 +26,8 @@ func GetMonitoringAlertPolicyCaiObject(d TerraformResourceData, config *Config) 
 			Name: name,
 			Type: "monitoring.googleapis.com/AlertPolicy",
 			Resource: &AssetResource{
-				Version:              "v3",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/monitoring/v3/rest",
+				Version:              "alertPolicies",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/monitoring/alertPolicies/rest",
 				DiscoveryName:        "AlertPolicy",
 				Data:                 obj,
 			},

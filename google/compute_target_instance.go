@@ -30,8 +30,8 @@ func GetComputeTargetInstanceCaiObject(d TerraformResourceData, config *Config) 
 			Name: name,
 			Type: "compute.googleapis.com/TargetInstance",
 			Resource: &AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
+				Version:              "targetInstances",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/targetInstances/rest",
 				DiscoveryName:        "TargetInstance",
 				Data:                 obj,
 			},
