@@ -19,8 +19,6 @@ import (
 	"log"
 	"reflect"
 	"strings"
-
-	"github.com/hashicorp/terraform/helper/schema"
 )
 
 // Is the new disk size smaller than the old one?
