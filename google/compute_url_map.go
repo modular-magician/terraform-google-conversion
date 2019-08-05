@@ -14,11 +14,7 @@
 
 package google
 
-import (
-	"reflect"
-
-	"github.com/hashicorp/terraform/helper/schema"
-)
+import "reflect"
 
 func GetComputeUrlMapCaiObject(d TerraformResourceData, config *Config) (Asset, error) {
 	name, err := assetName(d, config, "//compute.googleapis.com/projects/{{project}}/global/urlMaps/{{name}}")
