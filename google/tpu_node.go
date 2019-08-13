@@ -18,8 +18,6 @@ import (
 	"fmt"
 	"reflect"
 	"regexp"
-
-	"github.com/hashicorp/terraform/helper/schema"
 )
 
 // compareTpuNodeSchedulingConfig diff suppresses for the default

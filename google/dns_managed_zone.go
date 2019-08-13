@@ -14,11 +14,7 @@
 
 package google
 
-import (
-	"reflect"
-
-	"github.com/hashicorp/terraform/helper/schema"
-)
+import "reflect"
 
 func GetDnsManagedZoneCaiObject(d TerraformResourceData, config *Config) (Asset, error) {
 	name, err := assetName(d, config, "//dns.googleapis.com/projects/{{project}}/managedZones/{{name}}")

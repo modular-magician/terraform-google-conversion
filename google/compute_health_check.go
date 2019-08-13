@@ -19,8 +19,6 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
-
-	"github.com/hashicorp/terraform/helper/schema"
 )
 
 // Whether the port should be set or not
