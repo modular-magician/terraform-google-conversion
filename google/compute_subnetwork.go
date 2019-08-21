@@ -19,8 +19,6 @@ import (
 	"net"
 	"reflect"
 	"strings"
-
-	"github.com/apparentlymart/go-cidr/cidr"
 )
 
 // Whether the IP CIDR change shrinks the block.

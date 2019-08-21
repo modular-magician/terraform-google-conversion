@@ -20,8 +20,6 @@ import (
 	"net"
 	"reflect"
 	"strings"
-
-	"github.com/hashicorp/terraform/helper/schema"
 )
 
 // validatePeerAddr returns false if a tunnel's peer_ip property
