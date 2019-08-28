@@ -18,8 +18,6 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-
-	"github.com/hashicorp/terraform/helper/schema"
 )
 
 func GetComputeForwardingRuleCaiObject(d TerraformResourceData, config *Config) (Asset, error) {

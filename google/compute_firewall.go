@@ -19,9 +19,6 @@ import (
 	"fmt"
 	"reflect"
 	"sort"
-
-	"github.com/hashicorp/terraform/helper/hashcode"
-	"github.com/hashicorp/terraform/helper/schema"
 )
 
 func resourceComputeFirewallRuleHash(v interface{}) int {
