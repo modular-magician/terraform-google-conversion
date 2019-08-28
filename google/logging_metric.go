@@ -228,7 +228,7 @@ func expandLoggingMetricBucketOptions(v interface{}, d TerraformResourceData, co
 	if err != nil {
 		return nil, err
 	} else if val := reflect.ValueOf(transformedExplicit); val.IsValid() && !isEmptyValue(val) {
-		transformed["explicit"] = transformedExplicit
+		transformed["explicitBuckets"] = transformedExplicit
 	}
 
 	return transformed, nil
