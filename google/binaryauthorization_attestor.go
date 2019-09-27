@@ -74,7 +74,7 @@ func resourceBinaryAuthorizationAttestorEncoder(d TerraformResourceData, meta in
 }
 
 func expandBinaryAuthorizationAttestorName(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
-	return replaceVars(d, config, "projects/{{project}}/attestors/{{name}}")
+	return v, nil
 }
 
 func expandBinaryAuthorizationAttestorDescription(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
