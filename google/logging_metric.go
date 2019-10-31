@@ -17,7 +17,7 @@ package google
 import "reflect"
 
 func GetLoggingMetricCaiObject(d TerraformResourceData, config *Config) (Asset, error) {
-	name, err := assetName(d, config, "//logging.googleapis.com/projects/{{project}}/metrics/{{%name}}")
+	name, err := assetName(d, config, "//logging.googleapis.com/projects/{{project}}/metrics/{{name}}")
 	if err != nil {
 		return Asset{}, err
 	}
