@@ -9,7 +9,6 @@
 package google
 
 import (
-	"errors"
 	"fmt"
 	"strings"
 
@@ -147,8 +146,6 @@ func expandComputeInstance(project string, d TerraformResourceData, config *Conf
 		DeletionProtection: d.Get("deletion_protection").(bool),
 		Hostname:           d.Get("hostname").(string),
 		ForceSendFields:    []string{"CanIpForward", "DeletionProtection"},
-		ShieldedVmConfig:   expandShieldedVmConfigs(d),
-		DisplayDevice:      expandDisplayDevice(d),
 	}, nil
 }
 
@@ -183,24 +180,9 @@ func expandAttachedDisk(diskConfig map[string]interface{}, d TerraformResourceDa
 		disk.DeviceName = v.(string)
 	}
 
-	keyValue, keyOk := diskConfig["disk_encryption_key_raw"]
-	if keyOk {
-		if keyValue != "" {
-			disk.DiskEncryptionKey = &computeBeta.CustomerEncryptionKey{
-				RawKey: keyValue.(string),
-			}
-		}
-	}
-
-	kmsValue, kmsOk := diskConfig["kms_key_self_link"]
-	if kmsOk {
-		if keyOk && keyValue != "" && kmsValue != "" {
-			return nil, errors.New("Only one of kms_key_self_link and disk_encryption_key_raw can be set")
-		}
-		if kmsValue != "" {
-			disk.DiskEncryptionKey = &computeBeta.CustomerEncryptionKey{
-				KmsKeyName: kmsValue.(string),
-			}
+	if v, ok := diskConfig["disk_encryption_key_raw"]; ok {
+		disk.DiskEncryptionKey = &computeBeta.CustomerEncryptionKey{
+			RawKey: v.(string),
 		}
 	}
 	return disk, nil
