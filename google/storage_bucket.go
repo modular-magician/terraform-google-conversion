@@ -128,7 +128,7 @@ func expandCors(configured []interface{}) []*storage.BucketCors {
 
 func expandBucketEncryption(configured interface{}) *storage.BucketEncryption {
 	encs := configured.([]interface{})
-	if len(encs) == 0 || encs[0] == nil {
+	if encs == nil || len(encs) == 0 || encs[0] == nil {
 		return nil
 	}
 	enc := encs[0].(map[string]interface{})

@@ -211,7 +211,11 @@ func suppressWindowsFamilyDiff(imageName, familyName string) bool {
 	updatedFamilyString := strings.Replace(familyName, "windows-", "windows-server-", 1)
 	updatedImageName := strings.Replace(imageName, "-dc-", "-", 1)
 
-	return strings.Contains(updatedImageName, updatedFamilyString)
+	if strings.Contains(updatedImageName, updatedFamilyString) {
+		return true
+	}
+
+	return false
 }
 
 func GetComputeDiskCaiObject(d TerraformResourceData, config *Config) (Asset, error) {
