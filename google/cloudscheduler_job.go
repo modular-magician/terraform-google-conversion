@@ -18,8 +18,6 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 // Both oidc and oauth headers cannot be set

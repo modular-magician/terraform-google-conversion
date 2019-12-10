@@ -14,11 +14,7 @@
 
 package google
 
-import (
-	"reflect"
-
-	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
-)
+import "reflect"
 
 func GetComputeSslCertificateCaiObject(d TerraformResourceData, config *Config) (Asset, error) {
 	name, err := assetName(d, config, "//compute.googleapis.com/projects/{{project}}/global/sslCertificates/{{name}}")

@@ -14,11 +14,7 @@
 
 package google
 
-import (
-	"reflect"
-
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-)
+import "reflect"
 
 func sslSettingsDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
 	// If certificate id is empty, and ssl management type is `MANUAL`, then
