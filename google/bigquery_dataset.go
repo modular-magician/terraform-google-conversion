@@ -18,8 +18,6 @@ import (
 	"fmt"
 	"reflect"
 	"regexp"
-
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 const datasetIdRegexp = `[0-9A-Za-z_]+`

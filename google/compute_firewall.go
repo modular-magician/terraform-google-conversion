@@ -20,9 +20,6 @@ import (
 	"reflect"
 	"sort"
 	"strings"
-
-	"github.com/hashicorp/terraform-plugin-sdk/helper/hashcode"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func resourceComputeFirewallRuleHash(v interface{}) int {

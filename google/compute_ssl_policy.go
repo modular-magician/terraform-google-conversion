@@ -17,8 +17,6 @@ package google
 import (
 	"fmt"
 	"reflect"
-
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func sslPolicyCustomizeDiff(diff *schema.ResourceDiff, v interface{}) error {

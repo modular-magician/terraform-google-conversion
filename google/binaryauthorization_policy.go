@@ -18,8 +18,6 @@ import (
 	"fmt"
 	"reflect"
 	"regexp"
-
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func defaultBinaryAuthorizationPolicy(project string) map[string]interface{} {
