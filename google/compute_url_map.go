@@ -17,8 +17,6 @@ package google
 import (
 	"fmt"
 	"reflect"
-
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func GetComputeUrlMapCaiObject(d TerraformResourceData, config *Config) (Asset, error) {
