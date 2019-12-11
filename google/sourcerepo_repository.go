@@ -14,11 +14,7 @@
 
 package google
 
-import (
-	"reflect"
-
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-)
+import "reflect"
 
 func GetSourceRepoRepositoryCaiObject(d TerraformResourceData, config *Config) (Asset, error) {
 	name, err := assetName(d, config, "//sourcerepo.googleapis.com/projects/{{project}}/repos/{{name}}")

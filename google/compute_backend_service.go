@@ -19,9 +19,6 @@ import (
 	"fmt"
 	"log"
 	"reflect"
-
-	"github.com/hashicorp/terraform-plugin-sdk/helper/hashcode"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func resourceGoogleComputeBackendServiceBackendHash(v interface{}) int {
