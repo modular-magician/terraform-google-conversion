@@ -14,11 +14,7 @@
 
 package google
 
-import (
-	"reflect"
-
-	"google.golang.org/api/bigtableadmin/v2"
-)
+import "reflect"
 
 func GetBigtableAppProfileCaiObject(d TerraformResourceData, config *Config) (Asset, error) {
 	name, err := assetName(d, config, "//bigtable.googleapis.com/projects/{{project}}/instances/{{instance}}/appProfiles/{{app_profile_id}}")
@@ -74,7 +70,7 @@ func expandBigtableAppProfileMultiClusterRoutingUseAny(v interface{}, d Terrafor
 		return nil, nil
 	}
 
-	return bigtableadmin.MultiClusterRoutingUseAny{}, nil
+	return map[string]interface{}{}, nil
 }
 
 func expandBigtableAppProfileSingleClusterRouting(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
