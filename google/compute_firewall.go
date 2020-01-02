@@ -107,12 +107,6 @@ func GetComputeFirewallApiObject(d TerraformResourceData, config *Config) (map[s
 	} else if v, ok := d.GetOkExists("disabled"); ok || !reflect.DeepEqual(v, disabledProp) {
 		obj["disabled"] = disabledProp
 	}
-	logConfigProp, err := expandComputeFirewallLogConfig(nil, d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("log_config"); !isEmptyValue(reflect.ValueOf(logConfigProp)) && (ok || !reflect.DeepEqual(v, logConfigProp)) {
-		obj["logConfig"] = logConfigProp
-	}
 	nameProp, err := expandComputeFirewallName(d.Get("name"), d, config)
 	if err != nil {
 		return nil, err
@@ -160,6 +154,12 @@ func GetComputeFirewallApiObject(d TerraformResourceData, config *Config) (map[s
 		return nil, err
 	} else if v, ok := d.GetOkExists("target_tags"); !isEmptyValue(reflect.ValueOf(targetTagsProp)) && (ok || !reflect.DeepEqual(v, targetTagsProp)) {
 		obj["targetTags"] = targetTagsProp
+	}
+	logConfigProp, err := expandComputeFirewallLogConfig(nil, d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("log_config"); !isEmptyValue(reflect.ValueOf(logConfigProp)) && (ok || !reflect.DeepEqual(v, logConfigProp)) {
+		obj["logConfig"] = logConfigProp
 	}
 
 	return obj, nil
@@ -258,22 +258,6 @@ func expandComputeFirewallDisabled(v interface{}, d TerraformResourceData, confi
 	return v, nil
 }
 
-func expandComputeFirewallLogConfig(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
-	transformed := make(map[string]interface{})
-	transformedEnableLogging, err := expandComputeFirewallLogConfigEnableLogging(d.Get("enable_logging"), d, config)
-	if err != nil {
-		return nil, err
-	} else {
-		transformed["enable"] = transformedEnableLogging
-	}
-
-	return transformed, nil
-}
-
-func expandComputeFirewallLogConfigEnableLogging(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
-	return v, nil
-}
-
 func expandComputeFirewallName(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
@@ -312,5 +296,21 @@ func expandComputeFirewallTargetServiceAccounts(v interface{}, d TerraformResour
 
 func expandComputeFirewallTargetTags(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	return v, nil
+}
+
+func expandComputeFirewallLogConfig(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+	transformed := make(map[string]interface{})
+	transformedEnable, err := expandComputeFirewallLogConfigEnable(d.Get("enable"), d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["enable"] = transformedEnable
+	}
+
+	return transformed, nil
+}
+
+func expandComputeFirewallLogConfigEnable(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
