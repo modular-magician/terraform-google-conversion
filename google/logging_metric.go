@@ -145,6 +145,13 @@ func expandLoggingMetricMetricDescriptor(v interface{}, d TerraformResourceData,
 		transformed["displayName"] = transformedDisplayName
 	}
 
+	transformedType, err := expandLoggingMetricMetricDescriptorType(original["type"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedType); val.IsValid() && !isEmptyValue(val) {
+		transformed["type"] = transformedType
+	}
+
 	return transformed, nil
 }
 
@@ -210,6 +217,10 @@ func expandLoggingMetricMetricDescriptorLabelsValueType(v interface{}, d Terrafo
 }
 
 func expandLoggingMetricMetricDescriptorDisplayName(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandLoggingMetricMetricDescriptorType(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
 
