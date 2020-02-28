@@ -11,7 +11,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/logging"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/pathorcontents"
 	"github.com/hashicorp/terraform-plugin-sdk/httpclient"
-	"github.com/terraform-providers/terraform-provider-google/version"
 
 	"golang.org/x/oauth2"
 	googleoauth "golang.org/x/oauth2/google"
@@ -270,7 +269,7 @@ func (c *Config) LoadAndValidate(ctx context.Context) error {
 	client.Timeout = c.synchronousTimeout()
 
 	tfUserAgent := httpclient.TerraformUserAgent(c.terraformVersion)
-	providerVersion := fmt.Sprintf("terraform-provider-google/%s", version.ProviderVersion)
+	providerVersion := "terraform-google-conversion"
 	userAgent := fmt.Sprintf("%s %s", tfUserAgent, providerVersion)
 
 	c.client = client
