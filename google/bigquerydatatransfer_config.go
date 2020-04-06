@@ -17,7 +17,7 @@ package google
 import "reflect"
 
 func GetBigqueryDataTransferConfigCaiObject(d TerraformResourceData, config *Config) (Asset, error) {
-	name, err := assetName(d, config, "//bigquerydatatransfer.googleapis.com/{{name}}")
+	name, err := assetName(d, config, "//bigquerydatatransfer.googleapis.com/{{name}}?serviceAccountName={{serviceAccountName}}")
 	if err != nil {
 		return Asset{}, err
 	}
