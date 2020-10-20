@@ -140,6 +140,13 @@ func expandBigQueryDatasetAccess(v interface{}, d TerraformResourceData, config 
 		original := raw.(map[string]interface{})
 		transformed := make(map[string]interface{})
 
+		transformedId, err := expandBigQueryDatasetAccessId(original["id"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedId); val.IsValid() && !isEmptyValue(val) {
+			transformed["id"] = transformedId
+		}
+
 		transformedDomain, err := expandBigQueryDatasetAccessDomain(original["domain"], d, config)
 		if err != nil {
 			return nil, err
@@ -185,6 +192,10 @@ func expandBigQueryDatasetAccess(v interface{}, d TerraformResourceData, config 
 		req = append(req, transformed)
 	}
 	return req, nil
+}
+
+func expandBigQueryDatasetAccessId(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandBigQueryDatasetAccessDomain(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
