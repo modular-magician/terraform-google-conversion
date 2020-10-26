@@ -1307,11 +1307,11 @@ func expandOSConfigPatchDeploymentRolloutDisruptionBudget(v interface{}, d Terra
 		transformed["fixed"] = transformedFixed
 	}
 
-	transformedPercentage, err := expandOSConfigPatchDeploymentRolloutDisruptionBudgetPercentage(original["percentage"], d, config)
+	transformedPercent, err := expandOSConfigPatchDeploymentRolloutDisruptionBudgetPercent(original["percent"], d, config)
 	if err != nil {
 		return nil, err
-	} else if val := reflect.ValueOf(transformedPercentage); val.IsValid() && !isEmptyValue(val) {
-		transformed["percentage"] = transformedPercentage
+	} else if val := reflect.ValueOf(transformedPercent); val.IsValid() && !isEmptyValue(val) {
+		transformed["percent"] = transformedPercent
 	}
 
 	return transformed, nil
@@ -1321,6 +1321,6 @@ func expandOSConfigPatchDeploymentRolloutDisruptionBudgetFixed(v interface{}, d 
 	return v, nil
 }
 
-func expandOSConfigPatchDeploymentRolloutDisruptionBudgetPercentage(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+func expandOSConfigPatchDeploymentRolloutDisruptionBudgetPercent(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
