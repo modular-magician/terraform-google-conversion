@@ -120,6 +120,12 @@ func GetRedisInstanceApiObject(d TerraformResourceData, config *Config) (map[str
 	} else if v, ok := d.GetOkExists("tier"); !isEmptyValue(reflect.ValueOf(tierProp)) && (ok || !reflect.DeepEqual(v, tierProp)) {
 		obj["tier"] = tierProp
 	}
+	transitEncryptionModeProp, err := expandRedisInstanceTransitEncryptionMode(d.Get("transit_encryption_mode"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("transit_encryption_mode"); !isEmptyValue(reflect.ValueOf(transitEncryptionModeProp)) && (ok || !reflect.DeepEqual(v, transitEncryptionModeProp)) {
+		obj["transitEncryptionMode"] = transitEncryptionModeProp
+	}
 
 	return resourceRedisInstanceEncoder(d, config, obj)
 }
@@ -203,5 +209,9 @@ func expandRedisInstanceReservedIpRange(v interface{}, d TerraformResourceData, 
 }
 
 func expandRedisInstanceTier(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandRedisInstanceTransitEncryptionMode(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
