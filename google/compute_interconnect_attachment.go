@@ -72,6 +72,18 @@ func GetComputeInterconnectAttachmentApiObject(d TerraformResourceData, config *
 	} else if v, ok := d.GetOkExists("edge_availability_domain"); !isEmptyValue(reflect.ValueOf(edgeAvailabilityDomainProp)) && (ok || !reflect.DeepEqual(v, edgeAvailabilityDomainProp)) {
 		obj["edgeAvailabilityDomain"] = edgeAvailabilityDomainProp
 	}
+	partnerMetadataProp, err := expandComputeInterconnectAttachmentPartnerMetadata(d.Get("partner_metadata"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("partner_metadata"); !isEmptyValue(reflect.ValueOf(partnerMetadataProp)) && (ok || !reflect.DeepEqual(v, partnerMetadataProp)) {
+		obj["partnerMetadata"] = partnerMetadataProp
+	}
+	pairingKeyProp, err := expandComputeInterconnectAttachmentPairingKey(d.Get("pairing_key"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("pairing_key"); !isEmptyValue(reflect.ValueOf(pairingKeyProp)) && (ok || !reflect.DeepEqual(v, pairingKeyProp)) {
+		obj["pairingKey"] = pairingKeyProp
+	}
 	typeProp, err := expandComputeInterconnectAttachmentType(d.Get("type"), d, config)
 	if err != nil {
 		return nil, err
@@ -129,6 +141,55 @@ func expandComputeInterconnectAttachmentBandwidth(v interface{}, d TerraformReso
 }
 
 func expandComputeInterconnectAttachmentEdgeAvailabilityDomain(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeInterconnectAttachmentPartnerMetadata(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedPartnerName, err := expandComputeInterconnectAttachmentPartnerMetadataPartnerName(original["partner_name"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPartnerName); val.IsValid() && !isEmptyValue(val) {
+		transformed["partnerName"] = transformedPartnerName
+	}
+
+	transformedInterconnectName, err := expandComputeInterconnectAttachmentPartnerMetadataInterconnectName(original["interconnect_name"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedInterconnectName); val.IsValid() && !isEmptyValue(val) {
+		transformed["interconnectName"] = transformedInterconnectName
+	}
+
+	transformedPortalUrl, err := expandComputeInterconnectAttachmentPartnerMetadataPortalUrl(original["portal_url"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPortalUrl); val.IsValid() && !isEmptyValue(val) {
+		transformed["portalUrl"] = transformedPortalUrl
+	}
+
+	return transformed, nil
+}
+
+func expandComputeInterconnectAttachmentPartnerMetadataPartnerName(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeInterconnectAttachmentPartnerMetadataInterconnectName(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeInterconnectAttachmentPartnerMetadataPortalUrl(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeInterconnectAttachmentPairingKey(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
 
