@@ -16,40 +16,40 @@ package google
 
 import "fmt"
 
-func GetStorageBucketIamPolicyCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
+func GetComputeSubnetworkIamPolicyCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
 	return newBucketIamAsset(d, config, expandIamPolicyBindings)
 }
 
-func GetStorageBucketIamBindingCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
+func GetComputeSubnetworkIamBindingCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
 	return newBucketIamAsset(d, config, expandIamRoleBindings)
 }
 
-func GetStorageBucketIamMemberCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
-	return newStorageBucketIamAsset(d, config, expandIamMemberBindings)
+func GetComputeSubnetworkIamMemberCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
+	return newComputeSubnetworkIamAsset(d, config, expandIamMemberBindings)
 }
 
-func MergeStorageBucketIamPolicy(existing, incoming Asset) Asset {
+func MergeComputeSubnetworkIamPolicy(existing, incoming Asset) Asset {
 	existing.IAMPolicy = incoming.IAMPolicy
 	return existing
 }
 
-func MergeStorageBucketIamBinding(existing, incoming Asset) Asset {
+func MergeComputeSubnetworkIamBinding(existing, incoming Asset) Asset {
 	return mergeIamAssets(existing, incoming, mergeAuthoritativeBindings)
 }
 
-func MergeStorageBucketIamBindingDelete(existing, incoming Asset) Asset {
+func MergeComputeSubnetworkIamBindingDelete(existing, incoming Asset) Asset {
 	return mergeDeleteIamAssets(existing, incoming, mergeDeleteAuthoritativeBindings)
 }
 
-func MergeStorageBucketIamMember(existing, incoming Asset) Asset {
+func MergeComputeSubnetworkIamMember(existing, incoming Asset) Asset {
 	return mergeIamAssets(existing, incoming, mergeAdditiveBindings)
 }
 
-func MergeStorageBucketIamMemberDelete(existing, incoming Asset) Asset {
+func MergeComputeSubnetworkIamMemberDelete(existing, incoming Asset) Asset {
 	return mergeDeleteIamAssets(existing, incoming, mergeDeleteAdditiveBindings)
 }
 
-func newStorageBucketIamAsset(
+func newComputeSubnetworkIamAsset(
 	d TerraformResourceData,
 	config *Config,
 	expandBindings func(d TerraformResourceData) ([]IAMBinding, error),
@@ -59,31 +59,31 @@ func newStorageBucketIamAsset(
 		return []Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := assetName(d, config, "//storage.googleapis.com/{{storage}}")
+	name, err := assetName(d, config, "//storage.googleapis.com/{{compute}}")
 	if err != nil {
 		return []Asset{}, err
 	}
 
 	return []Asset{{
 		Name: name,
-		Type: "storage.googleapis.com/StorageBucket",
+		Type: "storage.googleapis.com/ComputeSubnetwork",
 		IAMPolicy: &IAMPolicy{
 			Bindings: bindings,
 		},
 	}}, nil
 }
 
-func FetchStorageBucketIamPolicy(d TerraformResourceData, config *Config) (Asset, error) {
+func FetchComputeSubnetworkIamPolicy(d TerraformResourceData, config *Config) (Asset, error) {
 	// Check if the identity field returns a value
-	if _, ok := d.GetOk("{{storage}}"); !ok {
+	if _, ok := d.GetOk("{{compute}}"); !ok {
 		return Asset{}, ErrEmptyIdentityField
 	}
 
 	return fetchIamPolicy(
-		StorageBucketIamUpdaterProducer,
+		ComputeSubnetworkIamUpdaterProducer,
 		d,
 		config,
-		"//storage.googleapis.com/{{storage}}",
-		"storage.googleapis.com/StorageBucket",
+		"//storage.googleapis.com/{{compute}}",
+		"storage.googleapis.com/ComputeSubnetwork",
 	)
 }

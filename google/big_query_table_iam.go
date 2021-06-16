@@ -16,40 +16,40 @@ package google
 
 import "fmt"
 
-func GetStorageBucketIamPolicyCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
+func GetBigQueryTableIamPolicyCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
 	return newBucketIamAsset(d, config, expandIamPolicyBindings)
 }
 
-func GetStorageBucketIamBindingCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
+func GetBigQueryTableIamBindingCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
 	return newBucketIamAsset(d, config, expandIamRoleBindings)
 }
 
-func GetStorageBucketIamMemberCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
-	return newStorageBucketIamAsset(d, config, expandIamMemberBindings)
+func GetBigQueryTableIamMemberCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
+	return newBigQueryTableIamAsset(d, config, expandIamMemberBindings)
 }
 
-func MergeStorageBucketIamPolicy(existing, incoming Asset) Asset {
+func MergeBigQueryTableIamPolicy(existing, incoming Asset) Asset {
 	existing.IAMPolicy = incoming.IAMPolicy
 	return existing
 }
 
-func MergeStorageBucketIamBinding(existing, incoming Asset) Asset {
+func MergeBigQueryTableIamBinding(existing, incoming Asset) Asset {
 	return mergeIamAssets(existing, incoming, mergeAuthoritativeBindings)
 }
 
-func MergeStorageBucketIamBindingDelete(existing, incoming Asset) Asset {
+func MergeBigQueryTableIamBindingDelete(existing, incoming Asset) Asset {
 	return mergeDeleteIamAssets(existing, incoming, mergeDeleteAuthoritativeBindings)
 }
 
-func MergeStorageBucketIamMember(existing, incoming Asset) Asset {
+func MergeBigQueryTableIamMember(existing, incoming Asset) Asset {
 	return mergeIamAssets(existing, incoming, mergeAdditiveBindings)
 }
 
-func MergeStorageBucketIamMemberDelete(existing, incoming Asset) Asset {
+func MergeBigQueryTableIamMemberDelete(existing, incoming Asset) Asset {
 	return mergeDeleteIamAssets(existing, incoming, mergeDeleteAdditiveBindings)
 }
 
-func newStorageBucketIamAsset(
+func newBigQueryTableIamAsset(
 	d TerraformResourceData,
 	config *Config,
 	expandBindings func(d TerraformResourceData) ([]IAMBinding, error),
@@ -59,31 +59,31 @@ func newStorageBucketIamAsset(
 		return []Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := assetName(d, config, "//storage.googleapis.com/{{storage}}")
+	name, err := assetName(d, config, "//storage.googleapis.com/{{bigquery}}")
 	if err != nil {
 		return []Asset{}, err
 	}
 
 	return []Asset{{
 		Name: name,
-		Type: "storage.googleapis.com/StorageBucket",
+		Type: "storage.googleapis.com/BigQueryTable",
 		IAMPolicy: &IAMPolicy{
 			Bindings: bindings,
 		},
 	}}, nil
 }
 
-func FetchStorageBucketIamPolicy(d TerraformResourceData, config *Config) (Asset, error) {
+func FetchBigQueryTableIamPolicy(d TerraformResourceData, config *Config) (Asset, error) {
 	// Check if the identity field returns a value
-	if _, ok := d.GetOk("{{storage}}"); !ok {
+	if _, ok := d.GetOk("{{bigquery}}"); !ok {
 		return Asset{}, ErrEmptyIdentityField
 	}
 
 	return fetchIamPolicy(
-		StorageBucketIamUpdaterProducer,
+		BigQueryTableIamUpdaterProducer,
 		d,
 		config,
-		"//storage.googleapis.com/{{storage}}",
-		"storage.googleapis.com/StorageBucket",
+		"//storage.googleapis.com/{{bigquery}}",
+		"storage.googleapis.com/BigQueryTable",
 	)
 }
