@@ -274,6 +274,14 @@ func resourceComputeRegionBackendServiceEncoder(d TerraformResourceData, meta in
 		return obj, nil
 	}
 
+	b, a := d.GetChange("subsetting.0.policy")
+
+	// This is for situations where TF users remove the block but the API requires policy to be set to NONE to disable it.
+	if b.(string) == "CONSISTENT_HASH_SUBSETTING" && a.(string) == "" {
+		disableSubsetting := map[string]string{"policy": "NONE"}
+		obj["subsetting"] = disableSubsetting
+	}
+
 	backendServiceOnlyManagedApiFieldNames := []string{
 		"capacityScaler",
 		"maxConnections",
