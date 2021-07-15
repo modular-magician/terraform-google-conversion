@@ -70,6 +70,7 @@ type Config struct {
 	BatchingConfig                     *batchingConfig
 	UserProjectOverride                bool
 	RequestTimeout                     time.Duration
+	ProviderVersion                    string
 	// PollInterval is passed to resource.StateChangeConf in common_operation.go
 	// It controls the interval at which we poll for successful operations
 	PollInterval time.Duration
