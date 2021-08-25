@@ -9,14 +9,23 @@ import (
 )
 
 type BigtableClientFactory struct {
-	UserAgent   string
-	TokenSource oauth2.TokenSource
+	UserAgent          string
+	TokenSource        oauth2.TokenSource
+	gRPCLoggingOptions []option.ClientOption
 }
 
 func (s BigtableClientFactory) NewInstanceAdminClient(project string) (*bigtable.InstanceAdminClient, error) {
-	return bigtable.NewInstanceAdminClient(context.Background(), project, option.WithTokenSource(s.TokenSource), option.WithUserAgent(s.UserAgent))
+	var opts []option.ClientOption
+	opts = append(opts, option.WithTokenSource(s.TokenSource), option.WithUserAgent(s.UserAgent))
+	opts = append(opts, s.gRPCLoggingOptions...)
+
+	return bigtable.NewInstanceAdminClient(context.Background(), project, opts...)
 }
 
 func (s BigtableClientFactory) NewAdminClient(project, instance string) (*bigtable.AdminClient, error) {
-	return bigtable.NewAdminClient(context.Background(), project, instance, option.WithTokenSource(s.TokenSource), option.WithUserAgent(s.UserAgent))
+	var opts []option.ClientOption
+	opts = append(opts, option.WithTokenSource(s.TokenSource), option.WithUserAgent(s.UserAgent))
+	opts = append(opts, s.gRPCLoggingOptions...)
+
+	return bigtable.NewAdminClient(context.Background(), project, instance, opts...)
 }
