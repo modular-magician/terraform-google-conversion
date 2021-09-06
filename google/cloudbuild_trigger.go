@@ -107,6 +107,12 @@ func GetCloudBuildTriggerApiObject(d TerraformResourceData, config *Config) (map
 	} else if v, ok := d.GetOkExists("disabled"); !isEmptyValue(reflect.ValueOf(disabledProp)) && (ok || !reflect.DeepEqual(v, disabledProp)) {
 		obj["disabled"] = disabledProp
 	}
+	serviceAccountProp, err := expandCloudBuildTriggerServiceAccount(d.Get("service_account"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("service_account"); !isEmptyValue(reflect.ValueOf(serviceAccountProp)) && (ok || !reflect.DeepEqual(v, serviceAccountProp)) {
+		obj["serviceAccount"] = serviceAccountProp
+	}
 	substitutionsProp, err := expandCloudBuildTriggerSubstitutions(d.Get("substitutions"), d, config)
 	if err != nil {
 		return nil, err
@@ -178,6 +184,10 @@ func expandCloudBuildTriggerTags(v interface{}, d TerraformResourceData, config 
 }
 
 func expandCloudBuildTriggerDisabled(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudBuildTriggerServiceAccount(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
 
