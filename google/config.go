@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging"
 	"google.golang.org/api/option"
 
+	gops "github.com/shirou/gopsutil/process"
 	"golang.org/x/oauth2"
 	googleoauth "golang.org/x/oauth2/google"
 	appengine "google.golang.org/api/appengine/v1"
@@ -389,9 +390,39 @@ func (c *Config) LoadAndValidate(ctx context.Context) error {
 	// 4. Header Transport - outer wrapper to inject additional headers we want to apply
 	// before making requests
 	headerTransport := newTransportWithHeaders(retryTransport)
-	if c.RequestReason != "" {
-		headerTransport.Set("X-Goog-Request-Reason", c.RequestReason)
+
+	// Retrieve the verb being used by terraform core (apply/plan/destroy/refresh)
+	// by fetching all processes on the OS and retrieving the process named "terraform".
+	// The verb is appended to the X-Goog-Request-Reason by default as long as a matching process
+	// is retrieved.
+	var verb string
+	processes, err := gops.Processes()
+	if err != nil {
+		return err
 	}
+	for _, p := range processes {
+		processName, err := p.Name()
+		if err != nil {
+			return err
+		}
+		if processName == "terraform" {
+			log.Printf("[INFO] found terraform process")
+			cmdLine, err := p.Cmdline()
+			if err != nil {
+				return err
+			}
+
+			re := regexp.MustCompile(" plan| apply| refresh| import")
+			verb = re.FindString(cmdLine)
+			log.Printf("[DEBUG] cmdLine %v", cmdLine)
+			log.Printf("[DEBUG] verb: %v", verb)
+			log.Printf("[DEBUG] process name: %v", processName)
+		}
+	}
+
+	// Append verb to user agent
+	ua := c.userAgent
+	c.userAgent = fmt.Sprintf("%v - %v", ua, verb)
 
 	// Ensure $userProject is set for all HTTP requests using the client if specified by the provider config
 	// See https://cloud.google.com/apis/docs/system-parameters
