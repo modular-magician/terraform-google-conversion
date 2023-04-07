@@ -26,7 +26,7 @@ func resourceConverterCertificateManagerCertificateMap() ResourceConverter {
 }
 
 func GetCertificateManagerCertificateMapCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
-	name, err := assetName(d, config, "//certificatemanager.googleapis.com/projects/{{project}}/locations/global/certificateMaps/{{name}}")
+	name, err := assetName(d, config, "//certificatemanager.googleapis.com/projects/{{project}}/locations/{{location}}/certificateMaps/{{name}}")
 	if err != nil {
 		return []Asset{}, err
 	}

@@ -26,7 +26,7 @@ func resourceConverterCertificateManagerDnsAuthorization() ResourceConverter {
 }
 
 func GetCertificateManagerDnsAuthorizationCaiObject(d TerraformResourceData, config *Config) ([]Asset, error) {
-	name, err := assetName(d, config, "//certificatemanager.googleapis.com/projects/{{project}}/locations/global/dnsAuthorizations/{{name}}")
+	name, err := assetName(d, config, "//certificatemanager.googleapis.com/projects/{{project}}/locations/{{location}}/dnsAuthorizations/{{name}}")
 	if err != nil {
 		return []Asset{}, err
 	}
