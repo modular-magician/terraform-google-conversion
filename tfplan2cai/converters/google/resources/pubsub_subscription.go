@@ -151,6 +151,12 @@ func GetPubsubSubscriptionApiObject(d TerraformResourceData, config *Config) (ma
 	} else if v, ok := d.GetOkExists("enable_exactly_once_delivery"); !isEmptyValue(reflect.ValueOf(enableExactlyOnceDeliveryProp)) && (ok || !reflect.DeepEqual(v, enableExactlyOnceDeliveryProp)) {
 		obj["enableExactlyOnceDelivery"] = enableExactlyOnceDeliveryProp
 	}
+	detachedProp, err := expandPubsubSubscriptionDetached(d.Get("detached"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("detached"); !isEmptyValue(reflect.ValueOf(detachedProp)) && (ok || !reflect.DeepEqual(v, detachedProp)) {
+		obj["detached"] = detachedProp
+	}
 
 	return resourcePubsubSubscriptionEncoder(d, config, obj)
 }
@@ -452,5 +458,9 @@ func expandPubsubSubscriptionEnableMessageOrdering(v interface{}, d TerraformRes
 }
 
 func expandPubsubSubscriptionEnableExactlyOnceDelivery(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandPubsubSubscriptionDetached(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
