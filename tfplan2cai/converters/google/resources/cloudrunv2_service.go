@@ -281,13 +281,6 @@ func expandCloudRunV2ServiceTemplate(v interface{}, d TerraformResourceData, con
 		transformed["maxInstanceRequestConcurrency"] = transformedMaxInstanceRequestConcurrency
 	}
 
-	transformedSessionAffinity, err := expandCloudRunV2ServiceTemplateSessionAffinity(original["session_affinity"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedSessionAffinity); val.IsValid() && !isEmptyValue(val) {
-		transformed["sessionAffinity"] = transformedSessionAffinity
-	}
-
 	return transformed, nil
 }
 
@@ -621,13 +614,6 @@ func expandCloudRunV2ServiceTemplateContainersResources(v interface{}, d Terrafo
 		transformed["cpuIdle"] = transformedCpuIdle
 	}
 
-	transformedStartupCpuBoost, err := expandCloudRunV2ServiceTemplateContainersResourcesStartupCpuBoost(original["startup_cpu_boost"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedStartupCpuBoost); val.IsValid() && !isEmptyValue(val) {
-		transformed["startupCpuBoost"] = transformedStartupCpuBoost
-	}
-
 	return transformed, nil
 }
 
@@ -643,10 +629,6 @@ func expandCloudRunV2ServiceTemplateContainersResourcesLimits(v interface{}, d T
 }
 
 func expandCloudRunV2ServiceTemplateContainersResourcesCpuIdle(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudRunV2ServiceTemplateContainersResourcesStartupCpuBoost(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -826,13 +808,6 @@ func expandCloudRunV2ServiceTemplateContainersLivenessProbeHttpGet(v interface{}
 		transformed["path"] = transformedPath
 	}
 
-	transformedPort, err := expandCloudRunV2ServiceTemplateContainersLivenessProbeHttpGetPort(original["port"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedPort); val.IsValid() && !isEmptyValue(val) {
-		transformed["port"] = transformedPort
-	}
-
 	transformedHttpHeaders, err := expandCloudRunV2ServiceTemplateContainersLivenessProbeHttpGetHttpHeaders(original["http_headers"], d, config)
 	if err != nil {
 		return nil, err
@@ -844,10 +819,6 @@ func expandCloudRunV2ServiceTemplateContainersLivenessProbeHttpGet(v interface{}
 }
 
 func expandCloudRunV2ServiceTemplateContainersLivenessProbeHttpGetPath(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudRunV2ServiceTemplateContainersLivenessProbeHttpGetPort(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -1053,13 +1024,6 @@ func expandCloudRunV2ServiceTemplateContainersStartupProbeHttpGet(v interface{},
 		transformed["path"] = transformedPath
 	}
 
-	transformedPort, err := expandCloudRunV2ServiceTemplateContainersStartupProbeHttpGetPort(original["port"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedPort); val.IsValid() && !isEmptyValue(val) {
-		transformed["port"] = transformedPort
-	}
-
 	transformedHttpHeaders, err := expandCloudRunV2ServiceTemplateContainersStartupProbeHttpGetHttpHeaders(original["http_headers"], d, config)
 	if err != nil {
 		return nil, err
@@ -1071,10 +1035,6 @@ func expandCloudRunV2ServiceTemplateContainersStartupProbeHttpGet(v interface{},
 }
 
 func expandCloudRunV2ServiceTemplateContainersStartupProbeHttpGetPath(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudRunV2ServiceTemplateContainersStartupProbeHttpGetPort(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -1343,10 +1303,6 @@ func expandCloudRunV2ServiceTemplateEncryptionKey(v interface{}, d TerraformReso
 }
 
 func expandCloudRunV2ServiceTemplateMaxInstanceRequestConcurrency(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudRunV2ServiceTemplateSessionAffinity(v interface{}, d TerraformResourceData, config *Config) (interface{}, error) {
 	return v, nil
 }
 
