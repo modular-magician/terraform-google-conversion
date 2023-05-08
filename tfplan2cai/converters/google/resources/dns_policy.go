@@ -20,7 +20,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 )
 
@@ -202,5 +201,5 @@ func expandDNSPolicyNetworksNetworkUrl(v interface{}, d TerraformResourceData, c
 	if err != nil {
 		return "", err
 	}
-	return tpgresource.ConvertSelfLinkToV1(url), nil
+	return ConvertSelfLinkToV1(url), nil
 }

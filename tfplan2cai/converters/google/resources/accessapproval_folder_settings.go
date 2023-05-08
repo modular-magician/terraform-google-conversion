@@ -22,7 +22,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 )
 
@@ -47,7 +46,7 @@ func accessApprovalEnrolledServicesHash(v interface{}) int {
 	}
 	buf.WriteString(fmt.Sprintf("%s-", strings.ToLower(cp))) // ToLower just in case
 	buf.WriteString(fmt.Sprintf("%s-", strings.ToLower(m["enrollment_level"].(string))))
-	return tpgresource.Hashcode(buf.String())
+	return hashcode(buf.String())
 }
 
 const AccessApprovalFolderSettingsAssetType string = "accessapproval.googleapis.com/FolderSettings"

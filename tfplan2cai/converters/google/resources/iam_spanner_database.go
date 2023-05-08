@@ -5,7 +5,6 @@ import (
 
 	"github.com/hashicorp/errwrap"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 	"google.golang.org/api/cloudresourcemanager/v1"
 	"google.golang.org/api/spanner/v1"
@@ -134,7 +133,7 @@ func (u *SpannerDatabaseIamUpdater) DescribeResource() string {
 
 func resourceManagerToSpannerPolicy(p *cloudresourcemanager.Policy) (*spanner.Policy, error) {
 	out := &spanner.Policy{}
-	err := tpgresource.Convert(p, out)
+	err := Convert(p, out)
 	if err != nil {
 		return nil, errwrap.Wrapf("Cannot convert a resourcemanager policy to a spanner policy: {{err}}", err)
 	}
@@ -143,7 +142,7 @@ func resourceManagerToSpannerPolicy(p *cloudresourcemanager.Policy) (*spanner.Po
 
 func spannerToResourceManagerPolicy(p *spanner.Policy) (*cloudresourcemanager.Policy, error) {
 	out := &cloudresourcemanager.Policy{}
-	err := tpgresource.Convert(p, out)
+	err := Convert(p, out)
 	if err != nil {
 		return nil, errwrap.Wrapf("Cannot convert a spanner policy to a resourcemanager policy: {{err}}", err)
 	}

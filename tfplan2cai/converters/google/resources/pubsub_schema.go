@@ -17,7 +17,6 @@ package google
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 )
 
@@ -84,5 +83,5 @@ func expandPubsubSchemaDefinition(v interface{}, d TerraformResourceData, config
 }
 
 func expandPubsubSchemaName(v interface{}, d TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.GetResourceNameFromSelfLink(v.(string)), nil
+	return GetResourceNameFromSelfLink(v.(string)), nil
 }

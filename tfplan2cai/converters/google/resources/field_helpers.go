@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 )
 
@@ -147,7 +146,7 @@ func parseGlobalFieldValue(resourceType, fieldValue, projectSchemaField string, 
 
 	return &GlobalFieldValue{
 		Project: project,
-		Name:    tpgresource.GetResourceNameFromSelfLink(fieldValue),
+		Name:    GetResourceNameFromSelfLink(fieldValue),
 
 		resourceType: resourceType,
 	}, nil
@@ -226,7 +225,7 @@ func parseZonalFieldValue(resourceType, fieldValue, projectSchemaField, zoneSche
 	return &ZonalFieldValue{
 		Project:      project,
 		Zone:         zone.(string),
-		Name:         tpgresource.GetResourceNameFromSelfLink(fieldValue),
+		Name:         GetResourceNameFromSelfLink(fieldValue),
 		resourceType: resourceType,
 	}, nil
 }
@@ -357,7 +356,7 @@ func parseRegionalFieldValue(resourceType, fieldValue, projectSchemaField, regio
 	return &RegionalFieldValue{
 		Project:      project,
 		Region:       region,
-		Name:         tpgresource.GetResourceNameFromSelfLink(fieldValue),
+		Name:         GetResourceNameFromSelfLink(fieldValue),
 		resourceType: resourceType,
 	}, nil
 }
@@ -381,7 +380,7 @@ func getRegionFromSchema(regionSchemaField, zoneSchemaField string, d TerraformR
 	}
 
 	if v, ok := d.GetOk(regionSchemaField); ok && regionSchemaField != "" {
-		return tpgresource.GetResourceNameFromSelfLink(v.(string)), nil
+		return GetResourceNameFromSelfLink(v.(string)), nil
 	}
 	if v, ok := d.GetOk(zoneSchemaField); ok && zoneSchemaField != "" {
 		return getRegionFromZone(v.(string)), nil
@@ -438,7 +437,7 @@ func parseProjectFieldValue(resourceType, fieldValue, projectSchemaField string,
 
 	return &ProjectFieldValue{
 		Project: project,
-		Name:    tpgresource.GetResourceNameFromSelfLink(fieldValue),
+		Name:    GetResourceNameFromSelfLink(fieldValue),
 
 		resourceType: resourceType,
 	}, nil

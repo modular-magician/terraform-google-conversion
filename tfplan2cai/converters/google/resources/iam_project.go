@@ -5,7 +5,6 @@ import (
 
 	"github.com/hashicorp/errwrap"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 	"google.golang.org/api/cloudresourcemanager/v1"
 )
@@ -41,7 +40,7 @@ func ProjectIdParseFunc(d *schema.ResourceData, _ *transport_tpg.Config) error {
 }
 
 func (u *ProjectIamUpdater) GetResourceIamPolicy() (*cloudresourcemanager.Policy, error) {
-	projectId := tpgresource.GetResourceNameFromSelfLink(u.resourceId)
+	projectId := GetResourceNameFromSelfLink(u.resourceId)
 
 	userAgent, err := generateUserAgentString(u.d, u.Config.UserAgent)
 	if err != nil {
@@ -63,7 +62,7 @@ func (u *ProjectIamUpdater) GetResourceIamPolicy() (*cloudresourcemanager.Policy
 }
 
 func (u *ProjectIamUpdater) SetResourceIamPolicy(policy *cloudresourcemanager.Policy) error {
-	projectId := tpgresource.GetResourceNameFromSelfLink(u.resourceId)
+	projectId := GetResourceNameFromSelfLink(u.resourceId)
 
 	userAgent, err := generateUserAgentString(u.d, u.Config.UserAgent)
 	if err != nil {
@@ -97,7 +96,7 @@ func (u *ProjectIamUpdater) DescribeResource() string {
 
 func compareProjectName(_, old, new string, _ *schema.ResourceData) bool {
 	// We can either get "projects/project-id" or "project-id", so strip any prefixes
-	return tpgresource.GetResourceNameFromSelfLink(old) == tpgresource.GetResourceNameFromSelfLink(new)
+	return GetResourceNameFromSelfLink(old) == GetResourceNameFromSelfLink(new)
 }
 
 func getProjectIamPolicyMutexKey(pid string) string {

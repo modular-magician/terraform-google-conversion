@@ -3,9 +3,7 @@ package google
 import (
 	"fmt"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
-
 	"github.com/hashicorp/errwrap"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"google.golang.org/api/cloudresourcemanager/v1"
@@ -21,7 +19,7 @@ var StorageBucketIamSchema = map[string]*schema.Schema{
 }
 
 func StorageBucketDiffSuppress(_, old, new string, _ *schema.ResourceData) bool {
-	return tpgresource.CompareResourceNames("", old, new, nil)
+	return compareResourceNames("", old, new, nil)
 }
 
 type StorageBucketIamUpdater struct {
@@ -107,7 +105,7 @@ func (u *StorageBucketIamUpdater) GetResourceIamPolicy() (*cloudresourcemanager.
 	}
 
 	out := &cloudresourcemanager.Policy{}
-	err = tpgresource.Convert(policy, out)
+	err = Convert(policy, out)
 	if err != nil {
 		return nil, errwrap.Wrapf("Cannot convert a policy to a resource manager policy: {{err}}", err)
 	}
@@ -116,7 +114,7 @@ func (u *StorageBucketIamUpdater) GetResourceIamPolicy() (*cloudresourcemanager.
 }
 
 func (u *StorageBucketIamUpdater) SetResourceIamPolicy(policy *cloudresourcemanager.Policy) error {
-	json, err := tpgresource.ConvertToMap(policy)
+	json, err := ConvertToMap(policy)
 	if err != nil {
 		return err
 	}

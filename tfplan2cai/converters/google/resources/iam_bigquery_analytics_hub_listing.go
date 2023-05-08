@@ -21,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"google.golang.org/api/cloudresourcemanager/v1"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 )
 
@@ -180,7 +179,7 @@ func (u *BigqueryAnalyticsHubListingIamUpdater) GetResourceIamPolicy() (*cloudre
 	}
 
 	out := &cloudresourcemanager.Policy{}
-	err = tpgresource.Convert(policy, out)
+	err = Convert(policy, out)
 	if err != nil {
 		return nil, errwrap.Wrapf("Cannot convert a policy to a resource manager policy: {{err}}", err)
 	}
@@ -189,7 +188,7 @@ func (u *BigqueryAnalyticsHubListingIamUpdater) GetResourceIamPolicy() (*cloudre
 }
 
 func (u *BigqueryAnalyticsHubListingIamUpdater) SetResourceIamPolicy(policy *cloudresourcemanager.Policy) error {
-	json, err := tpgresource.ConvertToMap(policy)
+	json, err := ConvertToMap(policy)
 	if err != nil {
 		return err
 	}
