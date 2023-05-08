@@ -5,7 +5,6 @@ import (
 
 	"github.com/hashicorp/errwrap"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 	"google.golang.org/api/cloudkms/v1"
 	"google.golang.org/api/cloudresourcemanager/v1"
@@ -111,7 +110,7 @@ func (u *KmsKeyRingIamUpdater) DescribeResource() string {
 
 func resourceManagerToKmsPolicy(p *cloudresourcemanager.Policy) (*cloudkms.Policy, error) {
 	out := &cloudkms.Policy{}
-	err := tpgresource.Convert(p, out)
+	err := Convert(p, out)
 	if err != nil {
 		return nil, errwrap.Wrapf("Cannot convert a v1 policy to a kms policy: {{err}}", err)
 	}
@@ -120,7 +119,7 @@ func resourceManagerToKmsPolicy(p *cloudresourcemanager.Policy) (*cloudkms.Polic
 
 func kmsToResourceManagerPolicy(p *cloudkms.Policy) (*cloudresourcemanager.Policy, error) {
 	out := &cloudresourcemanager.Policy{}
-	err := tpgresource.Convert(p, out)
+	err := Convert(p, out)
 	if err != nil {
 		return nil, errwrap.Wrapf("Cannot convert a kms policy to a v1 policy: {{err}}", err)
 	}

@@ -6,7 +6,6 @@ import (
 
 	"github.com/hashicorp/errwrap"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 	"google.golang.org/api/cloudresourcemanager/v1"
 	resourceManagerV3 "google.golang.org/api/cloudresourcemanager/v3"
@@ -99,7 +98,7 @@ func canonicalFolderId(folder string) string {
 // v1 and v2 policy are identical
 func v1PolicyToV2(in *cloudresourcemanager.Policy) (*resourceManagerV3.Policy, error) {
 	out := &resourceManagerV3.Policy{}
-	err := tpgresource.Convert(in, out)
+	err := Convert(in, out)
 	if err != nil {
 		return nil, errwrap.Wrapf("Cannot convert a v1 policy to a v2 policy: {{err}}", err)
 	}
@@ -108,7 +107,7 @@ func v1PolicyToV2(in *cloudresourcemanager.Policy) (*resourceManagerV3.Policy, e
 
 func v2PolicyToV1(in *resourceManagerV3.Policy) (*cloudresourcemanager.Policy, error) {
 	out := &cloudresourcemanager.Policy{}
-	err := tpgresource.Convert(in, out)
+	err := Convert(in, out)
 	if err != nil {
 		return nil, errwrap.Wrapf("Cannot convert a v2 policy to a v1 policy: {{err}}", err)
 	}

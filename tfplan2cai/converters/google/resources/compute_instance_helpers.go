@@ -2,10 +2,8 @@ package google
 
 import (
 	"fmt"
-	"reflect"
-
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
+	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
@@ -203,8 +201,8 @@ func flattenNetworkInterfaces(d *schema.ResourceData, config *transport_tpg.Conf
 
 		flattened[i] = map[string]interface{}{
 			"network_ip":         iface.NetworkIP,
-			"network":            tpgresource.ConvertSelfLinkToV1(iface.Network),
-			"subnetwork":         tpgresource.ConvertSelfLinkToV1(iface.Subnetwork),
+			"network":            ConvertSelfLinkToV1(iface.Network),
+			"subnetwork":         ConvertSelfLinkToV1(iface.Subnetwork),
 			"subnetwork_project": subnet.Project,
 			"access_config":      ac,
 			"alias_ip_range":     flattenAliasIpRange(iface.AliasIpRanges),
@@ -304,7 +302,7 @@ func flattenServiceAccounts(serviceAccounts []*compute.ServiceAccount) []map[str
 	for i, serviceAccount := range serviceAccounts {
 		result[i] = map[string]interface{}{
 			"email":  serviceAccount.Email,
-			"scopes": schema.NewSet(tpgresource.StringScopeHashcode, convertStringArrToInterface(serviceAccount.Scopes)),
+			"scopes": schema.NewSet(stringScopeHashcode, convertStringArrToInterface(serviceAccount.Scopes)),
 		}
 	}
 	return result
@@ -317,7 +315,7 @@ func expandServiceAccounts(configs []interface{}) []*compute.ServiceAccount {
 
 		accounts[i] = &compute.ServiceAccount{
 			Email:  data["email"].(string),
-			Scopes: tpgresource.CanonicalizeServiceScopes(convertStringSet(data["scopes"].(*schema.Set))),
+			Scopes: canonicalizeServiceScopes(convertStringSet(data["scopes"].(*schema.Set))),
 		}
 
 		if accounts[i].Email == "" {

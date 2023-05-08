@@ -23,7 +23,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 )
 
@@ -59,7 +58,7 @@ func authHeaderDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
 		attr := b[4]
 
 		if block == "oauth_token" && attr == "scope" {
-			if old == tpgresource.CanonicalizeServiceScope("cloud-platform") && new == "" {
+			if old == canonicalizeServiceScope("cloud-platform") && new == "" {
 				return true
 			}
 		}

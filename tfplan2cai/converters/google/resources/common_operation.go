@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 	cloudresourcemanager "google.golang.org/api/cloudresourcemanager/v1"
 )
@@ -77,7 +76,7 @@ func (w *CommonOperationWaiter) IsRetryable(error) bool {
 }
 
 func (w *CommonOperationWaiter) SetOp(op interface{}) error {
-	if err := tpgresource.Convert(op, &w.Op); err != nil {
+	if err := Convert(op, &w.Op); err != nil {
 		return err
 	}
 	return nil
