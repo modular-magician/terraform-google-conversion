@@ -199,6 +199,7 @@ func flattenNetworkInterfaces(d *schema.ResourceData, config *transport_tpg.Conf
 		if err != nil {
 			return nil, "", "", "", err
 		}
+
 		region = subnet.Region
 
 		flattened[i] = map[string]interface{}{
@@ -269,11 +270,12 @@ func expandNetworkInterfaces(d tpgresource.TerraformResourceData, config *transp
 
 		network := data["network"].(string)
 		subnetwork := data["subnetwork"].(string)
+
 		if network == "" && subnetwork == "" {
 			return nil, fmt.Errorf("exactly one of network or subnetwork must be provided")
 		}
 
-		nf, err := tpgresource.ParseNetworkFieldValue(network, d, config)
+		nf, err := ParseNetworkFieldValue(network, d, config)
 		if err != nil {
 			return nil, fmt.Errorf("cannot determine self_link for network %q: %s", network, err)
 		}
