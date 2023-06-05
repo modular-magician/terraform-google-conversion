@@ -18,14 +18,12 @@ import (
 	"fmt"
 	"log"
 	"reflect"
-	"regexp"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/verify"
 )
 
 func expandCloudIotDeviceRegistryHTTPConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -245,19 +243,6 @@ func flattenCloudIotDeviceRegistryStateNotificationConfig(v interface{}, d *sche
 
 func flattenCloudIotDeviceRegistryStateNotificationConfigPubsubTopicName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func ValidateCloudIotDeviceRegistryID(v interface{}, k string) (warnings []string, errors []error) {
-	value := v.(string)
-	if strings.HasPrefix(value, "goog") {
-		errors = append(errors, fmt.Errorf(
-			"%q (%q) can not start with \"goog\"", k, value))
-	}
-	if !regexp.MustCompile(verify.CloudIoTIdRegex).MatchString(value) {
-		errors = append(errors, fmt.Errorf(
-			"%q (%q) doesn't match regexp %q", k, value, verify.CloudIoTIdRegex))
-	}
-	return
 }
 
 func validateCloudIotDeviceRegistrySubfolderMatch(v interface{}, k string) (warnings []string, errors []error) {
