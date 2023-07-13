@@ -17,6 +17,8 @@ package identityplatform
 import (
 	"reflect"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
 )
@@ -58,6 +60,24 @@ func GetIdentityPlatformProjectDefaultConfigApiObject(d tpgresource.TerraformRes
 		return nil, err
 	} else if v, ok := d.GetOkExists("sign_in"); !tpgresource.IsEmptyValue(reflect.ValueOf(signInProp)) && (ok || !reflect.DeepEqual(v, signInProp)) {
 		obj["signIn"] = signInProp
+	}
+	blockingFunctionsProp, err := expandIdentityPlatformProjectDefaultConfigBlockingFunctions(d.Get("blocking_functions"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("blocking_functions"); !tpgresource.IsEmptyValue(reflect.ValueOf(blockingFunctionsProp)) && (ok || !reflect.DeepEqual(v, blockingFunctionsProp)) {
+		obj["blockingFunctions"] = blockingFunctionsProp
+	}
+	quotaProp, err := expandIdentityPlatformProjectDefaultConfigQuota(d.Get("quota"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("quota"); !tpgresource.IsEmptyValue(reflect.ValueOf(quotaProp)) && (ok || !reflect.DeepEqual(v, quotaProp)) {
+		obj["quota"] = quotaProp
+	}
+	authorizedDomainsProp, err := expandIdentityPlatformProjectDefaultConfigAuthorizedDomains(d.Get("authorized_domains"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("authorized_domains"); !tpgresource.IsEmptyValue(reflect.ValueOf(authorizedDomainsProp)) && (ok || !reflect.DeepEqual(v, authorizedDomainsProp)) {
+		obj["authorizedDomains"] = authorizedDomainsProp
 	}
 
 	return obj, nil
@@ -276,5 +296,184 @@ func expandIdentityPlatformProjectDefaultConfigSignInHashConfigRounds(v interfac
 }
 
 func expandIdentityPlatformProjectDefaultConfigSignInHashConfigMemoryCost(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigBlockingFunctions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedTriggers, err := expandIdentityPlatformProjectDefaultConfigBlockingFunctionsTriggers(original["triggers"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedTriggers); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["triggers"] = transformedTriggers
+	}
+
+	transformedForwardInboundCredentials, err := expandIdentityPlatformProjectDefaultConfigBlockingFunctionsForwardInboundCredentials(original["forward_inbound_credentials"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedForwardInboundCredentials); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["forwardInboundCredentials"] = transformedForwardInboundCredentials
+	}
+
+	return transformed, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigBlockingFunctionsTriggers(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
+	if v == nil {
+		return map[string]interface{}{}, nil
+	}
+	m := make(map[string]interface{})
+	for _, raw := range v.(*schema.Set).List() {
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedFunctionUri, err := expandIdentityPlatformProjectDefaultConfigBlockingFunctionsTriggersFunctionUri(original["function_uri"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedFunctionUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["functionUri"] = transformedFunctionUri
+		}
+
+		transformedUpdateTime, err := expandIdentityPlatformProjectDefaultConfigBlockingFunctionsTriggersUpdateTime(original["update_time"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedUpdateTime); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["updateTime"] = transformedUpdateTime
+		}
+
+		transformedEventType, err := tpgresource.ExpandString(original["event_type"], d, config)
+		if err != nil {
+			return nil, err
+		}
+		m[transformedEventType] = transformed
+	}
+	return m, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigBlockingFunctionsTriggersFunctionUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigBlockingFunctionsTriggersUpdateTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigBlockingFunctionsForwardInboundCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedIdToken, err := expandIdentityPlatformProjectDefaultConfigBlockingFunctionsForwardInboundCredentialsIdToken(original["id_token"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedIdToken); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["idToken"] = transformedIdToken
+	}
+
+	transformedAccessToken, err := expandIdentityPlatformProjectDefaultConfigBlockingFunctionsForwardInboundCredentialsAccessToken(original["access_token"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAccessToken); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["accessToken"] = transformedAccessToken
+	}
+
+	transformedRefreshToken, err := expandIdentityPlatformProjectDefaultConfigBlockingFunctionsForwardInboundCredentialsRefreshToken(original["refresh_token"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRefreshToken); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["refreshToken"] = transformedRefreshToken
+	}
+
+	return transformed, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigBlockingFunctionsForwardInboundCredentialsIdToken(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigBlockingFunctionsForwardInboundCredentialsAccessToken(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigBlockingFunctionsForwardInboundCredentialsRefreshToken(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigQuota(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedSignUpQuotaConfig, err := expandIdentityPlatformProjectDefaultConfigQuotaSignUpQuotaConfig(original["sign_up_quota_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSignUpQuotaConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["signUpQuotaConfig"] = transformedSignUpQuotaConfig
+	}
+
+	return transformed, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigQuotaSignUpQuotaConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedQuota, err := expandIdentityPlatformProjectDefaultConfigQuotaSignUpQuotaConfigQuota(original["quota"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedQuota); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["quota"] = transformedQuota
+	}
+
+	transformedStartTime, err := expandIdentityPlatformProjectDefaultConfigQuotaSignUpQuotaConfigStartTime(original["start_time"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedStartTime); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["startTime"] = transformedStartTime
+	}
+
+	transformedQuotaDuration, err := expandIdentityPlatformProjectDefaultConfigQuotaSignUpQuotaConfigQuotaDuration(original["quota_duration"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedQuotaDuration); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["quotaDuration"] = transformedQuotaDuration
+	}
+
+	return transformed, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigQuotaSignUpQuotaConfigQuota(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigQuotaSignUpQuotaConfigStartTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigQuotaSignUpQuotaConfigQuotaDuration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformProjectDefaultConfigAuthorizedDomains(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
