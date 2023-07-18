@@ -94,6 +94,12 @@ func GetCloudTasksQueueApiObject(d tpgresource.TerraformResourceData, config *tr
 	} else if v, ok := d.GetOkExists("stackdriver_logging_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(stackdriverLoggingConfigProp)) && (ok || !reflect.DeepEqual(v, stackdriverLoggingConfigProp)) {
 		obj["stackdriverLoggingConfig"] = stackdriverLoggingConfigProp
 	}
+	stateProp, err := expandCloudTasksQueueState(d.Get("state"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("state"); !tpgresource.IsEmptyValue(reflect.ValueOf(stateProp)) && (ok || !reflect.DeepEqual(v, stateProp)) {
+		obj["state"] = stateProp
+	}
 
 	return obj, nil
 }
@@ -290,5 +296,9 @@ func expandCloudTasksQueueStackdriverLoggingConfig(v interface{}, d tpgresource.
 }
 
 func expandCloudTasksQueueStackdriverLoggingConfigSamplingRatio(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudTasksQueueState(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
