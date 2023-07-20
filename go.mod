@@ -18,6 +18,7 @@ require (
 	github.com/hashicorp/terraform-plugin-framework-validators v0.9.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.0
 	github.com/hashicorp/terraform-provider-google v1.20.1-0.20230720200054-de747a834903
+	github.com/hashicorp/terraform-provider-google-beta v0.0.0-00010101000000-000000000000
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.9.0
@@ -106,3 +107,5 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+replace github.com/hashicorp/terraform-provider-google-beta => github.com/modular-magician/terraform-provider-google-beta v1.20.1-0.20230720210712-0c32e7027524
