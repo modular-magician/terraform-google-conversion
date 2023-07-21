@@ -40,8 +40,8 @@ func GetHealthcareFhirStoreCaiObject(d tpgresource.TerraformResourceData, config
 			Name: name,
 			Type: HealthcareFhirStoreAssetType,
 			Resource: &tpgresource.AssetResource{
-				Version:              "v1beta1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/healthcare/v1beta1/rest",
+				Version:              "v1",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/healthcare/v1/rest",
 				DiscoveryName:        "FhirStore",
 				Data:                 obj,
 			},
@@ -112,12 +112,6 @@ func GetHealthcareFhirStoreApiObject(d tpgresource.TerraformResourceData, config
 		return nil, err
 	} else if v, ok := d.GetOkExists("stream_configs"); !tpgresource.IsEmptyValue(reflect.ValueOf(streamConfigsProp)) && (ok || !reflect.DeepEqual(v, streamConfigsProp)) {
 		obj["streamConfigs"] = streamConfigsProp
-	}
-	notificationConfigsProp, err := expandHealthcareFhirStoreNotificationConfigs(d.Get("notification_configs"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("notification_configs"); !tpgresource.IsEmptyValue(reflect.ValueOf(notificationConfigsProp)) && (ok || !reflect.DeepEqual(v, notificationConfigsProp)) {
-		obj["notificationConfigs"] = notificationConfigsProp
 	}
 
 	return obj, nil
@@ -271,6 +265,13 @@ func expandHealthcareFhirStoreStreamConfigsBigqueryDestinationSchemaConfig(v int
 		transformed["recursiveStructureDepth"] = transformedRecursiveStructureDepth
 	}
 
+	transformedLastUpdatedPartitionConfig, err := expandHealthcareFhirStoreStreamConfigsBigqueryDestinationSchemaConfigLastUpdatedPartitionConfig(original["last_updated_partition_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedLastUpdatedPartitionConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["lastUpdatedPartitionConfig"] = transformedLastUpdatedPartitionConfig
+	}
+
 	return transformed, nil
 }
 
@@ -282,39 +283,36 @@ func expandHealthcareFhirStoreStreamConfigsBigqueryDestinationSchemaConfigRecurs
 	return v, nil
 }
 
-func expandHealthcareFhirStoreNotificationConfigs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+func expandHealthcareFhirStoreStreamConfigsBigqueryDestinationSchemaConfigLastUpdatedPartitionConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	l := v.([]interface{})
-	req := make([]interface{}, 0, len(l))
-	for _, raw := range l {
-		if raw == nil {
-			continue
-		}
-		original := raw.(map[string]interface{})
-		transformed := make(map[string]interface{})
-
-		transformedPubsubTopic, err := expandHealthcareFhirStoreNotificationConfigsPubsubTopic(original["pubsub_topic"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedPubsubTopic); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["pubsubTopic"] = transformedPubsubTopic
-		}
-
-		transformedSendFullResource, err := expandHealthcareFhirStoreNotificationConfigsSendFullResource(original["send_full_resource"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedSendFullResource); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["sendFullResource"] = transformedSendFullResource
-		}
-
-		req = append(req, transformed)
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
 	}
-	return req, nil
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedType, err := expandHealthcareFhirStoreStreamConfigsBigqueryDestinationSchemaConfigLastUpdatedPartitionConfigType(original["type"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedType); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["type"] = transformedType
+	}
+
+	transformedExpirationMs, err := expandHealthcareFhirStoreStreamConfigsBigqueryDestinationSchemaConfigLastUpdatedPartitionConfigExpirationMs(original["expiration_ms"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedExpirationMs); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["expirationMs"] = transformedExpirationMs
+	}
+
+	return transformed, nil
 }
 
-func expandHealthcareFhirStoreNotificationConfigsPubsubTopic(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+func expandHealthcareFhirStoreStreamConfigsBigqueryDestinationSchemaConfigLastUpdatedPartitionConfigType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
-func expandHealthcareFhirStoreNotificationConfigsSendFullResource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+func expandHealthcareFhirStoreStreamConfigsBigqueryDestinationSchemaConfigLastUpdatedPartitionConfigExpirationMs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
