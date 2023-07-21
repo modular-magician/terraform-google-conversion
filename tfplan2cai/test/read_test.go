@@ -240,3 +240,6 @@ func TestReadPlannedAssetsCoverage_WithoutDefaultProject(t *testing.T) {
 		})
 	}
 }
+
+func TestPlaceholder(t *testing.T) {
+}

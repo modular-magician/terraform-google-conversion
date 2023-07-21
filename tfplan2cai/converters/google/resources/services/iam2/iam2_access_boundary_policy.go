@@ -40,8 +40,8 @@ func GetIAM2AccessBoundaryPolicyCaiObject(d tpgresource.TerraformResourceData, c
 			Name: name,
 			Type: IAM2AccessBoundaryPolicyAssetType,
 			Resource: &tpgresource.AssetResource{
-				Version:              "v2beta",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/iam/v2beta/rest",
+				Version:              "v2",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/iam/v2/rest",
 				DiscoveryName:        "AccessBoundaryPolicy",
 				Data:                 obj,
 			},
