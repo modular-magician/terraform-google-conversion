@@ -4,7 +4,7 @@ import (
 	"errors"
 	"sort"
 
-	compute "google.golang.org/api/compute/v0.beta"
+	"google.golang.org/api/compute/v1"
 
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
