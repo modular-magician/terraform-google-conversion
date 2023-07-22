@@ -43,8 +43,8 @@ func GetComputeNodeGroupCaiObject(d tpgresource.TerraformResourceData, config *t
 			Name: name,
 			Type: ComputeNodeGroupAssetType,
 			Resource: &tpgresource.AssetResource{
-				Version:              "beta",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/beta/rest",
+				Version:              "v1",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
 				DiscoveryName:        "NodeGroup",
 				Data:                 obj,
 			},
