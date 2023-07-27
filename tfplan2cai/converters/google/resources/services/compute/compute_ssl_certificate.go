@@ -43,8 +43,8 @@ func GetComputeSslCertificateCaiObject(d tpgresource.TerraformResourceData, conf
 			Name: name,
 			Type: ComputeSslCertificateAssetType,
 			Resource: &tpgresource.AssetResource{
-				Version:              "beta",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/beta/rest",
+				Version:              "v1",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
 				DiscoveryName:        "SslCertificate",
 				Data:                 obj,
 			},
