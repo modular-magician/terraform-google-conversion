@@ -106,3 +106,5 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+replace github.com/hashicorp/terraform-provider-google-beta => github.com/modular-magician/terraform-provider-google-beta v0.0.0-20230802180834-3b83b6f094c7
