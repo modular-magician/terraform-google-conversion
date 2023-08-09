@@ -1,7 +1,7 @@
 package google
 
 import (
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/verify"
+	"github.com/hashicorp/terraform-provider-google-beta/google-beta/verify"
 )
 
 // If the argument is a path, pathOrContents loads it and returns the contents,

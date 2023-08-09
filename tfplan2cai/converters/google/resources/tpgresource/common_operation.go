@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/transport"
+	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 	cloudresourcemanager "google.golang.org/api/cloudresourcemanager/v1"
 )
 
