@@ -15,12 +15,41 @@
 package secretmanager
 
 import (
+	"context"
 	"reflect"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v2/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
+
+// Prevent ForceNew when upgrading replication.automatic -> replication.auto
+func secretManagerSecretAutoCustomizeDiff(_ context.Context, diff *schema.ResourceDiff, meta interface{}) error {
+	oAutomatic, nAutomatic := diff.GetChange("replication.0.automatic")
+	_, nAuto := diff.GetChange("replication.0.auto")
+	autoLen := len(nAuto.([]interface{}))
+
+	// Do not ForceNew if we are removing "automatic" while adding "auto"
+	if oAutomatic == true && nAutomatic == false && autoLen > 0 {
+		return nil
+	}
+
+	if diff.HasChange("replication.0.automatic") {
+		if err := diff.ForceNew("replication.0.automatic"); err != nil {
+			return err
+		}
+	}
+
+	if diff.HasChange("replication.0.auto") {
+		if err := diff.ForceNew("replication.0.auto"); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
 
 const SecretManagerSecretAssetType string = "secretmanager.googleapis.com/Secret"
 
@@ -54,6 +83,12 @@ func GetSecretManagerSecretCaiObject(d tpgresource.TerraformResourceData, config
 
 func GetSecretManagerSecretApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
+	annotationsProp, err := expandSecretManagerSecretAnnotations(d.Get("annotations"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("annotations"); !tpgresource.IsEmptyValue(reflect.ValueOf(annotationsProp)) && (ok || !reflect.DeepEqual(v, annotationsProp)) {
+		obj["annotations"] = annotationsProp
+	}
 	versionAliasesProp, err := expandSecretManagerSecretVersionAliases(d.Get("version_aliases"), d, config)
 	if err != nil {
 		return nil, err
@@ -96,14 +131,19 @@ func GetSecretManagerSecretApiObject(d tpgresource.TerraformResourceData, config
 	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
 		obj["labels"] = labelsProp
 	}
-	annotationsProp, err := expandSecretManagerSecretEffectiveAnnotations(d.Get("effective_annotations"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("effective_annotations"); !tpgresource.IsEmptyValue(reflect.ValueOf(annotationsProp)) && (ok || !reflect.DeepEqual(v, annotationsProp)) {
-		obj["annotations"] = annotationsProp
-	}
 
 	return obj, nil
+}
+
+func expandSecretManagerSecretAnnotations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
 
 func expandSecretManagerSecretVersionAliases(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
@@ -334,17 +374,6 @@ func expandSecretManagerSecretRotationRotationPeriod(v interface{}, d tpgresourc
 }
 
 func expandSecretManagerSecretEffectiveLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
-	if v == nil {
-		return map[string]string{}, nil
-	}
-	m := make(map[string]string)
-	for k, val := range v.(map[string]interface{}) {
-		m[k] = val.(string)
-	}
-	return m, nil
-}
-
-func expandSecretManagerSecretEffectiveAnnotations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
 	if v == nil {
 		return map[string]string{}, nil
 	}
