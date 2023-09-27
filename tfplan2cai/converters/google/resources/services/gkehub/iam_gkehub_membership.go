@@ -15,7 +15,9 @@
 package gkehub
 
 import (
+	"context"
 	"fmt"
+	"log"
 
 	"github.com/hashicorp/errwrap"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -33,6 +35,12 @@ var GKEHubMembershipIamSchema = map[string]*schema.Schema{
 		Optional: true,
 		ForceNew: true,
 	},
+	"location": {
+		Type:     schema.TypeString,
+		Computed: true,
+		Optional: true,
+		ForceNew: true,
+	},
 	"membership_id": {
 		Type:             schema.TypeString,
 		Required:         true,
@@ -43,6 +51,7 @@ var GKEHubMembershipIamSchema = map[string]*schema.Schema{
 
 type GKEHubMembershipIamUpdater struct {
 	project      string
+	location     string
 	membershipId string
 	d            tpgresource.TerraformResourceData
 	Config       *transport_tpg.Config
@@ -58,6 +67,13 @@ func GKEHubMembershipIamUpdaterProducer(d tpgresource.TerraformResourceData, con
 		}
 	}
 	values["project"] = project
+	location, _ := tpgresource.GetLocation(d, config)
+	if location != "" {
+		if err := d.Set("location", location); err != nil {
+			return nil, fmt.Errorf("Error setting location: %s", err)
+		}
+	}
+	values["location"] = location
 	if v, ok := d.GetOk("membership_id"); ok {
 		values["membership_id"] = v.(string)
 	}
@@ -74,6 +90,7 @@ func GKEHubMembershipIamUpdaterProducer(d tpgresource.TerraformResourceData, con
 
 	u := &GKEHubMembershipIamUpdater{
 		project:      values["project"],
+		location:     values["location"],
 		membershipId: values["membership_id"],
 		d:            d,
 		Config:       config,
@@ -81,6 +98,9 @@ func GKEHubMembershipIamUpdaterProducer(d tpgresource.TerraformResourceData, con
 
 	if err := d.Set("project", u.project); err != nil {
 		return nil, fmt.Errorf("Error setting project: %s", err)
+	}
+	if err := d.Set("location", u.location); err != nil {
+		return nil, fmt.Errorf("Error setting location: %s", err)
 	}
 	if err := d.Set("membership_id", u.GetResourceId()); err != nil {
 		return nil, fmt.Errorf("Error setting membership_id: %s", err)
@@ -97,6 +117,11 @@ func GKEHubMembershipIdParseFunc(d *schema.ResourceData, config *transport_tpg.C
 		values["project"] = project
 	}
 
+	location, _ := tpgresource.GetLocation(d, config)
+	if location != "" {
+		values["location"] = location
+	}
+
 	m, err := tpgresource.GetImportIdQualifiers([]string{"projects/(?P<project>[^/]+)/locations/(?P<location>[^/]+)/memberships/(?P<membership_id>[^/]+)", "(?P<project>[^/]+)/(?P<location>[^/]+)/(?P<membership_id>[^/]+)", "(?P<location>[^/]+)/(?P<membership_id>[^/]+)", "(?P<membership_id>[^/]+)"}, d, config, d.Id())
 	if err != nil {
 		return err
@@ -108,6 +133,7 @@ func GKEHubMembershipIdParseFunc(d *schema.ResourceData, config *transport_tpg.C
 
 	u := &GKEHubMembershipIamUpdater{
 		project:      values["project"],
+		location:     values["location"],
 		membershipId: values["membership_id"],
 		d:            d,
 		Config:       config,
@@ -197,7 +223,7 @@ func (u *GKEHubMembershipIamUpdater) SetResourceIamPolicy(policy *cloudresourcem
 }
 
 func (u *GKEHubMembershipIamUpdater) qualifyMembershipUrl(methodIdentifier string) (string, error) {
-	urlTemplate := fmt.Sprintf("{{GKEHubBasePath}}%s:%s", fmt.Sprintf("projects/%s/locations/global/memberships/%s", u.project, u.membershipId), methodIdentifier)
+	urlTemplate := fmt.Sprintf("{{GKEHubBasePath}}%s:%s", fmt.Sprintf("projects/%s/locations/%s/memberships/%s", u.project, u.location, u.membershipId), methodIdentifier)
 	url, err := tpgresource.ReplaceVars(u.d, u.Config, urlTemplate)
 	if err != nil {
 		return "", err
@@ -206,7 +232,7 @@ func (u *GKEHubMembershipIamUpdater) qualifyMembershipUrl(methodIdentifier strin
 }
 
 func (u *GKEHubMembershipIamUpdater) GetResourceId() string {
-	return fmt.Sprintf("projects/%s/locations/global/memberships/%s", u.project, u.membershipId)
+	return fmt.Sprintf("projects/%s/locations/%s/memberships/%s", u.project, u.location, u.membershipId)
 }
 
 func (u *GKEHubMembershipIamUpdater) GetMutexKey() string {
@@ -215,4 +241,89 @@ func (u *GKEHubMembershipIamUpdater) GetMutexKey() string {
 
 func (u *GKEHubMembershipIamUpdater) DescribeResource() string {
 	return fmt.Sprintf("gkehub membership %q", u.GetResourceId())
+}
+
+func ResourceGKEHubMembershipIamMemberResourceV0() *schema.Resource {
+	return &schema.Resource{
+		Schema: tpgresource.MergeSchemas(tpgiamresource.IamMemberBaseSchema, map[string]*schema.Schema{
+			"project": {
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+				ForceNew: true,
+			},
+			"membership_id": {
+				Type:             schema.TypeString,
+				Required:         true,
+				ForceNew:         true,
+				DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
+			},
+		}),
+	}
+}
+
+func ResourceGKEHubMembershipIamMemberUpgradeV0(_ context.Context, rawState map[string]interface{}, meta interface{}) (map[string]interface{}, error) {
+	log.Printf("[DEBUG] Attributes before migration: %#v", rawState)
+
+	// Version 0 didn't support location. Default it to global.
+	rawState["location"] = "global"
+
+	log.Printf("[DEBUG] Attributes after migration: %#v", rawState)
+	return rawState, nil
+}
+func ResourceGKEHubMembershipIamBindingResourceV0() *schema.Resource {
+	return &schema.Resource{
+		Schema: tpgresource.MergeSchemas(tpgiamresource.IamBindingSchema, map[string]*schema.Schema{
+			"project": {
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+				ForceNew: true,
+			},
+			"membership_id": {
+				Type:             schema.TypeString,
+				Required:         true,
+				ForceNew:         true,
+				DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
+			},
+		}),
+	}
+}
+
+func ResourceGKEHubMembershipIamBindingUpgradeV0(_ context.Context, rawState map[string]interface{}, meta interface{}) (map[string]interface{}, error) {
+	log.Printf("[DEBUG] Attributes before migration: %#v", rawState)
+
+	// Version 0 didn't support location. Default it to global.
+	rawState["location"] = "global"
+
+	log.Printf("[DEBUG] Attributes after migration: %#v", rawState)
+	return rawState, nil
+}
+func ResourceGKEHubMembershipIamPolicyResourceV0() *schema.Resource {
+	return &schema.Resource{
+		Schema: tpgresource.MergeSchemas(tpgiamresource.IamPolicyBaseSchema, map[string]*schema.Schema{
+			"project": {
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+				ForceNew: true,
+			},
+			"membership_id": {
+				Type:             schema.TypeString,
+				Required:         true,
+				ForceNew:         true,
+				DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
+			},
+		}),
+	}
+}
+
+func ResourceGKEHubMembershipIamPolicyUpgradeV0(_ context.Context, rawState map[string]interface{}, meta interface{}) (map[string]interface{}, error) {
+	log.Printf("[DEBUG] Attributes before migration: %#v", rawState)
+
+	// Version 0 didn't support location. Default it to global.
+	rawState["location"] = "global"
+
+	log.Printf("[DEBUG] Attributes after migration: %#v", rawState)
+	return rawState, nil
 }
