@@ -304,6 +304,20 @@ func expandDatabaseMigrationServiceConnectionProfilePostgresql(v interface{}, d 
 		transformed["networkArchitecture"] = transformedNetworkArchitecture
 	}
 
+	transformedStaticIpConnectivity, err := expandDatabaseMigrationServiceConnectionProfilePostgresqlStaticIpConnectivity(original["static_ip_connectivity"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedStaticIpConnectivity); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["staticIpConnectivity"] = transformedStaticIpConnectivity
+	}
+
+	transformedPrivateServiceConnectConnectivity, err := expandDatabaseMigrationServiceConnectionProfilePostgresqlPrivateServiceConnectConnectivity(original["private_service_connect_connectivity"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPrivateServiceConnectConnectivity); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["privateServiceConnectConnectivity"] = transformedPrivateServiceConnectConnectivity
+	}
+
 	return transformed, nil
 }
 
@@ -388,6 +402,44 @@ func expandDatabaseMigrationServiceConnectionProfilePostgresqlCloudSqlId(v inter
 }
 
 func expandDatabaseMigrationServiceConnectionProfilePostgresqlNetworkArchitecture(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatabaseMigrationServiceConnectionProfilePostgresqlStaticIpConnectivity(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 {
+		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
+	}
+	transformed := make(map[string]interface{})
+
+	return transformed, nil
+}
+
+func expandDatabaseMigrationServiceConnectionProfilePostgresqlPrivateServiceConnectConnectivity(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedServiceAttachment, err := expandDatabaseMigrationServiceConnectionProfilePostgresqlPrivateServiceConnectConnectivityServiceAttachment(original["service_attachment"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedServiceAttachment); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["serviceAttachment"] = transformedServiceAttachment
+	}
+
+	return transformed, nil
+}
+
+func expandDatabaseMigrationServiceConnectionProfilePostgresqlPrivateServiceConnectConnectivityServiceAttachment(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
