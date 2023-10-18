@@ -133,13 +133,6 @@ func expandCloudTasksQueueAppEngineRoutingOverride(v interface{}, d tpgresource.
 		transformed["instance"] = transformedInstance
 	}
 
-	transformedHost, err := expandCloudTasksQueueAppEngineRoutingOverrideHost(original["host"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedHost); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["host"] = transformedHost
-	}
-
 	return transformed, nil
 }
 
@@ -152,10 +145,6 @@ func expandCloudTasksQueueAppEngineRoutingOverrideVersion(v interface{}, d tpgre
 }
 
 func expandCloudTasksQueueAppEngineRoutingOverrideInstance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudTasksQueueAppEngineRoutingOverrideHost(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -182,13 +171,6 @@ func expandCloudTasksQueueRateLimits(v interface{}, d tpgresource.TerraformResou
 		transformed["maxConcurrentDispatches"] = transformedMaxConcurrentDispatches
 	}
 
-	transformedMaxBurstSize, err := expandCloudTasksQueueRateLimitsMaxBurstSize(original["max_burst_size"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedMaxBurstSize); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["maxBurstSize"] = transformedMaxBurstSize
-	}
-
 	return transformed, nil
 }
 
@@ -197,10 +179,6 @@ func expandCloudTasksQueueRateLimitsMaxDispatchesPerSecond(v interface{}, d tpgr
 }
 
 func expandCloudTasksQueueRateLimitsMaxConcurrentDispatches(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudTasksQueueRateLimitsMaxBurstSize(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

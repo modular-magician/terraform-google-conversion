@@ -79,20 +79,6 @@ func expandFirebaseExtensionsInstanceConfig(v interface{}, d tpgresource.Terrafo
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
-	transformedName, err := expandFirebaseExtensionsInstanceConfigName(original["name"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["name"] = transformedName
-	}
-
-	transformedCreateTime, err := expandFirebaseExtensionsInstanceConfigCreateTime(original["create_time"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedCreateTime); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["createTime"] = transformedCreateTime
-	}
-
 	transformedParams, err := expandFirebaseExtensionsInstanceConfigParams(original["params"], d, config)
 	if err != nil {
 		return nil, err
@@ -135,22 +121,7 @@ func expandFirebaseExtensionsInstanceConfig(v interface{}, d tpgresource.Terrafo
 		transformed["eventarcChannel"] = transformedEventarcChannel
 	}
 
-	transformedPopulatedPostinstallContent, err := expandFirebaseExtensionsInstanceConfigPopulatedPostinstallContent(original["populated_postinstall_content"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedPopulatedPostinstallContent); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["populatedPostinstallContent"] = transformedPopulatedPostinstallContent
-	}
-
 	return transformed, nil
-}
-
-func expandFirebaseExtensionsInstanceConfigName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandFirebaseExtensionsInstanceConfigCreateTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandFirebaseExtensionsInstanceConfigParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
@@ -188,10 +159,6 @@ func expandFirebaseExtensionsInstanceConfigAllowedEventTypes(v interface{}, d tp
 }
 
 func expandFirebaseExtensionsInstanceConfigEventarcChannel(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandFirebaseExtensionsInstanceConfigPopulatedPostinstallContent(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

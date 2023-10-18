@@ -126,13 +126,6 @@ func expandFilestoreInstanceFileShares(v interface{}, d tpgresource.TerraformRes
 			transformed["capacityGb"] = transformedCapacityGb
 		}
 
-		transformedSourceBackup, err := expandFilestoreInstanceFileSharesSourceBackup(original["source_backup"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedSourceBackup); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["sourceBackup"] = transformedSourceBackup
-		}
-
 		transformedNfsExportOptions, err := expandFilestoreInstanceFileSharesNfsExportOptions(original["nfs_export_options"], d, config)
 		if err != nil {
 			return nil, err
@@ -150,10 +143,6 @@ func expandFilestoreInstanceFileSharesName(v interface{}, d tpgresource.Terrafor
 }
 
 func expandFilestoreInstanceFileSharesCapacityGb(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandFilestoreInstanceFileSharesSourceBackup(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -258,13 +247,6 @@ func expandFilestoreInstanceNetworks(v interface{}, d tpgresource.TerraformResou
 			transformed["reservedIpRange"] = transformedReservedIpRange
 		}
 
-		transformedIpAddresses, err := expandFilestoreInstanceNetworksIpAddresses(original["ip_addresses"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedIpAddresses); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["ipAddresses"] = transformedIpAddresses
-		}
-
 		transformedConnectMode, err := expandFilestoreInstanceNetworksConnectMode(original["connect_mode"], d, config)
 		if err != nil {
 			return nil, err
@@ -286,10 +268,6 @@ func expandFilestoreInstanceNetworksModes(v interface{}, d tpgresource.Terraform
 }
 
 func expandFilestoreInstanceNetworksReservedIpRange(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandFilestoreInstanceNetworksIpAddresses(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

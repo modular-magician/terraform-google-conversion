@@ -196,13 +196,6 @@ func expandContainerAttachedClusterFleet(v interface{}, d tpgresource.TerraformR
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
-	transformedMembership, err := expandContainerAttachedClusterFleetMembership(original["membership"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedMembership); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["membership"] = transformedMembership
-	}
-
 	transformedProject, err := expandContainerAttachedClusterFleetProject(original["project"], d, config)
 	if err != nil {
 		return nil, err
@@ -211,10 +204,6 @@ func expandContainerAttachedClusterFleet(v interface{}, d tpgresource.TerraformR
 	}
 
 	return transformed, nil
-}
-
-func expandContainerAttachedClusterFleetMembership(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandContainerAttachedClusterFleetProject(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

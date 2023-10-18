@@ -142,13 +142,6 @@ func expandMonitoringAlertPolicyConditions(v interface{}, d tpgresource.Terrafor
 			transformed["conditionAbsent"] = transformedConditionAbsent
 		}
 
-		transformedName, err := expandMonitoringAlertPolicyConditionsName(original["name"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["name"] = transformedName
-		}
-
 		transformedConditionMonitoringQueryLanguage, err := expandMonitoringAlertPolicyConditionsConditionMonitoringQueryLanguage(original["condition_monitoring_query_language"], d, config)
 		if err != nil {
 			return nil, err
@@ -327,10 +320,6 @@ func expandMonitoringAlertPolicyConditionsConditionAbsentDuration(v interface{},
 }
 
 func expandMonitoringAlertPolicyConditionsConditionAbsentFilter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandMonitoringAlertPolicyConditionsName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

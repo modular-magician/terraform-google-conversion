@@ -120,13 +120,6 @@ func expandDialogflowCXIntentTrainingPhrases(v interface{}, d tpgresource.Terraf
 		original := raw.(map[string]interface{})
 		transformed := make(map[string]interface{})
 
-		transformedId, err := expandDialogflowCXIntentTrainingPhrasesId(original["id"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["id"] = transformedId
-		}
-
 		transformedParts, err := expandDialogflowCXIntentTrainingPhrasesParts(original["parts"], d, config)
 		if err != nil {
 			return nil, err
@@ -144,10 +137,6 @@ func expandDialogflowCXIntentTrainingPhrases(v interface{}, d tpgresource.Terraf
 		req = append(req, transformed)
 	}
 	return req, nil
-}
-
-func expandDialogflowCXIntentTrainingPhrasesId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandDialogflowCXIntentTrainingPhrasesParts(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

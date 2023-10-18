@@ -119,13 +119,6 @@ func expandDialogflowCXFlowTransitionRoutes(v interface{}, d tpgresource.Terrafo
 		original := raw.(map[string]interface{})
 		transformed := make(map[string]interface{})
 
-		transformedName, err := expandDialogflowCXFlowTransitionRoutesName(original["name"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["name"] = transformedName
-		}
-
 		transformedIntent, err := expandDialogflowCXFlowTransitionRoutesIntent(original["intent"], d, config)
 		if err != nil {
 			return nil, err
@@ -164,10 +157,6 @@ func expandDialogflowCXFlowTransitionRoutes(v interface{}, d tpgresource.Terrafo
 		req = append(req, transformed)
 	}
 	return req, nil
-}
-
-func expandDialogflowCXFlowTransitionRoutesName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandDialogflowCXFlowTransitionRoutesIntent(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -323,21 +312,10 @@ func expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesText(v inte
 		transformed["text"] = transformedText
 	}
 
-	transformedAllowPlaybackInterruption, err := expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesTextAllowPlaybackInterruption(original["allow_playback_interruption"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedAllowPlaybackInterruption); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["allowPlaybackInterruption"] = transformedAllowPlaybackInterruption
-	}
-
 	return transformed, nil
 }
 
 func expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesTextText(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesTextAllowPlaybackInterruption(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -393,13 +371,6 @@ func expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesOutputAudio
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
-	transformedAllowPlaybackInterruption, err := expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesOutputAudioTextAllowPlaybackInterruption(original["allow_playback_interruption"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedAllowPlaybackInterruption); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["allowPlaybackInterruption"] = transformedAllowPlaybackInterruption
-	}
-
 	transformedText, err := expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesOutputAudioTextText(original["text"], d, config)
 	if err != nil {
 		return nil, err
@@ -415,10 +386,6 @@ func expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesOutputAudio
 	}
 
 	return transformed, nil
-}
-
-func expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesOutputAudioTextAllowPlaybackInterruption(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesOutputAudioTextText(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -476,21 +443,10 @@ func expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesPlayAudio(v
 		transformed["audioUri"] = transformedAudioUri
 	}
 
-	transformedAllowPlaybackInterruption, err := expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesPlayAudioAllowPlaybackInterruption(original["allow_playback_interruption"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedAllowPlaybackInterruption); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["allowPlaybackInterruption"] = transformedAllowPlaybackInterruption
-	}
-
 	return transformed, nil
 }
 
 func expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesPlayAudioAudioUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandDialogflowCXFlowTransitionRoutesTriggerFulfillmentMessagesPlayAudioAllowPlaybackInterruption(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -626,13 +582,6 @@ func expandDialogflowCXFlowEventHandlers(v interface{}, d tpgresource.TerraformR
 		original := raw.(map[string]interface{})
 		transformed := make(map[string]interface{})
 
-		transformedName, err := expandDialogflowCXFlowEventHandlersName(original["name"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["name"] = transformedName
-		}
-
 		transformedEvent, err := expandDialogflowCXFlowEventHandlersEvent(original["event"], d, config)
 		if err != nil {
 			return nil, err
@@ -664,10 +613,6 @@ func expandDialogflowCXFlowEventHandlers(v interface{}, d tpgresource.TerraformR
 		req = append(req, transformed)
 	}
 	return req, nil
-}
-
-func expandDialogflowCXFlowEventHandlersName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandDialogflowCXFlowEventHandlersEvent(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -819,21 +764,10 @@ func expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesText(v interfa
 		transformed["text"] = transformedText
 	}
 
-	transformedAllowPlaybackInterruption, err := expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesTextAllowPlaybackInterruption(original["allow_playback_interruption"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedAllowPlaybackInterruption); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["allowPlaybackInterruption"] = transformedAllowPlaybackInterruption
-	}
-
 	return transformed, nil
 }
 
 func expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesTextText(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesTextAllowPlaybackInterruption(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -889,13 +823,6 @@ func expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesOutputAudioTex
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
-	transformedAllowPlaybackInterruption, err := expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesOutputAudioTextAllowPlaybackInterruption(original["allow_playback_interruption"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedAllowPlaybackInterruption); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["allowPlaybackInterruption"] = transformedAllowPlaybackInterruption
-	}
-
 	transformedText, err := expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesOutputAudioTextText(original["text"], d, config)
 	if err != nil {
 		return nil, err
@@ -911,10 +838,6 @@ func expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesOutputAudioTex
 	}
 
 	return transformed, nil
-}
-
-func expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesOutputAudioTextAllowPlaybackInterruption(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesOutputAudioTextText(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -972,21 +895,10 @@ func expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesPlayAudio(v in
 		transformed["audioUri"] = transformedAudioUri
 	}
 
-	transformedAllowPlaybackInterruption, err := expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesPlayAudioAllowPlaybackInterruption(original["allow_playback_interruption"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedAllowPlaybackInterruption); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["allowPlaybackInterruption"] = transformedAllowPlaybackInterruption
-	}
-
 	return transformed, nil
 }
 
 func expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesPlayAudioAudioUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandDialogflowCXFlowEventHandlersTriggerFulfillmentMessagesPlayAudioAllowPlaybackInterruption(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

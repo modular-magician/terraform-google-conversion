@@ -119,13 +119,6 @@ func expandCloudfunctions2functionBuildConfig(v interface{}, d tpgresource.Terra
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
-	transformedBuild, err := expandCloudfunctions2functionBuildConfigBuild(original["build"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedBuild); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["build"] = transformedBuild
-	}
-
 	transformedRuntime, err := expandCloudfunctions2functionBuildConfigRuntime(original["runtime"], d, config)
 	if err != nil {
 		return nil, err
@@ -169,10 +162,6 @@ func expandCloudfunctions2functionBuildConfig(v interface{}, d tpgresource.Terra
 	}
 
 	return transformed, nil
-}
-
-func expandCloudfunctions2functionBuildConfigBuild(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandCloudfunctions2functionBuildConfigRuntime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -448,20 +437,6 @@ func expandCloudfunctions2functionServiceConfig(v interface{}, d tpgresource.Ter
 		transformed["ingressSettings"] = transformedIngressSettings
 	}
 
-	transformedUri, err := expandCloudfunctions2functionServiceConfigUri(original["uri"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["uri"] = transformedUri
-	}
-
-	transformedGcfUri, err := expandCloudfunctions2functionServiceConfigGcfUri(original["gcf_uri"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedGcfUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["gcfUri"] = transformedGcfUri
-	}
-
 	transformedServiceAccountEmail, err := expandCloudfunctions2functionServiceConfigServiceAccountEmail(original["service_account_email"], d, config)
 	if err != nil {
 		return nil, err
@@ -541,14 +516,6 @@ func expandCloudfunctions2functionServiceConfigVpcConnectorEgressSettings(v inte
 }
 
 func expandCloudfunctions2functionServiceConfigIngressSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudfunctions2functionServiceConfigUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudfunctions2functionServiceConfigGcfUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -720,13 +687,6 @@ func expandCloudfunctions2functionEventTrigger(v interface{}, d tpgresource.Terr
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
-	transformedTrigger, err := expandCloudfunctions2functionEventTriggerTrigger(original["trigger"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedTrigger); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["trigger"] = transformedTrigger
-	}
-
 	transformedTriggerRegion, err := expandCloudfunctions2functionEventTriggerTriggerRegion(original["trigger_region"], d, config)
 	if err != nil {
 		return nil, err
@@ -770,10 +730,6 @@ func expandCloudfunctions2functionEventTrigger(v interface{}, d tpgresource.Terr
 	}
 
 	return transformed, nil
-}
-
-func expandCloudfunctions2functionEventTriggerTrigger(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandCloudfunctions2functionEventTriggerTriggerRegion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

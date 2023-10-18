@@ -111,20 +111,6 @@ func expandDataCatalogTagFields(v interface{}, d tpgresource.TerraformResourceDa
 		original := raw.(map[string]interface{})
 		transformed := make(map[string]interface{})
 
-		transformedDisplayName, err := expandDataCatalogTagFieldsDisplayName(original["display_name"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedDisplayName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["display_name"] = transformedDisplayName
-		}
-
-		transformedOrder, err := expandDataCatalogTagFieldsOrder(original["order"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedOrder); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["order"] = transformedOrder
-		}
-
 		transformedDoubleValue, err := expandDataCatalogTagFieldsDoubleValue(original["double_value"], d, config)
 		if err != nil {
 			return nil, err
@@ -167,14 +153,6 @@ func expandDataCatalogTagFields(v interface{}, d tpgresource.TerraformResourceDa
 		m[transformedFieldName] = transformed
 	}
 	return m, nil
-}
-
-func expandDataCatalogTagFieldsDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandDataCatalogTagFieldsOrder(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandDataCatalogTagFieldsDoubleValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

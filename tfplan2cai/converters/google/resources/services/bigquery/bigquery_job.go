@@ -87,13 +87,6 @@ func resourceBigQueryJobEncoder(d tpgresource.TerraformResourceData, meta interf
 
 func expandBigQueryJobConfiguration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	transformed := make(map[string]interface{})
-	transformedJobType, err := expandBigQueryJobConfigurationJobType(d.Get("job_type"), d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedJobType); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["jobType"] = transformedJobType
-	}
-
 	transformedJobTimeoutMs, err := expandBigQueryJobConfigurationJobTimeoutMs(d.Get("job_timeout_ms"), d, config)
 	if err != nil {
 		return nil, err
@@ -137,10 +130,6 @@ func expandBigQueryJobConfiguration(v interface{}, d tpgresource.TerraformResour
 	}
 
 	return transformed, nil
-}
-
-func expandBigQueryJobConfigurationJobType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandBigQueryJobConfigurationJobTimeoutMs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -439,21 +428,10 @@ func expandBigQueryJobConfigurationQueryDestinationEncryptionConfiguration(v int
 		transformed["kmsKeyName"] = transformedKmsKeyName
 	}
 
-	transformedKmsKeyVersion, err := expandBigQueryJobConfigurationQueryDestinationEncryptionConfigurationKmsKeyVersion(original["kms_key_version"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedKmsKeyVersion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["kmsKeyVersion"] = transformedKmsKeyVersion
-	}
-
 	return transformed, nil
 }
 
 func expandBigQueryJobConfigurationQueryDestinationEncryptionConfigurationKmsKeyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandBigQueryJobConfigurationQueryDestinationEncryptionConfigurationKmsKeyVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -823,21 +801,10 @@ func expandBigQueryJobConfigurationLoadDestinationEncryptionConfiguration(v inte
 		transformed["kmsKeyName"] = transformedKmsKeyName
 	}
 
-	transformedKmsKeyVersion, err := expandBigQueryJobConfigurationLoadDestinationEncryptionConfigurationKmsKeyVersion(original["kms_key_version"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedKmsKeyVersion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["kmsKeyVersion"] = transformedKmsKeyVersion
-	}
-
 	return transformed, nil
 }
 
 func expandBigQueryJobConfigurationLoadDestinationEncryptionConfigurationKmsKeyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandBigQueryJobConfigurationLoadDestinationEncryptionConfigurationKmsKeyVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -1016,21 +983,10 @@ func expandBigQueryJobConfigurationCopyDestinationEncryptionConfiguration(v inte
 		transformed["kmsKeyName"] = transformedKmsKeyName
 	}
 
-	transformedKmsKeyVersion, err := expandBigQueryJobConfigurationCopyDestinationEncryptionConfigurationKmsKeyVersion(original["kms_key_version"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedKmsKeyVersion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["kmsKeyVersion"] = transformedKmsKeyVersion
-	}
-
 	return transformed, nil
 }
 
 func expandBigQueryJobConfigurationCopyDestinationEncryptionConfigurationKmsKeyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandBigQueryJobConfigurationCopyDestinationEncryptionConfigurationKmsKeyVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

@@ -195,13 +195,6 @@ func expandCloudRunServiceSpecTraffic(v interface{}, d tpgresource.TerraformReso
 			transformed["latestRevision"] = transformedLatestRevision
 		}
 
-		transformedUrl, err := expandCloudRunServiceSpecTrafficUrl(original["url"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedUrl); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["url"] = transformedUrl
-		}
-
 		req = append(req, transformed)
 	}
 	return req, nil
@@ -220,10 +213,6 @@ func expandCloudRunServiceSpecTrafficTag(v interface{}, d tpgresource.TerraformR
 }
 
 func expandCloudRunServiceSpecTrafficLatestRevision(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudRunServiceSpecTrafficUrl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -269,34 +258,6 @@ func expandCloudRunServiceSpecTemplateMetadata(v interface{}, d tpgresource.Terr
 		transformed["labels"] = transformedLabels
 	}
 
-	transformedGeneration, err := expandCloudRunServiceSpecTemplateMetadataGeneration(original["generation"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedGeneration); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["generation"] = transformedGeneration
-	}
-
-	transformedResourceVersion, err := expandCloudRunServiceSpecTemplateMetadataResourceVersion(original["resource_version"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedResourceVersion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["resourceVersion"] = transformedResourceVersion
-	}
-
-	transformedSelfLink, err := expandCloudRunServiceSpecTemplateMetadataSelfLink(original["self_link"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedSelfLink); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["selfLink"] = transformedSelfLink
-	}
-
-	transformedUid, err := expandCloudRunServiceSpecTemplateMetadataUid(original["uid"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedUid); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["uid"] = transformedUid
-	}
-
 	transformedNamespace, err := expandCloudRunServiceSpecTemplateMetadataNamespace(original["namespace"], d, config)
 	if err != nil {
 		return nil, err
@@ -330,22 +291,6 @@ func expandCloudRunServiceSpecTemplateMetadataLabels(v interface{}, d tpgresourc
 		m[k] = val.(string)
 	}
 	return m, nil
-}
-
-func expandCloudRunServiceSpecTemplateMetadataGeneration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudRunServiceSpecTemplateMetadataResourceVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudRunServiceSpecTemplateMetadataSelfLink(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudRunServiceSpecTemplateMetadataUid(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 // If the property hasn't been explicitly set in config use the project defined by the provider or env.
@@ -419,13 +364,6 @@ func expandCloudRunServiceSpecTemplateSpec(v interface{}, d tpgresource.Terrafor
 		return nil, err
 	} else if val := reflect.ValueOf(transformedVolumes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 		transformed["volumes"] = transformedVolumes
-	}
-
-	transformedServingState, err := expandCloudRunServiceSpecTemplateSpecServingState(original["serving_state"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedServingState); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["servingState"] = transformedServingState
 	}
 
 	return transformed, nil
@@ -1521,10 +1459,6 @@ func expandCloudRunServiceSpecTemplateSpecVolumesEmptyDirSizeLimit(v interface{}
 	return v, nil
 }
 
-func expandCloudRunServiceSpecTemplateSpecServingState(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
 func expandCloudRunServiceMetadata(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
@@ -1533,34 +1467,6 @@ func expandCloudRunServiceMetadata(v interface{}, d tpgresource.TerraformResourc
 	raw := l[0]
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
-
-	transformedGeneration, err := expandCloudRunServiceMetadataGeneration(original["generation"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedGeneration); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["generation"] = transformedGeneration
-	}
-
-	transformedResourceVersion, err := expandCloudRunServiceMetadataResourceVersion(original["resource_version"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedResourceVersion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["resourceVersion"] = transformedResourceVersion
-	}
-
-	transformedSelfLink, err := expandCloudRunServiceMetadataSelfLink(original["self_link"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedSelfLink); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["selfLink"] = transformedSelfLink
-	}
-
-	transformedUid, err := expandCloudRunServiceMetadataUid(original["uid"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedUid); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["uid"] = transformedUid
-	}
 
 	transformedNamespace, err := expandCloudRunServiceMetadataNamespace(original["namespace"], d, config)
 	if err != nil {
@@ -1584,22 +1490,6 @@ func expandCloudRunServiceMetadata(v interface{}, d tpgresource.TerraformResourc
 	}
 
 	return transformed, nil
-}
-
-func expandCloudRunServiceMetadataGeneration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudRunServiceMetadataResourceVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudRunServiceMetadataSelfLink(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCloudRunServiceMetadataUid(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 // If the property hasn't been explicitly set in config use the project defined by the provider or env.
