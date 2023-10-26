@@ -54,6 +54,12 @@ func GetDialogflowCXIntentCaiObject(d tpgresource.TerraformResourceData, config 
 
 func GetDialogflowCXIntentApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
+	nameProp, err := expandDialogflowCXIntentName(d.Get("name"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("name"); !tpgresource.IsEmptyValue(reflect.ValueOf(nameProp)) && (ok || !reflect.DeepEqual(v, nameProp)) {
+		obj["name"] = nameProp
+	}
 	displayNameProp, err := expandDialogflowCXIntentDisplayName(d.Get("display_name"), d, config)
 	if err != nil {
 		return nil, err
@@ -104,6 +110,10 @@ func GetDialogflowCXIntentApiObject(d tpgresource.TerraformResourceData, config 
 	}
 
 	return obj, nil
+}
+
+func expandDialogflowCXIntentName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandDialogflowCXIntentDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
