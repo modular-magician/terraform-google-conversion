@@ -164,8 +164,8 @@ func GetSpannerInstanceApiObject(d tpgresource.TerraformResourceData, config *tr
 }
 
 func resourceSpannerInstanceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// Temp Logic to accommodate processing_units and num_nodes
-	if obj["processingUnits"] == nil && obj["nodeCount"] == nil {
+	// Temp Logic to accommodate autoscaling_config, processing_units and num_nodes
+	if obj["processingUnits"] == nil && obj["nodeCount"] == nil && obj["autoscalingConfig"] == nil {
 		obj["nodeCount"] = 1
 	}
 	newObj := make(map[string]interface{})
@@ -247,74 +247,14 @@ func expandSpannerInstanceAutoscalingConfigAutoscalingLimits(v interface{}, d tp
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
-	transformedMinLimit, err := expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMinLimit(original["min_limit"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedMinLimit); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["minLimit"] = transformedMinLimit
-	}
-
-	transformedMaxLimit, err := expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMaxLimit(original["max_limit"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedMaxLimit); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["maxLimit"] = transformedMaxLimit
-	}
-
-	return transformed, nil
-}
-
-func expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMinLimit(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedMinNodes, err := expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMinLimitMinNodes(original["min_nodes"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedMinNodes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["minNodes"] = transformedMinNodes
-	}
-
-	transformedMinProcessingUnits, err := expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMinLimitMinProcessingUnits(original["min_processing_units"], d, config)
+	transformedMinProcessingUnits, err := expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMinProcessingUnits(original["min_processing_units"], d, config)
 	if err != nil {
 		return nil, err
 	} else if val := reflect.ValueOf(transformedMinProcessingUnits); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 		transformed["minProcessingUnits"] = transformedMinProcessingUnits
 	}
 
-	return transformed, nil
-}
-
-func expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMinLimitMinNodes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMinLimitMinProcessingUnits(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMaxLimit(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedMaxNodes, err := expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMaxLimitMaxNodes(original["max_nodes"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedMaxNodes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["maxNodes"] = transformedMaxNodes
-	}
-
-	transformedMaxProcessingUnits, err := expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMaxLimitMaxProcessingUnits(original["max_processing_units"], d, config)
+	transformedMaxProcessingUnits, err := expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMaxProcessingUnits(original["max_processing_units"], d, config)
 	if err != nil {
 		return nil, err
 	} else if val := reflect.ValueOf(transformedMaxProcessingUnits); val.IsValid() && !tpgresource.IsEmptyValue(val) {
@@ -324,11 +264,11 @@ func expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMaxLimit(v interface
 	return transformed, nil
 }
 
-func expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMaxLimitMaxNodes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+func expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMinProcessingUnits(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
-func expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMaxLimitMaxProcessingUnits(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+func expandSpannerInstanceAutoscalingConfigAutoscalingLimitsMaxProcessingUnits(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
