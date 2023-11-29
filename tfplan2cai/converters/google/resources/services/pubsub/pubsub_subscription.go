@@ -397,6 +397,13 @@ func expandPubsubSubscriptionPushConfig(v interface{}, d tpgresource.TerraformRe
 		transformed["noWrapper"] = transformedNoWrapper
 	}
 
+	transformedPubsubWrapper, err := expandPubsubSubscriptionPushConfigPubsubWrapper(original["pubsub_wrapper"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPubsubWrapper); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["pubsubWrapper"] = transformedPubsubWrapper
+	}
+
 	return transformed, nil
 }
 
@@ -469,6 +476,29 @@ func expandPubsubSubscriptionPushConfigNoWrapper(v interface{}, d tpgresource.Te
 }
 
 func expandPubsubSubscriptionPushConfigNoWrapperWriteMetadata(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandPubsubSubscriptionPushConfigPubsubWrapper(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedWriteMetadata, err := expandPubsubSubscriptionPushConfigPubsubWrapperWriteMetadata(original["write_metadata"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["writeMetadata"] = transformedWriteMetadata
+	}
+
+	return transformed, nil
+}
+
+func expandPubsubSubscriptionPushConfigPubsubWrapperWriteMetadata(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
