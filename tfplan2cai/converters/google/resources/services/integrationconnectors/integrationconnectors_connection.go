@@ -1461,13 +1461,6 @@ func expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationC
 			transformed["port"] = transformedPort
 		}
 
-		transformedServiceAttachment, err := expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationConfigDestinationServiceAttachment(original["service_attachment"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedServiceAttachment); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["serviceAttachment"] = transformedServiceAttachment
-		}
-
 		transformedHost, err := expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationConfigDestinationHost(original["host"], d, config)
 		if err != nil {
 			return nil, err
@@ -1481,10 +1474,6 @@ func expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationC
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationConfigDestinationPort(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationConfigDestinationServiceAttachment(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
