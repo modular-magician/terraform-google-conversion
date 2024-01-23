@@ -90,6 +90,12 @@ func GetWorkstationsWorkstationConfigApiObject(d tpgresource.TerraformResourceDa
 	} else if v, ok := d.GetOkExists("enable_audit_agent"); !tpgresource.IsEmptyValue(reflect.ValueOf(enableAuditAgentProp)) && (ok || !reflect.DeepEqual(v, enableAuditAgentProp)) {
 		obj["enableAuditAgent"] = enableAuditAgentProp
 	}
+	disableTcpConnectionsProp, err := expandWorkstationsWorkstationConfigDisableTcpConnections(d.Get("disable_tcp_connections"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("disable_tcp_connections"); !tpgresource.IsEmptyValue(reflect.ValueOf(disableTcpConnectionsProp)) && (ok || !reflect.DeepEqual(v, disableTcpConnectionsProp)) {
+		obj["disableTcpConnections"] = disableTcpConnectionsProp
+	}
 	hostProp, err := expandWorkstationsWorkstationConfigHost(d.Get("host"), d, config)
 	if err != nil {
 		return nil, err
@@ -157,6 +163,10 @@ func expandWorkstationsWorkstationConfigReplicaZones(v interface{}, d tpgresourc
 }
 
 func expandWorkstationsWorkstationConfigEnableAuditAgent(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandWorkstationsWorkstationConfigDisableTcpConnections(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
