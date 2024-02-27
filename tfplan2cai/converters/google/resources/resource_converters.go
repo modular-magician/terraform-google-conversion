@@ -28,6 +28,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/cloudfunctions2"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/cloudrun"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/cloudrunv2"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/cloudrunv3"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/cloudtasks"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/compute"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/containeranalysis"
@@ -180,6 +181,12 @@ func ResourceConverters() map[string][]cai.ResourceConverter {
 		"google_cloud_run_v2_service_iam_policy":                  {cloudrunv2.ResourceConverterCloudRunV2ServiceIamPolicy()},
 		"google_cloud_run_v2_service_iam_binding":                 {cloudrunv2.ResourceConverterCloudRunV2ServiceIamBinding()},
 		"google_cloud_run_v2_service_iam_member":                  {cloudrunv2.ResourceConverterCloudRunV2ServiceIamMember()},
+		"google_cloud_run_v3_job_iam_policy":                      {cloudrunv3.ResourceConverterCloudRunV3JobIamPolicy()},
+		"google_cloud_run_v3_job_iam_binding":                     {cloudrunv3.ResourceConverterCloudRunV3JobIamBinding()},
+		"google_cloud_run_v3_job_iam_member":                      {cloudrunv3.ResourceConverterCloudRunV3JobIamMember()},
+		"google_cloud_run_v3_service_iam_policy":                  {cloudrunv3.ResourceConverterCloudRunV3ServiceIamPolicy()},
+		"google_cloud_run_v3_service_iam_binding":                 {cloudrunv3.ResourceConverterCloudRunV3ServiceIamBinding()},
+		"google_cloud_run_v3_service_iam_member":                  {cloudrunv3.ResourceConverterCloudRunV3ServiceIamMember()},
 		"google_cloud_tasks_queue_iam_policy":                     {cloudtasks.ResourceConverterCloudTasksQueueIamPolicy()},
 		"google_cloud_tasks_queue_iam_binding":                    {cloudtasks.ResourceConverterCloudTasksQueueIamBinding()},
 		"google_cloud_tasks_queue_iam_member":                     {cloudtasks.ResourceConverterCloudTasksQueueIamMember()},
