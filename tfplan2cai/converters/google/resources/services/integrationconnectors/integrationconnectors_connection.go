@@ -1390,6 +1390,20 @@ func expandIntegrationConnectorsConnectionEventingConfig(v interface{}, d tpgres
 		transformed["registrationDestinationConfig"] = transformedRegistrationDestinationConfig
 	}
 
+	transformedProxyDestinationConfig, err := expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfig(original["proxy_destination_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedProxyDestinationConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["proxyDestinationConfig"] = transformedProxyDestinationConfig
+	}
+
+	transformedDeadLetterConfig, err := expandIntegrationConnectorsConnectionEventingConfigDeadLetterConfig(original["dead_letter_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDeadLetterConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["deadLetterConfig"] = transformedDeadLetterConfig
+	}
+
 	transformedAuthConfig, err := expandIntegrationConnectorsConnectionEventingConfigAuthConfig(original["auth_config"], d, config)
 	if err != nil {
 		return nil, err
@@ -1489,6 +1503,118 @@ func expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationC
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationConfigDestinationHost(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedKey, err := expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfigKey(original["key"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["key"] = transformedKey
+	}
+
+	transformedDestination, err := expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfigDestination(original["destination"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDestination); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["destinations"] = transformedDestination
+	}
+
+	return transformed, nil
+}
+
+func expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfigKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfigDestination(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedPort, err := expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfigDestinationPort(original["port"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPort); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["port"] = transformedPort
+		}
+
+		transformedServiceAttachment, err := expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfigDestinationServiceAttachment(original["service_attachment"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedServiceAttachment); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["serviceAttachment"] = transformedServiceAttachment
+		}
+
+		transformedHost, err := expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfigDestinationHost(original["host"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedHost); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["host"] = transformedHost
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfigDestinationPort(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfigDestinationServiceAttachment(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIntegrationConnectorsConnectionEventingConfigProxyDestinationConfigDestinationHost(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIntegrationConnectorsConnectionEventingConfigDeadLetterConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedTopic, err := expandIntegrationConnectorsConnectionEventingConfigDeadLetterConfigTopic(original["topic"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedTopic); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["topic"] = transformedTopic
+	}
+
+	transformedProjectId, err := expandIntegrationConnectorsConnectionEventingConfigDeadLetterConfigProjectId(original["project_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedProjectId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["projectId"] = transformedProjectId
+	}
+
+	return transformed, nil
+}
+
+func expandIntegrationConnectorsConnectionEventingConfigDeadLetterConfigTopic(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIntegrationConnectorsConnectionEventingConfigDeadLetterConfigProjectId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
