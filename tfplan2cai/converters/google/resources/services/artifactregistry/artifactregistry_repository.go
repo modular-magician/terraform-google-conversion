@@ -568,6 +568,13 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigAptRepository(v inter
 		transformed["publicRepository"] = transformedPublicRepository
 	}
 
+	transformedCustomRepository, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigAptRepositoryCustomRepository(original["custom_repository"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCustomRepository); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["customRepository"] = transformedCustomRepository
+	}
+
 	return transformed, nil
 }
 
@@ -605,6 +612,29 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigAptRepositoryPublicRe
 	return v, nil
 }
 
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigAptRepositoryCustomRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedUri, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigAptRepositoryCustomRepositoryUri(original["uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["uri"] = transformedUri
+	}
+
+	return transformed, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigAptRepositoryCustomRepositoryUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigDockerRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
@@ -621,10 +651,40 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigDockerRepository(v in
 		transformed["publicRepository"] = transformedPublicRepository
 	}
 
+	transformedCustomRepository, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigDockerRepositoryCustomRepository(original["custom_repository"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCustomRepository); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["customRepository"] = transformedCustomRepository
+	}
+
 	return transformed, nil
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigDockerRepositoryPublicRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigDockerRepositoryCustomRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedUri, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigDockerRepositoryCustomRepositoryUri(original["uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["uri"] = transformedUri
+	}
+
+	return transformed, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigDockerRepositoryCustomRepositoryUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -644,10 +704,40 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigMavenRepository(v int
 		transformed["publicRepository"] = transformedPublicRepository
 	}
 
+	transformedCustomRepository, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigMavenRepositoryCustomRepository(original["custom_repository"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCustomRepository); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["customRepository"] = transformedCustomRepository
+	}
+
 	return transformed, nil
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigMavenRepositoryPublicRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigMavenRepositoryCustomRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedUri, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigMavenRepositoryCustomRepositoryUri(original["uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["uri"] = transformedUri
+	}
+
+	return transformed, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigMavenRepositoryCustomRepositoryUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -667,10 +757,40 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigNpmRepository(v inter
 		transformed["publicRepository"] = transformedPublicRepository
 	}
 
+	transformedCustomRepository, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigNpmRepositoryCustomRepository(original["custom_repository"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCustomRepository); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["customRepository"] = transformedCustomRepository
+	}
+
 	return transformed, nil
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigNpmRepositoryPublicRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigNpmRepositoryCustomRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedUri, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigNpmRepositoryCustomRepositoryUri(original["uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["uri"] = transformedUri
+	}
+
+	return transformed, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigNpmRepositoryCustomRepositoryUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -690,10 +810,40 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigPythonRepository(v in
 		transformed["publicRepository"] = transformedPublicRepository
 	}
 
+	transformedCustomRepository, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigPythonRepositoryCustomRepository(original["custom_repository"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCustomRepository); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["customRepository"] = transformedCustomRepository
+	}
+
 	return transformed, nil
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigPythonRepositoryPublicRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigPythonRepositoryCustomRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedUri, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigPythonRepositoryCustomRepositoryUri(original["uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["uri"] = transformedUri
+	}
+
+	return transformed, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigPythonRepositoryCustomRepositoryUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -711,6 +861,13 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigYumRepository(v inter
 		return nil, err
 	} else if val := reflect.ValueOf(transformedPublicRepository); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 		transformed["publicRepository"] = transformedPublicRepository
+	}
+
+	transformedCustomRepository, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigYumRepositoryCustomRepository(original["custom_repository"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCustomRepository); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["customRepository"] = transformedCustomRepository
 	}
 
 	return transformed, nil
@@ -747,6 +904,29 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigYumRepositoryPublicRe
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigYumRepositoryPublicRepositoryRepositoryPath(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigYumRepositoryCustomRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedUri, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigYumRepositoryCustomRepositoryUri(original["uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["uri"] = transformedUri
+	}
+
+	return transformed, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigYumRepositoryCustomRepositoryUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
