@@ -545,6 +545,13 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfig(v interface{}, d tpg
 		transformed["upstreamCredentials"] = transformedUpstreamCredentials
 	}
 
+	transformedDisableUpstreamValidation, err := expandArtifactRegistryRepositoryRemoteRepositoryConfigDisableUpstreamValidation(original["disable_upstream_validation"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDisableUpstreamValidation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["disableUpstreamValidation"] = transformedDisableUpstreamValidation
+	}
+
 	return transformed, nil
 }
 
@@ -800,6 +807,10 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigUpstreamCredentialsUs
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigUpstreamCredentialsUsernamePasswordCredentialsPasswordSecretVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandArtifactRegistryRepositoryRemoteRepositoryConfigDisableUpstreamValidation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
