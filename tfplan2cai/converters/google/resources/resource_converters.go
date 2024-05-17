@@ -16,6 +16,7 @@ package google
 import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/cai"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/accesscontextmanager"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/alloydb"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/apigee"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/artifactregistry"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/bigquery"
@@ -75,6 +76,8 @@ import (
 func ResourceConverters() map[string][]cai.ResourceConverter {
 	return map[string][]cai.ResourceConverter{
 		"google_artifact_registry_repository":                     {artifactregistry.ResourceConverterArtifactRegistryRepository()},
+		"google_alloydb_cluster":                                  {alloydb.ResourceConverterAlloydbCluster()},
+		"google_alloydb_instance":                                 {alloydb.ResourceConverterAlloydbInstance()},
 		"google_compute_address":                                  {compute.ResourceConverterComputeAddress()},
 		"google_compute_autoscaler":                               {compute.ResourceConverterComputeAutoscaler()},
 		"google_compute_firewall":                                 {compute.ResourceConverterComputeFirewall()},
@@ -94,6 +97,7 @@ func ResourceConverters() map[string][]cai.ResourceConverter {
 		"google_compute_snapshot":                                 {compute.ResourceConverterComputeSnapshot()},
 		"google_compute_subnetwork":                               {compute.ResourceConverterComputeSubnetwork()},
 		"google_compute_ssl_policy":                               {compute.ResourceConverterComputeSslPolicy()},
+		"google_compute_ssl_certificate":                          {compute.ResourceConverterComputeSslCertificate()},
 		"google_compute_target_http_proxy":                        {compute.ResourceConverterComputeTargetHttpProxy()},
 		"google_compute_target_https_proxy":                       {compute.ResourceConverterComputeTargetHttpsProxy()},
 		"google_compute_target_ssl_proxy":                         {compute.ResourceConverterComputeTargetSslProxy()},
