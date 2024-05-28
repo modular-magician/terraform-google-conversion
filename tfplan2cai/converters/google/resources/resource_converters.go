@@ -60,6 +60,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/servicemanagement"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/spanner"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/sql"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/storage"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/vertexai"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/vpcaccess"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/workbench"
@@ -360,6 +361,9 @@ func ResourceConverters() map[string][]cai.ResourceConverter {
 		"google_endpoints_service_consumers_iam_policy":           {servicemanagement.ResourceConverterServiceManagementServiceConsumersIamPolicy()},
 		"google_endpoints_service_consumers_iam_binding":          {servicemanagement.ResourceConverterServiceManagementServiceConsumersIamBinding()},
 		"google_endpoints_service_consumers_iam_member":           {servicemanagement.ResourceConverterServiceManagementServiceConsumersIamMember()},
+		"google_storage_managed_folder_iam_policy":                {storage.ResourceConverterStorageManagedFolderIamPolicy()},
+		"google_storage_managed_folder_iam_binding":               {storage.ResourceConverterStorageManagedFolderIamBinding()},
+		"google_storage_managed_folder_iam_member":                {storage.ResourceConverterStorageManagedFolderIamMember()},
 		"google_vertex_ai_endpoint_iam_policy":                    {vertexai.ResourceConverterVertexAIEndpointIamPolicy()},
 		"google_vertex_ai_endpoint_iam_binding":                   {vertexai.ResourceConverterVertexAIEndpointIamBinding()},
 		"google_vertex_ai_endpoint_iam_member":                    {vertexai.ResourceConverterVertexAIEndpointIamMember()},
