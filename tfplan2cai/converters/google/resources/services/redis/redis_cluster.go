@@ -96,6 +96,12 @@ func GetRedisClusterApiObject(d tpgresource.TerraformResourceData, config *trans
 	} else if v, ok := d.GetOkExists("redis_configs"); !tpgresource.IsEmptyValue(reflect.ValueOf(redisConfigsProp)) && (ok || !reflect.DeepEqual(v, redisConfigsProp)) {
 		obj["redisConfigs"] = redisConfigsProp
 	}
+	testMissingTestsProp, err := expandRedisClusterTestMissingTests(d.Get("test_missing_tests"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("test_missing_tests"); !tpgresource.IsEmptyValue(reflect.ValueOf(testMissingTestsProp)) && (ok || !reflect.DeepEqual(v, testMissingTestsProp)) {
+		obj["testMissingTests"] = testMissingTestsProp
+	}
 
 	return obj, nil
 }
@@ -147,6 +153,17 @@ func expandRedisClusterShardCount(v interface{}, d tpgresource.TerraformResource
 }
 
 func expandRedisClusterRedisConfigs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
+}
+
+func expandRedisClusterTestMissingTests(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
 	if v == nil {
 		return map[string]string{}, nil
 	}
