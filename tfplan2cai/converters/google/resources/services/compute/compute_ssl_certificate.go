@@ -81,6 +81,12 @@ func GetComputeSslCertificateApiObject(d tpgresource.TerraformResourceData, conf
 	} else if v, ok := d.GetOkExists("private_key"); !tpgresource.IsEmptyValue(reflect.ValueOf(privateKeyProp)) && (ok || !reflect.DeepEqual(v, privateKeyProp)) {
 		obj["privateKey"] = privateKeyProp
 	}
+	selfManagedProp, err := expandComputeSslCertificateSelfManaged(d.Get("self_managed"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("self_managed"); !tpgresource.IsEmptyValue(reflect.ValueOf(selfManagedProp)) && (ok || !reflect.DeepEqual(v, selfManagedProp)) {
+		obj["selfManaged"] = selfManagedProp
+	}
 
 	return obj, nil
 }
@@ -112,5 +118,28 @@ func expandComputeSslCertificateName(v interface{}, d tpgresource.TerraformResou
 }
 
 func expandComputeSslCertificatePrivateKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSslCertificateSelfManaged(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedCertificate, err := expandComputeSslCertificateSelfManagedCertificate(original["certificate"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCertificate); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["certificate"] = transformedCertificate
+	}
+
+	return transformed, nil
+}
+
+func expandComputeSslCertificateSelfManagedCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
