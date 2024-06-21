@@ -93,6 +93,12 @@ func GetComputeUrlMapApiObject(d tpgresource.TerraformResourceData, config *tran
 	} else if v, ok := d.GetOkExists("name"); !tpgresource.IsEmptyValue(reflect.ValueOf(nameProp)) && (ok || !reflect.DeepEqual(v, nameProp)) {
 		obj["name"] = nameProp
 	}
+	defaultCustomErrorResponsePolicyProp, err := expandComputeUrlMapDefaultCustomErrorResponsePolicy(d.Get("default_custom_error_response_policy"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("default_custom_error_response_policy"); !tpgresource.IsEmptyValue(reflect.ValueOf(defaultCustomErrorResponsePolicyProp)) && (ok || !reflect.DeepEqual(v, defaultCustomErrorResponsePolicyProp)) {
+		obj["defaultCustomErrorResponsePolicy"] = defaultCustomErrorResponsePolicyProp
+	}
 	pathMatchersProp, err := expandComputeUrlMapPathMatcher(d.Get("path_matcher"), d, config)
 	if err != nil {
 		return nil, err
@@ -365,6 +371,84 @@ func expandComputeUrlMapName(v interface{}, d tpgresource.TerraformResourceData,
 	return v, nil
 }
 
+func expandComputeUrlMapDefaultCustomErrorResponsePolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedErrorResponseRules, err := expandComputeUrlMapDefaultCustomErrorResponsePolicyErrorResponseRules(original["error_response_rules"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedErrorResponseRules); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["errorResponseRules"] = transformedErrorResponseRules
+	}
+
+	transformedErrorService, err := expandComputeUrlMapDefaultCustomErrorResponsePolicyErrorService(original["error_service"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedErrorService); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["errorService"] = transformedErrorService
+	}
+
+	return transformed, nil
+}
+
+func expandComputeUrlMapDefaultCustomErrorResponsePolicyErrorResponseRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedMatchResponseCodes, err := expandComputeUrlMapDefaultCustomErrorResponsePolicyErrorResponseRulesMatchResponseCodes(original["match_response_codes"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedMatchResponseCodes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["matchResponseCodes"] = transformedMatchResponseCodes
+		}
+
+		transformedPath, err := expandComputeUrlMapDefaultCustomErrorResponsePolicyErrorResponseRulesPath(original["path"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPath); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["path"] = transformedPath
+		}
+
+		transformedOverrideResponseCode, err := expandComputeUrlMapDefaultCustomErrorResponsePolicyErrorResponseRulesOverrideResponseCode(original["override_response_code"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedOverrideResponseCode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["overrideResponseCode"] = transformedOverrideResponseCode
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandComputeUrlMapDefaultCustomErrorResponsePolicyErrorResponseRulesMatchResponseCodes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapDefaultCustomErrorResponsePolicyErrorResponseRulesPath(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapDefaultCustomErrorResponsePolicyErrorResponseRulesOverrideResponseCode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapDefaultCustomErrorResponsePolicyErrorService(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandComputeUrlMapPathMatcher(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
@@ -408,6 +492,13 @@ func expandComputeUrlMapPathMatcher(v interface{}, d tpgresource.TerraformResour
 			return nil, err
 		} else if val := reflect.ValueOf(transformedName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 			transformed["name"] = transformedName
+		}
+
+		transformedDefaultCustomErrorResponsePolicy, err := expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicy(original["default_custom_error_response_policy"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDefaultCustomErrorResponsePolicy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["defaultCustomErrorResponsePolicy"] = transformedDefaultCustomErrorResponsePolicy
 		}
 
 		transformedPathRule, err := expandComputeUrlMapPathMatcherPathRule(original["path_rule"], d, config)
@@ -705,6 +796,84 @@ func expandComputeUrlMapPathMatcherName(v interface{}, d tpgresource.TerraformRe
 	return v, nil
 }
 
+func expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedErrorResponseRules, err := expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicyErrorResponseRules(original["error_response_rules"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedErrorResponseRules); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["errorResponseRules"] = transformedErrorResponseRules
+	}
+
+	transformedErrorService, err := expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicyErrorService(original["error_service"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedErrorService); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["errorService"] = transformedErrorService
+	}
+
+	return transformed, nil
+}
+
+func expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicyErrorResponseRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedMatchResponseCodes, err := expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicyErrorResponseRulesMatchResponseCodes(original["match_response_codes"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedMatchResponseCodes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["matchResponseCodes"] = transformedMatchResponseCodes
+		}
+
+		transformedPath, err := expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicyErrorResponseRulesPath(original["path"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPath); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["path"] = transformedPath
+		}
+
+		transformedOverrideResponseCode, err := expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicyErrorResponseRulesOverrideResponseCode(original["override_response_code"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedOverrideResponseCode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["overrideResponseCode"] = transformedOverrideResponseCode
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicyErrorResponseRulesMatchResponseCodes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicyErrorResponseRulesPath(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicyErrorResponseRulesOverrideResponseCode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapPathMatcherDefaultCustomErrorResponsePolicyErrorService(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandComputeUrlMapPathMatcherPathRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
@@ -741,6 +910,13 @@ func expandComputeUrlMapPathMatcherPathRule(v interface{}, d tpgresource.Terrafo
 			return nil, err
 		} else if val := reflect.ValueOf(transformedRouteAction); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 			transformed["routeAction"] = transformedRouteAction
+		}
+
+		transformedCustomErrorResponsePolicy, err := expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicy(original["custom_error_response_policy"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedCustomErrorResponsePolicy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["customErrorResponsePolicy"] = transformedCustomErrorResponsePolicy
 		}
 
 		transformedUrlRedirect, err := expandComputeUrlMapPathMatcherPathRuleUrlRedirect(original["url_redirect"], d, config)
@@ -1565,6 +1741,84 @@ func expandComputeUrlMapPathMatcherPathRuleRouteActionWeightedBackendServicesWei
 	return v, nil
 }
 
+func expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedErrorResponseRules, err := expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicyErrorResponseRules(original["error_response_rules"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedErrorResponseRules); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["errorResponseRules"] = transformedErrorResponseRules
+	}
+
+	transformedErrorService, err := expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicyErrorService(original["error_service"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedErrorService); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["errorService"] = transformedErrorService
+	}
+
+	return transformed, nil
+}
+
+func expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicyErrorResponseRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedMatchResponseCodes, err := expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicyErrorResponseRulesMatchResponseCodes(original["match_response_codes"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedMatchResponseCodes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["matchResponseCodes"] = transformedMatchResponseCodes
+		}
+
+		transformedPath, err := expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicyErrorResponseRulesPath(original["path"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPath); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["path"] = transformedPath
+		}
+
+		transformedOverrideResponseCode, err := expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicyErrorResponseRulesOverrideResponseCode(original["override_response_code"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedOverrideResponseCode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["overrideResponseCode"] = transformedOverrideResponseCode
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicyErrorResponseRulesMatchResponseCodes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicyErrorResponseRulesPath(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicyErrorResponseRulesOverrideResponseCode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapPathMatcherPathRuleCustomErrorResponsePolicyErrorService(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandComputeUrlMapPathMatcherPathRuleUrlRedirect(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
@@ -1686,6 +1940,13 @@ func expandComputeUrlMapPathMatcherRouteRules(v interface{}, d tpgresource.Terra
 			return nil, err
 		} else if val := reflect.ValueOf(transformedRouteAction); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 			transformed["routeAction"] = transformedRouteAction
+		}
+
+		transformedCustomErrorResponsePolicy, err := expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicy(original["custom_error_response_policy"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedCustomErrorResponsePolicy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["customErrorResponsePolicy"] = transformedCustomErrorResponsePolicy
 		}
 
 		transformedUrlRedirect, err := expandComputeUrlMapPathMatcherRouteRulesUrlRedirect(original["url_redirect"], d, config)
@@ -2936,6 +3197,84 @@ func expandComputeUrlMapPathMatcherRouteRulesRouteActionWeightedBackendServicesH
 }
 
 func expandComputeUrlMapPathMatcherRouteRulesRouteActionWeightedBackendServicesWeight(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedErrorResponseRules, err := expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicyErrorResponseRules(original["error_response_rules"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedErrorResponseRules); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["errorResponseRules"] = transformedErrorResponseRules
+	}
+
+	transformedErrorService, err := expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicyErrorService(original["error_service"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedErrorService); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["errorService"] = transformedErrorService
+	}
+
+	return transformed, nil
+}
+
+func expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicyErrorResponseRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedMatchResponseCodes, err := expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicyErrorResponseRulesMatchResponseCodes(original["match_response_codes"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedMatchResponseCodes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["matchResponseCodes"] = transformedMatchResponseCodes
+		}
+
+		transformedPath, err := expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicyErrorResponseRulesPath(original["path"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPath); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["path"] = transformedPath
+		}
+
+		transformedOverrideResponseCode, err := expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicyErrorResponseRulesOverrideResponseCode(original["override_response_code"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedOverrideResponseCode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["overrideResponseCode"] = transformedOverrideResponseCode
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicyErrorResponseRulesMatchResponseCodes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicyErrorResponseRulesPath(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicyErrorResponseRulesOverrideResponseCode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicyErrorService(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
