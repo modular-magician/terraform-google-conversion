@@ -165,6 +165,41 @@ func expandNetworkManagementConnectivityTestSource(v interface{}, d tpgresource.
 		transformed["projectId"] = transformedProjectId
 	}
 
+	transformedForwardingRule, err := expandNetworkManagementConnectivityTestSourceForwardingRule(original["forwarding_rule"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedForwardingRule); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["forwardingRule"] = transformedForwardingRule
+	}
+
+	transformedGkeMasterCluster, err := expandNetworkManagementConnectivityTestSourceGkeMasterCluster(original["gke_master_cluster"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedGkeMasterCluster); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["gkeMasterCluster"] = transformedGkeMasterCluster
+	}
+
+	transformedCloudSqlInstance, err := expandNetworkManagementConnectivityTestSourceCloudSqlInstance(original["cloud_sql_instance"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCloudSqlInstance); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["cloudSqlInstance"] = transformedCloudSqlInstance
+	}
+
+	transformedCloudFunction, err := expandNetworkManagementConnectivityTestSourceCloudFunction(original["cloud_function"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCloudFunction); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["cloudFunction"] = transformedCloudFunction
+	}
+
+	transformedCloudRunRevision, err := expandNetworkManagementConnectivityTestSourceCloudRunRevision(original["cloud_run_revision"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCloudRunRevision); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["cloudRunRevision"] = transformedCloudRunRevision
+	}
+
 	return transformed, nil
 }
 
@@ -189,6 +224,64 @@ func expandNetworkManagementConnectivityTestSourceNetworkType(v interface{}, d t
 }
 
 func expandNetworkManagementConnectivityTestSourceProjectId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkManagementConnectivityTestSourceForwardingRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkManagementConnectivityTestSourceGkeMasterCluster(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkManagementConnectivityTestSourceCloudSqlInstance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkManagementConnectivityTestSourceCloudFunction(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedUri, err := expandNetworkManagementConnectivityTestSourceCloudFunctionUri(original["uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["uri"] = transformedUri
+	}
+
+	return transformed, nil
+}
+
+func expandNetworkManagementConnectivityTestSourceCloudFunctionUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkManagementConnectivityTestSourceCloudRunRevision(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedUri, err := expandNetworkManagementConnectivityTestSourceCloudRunRevisionUri(original["uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["uri"] = transformedUri
+	}
+
+	return transformed, nil
+}
+
+func expandNetworkManagementConnectivityTestSourceCloudRunRevisionUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -236,6 +329,41 @@ func expandNetworkManagementConnectivityTestDestination(v interface{}, d tpgreso
 		transformed["projectId"] = transformedProjectId
 	}
 
+	transformedForwardingRule, err := expandNetworkManagementConnectivityTestDestinationForwardingRule(original["forwarding_rule"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedForwardingRule); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["forwardingRule"] = transformedForwardingRule
+	}
+
+	transformedGkeMasterCluster, err := expandNetworkManagementConnectivityTestDestinationGkeMasterCluster(original["gke_master_cluster"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedGkeMasterCluster); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["gkeMasterCluster"] = transformedGkeMasterCluster
+	}
+
+	transformedCloudSqlInstance, err := expandNetworkManagementConnectivityTestDestinationCloudSqlInstance(original["cloud_sql_instance"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCloudSqlInstance); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["cloudSqlInstance"] = transformedCloudSqlInstance
+	}
+
+	transformedCloudFunction, err := expandNetworkManagementConnectivityTestDestinationCloudFunction(original["cloud_function"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCloudFunction); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["cloudFunction"] = transformedCloudFunction
+	}
+
+	transformedCloudRunRevision, err := expandNetworkManagementConnectivityTestDestinationCloudRunRevision(original["cloud_run_revision"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCloudRunRevision); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["cloudRunRevision"] = transformedCloudRunRevision
+	}
+
 	return transformed, nil
 }
 
@@ -256,6 +384,64 @@ func expandNetworkManagementConnectivityTestDestinationNetwork(v interface{}, d 
 }
 
 func expandNetworkManagementConnectivityTestDestinationProjectId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkManagementConnectivityTestDestinationForwardingRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkManagementConnectivityTestDestinationGkeMasterCluster(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkManagementConnectivityTestDestinationCloudSqlInstance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkManagementConnectivityTestDestinationCloudFunction(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedUri, err := expandNetworkManagementConnectivityTestDestinationCloudFunctionUri(original["uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["uri"] = transformedUri
+	}
+
+	return transformed, nil
+}
+
+func expandNetworkManagementConnectivityTestDestinationCloudFunctionUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkManagementConnectivityTestDestinationCloudRunRevision(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedUri, err := expandNetworkManagementConnectivityTestDestinationCloudRunRevisionUri(original["uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["uri"] = transformedUri
+	}
+
+	return transformed, nil
+}
+
+func expandNetworkManagementConnectivityTestDestinationCloudRunRevisionUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
