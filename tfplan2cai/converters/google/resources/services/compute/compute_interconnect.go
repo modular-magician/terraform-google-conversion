@@ -15,12 +15,21 @@
 package compute
 
 import (
+	"log"
 	"reflect"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
+
+func InterconnectTypeDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
+	log.Printf("[DEBUG]zhenhuatest old %s, new %s", old, new)
+
+	return old == "IT_PRIVATE" && new == "DEDICATED"
+}
 
 const ComputeInterconnectAssetType string = "compute.googleapis.com/Interconnect"
 
