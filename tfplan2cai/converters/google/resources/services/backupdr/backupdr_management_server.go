@@ -22,7 +22,7 @@ import (
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
 
-const BackupDRManagementServerAssetType string = "backupdr.googleapis.com/ManagementServer"
+const BackupDRManagementServerAssetType string = "autopush-backupdr.sandbox.googleapis.com/ManagementServer"
 
 func ResourceConverterBackupDRManagementServer() cai.ResourceConverter {
 	return cai.ResourceConverter{
@@ -32,7 +32,7 @@ func ResourceConverterBackupDRManagementServer() cai.ResourceConverter {
 }
 
 func GetBackupDRManagementServerCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//backupdr.googleapis.com/projects/{{project}}/locations/{{location}}/managementServers/{{name}}")
+	name, err := cai.AssetName(d, config, "//autopush-backupdr.sandbox.googleapis.com/projects/{{project}}/locations/{{location}}/managementServers/{{management_server_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -42,7 +42,7 @@ func GetBackupDRManagementServerCaiObject(d tpgresource.TerraformResourceData, c
 			Type: BackupDRManagementServerAssetType,
 			Resource: &cai.AssetResource{
 				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/backupdr/v1/rest",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/autopush-backupdr.sandbox/v1/rest",
 				DiscoveryName:        "ManagementServer",
 				Data:                 obj,
 			},
@@ -54,11 +54,29 @@ func GetBackupDRManagementServerCaiObject(d tpgresource.TerraformResourceData, c
 
 func GetBackupDRManagementServerApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
+	descriptionProp, err := expandBackupDRManagementServerDescription(d.Get("description"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("description"); !tpgresource.IsEmptyValue(reflect.ValueOf(descriptionProp)) && (ok || !reflect.DeepEqual(v, descriptionProp)) {
+		obj["description"] = descriptionProp
+	}
 	typeProp, err := expandBackupDRManagementServerType(d.Get("type"), d, config)
 	if err != nil {
 		return nil, err
 	} else if v, ok := d.GetOkExists("type"); !tpgresource.IsEmptyValue(reflect.ValueOf(typeProp)) && (ok || !reflect.DeepEqual(v, typeProp)) {
 		obj["type"] = typeProp
+	}
+	managementUriProp, err := expandBackupDRManagementServerManagementUri(d.Get("management_uri"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("management_uri"); !tpgresource.IsEmptyValue(reflect.ValueOf(managementUriProp)) && (ok || !reflect.DeepEqual(v, managementUriProp)) {
+		obj["managementUri"] = managementUriProp
+	}
+	workforceIdentityBasedManagementUriProp, err := expandBackupDRManagementServerWorkforceIdentityBasedManagementUri(d.Get("workforce_identity_based_management_uri"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("workforce_identity_based_management_uri"); !tpgresource.IsEmptyValue(reflect.ValueOf(workforceIdentityBasedManagementUriProp)) && (ok || !reflect.DeepEqual(v, workforceIdentityBasedManagementUriProp)) {
+		obj["workforceIdentityBasedManagementUri"] = workforceIdentityBasedManagementUriProp
 	}
 	networksProp, err := expandBackupDRManagementServerNetworks(d.Get("networks"), d, config)
 	if err != nil {
@@ -66,11 +84,101 @@ func GetBackupDRManagementServerApiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("networks"); !tpgresource.IsEmptyValue(reflect.ValueOf(networksProp)) && (ok || !reflect.DeepEqual(v, networksProp)) {
 		obj["networks"] = networksProp
 	}
+	etagProp, err := expandBackupDRManagementServerEtag(d.Get("etag"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("etag"); !tpgresource.IsEmptyValue(reflect.ValueOf(etagProp)) && (ok || !reflect.DeepEqual(v, etagProp)) {
+		obj["etag"] = etagProp
+	}
+	workforceIdentityBasedOauth2ClientIdProp, err := expandBackupDRManagementServerWorkforceIdentityBasedOauth2ClientId(d.Get("workforce_identity_based_oauth2_client_id"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("workforce_identity_based_oauth2_client_id"); !tpgresource.IsEmptyValue(reflect.ValueOf(workforceIdentityBasedOauth2ClientIdProp)) && (ok || !reflect.DeepEqual(v, workforceIdentityBasedOauth2ClientIdProp)) {
+		obj["workforceIdentityBasedOauth2ClientId"] = workforceIdentityBasedOauth2ClientIdProp
+	}
+	labelsProp, err := expandBackupDRManagementServerEffectiveLabels(d.Get("effective_labels"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
+		obj["labels"] = labelsProp
+	}
 
 	return obj, nil
 }
 
+func expandBackupDRManagementServerDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandBackupDRManagementServerType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBackupDRManagementServerManagementUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedWebUi, err := expandBackupDRManagementServerManagementUriWebUi(original["web_ui"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedWebUi); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["webUi"] = transformedWebUi
+	}
+
+	transformedApi, err := expandBackupDRManagementServerManagementUriApi(original["api"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedApi); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["api"] = transformedApi
+	}
+
+	return transformed, nil
+}
+
+func expandBackupDRManagementServerManagementUriWebUi(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBackupDRManagementServerManagementUriApi(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBackupDRManagementServerWorkforceIdentityBasedManagementUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedFirstPartyManagementUri, err := expandBackupDRManagementServerWorkforceIdentityBasedManagementUriFirstPartyManagementUri(original["first_party_management_uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedFirstPartyManagementUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["firstPartyManagementUri"] = transformedFirstPartyManagementUri
+	}
+
+	transformedThirdPartyManagementUri, err := expandBackupDRManagementServerWorkforceIdentityBasedManagementUriThirdPartyManagementUri(original["third_party_management_uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedThirdPartyManagementUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["thirdPartyManagementUri"] = transformedThirdPartyManagementUri
+	}
+
+	return transformed, nil
+}
+
+func expandBackupDRManagementServerWorkforceIdentityBasedManagementUriFirstPartyManagementUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBackupDRManagementServerWorkforceIdentityBasedManagementUriThirdPartyManagementUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -109,4 +217,53 @@ func expandBackupDRManagementServerNetworksNetwork(v interface{}, d tpgresource.
 
 func expandBackupDRManagementServerNetworksPeeringMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandBackupDRManagementServerEtag(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBackupDRManagementServerWorkforceIdentityBasedOauth2ClientId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedFirstPartyOauth2ClientId, err := expandBackupDRManagementServerWorkforceIdentityBasedOauth2ClientIdFirstPartyOauth2ClientId(original["first_party_oauth2_client_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedFirstPartyOauth2ClientId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["firstPartyOauth2ClientId"] = transformedFirstPartyOauth2ClientId
+	}
+
+	transformedThirdPartyOauth2ClientId, err := expandBackupDRManagementServerWorkforceIdentityBasedOauth2ClientIdThirdPartyOauth2ClientId(original["third_party_oauth2_client_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedThirdPartyOauth2ClientId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["thirdPartyOauth2ClientId"] = transformedThirdPartyOauth2ClientId
+	}
+
+	return transformed, nil
+}
+
+func expandBackupDRManagementServerWorkforceIdentityBasedOauth2ClientIdFirstPartyOauth2ClientId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBackupDRManagementServerWorkforceIdentityBasedOauth2ClientIdThirdPartyOauth2ClientId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBackupDRManagementServerEffectiveLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
