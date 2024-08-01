@@ -80,6 +80,12 @@ func GetActiveDirectoryDomainApiObject(d tpgresource.TerraformResourceData, conf
 	} else if v, ok := d.GetOkExists("admin"); !tpgresource.IsEmptyValue(reflect.ValueOf(adminProp)) && (ok || !reflect.DeepEqual(v, adminProp)) {
 		obj["admin"] = adminProp
 	}
+	tagsProp, err := expandActiveDirectoryDomainTags(d.Get("tags"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("tags"); !tpgresource.IsEmptyValue(reflect.ValueOf(tagsProp)) && (ok || !reflect.DeepEqual(v, tagsProp)) {
+		obj["tags"] = tagsProp
+	}
 	labelsProp, err := expandActiveDirectoryDomainEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -105,6 +111,17 @@ func expandActiveDirectoryDomainLocations(v interface{}, d tpgresource.Terraform
 
 func expandActiveDirectoryDomainAdmin(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandActiveDirectoryDomainTags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
 
 func expandActiveDirectoryDomainEffectiveLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
