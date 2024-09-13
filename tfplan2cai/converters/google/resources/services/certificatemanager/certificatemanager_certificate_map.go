@@ -32,7 +32,7 @@ func ResourceConverterCertificateManagerCertificateMap() cai.ResourceConverter {
 }
 
 func GetCertificateManagerCertificateMapCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//certificatemanager.googleapis.com/projects/{{project}}/locations/global/certificateMaps/{{name}}")
+	name, err := cai.AssetName(d, config, "//certificatemanager.googleapis.com/projects/{{project}}/locations/{{location}}/certificateMaps/{{name}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
