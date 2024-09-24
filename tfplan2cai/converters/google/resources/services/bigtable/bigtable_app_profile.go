@@ -69,6 +69,12 @@ func GetBigtableAppProfileApiObject(d tpgresource.TerraformResourceData, config 
 	} else if v, ok := d.GetOkExists("multi_cluster_routing_use_any"); !tpgresource.IsEmptyValue(reflect.ValueOf(multiClusterRoutingUseAnyProp)) && (ok || !reflect.DeepEqual(v, multiClusterRoutingUseAnyProp)) {
 		obj["multiClusterRoutingUseAny"] = multiClusterRoutingUseAnyProp
 	}
+	rowAffinityProp, err := expandBigtableAppProfileRowAffinity(d.Get("row_affinity"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("row_affinity"); !tpgresource.IsEmptyValue(reflect.ValueOf(rowAffinityProp)) && (ok || !reflect.DeepEqual(v, rowAffinityProp)) {
+		obj["rowAffinity"] = rowAffinityProp
+	}
 	singleClusterRoutingProp, err := expandBigtableAppProfileSingleClusterRouting(d.Get("single_cluster_routing"), d, config)
 	if err != nil {
 		return nil, err
@@ -117,6 +123,10 @@ func expandBigtableAppProfileMultiClusterRoutingUseAny(v interface{}, d tpgresou
 	}
 
 	return obj, nil
+}
+
+func expandBigtableAppProfileRowAffinity(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandBigtableAppProfileSingleClusterRouting(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
