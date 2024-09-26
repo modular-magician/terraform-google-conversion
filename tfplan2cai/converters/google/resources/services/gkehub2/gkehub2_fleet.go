@@ -97,6 +97,13 @@ func expandGKEHub2FleetDefaultClusterConfig(v interface{}, d tpgresource.Terrafo
 		transformed["securityPostureConfig"] = transformedSecurityPostureConfig
 	}
 
+	transformedComplianceConfig, err := expandGKEHub2FleetDefaultClusterConfigComplianceConfig(original["compliance_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedComplianceConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["compliancePostureConfig"] = transformedComplianceConfig
+	}
+
 	return transformed, nil
 }
 
@@ -187,5 +194,61 @@ func expandGKEHub2FleetDefaultClusterConfigSecurityPostureConfigMode(v interface
 }
 
 func expandGKEHub2FleetDefaultClusterConfigSecurityPostureConfigVulnerabilityMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandGKEHub2FleetDefaultClusterConfigComplianceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedMode, err := expandGKEHub2FleetDefaultClusterConfigComplianceConfigMode(original["mode"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedMode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["mode"] = transformedMode
+	}
+
+	transformedComplianceStandards, err := expandGKEHub2FleetDefaultClusterConfigComplianceConfigComplianceStandards(original["compliance_standards"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedComplianceStandards); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["complianceStandards"] = transformedComplianceStandards
+	}
+
+	return transformed, nil
+}
+
+func expandGKEHub2FleetDefaultClusterConfigComplianceConfigMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandGKEHub2FleetDefaultClusterConfigComplianceConfigComplianceStandards(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedStandard, err := expandGKEHub2FleetDefaultClusterConfigComplianceConfigComplianceStandardsStandard(original["standard"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedStandard); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["standard"] = transformedStandard
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandGKEHub2FleetDefaultClusterConfigComplianceConfigComplianceStandardsStandard(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
