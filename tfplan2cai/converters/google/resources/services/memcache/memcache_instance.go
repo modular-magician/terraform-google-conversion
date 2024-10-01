@@ -110,6 +110,12 @@ func GetMemcacheInstanceApiObject(d tpgresource.TerraformResourceData, config *t
 	} else if v, ok := d.GetOkExists("reserved_ip_range_id"); !tpgresource.IsEmptyValue(reflect.ValueOf(reservedIpRangeIdProp)) && (ok || !reflect.DeepEqual(v, reservedIpRangeIdProp)) {
 		obj["reservedIpRangeId"] = reservedIpRangeIdProp
 	}
+	tagsProp, err := expandMemcacheInstanceTags(d.Get("tags"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("tags"); !tpgresource.IsEmptyValue(reflect.ValueOf(tagsProp)) && (ok || !reflect.DeepEqual(v, tagsProp)) {
+		obj["tags"] = tagsProp
+	}
 	labelsProp, err := expandMemcacheInstanceEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -375,6 +381,17 @@ func expandMemcacheInstanceMaintenancePolicyWeeklyMaintenanceWindowStartTimeNano
 
 func expandMemcacheInstanceReservedIpRangeId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandMemcacheInstanceTags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
 
 func expandMemcacheInstanceEffectiveLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
