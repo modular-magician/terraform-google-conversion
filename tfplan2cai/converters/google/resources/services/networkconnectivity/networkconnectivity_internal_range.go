@@ -41,8 +41,8 @@ func GetNetworkConnectivityInternalRangeCaiObject(d tpgresource.TerraformResourc
 			Name: name,
 			Type: NetworkConnectivityInternalRangeAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/networkconnectivity/v1/rest",
+				Version:              "v1beta",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/networkconnectivity/v1beta/rest",
 				DiscoveryName:        "InternalRange",
 				Data:                 obj,
 			},
