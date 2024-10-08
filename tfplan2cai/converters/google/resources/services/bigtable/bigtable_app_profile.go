@@ -116,6 +116,10 @@ func expandBigtableAppProfileMultiClusterRoutingUseAny(v interface{}, d tpgresou
 		obj.ClusterIds = append(obj.ClusterIds, id.(string))
 	}
 
+	if _, ok := d.GetOkExists("row_affinity"); ok {
+		obj.RowAffinity = &bigtableadmin.RowAffinity{}
+	}
+
 	return obj, nil
 }
 
