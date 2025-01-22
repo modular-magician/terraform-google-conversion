@@ -22,7 +22,7 @@ import (
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
 
-const GeminiRepositoryGroupAssetType string = "cloudaicompanion.googleapis.com/RepositoryGroup"
+const GeminiRepositoryGroupAssetType string = "staging-cloudaicompanion.sandbox.googleapis.com/RepositoryGroup"
 
 func ResourceConverterGeminiRepositoryGroup() cai.ResourceConverter {
 	return cai.ResourceConverter{
@@ -32,7 +32,7 @@ func ResourceConverterGeminiRepositoryGroup() cai.ResourceConverter {
 }
 
 func GetGeminiRepositoryGroupCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//cloudaicompanion.googleapis.com/projects/{{project}}/locations/{{location}}/codeRepositoryIndexes/{{code_repository_index}}/repositoryGroups/{{repository_group_id}}")
+	name, err := cai.AssetName(d, config, "//staging-cloudaicompanion.sandbox.googleapis.com/projects/{{project}}/locations/{{location}}/codeRepositoryIndexes/{{code_repository_index}}/repositoryGroups/{{repository_group_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -42,7 +42,7 @@ func GetGeminiRepositoryGroupCaiObject(d tpgresource.TerraformResourceData, conf
 			Type: GeminiRepositoryGroupAssetType,
 			Resource: &cai.AssetResource{
 				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/cloudaicompanion/v1/rest",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/staging-cloudaicompanion.sandbox/v1/rest",
 				DiscoveryName:        "RepositoryGroup",
 				Data:                 obj,
 			},

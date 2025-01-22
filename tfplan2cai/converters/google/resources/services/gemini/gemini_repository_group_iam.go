@@ -23,7 +23,7 @@ import (
 )
 
 // Provide a separate asset type constant so we don't have to worry about name conflicts between IAM and non-IAM converter files
-const GeminiRepositoryGroupIAMAssetType string = "cloudaicompanion.googleapis.com/RepositoryGroup"
+const GeminiRepositoryGroupIAMAssetType string = "staging-cloudaicompanion.sandbox.googleapis.com/RepositoryGroup"
 
 func ResourceConverterGeminiRepositoryGroupIamPolicy() cai.ResourceConverter {
 	return cai.ResourceConverter{
@@ -96,7 +96,7 @@ func newGeminiRepositoryGroupIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//cloudaicompanion.googleapis.com/projects/{{project}}/locations/{{location}}/codeRepositoryIndexes/{{code_repository_index}}/repositoryGroups/{{repository_group_id}}")
+	name, err := cai.AssetName(d, config, "//staging-cloudaicompanion.sandbox.googleapis.com/projects/{{project}}/locations/{{location}}/codeRepositoryIndexes/{{code_repository_index}}/repositoryGroups/{{repository_group_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -126,7 +126,7 @@ func FetchGeminiRepositoryGroupIamPolicy(d tpgresource.TerraformResourceData, co
 		GeminiRepositoryGroupIamUpdaterProducer,
 		d,
 		config,
-		"//cloudaicompanion.googleapis.com/projects/{{project}}/locations/{{location}}/codeRepositoryIndexes/{{code_repository_index}}/repositoryGroups/{{repository_group_id}}",
+		"//staging-cloudaicompanion.sandbox.googleapis.com/projects/{{project}}/locations/{{location}}/codeRepositoryIndexes/{{code_repository_index}}/repositoryGroups/{{repository_group_id}}",
 		GeminiRepositoryGroupIAMAssetType,
 	)
 }
