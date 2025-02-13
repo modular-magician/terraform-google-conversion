@@ -530,7 +530,6 @@ func resourceComputeDiskEncoder(d tpgresource.TerraformResourceData, meta interf
 		obj["sourceImage"] = imageUrl
 		log.Printf("[DEBUG] Image name resolved to: %s", imageUrl)
 	}
-
 	return obj, nil
 }
 

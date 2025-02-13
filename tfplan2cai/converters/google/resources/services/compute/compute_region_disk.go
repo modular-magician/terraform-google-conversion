@@ -195,7 +195,6 @@ func resourceComputeRegionDiskEncoder(d tpgresource.TerraformResourceData, meta 
 		obj["sourceImage"] = imageUrl
 		log.Printf("[DEBUG] Image name resolved to: %s", imageUrl)
 	}
-
 	return obj, nil
 }
 
@@ -213,6 +212,13 @@ func expandComputeRegionDiskDiskEncryptionKey(v interface{}, d tpgresource.Terra
 		return nil, err
 	} else if val := reflect.ValueOf(transformedRawKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 		transformed["rawKey"] = transformedRawKey
+	}
+
+	transformedRawKeyWo, err := expandComputeRegionDiskDiskEncryptionKeyRawKeyWo(original["raw_key_wo"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRawKeyWo); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["rawKeyWo"] = transformedRawKeyWo
 	}
 
 	transformedSha256, err := expandComputeRegionDiskDiskEncryptionKeySha256(original["sha256"], d, config)
@@ -233,6 +239,10 @@ func expandComputeRegionDiskDiskEncryptionKey(v interface{}, d tpgresource.Terra
 }
 
 func expandComputeRegionDiskDiskEncryptionKeyRawKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionDiskDiskEncryptionKeyRawKeyWo(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
