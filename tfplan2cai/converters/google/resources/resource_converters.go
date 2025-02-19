@@ -21,6 +21,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/apikeys"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/appengine"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/artifactregistry"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/beyondcorp"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/bigquery"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/bigqueryanalyticshub"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/bigqueryconnection"
@@ -33,6 +34,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/cloudrun"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/cloudrunv2"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/cloudtasks"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/colab"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/composer"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/compute"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/container"
@@ -47,6 +49,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/dns"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/filestore"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/firebase"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/gemini"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/gkebackup"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/gkehub"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v5/tfplan2cai/converters/google/resources/services/gkehub2"
@@ -192,6 +195,12 @@ func ResourceConverters() map[string][]cai.ResourceConverter {
 		"google_artifact_registry_repository_iam_policy":          {artifactregistry.ResourceConverterArtifactRegistryRepositoryIamPolicy()},
 		"google_artifact_registry_repository_iam_binding":         {artifactregistry.ResourceConverterArtifactRegistryRepositoryIamBinding()},
 		"google_artifact_registry_repository_iam_member":          {artifactregistry.ResourceConverterArtifactRegistryRepositoryIamMember()},
+		"google_beyondcorp_application_iam_policy":                {beyondcorp.ResourceConverterBeyondcorpApplicationIamPolicy()},
+		"google_beyondcorp_application_iam_binding":               {beyondcorp.ResourceConverterBeyondcorpApplicationIamBinding()},
+		"google_beyondcorp_application_iam_member":                {beyondcorp.ResourceConverterBeyondcorpApplicationIamMember()},
+		"google_beyondcorp_security_gateway_iam_policy":           {beyondcorp.ResourceConverterBeyondcorpSecurityGatewayIamPolicy()},
+		"google_beyondcorp_security_gateway_iam_binding":          {beyondcorp.ResourceConverterBeyondcorpSecurityGatewayIamBinding()},
+		"google_beyondcorp_security_gateway_iam_member":           {beyondcorp.ResourceConverterBeyondcorpSecurityGatewayIamMember()},
 		"google_bigquery_table_iam_policy":                        {bigquery.ResourceConverterBigQueryTableIamPolicy()},
 		"google_bigquery_table_iam_binding":                       {bigquery.ResourceConverterBigQueryTableIamBinding()},
 		"google_bigquery_table_iam_member":                        {bigquery.ResourceConverterBigQueryTableIamMember()},
@@ -237,6 +246,9 @@ func ResourceConverters() map[string][]cai.ResourceConverter {
 		"google_cloud_tasks_queue_iam_policy":                     {cloudtasks.ResourceConverterCloudTasksQueueIamPolicy()},
 		"google_cloud_tasks_queue_iam_binding":                    {cloudtasks.ResourceConverterCloudTasksQueueIamBinding()},
 		"google_cloud_tasks_queue_iam_member":                     {cloudtasks.ResourceConverterCloudTasksQueueIamMember()},
+		"google_colab_runtime_template_iam_policy":                {colab.ResourceConverterColabRuntimeTemplateIamPolicy()},
+		"google_colab_runtime_template_iam_binding":               {colab.ResourceConverterColabRuntimeTemplateIamBinding()},
+		"google_colab_runtime_template_iam_member":                {colab.ResourceConverterColabRuntimeTemplateIamMember()},
 		"google_compute_backend_bucket_iam_policy":                {compute.ResourceConverterComputeBackendBucketIamPolicy()},
 		"google_compute_backend_bucket_iam_binding":               {compute.ResourceConverterComputeBackendBucketIamBinding()},
 		"google_compute_backend_bucket_iam_member":                {compute.ResourceConverterComputeBackendBucketIamMember()},
@@ -252,6 +264,9 @@ func ResourceConverters() map[string][]cai.ResourceConverter {
 		"google_compute_instance_iam_policy":                      {compute.ResourceConverterComputeInstanceIamPolicy()},
 		"google_compute_instance_iam_binding":                     {compute.ResourceConverterComputeInstanceIamBinding()},
 		"google_compute_instance_iam_member":                      {compute.ResourceConverterComputeInstanceIamMember()},
+		"google_compute_instance_template_iam_policy":             {compute.ResourceConverterComputeInstanceTemplateIamPolicy()},
+		"google_compute_instance_template_iam_binding":            {compute.ResourceConverterComputeInstanceTemplateIamBinding()},
+		"google_compute_instance_template_iam_member":             {compute.ResourceConverterComputeInstanceTemplateIamMember()},
 		"google_compute_region_backend_service_iam_policy":        {compute.ResourceConverterComputeRegionBackendServiceIamPolicy()},
 		"google_compute_region_backend_service_iam_binding":       {compute.ResourceConverterComputeRegionBackendServiceIamBinding()},
 		"google_compute_region_backend_service_iam_member":        {compute.ResourceConverterComputeRegionBackendServiceIamMember()},
@@ -318,6 +333,9 @@ func ResourceConverters() map[string][]cai.ResourceConverter {
 		"google_dns_managed_zone_iam_policy":                      {dns.ResourceConverterDNSManagedZoneIamPolicy()},
 		"google_dns_managed_zone_iam_binding":                     {dns.ResourceConverterDNSManagedZoneIamBinding()},
 		"google_dns_managed_zone_iam_member":                      {dns.ResourceConverterDNSManagedZoneIamMember()},
+		"google_gemini_repository_group_iam_policy":               {gemini.ResourceConverterGeminiRepositoryGroupIamPolicy()},
+		"google_gemini_repository_group_iam_binding":              {gemini.ResourceConverterGeminiRepositoryGroupIamBinding()},
+		"google_gemini_repository_group_iam_member":               {gemini.ResourceConverterGeminiRepositoryGroupIamMember()},
 		"google_gke_backup_backup_plan_iam_policy":                {gkebackup.ResourceConverterGKEBackupBackupPlanIamPolicy()},
 		"google_gke_backup_backup_plan_iam_binding":               {gkebackup.ResourceConverterGKEBackupBackupPlanIamBinding()},
 		"google_gke_backup_backup_plan_iam_member":                {gkebackup.ResourceConverterGKEBackupBackupPlanIamMember()},
