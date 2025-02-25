@@ -791,6 +791,13 @@ func expandNetworkServicesEdgeCacheServiceRoutingPathMatcherRouteRuleRouteAction
 		transformed["compressionMode"] = transformedCompressionMode
 	}
 
+	transformedWasmAction, err := expandNetworkServicesEdgeCacheServiceRoutingPathMatcherRouteRuleRouteActionWasmAction(original["wasm_action"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedWasmAction); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["wasmAction"] = transformedWasmAction
+	}
+
 	return transformed, nil
 }
 
@@ -1258,6 +1265,10 @@ func expandNetworkServicesEdgeCacheServiceRoutingPathMatcherRouteRuleRouteAction
 }
 
 func expandNetworkServicesEdgeCacheServiceRoutingPathMatcherRouteRuleRouteActionCompressionMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkServicesEdgeCacheServiceRoutingPathMatcherRouteRuleRouteActionWasmAction(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
