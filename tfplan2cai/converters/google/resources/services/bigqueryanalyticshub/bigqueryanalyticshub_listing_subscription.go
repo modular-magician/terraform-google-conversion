@@ -110,6 +110,13 @@ func expandBigqueryAnalyticsHubListingSubscriptionDestinationDataset(v interface
 		transformed["labels"] = transformedLabels
 	}
 
+	transformedResourceTags, err := expandBigqueryAnalyticsHubListingSubscriptionDestinationDatasetResourceTags(original["resource_tags"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedResourceTags); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["resourceTags"] = transformedResourceTags
+	}
+
 	return transformed, nil
 }
 
@@ -160,6 +167,17 @@ func expandBigqueryAnalyticsHubListingSubscriptionDestinationDatasetDescription(
 }
 
 func expandBigqueryAnalyticsHubListingSubscriptionDestinationDatasetLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
+}
+
+func expandBigqueryAnalyticsHubListingSubscriptionDestinationDatasetResourceTags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
 	if v == nil {
 		return map[string]string{}, nil
 	}
