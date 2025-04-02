@@ -20,6 +20,8 @@ import (
 	"fmt"
 	"reflect"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
@@ -99,6 +101,18 @@ func GetComputeSnapshotApiObject(d tpgresource.TerraformResourceData, config *tr
 	} else if v, ok := d.GetOkExists("source_disk"); !tpgresource.IsEmptyValue(reflect.ValueOf(sourceDiskProp)) && (ok || !reflect.DeepEqual(v, sourceDiskProp)) {
 		obj["sourceDisk"] = sourceDiskProp
 	}
+	sourceInstantSnapshotProp, err := expandComputeSnapshotSourceInstantSnapshot(d.Get("source_instant_snapshot"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("source_instant_snapshot"); !tpgresource.IsEmptyValue(reflect.ValueOf(sourceInstantSnapshotProp)) && (ok || !reflect.DeepEqual(v, sourceInstantSnapshotProp)) {
+		obj["sourceInstantSnapshot"] = sourceInstantSnapshotProp
+	}
+	sourceInstantSnapshotEncryptionKeyProp, err := expandComputeSnapshotSourceInstantSnapshotEncryptionKey(d.Get("source_instant_snapshot_encryption_key"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("source_instant_snapshot_encryption_key"); !tpgresource.IsEmptyValue(reflect.ValueOf(sourceInstantSnapshotEncryptionKeyProp)) && (ok || !reflect.DeepEqual(v, sourceInstantSnapshotEncryptionKeyProp)) {
+		obj["sourceInstantSnapshotEncryptionKey"] = sourceInstantSnapshotEncryptionKeyProp
+	}
 	zoneProp, err := expandComputeSnapshotZone(d.Get("zone"), d, config)
 	if err != nil {
 		return nil, err
@@ -116,6 +130,30 @@ func GetComputeSnapshotApiObject(d tpgresource.TerraformResourceData, config *tr
 		return nil, err
 	} else if v, ok := d.GetOkExists("source_disk_encryption_key"); !tpgresource.IsEmptyValue(reflect.ValueOf(sourceDiskEncryptionKeyProp)) && (ok || !reflect.DeepEqual(v, sourceDiskEncryptionKeyProp)) {
 		obj["sourceDiskEncryptionKey"] = sourceDiskEncryptionKeyProp
+	}
+	guestOsFeaturesProp, err := expandComputeSnapshotGuestOsFeatures(d.Get("guest_os_features"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("guest_os_features"); !tpgresource.IsEmptyValue(reflect.ValueOf(guestOsFeaturesProp)) && (ok || !reflect.DeepEqual(v, guestOsFeaturesProp)) {
+		obj["guestOsFeatures"] = guestOsFeaturesProp
+	}
+	architectureProp, err := expandComputeSnapshotArchitecture(d.Get("architecture"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("architecture"); !tpgresource.IsEmptyValue(reflect.ValueOf(architectureProp)) && (ok || !reflect.DeepEqual(v, architectureProp)) {
+		obj["architecture"] = architectureProp
+	}
+	snapshotTypeProp, err := expandComputeSnapshotSnapshotType(d.Get("snapshot_type"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("snapshot_type"); !tpgresource.IsEmptyValue(reflect.ValueOf(snapshotTypeProp)) && (ok || !reflect.DeepEqual(v, snapshotTypeProp)) {
+		obj["snapshotType"] = snapshotTypeProp
+	}
+	sourceDiskForRecoveryCheckpointProp, err := expandComputeSnapshotSourceDiskForRecoveryCheckpoint(d.Get("source_disk_for_recovery_checkpoint"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("source_disk_for_recovery_checkpoint"); !tpgresource.IsEmptyValue(reflect.ValueOf(sourceDiskForRecoveryCheckpointProp)) && (ok || !reflect.DeepEqual(v, sourceDiskForRecoveryCheckpointProp)) {
+		obj["sourceDiskForRecoveryCheckpoint"] = sourceDiskForRecoveryCheckpointProp
 	}
 
 	return obj, nil
@@ -158,6 +196,77 @@ func expandComputeSnapshotSourceDisk(v interface{}, d tpgresource.TerraformResou
 		return nil, fmt.Errorf("Invalid value for source_disk: %s", err)
 	}
 	return f.RelativeLink(), nil
+}
+
+func expandComputeSnapshotSourceInstantSnapshot(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSnapshotSourceInstantSnapshotEncryptionKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedRawKey, err := expandComputeSnapshotSourceInstantSnapshotEncryptionKeyRawKey(original["raw_key"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRawKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["rawKey"] = transformedRawKey
+	}
+
+	transformedRsaEncryptedKey, err := expandComputeSnapshotSourceInstantSnapshotEncryptionKeyRsaEncryptedKey(original["rsa_encrypted_key"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRsaEncryptedKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["rsaEncryptedKey"] = transformedRsaEncryptedKey
+	}
+
+	transformedSha256, err := expandComputeSnapshotSourceInstantSnapshotEncryptionKeySha256(original["sha256"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSha256); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["sha256"] = transformedSha256
+	}
+
+	transformedKmsKeySelfLink, err := expandComputeSnapshotSourceInstantSnapshotEncryptionKeyKmsKeySelfLink(original["kms_key_self_link"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedKmsKeySelfLink); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["kmsKeyName"] = transformedKmsKeySelfLink
+	}
+
+	transformedKmsKeyServiceAccount, err := expandComputeSnapshotSourceInstantSnapshotEncryptionKeyKmsKeyServiceAccount(original["kms_key_service_account"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedKmsKeyServiceAccount); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["kmsKeyServiceAccount"] = transformedKmsKeyServiceAccount
+	}
+
+	return transformed, nil
+}
+
+func expandComputeSnapshotSourceInstantSnapshotEncryptionKeyRawKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSnapshotSourceInstantSnapshotEncryptionKeyRsaEncryptedKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSnapshotSourceInstantSnapshotEncryptionKeySha256(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSnapshotSourceInstantSnapshotEncryptionKeyKmsKeySelfLink(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSnapshotSourceInstantSnapshotEncryptionKeyKmsKeyServiceAccount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandComputeSnapshotZone(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -267,4 +376,47 @@ func expandComputeSnapshotSourceDiskEncryptionKeyRawKey(v interface{}, d tpgreso
 
 func expandComputeSnapshotSourceDiskEncryptionKeyKmsKeyServiceAccount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandComputeSnapshotGuestOsFeatures(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	v = v.(*schema.Set).List()
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedType, err := expandComputeSnapshotGuestOsFeaturesType(original["type"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedType); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["type"] = transformedType
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandComputeSnapshotGuestOsFeaturesType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSnapshotArchitecture(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSnapshotSnapshotType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSnapshotSourceDiskForRecoveryCheckpoint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	f, err := tpgresource.ParseZonalFieldValue("disks", v.(string), "project", "zone", d, config, true)
+	if err != nil {
+		return nil, fmt.Errorf("Invalid value for source_disk_for_recovery_checkpoint: %s", err)
+	}
+	return f.RelativeLink(), nil
 }
