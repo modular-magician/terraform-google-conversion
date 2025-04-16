@@ -94,6 +94,12 @@ func GetDiscoveryEngineDataStoreApiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("document_processing_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(documentProcessingConfigProp)) && (ok || !reflect.DeepEqual(v, documentProcessingConfigProp)) {
 		obj["documentProcessingConfig"] = documentProcessingConfigProp
 	}
+	startingSchemaProp, err := expandDiscoveryEngineDataStoreStartingSchema(d.Get("starting_schema"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("starting_schema"); !tpgresource.IsEmptyValue(reflect.ValueOf(startingSchemaProp)) && (ok || !reflect.DeepEqual(v, startingSchemaProp)) {
+		obj["startingSchema"] = startingSchemaProp
+	}
 
 	return obj, nil
 }
@@ -426,4 +432,38 @@ func expandDiscoveryEngineDataStoreDocumentProcessingConfigParsingConfigOverride
 	transformed := make(map[string]interface{})
 
 	return transformed, nil
+}
+
+func expandDiscoveryEngineDataStoreStartingSchema(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedName, err := expandDiscoveryEngineDataStoreStartingSchemaName(original["name"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["name"] = transformedName
+	}
+
+	transformedJsonSchema, err := expandDiscoveryEngineDataStoreStartingSchemaJsonSchema(original["json_schema"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedJsonSchema); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["jsonSchema"] = transformedJsonSchema
+	}
+
+	return transformed, nil
+}
+
+func expandDiscoveryEngineDataStoreStartingSchemaName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineDataStoreStartingSchemaJsonSchema(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
