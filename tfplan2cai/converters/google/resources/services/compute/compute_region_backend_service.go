@@ -318,6 +318,12 @@ func GetComputeRegionBackendServiceApiObject(d tpgresource.TerraformResourceData
 	} else if v, ok := d.GetOkExists("subsetting"); !tpgresource.IsEmptyValue(reflect.ValueOf(subsettingProp)) && (ok || !reflect.DeepEqual(v, subsettingProp)) {
 		obj["subsetting"] = subsettingProp
 	}
+	haPolicyProp, err := expandComputeRegionBackendServiceHaPolicy(d.Get("ha_policy"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("ha_policy"); !tpgresource.IsEmptyValue(reflect.ValueOf(haPolicyProp)) && (ok || !reflect.DeepEqual(v, haPolicyProp)) {
+		obj["haPolicy"] = haPolicyProp
+	}
 	regionProp, err := expandComputeRegionBackendServiceRegion(d.Get("region"), d, config)
 	if err != nil {
 		return nil, err
@@ -1645,6 +1651,89 @@ func expandComputeRegionBackendServiceSubsetting(v interface{}, d tpgresource.Te
 }
 
 func expandComputeRegionBackendServiceSubsettingPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionBackendServiceHaPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedFastIPMove, err := expandComputeRegionBackendServiceHaPolicyFastIPMove(original["fast_ip_move"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedFastIPMove); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["fastIPMove"] = transformedFastIPMove
+	}
+
+	transformedLeader, err := expandComputeRegionBackendServiceHaPolicyLeader(original["leader"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedLeader); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["leader"] = transformedLeader
+	}
+
+	return transformed, nil
+}
+
+func expandComputeRegionBackendServiceHaPolicyFastIPMove(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionBackendServiceHaPolicyLeader(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedBackendGroup, err := expandComputeRegionBackendServiceHaPolicyLeaderBackendGroup(original["backend_group"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedBackendGroup); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["backendGroup"] = transformedBackendGroup
+	}
+
+	transformedNetworkEndpoint, err := expandComputeRegionBackendServiceHaPolicyLeaderNetworkEndpoint(original["network_endpoint"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedNetworkEndpoint); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["networkEndpoint"] = transformedNetworkEndpoint
+	}
+
+	return transformed, nil
+}
+
+func expandComputeRegionBackendServiceHaPolicyLeaderBackendGroup(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionBackendServiceHaPolicyLeaderNetworkEndpoint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedInstance, err := expandComputeRegionBackendServiceHaPolicyLeaderNetworkEndpointInstance(original["instance"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedInstance); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["instance"] = transformedInstance
+	}
+
+	return transformed, nil
+}
+
+func expandComputeRegionBackendServiceHaPolicyLeaderNetworkEndpointInstance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
