@@ -142,6 +142,12 @@ func GetCloudRunV2ServiceApiObject(d tpgresource.TerraformResourceData, config *
 	} else if v, ok := d.GetOkExists("iap_enabled"); !tpgresource.IsEmptyValue(reflect.ValueOf(iapEnabledProp)) && (ok || !reflect.DeepEqual(v, iapEnabledProp)) {
 		obj["iapEnabled"] = iapEnabledProp
 	}
+	tagsProp, err := expandCloudRunV2ServiceTags(d.Get("tags"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("tags"); !tpgresource.IsEmptyValue(reflect.ValueOf(tagsProp)) && (ok || !reflect.DeepEqual(v, tagsProp)) {
+		obj["tags"] = tagsProp
+	}
 	labelsProp, err := expandCloudRunV2ServiceEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -1952,6 +1958,17 @@ func expandCloudRunV2ServiceBuildConfigServiceAccount(v interface{}, d tpgresour
 
 func expandCloudRunV2ServiceIapEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandCloudRunV2ServiceTags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
 
 func expandCloudRunV2ServiceEffectiveLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
