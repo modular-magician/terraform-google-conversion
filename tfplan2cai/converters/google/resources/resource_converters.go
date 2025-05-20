@@ -54,6 +54,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/services/gkehub"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/services/gkehub2"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/services/healthcare"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/services/iam2"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/services/iambeta"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/services/iap"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/services/kms"
@@ -128,6 +129,7 @@ func ResourceConverters() map[string][]cai.ResourceConverter {
 		"google_dataproc_cluster":                                       {dataproc.ResourceConverterDataprocCluster()},
 		"google_dns_managed_zone":                                       {dns.ResourceConverterDNSManagedZone()},
 		"google_dns_policy":                                             {dns.ResourceConverterDNSPolicy()},
+		"google_iam_deny_policy":                                        {iam2.ResourceConverterIAM2DenyPolicy()},
 		"google_kms_key_ring_import_job":                                {kms.ResourceConverterKMSKeyRingImportJob()},
 		"google_gke_hub_feature":                                        {gkehub2.ResourceConverterGKEHub2Feature()},
 		"google_storage_bucket":                                         {storage.ResourceConverterStorageBucket()},
