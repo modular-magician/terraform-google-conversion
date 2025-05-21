@@ -87,7 +87,7 @@ func expandBeyondcorpSecurityGatewayHubs(v interface{}, d tpgresource.TerraformR
 		if err != nil {
 			return nil, err
 		} else if val := reflect.ValueOf(transformedInternetGateway); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["internet_gateway"] = transformedInternetGateway
+			transformed["internetGateway"] = transformedInternetGateway
 		}
 
 		transformedRegion, err := tpgresource.ExpandString(original["region"], d, config)
@@ -112,7 +112,7 @@ func expandBeyondcorpSecurityGatewayHubsInternetGateway(v interface{}, d tpgreso
 	if err != nil {
 		return nil, err
 	} else if val := reflect.ValueOf(transformedAssignedIps); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["assigned_ips"] = transformedAssignedIps
+		transformed["assignedIps"] = transformedAssignedIps
 	}
 
 	return transformed, nil
