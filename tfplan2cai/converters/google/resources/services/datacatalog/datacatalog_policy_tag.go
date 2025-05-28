@@ -43,8 +43,8 @@ func GetDataCatalogPolicyTagCaiObject(d tpgresource.TerraformResourceData, confi
 			Name: name,
 			Type: DataCatalogPolicyTagAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "v1beta1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/datacatalog/v1beta1/rest",
+				Version:              "v1",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/datacatalog/v1/rest",
 				DiscoveryName:        "PolicyTag",
 				Data:                 obj,
 			},

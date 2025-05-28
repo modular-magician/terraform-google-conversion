@@ -88,6 +88,14 @@ func createTagTemplateField(d *schema.ResourceData, config *transport_tpg.Config
 	return nil
 }
 
+func suppressMissingDefault(k, old, new string, d *schema.ResourceData) bool {
+	if old == "" && new == "DATAPLEX_TRANSFER_STATUS_UNSPECIFIED" {
+		log.Printf("[INFO] API returned empty value for the default")
+		return true
+	}
+	return false
+}
+
 const DataCatalogTagTemplateAssetType string = "datacatalog.googleapis.com/TagTemplate"
 
 func ResourceConverterDataCatalogTagTemplate() cai.ResourceConverter {
@@ -107,8 +115,8 @@ func GetDataCatalogTagTemplateCaiObject(d tpgresource.TerraformResourceData, con
 			Name: name,
 			Type: DataCatalogTagTemplateAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "v1beta1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/datacatalog/v1beta1/rest",
+				Version:              "v1",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/datacatalog/v1/rest",
 				DiscoveryName:        "TagTemplate",
 				Data:                 obj,
 			},
@@ -126,6 +134,18 @@ func GetDataCatalogTagTemplateApiObject(d tpgresource.TerraformResourceData, con
 	} else if v, ok := d.GetOkExists("display_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(displayNameProp)) && (ok || !reflect.DeepEqual(v, displayNameProp)) {
 		obj["displayName"] = displayNameProp
 	}
+	isPubliclyReadableProp, err := expandDataCatalogTagTemplateIsPubliclyReadable(d.Get("is_publicly_readable"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("is_publicly_readable"); !tpgresource.IsEmptyValue(reflect.ValueOf(isPubliclyReadableProp)) && (ok || !reflect.DeepEqual(v, isPubliclyReadableProp)) {
+		obj["isPubliclyReadable"] = isPubliclyReadableProp
+	}
+	dataplexTransferStatusProp, err := expandDataCatalogTagTemplateDataplexTransferStatus(d.Get("dataplex_transfer_status"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("dataplex_transfer_status"); !tpgresource.IsEmptyValue(reflect.ValueOf(dataplexTransferStatusProp)) && (ok || !reflect.DeepEqual(v, dataplexTransferStatusProp)) {
+		obj["dataplexTransferStatus"] = dataplexTransferStatusProp
+	}
 	fieldsProp, err := expandDataCatalogTagTemplateFields(d.Get("fields"), d, config)
 	if err != nil {
 		return nil, err
@@ -137,6 +157,14 @@ func GetDataCatalogTagTemplateApiObject(d tpgresource.TerraformResourceData, con
 }
 
 func expandDataCatalogTagTemplateDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDataCatalogTagTemplateIsPubliclyReadable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDataCatalogTagTemplateDataplexTransferStatus(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

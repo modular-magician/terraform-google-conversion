@@ -43,8 +43,8 @@ func GetDataCatalogEntryGroupCaiObject(d tpgresource.TerraformResourceData, conf
 			Name: name,
 			Type: DataCatalogEntryGroupAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "v1beta1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/datacatalog/v1beta1/rest",
+				Version:              "v1",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/datacatalog/v1/rest",
 				DiscoveryName:        "EntryGroup",
 				Data:                 obj,
 			},
@@ -68,6 +68,12 @@ func GetDataCatalogEntryGroupApiObject(d tpgresource.TerraformResourceData, conf
 	} else if v, ok := d.GetOkExists("description"); !tpgresource.IsEmptyValue(reflect.ValueOf(descriptionProp)) && (ok || !reflect.DeepEqual(v, descriptionProp)) {
 		obj["description"] = descriptionProp
 	}
+	transferredToDataplexProp, err := expandDataCatalogEntryGroupTransferredToDataplex(d.Get("transferred_to_dataplex"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("transferred_to_dataplex"); !tpgresource.IsEmptyValue(reflect.ValueOf(transferredToDataplexProp)) && (ok || !reflect.DeepEqual(v, transferredToDataplexProp)) {
+		obj["transferredToDataplex"] = transferredToDataplexProp
+	}
 
 	return obj, nil
 }
@@ -77,5 +83,9 @@ func expandDataCatalogEntryGroupDisplayName(v interface{}, d tpgresource.Terrafo
 }
 
 func expandDataCatalogEntryGroupDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDataCatalogEntryGroupTransferredToDataplex(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
