@@ -19,6 +19,8 @@ package compute
 import (
 	"reflect"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
@@ -104,15 +106,69 @@ func expandComputeWireGroupName(v interface{}, d tpgresource.TerraformResourceDa
 	return v, nil
 }
 
-func expandComputeWireGroupEndpoints(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+func expandComputeWireGroupEndpoints(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	if v == nil {
-		return map[string]string{}, nil
+		return map[string]interface{}{}, nil
 	}
-	m := make(map[string]string)
-	for k, val := range v.(map[string]interface{}) {
-		m[k] = val.(string)
+	m := make(map[string]interface{})
+	for _, raw := range v.(*schema.Set).List() {
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedInterconnects, err := expandComputeWireGroupEndpointsInterconnects(original["interconnects"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedInterconnects); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["interconnects"] = transformedInterconnects
+		}
+
+		transformedEndpoint, err := tpgresource.ExpandString(original["endpoint"], d, config)
+		if err != nil {
+			return nil, err
+		}
+		m[transformedEndpoint] = transformed
 	}
 	return m, nil
+}
+
+func expandComputeWireGroupEndpointsInterconnects(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
+	if v == nil {
+		return map[string]interface{}{}, nil
+	}
+	m := make(map[string]interface{})
+	for _, raw := range v.(*schema.Set).List() {
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedInterconnect, err := expandComputeWireGroupEndpointsInterconnectsInterconnect(original["interconnect"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedInterconnect); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["interconnect"] = transformedInterconnect
+		}
+
+		transformedVlanTags, err := expandComputeWireGroupEndpointsInterconnectsVlanTags(original["vlan_tags"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedVlanTags); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["vlan_tags"] = transformedVlanTags
+		}
+
+		transformedInterconnectName, err := tpgresource.ExpandString(original["interconnect_name"], d, config)
+		if err != nil {
+			return nil, err
+		}
+		m[transformedInterconnectName] = transformed
+	}
+	return m, nil
+}
+
+func expandComputeWireGroupEndpointsInterconnectsInterconnect(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeWireGroupEndpointsInterconnectsVlanTags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandComputeWireGroupAdminEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
