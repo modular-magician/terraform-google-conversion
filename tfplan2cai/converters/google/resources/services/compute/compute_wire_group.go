@@ -68,18 +68,6 @@ func GetComputeWireGroupApiObject(d tpgresource.TerraformResourceData, config *t
 	} else if v, ok := d.GetOkExists("name"); !tpgresource.IsEmptyValue(reflect.ValueOf(nameProp)) && (ok || !reflect.DeepEqual(v, nameProp)) {
 		obj["name"] = nameProp
 	}
-	endpointsProp, err := expandComputeWireGroupEndpoints(d.Get("endpoints"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("endpoints"); !tpgresource.IsEmptyValue(reflect.ValueOf(endpointsProp)) && (ok || !reflect.DeepEqual(v, endpointsProp)) {
-		obj["endpoints"] = endpointsProp
-	}
-	adminEnabledProp, err := expandComputeWireGroupAdminEnabled(d.Get("admin_enabled"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("admin_enabled"); !tpgresource.IsEmptyValue(reflect.ValueOf(adminEnabledProp)) && (ok || !reflect.DeepEqual(v, adminEnabledProp)) {
-		obj["adminEnabled"] = adminEnabledProp
-	}
 	wireGroupPropertiesProp, err := expandComputeWireGroupWireGroupProperties(d.Get("wire_group_properties"), d, config)
 	if err != nil {
 		return nil, err
@@ -101,21 +89,6 @@ func expandComputeWireGroupDescription(v interface{}, d tpgresource.TerraformRes
 }
 
 func expandComputeWireGroupName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandComputeWireGroupEndpoints(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
-	if v == nil {
-		return map[string]string{}, nil
-	}
-	m := make(map[string]string)
-	for k, val := range v.(map[string]interface{}) {
-		m[k] = val.(string)
-	}
-	return m, nil
-}
-
-func expandComputeWireGroupAdminEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
