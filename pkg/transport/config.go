@@ -336,6 +336,7 @@ type Config struct {
 	IntegrationConnectorsBasePath    string
 	IntegrationsBasePath             string
 	KMSBasePath                      string
+	LicenseManagerBasePath           string
 	LoggingBasePath                  string
 	LookerBasePath                   string
 	LustreBasePath                   string
@@ -511,6 +512,7 @@ const IdentityPlatformBasePathKey = "IdentityPlatform"
 const IntegrationConnectorsBasePathKey = "IntegrationConnectors"
 const IntegrationsBasePathKey = "Integrations"
 const KMSBasePathKey = "KMS"
+const LicenseManagerBasePathKey = "LicenseManager"
 const LoggingBasePathKey = "Logging"
 const LookerBasePathKey = "Looker"
 const LustreBasePathKey = "Lustre"
@@ -680,6 +682,7 @@ var DefaultBasePaths = map[string]string{
 	IntegrationConnectorsBasePathKey:    "https://connectors.googleapis.com/v1/",
 	IntegrationsBasePathKey:             "https://integrations.googleapis.com/v1/",
 	KMSBasePathKey:                      "https://cloudkms.googleapis.com/v1/",
+	LicenseManagerBasePathKey:           "https://licensemanager.googleapis.com/v1/",
 	LoggingBasePathKey:                  "https://logging.googleapis.com/v2/",
 	LookerBasePathKey:                   "https://looker.googleapis.com/v1/",
 	LustreBasePathKey:                   "https://lustre.googleapis.com/v1/",
@@ -1291,6 +1294,11 @@ func SetEndpointDefaults(d *schema.ResourceData) error {
 		d.Set("kms_custom_endpoint", MultiEnvDefault([]string{
 			"GOOGLE_KMS_CUSTOM_ENDPOINT",
 		}, DefaultBasePaths[KMSBasePathKey]))
+	}
+	if d.Get("license_manager_custom_endpoint") == "" {
+		d.Set("license_manager_custom_endpoint", MultiEnvDefault([]string{
+			"GOOGLE_LICENSE_MANAGER_CUSTOM_ENDPOINT",
+		}, DefaultBasePaths[LicenseManagerBasePathKey]))
 	}
 	if d.Get("logging_custom_endpoint") == "" {
 		d.Set("logging_custom_endpoint", MultiEnvDefault([]string{
@@ -2705,6 +2713,7 @@ func ConfigureBasePaths(c *Config) {
 	c.IntegrationConnectorsBasePath = DefaultBasePaths[IntegrationConnectorsBasePathKey]
 	c.IntegrationsBasePath = DefaultBasePaths[IntegrationsBasePathKey]
 	c.KMSBasePath = DefaultBasePaths[KMSBasePathKey]
+	c.LicenseManagerBasePath = DefaultBasePaths[LicenseManagerBasePathKey]
 	c.LoggingBasePath = DefaultBasePaths[LoggingBasePathKey]
 	c.LookerBasePath = DefaultBasePaths[LookerBasePathKey]
 	c.LustreBasePath = DefaultBasePaths[LustreBasePathKey]
