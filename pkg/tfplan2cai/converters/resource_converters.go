@@ -21,8 +21,11 @@ import (
 
 var ConverterMap = map[string]cai.ResourceConverter{
 	// ####### START handwritten resources ###########
-	"google_project":          resourcemanager.ResourceConverterProject(),
-	"google_compute_instance": compute.ResourceConverterComputeInstance(),
+	"google_project":                      resourcemanager.ResourceConverterProject(),
+	"google_compute_instance":             compute.ResourceConverterComputeInstance(),
+	"google_compute_instance_iam_policy":  compute.ResourceConverterComputeInstanceIamPolicy(),
+	"google_compute_instance_iam_binding": compute.ResourceConverterComputeInstanceIamBinding(),
+	"google_compute_instance_iam_member":  compute.ResourceConverterComputeInstanceIamMember(),
 	// ####### END handwritten resources ###########
 	"google_compute_address":    compute.ResourceConverterComputeAddress(),
 	"google_compute_autoscaler": compute.ResourceConverterComputeAutoscaler(),
