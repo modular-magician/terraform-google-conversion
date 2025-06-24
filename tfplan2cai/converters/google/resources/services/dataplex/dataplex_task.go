@@ -328,6 +328,9 @@ func expandDataplexTaskSparkArchiveUris(v interface{}, d tpgresource.TerraformRe
 }
 
 func expandDataplexTaskSparkInfrastructureSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -361,6 +364,9 @@ func expandDataplexTaskSparkInfrastructureSpec(v interface{}, d tpgresource.Terr
 }
 
 func expandDataplexTaskSparkInfrastructureSpecBatch(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -395,6 +401,9 @@ func expandDataplexTaskSparkInfrastructureSpecBatchMaxExecutorsCount(v interface
 }
 
 func expandDataplexTaskSparkInfrastructureSpecContainerImage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -458,6 +467,9 @@ func expandDataplexTaskSparkInfrastructureSpecContainerImageProperties(v interfa
 }
 
 func expandDataplexTaskSparkInfrastructureSpecVpcNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -567,6 +579,9 @@ func expandDataplexTaskNotebookNotebook(v interface{}, d tpgresource.TerraformRe
 }
 
 func expandDataplexTaskNotebookInfrastructureSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -600,6 +615,9 @@ func expandDataplexTaskNotebookInfrastructureSpec(v interface{}, d tpgresource.T
 }
 
 func expandDataplexTaskNotebookInfrastructureSpecBatch(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -634,6 +652,9 @@ func expandDataplexTaskNotebookInfrastructureSpecBatchMaxExecutorsCount(v interf
 }
 
 func expandDataplexTaskNotebookInfrastructureSpecContainerImage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -697,6 +718,9 @@ func expandDataplexTaskNotebookInfrastructureSpecContainerImageProperties(v inte
 }
 
 func expandDataplexTaskNotebookInfrastructureSpecVpcNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

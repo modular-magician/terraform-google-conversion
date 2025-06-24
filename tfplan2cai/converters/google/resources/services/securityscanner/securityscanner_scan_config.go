@@ -153,6 +153,9 @@ func expandSecurityScannerScanConfigAuthentication(v interface{}, d tpgresource.
 }
 
 func expandSecurityScannerScanConfigAuthenticationGoogleAccount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -187,6 +190,9 @@ func expandSecurityScannerScanConfigAuthenticationGoogleAccountPassword(v interf
 }
 
 func expandSecurityScannerScanConfigAuthenticationCustomAccount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

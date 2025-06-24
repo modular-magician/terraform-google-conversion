@@ -379,6 +379,9 @@ func expandWorkbenchInstanceGceSetupMachineType(v interface{}, d tpgresource.Ter
 }
 
 func expandWorkbenchInstanceGceSetupAcceleratorConfigs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -416,6 +419,9 @@ func expandWorkbenchInstanceGceSetupAcceleratorConfigsCoreCount(v interface{}, d
 }
 
 func expandWorkbenchInstanceGceSetupShieldedInstanceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 {
 		return nil, nil
@@ -466,6 +472,9 @@ func expandWorkbenchInstanceGceSetupShieldedInstanceConfigEnableIntegrityMonitor
 }
 
 func expandWorkbenchInstanceGceSetupServiceAccounts(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -503,6 +512,9 @@ func expandWorkbenchInstanceGceSetupServiceAccountsScopes(v interface{}, d tpgre
 }
 
 func expandWorkbenchInstanceGceSetupVmImage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -548,6 +560,9 @@ func expandWorkbenchInstanceGceSetupVmImageFamily(v interface{}, d tpgresource.T
 }
 
 func expandWorkbenchInstanceGceSetupContainerImage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -582,6 +597,9 @@ func expandWorkbenchInstanceGceSetupContainerImageTag(v interface{}, d tpgresour
 }
 
 func expandWorkbenchInstanceGceSetupBootDisk(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -638,6 +656,9 @@ func expandWorkbenchInstanceGceSetupBootDiskKmsKey(v interface{}, d tpgresource.
 }
 
 func expandWorkbenchInstanceGceSetupDataDisks(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -697,6 +718,9 @@ func expandWorkbenchInstanceGceSetupDataDisksKmsKey(v interface{}, d tpgresource
 }
 
 func expandWorkbenchInstanceGceSetupNetworkInterfaces(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -752,6 +776,9 @@ func expandWorkbenchInstanceGceSetupNetworkInterfacesNicType(v interface{}, d tp
 }
 
 func expandWorkbenchInstanceGceSetupNetworkInterfacesAccessConfigs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -801,6 +828,9 @@ func expandWorkbenchInstanceGceSetupEnableIpForwarding(v interface{}, d tpgresou
 }
 
 func expandWorkbenchInstanceGceSetupConfidentialInstanceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

@@ -516,6 +516,9 @@ func expandComputeImageShieldedInstanceInitialState(v interface{}, d tpgresource
 }
 
 func expandComputeImageShieldedInstanceInitialStatePk(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -550,6 +553,9 @@ func expandComputeImageShieldedInstanceInitialStatePkFileType(v interface{}, d t
 }
 
 func expandComputeImageShieldedInstanceInitialStateKeks(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -587,6 +593,9 @@ func expandComputeImageShieldedInstanceInitialStateKeksFileType(v interface{}, d
 }
 
 func expandComputeImageShieldedInstanceInitialStateDbs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -624,6 +633,9 @@ func expandComputeImageShieldedInstanceInitialStateDbsFileType(v interface{}, d 
 }
 
 func expandComputeImageShieldedInstanceInitialStateDbxs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {

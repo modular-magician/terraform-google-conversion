@@ -408,6 +408,9 @@ func expandCloudSchedulerJobAppEngineHttpTargetHttpMethod(v interface{}, d tpgre
 }
 
 func expandCloudSchedulerJobAppEngineHttpTargetAppEngineRouting(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -549,6 +552,9 @@ func expandCloudSchedulerJobHttpTargetHeaders(v interface{}, d tpgresource.Terra
 }
 
 func expandCloudSchedulerJobHttpTargetOauthToken(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -583,6 +589,9 @@ func expandCloudSchedulerJobHttpTargetOauthTokenScope(v interface{}, d tpgresour
 }
 
 func expandCloudSchedulerJobHttpTargetOidcToken(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

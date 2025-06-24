@@ -206,6 +206,9 @@ func expandWorkstationsWorkstationConfigHost(v interface{}, d tpgresource.Terraf
 }
 
 func expandWorkstationsWorkstationConfigHostGceInstance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -352,6 +355,9 @@ func expandWorkstationsWorkstationConfigHostGceInstanceEnableNestedVirtualizatio
 }
 
 func expandWorkstationsWorkstationConfigHostGceInstanceShieldedInstanceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -397,6 +403,9 @@ func expandWorkstationsWorkstationConfigHostGceInstanceShieldedInstanceConfigEna
 }
 
 func expandWorkstationsWorkstationConfigHostGceInstanceConfidentialInstanceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -420,6 +429,9 @@ func expandWorkstationsWorkstationConfigHostGceInstanceConfidentialInstanceConfi
 }
 
 func expandWorkstationsWorkstationConfigHostGceInstanceAccelerators(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -457,6 +469,9 @@ func expandWorkstationsWorkstationConfigHostGceInstanceAcceleratorsCount(v inter
 }
 
 func expandWorkstationsWorkstationConfigHostGceInstanceBoostConfigs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -534,6 +549,9 @@ func expandWorkstationsWorkstationConfigHostGceInstanceBoostConfigsPoolSize(v in
 }
 
 func expandWorkstationsWorkstationConfigHostGceInstanceBoostConfigsAccelerators(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -615,6 +633,9 @@ func expandWorkstationsWorkstationConfigPersistentDirectoriesMountPath(v interfa
 }
 
 func expandWorkstationsWorkstationConfigPersistentDirectoriesGcePd(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -715,6 +736,9 @@ func expandWorkstationsWorkstationConfigEphemeralDirectoriesMountPath(v interfac
 }
 
 func expandWorkstationsWorkstationConfigEphemeralDirectoriesGcePd(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

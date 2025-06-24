@@ -226,6 +226,9 @@ func expandIntegrationConnectorsConnectionConfigVariableBooleanValue(v interface
 }
 
 func expandIntegrationConnectorsConnectionConfigVariableSecretValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -249,6 +252,9 @@ func expandIntegrationConnectorsConnectionConfigVariableSecretValueSecretVersion
 }
 
 func expandIntegrationConnectorsConnectionConfigVariableEncryptionKeyValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -355,6 +361,9 @@ func expandIntegrationConnectorsConnectionAuthConfigAuthType(v interface{}, d tp
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigAdditionalVariable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -428,6 +437,9 @@ func expandIntegrationConnectorsConnectionAuthConfigAdditionalVariableBooleanVal
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigAdditionalVariableSecretValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -451,6 +463,9 @@ func expandIntegrationConnectorsConnectionAuthConfigAdditionalVariableSecretValu
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigAdditionalVariableEncryptionKeyValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -489,6 +504,9 @@ func expandIntegrationConnectorsConnectionAuthConfigAuthKey(v interface{}, d tpg
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigUserPassword(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -519,6 +537,9 @@ func expandIntegrationConnectorsConnectionAuthConfigUserPasswordUsername(v inter
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigUserPasswordPassword(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -542,6 +563,9 @@ func expandIntegrationConnectorsConnectionAuthConfigUserPasswordPasswordSecretVe
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigOauth2JwtBearer(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -568,6 +592,9 @@ func expandIntegrationConnectorsConnectionAuthConfigOauth2JwtBearer(v interface{
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigOauth2JwtBearerClientKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -591,6 +618,9 @@ func expandIntegrationConnectorsConnectionAuthConfigOauth2JwtBearerClientKeySecr
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigOauth2JwtBearerJwtClaims(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -636,6 +666,9 @@ func expandIntegrationConnectorsConnectionAuthConfigOauth2JwtBearerJwtClaimsAudi
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigOauth2ClientCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -666,6 +699,9 @@ func expandIntegrationConnectorsConnectionAuthConfigOauth2ClientCredentialsClien
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigOauth2ClientCredentialsClientSecret(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -689,6 +725,9 @@ func expandIntegrationConnectorsConnectionAuthConfigOauth2ClientCredentialsClien
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigSshPublicKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -733,6 +772,9 @@ func expandIntegrationConnectorsConnectionAuthConfigSshPublicKeyUsername(v inter
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigSshPublicKeySshClientCert(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -760,6 +802,9 @@ func expandIntegrationConnectorsConnectionAuthConfigSshPublicKeyCertType(v inter
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigSshPublicKeySshClientCertPass(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -783,6 +828,9 @@ func expandIntegrationConnectorsConnectionAuthConfigSshPublicKeySshClientCertPas
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigOauth2AuthCodeFlow(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -834,6 +882,9 @@ func expandIntegrationConnectorsConnectionAuthConfigOauth2AuthCodeFlowClientId(v
 }
 
 func expandIntegrationConnectorsConnectionAuthConfigOauth2AuthCodeFlowClientSecret(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -936,6 +987,9 @@ func expandIntegrationConnectorsConnectionDestinationConfigKey(v interface{}, d 
 }
 
 func expandIntegrationConnectorsConnectionDestinationConfigDestination(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -1150,6 +1204,9 @@ func expandIntegrationConnectorsConnectionSslConfigTrustModel(v interface{}, d t
 }
 
 func expandIntegrationConnectorsConnectionSslConfigPrivateServerCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1173,6 +1230,9 @@ func expandIntegrationConnectorsConnectionSslConfigPrivateServerCertificateSecre
 }
 
 func expandIntegrationConnectorsConnectionSslConfigClientCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1196,6 +1256,9 @@ func expandIntegrationConnectorsConnectionSslConfigClientCertificateSecretVersio
 }
 
 func expandIntegrationConnectorsConnectionSslConfigClientPrivateKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1219,6 +1282,9 @@ func expandIntegrationConnectorsConnectionSslConfigClientPrivateKeySecretVersion
 }
 
 func expandIntegrationConnectorsConnectionSslConfigClientPrivateKeyPass(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1254,6 +1320,9 @@ func expandIntegrationConnectorsConnectionSslConfigUseSsl(v interface{}, d tpgre
 }
 
 func expandIntegrationConnectorsConnectionSslConfigAdditionalVariable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -1327,6 +1396,9 @@ func expandIntegrationConnectorsConnectionSslConfigAdditionalVariableBooleanValu
 }
 
 func expandIntegrationConnectorsConnectionSslConfigAdditionalVariableSecretValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1350,6 +1422,9 @@ func expandIntegrationConnectorsConnectionSslConfigAdditionalVariableSecretValue
 }
 
 func expandIntegrationConnectorsConnectionSslConfigAdditionalVariableEncryptionKeyValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1428,6 +1503,9 @@ func expandIntegrationConnectorsConnectionEventingConfig(v interface{}, d tpgres
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1458,6 +1536,9 @@ func expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationC
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationConfigDestination(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -1506,6 +1587,9 @@ func expandIntegrationConnectorsConnectionEventingConfigRegistrationDestinationC
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigAuthConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1550,6 +1634,9 @@ func expandIntegrationConnectorsConnectionEventingConfigAuthConfigAuthType(v int
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigAuthConfigAdditionalVariable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -1623,6 +1710,9 @@ func expandIntegrationConnectorsConnectionEventingConfigAuthConfigAdditionalVari
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigAuthConfigAdditionalVariableSecretValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1646,6 +1736,9 @@ func expandIntegrationConnectorsConnectionEventingConfigAuthConfigAdditionalVari
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigAuthConfigAdditionalVariableEncryptionKeyValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1684,6 +1777,9 @@ func expandIntegrationConnectorsConnectionEventingConfigAuthConfigAuthKey(v inte
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigAuthConfigUserPassword(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1714,6 +1810,9 @@ func expandIntegrationConnectorsConnectionEventingConfigAuthConfigUserPasswordUs
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigAuthConfigUserPasswordPassword(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1737,6 +1836,9 @@ func expandIntegrationConnectorsConnectionEventingConfigAuthConfigUserPasswordPa
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigAdditionalVariable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -1810,6 +1912,9 @@ func expandIntegrationConnectorsConnectionEventingConfigAdditionalVariableBoolea
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigAdditionalVariableSecretValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1833,6 +1938,9 @@ func expandIntegrationConnectorsConnectionEventingConfigAdditionalVariableSecret
 }
 
 func expandIntegrationConnectorsConnectionEventingConfigAdditionalVariableEncryptionKeyValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

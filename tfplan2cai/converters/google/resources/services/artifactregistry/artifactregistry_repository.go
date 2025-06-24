@@ -366,6 +366,9 @@ func expandArtifactRegistryRepositoryVirtualRepositoryConfig(v interface{}, d tp
 }
 
 func expandArtifactRegistryRepositoryVirtualRepositoryConfigUpstreamPolicies(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -457,6 +460,9 @@ func expandArtifactRegistryRepositoryCleanupPoliciesAction(v interface{}, d tpgr
 }
 
 func expandArtifactRegistryRepositoryCleanupPoliciesCondition(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -591,6 +597,9 @@ func expandArtifactRegistryRepositoryCleanupPoliciesConditionNewerThan(v interfa
 }
 
 func expandArtifactRegistryRepositoryCleanupPoliciesMostRecentVersions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -711,6 +720,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigDescription(v interfa
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigAptRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -730,6 +742,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigAptRepository(v inter
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigAptRepositoryPublicRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -764,6 +779,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigAptRepositoryPublicRe
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigDockerRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -794,6 +812,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigDockerRepositoryPubli
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigDockerRepositoryCustomRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -817,6 +838,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigDockerRepositoryCusto
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigMavenRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -847,6 +871,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigMavenRepositoryPublic
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigMavenRepositoryCustomRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -870,6 +897,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigMavenRepositoryCustom
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigNpmRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -900,6 +930,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigNpmRepositoryPublicRe
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigNpmRepositoryCustomRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -923,6 +956,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigNpmRepositoryCustomRe
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigPythonRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -953,6 +989,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigPythonRepositoryPubli
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigPythonRepositoryCustomRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -976,6 +1015,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigPythonRepositoryCusto
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigYumRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -995,6 +1037,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigYumRepository(v inter
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigYumRepositoryPublicRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1029,6 +1074,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigYumRepositoryPublicRe
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigCommonRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1052,6 +1100,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigCommonRepositoryUri(v
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigUpstreamCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1071,6 +1122,9 @@ func expandArtifactRegistryRepositoryRemoteRepositoryConfigUpstreamCredentials(v
 }
 
 func expandArtifactRegistryRepositoryRemoteRepositoryConfigUpstreamCredentialsUsernamePasswordCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

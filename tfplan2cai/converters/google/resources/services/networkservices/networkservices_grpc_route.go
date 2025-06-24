@@ -142,6 +142,9 @@ func expandNetworkServicesGrpcRouteRules(v interface{}, d tpgresource.TerraformR
 }
 
 func expandNetworkServicesGrpcRouteRulesMatches(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -171,6 +174,9 @@ func expandNetworkServicesGrpcRouteRulesMatches(v interface{}, d tpgresource.Ter
 }
 
 func expandNetworkServicesGrpcRouteRulesMatchesHeaders(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -219,6 +225,9 @@ func expandNetworkServicesGrpcRouteRulesMatchesHeadersType(v interface{}, d tpgr
 }
 
 func expandNetworkServicesGrpcRouteRulesMatchesMethod(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -264,6 +273,9 @@ func expandNetworkServicesGrpcRouteRulesMatchesMethodCaseSensitive(v interface{}
 }
 
 func expandNetworkServicesGrpcRouteRulesAction(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -304,6 +316,9 @@ func expandNetworkServicesGrpcRouteRulesAction(v interface{}, d tpgresource.Terr
 }
 
 func expandNetworkServicesGrpcRouteRulesActionDestinations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -341,6 +356,9 @@ func expandNetworkServicesGrpcRouteRulesActionDestinationsWeight(v interface{}, 
 }
 
 func expandNetworkServicesGrpcRouteRulesActionFaultInjectionPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -367,6 +385,9 @@ func expandNetworkServicesGrpcRouteRulesActionFaultInjectionPolicy(v interface{}
 }
 
 func expandNetworkServicesGrpcRouteRulesActionFaultInjectionPolicyDelay(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -401,6 +422,9 @@ func expandNetworkServicesGrpcRouteRulesActionFaultInjectionPolicyDelayPercentag
 }
 
 func expandNetworkServicesGrpcRouteRulesActionFaultInjectionPolicyAbort(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -439,6 +463,9 @@ func expandNetworkServicesGrpcRouteRulesActionTimeout(v interface{}, d tpgresour
 }
 
 func expandNetworkServicesGrpcRouteRulesActionRetryPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

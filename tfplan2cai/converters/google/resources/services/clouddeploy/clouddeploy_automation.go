@@ -134,6 +134,9 @@ func expandClouddeployAutomationSelector(v interface{}, d tpgresource.TerraformR
 }
 
 func expandClouddeployAutomationSelectorTargets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -221,6 +224,9 @@ func expandClouddeployAutomationRules(v interface{}, d tpgresource.TerraformReso
 }
 
 func expandClouddeployAutomationRulesPromoteReleaseRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -277,6 +283,9 @@ func expandClouddeployAutomationRulesPromoteReleaseRuleDestinationPhase(v interf
 }
 
 func expandClouddeployAutomationRulesAdvanceRolloutRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -322,6 +331,9 @@ func expandClouddeployAutomationRulesAdvanceRolloutRuleSourcePhases(v interface{
 }
 
 func expandClouddeployAutomationRulesRepairRolloutRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -374,6 +386,9 @@ func expandClouddeployAutomationRulesRepairRolloutRuleJobs(v interface{}, d tpgr
 }
 
 func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhases(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -403,6 +418,9 @@ func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhases(v interface{}
 }
 
 func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhasesRetry(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -448,6 +466,9 @@ func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhasesRetryBackoffMo
 }
 
 func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhasesRollback(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 {
 		return nil, nil
@@ -487,6 +508,9 @@ func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhasesRollbackDisabl
 }
 
 func expandClouddeployAutomationRulesTimedPromoteReleaseRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

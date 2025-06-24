@@ -561,6 +561,9 @@ func expandOracleDatabaseAutonomousDatabasePropertiesLicenseType(v interface{}, 
 }
 
 func expandOracleDatabaseAutonomousDatabasePropertiesCustomerContacts(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -607,6 +610,9 @@ func expandOracleDatabaseAutonomousDatabasePropertiesAllocatedStorageSizeTb(v in
 }
 
 func expandOracleDatabaseAutonomousDatabasePropertiesApexDetails(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -661,6 +667,9 @@ func expandOracleDatabaseAutonomousDatabasePropertiesAvailableUpgradeVersions(v 
 }
 
 func expandOracleDatabaseAutonomousDatabasePropertiesConnectionStrings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -715,6 +724,9 @@ func expandOracleDatabaseAutonomousDatabasePropertiesConnectionStrings(v interfa
 }
 
 func expandOracleDatabaseAutonomousDatabasePropertiesConnectionStringsAllConnectionStrings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -776,6 +788,9 @@ func expandOracleDatabaseAutonomousDatabasePropertiesConnectionStringsMedium(v i
 }
 
 func expandOracleDatabaseAutonomousDatabasePropertiesConnectionStringsProfiles(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -890,6 +905,9 @@ func expandOracleDatabaseAutonomousDatabasePropertiesConnectionStringsProfilesVa
 }
 
 func expandOracleDatabaseAutonomousDatabasePropertiesConnectionUrls(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1006,6 +1024,9 @@ func expandOracleDatabaseAutonomousDatabasePropertiesLocalAdgAutoFailoverMaxData
 }
 
 func expandOracleDatabaseAutonomousDatabasePropertiesLocalStandbyDb(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1121,6 +1142,9 @@ func expandOracleDatabaseAutonomousDatabasePropertiesRole(v interface{}, d tpgre
 }
 
 func expandOracleDatabaseAutonomousDatabasePropertiesScheduledOperationDetails(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -1161,6 +1185,9 @@ func expandOracleDatabaseAutonomousDatabasePropertiesScheduledOperationDetailsDa
 }
 
 func expandOracleDatabaseAutonomousDatabasePropertiesScheduledOperationDetailsStartTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1217,6 +1244,9 @@ func expandOracleDatabaseAutonomousDatabasePropertiesScheduledOperationDetailsSt
 }
 
 func expandOracleDatabaseAutonomousDatabasePropertiesScheduledOperationDetailsStopTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

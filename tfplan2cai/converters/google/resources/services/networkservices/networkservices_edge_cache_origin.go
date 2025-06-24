@@ -294,6 +294,9 @@ func expandNetworkServicesEdgeCacheOriginOriginOverrideAction(v interface{}, d t
 }
 
 func expandNetworkServicesEdgeCacheOriginOriginOverrideActionUrlRewrite(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -317,6 +320,9 @@ func expandNetworkServicesEdgeCacheOriginOriginOverrideActionUrlRewriteHostRewri
 }
 
 func expandNetworkServicesEdgeCacheOriginOriginOverrideActionHeaderAction(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -336,6 +342,9 @@ func expandNetworkServicesEdgeCacheOriginOriginOverrideActionHeaderAction(v inte
 }
 
 func expandNetworkServicesEdgeCacheOriginOriginOverrideActionHeaderActionRequestHeadersToAdd(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {

@@ -103,6 +103,9 @@ func expandGKEHub2FleetDefaultClusterConfig(v interface{}, d tpgresource.Terrafo
 }
 
 func expandGKEHub2FleetDefaultClusterConfigBinaryAuthorizationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -133,6 +136,9 @@ func expandGKEHub2FleetDefaultClusterConfigBinaryAuthorizationConfigEvaluationMo
 }
 
 func expandGKEHub2FleetDefaultClusterConfigBinaryAuthorizationConfigPolicyBindings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -159,6 +165,9 @@ func expandGKEHub2FleetDefaultClusterConfigBinaryAuthorizationConfigPolicyBindin
 }
 
 func expandGKEHub2FleetDefaultClusterConfigSecurityPostureConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

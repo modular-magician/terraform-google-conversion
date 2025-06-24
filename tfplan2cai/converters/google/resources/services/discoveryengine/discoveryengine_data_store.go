@@ -193,6 +193,9 @@ func expandDiscoveryEngineDataStoreDocumentProcessingConfigName(v interface{}, d
 }
 
 func expandDiscoveryEngineDataStoreDocumentProcessingConfigChunkingConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -212,6 +215,9 @@ func expandDiscoveryEngineDataStoreDocumentProcessingConfigChunkingConfig(v inte
 }
 
 func expandDiscoveryEngineDataStoreDocumentProcessingConfigChunkingConfigLayoutBasedChunkingConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 {
 		return nil, nil
@@ -251,6 +257,9 @@ func expandDiscoveryEngineDataStoreDocumentProcessingConfigChunkingConfigLayoutB
 }
 
 func expandDiscoveryEngineDataStoreDocumentProcessingConfigDefaultParsingConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -299,6 +308,9 @@ func expandDiscoveryEngineDataStoreDocumentProcessingConfigDefaultParsingConfigD
 }
 
 func expandDiscoveryEngineDataStoreDocumentProcessingConfigDefaultParsingConfigOcrParsingConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -391,6 +403,9 @@ func expandDiscoveryEngineDataStoreDocumentProcessingConfigParsingConfigOverride
 }
 
 func expandDiscoveryEngineDataStoreDocumentProcessingConfigParsingConfigOverridesOcrParsingConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

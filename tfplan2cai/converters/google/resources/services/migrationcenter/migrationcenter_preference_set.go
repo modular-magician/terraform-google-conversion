@@ -152,6 +152,9 @@ func expandMigrationCenterPreferenceSetVirtualMachinePreferencesTargetProduct(v 
 }
 
 func expandMigrationCenterPreferenceSetVirtualMachinePreferencesRegionPreferences(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -183,6 +186,9 @@ func expandMigrationCenterPreferenceSetVirtualMachinePreferencesSizingOptimizati
 }
 
 func expandMigrationCenterPreferenceSetVirtualMachinePreferencesComputeEnginePreferences(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -209,6 +215,9 @@ func expandMigrationCenterPreferenceSetVirtualMachinePreferencesComputeEnginePre
 }
 
 func expandMigrationCenterPreferenceSetVirtualMachinePreferencesComputeEnginePreferencesMachinePreferences(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -228,6 +237,9 @@ func expandMigrationCenterPreferenceSetVirtualMachinePreferencesComputeEnginePre
 }
 
 func expandMigrationCenterPreferenceSetVirtualMachinePreferencesComputeEnginePreferencesMachinePreferencesAllowedMachineSeries(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -258,6 +270,9 @@ func expandMigrationCenterPreferenceSetVirtualMachinePreferencesComputeEnginePre
 }
 
 func expandMigrationCenterPreferenceSetVirtualMachinePreferencesVmwareEnginePreferences(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -314,6 +329,9 @@ func expandMigrationCenterPreferenceSetVirtualMachinePreferencesVmwareEnginePref
 }
 
 func expandMigrationCenterPreferenceSetVirtualMachinePreferencesSoleTenancyPreferences(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -366,6 +384,9 @@ func expandMigrationCenterPreferenceSetVirtualMachinePreferencesSoleTenancyPrefe
 }
 
 func expandMigrationCenterPreferenceSetVirtualMachinePreferencesSoleTenancyPreferencesNodeTypes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {

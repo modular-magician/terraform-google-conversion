@@ -324,6 +324,9 @@ func expandVmwareenginePrivateCloudManagementClusterNodeTypeConfigsCustomCoreCou
 }
 
 func expandVmwareenginePrivateCloudManagementClusterStretchedClusterConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -358,6 +361,9 @@ func expandVmwareenginePrivateCloudManagementClusterStretchedClusterConfigSecond
 }
 
 func expandVmwareenginePrivateCloudManagementClusterAutoscalingSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -459,6 +465,9 @@ func expandVmwareenginePrivateCloudManagementClusterAutoscalingSettingsAutoscali
 }
 
 func expandVmwareenginePrivateCloudManagementClusterAutoscalingSettingsAutoscalingPoliciesCpuThresholds(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -493,6 +502,9 @@ func expandVmwareenginePrivateCloudManagementClusterAutoscalingSettingsAutoscali
 }
 
 func expandVmwareenginePrivateCloudManagementClusterAutoscalingSettingsAutoscalingPoliciesConsumedMemoryThresholds(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -527,6 +539,9 @@ func expandVmwareenginePrivateCloudManagementClusterAutoscalingSettingsAutoscali
 }
 
 func expandVmwareenginePrivateCloudManagementClusterAutoscalingSettingsAutoscalingPoliciesStorageThresholds(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

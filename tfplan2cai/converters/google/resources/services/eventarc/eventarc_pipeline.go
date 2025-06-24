@@ -156,6 +156,9 @@ func expandEventarcPipelineInputPayloadFormat(v interface{}, d tpgresource.Terra
 }
 
 func expandEventarcPipelineInputPayloadFormatProtobuf(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -179,6 +182,9 @@ func expandEventarcPipelineInputPayloadFormatProtobufSchemaDefinition(v interfac
 }
 
 func expandEventarcPipelineInputPayloadFormatAvro(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -326,6 +332,9 @@ func expandEventarcPipelineDestinations(v interface{}, d tpgresource.TerraformRe
 }
 
 func expandEventarcPipelineDestinationsAuthenticationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -352,6 +361,9 @@ func expandEventarcPipelineDestinationsAuthenticationConfig(v interface{}, d tpg
 }
 
 func expandEventarcPipelineDestinationsAuthenticationConfigGoogleOidc(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -386,6 +398,9 @@ func expandEventarcPipelineDestinationsAuthenticationConfigGoogleOidcAudience(v 
 }
 
 func expandEventarcPipelineDestinationsAuthenticationConfigOauthToken(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -420,6 +435,9 @@ func expandEventarcPipelineDestinationsAuthenticationConfigOauthTokenScope(v int
 }
 
 func expandEventarcPipelineDestinationsOutputPayloadFormat(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -453,6 +471,9 @@ func expandEventarcPipelineDestinationsOutputPayloadFormat(v interface{}, d tpgr
 }
 
 func expandEventarcPipelineDestinationsOutputPayloadFormatProtobuf(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -476,6 +497,9 @@ func expandEventarcPipelineDestinationsOutputPayloadFormatProtobufSchemaDefiniti
 }
 
 func expandEventarcPipelineDestinationsOutputPayloadFormatAvro(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -514,6 +538,9 @@ func expandEventarcPipelineDestinationsOutputPayloadFormatJson(v interface{}, d 
 }
 
 func expandEventarcPipelineDestinationsNetworkConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -537,6 +564,9 @@ func expandEventarcPipelineDestinationsNetworkConfigNetworkAttachment(v interfac
 }
 
 func expandEventarcPipelineDestinationsHttpEndpoint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -605,6 +635,9 @@ func expandEventarcPipelineMediations(v interface{}, d tpgresource.TerraformReso
 }
 
 func expandEventarcPipelineMediationsTransformation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

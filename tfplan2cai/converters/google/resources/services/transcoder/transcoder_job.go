@@ -165,6 +165,9 @@ func expandTranscoderJobConfig(v interface{}, d tpgresource.TerraformResourceDat
 }
 
 func expandTranscoderJobConfigInputs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -202,6 +205,9 @@ func expandTranscoderJobConfigInputsUri(v interface{}, d tpgresource.TerraformRe
 }
 
 func expandTranscoderJobConfigEditList(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -250,6 +256,9 @@ func expandTranscoderJobConfigEditListStartTimeOffset(v interface{}, d tpgresour
 }
 
 func expandTranscoderJobConfigElementaryStreams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -290,6 +299,9 @@ func expandTranscoderJobConfigElementaryStreamsKey(v interface{}, d tpgresource.
 }
 
 func expandTranscoderJobConfigElementaryStreamsVideoStream(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -309,6 +321,9 @@ func expandTranscoderJobConfigElementaryStreamsVideoStream(v interface{}, d tpgr
 }
 
 func expandTranscoderJobConfigElementaryStreamsVideoStreamH264(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -508,6 +523,9 @@ func expandTranscoderJobConfigElementaryStreamsVideoStreamH264Hlg(v interface{},
 }
 
 func expandTranscoderJobConfigElementaryStreamsAudioStream(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -575,6 +593,9 @@ func expandTranscoderJobConfigElementaryStreamsAudioStreamSampleRateHertz(v inte
 }
 
 func expandTranscoderJobConfigMuxStreams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -648,6 +669,9 @@ func expandTranscoderJobConfigMuxStreamsElementaryStreams(v interface{}, d tpgre
 }
 
 func expandTranscoderJobConfigMuxStreamsSegmentSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -675,6 +699,9 @@ func expandTranscoderJobConfigMuxStreamsEncryptionId(v interface{}, d tpgresourc
 }
 
 func expandTranscoderJobConfigManifests(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -723,6 +750,9 @@ func expandTranscoderJobConfigManifestsMuxStreams(v interface{}, d tpgresource.T
 }
 
 func expandTranscoderJobConfigOutput(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -746,6 +776,9 @@ func expandTranscoderJobConfigOutputUri(v interface{}, d tpgresource.TerraformRe
 }
 
 func expandTranscoderJobConfigAdBreaks(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -772,6 +805,9 @@ func expandTranscoderJobConfigAdBreaksStartTimeOffset(v interface{}, d tpgresour
 }
 
 func expandTranscoderJobConfigPubsubDestination(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -795,6 +831,9 @@ func expandTranscoderJobConfigPubsubDestinationTopic(v interface{}, d tpgresourc
 }
 
 func expandTranscoderJobConfigOverlays(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -824,6 +863,9 @@ func expandTranscoderJobConfigOverlays(v interface{}, d tpgresource.TerraformRes
 }
 
 func expandTranscoderJobConfigOverlaysImage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -847,6 +889,9 @@ func expandTranscoderJobConfigOverlaysImageUri(v interface{}, d tpgresource.Terr
 }
 
 func expandTranscoderJobConfigOverlaysAnimations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -869,6 +914,9 @@ func expandTranscoderJobConfigOverlaysAnimations(v interface{}, d tpgresource.Te
 }
 
 func expandTranscoderJobConfigOverlaysAnimationsAnimationFade(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -909,6 +957,9 @@ func expandTranscoderJobConfigOverlaysAnimationsAnimationFade(v interface{}, d t
 }
 
 func expandTranscoderJobConfigOverlaysAnimationsAnimationFadeXy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -955,6 +1006,9 @@ func expandTranscoderJobConfigOverlaysAnimationsAnimationFadeFadeType(v interfac
 }
 
 func expandTranscoderJobConfigEncryptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -1016,6 +1070,9 @@ func expandTranscoderJobConfigEncryptionsId(v interface{}, d tpgresource.Terrafo
 }
 
 func expandTranscoderJobConfigEncryptionsDrmSystems(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1146,6 +1203,9 @@ func expandTranscoderJobConfigEncryptionsSampleAes(v interface{}, d tpgresource.
 }
 
 func expandTranscoderJobConfigEncryptionsMpegCenc(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1169,6 +1229,9 @@ func expandTranscoderJobConfigEncryptionsMpegCencScheme(v interface{}, d tpgreso
 }
 
 func expandTranscoderJobConfigEncryptionsSecretManagerKeySource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

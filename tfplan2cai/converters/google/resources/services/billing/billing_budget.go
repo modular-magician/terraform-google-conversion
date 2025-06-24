@@ -230,6 +230,9 @@ func expandBillingBudgetBudgetFilterCalendarPeriod(v interface{}, d tpgresource.
 }
 
 func expandBillingBudgetBudgetFilterCustomPeriod(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -256,6 +259,9 @@ func expandBillingBudgetBudgetFilterCustomPeriod(v interface{}, d tpgresource.Te
 }
 
 func expandBillingBudgetBudgetFilterCustomPeriodStartDate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -301,6 +307,9 @@ func expandBillingBudgetBudgetFilterCustomPeriodStartDateDay(v interface{}, d tp
 }
 
 func expandBillingBudgetBudgetFilterCustomPeriodEndDate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -372,6 +381,9 @@ func expandBillingBudgetAmount(v interface{}, d tpgresource.TerraformResourceDat
 }
 
 func expandBillingBudgetAmountSpecifiedAmount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

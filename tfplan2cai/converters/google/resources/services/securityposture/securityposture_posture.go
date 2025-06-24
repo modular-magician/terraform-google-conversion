@@ -156,6 +156,9 @@ func expandSecurityposturePosturePolicySetsDescription(v interface{}, d tpgresou
 }
 
 func expandSecurityposturePosturePolicySetsPolicies(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -207,6 +210,9 @@ func expandSecurityposturePosturePolicySetsPoliciesDescription(v interface{}, d 
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesComplianceStandards(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -244,6 +250,9 @@ func expandSecurityposturePosturePolicySetsPoliciesComplianceStandardsControl(v 
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -284,6 +293,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraint(v interface{}, d t
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -314,6 +326,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraint
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraintPolicyRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -364,6 +379,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraint
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraintPolicyRulesValues(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -410,6 +428,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraint
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraintPolicyRulesCondition(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -466,6 +487,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraint
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraintCustom(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -492,6 +516,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraint
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraintCustomCustomConstraint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -581,6 +608,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraint
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraintCustomPolicyRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -631,6 +661,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraint
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraintCustomPolicyRulesValues(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -677,6 +710,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraint
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraintCustomPolicyRulesCondition(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -733,6 +769,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintOrgPolicyConstraint
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnalyticsModule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -767,6 +806,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnaly
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnalyticsCustomModule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -819,6 +861,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnaly
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnalyticsCustomModuleConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -873,6 +918,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnaly
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnalyticsCustomModuleConfigPredicate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -929,6 +977,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnaly
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnalyticsCustomModuleConfigCustomOutput(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -948,6 +999,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnaly
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnalyticsCustomModuleConfigCustomOutputProperties(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -981,6 +1035,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnaly
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnalyticsCustomModuleConfigCustomOutputPropertiesValueExpression(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1037,6 +1094,9 @@ func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnaly
 }
 
 func expandSecurityposturePosturePolicySetsPoliciesConstraintSecurityHealthAnalyticsCustomModuleConfigResourceSelector(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

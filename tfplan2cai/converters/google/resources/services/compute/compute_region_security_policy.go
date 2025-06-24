@@ -298,6 +298,9 @@ func expandComputeRegionSecurityPolicyRulesPriority(v interface{}, d tpgresource
 }
 
 func expandComputeRegionSecurityPolicyRulesMatch(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -335,6 +338,9 @@ func expandComputeRegionSecurityPolicyRulesMatchVersionedExpr(v interface{}, d t
 }
 
 func expandComputeRegionSecurityPolicyRulesMatchExpr(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -358,6 +364,9 @@ func expandComputeRegionSecurityPolicyRulesMatchExprExpression(v interface{}, d 
 }
 
 func expandComputeRegionSecurityPolicyRulesMatchConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -381,6 +390,9 @@ func expandComputeRegionSecurityPolicyRulesMatchConfigSrcIpRanges(v interface{},
 }
 
 func expandComputeRegionSecurityPolicyRulesPreconfiguredWafConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -400,6 +412,9 @@ func expandComputeRegionSecurityPolicyRulesPreconfiguredWafConfig(v interface{},
 }
 
 func expandComputeRegionSecurityPolicyRulesPreconfiguredWafConfigExclusion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -465,6 +480,9 @@ func expandComputeRegionSecurityPolicyRulesPreconfiguredWafConfigExclusionTarget
 }
 
 func expandComputeRegionSecurityPolicyRulesPreconfiguredWafConfigExclusionRequestHeader(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -502,6 +520,9 @@ func expandComputeRegionSecurityPolicyRulesPreconfiguredWafConfigExclusionReques
 }
 
 func expandComputeRegionSecurityPolicyRulesPreconfiguredWafConfigExclusionRequestCookie(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -539,6 +560,9 @@ func expandComputeRegionSecurityPolicyRulesPreconfiguredWafConfigExclusionReques
 }
 
 func expandComputeRegionSecurityPolicyRulesPreconfiguredWafConfigExclusionRequestUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -576,6 +600,9 @@ func expandComputeRegionSecurityPolicyRulesPreconfiguredWafConfigExclusionReques
 }
 
 func expandComputeRegionSecurityPolicyRulesPreconfiguredWafConfigExclusionRequestQueryParam(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -617,6 +644,9 @@ func expandComputeRegionSecurityPolicyRulesAction(v interface{}, d tpgresource.T
 }
 
 func expandComputeRegionSecurityPolicyRulesRateLimitOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -685,6 +715,9 @@ func expandComputeRegionSecurityPolicyRulesRateLimitOptions(v interface{}, d tpg
 }
 
 func expandComputeRegionSecurityPolicyRulesRateLimitOptionsRateLimitThreshold(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -735,6 +768,9 @@ func expandComputeRegionSecurityPolicyRulesRateLimitOptionsEnforceOnKeyName(v in
 }
 
 func expandComputeRegionSecurityPolicyRulesRateLimitOptionsEnforceOnKeyConfigs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -772,6 +808,9 @@ func expandComputeRegionSecurityPolicyRulesRateLimitOptionsEnforceOnKeyConfigsEn
 }
 
 func expandComputeRegionSecurityPolicyRulesRateLimitOptionsBanThreshold(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -814,6 +853,9 @@ func expandComputeRegionSecurityPolicyRulesPreview(v interface{}, d tpgresource.
 }
 
 func expandComputeRegionSecurityPolicyRulesNetworkMatch(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -882,6 +924,9 @@ func expandComputeRegionSecurityPolicyRulesNetworkMatch(v interface{}, d tpgreso
 }
 
 func expandComputeRegionSecurityPolicyRulesNetworkMatchUserDefinedFields(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {

@@ -253,6 +253,9 @@ func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsRetrievalImportan
 }
 
 func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsSchemaSources(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -335,6 +338,9 @@ func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsTextTypeOptions(v
 }
 
 func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsPropertyTypeOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -354,6 +360,9 @@ func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsPropertyTypeOptio
 }
 
 func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsPropertyTypeOptionsPropertyDefinitions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -513,6 +522,9 @@ func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsPropertyTypeOptio
 }
 
 func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsPropertyTypeOptionsPropertyDefinitionsSchemaSources(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -595,6 +607,9 @@ func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsPropertyTypeOptio
 }
 
 func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsPropertyTypeOptionsPropertyDefinitionsEnumTypeOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -674,6 +689,9 @@ func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsPropertyTypeOptio
 }
 
 func expandDocumentAIWarehouseDocumentSchemaPropertyDefinitionsEnumTypeOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

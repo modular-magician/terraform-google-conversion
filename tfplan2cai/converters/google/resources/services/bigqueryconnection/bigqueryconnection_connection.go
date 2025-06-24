@@ -198,6 +198,9 @@ func expandBigqueryConnectionConnectionCloudSqlDatabase(v interface{}, d tpgreso
 }
 
 func expandBigqueryConnectionConnectionCloudSqlCredential(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -259,6 +262,9 @@ func expandBigqueryConnectionConnectionAws(v interface{}, d tpgresource.Terrafor
 }
 
 func expandBigqueryConnectionConnectionAwsAccessRole(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -520,6 +526,9 @@ func expandBigqueryConnectionConnectionSparkServiceAccountId(v interface{}, d tp
 }
 
 func expandBigqueryConnectionConnectionSparkMetastoreServiceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -543,6 +552,9 @@ func expandBigqueryConnectionConnectionSparkMetastoreServiceConfigMetastoreServi
 }
 
 func expandBigqueryConnectionConnectionSparkSparkHistoryServerConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

@@ -273,6 +273,9 @@ func expandAppEngineStandardAppVersionHandlersRedirectHttpResponseCode(v interfa
 }
 
 func expandAppEngineStandardAppVersionHandlersScript(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -296,6 +299,9 @@ func expandAppEngineStandardAppVersionHandlersScriptScriptPath(v interface{}, d 
 }
 
 func expandAppEngineStandardAppVersionHandlersStaticFiles(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -466,6 +472,9 @@ func expandAppEngineStandardAppVersionDeployment(v interface{}, d tpgresource.Te
 }
 
 func expandAppEngineStandardAppVersionDeploymentZip(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -680,6 +689,9 @@ func expandAppEngineStandardAppVersionAutomaticScalingMinPendingLatency(v interf
 }
 
 func expandAppEngineStandardAppVersionAutomaticScalingStandardSchedulerSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

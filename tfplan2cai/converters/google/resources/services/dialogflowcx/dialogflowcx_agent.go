@@ -245,6 +245,9 @@ func expandDialogflowCXAgentAdvancedSettings(v interface{}, d tpgresource.Terraf
 }
 
 func expandDialogflowCXAgentAdvancedSettingsAudioExportGcsDestination(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -268,6 +271,9 @@ func expandDialogflowCXAgentAdvancedSettingsAudioExportGcsDestinationUri(v inter
 }
 
 func expandDialogflowCXAgentAdvancedSettingsSpeechSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -331,6 +337,9 @@ func expandDialogflowCXAgentAdvancedSettingsSpeechSettingsModels(v interface{}, 
 }
 
 func expandDialogflowCXAgentAdvancedSettingsDtmfSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -376,6 +385,9 @@ func expandDialogflowCXAgentAdvancedSettingsDtmfSettingsFinishDigit(v interface{
 }
 
 func expandDialogflowCXAgentAdvancedSettingsLoggingSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -445,6 +457,9 @@ func expandDialogflowCXAgentGitIntegrationSettings(v interface{}, d tpgresource.
 }
 
 func expandDialogflowCXAgentGitIntegrationSettingsGithubSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
