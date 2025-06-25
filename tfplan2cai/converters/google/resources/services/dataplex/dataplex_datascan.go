@@ -516,6 +516,13 @@ func expandDataplexDatascanDataQualitySpecRules(v interface{}, d tpgresource.Ter
 			transformed["description"] = transformedDescription
 		}
 
+		transformedSuspended, err := expandDataplexDatascanDataQualitySpecRulesSuspended(original["suspended"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedSuspended); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["suspended"] = transformedSuspended
+		}
+
 		transformedRangeExpectation, err := expandDataplexDatascanDataQualitySpecRulesRangeExpectation(original["range_expectation"], d, config)
 		if err != nil {
 			return nil, err
@@ -605,6 +612,10 @@ func expandDataplexDatascanDataQualitySpecRulesName(v interface{}, d tpgresource
 }
 
 func expandDataplexDatascanDataQualitySpecRulesDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDataplexDatascanDataQualitySpecRulesSuspended(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
