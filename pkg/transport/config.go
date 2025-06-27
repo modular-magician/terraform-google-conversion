@@ -14,6 +14,9 @@ import (
 	"strings"
 	"time"
 
+	"cloud.google.com/go/auth/credentials"
+	"cloud.google.com/go/auth/credentials/impersonate"
+	"cloud.google.com/go/auth/oauth2adapt"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 
@@ -282,6 +285,7 @@ type Config struct {
 	ColabBasePath                    string
 	ComposerBasePath                 string
 	ComputeBasePath                  string
+	ContactCenterInsightsBasePath    string
 	ContainerAnalysisBasePath        string
 	ContainerAttachedBasePath        string
 	CoreBillingBasePath              string
@@ -457,6 +461,7 @@ const CloudTasksBasePathKey = "CloudTasks"
 const ColabBasePathKey = "Colab"
 const ComposerBasePathKey = "Composer"
 const ComputeBasePathKey = "Compute"
+const ContactCenterInsightsBasePathKey = "ContactCenterInsights"
 const ContainerAnalysisBasePathKey = "ContainerAnalysis"
 const ContainerAttachedBasePathKey = "ContainerAttached"
 const CoreBillingBasePathKey = "CoreBilling"
@@ -626,6 +631,7 @@ var DefaultBasePaths = map[string]string{
 	ColabBasePathKey:                    "https://{{location}}-aiplatform.googleapis.com/v1beta1/",
 	ComposerBasePathKey:                 "https://composer.googleapis.com/v1beta1/",
 	ComputeBasePathKey:                  "https://compute.googleapis.com/compute/beta/",
+	ContactCenterInsightsBasePathKey:    "https://contactcenterinsights.googleapis.com/v1/",
 	ContainerAnalysisBasePathKey:        "https://containeranalysis.googleapis.com/v1beta1/",
 	ContainerAttachedBasePathKey:        "https://{{location}}-gkemulticloud.googleapis.com/v1/",
 	CoreBillingBasePathKey:              "https://cloudbilling.googleapis.com/v1/",
@@ -1033,6 +1039,11 @@ func SetEndpointDefaults(d *schema.ResourceData) error {
 		d.Set("compute_custom_endpoint", MultiEnvDefault([]string{
 			"GOOGLE_COMPUTE_CUSTOM_ENDPOINT",
 		}, DefaultBasePaths[ComputeBasePathKey]))
+	}
+	if d.Get("contact_center_insights_custom_endpoint") == "" {
+		d.Set("contact_center_insights_custom_endpoint", MultiEnvDefault([]string{
+			"GOOGLE_CONTACT_CENTER_INSIGHTS_CUSTOM_ENDPOINT",
+		}, DefaultBasePaths[ContactCenterInsightsBasePathKey]))
 	}
 	if d.Get("container_analysis_custom_endpoint") == "" {
 		d.Set("container_analysis_custom_endpoint", MultiEnvDefault([]string{
@@ -2498,10 +2509,33 @@ func (c *Config) GetCredentials(clientScopes []string, initialCredentialsOnly bo
 		}
 
 		if c.ImpersonateServiceAccount != "" && !initialCredentialsOnly {
-			opts := []option.ClientOption{option.WithCredentialsJSON([]byte(contents)), option.ImpersonateCredentials(c.ImpersonateServiceAccount, c.ImpersonateServiceAccountDelegates...), option.WithScopes(clientScopes...)}
-			creds, err := transport.Creds(context.TODO(), opts...)
+			jsonCreds, err := credentials.DetectDefault(&credentials.DetectOptions{
+				Scopes:          clientScopes,
+				CredentialsJSON: []byte(contents),
+			})
 			if err != nil {
-				return googleoauth.Credentials{}, err
+				return googleoauth.Credentials{}, fmt.Errorf("error loading credentials: %s", err)
+			}
+
+			impersonateOpts := &impersonate.CredentialsOptions{
+				TargetPrincipal: c.ImpersonateServiceAccount,
+				Scopes:          clientScopes,
+				Delegates:       c.ImpersonateServiceAccountDelegates,
+				Credentials:     jsonCreds,
+			}
+
+			if c.UniverseDomain != "" && c.UniverseDomain != "googleapis.com" {
+				impersonateOpts.UniverseDomain = c.UniverseDomain
+			}
+
+			authCred, err := impersonate.NewCredentials(impersonateOpts)
+			if err != nil {
+				return googleoauth.Credentials{}, fmt.Errorf("error loading credentials: %s", err)
+			}
+
+			creds := oauth2adapt.Oauth2CredentialsFromAuthCredentials(authCred)
+			if err != nil {
+				return googleoauth.Credentials{}, fmt.Errorf("error loading credentials: %s", err)
 			}
 			return *creds, nil
 		}
@@ -2529,11 +2563,34 @@ func (c *Config) GetCredentials(clientScopes []string, initialCredentialsOnly bo
 	var creds *googleoauth.Credentials
 	var err error
 	if c.ImpersonateServiceAccount != "" && !initialCredentialsOnly {
-		opts := option.ImpersonateCredentials(c.ImpersonateServiceAccount, c.ImpersonateServiceAccountDelegates...)
-		creds, err = transport.Creds(context.TODO(), opts, option.WithScopes(clientScopes...))
+		defaultCreds, err := credentials.DetectDefault(&credentials.DetectOptions{
+			Scopes: clientScopes,
+		})
 		if err != nil {
-			return googleoauth.Credentials{}, err
+			return googleoauth.Credentials{}, fmt.Errorf("error loading credentials: %s", err)
 		}
+
+		impersonateOpts := &impersonate.CredentialsOptions{
+			TargetPrincipal: c.ImpersonateServiceAccount,
+			Scopes:          clientScopes,
+			Delegates:       c.ImpersonateServiceAccountDelegates,
+			Credentials:     defaultCreds,
+		}
+
+		if c.UniverseDomain != "" && c.UniverseDomain != "googleapis.com" {
+			impersonateOpts.UniverseDomain = c.UniverseDomain
+		}
+
+		authCred, err := impersonate.NewCredentials(impersonateOpts)
+		if err != nil {
+			return googleoauth.Credentials{}, fmt.Errorf("error loading credentials: %s", err)
+		}
+
+		creds := oauth2adapt.Oauth2CredentialsFromAuthCredentials(authCred)
+		if err != nil {
+			return googleoauth.Credentials{}, fmt.Errorf("error loading credentials: %s", err)
+		}
+		return *creds, nil
 	} else {
 		log.Printf("[INFO] Authenticating using DefaultClient...")
 		log.Printf("[INFO]   -- Scopes: %s", clientScopes)
@@ -2628,6 +2685,7 @@ func ConfigureBasePaths(c *Config) {
 	c.ColabBasePath = DefaultBasePaths[ColabBasePathKey]
 	c.ComposerBasePath = DefaultBasePaths[ComposerBasePathKey]
 	c.ComputeBasePath = DefaultBasePaths[ComputeBasePathKey]
+	c.ContactCenterInsightsBasePath = DefaultBasePaths[ContactCenterInsightsBasePathKey]
 	c.ContainerAnalysisBasePath = DefaultBasePaths[ContainerAnalysisBasePathKey]
 	c.ContainerAttachedBasePath = DefaultBasePaths[ContainerAttachedBasePathKey]
 	c.CoreBillingBasePath = DefaultBasePaths[CoreBillingBasePathKey]

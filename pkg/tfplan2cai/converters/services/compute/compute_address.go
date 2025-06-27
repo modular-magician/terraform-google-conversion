@@ -24,6 +24,7 @@ import (
 
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tfplan2cai/converters/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tgcresource"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
 	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/verify"
@@ -227,6 +228,7 @@ func GetComputeAddressCaiObject(d tpgresource.TerraformResourceData, config *tra
 		return []caiasset.Asset{}, err
 	}
 	if obj, err := GetComputeAddressApiObject(d, config); err == nil {
+		location, _ := tpgresource.GetLocation(d, config)
 		return []caiasset.Asset{{
 			Name: name,
 			Type: ComputeAddressAssetType,
@@ -235,6 +237,7 @@ func GetComputeAddressCaiObject(d tpgresource.TerraformResourceData, config *tra
 				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/beta/rest",
 				DiscoveryName:        "Address",
 				Data:                 obj,
+				Location:             location,
 			},
 		}}, nil
 	} else {
@@ -328,6 +331,15 @@ func GetComputeAddressApiObject(d tpgresource.TerraformResourceData, config *tra
 	} else if v, ok := d.GetOkExists("region"); !tpgresource.IsEmptyValue(reflect.ValueOf(regionProp)) && (ok || !reflect.DeepEqual(v, regionProp)) {
 		obj["region"] = regionProp
 	}
+
+	return resourceComputeAddressTgcEncoder(d, config, obj)
+}
+
+func resourceComputeAddressTgcEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
+	config := meta.(*transport_tpg.Config)
+
+	obj["subnetwork"] = tgcresource.GetComputeSelfLink(config, obj["subnetwork"])
+	obj["network"] = tgcresource.GetComputeSelfLink(config, obj["network"])
 
 	return obj, nil
 }

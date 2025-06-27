@@ -26,6 +26,10 @@ var provider *schema.Provider = tpg_provider.Provider()
 
 // ConverterMap is a collection of converters instances, indexed by cai asset type.
 var ConverterMap = map[string]models.Converter{
+	// ####### START handwritten resources ###########
 	resourcemanager.ProjectAssetType: resourcemanager.NewProjectConverter(provider),
 	compute.ComputeInstanceAssetType: compute.NewComputeInstanceConverter(provider),
+	// ####### END handwritten resources ###########
+	compute.ComputeAddressAssetType:    compute.NewComputeAddressConverter(provider),
+	compute.ComputeAutoscalerAssetType: compute.NewComputeAutoscalerConverter(provider),
 }

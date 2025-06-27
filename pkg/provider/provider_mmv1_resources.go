@@ -13,3 +13,9 @@ var handwrittenTfplan2caiResources = map[string]*schema.Resource{
 	"google_project":          resourcemanager.ResourceGoogleProject(),
 	// ####### END handwritten resources ###########
 }
+
+// Generated resources: 2
+var generatedResources = map[string]*schema.Resource{
+	"google_compute_address":    compute.ResourceComputeAddress(),
+	"google_compute_autoscaler": compute.ResourceComputeAutoscaler(),
+}
