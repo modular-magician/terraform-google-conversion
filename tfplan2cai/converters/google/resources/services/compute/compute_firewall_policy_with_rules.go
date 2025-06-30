@@ -490,15 +490,7 @@ func expandComputeFirewallPolicyWithRulesRuleTlsInspect(v interface{}, d tpgreso
 }
 
 func expandComputeFirewallPolicyWithRulesRuleTargetResources(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	req := make([]interface{}, 0, len(l))
-	for _, raw := range l {
-		if raw == nil {
-			return nil, fmt.Errorf("Invalid value for target_resources: nil")
-		}
-		req = append(req, raw.(string))
-	}
-	return req, nil
+	return v, nil
 }
 
 func expandComputeFirewallPolicyWithRulesRuleDisabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

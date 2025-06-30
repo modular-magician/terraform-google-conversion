@@ -68,12 +68,6 @@ func GetComputeNetworkFirewallPolicyApiObject(d tpgresource.TerraformResourceDat
 	} else if v, ok := d.GetOkExists("description"); !tpgresource.IsEmptyValue(reflect.ValueOf(descriptionProp)) && (ok || !reflect.DeepEqual(v, descriptionProp)) {
 		obj["description"] = descriptionProp
 	}
-	policyTypeProp, err := expandComputeNetworkFirewallPolicyPolicyType(d.Get("policy_type"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("policy_type"); !tpgresource.IsEmptyValue(reflect.ValueOf(policyTypeProp)) && (ok || !reflect.DeepEqual(v, policyTypeProp)) {
-		obj["policyType"] = policyTypeProp
-	}
 	fingerprintProp, err := expandComputeNetworkFirewallPolicyFingerprint(d.Get("fingerprint"), d, config)
 	if err != nil {
 		return nil, err
@@ -89,10 +83,6 @@ func expandComputeNetworkFirewallPolicyName(v interface{}, d tpgresource.Terrafo
 }
 
 func expandComputeNetworkFirewallPolicyDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandComputeNetworkFirewallPolicyPolicyType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

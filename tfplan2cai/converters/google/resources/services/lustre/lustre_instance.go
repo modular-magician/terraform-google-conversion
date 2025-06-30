@@ -62,6 +62,12 @@ func GetLustreInstanceApiObject(d tpgresource.TerraformResourceData, config *tra
 	} else if v, ok := d.GetOkExists("capacity_gib"); !tpgresource.IsEmptyValue(reflect.ValueOf(capacityGibProp)) && (ok || !reflect.DeepEqual(v, capacityGibProp)) {
 		obj["capacityGib"] = capacityGibProp
 	}
+	descriptionProp, err := expandLustreInstanceDescription(d.Get("description"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("description"); !tpgresource.IsEmptyValue(reflect.ValueOf(descriptionProp)) && (ok || !reflect.DeepEqual(v, descriptionProp)) {
+		obj["description"] = descriptionProp
+	}
 	gkeSupportEnabledProp, err := expandLustreInstanceGkeSupportEnabled(d.Get("gke_support_enabled"), d, config)
 	if err != nil {
 		return nil, err
@@ -80,18 +86,6 @@ func GetLustreInstanceApiObject(d tpgresource.TerraformResourceData, config *tra
 	} else if v, ok := d.GetOkExists("network"); !tpgresource.IsEmptyValue(reflect.ValueOf(networkProp)) && (ok || !reflect.DeepEqual(v, networkProp)) {
 		obj["network"] = networkProp
 	}
-	descriptionProp, err := expandLustreInstanceDescription(d.Get("description"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("description"); !tpgresource.IsEmptyValue(reflect.ValueOf(descriptionProp)) && (ok || !reflect.DeepEqual(v, descriptionProp)) {
-		obj["description"] = descriptionProp
-	}
-	perUnitStorageThroughputProp, err := expandLustreInstancePerUnitStorageThroughput(d.Get("per_unit_storage_throughput"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("per_unit_storage_throughput"); !tpgresource.IsEmptyValue(reflect.ValueOf(perUnitStorageThroughputProp)) && (ok || !reflect.DeepEqual(v, perUnitStorageThroughputProp)) {
-		obj["perUnitStorageThroughput"] = perUnitStorageThroughputProp
-	}
 	labelsProp, err := expandLustreInstanceEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -106,6 +100,10 @@ func expandLustreInstanceCapacityGib(v interface{}, d tpgresource.TerraformResou
 	return v, nil
 }
 
+func expandLustreInstanceDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandLustreInstanceGkeSupportEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -115,14 +113,6 @@ func expandLustreInstanceFilesystem(v interface{}, d tpgresource.TerraformResour
 }
 
 func expandLustreInstanceNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandLustreInstanceDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandLustreInstancePerUnitStorageThroughput(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

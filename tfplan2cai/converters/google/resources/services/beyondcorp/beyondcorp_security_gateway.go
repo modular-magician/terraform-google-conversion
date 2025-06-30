@@ -17,8 +17,6 @@
 package beyondcorp
 
 import (
-	"bytes"
-	"fmt"
 	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -27,19 +25,6 @@ import (
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
-
-func beyondcorpSecurityGatewayHubsHash(v interface{}) int {
-	if v == nil {
-		return 0
-	}
-
-	var buf bytes.Buffer
-	m := v.(map[string]interface{})
-
-	buf.WriteString(fmt.Sprintf("%s-", m["region"].(string)))
-
-	return tpgresource.Hashcode(buf.String())
-}
 
 const BeyondcorpSecurityGatewayAssetType string = "beyondcorp.googleapis.com/SecurityGateway"
 
@@ -102,7 +87,7 @@ func expandBeyondcorpSecurityGatewayHubs(v interface{}, d tpgresource.TerraformR
 		if err != nil {
 			return nil, err
 		} else if val := reflect.ValueOf(transformedInternetGateway); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["internetGateway"] = transformedInternetGateway
+			transformed["internet_gateway"] = transformedInternetGateway
 		}
 
 		transformedRegion, err := tpgresource.ExpandString(original["region"], d, config)
@@ -127,7 +112,7 @@ func expandBeyondcorpSecurityGatewayHubsInternetGateway(v interface{}, d tpgreso
 	if err != nil {
 		return nil, err
 	} else if val := reflect.ValueOf(transformedAssignedIps); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["assignedIps"] = transformedAssignedIps
+		transformed["assigned_ips"] = transformedAssignedIps
 	}
 
 	return transformed, nil
