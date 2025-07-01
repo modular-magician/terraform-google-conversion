@@ -14,10 +14,11 @@ var handwrittenTfplan2caiResources = map[string]*schema.Resource{
 	// ####### END handwritten resources ###########
 }
 
-// Generated resources: 4
+// Generated resources: 5
 var generatedResources = map[string]*schema.Resource{
-	"google_compute_address":           compute.ResourceComputeAddress(),
-	"google_compute_autoscaler":        compute.ResourceComputeAutoscaler(),
-	"google_compute_disk":              compute.ResourceComputeDisk(),
-	"google_compute_region_autoscaler": compute.ResourceComputeRegionAutoscaler(),
+	"google_compute_address":              compute.ResourceComputeAddress(),
+	"google_compute_autoscaler":           compute.ResourceComputeAutoscaler(),
+	"google_compute_disk":                 compute.ResourceComputeDisk(),
+	"google_compute_external_vpn_gateway": compute.ResourceComputeExternalVpnGateway(),
+	"google_compute_region_autoscaler":    compute.ResourceComputeRegionAutoscaler(),
 }
