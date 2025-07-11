@@ -20,10 +20,32 @@ import (
 	"encoding/json"
 	"reflect"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
+
+/*
+ * FirestoreDocument: Fixes `fields` attribute always showing a diff when empty.
+ * Empty JSON representations are now canonicalized for accurate comparison,
+ * preventing spurious diffs and unnecessary updates.
+ */
+
+func FirestoreDFieldsDiffSuppressFunc(k, old, new string, d tpgresource.TerraformResourceDataChange) bool {
+	if old == "" && new == "{}" {
+		return true
+	}
+	return false
+
+}
+
+// firestoreDFieldsDiffSuppress is a wrapper for compatibility if needed,
+// otherwise FirestoreDFieldsDiffSuppressFunc should be directly used in the schema.
+func firestoreDFieldsDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
+	return FirestoreDFieldsDiffSuppressFunc(k, old, new, d)
+}
 
 const FirestoreDocumentAssetType string = "firestore.googleapis.com/Document"
 
