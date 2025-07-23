@@ -56,12 +56,6 @@ func GetApihubApiHubInstanceCaiObject(d tpgresource.TerraformResourceData, confi
 
 func GetApihubApiHubInstanceApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
-	descriptionProp, err := expandApihubApiHubInstanceDescription(d.Get("description"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("description"); !tpgresource.IsEmptyValue(reflect.ValueOf(descriptionProp)) && (ok || !reflect.DeepEqual(v, descriptionProp)) {
-		obj["description"] = descriptionProp
-	}
 	configProp, err := expandApihubApiHubInstanceConfig(d.Get("config"), d, config)
 	if err != nil {
 		return nil, err
@@ -76,10 +70,6 @@ func GetApihubApiHubInstanceApiObject(d tpgresource.TerraformResourceData, confi
 	}
 
 	return obj, nil
-}
-
-func expandApihubApiHubInstanceDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandApihubApiHubInstanceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
