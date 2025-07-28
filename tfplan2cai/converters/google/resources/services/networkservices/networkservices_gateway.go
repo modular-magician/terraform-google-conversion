@@ -318,6 +318,9 @@ func expandNetworkServicesGatewayEnvoyHeaders(v interface{}, d tpgresource.Terra
 }
 
 func expandNetworkServicesGatewayRoutingMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if d.Get("type") == "SECURE_WEB_GATEWAY" && (v == nil || tpgresource.IsEmptyValue(reflect.ValueOf(v))) {
+		return "EXPLICIT_ROUTING_MODE", nil
+	}
 	return v, nil
 }
 
