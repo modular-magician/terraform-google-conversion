@@ -28,14 +28,14 @@ import (
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
 
-var sensitiveLabels = []string{"auth_token", "service_key", "password"}
+var sensitiveLabels = []string{"auth_token", "service_key", "password", "auth_token_wo", "service_key_wo", "password_wo"}
 
 func sensitiveLabelCustomizeDiff(_ context.Context, diff *schema.ResourceDiff, v interface{}) error {
-	for _, sl := range sensitiveLabels {
-		mapLabel := diff.Get("labels." + sl).(string)
-		authLabel := diff.Get("sensitive_labels.0." + sl).(string)
+	for _, sp := range sensitiveLabels {
+		mapLabel := diff.Get("labels." + sp).(string)
+		authLabel := diff.Get("sensitive_labels.0." + sp).(string)
 		if mapLabel != "" && authLabel != "" {
-			return fmt.Errorf("Sensitive label [%s] cannot be set in both `labels` and the `sensitive_labels` block.", sl)
+			return fmt.Errorf("Sensitive label [%s] cannot be set in both `labels` and the `sensitive_labels` block.", sp)
 		}
 	}
 	return nil
@@ -126,6 +126,7 @@ func resourceMonitoringNotificationChannelEncoder(d tpgresource.TerraformResourc
 		if auth, _ := d.GetOkExists("sensitive_labels.0." + sl); auth != "" {
 			labels[sl] = auth.(string)
 		}
+
 	}
 
 	obj["labels"] = labels
