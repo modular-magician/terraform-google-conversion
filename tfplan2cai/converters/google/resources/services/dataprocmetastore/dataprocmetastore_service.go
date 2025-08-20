@@ -88,11 +88,11 @@ func GetDataprocMetastoreServiceApiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("scheduled_backup"); !tpgresource.IsEmptyValue(reflect.ValueOf(scheduledBackupProp)) && (ok || !reflect.DeepEqual(v, scheduledBackupProp)) {
 		obj["scheduledBackup"] = scheduledBackupProp
 	}
-	deletionProtectionProp, err := expandDataprocMetastoreServiceDeletionProtection(d.Get("deletion_protection"), d, config)
+	deletion_protectionProp, err := expandDataprocMetastoreServiceDeletionProtection(d.Get("deletion_protection"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("deletion_protection"); !tpgresource.IsEmptyValue(reflect.ValueOf(deletionProtectionProp)) && (ok || !reflect.DeepEqual(v, deletionProtectionProp)) {
-		obj["deletionProtection"] = deletionProtectionProp
+	} else if v, ok := d.GetOkExists("deletion_protection"); !tpgresource.IsEmptyValue(reflect.ValueOf(deletion_protectionProp)) && (ok || !reflect.DeepEqual(v, deletion_protectionProp)) {
+		obj["deletion_protection"] = deletion_protectionProp
 	}
 	maintenanceWindowProp, err := expandDataprocMetastoreServiceMaintenanceWindow(d.Get("maintenance_window"), d, config)
 	if err != nil {
