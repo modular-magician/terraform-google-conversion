@@ -21,6 +21,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/bigquery"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/blockchainnodeengine"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/certificatemanager"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/cloudasset"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/cloudfunctions2"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/compute"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/networksecurity"
@@ -75,6 +76,11 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	},
 	certificatemanager.CertificateManagerCertificateAssetType: {
 		"Default": certificatemanager.NewCertificateManagerCertificateCai2hclConverter(provider),
+	},
+	cloudasset.CloudAssetFeedAssetType: {
+		"CloudAssetFolderFeed":       cloudasset.NewCloudAssetFolderFeedCai2hclConverter(provider),
+		"CloudAssetOrganizationFeed": cloudasset.NewCloudAssetOrganizationFeedCai2hclConverter(provider),
+		"CloudAssetProjectFeed":      cloudasset.NewCloudAssetProjectFeedCai2hclConverter(provider),
 	},
 	cloudfunctions2.Cloudfunctions2FunctionAssetType: {
 		"Default": cloudfunctions2.NewCloudfunctions2functionCai2hclConverter(provider),
