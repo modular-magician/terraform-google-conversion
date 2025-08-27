@@ -92,12 +92,6 @@ func GetDatastreamStreamCaiObject(d tpgresource.TerraformResourceData, config *t
 
 func GetDatastreamStreamApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
-	displayNameProp, err := expandDatastreamStreamDisplayName(d.Get("display_name"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("display_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(displayNameProp)) && (ok || !reflect.DeepEqual(v, displayNameProp)) {
-		obj["displayName"] = displayNameProp
-	}
 	sourceConfigProp, err := expandDatastreamStreamSourceConfig(d.Get("source_config"), d, config)
 	if err != nil {
 		return nil, err
@@ -143,10 +137,6 @@ func resourceDatastreamStreamEncoder(d tpgresource.TerraformResourceData, meta i
 		obj["state"] = d.Get("desired_state")
 	}
 	return obj, nil
-}
-
-func expandDatastreamStreamDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
 }
 
 func expandDatastreamStreamSourceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
