@@ -24,7 +24,7 @@ import (
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
 
-const BigtableSchemaBundleAssetType string = "bigtableadmin.googleapis.com/SchemaBundle"
+const BigtableSchemaBundleAssetType string = "bigtable.googleapis.com/SchemaBundle"
 
 func ResourceConverterBigtableSchemaBundle() cai.ResourceConverter {
 	return cai.ResourceConverter{
@@ -34,7 +34,7 @@ func ResourceConverterBigtableSchemaBundle() cai.ResourceConverter {
 }
 
 func GetBigtableSchemaBundleCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//bigtableadmin.googleapis.com/projects/{{project}}/instances/{{instance}}/tables/{{table}}/schemaBundles/{{schema_bundle_id}}")
+	name, err := cai.AssetName(d, config, "//bigtable.googleapis.com/projects/{{project}}/instances/{{instance}}/tables/{{table}}/schemaBundles/{{schema_bundle_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -44,7 +44,7 @@ func GetBigtableSchemaBundleCaiObject(d tpgresource.TerraformResourceData, confi
 			Type: BigtableSchemaBundleAssetType,
 			Resource: &cai.AssetResource{
 				Version:              "v2",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/bigtableadmin/v2/rest",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/bigtable/v2/rest",
 				DiscoveryName:        "SchemaBundle",
 				Data:                 obj,
 			},

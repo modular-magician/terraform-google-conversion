@@ -24,7 +24,7 @@ import (
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
 
-const BigtableLogicalViewAssetType string = "bigtableadmin.googleapis.com/LogicalView"
+const BigtableLogicalViewAssetType string = "bigtable.googleapis.com/LogicalView"
 
 func ResourceConverterBigtableLogicalView() cai.ResourceConverter {
 	return cai.ResourceConverter{
@@ -34,7 +34,7 @@ func ResourceConverterBigtableLogicalView() cai.ResourceConverter {
 }
 
 func GetBigtableLogicalViewCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//bigtableadmin.googleapis.com/projects/{{project}}/instances/{{instance}}/logicalViews/{{logical_view_id}}")
+	name, err := cai.AssetName(d, config, "//bigtable.googleapis.com/projects/{{project}}/instances/{{instance}}/logicalViews/{{logical_view_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -44,7 +44,7 @@ func GetBigtableLogicalViewCaiObject(d tpgresource.TerraformResourceData, config
 			Type: BigtableLogicalViewAssetType,
 			Resource: &cai.AssetResource{
 				Version:              "v2",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/bigtableadmin/v2/rest",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/bigtable/v2/rest",
 				DiscoveryName:        "LogicalView",
 				Data:                 obj,
 			},

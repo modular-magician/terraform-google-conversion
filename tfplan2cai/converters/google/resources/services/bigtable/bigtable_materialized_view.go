@@ -24,7 +24,7 @@ import (
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
 
-const BigtableMaterializedViewAssetType string = "bigtableadmin.googleapis.com/MaterializedView"
+const BigtableMaterializedViewAssetType string = "bigtable.googleapis.com/MaterializedView"
 
 func ResourceConverterBigtableMaterializedView() cai.ResourceConverter {
 	return cai.ResourceConverter{
@@ -34,7 +34,7 @@ func ResourceConverterBigtableMaterializedView() cai.ResourceConverter {
 }
 
 func GetBigtableMaterializedViewCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//bigtableadmin.googleapis.com/projects/{{project}}/instances/{{instance}}/materializedViews/{{materialized_view_id}}")
+	name, err := cai.AssetName(d, config, "//bigtable.googleapis.com/projects/{{project}}/instances/{{instance}}/materializedViews/{{materialized_view_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -44,7 +44,7 @@ func GetBigtableMaterializedViewCaiObject(d tpgresource.TerraformResourceData, c
 			Type: BigtableMaterializedViewAssetType,
 			Resource: &cai.AssetResource{
 				Version:              "v2",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/bigtableadmin/v2/rest",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/bigtable/v2/rest",
 				DiscoveryName:        "MaterializedView",
 				Data:                 obj,
 			},

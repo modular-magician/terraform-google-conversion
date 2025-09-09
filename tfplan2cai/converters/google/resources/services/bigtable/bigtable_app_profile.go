@@ -27,7 +27,7 @@ import (
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
 
-const BigtableAppProfileAssetType string = "bigtableadmin.googleapis.com/AppProfile"
+const BigtableAppProfileAssetType string = "bigtable.googleapis.com/AppProfile"
 
 func ResourceConverterBigtableAppProfile() cai.ResourceConverter {
 	return cai.ResourceConverter{
@@ -37,7 +37,7 @@ func ResourceConverterBigtableAppProfile() cai.ResourceConverter {
 }
 
 func GetBigtableAppProfileCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//bigtableadmin.googleapis.com/projects/{{project}}/instances/{{instance}}/appProfiles/{{app_profile_id}}")
+	name, err := cai.AssetName(d, config, "//bigtable.googleapis.com/projects/{{project}}/instances/{{instance}}/appProfiles/{{app_profile_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -47,7 +47,7 @@ func GetBigtableAppProfileCaiObject(d tpgresource.TerraformResourceData, config 
 			Type: BigtableAppProfileAssetType,
 			Resource: &cai.AssetResource{
 				Version:              "v2",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/bigtableadmin/v2/rest",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/bigtable/v2/rest",
 				DiscoveryName:        "AppProfile",
 				Data:                 obj,
 			},
