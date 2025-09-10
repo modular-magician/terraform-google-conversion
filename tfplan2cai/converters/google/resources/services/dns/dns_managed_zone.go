@@ -125,6 +125,12 @@ func GetDNSManagedZoneApiObject(d tpgresource.TerraformResourceData, config *tra
 	} else if v, ok := d.GetOkExists("cloud_logging_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(cloudLoggingConfigProp)) && (ok || !reflect.DeepEqual(v, cloudLoggingConfigProp)) {
 		obj["cloudLoggingConfig"] = cloudLoggingConfigProp
 	}
+	nameServerSetProp, err := expandDNSManagedZoneNameServerSet(d.Get("name_server_set"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("name_server_set"); !tpgresource.IsEmptyValue(reflect.ValueOf(nameServerSetProp)) && (ok || !reflect.DeepEqual(v, nameServerSetProp)) {
+		obj["nameServerSet"] = nameServerSetProp
+	}
 	effectiveLabelsProp, err := expandDNSManagedZoneEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -554,6 +560,10 @@ func expandDNSManagedZoneCloudLoggingConfig(v interface{}, d tpgresource.Terrafo
 }
 
 func expandDNSManagedZoneCloudLoggingConfigEnableLogging(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDNSManagedZoneNameServerSet(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
