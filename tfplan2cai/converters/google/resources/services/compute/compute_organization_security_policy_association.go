@@ -68,6 +68,12 @@ func GetComputeOrganizationSecurityPolicyAssociationApiObject(d tpgresource.Terr
 	} else if v, ok := d.GetOkExists("attachment_id"); !tpgresource.IsEmptyValue(reflect.ValueOf(attachmentIdProp)) && (ok || !reflect.DeepEqual(v, attachmentIdProp)) {
 		obj["attachmentId"] = attachmentIdProp
 	}
+	displayNameProp, err := expandComputeOrganizationSecurityPolicyAssociationDisplayName(d.Get("display_name"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("display_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(displayNameProp)) && (ok || !reflect.DeepEqual(v, displayNameProp)) {
+		obj["displayName"] = displayNameProp
+	}
 
 	return obj, nil
 }
@@ -77,5 +83,9 @@ func expandComputeOrganizationSecurityPolicyAssociationName(v interface{}, d tpg
 }
 
 func expandComputeOrganizationSecurityPolicyAssociationAttachmentId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeOrganizationSecurityPolicyAssociationDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
