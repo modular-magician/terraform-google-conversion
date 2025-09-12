@@ -24,7 +24,7 @@ import (
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
 
-const NetappStoragePoolAssetType string = "netapp.googleapis.com/StoragePool"
+const NetappStoragePoolAssetType string = "staging-netapp.sandbox.googleapis.com/StoragePool"
 
 func ResourceConverterNetappStoragePool() cai.ResourceConverter {
 	return cai.ResourceConverter{
@@ -34,7 +34,7 @@ func ResourceConverterNetappStoragePool() cai.ResourceConverter {
 }
 
 func GetNetappStoragePoolCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/storagePools/{{name}}")
+	name, err := cai.AssetName(d, config, "//staging-netapp.sandbox.googleapis.com/projects/{{project}}/locations/{{location}}/storagePools/{{name}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -44,7 +44,7 @@ func GetNetappStoragePoolCaiObject(d tpgresource.TerraformResourceData, config *
 			Type: NetappStoragePoolAssetType,
 			Resource: &cai.AssetResource{
 				Version:              "v1beta1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/netapp/v1beta1/rest",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/staging-netapp.sandbox/v1beta1/rest",
 				DiscoveryName:        "StoragePool",
 				Data:                 obj,
 			},

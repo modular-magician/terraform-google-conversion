@@ -24,7 +24,7 @@ import (
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
 
-const NetappBackupPolicyAssetType string = "netapp.googleapis.com/BackupPolicy"
+const NetappBackupPolicyAssetType string = "staging-netapp.sandbox.googleapis.com/BackupPolicy"
 
 func ResourceConverterNetappBackupPolicy() cai.ResourceConverter {
 	return cai.ResourceConverter{
@@ -34,7 +34,7 @@ func ResourceConverterNetappBackupPolicy() cai.ResourceConverter {
 }
 
 func GetNetappBackupPolicyCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/backupPolicies/{{name}}")
+	name, err := cai.AssetName(d, config, "//staging-netapp.sandbox.googleapis.com/projects/{{project}}/locations/{{location}}/backupPolicies/{{name}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -44,7 +44,7 @@ func GetNetappBackupPolicyCaiObject(d tpgresource.TerraformResourceData, config 
 			Type: NetappBackupPolicyAssetType,
 			Resource: &cai.AssetResource{
 				Version:              "v1beta1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/netapp/v1beta1/rest",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/staging-netapp.sandbox/v1beta1/rest",
 				DiscoveryName:        "BackupPolicy",
 				Data:                 obj,
 			},

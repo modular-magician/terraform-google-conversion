@@ -81,7 +81,7 @@ func NetappVolumeReplicationWaitForMirror(d *schema.ResourceData, meta interface
 	return nil
 }
 
-const NetappVolumeReplicationAssetType string = "netapp.googleapis.com/VolumeReplication"
+const NetappVolumeReplicationAssetType string = "staging-netapp.sandbox.googleapis.com/VolumeReplication"
 
 func ResourceConverterNetappVolumeReplication() cai.ResourceConverter {
 	return cai.ResourceConverter{
@@ -91,7 +91,7 @@ func ResourceConverterNetappVolumeReplication() cai.ResourceConverter {
 }
 
 func GetNetappVolumeReplicationCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/volumes/{{volume_name}}/replications/{{name}}")
+	name, err := cai.AssetName(d, config, "//staging-netapp.sandbox.googleapis.com/projects/{{project}}/locations/{{location}}/volumes/{{volume_name}}/replications/{{name}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -101,7 +101,7 @@ func GetNetappVolumeReplicationCaiObject(d tpgresource.TerraformResourceData, co
 			Type: NetappVolumeReplicationAssetType,
 			Resource: &cai.AssetResource{
 				Version:              "v1beta1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/netapp/v1beta1/rest",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/staging-netapp.sandbox/v1beta1/rest",
 				DiscoveryName:        "VolumeReplication",
 				Data:                 obj,
 			},
