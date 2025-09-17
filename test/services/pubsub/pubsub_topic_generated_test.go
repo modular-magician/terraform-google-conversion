@@ -27,6 +27,7 @@ func TestAccPubsubTopic_pubsubTopicBasicExample(t *testing.T) {
 		t,
 		[]string{
 			"count",
+			"deletion_protection",
 			"depends_on",
 			"for_each",
 			"lifecycle",
@@ -45,6 +46,7 @@ func TestAccPubsubTopic_pubsubTopicGeoRestrictedExample(t *testing.T) {
 		t,
 		[]string{
 			"count",
+			"deletion_protection",
 			"depends_on",
 			"for_each",
 			"lifecycle",
@@ -63,6 +65,7 @@ func TestAccPubsubTopic_pubsubTopicSchemaSettingsExample(t *testing.T) {
 		t,
 		[]string{
 			"count",
+			"deletion_protection",
 			"depends_on",
 			"for_each",
 			"lifecycle",
@@ -81,6 +84,7 @@ func TestAccPubsubTopic_pubsubTopicIngestionKinesisExample(t *testing.T) {
 		t,
 		[]string{
 			"count",
+			"deletion_protection",
 			"depends_on",
 			"for_each",
 			"lifecycle",
@@ -99,6 +103,7 @@ func TestAccPubsubTopic_pubsubTopicIngestionCloudStorageExample(t *testing.T) {
 		t,
 		[]string{
 			"count",
+			"deletion_protection",
 			"depends_on",
 			"for_each",
 			"lifecycle",
@@ -117,6 +122,7 @@ func TestAccPubsubTopic_pubsubTopicIngestionAzureEventHubsExample(t *testing.T) 
 		t,
 		[]string{
 			"count",
+			"deletion_protection",
 			"depends_on",
 			"for_each",
 			"lifecycle",
@@ -135,6 +141,7 @@ func TestAccPubsubTopic_pubsubTopicIngestionAwsMskExample(t *testing.T) {
 		t,
 		[]string{
 			"count",
+			"deletion_protection",
 			"depends_on",
 			"for_each",
 			"lifecycle",
@@ -153,6 +160,7 @@ func TestAccPubsubTopic_pubsubTopicIngestionConfluentCloudExample(t *testing.T) 
 		t,
 		[]string{
 			"count",
+			"deletion_protection",
 			"depends_on",
 			"for_each",
 			"lifecycle",
@@ -171,6 +179,7 @@ func TestAccPubsubTopic_pubsubTopicSingleSmtExample(t *testing.T) {
 		t,
 		[]string{
 			"count",
+			"deletion_protection",
 			"depends_on",
 			"for_each",
 			"lifecycle",
@@ -190,6 +199,7 @@ func TestAccPubsubTopic_pubsubTopicMultipleSmtsExample(t *testing.T) {
 		t,
 		[]string{
 			"count",
+			"deletion_protection",
 			"depends_on",
 			"for_each",
 			"lifecycle",

@@ -471,6 +471,14 @@ if the schema has been deleted.`,
  and default labels configured on the provider.`,
 				Elem: &schema.Schema{Type: schema.TypeString},
 			},
+			"deletion_protection": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Description: `Whether Terraform will be prevented from destroying the topic. Defaults to false.
+When the field is set to true in Terraform state, a 'terraform apply'
+or 'terraform destroy' that would delete the topic will fail.`,
+				Default: false,
+			},
 			"project": {
 				Type:     schema.TypeString,
 				Optional: true,

@@ -578,6 +578,14 @@ A duration in seconds with up to nine fractional digits, terminated by 's'. Exam
  and default labels configured on the provider.`,
 				Elem: &schema.Schema{Type: schema.TypeString},
 			},
+			"deletion_protection": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Description: `Whether Terraform will be prevented from destroying the subscription. Defaults to false.
+When the field is set to true in Terraform state, a 'terraform apply'
+or 'terraform destroy' that would delete the subscription will fail.`,
+				Default: false,
+			},
 			"project": {
 				Type:     schema.TypeString,
 				Optional: true,
