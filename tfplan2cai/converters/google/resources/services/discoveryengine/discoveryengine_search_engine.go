@@ -19,6 +19,8 @@ package discoveryengine
 import (
 	"reflect"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
@@ -91,6 +93,12 @@ func GetDiscoveryEngineSearchEngineApiObject(d tpgresource.TerraformResourceData
 		return nil, err
 	} else if v, ok := d.GetOkExists("app_type"); !tpgresource.IsEmptyValue(reflect.ValueOf(appTypeProp)) && (ok || !reflect.DeepEqual(v, appTypeProp)) {
 		obj["appType"] = appTypeProp
+	}
+	featuresProp, err := expandDiscoveryEngineSearchEngineFeatures(d.Get("features"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("features"); !tpgresource.IsEmptyValue(reflect.ValueOf(featuresProp)) && (ok || !reflect.DeepEqual(v, featuresProp)) {
+		obj["features"] = featuresProp
 	}
 
 	return resourceDiscoveryEngineSearchEngineEncoder(d, config, obj)
@@ -172,5 +180,34 @@ func expandDiscoveryEngineSearchEngineCommonConfigCompanyName(v interface{}, d t
 }
 
 func expandDiscoveryEngineSearchEngineAppType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineSearchEngineFeatures(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
+	if v == nil {
+		return map[string]interface{}{}, nil
+	}
+	m := make(map[string]interface{})
+	for _, raw := range v.(*schema.Set).List() {
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedFeature, err := expandDiscoveryEngineSearchEngineFeaturesFeature(original["feature"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedFeature); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["feature"] = transformedFeature
+		}
+
+		transformedFeatures, err := tpgresource.ExpandString(original["features"], d, config)
+		if err != nil {
+			return nil, err
+		}
+		m[transformedFeatures] = transformed
+	}
+	return m, nil
+}
+
+func expandDiscoveryEngineSearchEngineFeaturesFeature(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
