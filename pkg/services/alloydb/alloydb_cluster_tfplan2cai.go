@@ -475,7 +475,7 @@ func expandAlloydbClusterAutomatedBackupPolicy(v interface{}, d tpgresource.Terr
 	transformedEnabled, err := expandAlloydbClusterAutomatedBackupPolicyEnabled(original["enabled"], d, config)
 	if err != nil {
 		return nil, err
-	} else {
+	} else if val := reflect.ValueOf(transformedEnabled); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 		transformed["enabled"] = transformedEnabled
 	}
 

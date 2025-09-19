@@ -116,7 +116,7 @@ func GetComputeSubnetworkCaiObject(d tpgresource.TerraformResourceData, config *
 	privateIpGoogleAccessProp, err := expandComputeSubnetworkPrivateIpGoogleAccess(d.Get("private_ip_google_access"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("private_ip_google_access"); ok || !reflect.DeepEqual(v, privateIpGoogleAccessProp) {
+	} else if v, ok := d.GetOkExists("private_ip_google_access"); !tpgresource.IsEmptyValue(reflect.ValueOf(privateIpGoogleAccessProp)) && (ok || !reflect.DeepEqual(v, privateIpGoogleAccessProp)) {
 		obj["privateIpGoogleAccess"] = privateIpGoogleAccessProp
 	}
 	privateIpv6GoogleAccessProp, err := expandComputeSubnetworkPrivateIpv6GoogleAccess(d.Get("private_ipv6_google_access"), d, config)

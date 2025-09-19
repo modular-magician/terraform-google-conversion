@@ -78,6 +78,7 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_compute_image":                                 compute.ComputeImageTfplan2caiConverter(),
 	"google_compute_network":                               compute.ComputeNetworkTfplan2caiConverter(),
 	"google_compute_region_autoscaler":                     compute.ComputeRegionAutoscalerTfplan2caiConverter(),
+	"google_compute_region_backend_service":                compute.ComputeRegionBackendServiceTfplan2caiConverter(),
 	"google_compute_subnetwork":                            compute.ComputeSubnetworkTfplan2caiConverter(),
 	"google_compute_url_map":                               compute.ComputeUrlMapTfplan2caiConverter(),
 	"google_kms_autokey_config":                            kms.KMSAutokeyConfigTfplan2caiConverter(),

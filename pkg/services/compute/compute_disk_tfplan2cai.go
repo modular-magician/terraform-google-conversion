@@ -153,7 +153,7 @@ func GetComputeDiskCaiObject(d tpgresource.TerraformResourceData, config *transp
 	enableConfidentialComputeProp, err := expandComputeDiskEnableConfidentialCompute(d.Get("enable_confidential_compute"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("enable_confidential_compute"); ok || !reflect.DeepEqual(v, enableConfidentialComputeProp) {
+	} else if v, ok := d.GetOkExists("enable_confidential_compute"); !tpgresource.IsEmptyValue(reflect.ValueOf(enableConfidentialComputeProp)) && (ok || !reflect.DeepEqual(v, enableConfidentialComputeProp)) {
 		obj["enableConfidentialCompute"] = enableConfidentialComputeProp
 	}
 	multiWriterProp, err := expandComputeDiskMultiWriter(d.Get("multi_writer"), d, config)
