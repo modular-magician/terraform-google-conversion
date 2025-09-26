@@ -159,7 +159,8 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 		"Default": compute.NewComputeGlobalAddressCai2hclConverter(provider),
 	},
 	compute.ComputeHealthCheckAssetType: {
-		"Default": compute.NewComputeHealthCheckCai2hclConverter(provider),
+		"ComputeHealthCheck":       compute.NewComputeHealthCheckCai2hclConverter(provider),
+		"ComputeRegionHealthCheck": compute.NewComputeRegionHealthCheckCai2hclConverter(provider),
 	},
 	compute.ComputeImageAssetType: {
 		"Default": compute.NewComputeImageCai2hclConverter(provider),
