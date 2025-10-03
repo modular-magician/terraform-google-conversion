@@ -465,6 +465,12 @@ this resource. You can provide either the rawKey or the rsaEncryptedKey.`,
 				Description: `Whether this disk is using confidential compute mode.
 Note: Only supported on hyperdisk skus, disk_encryption_key is required when setting to true`,
 			},
+			"go_version": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				ForceNew:    true,
+				Description: ``,
+			},
 			"guest_os_features": {
 				Type:     schema.TypeSet,
 				Computed: true,

@@ -410,6 +410,12 @@ func GetComputeDiskApiObject(d tpgresource.TerraformResourceData, config *transp
 	} else if v, ok := d.GetOkExists("size"); !tpgresource.IsEmptyValue(reflect.ValueOf(sizeProp)) && (ok || !reflect.DeepEqual(v, sizeProp)) {
 		obj["sizeGb"] = sizeProp
 	}
+	goVersionProp, err := expandComputeDiskGoVersion(d.Get("go_version"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("go_version"); ok || !reflect.DeepEqual(v, goVersionProp) {
+		obj["goVersion"] = goVersionProp
+	}
 	physicalBlockSizeBytesProp, err := expandComputeDiskPhysicalBlockSizeBytes(d.Get("physical_block_size_bytes"), d, config)
 	if err != nil {
 		return nil, err
@@ -778,6 +784,10 @@ func expandComputeDiskName(v interface{}, d tpgresource.TerraformResourceData, c
 }
 
 func expandComputeDiskSize(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeDiskGoVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

@@ -93,6 +93,7 @@ func (c *ComputeDiskCai2hclConverter) convertResourceData(asset caiasset.Asset) 
 	hclData["labels"] = flattenComputeDiskLabels(res["labels"], d, config)
 	hclData["name"] = flattenComputeDiskName(res["name"], d, config)
 	hclData["size"] = flattenComputeDiskSize(res["sizeGb"], d, config)
+	hclData["go_version"] = flattenComputeDiskGoVersion(res["goVersion"], d, config)
 	hclData["physical_block_size_bytes"] = flattenComputeDiskPhysicalBlockSizeBytes(res["physicalBlockSizeBytes"], d, config)
 	hclData["source_disk"] = flattenComputeDiskSourceDisk(res["sourceDisk"], d, config)
 	hclData["type"] = flattenComputeDiskType(res["type"], d, config)
@@ -261,6 +262,10 @@ func flattenComputeDiskSize(v interface{}, d *schema.ResourceData, config *trans
 	}
 
 	return v // let terraform core handle it otherwise
+}
+
+func flattenComputeDiskGoVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
 }
 
 func flattenComputeDiskPhysicalBlockSizeBytes(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
