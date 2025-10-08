@@ -34,7 +34,6 @@ func TestAccPubsubTopic_pubsubTopicBasicExample(t *testing.T) {
 			"message_storage_policy.enforce_in_transit",
 			"provider",
 			"schema_settings",
-			"tags",
 		},
 		[]string{},
 	)
@@ -53,7 +52,6 @@ func TestAccPubsubTopic_pubsubTopicGeoRestrictedExample(t *testing.T) {
 			"message_storage_policy.enforce_in_transit",
 			"provider",
 			"schema_settings",
-			"tags",
 		},
 		[]string{},
 	)
@@ -72,7 +70,6 @@ func TestAccPubsubTopic_pubsubTopicSchemaSettingsExample(t *testing.T) {
 			"message_storage_policy.enforce_in_transit",
 			"provider",
 			"schema_settings",
-			"tags",
 		},
 		[]string{},
 	)
@@ -91,7 +88,6 @@ func TestAccPubsubTopic_pubsubTopicIngestionKinesisExample(t *testing.T) {
 			"message_storage_policy.enforce_in_transit",
 			"provider",
 			"schema_settings",
-			"tags",
 		},
 		[]string{},
 	)
@@ -110,7 +106,6 @@ func TestAccPubsubTopic_pubsubTopicIngestionCloudStorageExample(t *testing.T) {
 			"message_storage_policy.enforce_in_transit",
 			"provider",
 			"schema_settings",
-			"tags",
 		},
 		[]string{},
 	)
@@ -129,7 +124,6 @@ func TestAccPubsubTopic_pubsubTopicIngestionAzureEventHubsExample(t *testing.T) 
 			"message_storage_policy.enforce_in_transit",
 			"provider",
 			"schema_settings",
-			"tags",
 		},
 		[]string{},
 	)
@@ -148,7 +142,6 @@ func TestAccPubsubTopic_pubsubTopicIngestionAwsMskExample(t *testing.T) {
 			"message_storage_policy.enforce_in_transit",
 			"provider",
 			"schema_settings",
-			"tags",
 		},
 		[]string{},
 	)
@@ -167,7 +160,6 @@ func TestAccPubsubTopic_pubsubTopicIngestionConfluentCloudExample(t *testing.T) 
 			"message_storage_policy.enforce_in_transit",
 			"provider",
 			"schema_settings",
-			"tags",
 		},
 		[]string{},
 	)
@@ -186,7 +178,6 @@ func TestAccPubsubTopic_pubsubTopicSingleSmtExample(t *testing.T) {
 			"message_storage_policy.enforce_in_transit",
 			"provider",
 			"schema_settings",
-			"tags",
 		},
 		[]string{},
 	)
@@ -206,7 +197,6 @@ func TestAccPubsubTopic_pubsubTopicMultipleSmtsExample(t *testing.T) {
 			"message_storage_policy.enforce_in_transit",
 			"provider",
 			"schema_settings",
-			"tags",
 		},
 		[]string{},
 	)
@@ -225,7 +215,6 @@ func TestAccPubsubTopic_pubsubTopicTagsExample(t *testing.T) {
 			"message_storage_policy.enforce_in_transit",
 			"provider",
 			"schema_settings",
-			"tags",
 		},
 		[]string{},
 	)

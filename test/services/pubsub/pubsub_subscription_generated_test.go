@@ -35,7 +35,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionPushExample(t *testing.T) {
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -56,7 +55,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionPullExample(t *testing.T) {
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -76,7 +74,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionPullFilterExample(t *testing.T)
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -96,7 +93,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionDeadLetterExample(t *testing.T)
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -116,7 +112,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionPushBqExample(t *testing.T) {
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -136,7 +131,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionPushBqTableSchemaExample(t *tes
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -156,7 +150,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionPushBqServiceAccountExample(t *
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -176,7 +169,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionPushCloudstorageExample(t *test
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -196,7 +188,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionPushCloudstorageAvroExample(t *
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -216,7 +207,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionPushCloudstorageServiceAccountE
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -236,7 +226,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionSingleSmtExample(t *testing.T) 
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -257,7 +246,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionMultipleSmtsExample(t *testing.
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)
@@ -277,7 +265,6 @@ func TestAccPubsubSubscription_pubsubSubscriptionTagsExample(t *testing.T) {
 			"for_each",
 			"lifecycle",
 			"provider",
-			"tags",
 		},
 		[]string{},
 	)

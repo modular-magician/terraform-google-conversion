@@ -33,7 +33,6 @@ func TestAccComputeBackendService_backendServiceBasicExample(t *testing.T) {
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -51,7 +50,6 @@ func TestAccComputeBackendService_backendServiceExternalIapExample(t *testing.T)
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -69,7 +67,6 @@ func TestAccComputeBackendService_backendServiceCacheSimpleExample(t *testing.T)
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -87,7 +84,6 @@ func TestAccComputeBackendService_backendServiceCacheIncludeHttpHeadersExample(t
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -105,7 +101,6 @@ func TestAccComputeBackendService_backendServiceCacheIncludeNamedCookiesExample(
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -123,7 +118,6 @@ func TestAccComputeBackendService_backendServiceCacheExample(t *testing.T) {
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -141,7 +135,6 @@ func TestAccComputeBackendService_backendServiceCacheBypassCacheOnRequestHeaders
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -159,7 +152,6 @@ func TestAccComputeBackendService_backendServiceTrafficDirectorRoundRobinExample
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{
 			"RESOURCE.enableCDN",
@@ -180,7 +172,6 @@ func TestAccComputeBackendService_backendServiceTrafficDirectorRingHashExample(t
 			"lifecycle",
 			"outlier_detection.enforcing_consecutive_gateway_failure",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{
 			"RESOURCE.enableCDN",
@@ -200,7 +191,6 @@ func TestAccComputeBackendService_backendServiceStatefulSessionAffinityExample(t
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -218,7 +208,6 @@ func TestAccComputeBackendService_backendServiceNetworkEndpointExample(t *testin
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -236,7 +225,6 @@ func TestAccComputeBackendService_backendServiceExternalManagedExample(t *testin
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -254,7 +242,6 @@ func TestAccComputeBackendService_backendServiceIpAddressSelectionPolicyExample(
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -272,7 +259,6 @@ func TestAccComputeBackendService_backendServiceCustomMetricsExample(t *testing.
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -290,7 +276,6 @@ func TestAccComputeBackendService_backendServiceTlsSettingsExample(t *testing.T)
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{},
 	)
@@ -308,7 +293,6 @@ func TestAccComputeBackendService_backendServiceDynamicForwardingExample(t *test
 			"iap.oauth2_client_secret",
 			"lifecycle",
 			"provider",
-			"security_settings.aws_v4_authentication.access_key",
 		},
 		[]string{
 			"RESOURCE.enableCDN",
