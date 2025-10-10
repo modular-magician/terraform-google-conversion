@@ -279,6 +279,13 @@ func expandBigqueryDataTransferConfigScheduleOptions(v interface{}, d tpgresourc
 		transformed["endTime"] = transformedEndTime
 	}
 
+	transformedEventDrivenSchedule, err := expandBigqueryDataTransferConfigScheduleOptionsEventDrivenSchedule(original["event_driven_schedule"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEventDrivenSchedule); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["eventDrivenSchedule"] = transformedEventDrivenSchedule
+	}
+
 	return transformed, nil
 }
 
@@ -291,6 +298,32 @@ func expandBigqueryDataTransferConfigScheduleOptionsStartTime(v interface{}, d t
 }
 
 func expandBigqueryDataTransferConfigScheduleOptionsEndTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBigqueryDataTransferConfigScheduleOptionsEventDrivenSchedule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedPubsubSubscription, err := expandBigqueryDataTransferConfigScheduleOptionsEventDrivenSchedulePubsubSubscription(original["pubsub_subscription"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPubsubSubscription); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["pubsubSubscription"] = transformedPubsubSubscription
+	}
+
+	return transformed, nil
+}
+
+func expandBigqueryDataTransferConfigScheduleOptionsEventDrivenSchedulePubsubSubscription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
