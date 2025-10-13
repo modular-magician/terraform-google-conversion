@@ -68,6 +68,12 @@ func GetTagsTagBindingApiObject(d tpgresource.TerraformResourceData, config *tra
 	} else if v, ok := d.GetOkExists("tag_value"); !tpgresource.IsEmptyValue(reflect.ValueOf(tagValueProp)) && (ok || !reflect.DeepEqual(v, tagValueProp)) {
 		obj["tagValue"] = tagValueProp
 	}
+	tagValueNamespacedNameProp, err := expandTagsTagBindingTagValueNamespacedName(d.Get("tag_value_namespaced_name"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("tag_value_namespaced_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(tagValueNamespacedNameProp)) && (ok || !reflect.DeepEqual(v, tagValueNamespacedNameProp)) {
+		obj["tagValueNamespacedName"] = tagValueNamespacedNameProp
+	}
 
 	return obj, nil
 }
@@ -77,5 +83,9 @@ func expandTagsTagBindingParent(v interface{}, d tpgresource.TerraformResourceDa
 }
 
 func expandTagsTagBindingTagValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandTagsTagBindingTagValueNamespacedName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
