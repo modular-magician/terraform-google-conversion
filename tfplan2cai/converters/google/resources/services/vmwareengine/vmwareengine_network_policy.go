@@ -86,6 +86,12 @@ func GetVmwareengineNetworkPolicyApiObject(d tpgresource.TerraformResourceData, 
 	} else if v, ok := d.GetOkExists("external_ip"); !tpgresource.IsEmptyValue(reflect.ValueOf(externalIpProp)) && (ok || !reflect.DeepEqual(v, externalIpProp)) {
 		obj["externalIp"] = externalIpProp
 	}
+	tagsProp, err := expandVmwareengineNetworkPolicyTags(d.Get("tags"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("tags"); !tpgresource.IsEmptyValue(reflect.ValueOf(tagsProp)) && (ok || !reflect.DeepEqual(v, tagsProp)) {
+		obj["tags"] = tagsProp
+	}
 
 	return obj, nil
 }
@@ -174,4 +180,15 @@ func expandVmwareengineNetworkPolicyExternalIpEnabled(v interface{}, d tpgresour
 
 func expandVmwareengineNetworkPolicyExternalIpState(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandVmwareengineNetworkPolicyTags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
