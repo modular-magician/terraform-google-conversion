@@ -79,9 +79,12 @@ func (c *ComputeGlobalAddressCai2hclConverter) convertResourceData(asset caiasse
 	hclData["name"] = flattenComputeGlobalAddressName(res["name"], d, config)
 	hclData["labels"] = flattenComputeGlobalAddressLabels(res["labels"], d, config)
 	hclData["ip_version"] = flattenComputeGlobalAddressIpVersion(res["ipVersion"], d, config)
+	hclData["ipv6_endpoint_type"] = flattenComputeGlobalAddressIpv6EndpointType(res["ipv6EndpointType"], d, config)
+	hclData["network_tier"] = flattenComputeGlobalAddressNetworkTier(res["networkTier"], d, config)
 	hclData["prefix_length"] = flattenComputeGlobalAddressPrefixLength(res["prefixLength"], d, config)
 	hclData["address_type"] = flattenComputeGlobalAddressAddressType(res["addressType"], d, config)
 	hclData["purpose"] = flattenComputeGlobalAddressPurpose(res["purpose"], d, config)
+	hclData["subnetwork"] = flattenComputeGlobalAddressSubnetwork(res["subnetwork"], d, config)
 	hclData["network"] = flattenComputeGlobalAddressNetwork(res["network"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
@@ -113,6 +116,14 @@ func flattenComputeGlobalAddressIpVersion(v interface{}, d *schema.ResourceData,
 	return v
 }
 
+func flattenComputeGlobalAddressIpv6EndpointType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenComputeGlobalAddressNetworkTier(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
 func flattenComputeGlobalAddressPrefixLength(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
@@ -136,6 +147,17 @@ func flattenComputeGlobalAddressAddressType(v interface{}, d *schema.ResourceDat
 
 func flattenComputeGlobalAddressPurpose(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
+}
+
+func flattenComputeGlobalAddressSubnetwork(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return v
+	}
+	relative, err := tpgresource.GetRelativePath(v.(string))
+	if err != nil {
+		return v
+	}
+	return relative
 }
 
 func flattenComputeGlobalAddressNetwork(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

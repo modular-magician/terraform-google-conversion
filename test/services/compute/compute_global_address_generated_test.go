@@ -35,3 +35,33 @@ func TestAccComputeGlobalAddress_globalAddressBasicExample(t *testing.T) {
 		[]string{},
 	)
 }
+func TestAccComputeGlobalAddress_globalAddressWithNetworkTierExample(t *testing.T) {
+	t.Parallel()
+
+	test.BidirectionalConversion(
+		t,
+		[]string{
+			"count",
+			"depends_on",
+			"for_each",
+			"lifecycle",
+			"provider",
+		},
+		[]string{},
+	)
+}
+func TestAccComputeGlobalAddress_globalAddressIpv6EndpointTypeExample(t *testing.T) {
+	t.Parallel()
+
+	test.BidirectionalConversion(
+		t,
+		[]string{
+			"count",
+			"depends_on",
+			"for_each",
+			"lifecycle",
+			"provider",
+		},
+		[]string{},
+	)
+}
