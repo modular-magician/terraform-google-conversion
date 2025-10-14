@@ -19,7 +19,7 @@ package integrations
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -92,11 +92,11 @@ func GetIntegrationsAuthConfigApiObject(d tpgresource.TerraformResourceData, con
 	} else if v, ok := d.GetOkExists("decrypted_credential"); !tpgresource.IsEmptyValue(reflect.ValueOf(decryptedCredentialProp)) && (ok || !reflect.DeepEqual(v, decryptedCredentialProp)) {
 		obj["decryptedCredential"] = decryptedCredentialProp
 	}
-	client_certificateProp, err := expandIntegrationsAuthConfigClientCertificate(d.Get("client_certificate"), d, config)
+	clientCertificateProp, err := expandIntegrationsAuthConfigClientCertificate(d.Get("client_certificate"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("client_certificate"); !tpgresource.IsEmptyValue(reflect.ValueOf(client_certificateProp)) && (ok || !reflect.DeepEqual(v, client_certificateProp)) {
-		obj["client_certificate"] = client_certificateProp
+	} else if v, ok := d.GetOkExists("client_certificate"); !tpgresource.IsEmptyValue(reflect.ValueOf(clientCertificateProp)) && (ok || !reflect.DeepEqual(v, clientCertificateProp)) {
+		obj["client_certificate"] = clientCertificateProp
 	}
 
 	return obj, nil
@@ -123,6 +123,9 @@ func expandIntegrationsAuthConfigOverrideValidTime(v interface{}, d tpgresource.
 }
 
 func expandIntegrationsAuthConfigDecryptedCredential(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -195,6 +198,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialCredentialType(v interface{}
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialUsernameAndPassword(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -229,6 +235,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialUsernameAndPasswordPassword(
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialOauth2AuthorizationCode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -296,6 +305,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialOauth2AuthorizationCodeToken
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -366,6 +378,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsScope
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsTokenParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -385,6 +400,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsToken
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsTokenParamsEntries(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -414,6 +432,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsToken
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsTokenParamsEntriesKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -433,6 +454,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsToken
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsTokenParamsEntriesKeyLiteralValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -456,6 +480,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsToken
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsTokenParamsEntriesValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -475,6 +502,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsToken
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsTokenParamsEntriesValueLiteralValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -502,6 +532,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialOauth2ClientCredentialsReque
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialJwt(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -558,6 +591,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialJwtJwt(v interface{}, d tpgr
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialAuthToken(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -592,6 +628,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialAuthTokenToken(v interface{}
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialServiceAccountCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -626,6 +665,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialServiceAccountCredentialsSco
 }
 
 func expandIntegrationsAuthConfigDecryptedCredentialOidcToken(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -682,6 +724,9 @@ func expandIntegrationsAuthConfigDecryptedCredentialOidcTokenTokenExpireTime(v i
 }
 
 func expandIntegrationsAuthConfigClientCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

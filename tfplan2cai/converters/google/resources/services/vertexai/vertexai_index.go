@@ -19,7 +19,7 @@ package vertexai
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -80,11 +80,17 @@ func GetVertexAIIndexApiObject(d tpgresource.TerraformResourceData, config *tran
 	} else if v, ok := d.GetOkExists("index_update_method"); !tpgresource.IsEmptyValue(reflect.ValueOf(indexUpdateMethodProp)) && (ok || !reflect.DeepEqual(v, indexUpdateMethodProp)) {
 		obj["indexUpdateMethod"] = indexUpdateMethodProp
 	}
-	labelsProp, err := expandVertexAIIndexEffectiveLabels(d.Get("effective_labels"), d, config)
+	encryptionSpecProp, err := expandVertexAIIndexEncryptionSpec(d.Get("encryption_spec"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("encryption_spec"); !tpgresource.IsEmptyValue(reflect.ValueOf(encryptionSpecProp)) && (ok || !reflect.DeepEqual(v, encryptionSpecProp)) {
+		obj["encryptionSpec"] = encryptionSpecProp
+	}
+	effectiveLabelsProp, err := expandVertexAIIndexEffectiveLabels(d.Get("effective_labels"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return obj, nil
@@ -99,6 +105,9 @@ func expandVertexAIIndexDescription(v interface{}, d tpgresource.TerraformResour
 }
 
 func expandVertexAIIndexMetadata(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -140,6 +149,9 @@ func expandVertexAIIndexMetadataIsCompleteOverwrite(v interface{}, d tpgresource
 }
 
 func expandVertexAIIndexMetadataConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -214,6 +226,9 @@ func expandVertexAIIndexMetadataConfigFeatureNormType(v interface{}, d tpgresour
 }
 
 func expandVertexAIIndexMetadataConfigAlgorithmConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -240,6 +255,9 @@ func expandVertexAIIndexMetadataConfigAlgorithmConfig(v interface{}, d tpgresour
 }
 
 func expandVertexAIIndexMetadataConfigAlgorithmConfigTreeAhConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -274,6 +292,9 @@ func expandVertexAIIndexMetadataConfigAlgorithmConfigTreeAhConfigLeafNodesToSear
 }
 
 func expandVertexAIIndexMetadataConfigAlgorithmConfigBruteForceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 {
 		return nil, nil
@@ -289,6 +310,32 @@ func expandVertexAIIndexMetadataConfigAlgorithmConfigBruteForceConfig(v interfac
 }
 
 func expandVertexAIIndexIndexUpdateMethod(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIIndexEncryptionSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedKmsKeyName, err := expandVertexAIIndexEncryptionSpecKmsKeyName(original["kms_key_name"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedKmsKeyName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["kmsKeyName"] = transformedKmsKeyName
+	}
+
+	return transformed, nil
+}
+
+func expandVertexAIIndexEncryptionSpecKmsKeyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

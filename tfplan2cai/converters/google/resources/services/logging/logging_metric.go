@@ -21,7 +21,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -137,6 +137,9 @@ func expandLoggingMetricFilter(v interface{}, d tpgresource.TerraformResourceDat
 }
 
 func expandLoggingMetricMetricDescriptor(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -197,6 +200,9 @@ func expandLoggingMetricMetricDescriptorMetricKind(v interface{}, d tpgresource.
 
 func expandLoggingMetricMetricDescriptorLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -264,6 +270,9 @@ func expandLoggingMetricValueExtractor(v interface{}, d tpgresource.TerraformRes
 }
 
 func expandLoggingMetricBucketOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -297,6 +306,9 @@ func expandLoggingMetricBucketOptions(v interface{}, d tpgresource.TerraformReso
 }
 
 func expandLoggingMetricBucketOptionsLinearBuckets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -342,6 +354,9 @@ func expandLoggingMetricBucketOptionsLinearBucketsOffset(v interface{}, d tpgres
 }
 
 func expandLoggingMetricBucketOptionsExponentialBuckets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -387,6 +402,9 @@ func expandLoggingMetricBucketOptionsExponentialBucketsScale(v interface{}, d tp
 }
 
 func expandLoggingMetricBucketOptionsExplicitBuckets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

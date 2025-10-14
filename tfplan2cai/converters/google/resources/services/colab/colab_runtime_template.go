@@ -19,7 +19,7 @@ package colab
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -128,11 +128,11 @@ func GetColabRuntimeTemplateApiObject(d tpgresource.TerraformResourceData, confi
 	} else if v, ok := d.GetOkExists("software_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(softwareConfigProp)) && (ok || !reflect.DeepEqual(v, softwareConfigProp)) {
 		obj["softwareConfig"] = softwareConfigProp
 	}
-	labelsProp, err := expandColabRuntimeTemplateEffectiveLabels(d.Get("effective_labels"), d, config)
+	effectiveLabelsProp, err := expandColabRuntimeTemplateEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return obj, nil
@@ -151,6 +151,9 @@ func expandColabRuntimeTemplateDescription(v interface{}, d tpgresource.Terrafor
 }
 
 func expandColabRuntimeTemplateMachineSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -196,6 +199,9 @@ func expandColabRuntimeTemplateMachineSpecAcceleratorCount(v interface{}, d tpgr
 }
 
 func expandColabRuntimeTemplateDataPersistentDiskSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -230,6 +236,9 @@ func expandColabRuntimeTemplateDataPersistentDiskSpecDiskSizeGb(v interface{}, d
 }
 
 func expandColabRuntimeTemplateNetworkSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -275,6 +284,9 @@ func expandColabRuntimeTemplateNetworkSpecSubnetwork(v interface{}, d tpgresourc
 }
 
 func expandColabRuntimeTemplateIdleShutdownConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -298,6 +310,9 @@ func expandColabRuntimeTemplateIdleShutdownConfigIdleTimeout(v interface{}, d tp
 }
 
 func expandColabRuntimeTemplateEucConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -321,6 +336,9 @@ func expandColabRuntimeTemplateEucConfigEucDisabled(v interface{}, d tpgresource
 }
 
 func expandColabRuntimeTemplateShieldedVmConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -348,6 +366,9 @@ func expandColabRuntimeTemplateNetworkTags(v interface{}, d tpgresource.Terrafor
 }
 
 func expandColabRuntimeTemplateEncryptionSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -371,6 +392,9 @@ func expandColabRuntimeTemplateEncryptionSpecKmsKeyName(v interface{}, d tpgreso
 }
 
 func expandColabRuntimeTemplateSoftwareConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -386,17 +410,13 @@ func expandColabRuntimeTemplateSoftwareConfig(v interface{}, d tpgresource.Terra
 		transformed["env"] = transformedEnv
 	}
 
-	transformedPostStartupScriptConfig, err := expandColabRuntimeTemplateSoftwareConfigPostStartupScriptConfig(original["post_startup_script_config"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedPostStartupScriptConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["postStartupScriptConfig"] = transformedPostStartupScriptConfig
-	}
-
 	return transformed, nil
 }
 
 func expandColabRuntimeTemplateSoftwareConfigEnv(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -430,51 +450,6 @@ func expandColabRuntimeTemplateSoftwareConfigEnvName(v interface{}, d tpgresourc
 }
 
 func expandColabRuntimeTemplateSoftwareConfigEnvValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandColabRuntimeTemplateSoftwareConfigPostStartupScriptConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedPostStartupScript, err := expandColabRuntimeTemplateSoftwareConfigPostStartupScriptConfigPostStartupScript(original["post_startup_script"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedPostStartupScript); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["postStartupScript"] = transformedPostStartupScript
-	}
-
-	transformedPostStartupScriptUrl, err := expandColabRuntimeTemplateSoftwareConfigPostStartupScriptConfigPostStartupScriptUrl(original["post_startup_script_url"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedPostStartupScriptUrl); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["postStartupScriptUrl"] = transformedPostStartupScriptUrl
-	}
-
-	transformedPostStartupScriptBehavior, err := expandColabRuntimeTemplateSoftwareConfigPostStartupScriptConfigPostStartupScriptBehavior(original["post_startup_script_behavior"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedPostStartupScriptBehavior); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["postStartupScriptBehavior"] = transformedPostStartupScriptBehavior
-	}
-
-	return transformed, nil
-}
-
-func expandColabRuntimeTemplateSoftwareConfigPostStartupScriptConfigPostStartupScript(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandColabRuntimeTemplateSoftwareConfigPostStartupScriptConfigPostStartupScriptUrl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandColabRuntimeTemplateSoftwareConfigPostStartupScriptConfigPostStartupScriptBehavior(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

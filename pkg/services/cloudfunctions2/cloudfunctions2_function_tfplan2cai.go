@@ -21,10 +21,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tfplan2cai/converters/cai"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tfplan2cai/converters/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 func Cloudfunctions2functionTfplan2caiConverter() cai.Tfplan2caiConverter {
@@ -48,8 +48,8 @@ func GetCloudfunctions2functionCaiAssets(d tpgresource.TerraformResourceData, co
 				Name: name,
 				Type: Cloudfunctions2FunctionAssetType,
 				Resource: &caiasset.AssetResource{
-					Version:              "v2beta",
-					DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/cloudfunctions/v2beta/rest",
+					Version:              "v2",
+					DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/cloudfunctions/v2/rest",
 					DiscoveryName:        "Function",
 					Data:                 obj,
 					Location:             location,
@@ -99,11 +99,11 @@ func GetCloudfunctions2functionCaiObject(d tpgresource.TerraformResourceData, co
 	} else if v, ok := d.GetOkExists("kms_key_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(kmsKeyNameProp)) && (ok || !reflect.DeepEqual(v, kmsKeyNameProp)) {
 		obj["kmsKeyName"] = kmsKeyNameProp
 	}
-	labelsProp, err := expandCloudfunctions2functionEffectiveLabels(d.Get("effective_labels"), d, config)
+	effectiveLabelsProp, err := expandCloudfunctions2functionEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	obj, err = resourceCloudfunctions2functionEncoder(d, config, obj)
@@ -140,6 +140,9 @@ func expandCloudfunctions2functionDescription(v interface{}, d tpgresource.Terra
 }
 
 func expandCloudfunctions2functionBuildConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -223,6 +226,9 @@ func expandCloudfunctions2functionBuildConfigEntryPoint(v interface{}, d tpgreso
 }
 
 func expandCloudfunctions2functionBuildConfigSource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -249,6 +255,9 @@ func expandCloudfunctions2functionBuildConfigSource(v interface{}, d tpgresource
 }
 
 func expandCloudfunctions2functionBuildConfigSourceStorageSource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -294,6 +303,9 @@ func expandCloudfunctions2functionBuildConfigSourceStorageSourceGeneration(v int
 }
 
 func expandCloudfunctions2functionBuildConfigSourceRepoSource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -406,6 +418,9 @@ func expandCloudfunctions2functionBuildConfigServiceAccount(v interface{}, d tpg
 }
 
 func expandCloudfunctions2functionBuildConfigAutomaticUpdatePolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 {
 		return nil, nil
@@ -421,6 +436,9 @@ func expandCloudfunctions2functionBuildConfigAutomaticUpdatePolicy(v interface{}
 }
 
 func expandCloudfunctions2functionBuildConfigOnDeployUpdatePolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 {
 		return nil, nil
@@ -436,6 +454,9 @@ func expandCloudfunctions2functionBuildConfigOnDeployUpdatePolicy(v interface{},
 }
 
 func expandCloudfunctions2functionServiceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -443,13 +464,6 @@ func expandCloudfunctions2functionServiceConfig(v interface{}, d tpgresource.Ter
 	raw := l[0]
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
-
-	transformedService, err := expandCloudfunctions2functionServiceConfigService(original["service"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedService); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["service"] = transformedService
-	}
 
 	transformedTimeoutSeconds, err := expandCloudfunctions2functionServiceConfigTimeoutSeconds(original["timeout_seconds"], d, config)
 	if err != nil {
@@ -559,10 +573,6 @@ func expandCloudfunctions2functionServiceConfig(v interface{}, d tpgresource.Ter
 	return transformed, nil
 }
 
-func expandCloudfunctions2functionServiceConfigService(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
 func expandCloudfunctions2functionServiceConfigTimeoutSeconds(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -619,6 +629,9 @@ func expandCloudfunctions2functionServiceConfigAllTrafficOnLatestRevision(v inte
 }
 
 func expandCloudfunctions2functionServiceConfigSecretEnvironmentVariables(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -678,6 +691,9 @@ func expandCloudfunctions2functionServiceConfigSecretEnvironmentVariablesVersion
 }
 
 func expandCloudfunctions2functionServiceConfigSecretVolumes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -733,6 +749,9 @@ func expandCloudfunctions2functionServiceConfigSecretVolumesSecret(v interface{}
 }
 
 func expandCloudfunctions2functionServiceConfigSecretVolumesVersions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -774,6 +793,9 @@ func expandCloudfunctions2functionServiceConfigBinaryAuthorizationPolicy(v inter
 }
 
 func expandCloudfunctions2functionEventTrigger(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -837,6 +859,9 @@ func expandCloudfunctions2functionEventTriggerEventType(v interface{}, d tpgreso
 
 func expandCloudfunctions2functionEventTriggerEventFilters(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {

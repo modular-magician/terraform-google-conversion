@@ -26,7 +26,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -164,17 +164,17 @@ func GetComputeFirewallCaiObject(d tpgresource.TerraformResourceData, config *tr
 
 func GetComputeFirewallApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
-	allowedProp, err := expandComputeFirewallAllow(d.Get("allow"), d, config)
+	allowProp, err := expandComputeFirewallAllow(d.Get("allow"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("allow"); !tpgresource.IsEmptyValue(reflect.ValueOf(allowedProp)) && (ok || !reflect.DeepEqual(v, allowedProp)) {
-		obj["allowed"] = allowedProp
+	} else if v, ok := d.GetOkExists("allow"); !tpgresource.IsEmptyValue(reflect.ValueOf(allowProp)) && (ok || !reflect.DeepEqual(v, allowProp)) {
+		obj["allowed"] = allowProp
 	}
-	deniedProp, err := expandComputeFirewallDeny(d.Get("deny"), d, config)
+	denyProp, err := expandComputeFirewallDeny(d.Get("deny"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("deny"); !tpgresource.IsEmptyValue(reflect.ValueOf(deniedProp)) && (ok || !reflect.DeepEqual(v, deniedProp)) {
-		obj["denied"] = deniedProp
+	} else if v, ok := d.GetOkExists("deny"); !tpgresource.IsEmptyValue(reflect.ValueOf(denyProp)) && (ok || !reflect.DeepEqual(v, denyProp)) {
+		obj["denied"] = denyProp
 	}
 	descriptionProp, err := expandComputeFirewallDescription(d.Get("description"), d, config)
 	if err != nil {
@@ -266,6 +266,9 @@ func GetComputeFirewallApiObject(d tpgresource.TerraformResourceData, config *tr
 
 func expandComputeFirewallAllow(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -304,6 +307,9 @@ func expandComputeFirewallAllowPorts(v interface{}, d tpgresource.TerraformResou
 
 func expandComputeFirewallDeny(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -419,6 +425,9 @@ func expandComputeFirewallTargetTags(v interface{}, d tpgresource.TerraformResou
 }
 
 func expandComputeFirewallParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

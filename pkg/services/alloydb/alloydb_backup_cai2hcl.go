@@ -22,12 +22,12 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/cai2hcl/converters/utils"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/cai2hcl/models"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tgcresource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/cai2hcl/converters/utils"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/cai2hcl/models"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tgcresource"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 type AlloydbBackupCai2hclConverter struct {
@@ -132,16 +132,5 @@ func flattenAlloydbBackupEncryptionConfigKmsKeyName(v interface{}, d *schema.Res
 }
 
 func flattenAlloydbBackupAnnotations(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-
-	transformed := make(map[string]interface{})
-	if l, ok := d.GetOkExists("annotations"); ok {
-		for k := range l.(map[string]interface{}) {
-			transformed[k] = v.(map[string]interface{})[k]
-		}
-	}
-
-	return transformed
+	return v
 }

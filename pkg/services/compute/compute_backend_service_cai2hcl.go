@@ -22,13 +22,13 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/cai2hcl/converters/utils"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/cai2hcl/models"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tgcresource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/cai2hcl/converters/utils"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/cai2hcl/models"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tgcresource"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 type ComputeBackendServiceCai2hclConverter struct {
@@ -71,7 +71,7 @@ func (c *ComputeBackendServiceCai2hclConverter) convertResourceData(asset caiass
 
 	hclData := make(map[string]interface{})
 
-	res, err = resourceComputeBackendServiceTgcDecoder(d, config, res)
+	res, hclData, err = resourceComputeBackendServiceTgcDecoder(d, config, res, hclData)
 	if err != nil {
 		return nil, err
 	}
@@ -127,8 +127,7 @@ func (c *ComputeBackendServiceCai2hclConverter) convertResourceData(asset caiass
 	hclData["service_lb_policy"] = flattenComputeBackendServiceServiceLbPolicy(res["serviceLbPolicy"], d, config)
 	hclData["tls_settings"] = flattenComputeBackendServiceTlsSettings(res["tlsSettings"], d, config)
 	hclData["max_stream_duration"] = flattenComputeBackendServiceMaxStreamDuration(res["maxStreamDuration"], d, config)
-	hclData["network_pass_through_lb_traffic_policy"] = flattenComputeBackendServiceNetworkPassThroughLbTrafficPolicy(res["networkPassThroughLbTrafficPolicy"], d, config)
-	hclData["dynamic_forwarding"] = flattenComputeBackendServiceDynamicForwarding(res["dynamicForwarding"], d, config)
+	hclData["params"] = flattenComputeBackendServiceParams(res["params"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -336,8 +335,6 @@ func flattenComputeBackendServiceCircuitBreakers(v interface{}, d *schema.Resour
 		return nil
 	}
 	transformed := make(map[string]interface{})
-	transformed["connect_timeout"] =
-		flattenComputeBackendServiceCircuitBreakersConnectTimeout(original["connectTimeout"], d, config)
 	transformed["max_requests_per_connection"] =
 		flattenComputeBackendServiceCircuitBreakersMaxRequestsPerConnection(original["maxRequestsPerConnection"], d, config)
 	transformed["max_connections"] =
@@ -352,59 +349,6 @@ func flattenComputeBackendServiceCircuitBreakers(v interface{}, d *schema.Resour
 		return nil
 	}
 	return []interface{}{transformed}
-}
-
-func flattenComputeBackendServiceCircuitBreakersConnectTimeout(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	original := v.(map[string]interface{})
-	if len(original) == 0 {
-		return nil
-	}
-	transformed := make(map[string]interface{})
-	transformed["seconds"] =
-		flattenComputeBackendServiceCircuitBreakersConnectTimeoutSeconds(original["seconds"], d, config)
-	transformed["nanos"] =
-		flattenComputeBackendServiceCircuitBreakersConnectTimeoutNanos(original["nanos"], d, config)
-	if tgcresource.AllValuesAreNil(transformed) {
-		return nil
-	}
-	return []interface{}{transformed}
-}
-
-func flattenComputeBackendServiceCircuitBreakersConnectTimeoutSeconds(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	// Handles the string fixed64 format
-	if strVal, ok := v.(string); ok {
-		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
-			return intVal
-		}
-	}
-
-	// number values are represented as float64
-	if floatVal, ok := v.(float64); ok {
-		intVal := int(floatVal)
-		return intVal
-	}
-
-	return v // let terraform core handle it otherwise
-}
-
-func flattenComputeBackendServiceCircuitBreakersConnectTimeoutNanos(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	// Handles the string fixed64 format
-	if strVal, ok := v.(string); ok {
-		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
-			return intVal
-		}
-	}
-
-	// number values are represented as float64
-	if floatVal, ok := v.(float64); ok {
-		intVal := int(floatVal)
-		return intVal
-	}
-
-	return v // let terraform core handle it otherwise
 }
 
 func flattenComputeBackendServiceCircuitBreakersMaxRequestsPerConnection(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -569,6 +513,9 @@ func flattenComputeBackendServiceConsistentHashHttpCookieTtlSeconds(v interface{
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
 		return intVal
+	}
+	if v == nil {
+		return 0
 	}
 
 	return v // let terraform core handle it otherwise
@@ -1189,6 +1136,9 @@ func flattenComputeBackendServiceOutlierDetectionBaseEjectionTimeSeconds(v inter
 		intVal := int(floatVal)
 		return intVal
 	}
+	if v == nil {
+		return 0
+	}
 
 	return v // let terraform core handle it otherwise
 }
@@ -1326,6 +1276,9 @@ func flattenComputeBackendServiceOutlierDetectionIntervalSeconds(v interface{}, 
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
 		return intVal
+	}
+	if v == nil {
+		return 0
 	}
 
 	return v // let terraform core handle it otherwise
@@ -1564,6 +1517,9 @@ func flattenComputeBackendServiceStrongSessionAffinityCookieTtlSeconds(v interfa
 		intVal := int(floatVal)
 		return intVal
 	}
+	if v == nil {
+		return 0
+	}
 
 	return v // let terraform core handle it otherwise
 }
@@ -1750,7 +1706,7 @@ func flattenComputeBackendServiceMaxStreamDurationNanos(v interface{}, d *schema
 	return v // let terraform core handle it otherwise
 }
 
-func flattenComputeBackendServiceNetworkPassThroughLbTrafficPolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+func flattenComputeBackendServiceParams(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
 	}
@@ -1759,80 +1715,19 @@ func flattenComputeBackendServiceNetworkPassThroughLbTrafficPolicy(v interface{}
 		return nil
 	}
 	transformed := make(map[string]interface{})
-	transformed["zonal_affinity"] =
-		flattenComputeBackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity(original["zonalAffinity"], d, config)
+	transformed["resource_manager_tags"] =
+		flattenComputeBackendServiceParamsResourceManagerTags(original["resourceManagerTags"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
 	return []interface{}{transformed}
 }
 
-func flattenComputeBackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	original := v.(map[string]interface{})
-	if len(original) == 0 {
-		return nil
-	}
-	transformed := make(map[string]interface{})
-	transformed["spillover"] =
-		flattenComputeBackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinitySpillover(original["spillover"], d, config)
-	transformed["spillover_ratio"] =
-		flattenComputeBackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinitySpilloverRatio(original["spilloverRatio"], d, config)
-	if tgcresource.AllValuesAreNil(transformed) {
-		return nil
-	}
-	return []interface{}{transformed}
-}
-
-func flattenComputeBackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinitySpillover(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+func flattenComputeBackendServiceParamsResourceManagerTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
-func flattenComputeBackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinitySpilloverRatio(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
-}
-
-func flattenComputeBackendServiceDynamicForwarding(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	original := v.(map[string]interface{})
-	if len(original) == 0 {
-		return nil
-	}
-	transformed := make(map[string]interface{})
-	transformed["ip_port_selection"] =
-		flattenComputeBackendServiceDynamicForwardingIpPortSelection(original["ipPortSelection"], d, config)
-	if tgcresource.AllValuesAreNil(transformed) {
-		return nil
-	}
-	return []interface{}{transformed}
-}
-
-func flattenComputeBackendServiceDynamicForwardingIpPortSelection(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	original := v.(map[string]interface{})
-	if len(original) == 0 {
-		return nil
-	}
-	transformed := make(map[string]interface{})
-	transformed["enabled"] =
-		flattenComputeBackendServiceDynamicForwardingIpPortSelectionEnabled(original["enabled"], d, config)
-	if tgcresource.AllValuesAreNil(transformed) {
-		return nil
-	}
-	return []interface{}{transformed}
-}
-
-func flattenComputeBackendServiceDynamicForwardingIpPortSelectionEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
-}
-
-func resourceComputeBackendServiceTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
+func resourceComputeBackendServiceTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
 	if v, ok := res["backends"]; ok {
 		backends := v.([]interface{})
 		for _, vBackend := range backends {
@@ -1850,7 +1745,7 @@ func resourceComputeBackendServiceTgcDecoder(d *schema.ResourceData, meta interf
 		}
 	}
 
-	return res, nil
+	return res, hclData, nil
 }
 func resourceComputeBackendServiceDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
 	// Requests with consistentHash will error for specific values of

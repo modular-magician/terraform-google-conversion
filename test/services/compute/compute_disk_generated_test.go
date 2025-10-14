@@ -17,7 +17,7 @@ package compute_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccComputeDisk_diskBasicExample(t *testing.T) {
@@ -31,7 +31,6 @@ func TestAccComputeDisk_diskBasicExample(t *testing.T) {
 			"create_snapshot_before_destroy_prefix",
 			"depends_on",
 			"for_each",
-			"interface",
 			"lifecycle",
 			"provider",
 		},
@@ -49,7 +48,6 @@ func TestAccComputeDisk_diskAsyncExample(t *testing.T) {
 			"create_snapshot_before_destroy_prefix",
 			"depends_on",
 			"for_each",
-			"interface",
 			"lifecycle",
 			"provider",
 		},
@@ -67,7 +65,6 @@ func TestAccComputeDisk_diskFeaturesExample(t *testing.T) {
 			"create_snapshot_before_destroy_prefix",
 			"depends_on",
 			"for_each",
-			"interface",
 			"lifecycle",
 			"provider",
 		},

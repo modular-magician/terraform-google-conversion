@@ -17,25 +17,10 @@ package compute_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccComputeGlobalAddress_globalAddressBasicExample(t *testing.T) {
-	t.Parallel()
-
-	test.BidirectionalConversion(
-		t,
-		[]string{
-			"count",
-			"depends_on",
-			"for_each",
-			"lifecycle",
-			"provider",
-		},
-		[]string{},
-	)
-}
-func TestAccComputeGlobalAddress_globalAddressPrivateServicesConnectExample(t *testing.T) {
 	t.Parallel()
 
 	test.BidirectionalConversion(

@@ -22,7 +22,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -185,6 +185,9 @@ func expandColabScheduleAllowQueueing(v interface{}, d tpgresource.TerraformReso
 }
 
 func expandColabScheduleCreateNotebookExecutionJobRequest(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -204,6 +207,9 @@ func expandColabScheduleCreateNotebookExecutionJobRequest(v interface{}, d tpgre
 }
 
 func expandColabScheduleCreateNotebookExecutionJobRequestNotebookExecutionJob(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -276,6 +282,9 @@ func expandColabScheduleCreateNotebookExecutionJobRequestNotebookExecutionJobDis
 }
 
 func expandColabScheduleCreateNotebookExecutionJobRequestNotebookExecutionJobDataformRepositorySource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -310,6 +319,9 @@ func expandColabScheduleCreateNotebookExecutionJobRequestNotebookExecutionJobDat
 }
 
 func expandColabScheduleCreateNotebookExecutionJobRequestNotebookExecutionJobGcsNotebookSource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

@@ -22,7 +22,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -107,11 +107,11 @@ func GetDNSManagedZoneApiObject(d tpgresource.TerraformResourceData, config *tra
 	} else if v, ok := d.GetOkExists("peering_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(peeringConfigProp)) && (ok || !reflect.DeepEqual(v, peeringConfigProp)) {
 		obj["peeringConfig"] = peeringConfigProp
 	}
-	reverseLookupConfigProp, err := expandDNSManagedZoneReverseLookup(d.Get("reverse_lookup"), d, config)
+	reverseLookupProp, err := expandDNSManagedZoneReverseLookup(d.Get("reverse_lookup"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("reverse_lookup"); !tpgresource.IsEmptyValue(reflect.ValueOf(reverseLookupConfigProp)) && (ok || !reflect.DeepEqual(v, reverseLookupConfigProp)) {
-		obj["reverseLookupConfig"] = reverseLookupConfigProp
+	} else if v, ok := d.GetOkExists("reverse_lookup"); !tpgresource.IsEmptyValue(reflect.ValueOf(reverseLookupProp)) && (ok || !reflect.DeepEqual(v, reverseLookupProp)) {
+		obj["reverseLookupConfig"] = reverseLookupProp
 	}
 	serviceDirectoryConfigProp, err := expandDNSManagedZoneServiceDirectoryConfig(d.Get("service_directory_config"), d, config)
 	if err != nil {
@@ -125,11 +125,11 @@ func GetDNSManagedZoneApiObject(d tpgresource.TerraformResourceData, config *tra
 	} else if v, ok := d.GetOkExists("cloud_logging_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(cloudLoggingConfigProp)) && (ok || !reflect.DeepEqual(v, cloudLoggingConfigProp)) {
 		obj["cloudLoggingConfig"] = cloudLoggingConfigProp
 	}
-	labelsProp, err := expandDNSManagedZoneEffectiveLabels(d.Get("effective_labels"), d, config)
+	effectiveLabelsProp, err := expandDNSManagedZoneEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return obj, nil
@@ -144,6 +144,9 @@ func expandDNSManagedZoneDnsName(v interface{}, d tpgresource.TerraformResourceD
 }
 
 func expandDNSManagedZoneDnssecConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -196,6 +199,9 @@ func expandDNSManagedZoneDnssecConfigState(v interface{}, d tpgresource.Terrafor
 }
 
 func expandDNSManagedZoneDnssecConfigDefaultKeySpecs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -355,6 +361,9 @@ func expandDNSManagedZonePrivateVisibilityConfigGkeClustersGkeClusterName(v inte
 }
 
 func expandDNSManagedZoneForwardingConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -375,6 +384,9 @@ func expandDNSManagedZoneForwardingConfig(v interface{}, d tpgresource.Terraform
 
 func expandDNSManagedZoneForwardingConfigTargetNameServers(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -423,6 +435,9 @@ func expandDNSManagedZoneForwardingConfigTargetNameServersForwardingPath(v inter
 }
 
 func expandDNSManagedZonePeeringConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -442,6 +457,9 @@ func expandDNSManagedZonePeeringConfig(v interface{}, d tpgresource.TerraformRes
 }
 
 func expandDNSManagedZonePeeringConfigTargetNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -482,6 +500,9 @@ func expandDNSManagedZoneReverseLookup(v interface{}, d tpgresource.TerraformRes
 }
 
 func expandDNSManagedZoneServiceDirectoryConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -501,6 +522,9 @@ func expandDNSManagedZoneServiceDirectoryConfig(v interface{}, d tpgresource.Ter
 }
 
 func expandDNSManagedZoneServiceDirectoryConfigNamespace(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -535,6 +559,9 @@ func expandDNSManagedZoneServiceDirectoryConfigNamespaceNamespaceUrl(v interface
 }
 
 func expandDNSManagedZoneCloudLoggingConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

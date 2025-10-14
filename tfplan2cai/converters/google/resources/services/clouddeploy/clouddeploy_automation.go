@@ -19,7 +19,7 @@ package clouddeploy
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -65,7 +65,7 @@ func GetClouddeployAutomationApiObject(d tpgresource.TerraformResourceData, conf
 	suspendedProp, err := expandClouddeployAutomationSuspended(d.Get("suspended"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("suspended"); ok || !reflect.DeepEqual(v, suspendedProp) {
+	} else if v, ok := d.GetOkExists("suspended"); !tpgresource.IsEmptyValue(reflect.ValueOf(suspendedProp)) && (ok || !reflect.DeepEqual(v, suspendedProp)) {
 		obj["suspended"] = suspendedProp
 	}
 	serviceAccountProp, err := expandClouddeployAutomationServiceAccount(d.Get("service_account"), d, config)
@@ -86,17 +86,17 @@ func GetClouddeployAutomationApiObject(d tpgresource.TerraformResourceData, conf
 	} else if v, ok := d.GetOkExists("rules"); !tpgresource.IsEmptyValue(reflect.ValueOf(rulesProp)) && (ok || !reflect.DeepEqual(v, rulesProp)) {
 		obj["rules"] = rulesProp
 	}
-	annotationsProp, err := expandClouddeployAutomationEffectiveAnnotations(d.Get("effective_annotations"), d, config)
+	effectiveAnnotationsProp, err := expandClouddeployAutomationEffectiveAnnotations(d.Get("effective_annotations"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_annotations"); !tpgresource.IsEmptyValue(reflect.ValueOf(annotationsProp)) && (ok || !reflect.DeepEqual(v, annotationsProp)) {
-		obj["annotations"] = annotationsProp
+	} else if v, ok := d.GetOkExists("effective_annotations"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveAnnotationsProp)) && (ok || !reflect.DeepEqual(v, effectiveAnnotationsProp)) {
+		obj["annotations"] = effectiveAnnotationsProp
 	}
-	labelsProp, err := expandClouddeployAutomationEffectiveLabels(d.Get("effective_labels"), d, config)
+	effectiveLabelsProp, err := expandClouddeployAutomationEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return obj, nil
@@ -115,6 +115,9 @@ func expandClouddeployAutomationServiceAccount(v interface{}, d tpgresource.Terr
 }
 
 func expandClouddeployAutomationSelector(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -134,6 +137,9 @@ func expandClouddeployAutomationSelector(v interface{}, d tpgresource.TerraformR
 }
 
 func expandClouddeployAutomationSelectorTargets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -178,6 +184,9 @@ func expandClouddeployAutomationSelectorTargetsLabels(v interface{}, d tpgresour
 }
 
 func expandClouddeployAutomationRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -221,6 +230,9 @@ func expandClouddeployAutomationRules(v interface{}, d tpgresource.TerraformReso
 }
 
 func expandClouddeployAutomationRulesPromoteReleaseRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -277,6 +289,9 @@ func expandClouddeployAutomationRulesPromoteReleaseRuleDestinationPhase(v interf
 }
 
 func expandClouddeployAutomationRulesAdvanceRolloutRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -322,6 +337,9 @@ func expandClouddeployAutomationRulesAdvanceRolloutRuleSourcePhases(v interface{
 }
 
 func expandClouddeployAutomationRulesRepairRolloutRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -374,6 +392,9 @@ func expandClouddeployAutomationRulesRepairRolloutRuleJobs(v interface{}, d tpgr
 }
 
 func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhases(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -403,6 +424,9 @@ func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhases(v interface{}
 }
 
 func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhasesRetry(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -448,6 +472,9 @@ func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhasesRetryBackoffMo
 }
 
 func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhasesRollback(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 {
 		return nil, nil
@@ -471,7 +498,7 @@ func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhasesRollback(v int
 	transformedDisableRollbackIfRolloutPending, err := expandClouddeployAutomationRulesRepairRolloutRuleRepairPhasesRollbackDisableRollbackIfRolloutPending(original["disable_rollback_if_rollout_pending"], d, config)
 	if err != nil {
 		return nil, err
-	} else {
+	} else if val := reflect.ValueOf(transformedDisableRollbackIfRolloutPending); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 		transformed["disableRollbackIfRolloutPending"] = transformedDisableRollbackIfRolloutPending
 	}
 
@@ -487,6 +514,9 @@ func expandClouddeployAutomationRulesRepairRolloutRuleRepairPhasesRollbackDisabl
 }
 
 func expandClouddeployAutomationRulesTimedPromoteReleaseRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

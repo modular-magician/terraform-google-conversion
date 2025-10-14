@@ -19,7 +19,7 @@ package appengine
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -34,7 +34,7 @@ func ResourceConverterAppEngineApplicationUrlDispatchRules() cai.ResourceConvert
 }
 
 func GetAppEngineApplicationUrlDispatchRulesCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//appengine.googleapis.com/apps/{{project}}/{{name}}")
+	name, err := cai.AssetName(d, config, "//appengine.googleapis.com/apps/{{project}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -67,6 +67,9 @@ func GetAppEngineApplicationUrlDispatchRulesApiObject(d tpgresource.TerraformRes
 }
 
 func expandAppEngineApplicationUrlDispatchRulesDispatchRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {

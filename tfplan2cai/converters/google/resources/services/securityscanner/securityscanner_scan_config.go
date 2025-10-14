@@ -19,7 +19,7 @@ package securityscanner
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -127,6 +127,9 @@ func expandSecurityScannerScanConfigStartingUrls(v interface{}, d tpgresource.Te
 }
 
 func expandSecurityScannerScanConfigAuthentication(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -153,6 +156,9 @@ func expandSecurityScannerScanConfigAuthentication(v interface{}, d tpgresource.
 }
 
 func expandSecurityScannerScanConfigAuthenticationGoogleAccount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -187,6 +193,9 @@ func expandSecurityScannerScanConfigAuthenticationGoogleAccountPassword(v interf
 }
 
 func expandSecurityScannerScanConfigAuthenticationCustomAccount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -240,6 +249,9 @@ func expandSecurityScannerScanConfigBlacklistPatterns(v interface{}, d tpgresour
 }
 
 func expandSecurityScannerScanConfigSchedule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

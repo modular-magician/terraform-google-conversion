@@ -19,7 +19,7 @@ package networkservices
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -128,11 +128,11 @@ func GetNetworkServicesEdgeCacheOriginApiObject(d tpgresource.TerraformResourceD
 	} else if v, ok := d.GetOkExists("flex_shielding"); !tpgresource.IsEmptyValue(reflect.ValueOf(flexShieldingProp)) && (ok || !reflect.DeepEqual(v, flexShieldingProp)) {
 		obj["flexShielding"] = flexShieldingProp
 	}
-	labelsProp, err := expandNetworkServicesEdgeCacheOriginEffectiveLabels(d.Get("effective_labels"), d, config)
+	effectiveLabelsProp, err := expandNetworkServicesEdgeCacheOriginEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return obj, nil
@@ -167,6 +167,9 @@ func expandNetworkServicesEdgeCacheOriginRetryConditions(v interface{}, d tpgres
 }
 
 func expandNetworkServicesEdgeCacheOriginTimeout(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -223,6 +226,9 @@ func expandNetworkServicesEdgeCacheOriginTimeoutReadTimeout(v interface{}, d tpg
 }
 
 func expandNetworkServicesEdgeCacheOriginAwsV4Authentication(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -268,6 +274,9 @@ func expandNetworkServicesEdgeCacheOriginAwsV4AuthenticationOriginRegion(v inter
 }
 
 func expandNetworkServicesEdgeCacheOriginOriginOverrideAction(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -294,6 +303,9 @@ func expandNetworkServicesEdgeCacheOriginOriginOverrideAction(v interface{}, d t
 }
 
 func expandNetworkServicesEdgeCacheOriginOriginOverrideActionUrlRewrite(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -317,6 +329,9 @@ func expandNetworkServicesEdgeCacheOriginOriginOverrideActionUrlRewriteHostRewri
 }
 
 func expandNetworkServicesEdgeCacheOriginOriginOverrideActionHeaderAction(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -336,6 +351,9 @@ func expandNetworkServicesEdgeCacheOriginOriginOverrideActionHeaderAction(v inte
 }
 
 func expandNetworkServicesEdgeCacheOriginOriginOverrideActionHeaderActionRequestHeadersToAdd(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -384,6 +402,9 @@ func expandNetworkServicesEdgeCacheOriginOriginOverrideActionHeaderActionRequest
 }
 
 func expandNetworkServicesEdgeCacheOriginOriginRedirect(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -407,6 +428,9 @@ func expandNetworkServicesEdgeCacheOriginOriginRedirectRedirectConditions(v inte
 }
 
 func expandNetworkServicesEdgeCacheOriginFlexShielding(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

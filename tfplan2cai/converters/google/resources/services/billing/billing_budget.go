@@ -21,7 +21,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -93,11 +93,11 @@ func GetBillingBudgetApiObject(d tpgresource.TerraformResourceData, config *tran
 	} else if v, ok := d.GetOkExists("threshold_rules"); !tpgresource.IsEmptyValue(reflect.ValueOf(thresholdRulesProp)) && (ok || !reflect.DeepEqual(v, thresholdRulesProp)) {
 		obj["thresholdRules"] = thresholdRulesProp
 	}
-	notificationsRuleProp, err := expandBillingBudgetAllUpdatesRule(d.Get("all_updates_rule"), d, config)
+	allUpdatesRuleProp, err := expandBillingBudgetAllUpdatesRule(d.Get("all_updates_rule"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("all_updates_rule"); !tpgresource.IsEmptyValue(reflect.ValueOf(notificationsRuleProp)) && (ok || !reflect.DeepEqual(v, notificationsRuleProp)) {
-		obj["notificationsRule"] = notificationsRuleProp
+	} else if v, ok := d.GetOkExists("all_updates_rule"); !tpgresource.IsEmptyValue(reflect.ValueOf(allUpdatesRuleProp)) && (ok || !reflect.DeepEqual(v, allUpdatesRuleProp)) {
+		obj["notificationsRule"] = allUpdatesRuleProp
 	}
 	ownershipScopeProp, err := expandBillingBudgetOwnershipScope(d.Get("ownership_scope"), d, config)
 	if err != nil {
@@ -114,6 +114,9 @@ func expandBillingBudgetDisplayName(v interface{}, d tpgresource.TerraformResour
 }
 
 func expandBillingBudgetBudgetFilter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -230,6 +233,9 @@ func expandBillingBudgetBudgetFilterCalendarPeriod(v interface{}, d tpgresource.
 }
 
 func expandBillingBudgetBudgetFilterCustomPeriod(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -256,6 +262,9 @@ func expandBillingBudgetBudgetFilterCustomPeriod(v interface{}, d tpgresource.Te
 }
 
 func expandBillingBudgetBudgetFilterCustomPeriodStartDate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -301,6 +310,9 @@ func expandBillingBudgetBudgetFilterCustomPeriodStartDateDay(v interface{}, d tp
 }
 
 func expandBillingBudgetBudgetFilterCustomPeriodEndDate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -346,6 +358,9 @@ func expandBillingBudgetBudgetFilterCustomPeriodEndDateDay(v interface{}, d tpgr
 }
 
 func expandBillingBudgetAmount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -372,6 +387,9 @@ func expandBillingBudgetAmount(v interface{}, d tpgresource.TerraformResourceDat
 }
 
 func expandBillingBudgetAmountSpecifiedAmount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -425,6 +443,9 @@ func expandBillingBudgetAmountLastPeriodAmount(v interface{}, d tpgresource.Terr
 }
 
 func expandBillingBudgetThresholdRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -462,6 +483,9 @@ func expandBillingBudgetThresholdRulesSpendBasis(v interface{}, d tpgresource.Te
 }
 
 func expandBillingBudgetAllUpdatesRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

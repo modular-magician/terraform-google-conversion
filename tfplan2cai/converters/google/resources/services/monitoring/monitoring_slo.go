@@ -23,7 +23,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -87,11 +87,11 @@ func GetMonitoringSloApiObject(d tpgresource.TerraformResourceData, config *tran
 	} else if v, ok := d.GetOkExists("goal"); !tpgresource.IsEmptyValue(reflect.ValueOf(goalProp)) && (ok || !reflect.DeepEqual(v, goalProp)) {
 		obj["goal"] = goalProp
 	}
-	rollingPeriodProp, err := expandMonitoringSloRollingPeriodDays(d.Get("rolling_period_days"), d, config)
+	rollingPeriodDaysProp, err := expandMonitoringSloRollingPeriodDays(d.Get("rolling_period_days"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("rolling_period_days"); !tpgresource.IsEmptyValue(reflect.ValueOf(rollingPeriodProp)) && (ok || !reflect.DeepEqual(v, rollingPeriodProp)) {
-		obj["rollingPeriod"] = rollingPeriodProp
+	} else if v, ok := d.GetOkExists("rolling_period_days"); !tpgresource.IsEmptyValue(reflect.ValueOf(rollingPeriodDaysProp)) && (ok || !reflect.DeepEqual(v, rollingPeriodDaysProp)) {
+		obj["rollingPeriod"] = rollingPeriodDaysProp
 	}
 	calendarPeriodProp, err := expandMonitoringSloCalendarPeriod(d.Get("calendar_period"), d, config)
 	if err != nil {
@@ -111,11 +111,11 @@ func GetMonitoringSloApiObject(d tpgresource.TerraformResourceData, config *tran
 	} else if v, ok := d.GetOkExists("service_level_indicator"); !tpgresource.IsEmptyValue(reflect.ValueOf(serviceLevelIndicatorProp)) && (ok || !reflect.DeepEqual(v, serviceLevelIndicatorProp)) {
 		obj["serviceLevelIndicator"] = serviceLevelIndicatorProp
 	}
-	nameProp, err := expandMonitoringSloSloId(d.Get("slo_id"), d, config)
+	sloIdProp, err := expandMonitoringSloSloId(d.Get("slo_id"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("slo_id"); !tpgresource.IsEmptyValue(reflect.ValueOf(nameProp)) && (ok || !reflect.DeepEqual(v, nameProp)) {
-		obj["name"] = nameProp
+	} else if v, ok := d.GetOkExists("slo_id"); !tpgresource.IsEmptyValue(reflect.ValueOf(sloIdProp)) && (ok || !reflect.DeepEqual(v, sloIdProp)) {
+		obj["name"] = sloIdProp
 	}
 
 	return resourceMonitoringSloEncoder(d, config, obj)
@@ -215,6 +215,9 @@ func expandMonitoringSloServiceLevelIndicator(v interface{}, d tpgresource.Terra
 }
 
 func expandMonitoringSloServiceLevelIndicatorBasicSli(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -277,6 +280,9 @@ func expandMonitoringSloServiceLevelIndicatorBasicSliVersion(v interface{}, d tp
 }
 
 func expandMonitoringSloServiceLevelIndicatorBasicSliLatency(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -300,6 +306,9 @@ func expandMonitoringSloServiceLevelIndicatorBasicSliLatencyThreshold(v interfac
 }
 
 func expandMonitoringSloServiceLevelIndicatorBasicSliAvailability(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -323,6 +332,9 @@ func expandMonitoringSloServiceLevelIndicatorBasicSliAvailabilityEnabled(v inter
 }
 
 func expandMonitoringSloServiceLevelIndicatorRequestBasedSli(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -349,6 +361,9 @@ func expandMonitoringSloServiceLevelIndicatorRequestBasedSli(v interface{}, d tp
 }
 
 func expandMonitoringSloServiceLevelIndicatorRequestBasedSliGoodTotalRatio(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -394,6 +409,9 @@ func expandMonitoringSloServiceLevelIndicatorRequestBasedSliGoodTotalRatioTotalS
 }
 
 func expandMonitoringSloServiceLevelIndicatorRequestBasedSliDistributionCut(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -424,6 +442,9 @@ func expandMonitoringSloServiceLevelIndicatorRequestBasedSliDistributionCutDistr
 }
 
 func expandMonitoringSloServiceLevelIndicatorRequestBasedSliDistributionCutRange(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -458,6 +479,9 @@ func expandMonitoringSloServiceLevelIndicatorRequestBasedSliDistributionCutRange
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSli(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -513,6 +537,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodBadMetricFilter(
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThreshold(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -550,6 +577,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresh
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresholdPerformance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -576,6 +606,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresh
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresholdPerformanceGoodTotalRatio(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -621,6 +654,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresh
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresholdPerformanceDistributionCut(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -651,6 +687,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresh
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresholdPerformanceDistributionCutRange(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -685,6 +724,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresh
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresholdBasicSliPerformance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -747,6 +789,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresh
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresholdBasicSliPerformanceLatency(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -770,6 +815,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresh
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresholdBasicSliPerformanceAvailability(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -793,6 +841,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliGoodTotalRatioThresh
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliMetricMeanInRange(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -823,6 +874,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliMetricMeanInRangeTim
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliMetricMeanInRangeRange(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -857,6 +911,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliMetricMeanInRangeRan
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliMetricSumInRange(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -887,6 +944,9 @@ func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliMetricSumInRangeTime
 }
 
 func expandMonitoringSloServiceLevelIndicatorWindowsBasedSliMetricSumInRangeRange(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

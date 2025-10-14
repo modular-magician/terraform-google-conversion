@@ -25,8 +25,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/verify"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/verify"
 )
 
 const ComputeBackendServiceAssetType string = "compute.googleapis.com/BackendService"
@@ -414,38 +414,13 @@ is applicable only when the load_balancing_scheme is set to INTERNAL_SELF_MANAGE
 				MaxItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"connect_timeout": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: `The timeout for new network connections to hosts.`,
-							MaxItems:    1,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"seconds": {
-										Type:     schema.TypeInt,
-										Required: true,
-										Description: `Span of time at a resolution of a second.
-Must be from 0 to 315,576,000,000 inclusive.`,
-									},
-									"nanos": {
-										Type:     schema.TypeInt,
-										Optional: true,
-										Description: `Span of time that's a fraction of a second at nanosecond
-resolution. Durations less than one second are represented
-with a 0 seconds field and a positive nanos field. Must
-be from 0 to 999,999,999 inclusive.`,
-									},
-								},
-							},
-							AtLeastOneOf: []string{"circuit_breakers.0.connect_timeout", "circuit_breakers.0.max_requests_per_connection", "circuit_breakers.0.max_connections", "circuit_breakers.0.max_pending_requests", "circuit_breakers.0.max_requests", "circuit_breakers.0.max_retries"},
-						},
 						"max_connections": {
 							Type:     schema.TypeInt,
 							Optional: true,
 							Description: `The maximum number of connections to the backend cluster.
 Defaults to 1024.`,
 							Default:      1024,
-							AtLeastOneOf: []string{"circuit_breakers.0.connect_timeout", "circuit_breakers.0.max_requests_per_connection", "circuit_breakers.0.max_connections", "circuit_breakers.0.max_pending_requests", "circuit_breakers.0.max_requests", "circuit_breakers.0.max_retries"},
+							AtLeastOneOf: []string{"circuit_breakers.0.max_requests_per_connection", "circuit_breakers.0.max_connections", "circuit_breakers.0.max_pending_requests", "circuit_breakers.0.max_requests", "circuit_breakers.0.max_retries"},
 						},
 						"max_pending_requests": {
 							Type:     schema.TypeInt,
@@ -453,7 +428,7 @@ Defaults to 1024.`,
 							Description: `The maximum number of pending requests to the backend cluster.
 Defaults to 1024.`,
 							Default:      1024,
-							AtLeastOneOf: []string{"circuit_breakers.0.connect_timeout", "circuit_breakers.0.max_requests_per_connection", "circuit_breakers.0.max_connections", "circuit_breakers.0.max_pending_requests", "circuit_breakers.0.max_requests", "circuit_breakers.0.max_retries"},
+							AtLeastOneOf: []string{"circuit_breakers.0.max_requests_per_connection", "circuit_breakers.0.max_connections", "circuit_breakers.0.max_pending_requests", "circuit_breakers.0.max_requests", "circuit_breakers.0.max_retries"},
 						},
 						"max_requests": {
 							Type:     schema.TypeInt,
@@ -461,7 +436,7 @@ Defaults to 1024.`,
 							Description: `The maximum number of parallel requests to the backend cluster.
 Defaults to 1024.`,
 							Default:      1024,
-							AtLeastOneOf: []string{"circuit_breakers.0.connect_timeout", "circuit_breakers.0.max_requests_per_connection", "circuit_breakers.0.max_connections", "circuit_breakers.0.max_pending_requests", "circuit_breakers.0.max_requests", "circuit_breakers.0.max_retries"},
+							AtLeastOneOf: []string{"circuit_breakers.0.max_requests_per_connection", "circuit_breakers.0.max_connections", "circuit_breakers.0.max_pending_requests", "circuit_breakers.0.max_requests", "circuit_breakers.0.max_retries"},
 						},
 						"max_requests_per_connection": {
 							Type:     schema.TypeInt,
@@ -470,7 +445,7 @@ Defaults to 1024.`,
 is respected by both the HTTP/1.1 and HTTP/2 implementations. If
 not specified, there is no limit. Setting this parameter to 1
 will effectively disable keep alive.`,
-							AtLeastOneOf: []string{"circuit_breakers.0.connect_timeout", "circuit_breakers.0.max_requests_per_connection", "circuit_breakers.0.max_connections", "circuit_breakers.0.max_pending_requests", "circuit_breakers.0.max_requests", "circuit_breakers.0.max_retries"},
+							AtLeastOneOf: []string{"circuit_breakers.0.max_requests_per_connection", "circuit_breakers.0.max_connections", "circuit_breakers.0.max_pending_requests", "circuit_breakers.0.max_requests", "circuit_breakers.0.max_retries"},
 						},
 						"max_retries": {
 							Type:     schema.TypeInt,
@@ -478,7 +453,7 @@ will effectively disable keep alive.`,
 							Description: `The maximum number of parallel retries to the backend cluster.
 Defaults to 3.`,
 							Default:      3,
-							AtLeastOneOf: []string{"circuit_breakers.0.connect_timeout", "circuit_breakers.0.max_requests_per_connection", "circuit_breakers.0.max_connections", "circuit_breakers.0.max_pending_requests", "circuit_breakers.0.max_requests", "circuit_breakers.0.max_retries"},
+							AtLeastOneOf: []string{"circuit_breakers.0.max_requests_per_connection", "circuit_breakers.0.max_connections", "circuit_breakers.0.max_pending_requests", "circuit_breakers.0.max_requests", "circuit_breakers.0.max_retries"},
 						},
 					},
 				},
@@ -635,33 +610,6 @@ responses.`,
 				Type:        schema.TypeString,
 				Optional:    true,
 				Description: `An optional description of this resource.`,
-			},
-			"dynamic_forwarding": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Description: `Dynamic forwarding configuration. This field is used to configure the backend service with dynamic forwarding
-feature which together with Service Extension allows customized and complex routing logic.`,
-				MaxItems: 1,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"ip_port_selection": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: `IP:PORT based dynamic forwarding configuration.`,
-							MaxItems:    1,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"enabled": {
-										Type:        schema.TypeBool,
-										Optional:    true,
-										ForceNew:    true,
-										Description: `A boolean flag enabling IP:PORT based dynamic forwarding.`,
-									},
-								},
-							},
-						},
-					},
-				},
 			},
 			"edge_security_policy": {
 				Type:             schema.TypeString,
@@ -1008,42 +956,6 @@ Must be from 0 to 999,999,999 inclusive.`,
 					},
 				},
 			},
-			"network_pass_through_lb_traffic_policy": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: `Configures traffic steering properties of internal passthrough Network Load Balancers.`,
-				MaxItems:    1,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"zonal_affinity": {
-							Type:        schema.TypeList,
-							Optional:    true,
-							Description: `When configured, new connections are load balanced across healthy backend endpoints in the local zone.`,
-							MaxItems:    1,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"spillover": {
-										Type:         schema.TypeString,
-										Optional:     true,
-										ValidateFunc: verify.ValidateEnum([]string{"ZONAL_AFFINITY_DISABLED", "ZONAL_AFFINITY_SPILL_CROSS_ZONE", "ZONAL_AFFINITY_STAY_WITHIN_ZONE", ""}),
-										Description:  `This field indicates whether zonal affinity is enabled or not. Default value: "ZONAL_AFFINITY_DISABLED" Possible values: ["ZONAL_AFFINITY_DISABLED", "ZONAL_AFFINITY_SPILL_CROSS_ZONE", "ZONAL_AFFINITY_STAY_WITHIN_ZONE"]`,
-										Default:      "ZONAL_AFFINITY_DISABLED",
-									},
-									"spillover_ratio": {
-										Type:     schema.TypeFloat,
-										Optional: true,
-										Description: `The value of the field must be in [0, 1]. When the ratio of the count of healthy backend endpoints in a zone
-to the count of backend endpoints in that same zone is equal to or above this threshold, the load balancer
-distributes new connections to all healthy endpoints in the local zone only. When the ratio of the count
-of healthy backend endpoints in a zone to the count of backend endpoints in that same zone is below this
-threshold, the load balancer distributes all new connections to all healthy endpoints across all zones.`,
-									},
-								},
-							},
-						},
-					},
-				},
-			},
 			"outlier_detection": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -1180,6 +1092,26 @@ success rate: mean - (stdev * success_rate_stdev_factor). This factor is divided
 by a thousand to get a double. That is, if the desired factor is 1.9, the
 runtime value should be 1900. Defaults to 1900.`,
 							AtLeastOneOf: []string{"outlier_detection.0.base_ejection_time", "outlier_detection.0.consecutive_errors", "outlier_detection.0.consecutive_gateway_failure", "outlier_detection.0.enforcing_consecutive_errors", "outlier_detection.0.enforcing_consecutive_gateway_failure", "outlier_detection.0.enforcing_success_rate", "outlier_detection.0.interval", "outlier_detection.0.max_ejection_percent", "outlier_detection.0.success_rate_minimum_hosts", "outlier_detection.0.success_rate_request_volume", "outlier_detection.0.success_rate_stdev_factor"},
+						},
+					},
+				},
+			},
+			"params": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				ForceNew:    true,
+				Description: `Additional params passed with the request, but not persisted as part of resource payload`,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"resource_manager_tags": {
+							Type:     schema.TypeMap,
+							Optional: true,
+							ForceNew: true,
+							Description: `Resource manager tags to be bound to the backend service. Tag keys and values have the
+same definition as resource manager tags. Keys must be in the format tagKeys/{tag_key_id},
+and values are in the format tagValues/456.`,
+							Elem: &schema.Schema{Type: schema.TypeString},
 						},
 					},
 				},

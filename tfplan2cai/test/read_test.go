@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai"
 	"github.com/google/go-cmp/cmp"
 	"go.uber.org/zap/zaptest"
 )
@@ -52,6 +52,7 @@ func TestReadPlannedAssetsCoverage(t *testing.T) {
 		{name: "example_cloud_run_service_iam_member"},
 		{name: "example_cloud_run_service_iam_policy"},
 		{name: "example_cloud_run_v2_job"},
+		{name: "example_cloud_run_v2_service"},
 		{name: "example_cloud_tasks_queue"},
 		{name: "example_compute_address"},
 		{name: "example_compute_disk"},

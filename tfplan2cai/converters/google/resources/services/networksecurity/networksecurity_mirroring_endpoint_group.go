@@ -19,7 +19,7 @@ package networksecurity
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -62,23 +62,43 @@ func GetNetworkSecurityMirroringEndpointGroupApiObject(d tpgresource.TerraformRe
 	} else if v, ok := d.GetOkExists("mirroring_deployment_group"); !tpgresource.IsEmptyValue(reflect.ValueOf(mirroringDeploymentGroupProp)) && (ok || !reflect.DeepEqual(v, mirroringDeploymentGroupProp)) {
 		obj["mirroringDeploymentGroup"] = mirroringDeploymentGroupProp
 	}
+	mirroringDeploymentGroupsProp, err := expandNetworkSecurityMirroringEndpointGroupMirroringDeploymentGroups(d.Get("mirroring_deployment_groups"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("mirroring_deployment_groups"); !tpgresource.IsEmptyValue(reflect.ValueOf(mirroringDeploymentGroupsProp)) && (ok || !reflect.DeepEqual(v, mirroringDeploymentGroupsProp)) {
+		obj["mirroringDeploymentGroups"] = mirroringDeploymentGroupsProp
+	}
+	typeProp, err := expandNetworkSecurityMirroringEndpointGroupType(d.Get("type"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("type"); !tpgresource.IsEmptyValue(reflect.ValueOf(typeProp)) && (ok || !reflect.DeepEqual(v, typeProp)) {
+		obj["type"] = typeProp
+	}
 	descriptionProp, err := expandNetworkSecurityMirroringEndpointGroupDescription(d.Get("description"), d, config)
 	if err != nil {
 		return nil, err
 	} else if v, ok := d.GetOkExists("description"); !tpgresource.IsEmptyValue(reflect.ValueOf(descriptionProp)) && (ok || !reflect.DeepEqual(v, descriptionProp)) {
 		obj["description"] = descriptionProp
 	}
-	labelsProp, err := expandNetworkSecurityMirroringEndpointGroupEffectiveLabels(d.Get("effective_labels"), d, config)
+	effectiveLabelsProp, err := expandNetworkSecurityMirroringEndpointGroupEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return obj, nil
 }
 
 func expandNetworkSecurityMirroringEndpointGroupMirroringDeploymentGroup(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkSecurityMirroringEndpointGroupMirroringDeploymentGroups(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkSecurityMirroringEndpointGroupType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

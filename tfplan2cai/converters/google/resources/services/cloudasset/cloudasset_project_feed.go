@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -36,7 +36,7 @@ func ResourceConverterCloudAssetProjectFeed() cai.ResourceConverter {
 }
 
 func GetCloudAssetProjectFeedCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//cloudasset.googleapis.com/{{name}}")
+	name, err := cai.AssetName(d, config, "//cloudasset.googleapis.com/projects/{{project}}/feeds/{{feed_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -118,6 +118,9 @@ func expandCloudAssetProjectFeedContentType(v interface{}, d tpgresource.Terrafo
 }
 
 func expandCloudAssetProjectFeedFeedOutputConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -137,6 +140,9 @@ func expandCloudAssetProjectFeedFeedOutputConfig(v interface{}, d tpgresource.Te
 }
 
 func expandCloudAssetProjectFeedFeedOutputConfigPubsubDestination(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -160,6 +166,9 @@ func expandCloudAssetProjectFeedFeedOutputConfigPubsubDestinationTopic(v interfa
 }
 
 func expandCloudAssetProjectFeedCondition(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

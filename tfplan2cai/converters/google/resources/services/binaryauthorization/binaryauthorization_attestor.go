@@ -23,7 +23,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -100,11 +100,11 @@ func GetBinaryAuthorizationAttestorApiObject(d tpgresource.TerraformResourceData
 	} else if v, ok := d.GetOkExists("description"); !tpgresource.IsEmptyValue(reflect.ValueOf(descriptionProp)) && (ok || !reflect.DeepEqual(v, descriptionProp)) {
 		obj["description"] = descriptionProp
 	}
-	userOwnedGrafeasNoteProp, err := expandBinaryAuthorizationAttestorAttestationAuthorityNote(d.Get("attestation_authority_note"), d, config)
+	attestationAuthorityNoteProp, err := expandBinaryAuthorizationAttestorAttestationAuthorityNote(d.Get("attestation_authority_note"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("attestation_authority_note"); !tpgresource.IsEmptyValue(reflect.ValueOf(userOwnedGrafeasNoteProp)) && (ok || !reflect.DeepEqual(v, userOwnedGrafeasNoteProp)) {
-		obj["userOwnedGrafeasNote"] = userOwnedGrafeasNoteProp
+	} else if v, ok := d.GetOkExists("attestation_authority_note"); !tpgresource.IsEmptyValue(reflect.ValueOf(attestationAuthorityNoteProp)) && (ok || !reflect.DeepEqual(v, attestationAuthorityNoteProp)) {
+		obj["userOwnedGrafeasNote"] = attestationAuthorityNoteProp
 	}
 
 	return obj, nil
@@ -119,6 +119,9 @@ func expandBinaryAuthorizationAttestorDescription(v interface{}, d tpgresource.T
 }
 
 func expandBinaryAuthorizationAttestorAttestationAuthorityNote(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -166,6 +169,9 @@ func expandBinaryAuthorizationAttestorAttestationAuthorityNoteNoteReference(v in
 }
 
 func expandBinaryAuthorizationAttestorAttestationAuthorityNotePublicKeys(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -221,6 +227,9 @@ func expandBinaryAuthorizationAttestorAttestationAuthorityNotePublicKeysAsciiArm
 }
 
 func expandBinaryAuthorizationAttestorAttestationAuthorityNotePublicKeysPkixPublicKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

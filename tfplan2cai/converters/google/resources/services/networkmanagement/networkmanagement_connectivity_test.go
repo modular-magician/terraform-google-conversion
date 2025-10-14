@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -105,11 +105,11 @@ func GetNetworkManagementConnectivityTestApiObject(d tpgresource.TerraformResour
 	} else if v, ok := d.GetOkExists("bypass_firewall_checks"); !tpgresource.IsEmptyValue(reflect.ValueOf(bypassFirewallChecksProp)) && (ok || !reflect.DeepEqual(v, bypassFirewallChecksProp)) {
 		obj["bypassFirewallChecks"] = bypassFirewallChecksProp
 	}
-	labelsProp, err := expandNetworkManagementConnectivityTestEffectiveLabels(d.Get("effective_labels"), d, config)
+	effectiveLabelsProp, err := expandNetworkManagementConnectivityTestEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return obj, nil
@@ -129,6 +129,9 @@ func expandNetworkManagementConnectivityTestDescription(v interface{}, d tpgreso
 }
 
 func expandNetworkManagementConnectivityTestSource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -238,6 +241,9 @@ func expandNetworkManagementConnectivityTestSourceCloudSqlInstance(v interface{}
 }
 
 func expandNetworkManagementConnectivityTestSourceCloudFunction(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -261,6 +267,9 @@ func expandNetworkManagementConnectivityTestSourceCloudFunctionUri(v interface{}
 }
 
 func expandNetworkManagementConnectivityTestSourceAppEngineVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -284,6 +293,9 @@ func expandNetworkManagementConnectivityTestSourceAppEngineVersionUri(v interfac
 }
 
 func expandNetworkManagementConnectivityTestSourceCloudRunRevision(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -319,6 +331,9 @@ func expandNetworkManagementConnectivityTestSourceProjectId(v interface{}, d tpg
 }
 
 func expandNetworkManagementConnectivityTestDestination(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

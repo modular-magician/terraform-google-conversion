@@ -19,7 +19,7 @@ package dialogflow
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -34,7 +34,7 @@ func ResourceConverterDialogflowEncryptionSpec() cai.ResourceConverter {
 }
 
 func GetDialogflowEncryptionSpecCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//dialogflow.googleapis.com/projects/{{project}}/locations/{{location}}/encryptionSpec/{{name}}")
+	name, err := cai.AssetName(d, config, "//dialogflow.googleapis.com/projects/{{project}}/locations/{{location}}/encryptionSpec")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -73,6 +73,9 @@ func GetDialogflowEncryptionSpecApiObject(d tpgresource.TerraformResourceData, c
 }
 
 func expandDialogflowEncryptionSpecEncryptionSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

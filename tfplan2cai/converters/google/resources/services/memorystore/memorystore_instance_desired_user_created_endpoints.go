@@ -19,7 +19,7 @@ package memorystore
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -56,17 +56,20 @@ func GetMemorystoreInstanceDesiredUserCreatedEndpointsCaiObject(d tpgresource.Te
 
 func GetMemorystoreInstanceDesiredUserCreatedEndpointsApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
-	endpointsProp, err := expandMemorystoreInstanceDesiredUserCreatedEndpointsDesiredUserCreatedEndpoints(d.Get("desired_user_created_endpoints"), d, config)
+	desiredUserCreatedEndpointsProp, err := expandMemorystoreInstanceDesiredUserCreatedEndpointsDesiredUserCreatedEndpoints(d.Get("desired_user_created_endpoints"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("desired_user_created_endpoints"); !tpgresource.IsEmptyValue(reflect.ValueOf(endpointsProp)) && (ok || !reflect.DeepEqual(v, endpointsProp)) {
-		obj["endpoints"] = endpointsProp
+	} else if v, ok := d.GetOkExists("desired_user_created_endpoints"); !tpgresource.IsEmptyValue(reflect.ValueOf(desiredUserCreatedEndpointsProp)) && (ok || !reflect.DeepEqual(v, desiredUserCreatedEndpointsProp)) {
+		obj["endpoints"] = desiredUserCreatedEndpointsProp
 	}
 
 	return obj, nil
 }
 
 func expandMemorystoreInstanceDesiredUserCreatedEndpointsDesiredUserCreatedEndpoints(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -89,6 +92,9 @@ func expandMemorystoreInstanceDesiredUserCreatedEndpointsDesiredUserCreatedEndpo
 }
 
 func expandMemorystoreInstanceDesiredUserCreatedEndpointsDesiredUserCreatedEndpointsConnections(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -111,6 +117,9 @@ func expandMemorystoreInstanceDesiredUserCreatedEndpointsDesiredUserCreatedEndpo
 }
 
 func expandMemorystoreInstanceDesiredUserCreatedEndpointsDesiredUserCreatedEndpointsConnectionsPscConnection(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

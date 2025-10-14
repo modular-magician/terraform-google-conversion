@@ -19,10 +19,10 @@ package blockchainnodeengine
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tfplan2cai/converters/cai"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tfplan2cai/converters/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 func BlockchainNodeEngineBlockchainNodesTfplan2caiConverter() cai.Tfplan2caiConverter {
@@ -73,17 +73,20 @@ func GetBlockchainNodeEngineBlockchainNodesCaiObject(d tpgresource.TerraformReso
 	} else if v, ok := d.GetOkExists("blockchain_type"); !tpgresource.IsEmptyValue(reflect.ValueOf(blockchainTypeProp)) && (ok || !reflect.DeepEqual(v, blockchainTypeProp)) {
 		obj["blockchainType"] = blockchainTypeProp
 	}
-	labelsProp, err := expandBlockchainNodeEngineBlockchainNodesEffectiveLabels(d.Get("effective_labels"), d, config)
+	effectiveLabelsProp, err := expandBlockchainNodeEngineBlockchainNodesEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return obj, nil
 }
 
 func expandBlockchainNodeEngineBlockchainNodesEthereumDetails(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -152,6 +155,9 @@ func expandBlockchainNodeEngineBlockchainNodesEthereumDetails(v interface{}, d t
 }
 
 func expandBlockchainNodeEngineBlockchainNodesEthereumDetailsValidatorConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -175,6 +181,9 @@ func expandBlockchainNodeEngineBlockchainNodesEthereumDetailsValidatorConfigMevR
 }
 
 func expandBlockchainNodeEngineBlockchainNodesEthereumDetailsGethDetails(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

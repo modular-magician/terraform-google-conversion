@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -100,11 +100,11 @@ func GetKMSCryptoKeyApiObject(d tpgresource.TerraformResourceData, config *trans
 	} else if v, ok := d.GetOkExists("key_access_justifications_policy"); !tpgresource.IsEmptyValue(reflect.ValueOf(keyAccessJustificationsPolicyProp)) && (ok || !reflect.DeepEqual(v, keyAccessJustificationsPolicyProp)) {
 		obj["keyAccessJustificationsPolicy"] = keyAccessJustificationsPolicyProp
 	}
-	labelsProp, err := expandKMSCryptoKeyEffectiveLabels(d.Get("effective_labels"), d, config)
+	effectiveLabelsProp, err := expandKMSCryptoKeyEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return resourceKMSCryptoKeyEncoder(d, config, obj)
@@ -142,6 +142,9 @@ func expandKMSCryptoKeyRotationPeriod(v interface{}, d tpgresource.TerraformReso
 }
 
 func expandKMSCryptoKeyVersionTemplate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -188,6 +191,9 @@ func expandKMSCryptoKeyCryptoKeyBackend(v interface{}, d tpgresource.TerraformRe
 }
 
 func expandKMSCryptoKeyKeyAccessJustificationsPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

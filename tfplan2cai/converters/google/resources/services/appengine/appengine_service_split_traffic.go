@@ -19,7 +19,7 @@ package appengine
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -56,11 +56,11 @@ func GetAppEngineServiceSplitTrafficCaiObject(d tpgresource.TerraformResourceDat
 
 func GetAppEngineServiceSplitTrafficApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
-	idProp, err := expandAppEngineServiceSplitTrafficService(d.Get("service"), d, config)
+	serviceProp, err := expandAppEngineServiceSplitTrafficService(d.Get("service"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("service"); !tpgresource.IsEmptyValue(reflect.ValueOf(idProp)) && (ok || !reflect.DeepEqual(v, idProp)) {
-		obj["id"] = idProp
+	} else if v, ok := d.GetOkExists("service"); !tpgresource.IsEmptyValue(reflect.ValueOf(serviceProp)) && (ok || !reflect.DeepEqual(v, serviceProp)) {
+		obj["id"] = serviceProp
 	}
 	splitProp, err := expandAppEngineServiceSplitTrafficSplit(d.Get("split"), d, config)
 	if err != nil {
@@ -77,6 +77,9 @@ func expandAppEngineServiceSplitTrafficService(v interface{}, d tpgresource.Terr
 }
 
 func expandAppEngineServiceSplitTrafficSplit(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

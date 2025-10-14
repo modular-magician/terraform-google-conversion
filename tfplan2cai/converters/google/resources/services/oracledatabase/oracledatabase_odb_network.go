@@ -19,7 +19,7 @@ package oracledatabase
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -62,17 +62,27 @@ func GetOracleDatabaseOdbNetworkApiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("network"); !tpgresource.IsEmptyValue(reflect.ValueOf(networkProp)) && (ok || !reflect.DeepEqual(v, networkProp)) {
 		obj["network"] = networkProp
 	}
-	labelsProp, err := expandOracleDatabaseOdbNetworkEffectiveLabels(d.Get("effective_labels"), d, config)
+	gcpOracleZoneProp, err := expandOracleDatabaseOdbNetworkGcpOracleZone(d.Get("gcp_oracle_zone"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("gcp_oracle_zone"); !tpgresource.IsEmptyValue(reflect.ValueOf(gcpOracleZoneProp)) && (ok || !reflect.DeepEqual(v, gcpOracleZoneProp)) {
+		obj["gcpOracleZone"] = gcpOracleZoneProp
+	}
+	effectiveLabelsProp, err := expandOracleDatabaseOdbNetworkEffectiveLabels(d.Get("effective_labels"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return obj, nil
 }
 
 func expandOracleDatabaseOdbNetworkNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandOracleDatabaseOdbNetworkGcpOracleZone(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

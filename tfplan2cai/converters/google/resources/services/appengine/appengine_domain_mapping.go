@@ -19,7 +19,7 @@ package appengine
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -62,17 +62,20 @@ func GetAppEngineDomainMappingApiObject(d tpgresource.TerraformResourceData, con
 	} else if v, ok := d.GetOkExists("ssl_settings"); !tpgresource.IsEmptyValue(reflect.ValueOf(sslSettingsProp)) && (ok || !reflect.DeepEqual(v, sslSettingsProp)) {
 		obj["sslSettings"] = sslSettingsProp
 	}
-	idProp, err := expandAppEngineDomainMappingDomainName(d.Get("domain_name"), d, config)
+	domainNameProp, err := expandAppEngineDomainMappingDomainName(d.Get("domain_name"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("domain_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(idProp)) && (ok || !reflect.DeepEqual(v, idProp)) {
-		obj["id"] = idProp
+	} else if v, ok := d.GetOkExists("domain_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(domainNameProp)) && (ok || !reflect.DeepEqual(v, domainNameProp)) {
+		obj["id"] = domainNameProp
 	}
 
 	return obj, nil
 }
 
 func expandAppEngineDomainMappingSslSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

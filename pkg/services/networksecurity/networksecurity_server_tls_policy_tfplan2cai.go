@@ -19,10 +19,10 @@ package networksecurity
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tfplan2cai/converters/cai"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tfplan2cai/converters/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 func NetworkSecurityServerTlsPolicyTfplan2caiConverter() cai.Tfplan2caiConverter {
@@ -46,8 +46,8 @@ func GetNetworkSecurityServerTlsPolicyCaiAssets(d tpgresource.TerraformResourceD
 				Name: name,
 				Type: NetworkSecurityServerTlsPolicyAssetType,
 				Resource: &caiasset.AssetResource{
-					Version:              "v1beta1",
-					DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/networksecurity/v1beta1/rest",
+					Version:              "v1",
+					DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/networksecurity/v1/rest",
 					DiscoveryName:        "ServerTlsPolicy",
 					Data:                 obj,
 					Location:             location,
@@ -85,11 +85,11 @@ func GetNetworkSecurityServerTlsPolicyCaiObject(d tpgresource.TerraformResourceD
 	} else if v, ok := d.GetOkExists("mtls_policy"); !tpgresource.IsEmptyValue(reflect.ValueOf(mtlsPolicyProp)) && (ok || !reflect.DeepEqual(v, mtlsPolicyProp)) {
 		obj["mtlsPolicy"] = mtlsPolicyProp
 	}
-	labelsProp, err := expandNetworkSecurityServerTlsPolicyEffectiveLabels(d.Get("effective_labels"), d, config)
+	effectiveLabelsProp, err := expandNetworkSecurityServerTlsPolicyEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return obj, nil
@@ -104,6 +104,9 @@ func expandNetworkSecurityServerTlsPolicyAllowOpen(v interface{}, d tpgresource.
 }
 
 func expandNetworkSecurityServerTlsPolicyServerCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -130,6 +133,9 @@ func expandNetworkSecurityServerTlsPolicyServerCertificate(v interface{}, d tpgr
 }
 
 func expandNetworkSecurityServerTlsPolicyServerCertificateGrpcEndpoint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -153,6 +159,9 @@ func expandNetworkSecurityServerTlsPolicyServerCertificateGrpcEndpointTargetUri(
 }
 
 func expandNetworkSecurityServerTlsPolicyServerCertificateCertificateProviderInstance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -176,6 +185,9 @@ func expandNetworkSecurityServerTlsPolicyServerCertificateCertificateProviderIns
 }
 
 func expandNetworkSecurityServerTlsPolicyMtlsPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -217,6 +229,9 @@ func expandNetworkSecurityServerTlsPolicyMtlsPolicyClientValidationTrustConfig(v
 }
 
 func expandNetworkSecurityServerTlsPolicyMtlsPolicyClientValidationCa(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -246,6 +261,9 @@ func expandNetworkSecurityServerTlsPolicyMtlsPolicyClientValidationCa(v interfac
 }
 
 func expandNetworkSecurityServerTlsPolicyMtlsPolicyClientValidationCaGrpcEndpoint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -269,6 +287,9 @@ func expandNetworkSecurityServerTlsPolicyMtlsPolicyClientValidationCaGrpcEndpoin
 }
 
 func expandNetworkSecurityServerTlsPolicyMtlsPolicyClientValidationCaCertificateProviderInstance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

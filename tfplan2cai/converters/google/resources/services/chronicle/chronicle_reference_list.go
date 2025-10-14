@@ -19,7 +19,7 @@ package chronicle
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -68,6 +68,12 @@ func GetChronicleReferenceListApiObject(d tpgresource.TerraformResourceData, con
 	} else if v, ok := d.GetOkExists("entries"); !tpgresource.IsEmptyValue(reflect.ValueOf(entriesProp)) && (ok || !reflect.DeepEqual(v, entriesProp)) {
 		obj["entries"] = entriesProp
 	}
+	scopeInfoProp, err := expandChronicleReferenceListScopeInfo(d.Get("scope_info"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("scope_info"); !tpgresource.IsEmptyValue(reflect.ValueOf(scopeInfoProp)) && (ok || !reflect.DeepEqual(v, scopeInfoProp)) {
+		obj["scopeInfo"] = scopeInfoProp
+	}
 	syntaxTypeProp, err := expandChronicleReferenceListSyntaxType(d.Get("syntax_type"), d, config)
 	if err != nil {
 		return nil, err
@@ -83,6 +89,9 @@ func expandChronicleReferenceListDescription(v interface{}, d tpgresource.Terraf
 }
 
 func expandChronicleReferenceListEntries(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -105,6 +114,54 @@ func expandChronicleReferenceListEntries(v interface{}, d tpgresource.TerraformR
 }
 
 func expandChronicleReferenceListEntriesValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandChronicleReferenceListScopeInfo(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedReferenceListScope, err := expandChronicleReferenceListScopeInfoReferenceListScope(original["reference_list_scope"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedReferenceListScope); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["referenceListScope"] = transformedReferenceListScope
+	}
+
+	return transformed, nil
+}
+
+func expandChronicleReferenceListScopeInfoReferenceListScope(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedScopeNames, err := expandChronicleReferenceListScopeInfoReferenceListScopeScopeNames(original["scope_names"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedScopeNames); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["scopeNames"] = transformedScopeNames
+	}
+
+	return transformed, nil
+}
+
+func expandChronicleReferenceListScopeInfoReferenceListScopeScopeNames(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

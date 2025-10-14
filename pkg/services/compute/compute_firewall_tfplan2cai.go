@@ -22,11 +22,11 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tfplan2cai/converters/cai"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tgcresource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tfplan2cai/converters/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tgcresource"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 func ComputeFirewallTfplan2caiConverter() cai.Tfplan2caiConverter {
@@ -50,8 +50,8 @@ func GetComputeFirewallCaiAssets(d tpgresource.TerraformResourceData, config *tr
 				Name: name,
 				Type: ComputeFirewallAssetType,
 				Resource: &caiasset.AssetResource{
-					Version:              "beta",
-					DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/beta/rest",
+					Version:              "v1",
+					DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
 					DiscoveryName:        "Firewall",
 					Data:                 obj,
 					Location:             location,
@@ -65,17 +65,17 @@ func GetComputeFirewallCaiAssets(d tpgresource.TerraformResourceData, config *tr
 
 func GetComputeFirewallCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
-	allowedProp, err := expandComputeFirewallAllow(d.Get("allow"), d, config)
+	allowProp, err := expandComputeFirewallAllow(d.Get("allow"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("allow"); !tpgresource.IsEmptyValue(reflect.ValueOf(allowedProp)) && (ok || !reflect.DeepEqual(v, allowedProp)) {
-		obj["allowed"] = allowedProp
+	} else if v, ok := d.GetOkExists("allow"); !tpgresource.IsEmptyValue(reflect.ValueOf(allowProp)) && (ok || !reflect.DeepEqual(v, allowProp)) {
+		obj["allowed"] = allowProp
 	}
-	deniedProp, err := expandComputeFirewallDeny(d.Get("deny"), d, config)
+	denyProp, err := expandComputeFirewallDeny(d.Get("deny"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("deny"); !tpgresource.IsEmptyValue(reflect.ValueOf(deniedProp)) && (ok || !reflect.DeepEqual(v, deniedProp)) {
-		obj["denied"] = deniedProp
+	} else if v, ok := d.GetOkExists("deny"); !tpgresource.IsEmptyValue(reflect.ValueOf(denyProp)) && (ok || !reflect.DeepEqual(v, denyProp)) {
+		obj["denied"] = denyProp
 	}
 	descriptionProp, err := expandComputeFirewallDescription(d.Get("description"), d, config)
 	if err != nil {
@@ -167,6 +167,9 @@ func GetComputeFirewallCaiObject(d tpgresource.TerraformResourceData, config *tr
 
 func expandComputeFirewallAllow(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -205,6 +208,9 @@ func expandComputeFirewallAllowPorts(v interface{}, d tpgresource.TerraformResou
 
 func expandComputeFirewallDeny(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -321,6 +327,9 @@ func expandComputeFirewallTargetTags(v interface{}, d tpgresource.TerraformResou
 }
 
 func expandComputeFirewallParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

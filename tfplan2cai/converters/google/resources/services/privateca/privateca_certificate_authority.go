@@ -23,7 +23,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -119,11 +119,11 @@ func GetPrivatecaCertificateAuthorityApiObject(d tpgresource.TerraformResourceDa
 	} else if v, ok := d.GetOkExists("user_defined_access_urls"); !tpgresource.IsEmptyValue(reflect.ValueOf(userDefinedAccessUrlsProp)) && (ok || !reflect.DeepEqual(v, userDefinedAccessUrlsProp)) {
 		obj["userDefinedAccessUrls"] = userDefinedAccessUrlsProp
 	}
-	labelsProp, err := expandPrivatecaCertificateAuthorityEffectiveLabels(d.Get("effective_labels"), d, config)
+	effectiveLabelsProp, err := expandPrivatecaCertificateAuthorityEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelsProp)) && (ok || !reflect.DeepEqual(v, labelsProp)) {
-		obj["labels"] = labelsProp
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
 	}
 
 	return obj, nil
@@ -134,6 +134,9 @@ func expandPrivatecaCertificateAuthorityType(v interface{}, d tpgresource.Terraf
 }
 
 func expandPrivatecaCertificateAuthorityConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -167,6 +170,9 @@ func expandPrivatecaCertificateAuthorityConfig(v interface{}, d tpgresource.Terr
 }
 
 func expandPrivatecaCertificateAuthorityConfigSubjectKeyId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -243,6 +249,9 @@ func expandPrivatecaCertificateAuthorityConfigX509Config(v interface{}, d tpgres
 }
 
 func expandPrivatecaCertificateAuthorityConfigSubjectConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -269,6 +278,9 @@ func expandPrivatecaCertificateAuthorityConfigSubjectConfig(v interface{}, d tpg
 }
 
 func expandPrivatecaCertificateAuthorityConfigSubjectConfigSubject(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -369,6 +381,9 @@ func expandPrivatecaCertificateAuthorityConfigSubjectConfigSubjectCommonName(v i
 }
 
 func expandPrivatecaCertificateAuthorityConfigSubjectConfigSubjectAltName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -429,6 +444,9 @@ func expandPrivatecaCertificateAuthorityLifetime(v interface{}, d tpgresource.Te
 }
 
 func expandPrivatecaCertificateAuthorityKeySpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -463,6 +481,9 @@ func expandPrivatecaCertificateAuthorityKeySpecAlgorithm(v interface{}, d tpgres
 }
 
 func expandPrivatecaCertificateAuthoritySubordinateConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -493,6 +514,9 @@ func expandPrivatecaCertificateAuthoritySubordinateConfigCertificateAuthority(v 
 }
 
 func expandPrivatecaCertificateAuthoritySubordinateConfigPemIssuerChain(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -520,6 +544,9 @@ func expandPrivatecaCertificateAuthorityGcsBucket(v interface{}, d tpgresource.T
 }
 
 func expandPrivatecaCertificateAuthorityUserDefinedAccessUrls(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

@@ -19,7 +19,7 @@ package gkeonprem
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -128,11 +128,11 @@ func GetGkeonpremBareMetalAdminClusterApiObject(d tpgresource.TerraformResourceD
 	} else if v, ok := d.GetOkExists("security_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(securityConfigProp)) && (ok || !reflect.DeepEqual(v, securityConfigProp)) {
 		obj["securityConfig"] = securityConfigProp
 	}
-	annotationsProp, err := expandGkeonpremBareMetalAdminClusterEffectiveAnnotations(d.Get("effective_annotations"), d, config)
+	effectiveAnnotationsProp, err := expandGkeonpremBareMetalAdminClusterEffectiveAnnotations(d.Get("effective_annotations"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("effective_annotations"); !tpgresource.IsEmptyValue(reflect.ValueOf(annotationsProp)) && (ok || !reflect.DeepEqual(v, annotationsProp)) {
-		obj["annotations"] = annotationsProp
+	} else if v, ok := d.GetOkExists("effective_annotations"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveAnnotationsProp)) && (ok || !reflect.DeepEqual(v, effectiveAnnotationsProp)) {
+		obj["annotations"] = effectiveAnnotationsProp
 	}
 
 	return obj, nil
@@ -147,6 +147,9 @@ func expandGkeonpremBareMetalAdminClusterBareMetalVersion(v interface{}, d tpgre
 }
 
 func expandGkeonpremBareMetalAdminClusterNetworkConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -166,6 +169,9 @@ func expandGkeonpremBareMetalAdminClusterNetworkConfig(v interface{}, d tpgresou
 }
 
 func expandGkeonpremBareMetalAdminClusterNetworkConfigIslandModeCidr(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -200,6 +206,9 @@ func expandGkeonpremBareMetalAdminClusterNetworkConfigIslandModeCidrPodAddressCi
 }
 
 func expandGkeonpremBareMetalAdminClusterControlPlane(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -226,6 +235,9 @@ func expandGkeonpremBareMetalAdminClusterControlPlane(v interface{}, d tpgresour
 }
 
 func expandGkeonpremBareMetalAdminClusterControlPlaneControlPlaneNodePoolConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -245,6 +257,9 @@ func expandGkeonpremBareMetalAdminClusterControlPlaneControlPlaneNodePoolConfig(
 }
 
 func expandGkeonpremBareMetalAdminClusterControlPlaneControlPlaneNodePoolConfigNodePoolConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -285,6 +300,9 @@ func expandGkeonpremBareMetalAdminClusterControlPlaneControlPlaneNodePoolConfigN
 }
 
 func expandGkeonpremBareMetalAdminClusterControlPlaneControlPlaneNodePoolConfigNodePoolConfigNodeConfigs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -333,6 +351,9 @@ func expandGkeonpremBareMetalAdminClusterControlPlaneControlPlaneNodePoolConfigN
 }
 
 func expandGkeonpremBareMetalAdminClusterControlPlaneControlPlaneNodePoolConfigNodePoolConfigTaints(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -392,6 +413,9 @@ func expandGkeonpremBareMetalAdminClusterControlPlaneControlPlaneNodePoolConfigN
 }
 
 func expandGkeonpremBareMetalAdminClusterControlPlaneApiServerArgs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -429,6 +453,9 @@ func expandGkeonpremBareMetalAdminClusterControlPlaneApiServerArgsValue(v interf
 }
 
 func expandGkeonpremBareMetalAdminClusterLoadBalancer(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -462,6 +489,9 @@ func expandGkeonpremBareMetalAdminClusterLoadBalancer(v interface{}, d tpgresour
 }
 
 func expandGkeonpremBareMetalAdminClusterLoadBalancerVipConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -485,6 +515,9 @@ func expandGkeonpremBareMetalAdminClusterLoadBalancerVipConfigControlPlaneVip(v 
 }
 
 func expandGkeonpremBareMetalAdminClusterLoadBalancerPortConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -508,6 +541,9 @@ func expandGkeonpremBareMetalAdminClusterLoadBalancerPortConfigControlPlaneLoadB
 }
 
 func expandGkeonpremBareMetalAdminClusterLoadBalancerManualLbConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -531,6 +567,9 @@ func expandGkeonpremBareMetalAdminClusterLoadBalancerManualLbConfigEnabled(v int
 }
 
 func expandGkeonpremBareMetalAdminClusterStorage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -557,6 +596,9 @@ func expandGkeonpremBareMetalAdminClusterStorage(v interface{}, d tpgresource.Te
 }
 
 func expandGkeonpremBareMetalAdminClusterStorageLvpShareConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -583,6 +625,9 @@ func expandGkeonpremBareMetalAdminClusterStorageLvpShareConfig(v interface{}, d 
 }
 
 func expandGkeonpremBareMetalAdminClusterStorageLvpShareConfigLvpConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -621,6 +666,9 @@ func expandGkeonpremBareMetalAdminClusterStorageLvpShareConfigSharedPathPvCount(
 }
 
 func expandGkeonpremBareMetalAdminClusterStorageLvpNodeMountsConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -655,6 +703,9 @@ func expandGkeonpremBareMetalAdminClusterStorageLvpNodeMountsConfigStorageClass(
 }
 
 func expandGkeonpremBareMetalAdminClusterProxy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -689,6 +740,9 @@ func expandGkeonpremBareMetalAdminClusterProxyNoProxy(v interface{}, d tpgresour
 }
 
 func expandGkeonpremBareMetalAdminClusterClusterOperations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -712,6 +766,9 @@ func expandGkeonpremBareMetalAdminClusterClusterOperationsEnableApplicationLogs(
 }
 
 func expandGkeonpremBareMetalAdminClusterMaintenanceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -735,6 +792,9 @@ func expandGkeonpremBareMetalAdminClusterMaintenanceConfigMaintenanceAddressCidr
 }
 
 func expandGkeonpremBareMetalAdminClusterNodeConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -758,6 +818,9 @@ func expandGkeonpremBareMetalAdminClusterNodeConfigMaxPodsPerNode(v interface{},
 }
 
 func expandGkeonpremBareMetalAdminClusterNodeAccessConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -781,6 +844,9 @@ func expandGkeonpremBareMetalAdminClusterNodeAccessConfigLoginUser(v interface{}
 }
 
 func expandGkeonpremBareMetalAdminClusterSecurityConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -800,6 +866,9 @@ func expandGkeonpremBareMetalAdminClusterSecurityConfig(v interface{}, d tpgreso
 }
 
 func expandGkeonpremBareMetalAdminClusterSecurityConfigAuthorization(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -819,6 +888,9 @@ func expandGkeonpremBareMetalAdminClusterSecurityConfigAuthorization(v interface
 }
 
 func expandGkeonpremBareMetalAdminClusterSecurityConfigAuthorizationAdminUsers(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {

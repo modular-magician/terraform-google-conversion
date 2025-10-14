@@ -19,7 +19,7 @@ package monitoring
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -74,11 +74,11 @@ func GetMonitoringServiceApiObject(d tpgresource.TerraformResourceData, config *
 	} else if v, ok := d.GetOkExists("telemetry"); !tpgresource.IsEmptyValue(reflect.ValueOf(telemetryProp)) && (ok || !reflect.DeepEqual(v, telemetryProp)) {
 		obj["telemetry"] = telemetryProp
 	}
-	nameProp, err := expandMonitoringServiceServiceId(d.Get("service_id"), d, config)
+	serviceIdProp, err := expandMonitoringServiceServiceId(d.Get("service_id"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("service_id"); !tpgresource.IsEmptyValue(reflect.ValueOf(nameProp)) && (ok || !reflect.DeepEqual(v, nameProp)) {
-		obj["name"] = nameProp
+	} else if v, ok := d.GetOkExists("service_id"); !tpgresource.IsEmptyValue(reflect.ValueOf(serviceIdProp)) && (ok || !reflect.DeepEqual(v, serviceIdProp)) {
+		obj["name"] = serviceIdProp
 	}
 
 	return resourceMonitoringServiceEncoder(d, config, obj)
@@ -113,6 +113,9 @@ func expandMonitoringServiceUserLabels(v interface{}, d tpgresource.TerraformRes
 }
 
 func expandMonitoringServiceTelemetry(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
