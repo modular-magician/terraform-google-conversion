@@ -34,6 +34,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/filestore"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/firebasedataconnect"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/kms"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/logging"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/networksecurity"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/pubsub"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/resourcemanager"
@@ -96,6 +97,7 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_firebase_data_connect_service":                 firebasedataconnect.FirebaseDataConnectServiceTfplan2caiConverter(),
 	"google_kms_autokey_config":                            kms.KMSAutokeyConfigTfplan2caiConverter(),
 	"google_kms_key_handle":                                kms.KMSKeyHandleTfplan2caiConverter(),
+	"google_logging_metric":                                logging.LoggingMetricTfplan2caiConverter(),
 	"google_network_security_address_group":                networksecurity.NetworkSecurityAddressGroupTfplan2caiConverter(),
 	"google_network_security_client_tls_policy":            networksecurity.NetworkSecurityClientTlsPolicyTfplan2caiConverter(),
 	"google_network_security_gateway_security_policy":      networksecurity.NetworkSecurityGatewaySecurityPolicyTfplan2caiConverter(),
