@@ -14,25 +14,28 @@
 package converters
 
 import (
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/alloydb"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/apigee"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/apphub"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/backupdr"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/beyondcorp"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/bigquery"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/binaryauthorization"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/blockchainnodeengine"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/certificatemanager"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/cloudasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/cloudbuild"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/cloudbuildv2"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/clouddeploy"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/cloudfunctions2"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/compute"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/networksecurity"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/pubsub"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/resourcemanager"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tfplan2cai/converters/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/alloydb"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/apigee"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/apphub"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/artifactregistry"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/backupdr"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/beyondcorp"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/bigquery"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/binaryauthorization"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/blockchainnodeengine"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/certificatemanager"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudbuild"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudbuildv2"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/clouddeploy"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudfunctions2"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/compute"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/filestore"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/kms"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/networksecurity"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/pubsub"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/resourcemanager"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tfplan2cai/converters/cai"
 )
 
 var ConverterMap = map[string]cai.Tfplan2caiConverter{
@@ -46,7 +49,9 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_apigee_instance":                               apigee.ApigeeInstanceTfplan2caiConverter(),
 	"google_apphub_application":                            apphub.ApphubApplicationTfplan2caiConverter(),
 	"google_apphub_service":                                apphub.ApphubServiceTfplan2caiConverter(),
+	"google_apphub_service_project_attachment":             apphub.ApphubServiceProjectAttachmentTfplan2caiConverter(),
 	"google_apphub_workload":                               apphub.ApphubWorkloadTfplan2caiConverter(),
+	"google_artifact_registry_repository":                  artifactregistry.ArtifactRegistryRepositoryTfplan2caiConverter(),
 	"google_backup_dr_backup_plan":                         backupdr.BackupDRBackupPlanTfplan2caiConverter(),
 	"google_backup_dr_backup_vault":                        backupdr.BackupDRBackupVaultTfplan2caiConverter(),
 	"google_beyondcorp_app_connection":                     beyondcorp.BeyondcorpAppConnectionTfplan2caiConverter(),
@@ -62,7 +67,9 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_cloudbuild_bitbucket_server_config":            cloudbuild.CloudBuildBitbucketServerConfigTfplan2caiConverter(),
 	"google_cloudbuildv2_connection":                       cloudbuildv2.Cloudbuildv2ConnectionTfplan2caiConverter(),
 	"google_cloudbuildv2_repository":                       cloudbuildv2.Cloudbuildv2RepositoryTfplan2caiConverter(),
+	"google_clouddeploy_automation":                        clouddeploy.ClouddeployAutomationTfplan2caiConverter(),
 	"google_clouddeploy_custom_target_type":                clouddeploy.ClouddeployCustomTargetTypeTfplan2caiConverter(),
+	"google_clouddeploy_deploy_policy":                     clouddeploy.ClouddeployDeployPolicyTfplan2caiConverter(),
 	"google_cloudfunctions2_function":                      cloudfunctions2.Cloudfunctions2functionTfplan2caiConverter(),
 	"google_compute_address":                               compute.ComputeAddressTfplan2caiConverter(),
 	"google_compute_autoscaler":                            compute.ComputeAutoscalerTfplan2caiConverter(),
@@ -77,8 +84,14 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_compute_image":                                 compute.ComputeImageTfplan2caiConverter(),
 	"google_compute_network":                               compute.ComputeNetworkTfplan2caiConverter(),
 	"google_compute_region_autoscaler":                     compute.ComputeRegionAutoscalerTfplan2caiConverter(),
+	"google_compute_region_health_check":                   compute.ComputeRegionHealthCheckTfplan2caiConverter(),
 	"google_compute_subnetwork":                            compute.ComputeSubnetworkTfplan2caiConverter(),
 	"google_compute_url_map":                               compute.ComputeUrlMapTfplan2caiConverter(),
+	"google_filestore_backup":                              filestore.FilestoreBackupTfplan2caiConverter(),
+	"google_filestore_instance":                            filestore.FilestoreInstanceTfplan2caiConverter(),
+	"google_filestore_snapshot":                            filestore.FilestoreSnapshotTfplan2caiConverter(),
+	"google_kms_autokey_config":                            kms.KMSAutokeyConfigTfplan2caiConverter(),
+	"google_kms_key_handle":                                kms.KMSKeyHandleTfplan2caiConverter(),
 	"google_network_security_address_group":                networksecurity.NetworkSecurityAddressGroupTfplan2caiConverter(),
 	"google_network_security_authorization_policy":         networksecurity.NetworkSecurityAuthorizationPolicyTfplan2caiConverter(),
 	"google_network_security_client_tls_policy":            networksecurity.NetworkSecurityClientTlsPolicyTfplan2caiConverter(),

@@ -17,7 +17,7 @@ package compute_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccComputeImage_imageBasicExample(t *testing.T) {
@@ -29,6 +29,8 @@ func TestAccComputeImage_imageBasicExample(t *testing.T) {
 			"count",
 			"depends_on",
 			"for_each",
+			"image_encryption_key.raw_key",
+			"image_encryption_key.rsa_encrypted_key",
 			"lifecycle",
 			"provider",
 		},
@@ -44,6 +46,8 @@ func TestAccComputeImage_imageGuestOsExample(t *testing.T) {
 			"count",
 			"depends_on",
 			"for_each",
+			"image_encryption_key.raw_key",
+			"image_encryption_key.rsa_encrypted_key",
 			"lifecycle",
 			"provider",
 		},
@@ -59,6 +63,8 @@ func TestAccComputeImage_imageBasicStorageLocationExample(t *testing.T) {
 			"count",
 			"depends_on",
 			"for_each",
+			"image_encryption_key.raw_key",
+			"image_encryption_key.rsa_encrypted_key",
 			"lifecycle",
 			"provider",
 		},
