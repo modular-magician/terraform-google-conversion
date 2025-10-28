@@ -19,7 +19,7 @@ package storageinsights
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -91,6 +91,9 @@ func GetStorageInsightsReportConfigApiObject(d tpgresource.TerraformResourceData
 }
 
 func expandStorageInsightsReportConfigFrequencyOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -128,6 +131,9 @@ func expandStorageInsightsReportConfigFrequencyOptionsFrequency(v interface{}, d
 }
 
 func expandStorageInsightsReportConfigFrequencyOptionsStartDate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -173,6 +179,9 @@ func expandStorageInsightsReportConfigFrequencyOptionsStartDateYear(v interface{
 }
 
 func expandStorageInsightsReportConfigFrequencyOptionsEndDate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -218,6 +227,9 @@ func expandStorageInsightsReportConfigFrequencyOptionsEndDateYear(v interface{},
 }
 
 func expandStorageInsightsReportConfigParquetOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 {
 		return nil, nil
@@ -233,6 +245,9 @@ func expandStorageInsightsReportConfigParquetOptions(v interface{}, d tpgresourc
 }
 
 func expandStorageInsightsReportConfigCsvOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -278,6 +293,9 @@ func expandStorageInsightsReportConfigCsvOptionsHeaderRequired(v interface{}, d 
 }
 
 func expandStorageInsightsReportConfigObjectMetadataReportOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -315,6 +333,9 @@ func expandStorageInsightsReportConfigObjectMetadataReportOptionsMetadataFields(
 }
 
 func expandStorageInsightsReportConfigObjectMetadataReportOptionsStorageFilters(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -338,6 +359,9 @@ func expandStorageInsightsReportConfigObjectMetadataReportOptionsStorageFiltersB
 }
 
 func expandStorageInsightsReportConfigObjectMetadataReportOptionsStorageDestinationOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
