@@ -25,7 +25,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -259,6 +259,18 @@ func GetComputeVpnTunnelApiObject(d tpgresource.TerraformResourceData, config *t
 	} else if v, ok := d.GetOkExists("cipher_suite"); !tpgresource.IsEmptyValue(reflect.ValueOf(cipherSuiteProp)) && (ok || !reflect.DeepEqual(v, cipherSuiteProp)) {
 		obj["cipherSuite"] = cipherSuiteProp
 	}
+	sharedSecretWoProp, err := expandComputeVpnTunnelSharedSecretWo(d.Get("shared_secret_wo"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("shared_secret_wo"); !tpgresource.IsEmptyValue(reflect.ValueOf(sharedSecretWoProp)) && (ok || !reflect.DeepEqual(v, sharedSecretWoProp)) {
+		obj["sharedSecret"] = sharedSecretWoProp
+	}
+	sharedSecretWoVersionProp, err := expandComputeVpnTunnelSharedSecretWoVersion(d.Get("shared_secret_wo_version"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("shared_secret_wo_version"); !tpgresource.IsEmptyValue(reflect.ValueOf(sharedSecretWoVersionProp)) && (ok || !reflect.DeepEqual(v, sharedSecretWoVersionProp)) {
+		obj["sharedSecretWoVersion"] = sharedSecretWoVersionProp
+	}
 	effectiveLabelsProp, err := expandComputeVpnTunnelEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -386,6 +398,9 @@ func expandComputeVpnTunnelLabelFingerprint(v interface{}, d tpgresource.Terrafo
 }
 
 func expandComputeVpnTunnelCipherSuite(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -412,6 +427,9 @@ func expandComputeVpnTunnelCipherSuite(v interface{}, d tpgresource.TerraformRes
 }
 
 func expandComputeVpnTunnelCipherSuitePhase1(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -472,6 +490,9 @@ func expandComputeVpnTunnelCipherSuitePhase1Dh(v interface{}, d tpgresource.Terr
 }
 
 func expandComputeVpnTunnelCipherSuitePhase2(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -516,6 +537,14 @@ func expandComputeVpnTunnelCipherSuitePhase2Integrity(v interface{}, d tpgresour
 
 func expandComputeVpnTunnelCipherSuitePhase2Pfs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	return v, nil
+}
+
+func expandComputeVpnTunnelSharedSecretWo(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeVpnTunnelSharedSecretWoVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

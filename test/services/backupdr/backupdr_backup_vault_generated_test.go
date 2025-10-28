@@ -17,7 +17,7 @@ package backupdr_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccBackupDRBackupVault_backupDrBackupVaultFullExample(t *testing.T) {
@@ -42,6 +42,5 @@ func TestAccBackupDRBackupVault_backupDrBackupVaultFullExample(t *testing.T) {
 			"location",
 			"provider",
 		},
-		[]string{},
 	)
 }

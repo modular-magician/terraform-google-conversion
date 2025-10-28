@@ -19,7 +19,7 @@ package bigqueryanalyticshub
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -129,6 +129,9 @@ func expandBigqueryAnalyticsHubDataExchangeIcon(v interface{}, d tpgresource.Ter
 }
 
 func expandBigqueryAnalyticsHubDataExchangeSharingEnvironmentConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -155,6 +158,9 @@ func expandBigqueryAnalyticsHubDataExchangeSharingEnvironmentConfig(v interface{
 }
 
 func expandBigqueryAnalyticsHubDataExchangeSharingEnvironmentConfigDefaultExchangeConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 {
 		return nil, nil
@@ -170,6 +176,9 @@ func expandBigqueryAnalyticsHubDataExchangeSharingEnvironmentConfigDefaultExchan
 }
 
 func expandBigqueryAnalyticsHubDataExchangeSharingEnvironmentConfigDcrExchangeConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 {
 		return nil, nil

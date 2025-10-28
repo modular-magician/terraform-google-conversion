@@ -19,7 +19,7 @@ package discoveryengine
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -109,6 +109,9 @@ func expandDiscoveryEngineChatEngineDataStoreIds(v interface{}, d tpgresource.Te
 }
 
 func expandDiscoveryEngineChatEngineChatEngineConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -142,6 +145,9 @@ func expandDiscoveryEngineChatEngineChatEngineConfig(v interface{}, d tpgresourc
 }
 
 func expandDiscoveryEngineChatEngineChatEngineConfigAgentCreationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -206,6 +212,9 @@ func expandDiscoveryEngineChatEngineChatEngineConfigAllowCrossRegion(v interface
 }
 
 func expandDiscoveryEngineChatEngineCommonConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

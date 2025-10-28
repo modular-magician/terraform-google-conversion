@@ -19,7 +19,7 @@ package firebaseapphosting
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -99,6 +99,9 @@ func expandFirebaseAppHostingBuildEtag(v interface{}, d tpgresource.TerraformRes
 }
 
 func expandFirebaseAppHostingBuildSource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -125,6 +128,9 @@ func expandFirebaseAppHostingBuildSource(v interface{}, d tpgresource.TerraformR
 }
 
 func expandFirebaseAppHostingBuildSourceContainer(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -148,6 +154,9 @@ func expandFirebaseAppHostingBuildSourceContainerImage(v interface{}, d tpgresou
 }
 
 func expandFirebaseAppHostingBuildSourceCodebase(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -232,6 +241,9 @@ func expandFirebaseAppHostingBuildSourceCodebaseUri(v interface{}, d tpgresource
 }
 
 func expandFirebaseAppHostingBuildSourceCodebaseAuthor(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

@@ -22,13 +22,13 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/cai2hcl/converters/utils"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/cai2hcl/models"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tgcresource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/cai2hcl/converters/utils"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/cai2hcl/models"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tgcresource"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 type ComputeUrlMapCai2hclConverter struct {
@@ -64,7 +64,13 @@ func (c *ComputeUrlMapCai2hclConverter) convertResourceData(asset caiasset.Asset
 	var err error
 	res := asset.Resource.Data
 	config := transport.NewConfig()
-	d := &schema.ResourceData{}
+
+	// This is a fake resource used to get fake d
+	// d.Get will return empty map, instead of nil
+	fakeResource := &schema.Resource{
+		Schema: c.schema,
+	}
+	d := fakeResource.TestResourceData()
 
 	assetNameParts := strings.Split(asset.Name, "/")
 	hclBlockName := assetNameParts[len(assetNameParts)-1]
@@ -841,8 +847,6 @@ func flattenComputeUrlMapPathMatcherPathRuleRouteActionRequestMirrorPolicy(v int
 	transformed := make(map[string]interface{})
 	transformed["backend_service"] =
 		flattenComputeUrlMapPathMatcherPathRuleRouteActionRequestMirrorPolicyBackendService(original["backendService"], d, config)
-	transformed["mirror_percent"] =
-		flattenComputeUrlMapPathMatcherPathRuleRouteActionRequestMirrorPolicyMirrorPercent(original["mirrorPercent"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -858,10 +862,6 @@ func flattenComputeUrlMapPathMatcherPathRuleRouteActionRequestMirrorPolicyBacken
 		return v
 	}
 	return relative
-}
-
-func flattenComputeUrlMapPathMatcherPathRuleRouteActionRequestMirrorPolicyMirrorPercent(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
 }
 
 func flattenComputeUrlMapPathMatcherPathRuleRouteActionRetryPolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -1282,8 +1282,6 @@ func flattenComputeUrlMapPathMatcherRouteRules(v interface{}, d *schema.Resource
 			"route_action":                 flattenComputeUrlMapPathMatcherRouteRulesRouteAction(original["routeAction"], d, config),
 			"url_redirect":                 flattenComputeUrlMapPathMatcherRouteRulesUrlRedirect(original["urlRedirect"], d, config),
 			"custom_error_response_policy": flattenComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicy(original["customErrorResponsePolicy"], d, config),
-			"http_filter_configs":          flattenComputeUrlMapPathMatcherRouteRulesHttpFilterConfigs(original["httpFilterConfigs"], d, config),
-			"http_filter_metadata":         flattenComputeUrlMapPathMatcherRouteRulesHttpFilterMetadata(original["httpFilterMetadata"], d, config),
 		})
 	}
 	return transformed
@@ -1912,8 +1910,6 @@ func flattenComputeUrlMapPathMatcherRouteRulesRouteActionRequestMirrorPolicy(v i
 	transformed := make(map[string]interface{})
 	transformed["backend_service"] =
 		flattenComputeUrlMapPathMatcherRouteRulesRouteActionRequestMirrorPolicyBackendService(original["backendService"], d, config)
-	transformed["mirror_percent"] =
-		flattenComputeUrlMapPathMatcherRouteRulesRouteActionRequestMirrorPolicyMirrorPercent(original["mirrorPercent"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -1929,10 +1925,6 @@ func flattenComputeUrlMapPathMatcherRouteRulesRouteActionRequestMirrorPolicyBack
 		return v
 	}
 	return relative
-}
-
-func flattenComputeUrlMapPathMatcherRouteRulesRouteActionRequestMirrorPolicyMirrorPercent(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
 }
 
 func flattenComputeUrlMapPathMatcherRouteRulesRouteActionRetryPolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -2415,72 +2407,6 @@ func flattenComputeUrlMapPathMatcherRouteRulesCustomErrorResponsePolicyErrorServ
 	return relative
 }
 
-func flattenComputeUrlMapPathMatcherRouteRulesHttpFilterConfigs(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	l := v.([]interface{})
-	transformed := make([]interface{}, 0, len(l))
-	for _, raw := range l {
-		original := raw.(map[string]interface{})
-		if len(original) < 1 {
-			// Do not include empty json objects coming back from the api
-			continue
-		}
-		transformed = append(transformed, map[string]interface{}{
-			"filter_name":     flattenComputeUrlMapPathMatcherRouteRulesHttpFilterConfigsFilterName(original["filterName"], d, config),
-			"config_type_url": flattenComputeUrlMapPathMatcherRouteRulesHttpFilterConfigsConfigTypeUrl(original["configTypeUrl"], d, config),
-			"config":          flattenComputeUrlMapPathMatcherRouteRulesHttpFilterConfigsConfig(original["config"], d, config),
-		})
-	}
-	return transformed
-}
-
-func flattenComputeUrlMapPathMatcherRouteRulesHttpFilterConfigsFilterName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
-}
-
-func flattenComputeUrlMapPathMatcherRouteRulesHttpFilterConfigsConfigTypeUrl(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
-}
-
-func flattenComputeUrlMapPathMatcherRouteRulesHttpFilterConfigsConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
-}
-
-func flattenComputeUrlMapPathMatcherRouteRulesHttpFilterMetadata(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	l := v.([]interface{})
-	transformed := make([]interface{}, 0, len(l))
-	for _, raw := range l {
-		original := raw.(map[string]interface{})
-		if len(original) < 1 {
-			// Do not include empty json objects coming back from the api
-			continue
-		}
-		transformed = append(transformed, map[string]interface{}{
-			"filter_name":     flattenComputeUrlMapPathMatcherRouteRulesHttpFilterMetadataFilterName(original["filterName"], d, config),
-			"config_type_url": flattenComputeUrlMapPathMatcherRouteRulesHttpFilterMetadataConfigTypeUrl(original["configTypeUrl"], d, config),
-			"config":          flattenComputeUrlMapPathMatcherRouteRulesHttpFilterMetadataConfig(original["config"], d, config),
-		})
-	}
-	return transformed
-}
-
-func flattenComputeUrlMapPathMatcherRouteRulesHttpFilterMetadataFilterName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
-}
-
-func flattenComputeUrlMapPathMatcherRouteRulesHttpFilterMetadataConfigTypeUrl(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
-}
-
-func flattenComputeUrlMapPathMatcherRouteRulesHttpFilterMetadataConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
-}
-
 func flattenComputeUrlMapPathMatcherDefaultUrlRedirect(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -2912,8 +2838,6 @@ func flattenComputeUrlMapPathMatcherDefaultRouteActionRequestMirrorPolicy(v inte
 	transformed := make(map[string]interface{})
 	transformed["backend_service"] =
 		flattenComputeUrlMapPathMatcherDefaultRouteActionRequestMirrorPolicyBackendService(original["backendService"], d, config)
-	transformed["mirror_percent"] =
-		flattenComputeUrlMapPathMatcherDefaultRouteActionRequestMirrorPolicyMirrorPercent(original["mirrorPercent"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -2929,10 +2853,6 @@ func flattenComputeUrlMapPathMatcherDefaultRouteActionRequestMirrorPolicyBackend
 		return v
 	}
 	return relative
-}
-
-func flattenComputeUrlMapPathMatcherDefaultRouteActionRequestMirrorPolicyMirrorPercent(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
 }
 
 func flattenComputeUrlMapPathMatcherDefaultRouteActionCorsPolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -3737,8 +3657,6 @@ func flattenComputeUrlMapDefaultRouteActionRequestMirrorPolicy(v interface{}, d 
 	transformed := make(map[string]interface{})
 	transformed["backend_service"] =
 		flattenComputeUrlMapDefaultRouteActionRequestMirrorPolicyBackendService(original["backendService"], d, config)
-	transformed["mirror_percent"] =
-		flattenComputeUrlMapDefaultRouteActionRequestMirrorPolicyMirrorPercent(original["mirrorPercent"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -3754,10 +3672,6 @@ func flattenComputeUrlMapDefaultRouteActionRequestMirrorPolicyBackendService(v i
 		return v
 	}
 	return relative
-}
-
-func flattenComputeUrlMapDefaultRouteActionRequestMirrorPolicyMirrorPercent(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
 }
 
 func flattenComputeUrlMapDefaultRouteActionCorsPolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

@@ -19,7 +19,7 @@ package gkebackup
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -121,6 +121,9 @@ func expandGKEBackupBackupPlanCluster(v interface{}, d tpgresource.TerraformReso
 }
 
 func expandGKEBackupBackupPlanRetentionPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -166,6 +169,9 @@ func expandGKEBackupBackupPlanRetentionPolicyLocked(v interface{}, d tpgresource
 }
 
 func expandGKEBackupBackupPlanBackupSchedule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -207,6 +213,9 @@ func expandGKEBackupBackupPlanBackupSchedulePaused(v interface{}, d tpgresource.
 }
 
 func expandGKEBackupBackupPlanBackupScheduleRpoConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -237,6 +246,9 @@ func expandGKEBackupBackupPlanBackupScheduleRpoConfigTargetRpoMinutes(v interfac
 }
 
 func expandGKEBackupBackupPlanBackupScheduleRpoConfigExclusionWindows(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -287,6 +299,9 @@ func expandGKEBackupBackupPlanBackupScheduleRpoConfigExclusionWindows(v interfac
 }
 
 func expandGKEBackupBackupPlanBackupScheduleRpoConfigExclusionWindowsStartTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -347,6 +362,9 @@ func expandGKEBackupBackupPlanBackupScheduleRpoConfigExclusionWindowsDuration(v 
 }
 
 func expandGKEBackupBackupPlanBackupScheduleRpoConfigExclusionWindowsSingleOccurrenceDate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -396,6 +414,9 @@ func expandGKEBackupBackupPlanBackupScheduleRpoConfigExclusionWindowsDaily(v int
 }
 
 func expandGKEBackupBackupPlanBackupScheduleRpoConfigExclusionWindowsDaysOfWeek(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -423,6 +444,9 @@ func expandGKEBackupBackupPlanDeactivated(v interface{}, d tpgresource.Terraform
 }
 
 func expandGKEBackupBackupPlanBackupConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -473,6 +497,13 @@ func expandGKEBackupBackupPlanBackupConfig(v interface{}, d tpgresource.Terrafor
 		transformed["selectedApplications"] = transformedSelectedApplications
 	}
 
+	transformedSelectedNamespaceLabels, err := expandGKEBackupBackupPlanBackupConfigSelectedNamespaceLabels(original["selected_namespace_labels"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSelectedNamespaceLabels); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["selectedNamespaceLabels"] = transformedSelectedNamespaceLabels
+	}
+
 	transformedPermissiveMode, err := expandGKEBackupBackupPlanBackupConfigPermissiveMode(original["permissive_mode"], d, config)
 	if err != nil {
 		return nil, err
@@ -492,6 +523,9 @@ func expandGKEBackupBackupPlanBackupConfigIncludeSecrets(v interface{}, d tpgres
 }
 
 func expandGKEBackupBackupPlanBackupConfigEncryptionKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -519,6 +553,9 @@ func expandGKEBackupBackupPlanBackupConfigAllNamespaces(v interface{}, d tpgreso
 }
 
 func expandGKEBackupBackupPlanBackupConfigSelectedNamespaces(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -542,6 +579,9 @@ func expandGKEBackupBackupPlanBackupConfigSelectedNamespacesNamespaces(v interfa
 }
 
 func expandGKEBackupBackupPlanBackupConfigSelectedApplications(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -561,6 +601,9 @@ func expandGKEBackupBackupPlanBackupConfigSelectedApplications(v interface{}, d 
 }
 
 func expandGKEBackupBackupPlanBackupConfigSelectedApplicationsNamespacedNames(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -594,6 +637,68 @@ func expandGKEBackupBackupPlanBackupConfigSelectedApplicationsNamespacedNamesNam
 }
 
 func expandGKEBackupBackupPlanBackupConfigSelectedApplicationsNamespacedNamesName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandGKEBackupBackupPlanBackupConfigSelectedNamespaceLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedResourceLabels, err := expandGKEBackupBackupPlanBackupConfigSelectedNamespaceLabelsResourceLabels(original["resource_labels"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedResourceLabels); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["resourceLabels"] = transformedResourceLabels
+	}
+
+	return transformed, nil
+}
+
+func expandGKEBackupBackupPlanBackupConfigSelectedNamespaceLabelsResourceLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedKey, err := expandGKEBackupBackupPlanBackupConfigSelectedNamespaceLabelsResourceLabelsKey(original["key"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["key"] = transformedKey
+		}
+
+		transformedValue, err := expandGKEBackupBackupPlanBackupConfigSelectedNamespaceLabelsResourceLabelsValue(original["value"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedValue); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["value"] = transformedValue
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandGKEBackupBackupPlanBackupConfigSelectedNamespaceLabelsResourceLabelsKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandGKEBackupBackupPlanBackupConfigSelectedNamespaceLabelsResourceLabelsValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

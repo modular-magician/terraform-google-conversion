@@ -21,7 +21,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -117,6 +117,12 @@ func GetDatastreamConnectionProfileApiObject(d tpgresource.TerraformResourceData
 	} else if v, ok := d.GetOkExists("sql_server_profile"); !tpgresource.IsEmptyValue(reflect.ValueOf(sqlServerProfileProp)) && (ok || !reflect.DeepEqual(v, sqlServerProfileProp)) {
 		obj["sqlServerProfile"] = sqlServerProfileProp
 	}
+	mongodbProfileProp, err := expandDatastreamConnectionProfileMongodbProfile(d.Get("mongodb_profile"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("mongodb_profile"); !tpgresource.IsEmptyValue(reflect.ValueOf(mongodbProfileProp)) && (ok || !reflect.DeepEqual(v, mongodbProfileProp)) {
+		obj["mongodbProfile"] = mongodbProfileProp
+	}
 	forwardSshConnectivityProp, err := expandDatastreamConnectionProfileForwardSshConnectivity(d.Get("forward_ssh_connectivity"), d, config)
 	if err != nil {
 		return nil, err
@@ -144,6 +150,9 @@ func expandDatastreamConnectionProfileDisplayName(v interface{}, d tpgresource.T
 }
 
 func expandDatastreamConnectionProfileOracleProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -240,6 +249,9 @@ func expandDatastreamConnectionProfileOracleProfileConnectionAttributes(v interf
 }
 
 func expandDatastreamConnectionProfileGcsProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -274,6 +286,9 @@ func expandDatastreamConnectionProfileGcsProfileRootPath(v interface{}, d tpgres
 }
 
 func expandDatastreamConnectionProfileMysqlProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -348,6 +363,9 @@ func expandDatastreamConnectionProfileMysqlProfileSecretManagerStoredPassword(v 
 }
 
 func expandDatastreamConnectionProfileMysqlProfileSslConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -426,6 +444,9 @@ func expandDatastreamConnectionProfileMysqlProfileSslConfigCaCertificateSet(v in
 }
 
 func expandDatastreamConnectionProfileBigqueryProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 {
 		return nil, nil
@@ -441,6 +462,9 @@ func expandDatastreamConnectionProfileBigqueryProfile(v interface{}, d tpgresour
 }
 
 func expandDatastreamConnectionProfilePostgresqlProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -519,6 +543,9 @@ func expandDatastreamConnectionProfilePostgresqlProfileDatabase(v interface{}, d
 }
 
 func expandDatastreamConnectionProfileSalesforceProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -556,6 +583,9 @@ func expandDatastreamConnectionProfileSalesforceProfileDomain(v interface{}, d t
 }
 
 func expandDatastreamConnectionProfileSalesforceProfileUserCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -623,6 +653,9 @@ func expandDatastreamConnectionProfileSalesforceProfileUserCredentialsSecretMana
 }
 
 func expandDatastreamConnectionProfileSalesforceProfileOauth2ClientCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -668,6 +701,9 @@ func expandDatastreamConnectionProfileSalesforceProfileOauth2ClientCredentialsSe
 }
 
 func expandDatastreamConnectionProfileSqlServerProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -745,7 +781,278 @@ func expandDatastreamConnectionProfileSqlServerProfileDatabase(v interface{}, d 
 	return v, nil
 }
 
+func expandDatastreamConnectionProfileMongodbProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedHostAddresses, err := expandDatastreamConnectionProfileMongodbProfileHostAddresses(original["host_addresses"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedHostAddresses); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["hostAddresses"] = transformedHostAddresses
+	}
+
+	transformedReplicaSet, err := expandDatastreamConnectionProfileMongodbProfileReplicaSet(original["replica_set"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedReplicaSet); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["replicaSet"] = transformedReplicaSet
+	}
+
+	transformedUsername, err := expandDatastreamConnectionProfileMongodbProfileUsername(original["username"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUsername); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["username"] = transformedUsername
+	}
+
+	transformedPassword, err := expandDatastreamConnectionProfileMongodbProfilePassword(original["password"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPassword); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["password"] = transformedPassword
+	}
+
+	transformedSecretManagerStoredPassword, err := expandDatastreamConnectionProfileMongodbProfileSecretManagerStoredPassword(original["secret_manager_stored_password"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSecretManagerStoredPassword); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["secretManagerStoredPassword"] = transformedSecretManagerStoredPassword
+	}
+
+	transformedSslConfig, err := expandDatastreamConnectionProfileMongodbProfileSslConfig(original["ssl_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSslConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["sslConfig"] = transformedSslConfig
+	}
+
+	transformedSrvConnectionFormat, err := expandDatastreamConnectionProfileMongodbProfileSrvConnectionFormat(original["srv_connection_format"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["srvConnectionFormat"] = transformedSrvConnectionFormat
+	}
+
+	transformedStandardConnectionFormat, err := expandDatastreamConnectionProfileMongodbProfileStandardConnectionFormat(original["standard_connection_format"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["standardConnectionFormat"] = transformedStandardConnectionFormat
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileHostAddresses(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedHostname, err := expandDatastreamConnectionProfileMongodbProfileHostAddressesHostname(original["hostname"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedHostname); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["hostname"] = transformedHostname
+		}
+
+		transformedPort, err := expandDatastreamConnectionProfileMongodbProfileHostAddressesPort(original["port"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPort); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["port"] = transformedPort
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileHostAddressesHostname(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileHostAddressesPort(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileReplicaSet(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileUsername(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfilePassword(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileSecretManagerStoredPassword(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileSslConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedClientKey, err := expandDatastreamConnectionProfileMongodbProfileSslConfigClientKey(original["client_key"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientKey"] = transformedClientKey
+	}
+
+	transformedClientKeySet, err := expandDatastreamConnectionProfileMongodbProfileSslConfigClientKeySet(original["client_key_set"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientKeySet); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientKeySet"] = transformedClientKeySet
+	}
+
+	transformedClientCertificate, err := expandDatastreamConnectionProfileMongodbProfileSslConfigClientCertificate(original["client_certificate"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientCertificate); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientCertificate"] = transformedClientCertificate
+	}
+
+	transformedClientCertificateSet, err := expandDatastreamConnectionProfileMongodbProfileSslConfigClientCertificateSet(original["client_certificate_set"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientCertificateSet); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientCertificateSet"] = transformedClientCertificateSet
+	}
+
+	transformedCaCertificate, err := expandDatastreamConnectionProfileMongodbProfileSslConfigCaCertificate(original["ca_certificate"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCaCertificate); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["caCertificate"] = transformedCaCertificate
+	}
+
+	transformedCaCertificateSet, err := expandDatastreamConnectionProfileMongodbProfileSslConfigCaCertificateSet(original["ca_certificate_set"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCaCertificateSet); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["caCertificateSet"] = transformedCaCertificateSet
+	}
+
+	transformedSecretManagerStoredClientKey, err := expandDatastreamConnectionProfileMongodbProfileSslConfigSecretManagerStoredClientKey(original["secret_manager_stored_client_key"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSecretManagerStoredClientKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["secretManagerStoredClientKey"] = transformedSecretManagerStoredClientKey
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileSslConfigClientKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileSslConfigClientKeySet(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileSslConfigClientCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileSslConfigClientCertificateSet(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileSslConfigCaCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileSslConfigCaCertificateSet(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileSslConfigSecretManagerStoredClientKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileSrvConnectionFormat(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 {
+		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
+	}
+	transformed := make(map[string]interface{})
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileStandardConnectionFormat(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 {
+		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedDirectConnection, err := expandDatastreamConnectionProfileMongodbProfileStandardConnectionFormatDirectConnection(original["direct_connection"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDirectConnection); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["directConnection"] = transformedDirectConnection
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileMongodbProfileStandardConnectionFormatDirectConnection(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandDatastreamConnectionProfileForwardSshConnectivity(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -813,6 +1120,9 @@ func expandDatastreamConnectionProfileForwardSshConnectivityPrivateKey(v interfa
 }
 
 func expandDatastreamConnectionProfilePrivateConnectivity(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

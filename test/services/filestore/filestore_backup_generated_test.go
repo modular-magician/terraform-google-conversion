@@ -12,15 +12,15 @@
 //
 // ----------------------------------------------------------------------------
 
-package networksecurity_test
+package filestore_test
 
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
-func TestAccNetworkSecurityAuthorizationPolicy_networkSecurityAuthorizationPolicyBasicExample(t *testing.T) {
+func TestAccFilestoreBackup_filestoreBackupBasicExample(t *testing.T) {
 	t.Parallel()
 
 	test.BidirectionalConversion(
@@ -33,24 +33,7 @@ func TestAccNetworkSecurityAuthorizationPolicy_networkSecurityAuthorizationPolic
 			"location",
 			"name",
 			"provider",
+			"tags",
 		},
-		[]string{},
-	)
-}
-func TestAccNetworkSecurityAuthorizationPolicy_networkSecurityAuthorizationPolicyDestinationsExample(t *testing.T) {
-	t.Parallel()
-
-	test.BidirectionalConversion(
-		t,
-		[]string{
-			"count",
-			"depends_on",
-			"for_each",
-			"lifecycle",
-			"location",
-			"name",
-			"provider",
-		},
-		[]string{},
 	)
 }
