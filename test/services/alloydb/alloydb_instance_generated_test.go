@@ -17,7 +17,7 @@ package alloydb_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccAlloydbInstance_alloydbInstanceBasicTestExample(t *testing.T) {
@@ -29,12 +29,12 @@ func TestAccAlloydbInstance_alloydbInstanceBasicTestExample(t *testing.T) {
 			"cluster",
 			"count",
 			"depends_on",
+			"display_name",
 			"for_each",
 			"instance_id",
 			"lifecycle",
 			"provider",
 		},
-		[]string{},
 	)
 }
 func TestAccAlloydbInstance_alloydbSecondaryInstanceBasicTestExample(t *testing.T) {
@@ -46,12 +46,12 @@ func TestAccAlloydbInstance_alloydbSecondaryInstanceBasicTestExample(t *testing.
 			"cluster",
 			"count",
 			"depends_on",
+			"display_name",
 			"for_each",
 			"instance_id",
 			"lifecycle",
 			"provider",
 		},
-		[]string{},
 	)
 }
 func TestAccAlloydbInstance_alloydbInstancePscTestExample(t *testing.T) {
@@ -63,11 +63,11 @@ func TestAccAlloydbInstance_alloydbInstancePscTestExample(t *testing.T) {
 			"cluster",
 			"count",
 			"depends_on",
+			"display_name",
 			"for_each",
 			"instance_id",
 			"lifecycle",
 			"provider",
 		},
-		[]string{},
 	)
 }

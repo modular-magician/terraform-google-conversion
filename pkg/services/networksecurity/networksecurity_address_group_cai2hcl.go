@@ -22,13 +22,13 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/cai2hcl/converters/utils"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/cai2hcl/models"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tgcresource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/cai2hcl/converters/utils"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/cai2hcl/models"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tgcresource"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 type NetworkSecurityAddressGroupCai2hclConverter struct {
@@ -64,7 +64,13 @@ func (c *NetworkSecurityAddressGroupCai2hclConverter) convertResourceData(asset 
 	var err error
 	res := asset.Resource.Data
 	config := transport.NewConfig()
-	d := &schema.ResourceData{}
+
+	// This is a fake resource used to get fake d
+	// d.Get will return empty map, instead of nil
+	fakeResource := &schema.Resource{
+		Schema: c.schema,
+	}
+	d := fakeResource.TestResourceData()
 
 	assetNameParts := strings.Split(asset.Name, "/")
 	hclBlockName := assetNameParts[len(assetNameParts)-1]
@@ -79,7 +85,6 @@ func (c *NetworkSecurityAddressGroupCai2hclConverter) convertResourceData(asset 
 	hclData["type"] = flattenNetworkSecurityAddressGroupType(res["type"], d, config)
 	hclData["items"] = flattenNetworkSecurityAddressGroupItems(res["items"], d, config)
 	hclData["capacity"] = flattenNetworkSecurityAddressGroupCapacity(res["capacity"], d, config)
-	hclData["purpose"] = flattenNetworkSecurityAddressGroupPurpose(res["purpose"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -124,8 +129,4 @@ func flattenNetworkSecurityAddressGroupCapacity(v interface{}, d *schema.Resourc
 	}
 
 	return v // let terraform core handle it otherwise
-}
-
-func flattenNetworkSecurityAddressGroupPurpose(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
 }

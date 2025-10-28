@@ -17,7 +17,7 @@ package compute_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccComputeSubnetwork_subnetworkBasicExample(t *testing.T) {
@@ -26,16 +26,16 @@ func TestAccComputeSubnetwork_subnetworkBasicExample(t *testing.T) {
 	test.BidirectionalConversion(
 		t,
 		[]string{
-			"allow_subnet_cidr_routes_overlap",
 			"count",
 			"depends_on",
 			"for_each",
 			"ip_collection",
 			"lifecycle",
+			"params",
+			"params.resource_manager_tags",
 			"provider",
 			"send_secondary_ip_range_if_empty",
 		},
-		[]string{},
 	)
 }
 func TestAccComputeSubnetwork_subnetworkLoggingConfigExample(t *testing.T) {
@@ -44,34 +44,16 @@ func TestAccComputeSubnetwork_subnetworkLoggingConfigExample(t *testing.T) {
 	test.BidirectionalConversion(
 		t,
 		[]string{
-			"allow_subnet_cidr_routes_overlap",
 			"count",
 			"depends_on",
 			"for_each",
 			"ip_collection",
 			"lifecycle",
+			"params",
+			"params.resource_manager_tags",
 			"provider",
 			"send_secondary_ip_range_if_empty",
 		},
-		[]string{},
-	)
-}
-func TestAccComputeSubnetwork_subnetworkInternalL7lbExample(t *testing.T) {
-	t.Parallel()
-
-	test.BidirectionalConversion(
-		t,
-		[]string{
-			"allow_subnet_cidr_routes_overlap",
-			"count",
-			"depends_on",
-			"for_each",
-			"ip_collection",
-			"lifecycle",
-			"provider",
-			"send_secondary_ip_range_if_empty",
-		},
-		[]string{},
 	)
 }
 func TestAccComputeSubnetwork_subnetworkIpv6Example(t *testing.T) {
@@ -80,16 +62,16 @@ func TestAccComputeSubnetwork_subnetworkIpv6Example(t *testing.T) {
 	test.BidirectionalConversion(
 		t,
 		[]string{
-			"allow_subnet_cidr_routes_overlap",
 			"count",
 			"depends_on",
 			"for_each",
 			"ip_collection",
 			"lifecycle",
+			"params",
+			"params.resource_manager_tags",
 			"provider",
 			"send_secondary_ip_range_if_empty",
 		},
-		[]string{},
 	)
 }
 func TestAccComputeSubnetwork_subnetworkInternalIpv6Example(t *testing.T) {
@@ -98,88 +80,16 @@ func TestAccComputeSubnetwork_subnetworkInternalIpv6Example(t *testing.T) {
 	test.BidirectionalConversion(
 		t,
 		[]string{
-			"allow_subnet_cidr_routes_overlap",
 			"count",
 			"depends_on",
 			"for_each",
 			"ip_collection",
 			"lifecycle",
+			"params",
+			"params.resource_manager_tags",
 			"provider",
 			"send_secondary_ip_range_if_empty",
 		},
-		[]string{},
-	)
-}
-func TestAccComputeSubnetwork_subnetworkPurposePrivateNatExample(t *testing.T) {
-	t.Parallel()
-
-	test.BidirectionalConversion(
-		t,
-		[]string{
-			"allow_subnet_cidr_routes_overlap",
-			"count",
-			"depends_on",
-			"for_each",
-			"ip_collection",
-			"lifecycle",
-			"provider",
-			"send_secondary_ip_range_if_empty",
-		},
-		[]string{},
-	)
-}
-func TestAccComputeSubnetwork_subnetworkCidrOverlapExample(t *testing.T) {
-	t.Parallel()
-
-	test.BidirectionalConversion(
-		t,
-		[]string{
-			"allow_subnet_cidr_routes_overlap",
-			"count",
-			"depends_on",
-			"for_each",
-			"ip_collection",
-			"lifecycle",
-			"provider",
-			"send_secondary_ip_range_if_empty",
-		},
-		[]string{},
-	)
-}
-func TestAccComputeSubnetwork_subnetworkReservedInternalRangeExample(t *testing.T) {
-	t.Parallel()
-
-	test.BidirectionalConversion(
-		t,
-		[]string{
-			"allow_subnet_cidr_routes_overlap",
-			"count",
-			"depends_on",
-			"for_each",
-			"ip_collection",
-			"lifecycle",
-			"provider",
-			"send_secondary_ip_range_if_empty",
-		},
-		[]string{},
-	)
-}
-func TestAccComputeSubnetwork_subnetworkReservedSecondaryRangeExample(t *testing.T) {
-	t.Parallel()
-
-	test.BidirectionalConversion(
-		t,
-		[]string{
-			"allow_subnet_cidr_routes_overlap",
-			"count",
-			"depends_on",
-			"for_each",
-			"ip_collection",
-			"lifecycle",
-			"provider",
-			"send_secondary_ip_range_if_empty",
-		},
-		[]string{},
 	)
 }
 func TestAccComputeSubnetwork_subnetworkIpv6OnlyInternalExample(t *testing.T) {
@@ -188,16 +98,16 @@ func TestAccComputeSubnetwork_subnetworkIpv6OnlyInternalExample(t *testing.T) {
 	test.BidirectionalConversion(
 		t,
 		[]string{
-			"allow_subnet_cidr_routes_overlap",
 			"count",
 			"depends_on",
 			"for_each",
 			"ip_collection",
 			"lifecycle",
+			"params",
+			"params.resource_manager_tags",
 			"provider",
 			"send_secondary_ip_range_if_empty",
 		},
-		[]string{},
 	)
 }
 func TestAccComputeSubnetwork_subnetworkWithSubnetModePdpExample(t *testing.T) {
@@ -206,16 +116,16 @@ func TestAccComputeSubnetwork_subnetworkWithSubnetModePdpExample(t *testing.T) {
 	test.BidirectionalConversion(
 		t,
 		[]string{
-			"allow_subnet_cidr_routes_overlap",
 			"count",
 			"depends_on",
 			"for_each",
 			"ip_collection",
 			"lifecycle",
+			"params",
+			"params.resource_manager_tags",
 			"provider",
 			"send_secondary_ip_range_if_empty",
 		},
-		[]string{},
 	)
 }
 func TestAccComputeSubnetwork_subnetworkIpv6OnlyExternalExample(t *testing.T) {
@@ -224,15 +134,15 @@ func TestAccComputeSubnetwork_subnetworkIpv6OnlyExternalExample(t *testing.T) {
 	test.BidirectionalConversion(
 		t,
 		[]string{
-			"allow_subnet_cidr_routes_overlap",
 			"count",
 			"depends_on",
 			"for_each",
 			"ip_collection",
 			"lifecycle",
+			"params",
+			"params.resource_manager_tags",
 			"provider",
 			"send_secondary_ip_range_if_empty",
 		},
-		[]string{},
 	)
 }

@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tfplan2cai/converters/cai"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tfplan2cai/converters/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 func ComputeHealthCheckTfplan2caiConverter() cai.Tfplan2caiConverter {
@@ -47,8 +47,8 @@ func GetComputeHealthCheckCaiAssets(d tpgresource.TerraformResourceData, config 
 				Name: name,
 				Type: ComputeHealthCheckAssetType,
 				Resource: &caiasset.AssetResource{
-					Version:              "beta",
-					DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/beta/rest",
+					Version:              "v1",
+					DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
 					DiscoveryName:        "HealthCheck",
 					Data:                 obj,
 					Location:             location,
@@ -139,12 +139,6 @@ func GetComputeHealthCheckCaiObject(d tpgresource.TerraformResourceData, config 
 		return nil, err
 	} else if v, ok := d.GetOkExists("grpc_health_check"); !tpgresource.IsEmptyValue(reflect.ValueOf(grpcHealthCheckProp)) && (ok || !reflect.DeepEqual(v, grpcHealthCheckProp)) {
 		obj["grpcHealthCheck"] = grpcHealthCheckProp
-	}
-	grpcTlsHealthCheckProp, err := expandComputeHealthCheckGrpcTlsHealthCheck(d.Get("grpc_tls_health_check"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("grpc_tls_health_check"); !tpgresource.IsEmptyValue(reflect.ValueOf(grpcTlsHealthCheckProp)) && (ok || !reflect.DeepEqual(v, grpcTlsHealthCheckProp)) {
-		obj["grpcTlsHealthCheck"] = grpcTlsHealthCheckProp
 	}
 	logConfigProp, err := expandComputeHealthCheckLogConfig(d.Get("log_config"), d, config)
 	if err != nil {
@@ -247,20 +241,6 @@ func resourceComputeHealthCheckEncoder(d tpgresource.TerraformResourceData, meta
 		return obj, nil
 	}
 
-	if _, ok := d.GetOk("grpc_tls_health_check"); ok {
-		hc := d.Get("grpc_tls_health_check").([]interface{})[0]
-		ps := hc.(map[string]interface{})["port_specification"]
-
-		if ps == "USE_FIXED_PORT" || ps == "" {
-			m := obj["grpcTlsHealthCheck"].(map[string]interface{})
-			if m["port"] == nil {
-				return nil, fmt.Errorf("error in HealthCheck %s: `port` must be set for GRPC with TLS health checks`.", d.Get("name").(string))
-			}
-		}
-		obj["type"] = "GRPC_WITH_TLS"
-		return obj, nil
-	}
-
 	return nil, fmt.Errorf("error in HealthCheck %s: No health check block specified.", d.Get("name").(string))
 }
 
@@ -293,6 +273,9 @@ func expandComputeHealthCheckUnhealthyThreshold(v interface{}, d tpgresource.Ter
 }
 
 func expandComputeHealthCheckHttpHealthCheck(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -382,6 +365,9 @@ func expandComputeHealthCheckHttpHealthCheckPortSpecification(v interface{}, d t
 }
 
 func expandComputeHealthCheckHttpsHealthCheck(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -471,6 +457,9 @@ func expandComputeHealthCheckHttpsHealthCheckPortSpecification(v interface{}, d 
 }
 
 func expandComputeHealthCheckTcpHealthCheck(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -549,6 +538,9 @@ func expandComputeHealthCheckTcpHealthCheckPortSpecification(v interface{}, d tp
 }
 
 func expandComputeHealthCheckSslHealthCheck(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -627,6 +619,9 @@ func expandComputeHealthCheckSslHealthCheckPortSpecification(v interface{}, d tp
 }
 
 func expandComputeHealthCheckHttp2HealthCheck(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -716,6 +711,9 @@ func expandComputeHealthCheckHttp2HealthCheckPortSpecification(v interface{}, d 
 }
 
 func expandComputeHealthCheckGrpcHealthCheck(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -771,52 +769,10 @@ func expandComputeHealthCheckGrpcHealthCheckGrpcServiceName(v interface{}, d tpg
 	return v, nil
 }
 
-func expandComputeHealthCheckGrpcTlsHealthCheck(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
+func expandComputeHealthCheckLogConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
 		return nil, nil
 	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedPort, err := expandComputeHealthCheckGrpcTlsHealthCheckPort(original["port"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedPort); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["port"] = transformedPort
-	}
-
-	transformedPortSpecification, err := expandComputeHealthCheckGrpcTlsHealthCheckPortSpecification(original["port_specification"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedPortSpecification); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["portSpecification"] = transformedPortSpecification
-	}
-
-	transformedGrpcServiceName, err := expandComputeHealthCheckGrpcTlsHealthCheckGrpcServiceName(original["grpc_service_name"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedGrpcServiceName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["grpcServiceName"] = transformedGrpcServiceName
-	}
-
-	return transformed, nil
-}
-
-func expandComputeHealthCheckGrpcTlsHealthCheckPort(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandComputeHealthCheckGrpcTlsHealthCheckPortSpecification(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandComputeHealthCheckGrpcTlsHealthCheckGrpcServiceName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandComputeHealthCheckLogConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

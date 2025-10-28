@@ -19,7 +19,7 @@ package saasruntime
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -97,6 +97,9 @@ func GetSaasRuntimeReleaseApiObject(d tpgresource.TerraformResourceData, config 
 }
 
 func expandSaasRuntimeReleaseBlueprint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -142,6 +145,9 @@ func expandSaasRuntimeReleaseBlueprintVersion(v interface{}, d tpgresource.Terra
 }
 
 func expandSaasRuntimeReleaseInputVariableDefaults(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -190,6 +196,9 @@ func expandSaasRuntimeReleaseInputVariableDefaultsVariable(v interface{}, d tpgr
 }
 
 func expandSaasRuntimeReleaseReleaseRequirements(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
