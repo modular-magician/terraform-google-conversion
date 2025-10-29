@@ -21,11 +21,11 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/cai2hcl/converters/utils"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/cai2hcl/models"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/cai2hcl/converters/utils"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/cai2hcl/models"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 type ComputeFirewallPolicyCai2hclConverter struct {
@@ -61,7 +61,13 @@ func (c *ComputeFirewallPolicyCai2hclConverter) convertResourceData(asset caiass
 	var err error
 	res := asset.Resource.Data
 	config := transport.NewConfig()
-	d := &schema.ResourceData{}
+
+	// This is a fake resource used to get fake d
+	// d.Get will return empty map, instead of nil
+	fakeResource := &schema.Resource{
+		Schema: c.schema,
+	}
+	d := fakeResource.TestResourceData()
 
 	hclBlockName := res["shortName"].(string)
 

@@ -20,8 +20,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/verify"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/verify"
 )
 
 const ComputeUrlMapAssetType string = "compute.googleapis.com/UrlMap"
@@ -337,13 +337,6 @@ the host / authority header is suffixed with -shadow.`,
 										Required:         true,
 										DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
 										Description:      `The full or partial URL to the BackendService resource being mirrored to.`,
-									},
-									"mirror_percent": {
-										Type:         schema.TypeFloat,
-										Optional:     true,
-										ValidateFunc: validation.FloatBetween(0, 100),
-										Description: `The percentage of requests to be mirrored to backendService.
-The value must be between 0.0 and 100.0 inclusive.`,
 									},
 								},
 							},
@@ -1072,13 +1065,6 @@ the host / authority header is suffixed with -shadow.`,
 													DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
 													Description:      `The full or partial URL to the BackendService resource being mirrored to.`,
 												},
-												"mirror_percent": {
-													Type:         schema.TypeFloat,
-													Optional:     true,
-													ValidateFunc: validation.FloatBetween(0, 100),
-													Description: `The percentage of requests to be mirrored to backendService.
-The value must be between 0.0 and 100.0 inclusive.`,
-												},
 											},
 										},
 									},
@@ -1791,13 +1777,6 @@ service, the host / authority header is suffixed with -shadow.`,
 																DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
 																Description:      `The BackendService resource being mirrored to.`,
 															},
-															"mirror_percent": {
-																Type:         schema.TypeFloat,
-																Optional:     true,
-																ValidateFunc: validation.FloatBetween(0, 100),
-																Description: `The percentage of requests to be mirrored to backendService.
-The value must be between 0.0 and 100.0 inclusive.`,
-															},
 														},
 													},
 												},
@@ -2299,68 +2278,6 @@ prior to sending the response back to the client.`,
 											},
 										},
 									},
-									"http_filter_configs": {
-										Type:     schema.TypeList,
-										Optional: true,
-										Description: `Outbound route specific configuration for networkservices.HttpFilter resources enabled by Traffic Director.
-httpFilterConfigs only applies for load balancers with loadBalancingScheme set to INTERNAL_SELF_MANAGED.
-See ForwardingRule for more details.
-
-Not supported when the URL map is bound to a target gRPC proxy that has validateForProxyless field set to true.`,
-										Elem: &schema.Resource{
-											Schema: map[string]*schema.Schema{
-												"config": {
-													Type:     schema.TypeString,
-													Optional: true,
-													Description: `The configuration needed to enable the networkservices.HttpFilter resource.
-The configuration must be YAML formatted and only contain fields defined in the protobuf identified in configTypeUrl`,
-												},
-												"config_type_url": {
-													Type:     schema.TypeString,
-													Optional: true,
-													Description: `The fully qualified versioned proto3 type url of the protobuf that the filter expects for its contextual settings,
-for example: type.googleapis.com/google.protobuf.Struct`,
-												},
-												"filter_name": {
-													Type:     schema.TypeString,
-													Optional: true,
-													Description: `Name of the networkservices.HttpFilter resource this configuration belongs to.
-This name must be known to the xDS client. Example: envoy.wasm`,
-												},
-											},
-										},
-									},
-									"http_filter_metadata": {
-										Type:     schema.TypeList,
-										Optional: true,
-										Description: `Outbound route specific metadata supplied to networkservices.HttpFilter resources enabled by Traffic Director.
-httpFilterMetadata only applies for load balancers with loadBalancingScheme set to INTERNAL_SELF_MANAGED.
-See ForwardingRule for more details.
-
-Not supported when the URL map is bound to a target gRPC proxy that has validateForProxyless field set to true.`,
-										Elem: &schema.Resource{
-											Schema: map[string]*schema.Schema{
-												"config": {
-													Type:     schema.TypeString,
-													Optional: true,
-													Description: `The configuration needed to enable the networkservices.HttpFilter resource.
-The configuration must be YAML formatted and only contain fields defined in the protobuf identified in configTypeUrl`,
-												},
-												"config_type_url": {
-													Type:     schema.TypeString,
-													Optional: true,
-													Description: `The fully qualified versioned proto3 type url of the protobuf that the filter expects for its contextual settings,
-for example: type.googleapis.com/google.protobuf.Struct`,
-												},
-												"filter_name": {
-													Type:     schema.TypeString,
-													Optional: true,
-													Description: `Name of the networkservices.HttpFilter resource this configuration belongs to.
-This name must be known to the xDS client. Example: envoy.wasm`,
-												},
-											},
-										},
-									},
 									"match_rules": {
 										Type:        schema.TypeList,
 										Optional:    true,
@@ -2808,13 +2725,6 @@ service, the host / authority header is suffixed with -shadow.`,
 																Required:         true,
 																DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
 																Description:      `The BackendService resource being mirrored to.`,
-															},
-															"mirror_percent": {
-																Type:         schema.TypeFloat,
-																Optional:     true,
-																ValidateFunc: validation.FloatBetween(0, 100),
-																Description: `The percentage of requests to be mirrored to backendService.
-The value must be between 0.0 and 100.0 inclusive.`,
 															},
 														},
 													},

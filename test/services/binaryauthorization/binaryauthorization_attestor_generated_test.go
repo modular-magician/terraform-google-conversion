@@ -17,7 +17,7 @@ package binaryauthorization_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccBinaryAuthorizationAttestor_binaryAuthorizationAttestorBasicExample(t *testing.T) {
@@ -32,6 +32,5 @@ func TestAccBinaryAuthorizationAttestor_binaryAuthorizationAttestorBasicExample(
 			"lifecycle",
 			"provider",
 		},
-		[]string{},
 	)
 }

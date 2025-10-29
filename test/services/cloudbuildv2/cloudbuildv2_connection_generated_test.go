@@ -17,7 +17,7 @@ package cloudbuildv2_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccCloudbuildv2Connection_cloudbuildv2ConnectionExample(t *testing.T) {
@@ -29,12 +29,10 @@ func TestAccCloudbuildv2Connection_cloudbuildv2ConnectionExample(t *testing.T) {
 			"count",
 			"depends_on",
 			"for_each",
-			"github_config.app_installation_id",
 			"lifecycle",
 			"location",
 			"name",
 			"provider",
 		},
-		[]string{},
 	)
 }

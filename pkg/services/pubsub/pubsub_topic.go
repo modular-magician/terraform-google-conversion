@@ -19,8 +19,8 @@ package pubsub
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/verify"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/verify"
 )
 
 const PubsubTopicAssetType string = "pubsub.googleapis.com/Topic"
@@ -457,6 +457,20 @@ if the schema has been deleted.`,
 						},
 					},
 				},
+			},
+			"tags": {
+				Type:     schema.TypeMap,
+				Optional: true,
+				ForceNew: true,
+				Description: `Input only. Resource manager tags to be bound to the topic. Tag keys and
+values have the same definition as resource manager tags. Keys must be in
+the format tagKeys/{tag_key_id}, and values are in the format
+tagValues/456. The field is ignored when empty. The field is immutable and
+causes resource replacement when mutated. This field is only set at create
+time and modifying this field after creation will trigger recreation. To
+apply tags to an existing resource, see the 'google_tags_tag_value'
+resource.`,
+				Elem: &schema.Schema{Type: schema.TypeString},
 			},
 			"effective_labels": {
 				Type:        schema.TypeMap,
