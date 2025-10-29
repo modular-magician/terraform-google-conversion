@@ -17,7 +17,7 @@ package backupdr_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccBackupDRBackupPlan_backupDrBackupPlanSimpleExample(t *testing.T) {
@@ -34,24 +34,6 @@ func TestAccBackupDRBackupPlan_backupDrBackupPlanSimpleExample(t *testing.T) {
 			"location",
 			"provider",
 		},
-		[]string{},
-	)
-}
-func TestAccBackupDRBackupPlan_backupDrBackupPlanForDiskResourceExample(t *testing.T) {
-	t.Parallel()
-
-	test.BidirectionalConversion(
-		t,
-		[]string{
-			"backup_plan_id",
-			"count",
-			"depends_on",
-			"for_each",
-			"lifecycle",
-			"location",
-			"provider",
-		},
-		[]string{},
 	)
 }
 func TestAccBackupDRBackupPlan_backupDrBackupPlanForCsqlResourceExample(t *testing.T) {
@@ -68,6 +50,5 @@ func TestAccBackupDRBackupPlan_backupDrBackupPlanForCsqlResourceExample(t *testi
 			"location",
 			"provider",
 		},
-		[]string{},
 	)
 }

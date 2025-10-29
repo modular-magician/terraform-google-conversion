@@ -19,7 +19,7 @@ package identityplatform
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -103,6 +103,9 @@ func expandIdentityPlatformInboundSamlConfigEnabled(v interface{}, d tpgresource
 }
 
 func expandIdentityPlatformInboundSamlConfigIdpConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -155,6 +158,9 @@ func expandIdentityPlatformInboundSamlConfigIdpConfigSignRequest(v interface{}, 
 }
 
 func expandIdentityPlatformInboundSamlConfigIdpConfigIdpCertificates(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -181,6 +187,9 @@ func expandIdentityPlatformInboundSamlConfigIdpConfigIdpCertificatesX509Certific
 }
 
 func expandIdentityPlatformInboundSamlConfigSpConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -222,6 +231,9 @@ func expandIdentityPlatformInboundSamlConfigSpConfigCallbackUri(v interface{}, d
 }
 
 func expandIdentityPlatformInboundSamlConfigSpConfigSpCertificates(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {

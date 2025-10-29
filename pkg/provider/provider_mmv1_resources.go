@@ -1,24 +1,33 @@
 package provider
 
 import (
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/alloydb"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/apigee"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/apphub"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/backupdr"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/beyondcorp"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/bigquery"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/binaryauthorization"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/blockchainnodeengine"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/certificatemanager"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/cloudasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/cloudbuild"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/cloudbuildv2"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/clouddeploy"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/cloudfunctions2"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/compute"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/networksecurity"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/pubsub"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/services/resourcemanager"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/alloydb"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/apigee"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/apphub"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/artifactregistry"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/backupdr"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/beyondcorp"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/bigquery"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/binaryauthorization"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/blockchainnodeengine"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/certificatemanager"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudbuild"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudbuildv2"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/clouddeploy"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudfunctions2"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/compute"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/dataproc"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/datastream"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/filestore"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/firebasedataconnect"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/kms"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/networksecurity"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/pubsub"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/redis"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/resourcemanager"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/secretmanager"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/secretmanagerregional"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
@@ -29,7 +38,7 @@ var handwrittenTfplan2caiResources = map[string]*schema.Resource{
 	// ####### END handwritten resources ###########
 }
 
-// Generated resources: 50
+// Generated resources: 68
 var generatedResources = map[string]*schema.Resource{
 	"google_alloydb_backup":                                alloydb.ResourceAlloydbBackup(),
 	"google_alloydb_cluster":                               alloydb.ResourceAlloydbCluster(),
@@ -37,7 +46,9 @@ var generatedResources = map[string]*schema.Resource{
 	"google_apigee_instance":                               apigee.ResourceApigeeInstance(),
 	"google_apphub_application":                            apphub.ResourceApphubApplication(),
 	"google_apphub_service":                                apphub.ResourceApphubService(),
+	"google_apphub_service_project_attachment":             apphub.ResourceApphubServiceProjectAttachment(),
 	"google_apphub_workload":                               apphub.ResourceApphubWorkload(),
+	"google_artifact_registry_repository":                  artifactregistry.ResourceArtifactRegistryRepository(),
 	"google_backup_dr_backup_plan":                         backupdr.ResourceBackupDRBackupPlan(),
 	"google_backup_dr_backup_vault":                        backupdr.ResourceBackupDRBackupVault(),
 	"google_beyondcorp_app_connection":                     beyondcorp.ResourceBeyondcorpAppConnection(),
@@ -53,7 +64,9 @@ var generatedResources = map[string]*schema.Resource{
 	"google_cloudbuild_bitbucket_server_config":            cloudbuild.ResourceCloudBuildBitbucketServerConfig(),
 	"google_cloudbuildv2_connection":                       cloudbuildv2.ResourceCloudbuildv2Connection(),
 	"google_cloudbuildv2_repository":                       cloudbuildv2.ResourceCloudbuildv2Repository(),
+	"google_clouddeploy_automation":                        clouddeploy.ResourceClouddeployAutomation(),
 	"google_clouddeploy_custom_target_type":                clouddeploy.ResourceClouddeployCustomTargetType(),
+	"google_clouddeploy_deploy_policy":                     clouddeploy.ResourceClouddeployDeployPolicy(),
 	"google_cloudfunctions2_function":                      cloudfunctions2.ResourceCloudfunctions2function(),
 	"google_compute_address":                               compute.ResourceComputeAddress(),
 	"google_compute_autoscaler":                            compute.ResourceComputeAutoscaler(),
@@ -68,10 +81,20 @@ var generatedResources = map[string]*schema.Resource{
 	"google_compute_image":                                 compute.ResourceComputeImage(),
 	"google_compute_network":                               compute.ResourceComputeNetwork(),
 	"google_compute_region_autoscaler":                     compute.ResourceComputeRegionAutoscaler(),
+	"google_compute_region_health_check":                   compute.ResourceComputeRegionHealthCheck(),
 	"google_compute_subnetwork":                            compute.ResourceComputeSubnetwork(),
 	"google_compute_url_map":                               compute.ResourceComputeUrlMap(),
+	"google_dataproc_batch":                                dataproc.ResourceDataprocBatch(),
+	"google_datastream_connection_profile":                 datastream.ResourceDatastreamConnectionProfile(),
+	"google_datastream_private_connection":                 datastream.ResourceDatastreamPrivateConnection(),
+	"google_datastream_stream":                             datastream.ResourceDatastreamStream(),
+	"google_filestore_backup":                              filestore.ResourceFilestoreBackup(),
+	"google_filestore_instance":                            filestore.ResourceFilestoreInstance(),
+	"google_filestore_snapshot":                            filestore.ResourceFilestoreSnapshot(),
+	"google_firebase_data_connect_service":                 firebasedataconnect.ResourceFirebaseDataConnectService(),
+	"google_kms_autokey_config":                            kms.ResourceKMSAutokeyConfig(),
+	"google_kms_key_handle":                                kms.ResourceKMSKeyHandle(),
 	"google_network_security_address_group":                networksecurity.ResourceNetworkSecurityAddressGroup(),
-	"google_network_security_authorization_policy":         networksecurity.ResourceNetworkSecurityAuthorizationPolicy(),
 	"google_network_security_client_tls_policy":            networksecurity.ResourceNetworkSecurityClientTlsPolicy(),
 	"google_network_security_gateway_security_policy":      networksecurity.ResourceNetworkSecurityGatewaySecurityPolicy(),
 	"google_network_security_gateway_security_policy_rule": networksecurity.ResourceNetworkSecurityGatewaySecurityPolicyRule(),
@@ -81,4 +104,8 @@ var generatedResources = map[string]*schema.Resource{
 	"google_network_security_url_lists":                    networksecurity.ResourceNetworkSecurityUrlLists(),
 	"google_pubsub_subscription":                           pubsub.ResourcePubsubSubscription(),
 	"google_pubsub_topic":                                  pubsub.ResourcePubsubTopic(),
+	"google_redis_cluster":                                 redis.ResourceRedisCluster(),
+	"google_redis_instance":                                redis.ResourceRedisInstance(),
+	"google_secret_manager_secret":                         secretmanager.ResourceSecretManagerSecret(),
+	"google_secret_manager_regional_secret":                secretmanagerregional.ResourceSecretManagerRegionalRegionalSecret(),
 }

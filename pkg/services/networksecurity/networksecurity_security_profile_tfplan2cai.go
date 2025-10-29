@@ -21,10 +21,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tfplan2cai/converters/cai"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tfplan2cai/converters/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 func NetworkSecuritySecurityProfileTfplan2caiConverter() cai.Tfplan2caiConverter {
@@ -48,8 +48,8 @@ func GetNetworkSecuritySecurityProfileCaiAssets(d tpgresource.TerraformResourceD
 				Name: name,
 				Type: NetworkSecuritySecurityProfileAssetType,
 				Resource: &caiasset.AssetResource{
-					Version:              "v1beta1",
-					DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/networksecurity/v1beta1/rest",
+					Version:              "v1",
+					DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/networksecurity/v1/rest",
 					DiscoveryName:        "SecurityProfile",
 					Data:                 obj,
 					Location:             location,
@@ -108,6 +108,9 @@ func expandNetworkSecuritySecurityProfileDescription(v interface{}, d tpgresourc
 }
 
 func expandNetworkSecuritySecurityProfileThreatPreventionProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -142,6 +145,9 @@ func expandNetworkSecuritySecurityProfileThreatPreventionProfile(v interface{}, 
 
 func expandNetworkSecuritySecurityProfileThreatPreventionProfileSeverityOverrides(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -180,6 +186,9 @@ func expandNetworkSecuritySecurityProfileThreatPreventionProfileSeverityOverride
 
 func expandNetworkSecuritySecurityProfileThreatPreventionProfileThreatOverrides(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -218,6 +227,9 @@ func expandNetworkSecuritySecurityProfileThreatPreventionProfileThreatOverridesT
 
 func expandNetworkSecuritySecurityProfileThreatPreventionProfileAntivirusOverrides(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -255,6 +267,9 @@ func expandNetworkSecuritySecurityProfileThreatPreventionProfileAntivirusOverrid
 }
 
 func expandNetworkSecuritySecurityProfileCustomMirroringProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -278,6 +293,9 @@ func expandNetworkSecuritySecurityProfileCustomMirroringProfileMirroringEndpoint
 }
 
 func expandNetworkSecuritySecurityProfileCustomInterceptProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

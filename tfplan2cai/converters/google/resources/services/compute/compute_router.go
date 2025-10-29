@@ -20,10 +20,11 @@ import (
 	"context"
 	"fmt"
 	"reflect"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -114,6 +115,12 @@ func GetComputeRouterApiObject(d tpgresource.TerraformResourceData, config *tran
 	} else if v, ok := d.GetOkExists("md5_authentication_keys"); !tpgresource.IsEmptyValue(reflect.ValueOf(md5AuthenticationKeysProp)) && (ok || !reflect.DeepEqual(v, md5AuthenticationKeysProp)) {
 		obj["md5AuthenticationKeys"] = md5AuthenticationKeysProp
 	}
+	nccGatewayProp, err := expandComputeRouterNccGateway(d.Get("ncc_gateway"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("ncc_gateway"); !tpgresource.IsEmptyValue(reflect.ValueOf(nccGatewayProp)) && (ok || !reflect.DeepEqual(v, nccGatewayProp)) {
+		obj["nccGateway"] = nccGatewayProp
+	}
 	paramsProp, err := expandComputeRouterParams(d.Get("params"), d, config)
 	if err != nil {
 		return nil, err
@@ -147,6 +154,9 @@ func expandComputeRouterNetwork(v interface{}, d tpgresource.TerraformResourceDa
 }
 
 func expandComputeRouterBgp(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -214,6 +224,9 @@ func expandComputeRouterBgpAdvertisedGroups(v interface{}, d tpgresource.Terrafo
 
 func expandComputeRouterBgpAdvertisedIpRanges(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -263,6 +276,9 @@ func expandComputeRouterEncryptedInterconnectRouter(v interface{}, d tpgresource
 }
 
 func expandComputeRouterMd5AuthenticationKeys(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -296,7 +312,29 @@ func expandComputeRouterMd5AuthenticationKeysKey(v interface{}, d tpgresource.Te
 	return v, nil
 }
 
+func expandComputeRouterNccGateway(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	// This method returns a full self link from a partial self link.
+	if v == nil || v.(string) == "" {
+		// It does not try to construct anything from empty.
+		return "", nil
+	} else if strings.HasPrefix(v.(string), "https://") {
+		// Anything that starts with a URL scheme is assumed to be a self link worth using.
+		return v, nil
+	}
+	// Anything else is assumed to be a regional resource, with a partial link that begins with the resource name.
+	// This isn't very likely - it's a last-ditch effort to extract something useful here.  We can do a better job
+	// as soon as MultiResourceRefs are working since we'll know the types that this field is supposed to point to.
+	url, err := tpgresource.ReplaceVars(d, config, "{{NetworkConnectivityBasePath}}")
+	if err != nil {
+		return nil, err
+	}
+	return url + v.(string), nil
+}
+
 func expandComputeRouterParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
