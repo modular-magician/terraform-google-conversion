@@ -19,10 +19,10 @@ package blockchainnodeengine
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/caiasset"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tfplan2cai/converters/cai"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/tpgresource"
-	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v6/pkg/transport"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/caiasset"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tfplan2cai/converters/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tpgresource"
+	transport_tpg "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/transport"
 )
 
 func BlockchainNodeEngineBlockchainNodesTfplan2caiConverter() cai.Tfplan2caiConverter {
@@ -84,6 +84,9 @@ func GetBlockchainNodeEngineBlockchainNodesCaiObject(d tpgresource.TerraformReso
 }
 
 func expandBlockchainNodeEngineBlockchainNodesEthereumDetails(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -152,6 +155,9 @@ func expandBlockchainNodeEngineBlockchainNodesEthereumDetails(v interface{}, d t
 }
 
 func expandBlockchainNodeEngineBlockchainNodesEthereumDetailsValidatorConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -175,6 +181,9 @@ func expandBlockchainNodeEngineBlockchainNodesEthereumDetailsValidatorConfigMevR
 }
 
 func expandBlockchainNodeEngineBlockchainNodesEthereumDetailsGethDetails(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

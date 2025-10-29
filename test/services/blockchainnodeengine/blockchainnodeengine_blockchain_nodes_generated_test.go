@@ -17,7 +17,7 @@ package blockchainnodeengine_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccBlockchainNodeEngineBlockchainNodes_blockchainNodesBasicExample(t *testing.T) {
@@ -34,7 +34,6 @@ func TestAccBlockchainNodeEngineBlockchainNodes_blockchainNodesBasicExample(t *t
 			"location",
 			"provider",
 		},
-		[]string{},
 	)
 }
 func TestAccBlockchainNodeEngineBlockchainNodes_blockchainNodesGethDetailsExample(t *testing.T) {
@@ -51,6 +50,5 @@ func TestAccBlockchainNodeEngineBlockchainNodes_blockchainNodesGethDetailsExampl
 			"location",
 			"provider",
 		},
-		[]string{},
 	)
 }
