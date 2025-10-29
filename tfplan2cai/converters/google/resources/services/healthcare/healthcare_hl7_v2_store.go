@@ -20,7 +20,7 @@ import (
 	"encoding/json"
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -106,6 +106,9 @@ func expandHealthcareHl7V2StoreRejectDuplicateMessage(v interface{}, d tpgresour
 }
 
 func expandHealthcareHl7V2StoreParserConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -170,6 +173,9 @@ func expandHealthcareHl7V2StoreParserConfigVersion(v interface{}, d tpgresource.
 }
 
 func expandHealthcareHl7V2StoreNotificationConfigs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -207,6 +213,9 @@ func expandHealthcareHl7V2StoreNotificationConfigsFilter(v interface{}, d tpgres
 }
 
 func expandHealthcareHl7V2StoreNotificationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

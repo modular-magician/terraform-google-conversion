@@ -19,7 +19,7 @@ package vertexai
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -137,6 +137,9 @@ func expandVertexAIIndexEndpointDeployedIndexDisplayName(v interface{}, d tpgres
 }
 
 func expandVertexAIIndexEndpointDeployedIndexAutomaticResources(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -171,6 +174,9 @@ func expandVertexAIIndexEndpointDeployedIndexAutomaticResourcesMaxReplicaCount(v
 }
 
 func expandVertexAIIndexEndpointDeployedIndexDedicatedResources(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -204,6 +210,9 @@ func expandVertexAIIndexEndpointDeployedIndexDedicatedResources(v interface{}, d
 }
 
 func expandVertexAIIndexEndpointDeployedIndexDedicatedResourcesMachineSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -239,6 +248,9 @@ func expandVertexAIIndexEndpointDeployedIndexEnableAccessLogging(v interface{}, 
 }
 
 func expandVertexAIIndexEndpointDeployedIndexDeployedIndexAuthConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -258,6 +270,9 @@ func expandVertexAIIndexEndpointDeployedIndexDeployedIndexAuthConfig(v interface
 }
 
 func expandVertexAIIndexEndpointDeployedIndexDeployedIndexAuthConfigAuthProvider(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

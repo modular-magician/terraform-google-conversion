@@ -17,7 +17,7 @@ package networksecurity_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccNetworkSecuritySecurityProfile_networkSecuritySecurityProfileBasicExample(t *testing.T) {
@@ -35,7 +35,6 @@ func TestAccNetworkSecuritySecurityProfile_networkSecuritySecurityProfileBasicEx
 			"parent",
 			"provider",
 		},
-		[]string{},
 	)
 }
 func TestAccNetworkSecuritySecurityProfile_networkSecuritySecurityProfileOverridesExample(t *testing.T) {
@@ -53,42 +52,5 @@ func TestAccNetworkSecuritySecurityProfile_networkSecuritySecurityProfileOverrid
 			"parent",
 			"provider",
 		},
-		[]string{},
-	)
-}
-func TestAccNetworkSecuritySecurityProfile_networkSecuritySecurityProfileMirroringExample(t *testing.T) {
-	t.Parallel()
-
-	test.BidirectionalConversion(
-		t,
-		[]string{
-			"count",
-			"depends_on",
-			"for_each",
-			"lifecycle",
-			"location",
-			"name",
-			"parent",
-			"provider",
-		},
-		[]string{},
-	)
-}
-func TestAccNetworkSecuritySecurityProfile_networkSecuritySecurityProfileInterceptExample(t *testing.T) {
-	t.Parallel()
-
-	test.BidirectionalConversion(
-		t,
-		[]string{
-			"count",
-			"depends_on",
-			"for_each",
-			"lifecycle",
-			"location",
-			"name",
-			"parent",
-			"provider",
-		},
-		[]string{},
 	)
 }

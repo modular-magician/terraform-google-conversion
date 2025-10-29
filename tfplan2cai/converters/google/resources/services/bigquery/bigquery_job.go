@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -132,6 +132,13 @@ func expandBigQueryJobConfiguration(v interface{}, d tpgresource.TerraformResour
 		transformed["extract"] = transformedExtract
 	}
 
+	transformedReservation, err := expandBigQueryJobConfigurationReservation(d.Get("reservation"), d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedReservation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["reservation"] = transformedReservation
+	}
+
 	transformedEffectiveLabels, err := expandBigQueryJobConfigurationEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -151,6 +158,9 @@ func expandBigQueryJobConfigurationJobTimeoutMs(v interface{}, d tpgresource.Ter
 }
 
 func expandBigQueryJobConfigurationQuery(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -347,6 +357,9 @@ func expandBigQueryJobConfigurationQueryDestinationTable(v interface{}, d tpgres
 }
 
 func expandBigQueryJobConfigurationQueryUserDefinedFunctionResources(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -455,6 +468,9 @@ func expandBigQueryJobConfigurationQuerySchemaUpdateOptions(v interface{}, d tpg
 }
 
 func expandBigQueryJobConfigurationQueryDestinationEncryptionConfiguration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -489,6 +505,9 @@ func expandBigQueryJobConfigurationQueryDestinationEncryptionConfigurationKmsKey
 }
 
 func expandBigQueryJobConfigurationQueryScriptOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -538,6 +557,9 @@ func expandBigQueryJobConfigurationQueryContinuous(v interface{}, d tpgresource.
 }
 
 func expandBigQueryJobConfigurationQueryConnectionProperties(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -575,6 +597,9 @@ func expandBigQueryJobConfigurationQueryConnectionPropertiesValue(v interface{},
 }
 
 func expandBigQueryJobConfigurationLoad(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -849,6 +874,9 @@ func expandBigQueryJobConfigurationLoadSchemaUpdateOptions(v interface{}, d tpgr
 }
 
 func expandBigQueryJobConfigurationLoadTimePartitioning(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -894,6 +922,9 @@ func expandBigQueryJobConfigurationLoadTimePartitioningField(v interface{}, d tp
 }
 
 func expandBigQueryJobConfigurationLoadDestinationEncryptionConfiguration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -928,6 +959,9 @@ func expandBigQueryJobConfigurationLoadDestinationEncryptionConfigurationKmsKeyV
 }
 
 func expandBigQueryJobConfigurationLoadParquetOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -962,6 +996,9 @@ func expandBigQueryJobConfigurationLoadParquetOptionsEnableListInference(v inter
 }
 
 func expandBigQueryJobConfigurationCopy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1101,6 +1138,9 @@ func expandBigQueryJobConfigurationCopyWriteDisposition(v interface{}, d tpgreso
 }
 
 func expandBigQueryJobConfigurationCopyDestinationEncryptionConfiguration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1135,6 +1175,9 @@ func expandBigQueryJobConfigurationCopyDestinationEncryptionConfigurationKmsKeyV
 }
 
 func expandBigQueryJobConfigurationExtract(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1274,6 +1317,9 @@ func expandBigQueryJobConfigurationExtractSourceTable(v interface{}, d tpgresour
 }
 
 func expandBigQueryJobConfigurationExtractSourceModel(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1315,6 +1361,10 @@ func expandBigQueryJobConfigurationExtractSourceModelDatasetId(v interface{}, d 
 }
 
 func expandBigQueryJobConfigurationExtractSourceModelModelId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBigQueryJobConfigurationReservation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
