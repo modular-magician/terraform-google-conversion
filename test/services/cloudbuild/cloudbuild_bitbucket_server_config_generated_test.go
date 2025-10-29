@@ -17,7 +17,7 @@ package cloudbuild_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccCloudBuildBitbucketServerConfig_cloudbuildBitbucketServerConfigExample(t *testing.T) {
@@ -34,7 +34,6 @@ func TestAccCloudBuildBitbucketServerConfig_cloudbuildBitbucketServerConfigExamp
 			"location",
 			"provider",
 		},
-		[]string{},
 	)
 }
 func TestAccCloudBuildBitbucketServerConfig_cloudbuildBitbucketServerConfigPeeredNetworkExample(t *testing.T) {
@@ -51,6 +50,5 @@ func TestAccCloudBuildBitbucketServerConfig_cloudbuildBitbucketServerConfigPeere
 			"location",
 			"provider",
 		},
-		[]string{},
 	)
 }

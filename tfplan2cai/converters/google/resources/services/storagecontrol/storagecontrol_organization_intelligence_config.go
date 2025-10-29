@@ -19,7 +19,7 @@ package storagecontrol
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -77,6 +77,9 @@ func expandStorageControlOrganizationIntelligenceConfigEditionConfig(v interface
 }
 
 func expandStorageControlOrganizationIntelligenceConfigFilter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -117,6 +120,9 @@ func expandStorageControlOrganizationIntelligenceConfigFilter(v interface{}, d t
 }
 
 func expandStorageControlOrganizationIntelligenceConfigFilterExcludedCloudStorageBuckets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -140,6 +146,9 @@ func expandStorageControlOrganizationIntelligenceConfigFilterExcludedCloudStorag
 }
 
 func expandStorageControlOrganizationIntelligenceConfigFilterIncludedCloudStorageBuckets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -163,6 +172,9 @@ func expandStorageControlOrganizationIntelligenceConfigFilterIncludedCloudStorag
 }
 
 func expandStorageControlOrganizationIntelligenceConfigFilterExcludedCloudStorageLocations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -186,6 +198,9 @@ func expandStorageControlOrganizationIntelligenceConfigFilterExcludedCloudStorag
 }
 
 func expandStorageControlOrganizationIntelligenceConfigFilterIncludedCloudStorageLocations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

@@ -19,7 +19,7 @@ package vertexai
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -99,6 +99,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentHuggingFaceModelId(v interfa
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -154,6 +157,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigModelDisplayName(
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -257,6 +263,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpec(v i
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecPorts(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -295,6 +304,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecDepl
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStartupProbe(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -370,6 +382,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStar
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStartupProbeExec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -393,6 +408,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStar
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStartupProbeHttpGet(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -456,6 +474,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStar
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStartupProbeHttpGetHttpHeaders(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -493,6 +514,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStar
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStartupProbeGrpc(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -527,6 +551,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStar
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStartupProbeTcpSocket(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -581,6 +608,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecStar
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecHealthProbe(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -656,6 +686,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecHeal
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecHealthProbeExec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -679,6 +712,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecHeal
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecHealthProbeHttpGet(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -742,6 +778,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecHeal
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecHealthProbeHttpGetHttpHeaders(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -779,6 +818,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecHeal
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecHealthProbeGrpc(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -813,6 +855,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecHeal
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecHealthProbeTcpSocket(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -879,6 +924,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecArgs
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecGrpcPorts(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -909,6 +957,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecShar
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLivenessProbe(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -984,6 +1035,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLive
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLivenessProbeExec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1007,6 +1061,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLive
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLivenessProbeHttpGet(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1070,6 +1127,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLive
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLivenessProbeHttpGetHttpHeaders(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -1107,6 +1167,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLive
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLivenessProbeGrpc(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1141,6 +1204,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLive
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLivenessProbeTcpSocket(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1195,6 +1261,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecLive
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentModelConfigContainerSpecEnv(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -1240,6 +1309,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentModelConfigHuggingFaceAccess
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1262,6 +1334,13 @@ func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfig(v interface{}
 		transformed["dedicatedEndpointEnabled"] = transformedDedicatedEndpointEnabled
 	}
 
+	transformedPrivateServiceConnectConfig, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfig(original["private_service_connect_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPrivateServiceConnectConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["privateServiceConnectConfig"] = transformedPrivateServiceConnectConfig
+	}
+
 	return transformed, nil
 }
 
@@ -1273,7 +1352,146 @@ func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigDedicatedEndpo
 	return v, nil
 }
 
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnablePrivateServiceConnect, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigEnablePrivateServiceConnect(original["enable_private_service_connect"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEnablePrivateServiceConnect); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["enablePrivateServiceConnect"] = transformedEnablePrivateServiceConnect
+	}
+
+	transformedProjectAllowlist, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigProjectAllowlist(original["project_allowlist"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedProjectAllowlist); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["projectAllowlist"] = transformedProjectAllowlist
+	}
+
+	transformedPscAutomationConfigs, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigs(original["psc_automation_configs"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPscAutomationConfigs); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["pscAutomationConfigs"] = transformedPscAutomationConfigs
+	}
+
+	transformedServiceAttachment, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigServiceAttachment(original["service_attachment"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedServiceAttachment); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["serviceAttachment"] = transformedServiceAttachment
+	}
+
+	return transformed, nil
+}
+
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigEnablePrivateServiceConnect(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigProjectAllowlist(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedProjectId, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsProjectId(original["project_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedProjectId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["projectId"] = transformedProjectId
+	}
+
+	transformedNetwork, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsNetwork(original["network"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedNetwork); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["network"] = transformedNetwork
+	}
+
+	transformedIpAddress, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsIpAddress(original["ip_address"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedIpAddress); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["ipAddress"] = transformedIpAddress
+	}
+
+	transformedForwardingRule, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsForwardingRule(original["forwarding_rule"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedForwardingRule); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["forwardingRule"] = transformedForwardingRule
+	}
+
+	transformedState, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsState(original["state"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedState); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["state"] = transformedState
+	}
+
+	transformedErrorMessage, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsErrorMessage(original["error_message"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedErrorMessage); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["errorMessage"] = transformedErrorMessage
+	}
+
+	return transformed, nil
+}
+
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsProjectId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsIpAddress(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsForwardingRule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsState(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigPscAutomationConfigsErrorMessage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfigServiceAttachment(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandVertexAIEndpointWithModelGardenDeploymentDeployConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1318,6 +1536,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentDeployConfigSystemLabels(v i
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentDeployConfigDedicatedResources(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1372,6 +1593,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentDeployConfigDedicatedResourc
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentDeployConfigDedicatedResourcesMachineSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1426,6 +1650,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentDeployConfigDedicatedResourc
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentDeployConfigDedicatedResourcesMachineSpecReservationAffinity(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -1503,6 +1730,9 @@ func expandVertexAIEndpointWithModelGardenDeploymentDeployConfigDedicatedResourc
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentDeployConfigDedicatedResourcesAutoscalingMetricSpecs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
