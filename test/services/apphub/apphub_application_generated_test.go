@@ -17,7 +17,7 @@ package apphub_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccApphubApplication_apphubApplicationBasicExample(t *testing.T) {
@@ -34,7 +34,6 @@ func TestAccApphubApplication_apphubApplicationBasicExample(t *testing.T) {
 			"location",
 			"provider",
 		},
-		[]string{},
 	)
 }
 func TestAccApphubApplication_apphubApplicationGlobalBasicExample(t *testing.T) {
@@ -51,7 +50,6 @@ func TestAccApphubApplication_apphubApplicationGlobalBasicExample(t *testing.T) 
 			"location",
 			"provider",
 		},
-		[]string{},
 	)
 }
 func TestAccApphubApplication_apphubApplicationFullExample(t *testing.T) {
@@ -68,6 +66,5 @@ func TestAccApphubApplication_apphubApplicationFullExample(t *testing.T) {
 			"location",
 			"provider",
 		},
-		[]string{},
 	)
 }

@@ -17,7 +17,7 @@ package beyondcorp_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccBeyondcorpAppConnection_beyondcorpAppConnectionBasicExample(t *testing.T) {
@@ -34,7 +34,6 @@ func TestAccBeyondcorpAppConnection_beyondcorpAppConnectionBasicExample(t *testi
 			"provider",
 			"region",
 		},
-		[]string{},
 	)
 }
 func TestAccBeyondcorpAppConnection_beyondcorpAppConnectionFullExample(t *testing.T) {
@@ -51,6 +50,5 @@ func TestAccBeyondcorpAppConnection_beyondcorpAppConnectionFullExample(t *testin
 			"provider",
 			"region",
 		},
-		[]string{},
 	)
 }
