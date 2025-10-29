@@ -19,7 +19,7 @@ package networkconnectivity
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -43,8 +43,8 @@ func GetNetworkConnectivityPolicyBasedRouteCaiObject(d tpgresource.TerraformReso
 			Name: name,
 			Type: NetworkConnectivityPolicyBasedRouteAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/networkconnectivity/v1/rest",
+				Version:              "v1beta",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/networkconnectivity/v1beta/rest",
 				DiscoveryName:        "PolicyBasedRoute",
 				Data:                 obj,
 			},
@@ -123,6 +123,9 @@ func expandNetworkConnectivityPolicyBasedRouteNetwork(v interface{}, d tpgresour
 }
 
 func expandNetworkConnectivityPolicyBasedRouteFilter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -191,6 +194,9 @@ func expandNetworkConnectivityPolicyBasedRoutePriority(v interface{}, d tpgresou
 }
 
 func expandNetworkConnectivityPolicyBasedRouteVirtualMachine(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -214,6 +220,9 @@ func expandNetworkConnectivityPolicyBasedRouteVirtualMachineTags(v interface{}, 
 }
 
 func expandNetworkConnectivityPolicyBasedRouteInterconnectAttachment(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
