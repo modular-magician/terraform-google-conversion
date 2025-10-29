@@ -17,7 +17,7 @@ package compute_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccComputeFirewallPolicy_firewallPolicyExample(t *testing.T) {
@@ -32,6 +32,5 @@ func TestAccComputeFirewallPolicy_firewallPolicyExample(t *testing.T) {
 			"lifecycle",
 			"provider",
 		},
-		[]string{},
 	)
 }

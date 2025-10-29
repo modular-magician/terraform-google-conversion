@@ -21,7 +21,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -176,6 +176,9 @@ func expandComputeWireGroupAdminEnabled(v interface{}, d tpgresource.TerraformRe
 }
 
 func expandComputeWireGroupWireGroupProperties(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -199,6 +202,9 @@ func expandComputeWireGroupWireGroupPropertiesType(v interface{}, d tpgresource.
 }
 
 func expandComputeWireGroupWireProperties(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -221,6 +227,13 @@ func expandComputeWireGroupWireProperties(v interface{}, d tpgresource.Terraform
 		transformed["faultResponse"] = transformedFaultResponse
 	}
 
+	transformedBandwidthAllocation, err := expandComputeWireGroupWirePropertiesBandwidthAllocation(original["bandwidth_allocation"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedBandwidthAllocation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["bandwidthAllocation"] = transformedBandwidthAllocation
+	}
+
 	return transformed, nil
 }
 
@@ -229,5 +242,9 @@ func expandComputeWireGroupWirePropertiesBandwidthUnmetered(v interface{}, d tpg
 }
 
 func expandComputeWireGroupWirePropertiesFaultResponse(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeWireGroupWirePropertiesBandwidthAllocation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

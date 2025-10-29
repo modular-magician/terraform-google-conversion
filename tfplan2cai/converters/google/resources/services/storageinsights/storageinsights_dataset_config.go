@@ -19,7 +19,7 @@ package storageinsights
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -145,6 +145,9 @@ func expandStorageInsightsDatasetConfigRetentionPeriodDays(v interface{}, d tpgr
 }
 
 func expandStorageInsightsDatasetConfigIdentity(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -183,6 +186,9 @@ func expandStorageInsightsDatasetConfigDescription(v interface{}, d tpgresource.
 }
 
 func expandStorageInsightsDatasetConfigSourceProjects(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -206,6 +212,9 @@ func expandStorageInsightsDatasetConfigSourceProjectsProjectNumbers(v interface{
 }
 
 func expandStorageInsightsDatasetConfigSourceFolders(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -233,6 +242,9 @@ func expandStorageInsightsDatasetConfigOrganizationScope(v interface{}, d tpgres
 }
 
 func expandStorageInsightsDatasetConfigIncludeCloudStorageLocations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -256,6 +268,9 @@ func expandStorageInsightsDatasetConfigIncludeCloudStorageLocationsLocations(v i
 }
 
 func expandStorageInsightsDatasetConfigExcludeCloudStorageLocations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -279,6 +294,9 @@ func expandStorageInsightsDatasetConfigExcludeCloudStorageLocationsLocations(v i
 }
 
 func expandStorageInsightsDatasetConfigIncludeCloudStorageBuckets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -298,6 +316,9 @@ func expandStorageInsightsDatasetConfigIncludeCloudStorageBuckets(v interface{},
 }
 
 func expandStorageInsightsDatasetConfigIncludeCloudStorageBucketsCloudStorageBuckets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
@@ -335,6 +356,9 @@ func expandStorageInsightsDatasetConfigIncludeCloudStorageBucketsCloudStorageBuc
 }
 
 func expandStorageInsightsDatasetConfigExcludeCloudStorageBuckets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -354,6 +378,9 @@ func expandStorageInsightsDatasetConfigExcludeCloudStorageBuckets(v interface{},
 }
 
 func expandStorageInsightsDatasetConfigExcludeCloudStorageBucketsCloudStorageBuckets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
