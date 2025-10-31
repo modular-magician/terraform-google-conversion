@@ -18,6 +18,7 @@ package cloudfunctions2
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -73,8 +74,12 @@ func (c *Cloudfunctions2functionCai2hclConverter) convertResourceData(asset caia
 	d := fakeResource.TestResourceData()
 
 	assetNameParts := strings.Split(asset.Name, "/")
-	hclBlockName := assetNameParts[len(assetNameParts)-1]
 
+	hclBlockName := assetNameParts[len(assetNameParts)-1]
+	digitRegex := regexp.MustCompile(`^\d+$`)
+	if digitRegex.MatchString(hclBlockName) {
+		hclBlockName = fmt.Sprintf("resource%s", utils.RandString(8))
+	}
 	hclData := make(map[string]interface{})
 
 	outputFields := map[string]struct{}{"effective_labels": struct{}{}, "environment": struct{}{}, "state": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}, "url": struct{}{}}
