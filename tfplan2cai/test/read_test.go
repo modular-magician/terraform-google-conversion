@@ -176,6 +176,7 @@ func TestReadPlannedAssetsCoverage(t *testing.T) {
 		{name: "full_spanner_instance"},
 		{name: "full_sql_database_instance"},
 		{name: "full_storage_bucket"},
+		{name: "google_iam_workload_identity_pool_provider"},
 		{name: "instance"},
 		{name: "logging_organization_sink"},
 		{name: "sql"},
