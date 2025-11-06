@@ -88,7 +88,7 @@ func ResourceConverterDataCatalogEntryGroup() cai.ResourceConverter {
 }
 
 func GetDataCatalogEntryGroupCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//datacatalog.googleapis.com/{{name}}")
+	name, err := cai.AssetName(d, config, "//datacatalog.googleapis.com/projects/{{project}}/locations/{{region}}/entryGroups/{{entry_group_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}

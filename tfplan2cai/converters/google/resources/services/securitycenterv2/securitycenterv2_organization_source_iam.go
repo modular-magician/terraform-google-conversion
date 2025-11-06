@@ -98,7 +98,7 @@ func newSecurityCenterV2OrganizationSourceIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//securitycenter.googleapis.com/organizations/{{organization}}/sources/{{source}}")
+	name, err := cai.AssetName(d, config, "//securitycenter.googleapis.com/{{source}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -125,7 +125,7 @@ func FetchSecurityCenterV2OrganizationSourceIamPolicy(d tpgresource.TerraformRes
 		SecurityCenterV2OrganizationSourceIamUpdaterProducer,
 		d,
 		config,
-		"//securitycenter.googleapis.com/organizations/{{organization}}/sources/{{source}}",
+		"//securitycenter.googleapis.com/{{source}}",
 		SecurityCenterV2OrganizationSourceIAMAssetType,
 	)
 }

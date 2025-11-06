@@ -98,7 +98,7 @@ func newPrivatecaCertificateTemplateIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//privateca.googleapis.com/projects/{{project}}/locations/{{location}}/certificateTemplates/{{name}}/{{certificate_template}}")
+	name, err := cai.AssetName(d, config, "//privateca.googleapis.com/projects/{{project}}/locations/{{location}}/certificateTemplates/{{certificate_template}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -125,7 +125,7 @@ func FetchPrivatecaCertificateTemplateIamPolicy(d tpgresource.TerraformResourceD
 		PrivatecaCertificateTemplateIamUpdaterProducer,
 		d,
 		config,
-		"//privateca.googleapis.com/projects/{{project}}/locations/{{location}}/certificateTemplates/{{name}}/{{certificate_template}}",
+		"//privateca.googleapis.com/projects/{{project}}/locations/{{location}}/certificateTemplates/{{certificate_template}}",
 		PrivatecaCertificateTemplateIAMAssetType,
 	)
 }

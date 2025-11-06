@@ -98,7 +98,7 @@ func newDataprocAutoscalingPolicyIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//dataproc.googleapis.com/projects/{{project}}/locations/{{location}}/autoscalingPolicies/{{policy_id}}")
+	name, err := cai.AssetName(d, config, "//dataproc.googleapis.com/projects/{{project}}/regions/{{location}}/autoscalingPolicies/{{policy_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -125,7 +125,7 @@ func FetchDataprocAutoscalingPolicyIamPolicy(d tpgresource.TerraformResourceData
 		DataprocAutoscalingPolicyIamUpdaterProducer,
 		d,
 		config,
-		"//dataproc.googleapis.com/projects/{{project}}/locations/{{location}}/autoscalingPolicies/{{policy_id}}",
+		"//dataproc.googleapis.com/projects/{{project}}/regions/{{location}}/autoscalingPolicies/{{policy_id}}",
 		DataprocAutoscalingPolicyIAMAssetType,
 	)
 }

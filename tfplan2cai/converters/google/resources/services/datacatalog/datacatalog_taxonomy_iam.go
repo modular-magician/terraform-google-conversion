@@ -98,7 +98,7 @@ func newDataCatalogTaxonomyIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//datacatalog.googleapis.com/projects/{{project}}/locations/{{region}}/taxonomies/{{taxonomy}}")
+	name, err := cai.AssetName(d, config, "//datacatalog.googleapis.com/{{taxonomy}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -125,7 +125,7 @@ func FetchDataCatalogTaxonomyIamPolicy(d tpgresource.TerraformResourceData, conf
 		DataCatalogTaxonomyIamUpdaterProducer,
 		d,
 		config,
-		"//datacatalog.googleapis.com/projects/{{project}}/locations/{{region}}/taxonomies/{{taxonomy}}",
+		"//datacatalog.googleapis.com/{{taxonomy}}",
 		DataCatalogTaxonomyIAMAssetType,
 	)
 }

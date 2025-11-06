@@ -98,7 +98,7 @@ func newApiGatewayApiConfigIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//apigateway.googleapis.com/projects/{{project}}/locations/global/apis/{{api}}/configs/{{api_config}}")
+	name, err := cai.AssetName(d, config, "//apigateway.googleapis.com/projects/{{project}}/locations/global/apis/{{api}}/configs/{{api_config_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -125,7 +125,7 @@ func FetchApiGatewayApiConfigIamPolicy(d tpgresource.TerraformResourceData, conf
 		ApiGatewayApiConfigIamUpdaterProducer,
 		d,
 		config,
-		"//apigateway.googleapis.com/projects/{{project}}/locations/global/apis/{{api}}/configs/{{api_config}}",
+		"//apigateway.googleapis.com/projects/{{project}}/locations/global/apis/{{api}}/configs/{{api_config_id}}",
 		ApiGatewayApiConfigIAMAssetType,
 	)
 }

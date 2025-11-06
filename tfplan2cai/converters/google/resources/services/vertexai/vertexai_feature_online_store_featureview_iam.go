@@ -98,7 +98,7 @@ func newVertexAIFeatureOnlineStoreFeatureviewIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//aiplatform.googleapis.com/{{feature_online_store}}/featureViews/{{feature_view}}")
+	name, err := cai.AssetName(d, config, "//aiplatform.googleapis.com/projects/{{project}}/locations/{{region}}/featureOnlineStores/{{feature_online_store}}/featureViews/{{feature_view}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -128,7 +128,7 @@ func FetchVertexAIFeatureOnlineStoreFeatureviewIamPolicy(d tpgresource.Terraform
 		VertexAIFeatureOnlineStoreFeatureviewIamUpdaterProducer,
 		d,
 		config,
-		"//aiplatform.googleapis.com/{{feature_online_store}}/featureViews/{{feature_view}}",
+		"//aiplatform.googleapis.com/projects/{{project}}/locations/{{region}}/featureOnlineStores/{{feature_online_store}}/featureViews/{{feature_view}}",
 		VertexAIFeatureOnlineStoreFeatureviewIAMAssetType,
 	)
 }

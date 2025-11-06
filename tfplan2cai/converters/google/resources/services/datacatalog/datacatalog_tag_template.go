@@ -148,7 +148,7 @@ func ResourceConverterDataCatalogTagTemplate() cai.ResourceConverter {
 }
 
 func GetDataCatalogTagTemplateCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//datacatalog.googleapis.com/{{name}}")
+	name, err := cai.AssetName(d, config, "//datacatalog.googleapis.com/projects/{{project}}/locations/{{region}}/tagTemplates/{{tag_template_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}

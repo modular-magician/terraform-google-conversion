@@ -98,7 +98,7 @@ func newIapTunnelDestGroupIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//iap.googleapis.com/projects/{{project}}/iap_tunnel/locations/{{region}}/destGroups/{{dest_group}}")
+	name, err := cai.AssetName(d, config, "//iap.googleapis.com/projects/{{project}}/iap_tunnel/locations/{{region}}/destGroups/{{group_name}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -125,7 +125,7 @@ func FetchIapTunnelDestGroupIamPolicy(d tpgresource.TerraformResourceData, confi
 		IapTunnelDestGroupIamUpdaterProducer,
 		d,
 		config,
-		"//iap.googleapis.com/projects/{{project}}/iap_tunnel/locations/{{region}}/destGroups/{{dest_group}}",
+		"//iap.googleapis.com/projects/{{project}}/iap_tunnel/locations/{{region}}/destGroups/{{group_name}}",
 		IapTunnelDestGroupIAMAssetType,
 	)
 }

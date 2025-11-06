@@ -98,7 +98,7 @@ func newServiceDirectoryNamespaceIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//servicedirectory.googleapis.com/projects/{{project}}/locations/{{location}}/namespaces/{{namespace_id}}")
+	name, err := cai.AssetName(d, config, "//servicedirectory.googleapis.com/{{name}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -122,7 +122,7 @@ func FetchServiceDirectoryNamespaceIamPolicy(d tpgresource.TerraformResourceData
 		ServiceDirectoryNamespaceIamUpdaterProducer,
 		d,
 		config,
-		"//servicedirectory.googleapis.com/projects/{{project}}/locations/{{location}}/namespaces/{{namespace_id}}",
+		"//servicedirectory.googleapis.com/{{name}}",
 		ServiceDirectoryNamespaceIAMAssetType,
 	)
 }

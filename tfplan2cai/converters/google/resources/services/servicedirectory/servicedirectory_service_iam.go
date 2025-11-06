@@ -98,7 +98,7 @@ func newServiceDirectoryServiceIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//servicedirectory.googleapis.com/projects/{{project}}/locations/{{location}}/namespaces/{{namespace_id}}/services/{{service_id}}")
+	name, err := cai.AssetName(d, config, "//servicedirectory.googleapis.com/{{name}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -122,7 +122,7 @@ func FetchServiceDirectoryServiceIamPolicy(d tpgresource.TerraformResourceData, 
 		ServiceDirectoryServiceIamUpdaterProducer,
 		d,
 		config,
-		"//servicedirectory.googleapis.com/projects/{{project}}/locations/{{location}}/namespaces/{{namespace_id}}/services/{{service_id}}",
+		"//servicedirectory.googleapis.com/{{name}}",
 		ServiceDirectoryServiceIAMAssetType,
 	)
 }

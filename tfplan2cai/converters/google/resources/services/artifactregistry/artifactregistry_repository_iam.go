@@ -98,7 +98,7 @@ func newArtifactRegistryRepositoryIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//artifactregistry.googleapis.com/projects/{{project}}/locations/{{location}}/repositories/{{repository}}")
+	name, err := cai.AssetName(d, config, "//artifactregistry.googleapis.com/projects/{{project}}/locations/{{location}}/repositories/{{repository_id}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -125,7 +125,7 @@ func FetchArtifactRegistryRepositoryIamPolicy(d tpgresource.TerraformResourceDat
 		ArtifactRegistryRepositoryIamUpdaterProducer,
 		d,
 		config,
-		"//artifactregistry.googleapis.com/projects/{{project}}/locations/{{location}}/repositories/{{repository}}",
+		"//artifactregistry.googleapis.com/projects/{{project}}/locations/{{location}}/repositories/{{repository_id}}",
 		ArtifactRegistryRepositoryIAMAssetType,
 	)
 }
