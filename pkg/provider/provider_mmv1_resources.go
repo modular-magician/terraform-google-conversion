@@ -29,6 +29,8 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/redis"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/secretmanager"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/secretmanagerregional"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/vmwareengine"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/workbench"
 )
 
 var handwrittenTfplan2caiResources = map[string]*schema.Resource{
@@ -38,7 +40,7 @@ var handwrittenTfplan2caiResources = map[string]*schema.Resource{
 	// ####### END handwritten resources ###########
 }
 
-// Generated resources: 70
+// Generated resources: 72
 var generatedResources = map[string]*schema.Resource{
 	"google_alloydb_backup":                                alloydb.ResourceAlloydbBackup(),
 	"google_alloydb_cluster":                               alloydb.ResourceAlloydbCluster(),
@@ -110,4 +112,6 @@ var generatedResources = map[string]*schema.Resource{
 	"google_secret_manager_secret_version":                 secretmanager.ResourceSecretManagerSecretVersion(),
 	"google_secret_manager_regional_secret":                secretmanagerregional.ResourceSecretManagerRegionalRegionalSecret(),
 	"google_secret_manager_regional_secret_version":        secretmanagerregional.ResourceSecretManagerRegionalRegionalSecretVersion(),
+	"google_vmwareengine_network_peering":                  vmwareengine.ResourceVmwareengineNetworkPeering(),
+	"google_workbench_instance":                            workbench.ResourceWorkbenchInstance(),
 }
