@@ -206,6 +206,12 @@ func GetGkeonpremBareMetalClusterApiObject(d tpgresource.TerraformResourceData, 
 	} else if v, ok := d.GetOkExists("upgrade_policy"); !tpgresource.IsEmptyValue(reflect.ValueOf(upgradePolicyProp)) && (ok || !reflect.DeepEqual(v, upgradePolicyProp)) {
 		obj["upgradePolicy"] = upgradePolicyProp
 	}
+	tagsProp, err := expandGkeonpremBareMetalClusterTags(d.Get("tags"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("tags"); !tpgresource.IsEmptyValue(reflect.ValueOf(tagsProp)) && (ok || !reflect.DeepEqual(v, tagsProp)) {
+		obj["tags"] = tagsProp
+	}
 	effectiveAnnotationsProp, err := expandGkeonpremBareMetalClusterEffectiveAnnotations(d.Get("effective_annotations"), d, config)
 	if err != nil {
 		return nil, err
@@ -1849,6 +1855,17 @@ func expandGkeonpremBareMetalClusterUpgradePolicy(v interface{}, d tpgresource.T
 
 func expandGkeonpremBareMetalClusterUpgradePolicyPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandGkeonpremBareMetalClusterTags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
 
 func expandGkeonpremBareMetalClusterEffectiveAnnotations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
