@@ -19,7 +19,7 @@ package oracledatabase
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -129,6 +129,9 @@ func expandOracleDatabaseCloudVmClusterDisplayName(v interface{}, d tpgresource.
 }
 
 func expandOracleDatabaseCloudVmClusterProperties(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -377,6 +380,9 @@ func expandOracleDatabaseCloudVmClusterPropertiesGiVersion(v interface{}, d tpgr
 }
 
 func expandOracleDatabaseCloudVmClusterPropertiesTimeZone(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -448,6 +454,9 @@ func expandOracleDatabaseCloudVmClusterPropertiesHostnamePrefix(v interface{}, d
 }
 
 func expandOracleDatabaseCloudVmClusterPropertiesDiagnosticsDataCollectionOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

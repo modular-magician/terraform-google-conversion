@@ -17,7 +17,7 @@ package networksecurity_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccNetworkSecurityGatewaySecurityPolicy_networkSecurityGatewaySecurityPolicyBasicExample(t *testing.T) {
@@ -33,8 +33,8 @@ func TestAccNetworkSecurityGatewaySecurityPolicy_networkSecurityGatewaySecurityP
 			"location",
 			"name",
 			"provider",
+			"tls_inspection_policy",
 		},
-		[]string{},
 	)
 }
 func TestAccNetworkSecurityGatewaySecurityPolicy_networkSecurityGatewaySecurityPolicyTlsInspectionBasicExample(t *testing.T) {
@@ -50,7 +50,7 @@ func TestAccNetworkSecurityGatewaySecurityPolicy_networkSecurityGatewaySecurityP
 			"location",
 			"name",
 			"provider",
+			"tls_inspection_policy",
 		},
-		[]string{},
 	)
 }

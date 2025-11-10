@@ -19,7 +19,7 @@ package dataprocgdc
 import (
 	"reflect"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
@@ -133,6 +133,9 @@ func GetDataprocGdcSparkApplicationApiObject(d tpgresource.TerraformResourceData
 }
 
 func expandDataprocGdcSparkApplicationPysparkApplicationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -211,6 +214,9 @@ func expandDataprocGdcSparkApplicationPysparkApplicationConfigArchiveUris(v inte
 }
 
 func expandDataprocGdcSparkApplicationSparkApplicationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -289,6 +295,9 @@ func expandDataprocGdcSparkApplicationSparkApplicationConfigArchiveUris(v interf
 }
 
 func expandDataprocGdcSparkApplicationSparkRApplicationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -345,6 +354,9 @@ func expandDataprocGdcSparkApplicationSparkRApplicationConfigArchiveUris(v inter
 }
 
 func expandDataprocGdcSparkApplicationSparkSqlApplicationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -389,6 +401,9 @@ func expandDataprocGdcSparkApplicationSparkSqlApplicationConfigQueryFileUri(v in
 }
 
 func expandDataprocGdcSparkApplicationSparkSqlApplicationConfigQueryList(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil

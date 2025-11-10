@@ -24,12 +24,13 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/tfplan2cai/converters/google/resources/cai"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/tfplan2cai/converters/google/resources/cai"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
 )
 
 const workloadIdentityPoolIdRegexp = `^[0-9a-z-]+$`
+const defaultWorkloadIdentityPoolIdSuffix = ".svc.id.goog"
 
 func ValidateWorkloadIdentityPoolId(v interface{}, k string) (ws []string, errors []error) {
 	value := v.(string)
@@ -39,9 +40,13 @@ func ValidateWorkloadIdentityPoolId(v interface{}, k string) (ws []string, error
 			"%q (%q) can not start with \"gcp-\"", k, value))
 	}
 
+	if strings.HasSuffix(value, defaultWorkloadIdentityPoolIdSuffix) {
+		value = strings.TrimRight(value, defaultWorkloadIdentityPoolIdSuffix)
+	}
+
 	if !regexp.MustCompile(workloadIdentityPoolIdRegexp).MatchString(value) {
 		errors = append(errors, fmt.Errorf(
-			"%q must contain only lowercase letters (a-z), numbers (0-9), or dashes (-)", k))
+			"%q must contain only lowercase letters (a-z), numbers (0-9), or dashes (-), or end in '.svc.id.goog'", k))
 	}
 
 	if len(value) < 4 {
@@ -146,6 +151,9 @@ func expandIAMBetaWorkloadIdentityPoolMode(v interface{}, d tpgresource.Terrafor
 }
 
 func expandIAMBetaWorkloadIdentityPoolInlineCertificateIssuanceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -209,6 +217,9 @@ func expandIAMBetaWorkloadIdentityPoolInlineCertificateIssuanceConfigKeyAlgorith
 }
 
 func expandIAMBetaWorkloadIdentityPoolInlineTrustConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	if len(l) == 0 || l[0] == nil {
 		return nil, nil
@@ -253,6 +264,9 @@ func expandIAMBetaWorkloadIdentityPoolInlineTrustConfigAdditionalTrustBundles(v 
 }
 
 func expandIAMBetaWorkloadIdentityPoolInlineTrustConfigAdditionalTrustBundlesTrustAnchors(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
 	l := v.([]interface{})
 	req := make([]interface{}, 0, len(l))
 	for _, raw := range l {
