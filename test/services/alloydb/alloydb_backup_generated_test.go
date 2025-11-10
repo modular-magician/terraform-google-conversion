@@ -17,7 +17,7 @@ package alloydb_test
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v6/test"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
 func TestAccAlloydbBackup_alloydbBackupBasicTestExample(t *testing.T) {
@@ -34,7 +34,6 @@ func TestAccAlloydbBackup_alloydbBackupBasicTestExample(t *testing.T) {
 			"location",
 			"provider",
 		},
-		[]string{},
 	)
 }
 func TestAccAlloydbBackup_alloydbBackupFullTestExample(t *testing.T) {
@@ -51,6 +50,5 @@ func TestAccAlloydbBackup_alloydbBackupFullTestExample(t *testing.T) {
 			"location",
 			"provider",
 		},
-		[]string{},
 	)
 }
