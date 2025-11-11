@@ -175,6 +175,8 @@ func resourceMonitoringNotificationChannelDecoder(d *schema.ResourceData, meta i
 			if _, apiOk := labels[sl]; apiOk {
 				if _, exists := d.GetOkExists("sensitive_labels.0." + sl); exists {
 					delete(labels, sl)
+				} else if _, existsWo := d.GetOkExists("sensitive_labels.0." + sl + "_wo"); existsWo {
+					delete(labels, sl)
 				} else {
 					labels[sl] = d.Get("labels." + sl)
 				}

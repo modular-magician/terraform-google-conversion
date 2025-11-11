@@ -176,6 +176,9 @@ func resourceMonitoringNotificationChannelEncoder(d tpgresource.TerraformResourc
 		if auth, _ := d.GetOkExists("sensitive_labels.0." + sl); auth != "" {
 			labels[sl] = auth.(string)
 		}
+		if authWo, _ := d.GetOkExists("sensitive_labels.0." + sl + "_wo"); authWo != "" {
+			labels[sl] = authWo.(string)
+		}
 	}
 
 	obj["labels"] = labels

@@ -27,13 +27,19 @@ func TestAccMonitoringNotificationChannel_notificationChannelBasicExample(t *tes
 		t,
 		[]string{
 			"ASSETNAME",
+			"auth_token_wo_version",
 			"count",
 			"depends_on",
 			"for_each",
 			"force_delete",
 			"lifecycle",
+			"password_wo_version",
 			"provider",
 			"sensitive_labels",
+			"sensitive_labels.auth_token_wo",
+			"sensitive_labels.password_wo",
+			"sensitive_labels.service_key_wo",
+			"service_key_wo_version",
 		},
 	)
 }
