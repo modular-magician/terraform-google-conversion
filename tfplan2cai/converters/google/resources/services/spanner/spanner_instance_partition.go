@@ -140,11 +140,22 @@ func GetSpannerInstancePartitionApiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("config"); !tpgresource.IsEmptyValue(reflect.ValueOf(configProp)) && (ok || !reflect.DeepEqual(v, configProp)) {
 		obj["config"] = configProp
 	}
+	autoscalingConfigProp, err := expandSpannerInstancePartitionAutoscalingConfig(d.Get("autoscaling_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("autoscaling_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(autoscalingConfigProp)) && (ok || !reflect.DeepEqual(v, autoscalingConfigProp)) {
+		obj["autoscalingConfig"] = autoscalingConfigProp
+	}
 
 	return resourceSpannerInstancePartitionEncoder(d, config, obj)
 }
 
 func resourceSpannerInstancePartitionEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
+	// Temp Logic to accommodate autoscaling_config, processing_units and node_count
+	if obj["processingUnits"] == nil && obj["nodeCount"] == nil && obj["autoscalingConfig"] == nil {
+		obj["nodeCount"] = 1
+	}
+
 	// Wrap the request body in an instancePartition field
 	wrapped := make(map[string]interface{})
 	wrapped["instancePartitionId"] = obj["name"]
@@ -181,4 +192,129 @@ func expandSpannerInstancePartitionConfig(v interface{}, d tpgresource.Terraform
 	}
 
 	return fmt.Sprintf("projects/%s/instanceConfigs/%s", project, v.(string)), nil
+}
+
+func expandSpannerInstancePartitionAutoscalingConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedAutoscalingLimits, err := expandSpannerInstancePartitionAutoscalingConfigAutoscalingLimits(original["autoscaling_limits"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAutoscalingLimits); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["autoscalingLimits"] = transformedAutoscalingLimits
+	}
+
+	transformedAutoscalingTargets, err := expandSpannerInstancePartitionAutoscalingConfigAutoscalingTargets(original["autoscaling_targets"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAutoscalingTargets); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["autoscalingTargets"] = transformedAutoscalingTargets
+	}
+
+	return transformed, nil
+}
+
+func expandSpannerInstancePartitionAutoscalingConfigAutoscalingLimits(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedMinProcessingUnits, err := expandSpannerInstancePartitionAutoscalingConfigAutoscalingLimitsMinProcessingUnits(original["min_processing_units"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedMinProcessingUnits); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["minProcessingUnits"] = transformedMinProcessingUnits
+	}
+
+	transformedMaxProcessingUnits, err := expandSpannerInstancePartitionAutoscalingConfigAutoscalingLimitsMaxProcessingUnits(original["max_processing_units"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedMaxProcessingUnits); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["maxProcessingUnits"] = transformedMaxProcessingUnits
+	}
+
+	transformedMinNodes, err := expandSpannerInstancePartitionAutoscalingConfigAutoscalingLimitsMinNodes(original["min_nodes"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedMinNodes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["minNodes"] = transformedMinNodes
+	}
+
+	transformedMaxNodes, err := expandSpannerInstancePartitionAutoscalingConfigAutoscalingLimitsMaxNodes(original["max_nodes"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedMaxNodes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["maxNodes"] = transformedMaxNodes
+	}
+
+	return transformed, nil
+}
+
+func expandSpannerInstancePartitionAutoscalingConfigAutoscalingLimitsMinProcessingUnits(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandSpannerInstancePartitionAutoscalingConfigAutoscalingLimitsMaxProcessingUnits(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandSpannerInstancePartitionAutoscalingConfigAutoscalingLimitsMinNodes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandSpannerInstancePartitionAutoscalingConfigAutoscalingLimitsMaxNodes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandSpannerInstancePartitionAutoscalingConfigAutoscalingTargets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedHighPriorityCpuUtilizationPercent, err := expandSpannerInstancePartitionAutoscalingConfigAutoscalingTargetsHighPriorityCpuUtilizationPercent(original["high_priority_cpu_utilization_percent"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedHighPriorityCpuUtilizationPercent); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["highPriorityCpuUtilizationPercent"] = transformedHighPriorityCpuUtilizationPercent
+	}
+
+	transformedStorageUtilizationPercent, err := expandSpannerInstancePartitionAutoscalingConfigAutoscalingTargetsStorageUtilizationPercent(original["storage_utilization_percent"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedStorageUtilizationPercent); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["storageUtilizationPercent"] = transformedStorageUtilizationPercent
+	}
+
+	return transformed, nil
+}
+
+func expandSpannerInstancePartitionAutoscalingConfigAutoscalingTargetsHighPriorityCpuUtilizationPercent(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandSpannerInstancePartitionAutoscalingConfigAutoscalingTargetsStorageUtilizationPercent(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
