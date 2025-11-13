@@ -134,6 +134,30 @@ func GetComputeSslCertificateApiObject(d tpgresource.TerraformResourceData, conf
 	} else if v, ok := d.GetOkExists("private_key"); !tpgresource.IsEmptyValue(reflect.ValueOf(privateKeyProp)) && (ok || !reflect.DeepEqual(v, privateKeyProp)) {
 		obj["privateKey"] = privateKeyProp
 	}
+	certificateWoProp, err := expandComputeSslCertificateCertificateWo(d.Get("certificate_wo"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("certificate_wo"); !tpgresource.IsEmptyValue(reflect.ValueOf(certificateWoProp)) && (ok || !reflect.DeepEqual(v, certificateWoProp)) {
+		obj["certificate"] = certificateWoProp
+	}
+	certificateWoVersionProp, err := expandComputeSslCertificateCertificateWoVersion(d.Get("certificate_wo_version"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("certificate_wo_version"); !tpgresource.IsEmptyValue(reflect.ValueOf(certificateWoVersionProp)) && (ok || !reflect.DeepEqual(v, certificateWoVersionProp)) {
+		obj["certificateWoVersion"] = certificateWoVersionProp
+	}
+	privateKeyWoProp, err := expandComputeSslCertificatePrivateKeyWo(d.Get("private_key_wo"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("private_key_wo"); !tpgresource.IsEmptyValue(reflect.ValueOf(privateKeyWoProp)) && (ok || !reflect.DeepEqual(v, privateKeyWoProp)) {
+		obj["privateKey"] = privateKeyWoProp
+	}
+	privateKeyWoVersionProp, err := expandComputeSslCertificatePrivateKeyWoVersion(d.Get("private_key_wo_version"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("private_key_wo_version"); !tpgresource.IsEmptyValue(reflect.ValueOf(privateKeyWoVersionProp)) && (ok || !reflect.DeepEqual(v, privateKeyWoVersionProp)) {
+		obj["privateKeyWoVersion"] = privateKeyWoVersionProp
+	}
 
 	return obj, nil
 }
@@ -170,5 +194,21 @@ func expandComputeSslCertificateName(v interface{}, d tpgresource.TerraformResou
 }
 
 func expandComputeSslCertificatePrivateKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSslCertificateCertificateWo(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSslCertificateCertificateWoVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSslCertificatePrivateKeyWo(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSslCertificatePrivateKeyWoVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
