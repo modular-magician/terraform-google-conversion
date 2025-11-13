@@ -145,6 +145,18 @@ func GetComputeRegionSslCertificateApiObject(d tpgresource.TerraformResourceData
 	} else if v, ok := d.GetOkExists("private_key"); !tpgresource.IsEmptyValue(reflect.ValueOf(privateKeyProp)) && (ok || !reflect.DeepEqual(v, privateKeyProp)) {
 		obj["privateKey"] = privateKeyProp
 	}
+	certificateWoProp, err := expandComputeRegionSslCertificateCertificateWo(d.Get("certificate_wo"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("certificate_wo"); !tpgresource.IsEmptyValue(reflect.ValueOf(certificateWoProp)) && (ok || !reflect.DeepEqual(v, certificateWoProp)) {
+		obj["certificate"] = certificateWoProp
+	}
+	certificateWoVersionProp, err := expandComputeRegionSslCertificateCertificateWoVersion(d.Get("certificate_wo_version"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("certificate_wo_version"); !tpgresource.IsEmptyValue(reflect.ValueOf(certificateWoVersionProp)) && (ok || !reflect.DeepEqual(v, certificateWoVersionProp)) {
+		obj["certificateWoVersion"] = certificateWoVersionProp
+	}
 	regionProp, err := expandComputeRegionSslCertificateRegion(d.Get("region"), d, config)
 	if err != nil {
 		return nil, err
@@ -187,6 +199,14 @@ func expandComputeRegionSslCertificateName(v interface{}, d tpgresource.Terrafor
 }
 
 func expandComputeRegionSslCertificatePrivateKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionSslCertificateCertificateWo(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionSslCertificateCertificateWoVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
