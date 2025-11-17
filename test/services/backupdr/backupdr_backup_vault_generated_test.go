@@ -20,7 +20,31 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
-func TestAccBackupDRBackupVault_backupDrBackupVaultFullExample(t *testing.T) {
+func TestAccBackupDRBackupVault_backupDrBackupVaultSimpleExample(t *testing.T) {
+	t.Parallel()
+
+	test.BidirectionalConversion(
+		t,
+		[]string{
+			"allow_missing",
+			"annotations",
+			"backup_retention_inheritance",
+			"backup_vault_id",
+			"count",
+			"depends_on",
+			"for_each",
+			"force_delete",
+			"force_update",
+			"ignore_backup_plan_references",
+			"ignore_inactive_datasources",
+			"labels",
+			"lifecycle",
+			"location",
+			"provider",
+		},
+	)
+}
+func TestAccBackupDRBackupVault_backupDrBackupVaultCmekExample(t *testing.T) {
 	t.Parallel()
 
 	test.BidirectionalConversion(
