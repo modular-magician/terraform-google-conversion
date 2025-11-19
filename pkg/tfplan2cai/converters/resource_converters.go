@@ -57,6 +57,7 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_alloydb_backup":                                alloydb.AlloydbBackupTfplan2caiConverter(),
 	"google_alloydb_cluster":                               alloydb.AlloydbClusterTfplan2caiConverter(),
 	"google_alloydb_instance":                              alloydb.AlloydbInstanceTfplan2caiConverter(),
+	"google_alloydb_user":                                  alloydb.AlloydbUserTfplan2caiConverter(),
 	"google_apigee_instance":                               apigee.ApigeeInstanceTfplan2caiConverter(),
 	"google_apphub_application":                            apphub.ApphubApplicationTfplan2caiConverter(),
 	"google_apphub_service":                                apphub.ApphubServiceTfplan2caiConverter(),

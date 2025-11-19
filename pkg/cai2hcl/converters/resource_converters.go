@@ -73,6 +73,9 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	"alloydb.googleapis.com/Instance": {
 		"Default": alloydb.NewAlloydbInstanceCai2hclConverter(provider),
 	},
+	"alloydb.googleapis.com/User": {
+		"Default": alloydb.NewAlloydbUserCai2hclConverter(provider),
+	},
 	"apigee.googleapis.com/Instance": {
 		"Default": apigee.NewApigeeInstanceCai2hclConverter(provider),
 	},
