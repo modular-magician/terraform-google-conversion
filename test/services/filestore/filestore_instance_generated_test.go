@@ -57,6 +57,7 @@ func TestAccFilestoreInstance(t *testing.T) {
 					"location",
 					"name",
 					"provider",
+					"replica_action",
 					"tags",
 					"zone",
 				},

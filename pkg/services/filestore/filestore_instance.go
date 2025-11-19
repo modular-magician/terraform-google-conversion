@@ -430,6 +430,12 @@ simultaneous updates from overwriting each other.`,
  and default labels configured on the provider.`,
 				Elem: &schema.Schema{Type: schema.TypeString},
 			},
+			"replica_action": {
+				Type:         schema.TypeString,
+				Optional:     true,
+				ValidateFunc: verify.ValidateEnum([]string{"PAUSE", "RESUME", ""}),
+				Description:  `Replicate action can perfrom p[ause and resume on replica Possible values: ["PAUSE", "RESUME"]`,
+			},
 			"project": {
 				Type:     schema.TypeString,
 				Optional: true,
