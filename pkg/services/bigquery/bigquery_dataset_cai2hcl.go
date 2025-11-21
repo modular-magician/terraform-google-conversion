@@ -191,7 +191,11 @@ func flattenBigQueryDatasetAccessDomain(v interface{}, d *schema.ResourceData, c
 }
 
 func flattenBigQueryDatasetAccessGroupByEmail(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
+	if v == nil {
+		return nil
+	}
+
+	return strings.ToLower(v.(string))
 }
 
 func flattenBigQueryDatasetAccessRole(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -207,7 +211,11 @@ func flattenBigQueryDatasetAccessIamMember(v interface{}, d *schema.ResourceData
 }
 
 func flattenBigQueryDatasetAccessUserByEmail(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
+	if v == nil {
+		return nil
+	}
+
+	return strings.ToLower(v.(string))
 }
 
 func flattenBigQueryDatasetAccessView(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
