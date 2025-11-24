@@ -1388,6 +1388,13 @@ func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfig(v interface{}
 		transformed["dedicatedEndpointEnabled"] = transformedDedicatedEndpointEnabled
 	}
 
+	transformedDedicatedEndpointDisabled, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigDedicatedEndpointDisabled(original["dedicated_endpoint_disabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDedicatedEndpointDisabled); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["dedicatedEndpointDisabled"] = transformedDedicatedEndpointDisabled
+	}
+
 	transformedPrivateServiceConnectConfig, err := expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigPrivateServiceConnectConfig(original["private_service_connect_config"], d, config)
 	if err != nil {
 		return nil, err
@@ -1403,6 +1410,10 @@ func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigEndpointDispla
 }
 
 func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigDedicatedEndpointEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointWithModelGardenDeploymentEndpointConfigDedicatedEndpointDisabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
