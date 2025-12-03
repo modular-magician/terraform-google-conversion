@@ -94,6 +94,10 @@ func TestAccAlloydbInstance(t *testing.T) {
 			Name: "TestAccAlloydbInstance_createPrimaryAndReadPoolInstanceWithAllocatedIpRangeOverride",
 			Skip: "",
 		},
+		{
+			Name: "TestAccAlloydbInstance_connectionPoolConfig",
+			Skip: "",
+		},
 	}
 
 	for _, tt := range tests {
