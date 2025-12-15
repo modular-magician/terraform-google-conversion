@@ -134,6 +134,12 @@ func GetVertexAIFeatureOnlineStoreApiObject(d tpgresource.TerraformResourceData,
 	} else if v, ok := d.GetOkExists("embedding_management"); !tpgresource.IsEmptyValue(reflect.ValueOf(embeddingManagementProp)) && (ok || !reflect.DeepEqual(v, embeddingManagementProp)) {
 		obj["embeddingManagement"] = embeddingManagementProp
 	}
+	encryptionSpecProp, err := expandVertexAIFeatureOnlineStoreEncryptionSpec(d.Get("encryption_spec"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("encryption_spec"); !tpgresource.IsEmptyValue(reflect.ValueOf(encryptionSpecProp)) && (ok || !reflect.DeepEqual(v, encryptionSpecProp)) {
+		obj["encryptionSpec"] = encryptionSpecProp
+	}
 	effectiveLabelsProp, err := expandVertexAIFeatureOnlineStoreEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -156,6 +162,13 @@ func expandVertexAIFeatureOnlineStoreBigtable(v interface{}, d tpgresource.Terra
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
+	transformedEnableDirectBigtableAccess, err := expandVertexAIFeatureOnlineStoreBigtableEnableDirectBigtableAccess(original["enable_direct_bigtable_access"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEnableDirectBigtableAccess); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["enableDirectBigtableAccess"] = transformedEnableDirectBigtableAccess
+	}
+
 	transformedAutoScaling, err := expandVertexAIFeatureOnlineStoreBigtableAutoScaling(original["auto_scaling"], d, config)
 	if err != nil {
 		return nil, err
@@ -164,6 +177,10 @@ func expandVertexAIFeatureOnlineStoreBigtable(v interface{}, d tpgresource.Terra
 	}
 
 	return transformed, nil
+}
+
+func expandVertexAIFeatureOnlineStoreBigtableEnableDirectBigtableAccess(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandVertexAIFeatureOnlineStoreBigtableAutoScaling(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -199,6 +216,13 @@ func expandVertexAIFeatureOnlineStoreBigtableAutoScaling(v interface{}, d tpgres
 		transformed["cpuUtilizationTarget"] = transformedCpuUtilizationTarget
 	}
 
+	transformedZone, err := expandVertexAIFeatureOnlineStoreBigtableAutoScalingZone(original["zone"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedZone); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["zone"] = transformedZone
+	}
+
 	return transformed, nil
 }
 
@@ -211,6 +235,10 @@ func expandVertexAIFeatureOnlineStoreBigtableAutoScalingMaxNodeCount(v interface
 }
 
 func expandVertexAIFeatureOnlineStoreBigtableAutoScalingCpuUtilizationTarget(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIFeatureOnlineStoreBigtableAutoScalingZone(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -336,6 +364,32 @@ func expandVertexAIFeatureOnlineStoreEmbeddingManagement(v interface{}, d tpgres
 }
 
 func expandVertexAIFeatureOnlineStoreEmbeddingManagementEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIFeatureOnlineStoreEncryptionSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedKmsKeyName, err := expandVertexAIFeatureOnlineStoreEncryptionSpecKmsKeyName(original["kms_key_name"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedKmsKeyName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["kmsKeyName"] = transformedKmsKeyName
+	}
+
+	return transformed, nil
+}
+
+func expandVertexAIFeatureOnlineStoreEncryptionSpecKmsKeyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
