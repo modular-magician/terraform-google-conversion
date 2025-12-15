@@ -32,6 +32,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudfunctions2"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudtasks"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/compute"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/corebilling"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/dataproc"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/datastream"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/filestore"
@@ -127,6 +128,9 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 		"CloudAssetFolderFeed":       cloudasset.NewCloudAssetFolderFeedCai2hclConverter(provider),
 		"CloudAssetOrganizationFeed": cloudasset.NewCloudAssetOrganizationFeedCai2hclConverter(provider),
 		"CloudAssetProjectFeed":      cloudasset.NewCloudAssetProjectFeedCai2hclConverter(provider),
+	},
+	"cloudbilling.googleapis.com/ProjectBillingInfo": {
+		"Default": corebilling.NewCoreBillingProjectInfoCai2hclConverter(provider),
 	},
 	"cloudbuild.googleapis.com/BitbucketServerConfig": {
 		"Default": cloudbuild.NewCloudBuildBitbucketServerConfigCai2hclConverter(provider),

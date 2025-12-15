@@ -12,7 +12,7 @@
 //
 // ----------------------------------------------------------------------------
 
-package backupdr_test
+package corebilling_test
 
 import (
 	"os"
@@ -21,19 +21,16 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
-func TestAccBackupDRBackupPlan(t *testing.T) {
+func TestAccCoreBillingProjectInfo(t *testing.T) {
 	if os.Getenv("WRITE_FILES") != "" {
 		t.Parallel()
 	}
 	tests := []test.TestCase{
 		{
-			Name: "TestAccBackupDRBackupPlan_backupDrBackupPlanSimpleExample",
+			Name: "TestAccCoreBillingProjectInfo_billingProjectInfoBasicExample",
 		},
 		{
-			Name: "TestAccBackupDRBackupPlan_backupDrBackupPlanForCsqlResourceExample",
-		},
-		{
-			Name: "TestAccBackupDRBackupPlan_fullUpdate",
+			Name: "TestAccBillingProjectInfo_update",
 		},
 	}
 
@@ -50,16 +47,14 @@ func TestAccBackupDRBackupPlan(t *testing.T) {
 			test.BidirectionalConversion(
 				t,
 				[]string{
-					"backup_plan_id",
 					"count",
 					"depends_on",
 					"for_each",
 					"lifecycle",
-					"location",
 					"provider",
 					"timeouts",
 				},
-				"google_backup_dr_backup_plan",
+				"google_billing_project_info",
 			)
 		})
 	}

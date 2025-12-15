@@ -20,6 +20,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudfunctions2"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudtasks"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/compute"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/corebilling"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/dataproc"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/datastream"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/filestore"
@@ -48,7 +49,7 @@ var handwrittenTfplan2caiResources = map[string]*schema.Resource{
 	// ####### END handwritten resources ###########
 }
 
-// Generated resources: 94
+// Generated resources: 95
 var generatedResources = map[string]*schema.Resource{
 	"google_alloydb_backup":                                alloydb.ResourceAlloydbBackup(),
 	"google_alloydb_cluster":                               alloydb.ResourceAlloydbCluster(),
@@ -98,6 +99,7 @@ var generatedResources = map[string]*schema.Resource{
 	"google_compute_storage_pool":                          compute.ResourceComputeStoragePool(),
 	"google_compute_subnetwork":                            compute.ResourceComputeSubnetwork(),
 	"google_compute_url_map":                               compute.ResourceComputeUrlMap(),
+	"google_billing_project_info":                          corebilling.ResourceCoreBillingProjectInfo(),
 	"google_dataproc_batch":                                dataproc.ResourceDataprocBatch(),
 	"google_datastream_connection_profile":                 datastream.ResourceDatastreamConnectionProfile(),
 	"google_datastream_private_connection":                 datastream.ResourceDatastreamPrivateConnection(),

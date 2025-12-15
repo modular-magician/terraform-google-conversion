@@ -31,6 +31,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudfunctions2"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudtasks"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/compute"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/corebilling"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/dataproc"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/datastream"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/filestore"
@@ -107,6 +108,7 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_compute_storage_pool":                          compute.ComputeStoragePoolTfplan2caiConverter(),
 	"google_compute_subnetwork":                            compute.ComputeSubnetworkTfplan2caiConverter(),
 	"google_compute_url_map":                               compute.ComputeUrlMapTfplan2caiConverter(),
+	"google_billing_project_info":                          corebilling.CoreBillingProjectInfoTfplan2caiConverter(),
 	"google_dataproc_batch":                                dataproc.DataprocBatchTfplan2caiConverter(),
 	"google_datastream_connection_profile":                 datastream.DatastreamConnectionProfileTfplan2caiConverter(),
 	"google_datastream_private_connection":                 datastream.DatastreamPrivateConnectionTfplan2caiConverter(),

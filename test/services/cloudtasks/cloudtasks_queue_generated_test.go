@@ -27,6 +27,10 @@ func TestAccCloudTasksQueue(t *testing.T) {
 	}
 	tests := []test.TestCase{
 		{
+			Name: "TestAccCloudTasksQueue_MaxRetryDiffSuppress0s",
+			Skip: "fix later",
+		},
+		{
 			Name: "TestAccCloudTasksQueue_queueBasicExample",
 		},
 		{
@@ -37,6 +41,27 @@ func TestAccCloudTasksQueue(t *testing.T) {
 		},
 		{
 			Name: "TestAccCloudTasksQueue_cloudTasksQueueHttpTargetOauthExample",
+		},
+		{
+			Name: "TestAccCloudTasksQueue_update",
+		},
+		{
+			Name: "TestAccCloudTasksQueue_update2Basic",
+		},
+		{
+			Name: "",
+		},
+		{
+			Name: "TestAccCloudTasksQueue_TimeUnitDiff",
+		},
+		{
+			Name: "TestAccCloudTasksQueue_HttpTargetOIDC_update",
+		},
+		{
+			Name: "TestAccCloudTasksQueue_HttpTargetOAuth_update",
+		},
+		{
+			Name: "TestAccCloudTasksQueue_paused",
 		},
 	}
 
