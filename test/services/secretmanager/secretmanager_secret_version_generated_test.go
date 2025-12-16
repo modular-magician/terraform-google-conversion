@@ -28,7 +28,6 @@ func TestAccSecretManagerSecretVersion(t *testing.T) {
 	tests := []test.TestCase{
 		{
 			Name: "TestAccSecretManagerSecretVersion_secretVersionBasicExample",
-			Skip: "fix later",
 		},
 		{
 			Name: "TestAccSecretManagerSecretVersion_secretVersionBasicWriteOnlyExample",
