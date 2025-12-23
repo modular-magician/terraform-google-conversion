@@ -39,6 +39,8 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/iambeta"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/kms"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/logging"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/looker"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/memcache"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/monitoring"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/netapp"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/networksecurity"
@@ -273,6 +275,12 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	},
 	"logging.googleapis.com/LogMetric": {
 		"Default": logging.NewLoggingMetricCai2hclConverter(provider),
+	},
+	"looker.googleapis.com/Instance": {
+		"Default": looker.NewLookerInstanceCai2hclConverter(provider),
+	},
+	"memcache.googleapis.com/Instance": {
+		"Default": memcache.NewMemcacheInstanceCai2hclConverter(provider),
 	},
 	"monitoring.googleapis.com/AlertPolicy": {
 		"Default": monitoring.NewMonitoringAlertPolicyCai2hclConverter(provider),

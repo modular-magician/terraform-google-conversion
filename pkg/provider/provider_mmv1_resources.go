@@ -27,6 +27,8 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/iambeta"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/kms"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/logging"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/looker"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/memcache"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/monitoring"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/netapp"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/networksecurity"
@@ -48,7 +50,7 @@ var handwrittenTfplan2caiResources = map[string]*schema.Resource{
 	// ####### END handwritten resources ###########
 }
 
-// Generated resources: 100
+// Generated resources: 102
 var generatedResources = map[string]*schema.Resource{
 	"google_alloydb_backup":                                alloydb.ResourceAlloydbBackup(),
 	"google_alloydb_cluster":                               alloydb.ResourceAlloydbCluster(),
@@ -121,6 +123,8 @@ var generatedResources = map[string]*schema.Resource{
 	"google_kms_key_ring":                                  kms.ResourceKMSKeyRing(),
 	"google_kms_key_ring_import_job":                       kms.ResourceKMSKeyRingImportJob(),
 	"google_logging_metric":                                logging.ResourceLoggingMetric(),
+	"google_looker_instance":                               looker.ResourceLookerInstance(),
+	"google_memcache_instance":                             memcache.ResourceMemcacheInstance(),
 	"google_monitoring_alert_policy":                       monitoring.ResourceMonitoringAlertPolicy(),
 	"google_monitoring_notification_channel":               monitoring.ResourceMonitoringNotificationChannel(),
 	"google_monitoring_uptime_check_config":                monitoring.ResourceMonitoringUptimeCheckConfig(),
