@@ -110,6 +110,12 @@ func GetComputeInterconnectAttachmentCaiObject(d tpgresource.TerraformResourceDa
 
 func GetComputeInterconnectAttachmentApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
+	l2ForwardingProp, err := expandComputeInterconnectAttachmentL2Forwarding(d.Get("l2_forwarding"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("l2_forwarding"); !tpgresource.IsEmptyValue(reflect.ValueOf(l2ForwardingProp)) && (ok || !reflect.DeepEqual(v, l2ForwardingProp)) {
+		obj["l2Forwarding"] = l2ForwardingProp
+	}
 	adminEnabledProp, err := expandComputeInterconnectAttachmentAdminEnabled(d.Get("admin_enabled"), d, config)
 	if err != nil {
 		return nil, err
@@ -244,6 +250,87 @@ func GetComputeInterconnectAttachmentApiObject(d tpgresource.TerraformResourceDa
 	}
 
 	return obj, nil
+}
+
+func expandComputeInterconnectAttachmentL2Forwarding(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedNetwork, err := expandComputeInterconnectAttachmentL2ForwardingNetwork(original["network"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedNetwork); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["network"] = transformedNetwork
+	}
+
+	transformedGeneveHeader, err := expandComputeInterconnectAttachmentL2ForwardingGeneveHeader(original["geneve_header"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedGeneveHeader); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["geneveHeader"] = transformedGeneveHeader
+	}
+
+	transformedDefaultApplianceIpAddress, err := expandComputeInterconnectAttachmentL2ForwardingDefaultApplianceIpAddress(original["default_appliance_ip_address"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDefaultApplianceIpAddress); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["defaultApplianceIpAddress"] = transformedDefaultApplianceIpAddress
+	}
+
+	transformedTunnelEndpointIpAddress, err := expandComputeInterconnectAttachmentL2ForwardingTunnelEndpointIpAddress(original["tunnel_endpoint_ip_address"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedTunnelEndpointIpAddress); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["tunnelEndpointIpAddress"] = transformedTunnelEndpointIpAddress
+	}
+
+	return transformed, nil
+}
+
+func expandComputeInterconnectAttachmentL2ForwardingNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeInterconnectAttachmentL2ForwardingGeneveHeader(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedVni, err := expandComputeInterconnectAttachmentL2ForwardingGeneveHeaderVni(original["vni"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedVni); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["vni"] = transformedVni
+	}
+
+	return transformed, nil
+}
+
+func expandComputeInterconnectAttachmentL2ForwardingGeneveHeaderVni(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeInterconnectAttachmentL2ForwardingDefaultApplianceIpAddress(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeInterconnectAttachmentL2ForwardingTunnelEndpointIpAddress(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandComputeInterconnectAttachmentAdminEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
