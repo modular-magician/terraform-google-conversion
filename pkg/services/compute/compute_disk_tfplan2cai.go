@@ -173,6 +173,12 @@ func GetComputeDiskCaiObject(d tpgresource.TerraformResourceData, config *transp
 	} else if v, ok := d.GetOkExists("source_disk"); !tpgresource.IsEmptyValue(reflect.ValueOf(sourceDiskProp)) && (ok || !reflect.DeepEqual(v, sourceDiskProp)) {
 		obj["sourceDisk"] = sourceDiskProp
 	}
+	eraseWindowsVssSignatureProp, err := expandComputeDiskEraseWindowsVssSignature(d.Get("erase_windows_vss_signature"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("erase_windows_vss_signature"); !tpgresource.IsEmptyValue(reflect.ValueOf(eraseWindowsVssSignatureProp)) && (ok || !reflect.DeepEqual(v, eraseWindowsVssSignatureProp)) {
+		obj["eraseWindowsVssSignature"] = eraseWindowsVssSignatureProp
+	}
 	typeProp, err := expandComputeDiskType(d.Get("type"), d, config)
 	if err != nil {
 		return nil, err
@@ -232,6 +238,12 @@ func GetComputeDiskCaiObject(d tpgresource.TerraformResourceData, config *transp
 		return nil, err
 	} else if v, ok := d.GetOkExists("licenses"); !tpgresource.IsEmptyValue(reflect.ValueOf(licensesProp)) && (ok || !reflect.DeepEqual(v, licensesProp)) {
 		obj["licenses"] = licensesProp
+	}
+	userLicensesProp, err := expandComputeDiskUserLicenses(d.Get("user_licenses"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("user_licenses"); !tpgresource.IsEmptyValue(reflect.ValueOf(userLicensesProp)) && (ok || !reflect.DeepEqual(v, userLicensesProp)) {
+		obj["userLicenses"] = userLicensesProp
 	}
 	storagePoolProp, err := expandComputeDiskStoragePool(d.Get("storage_pool"), d, config)
 	if err != nil {
@@ -342,6 +354,13 @@ func expandComputeDiskSourceImageEncryptionKey(v interface{}, d tpgresource.Terr
 		transformed["rawKey"] = transformedRawKey
 	}
 
+	transformedRsaEncryptedKey, err := expandComputeDiskSourceImageEncryptionKeyRsaEncryptedKey(original["rsa_encrypted_key"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRsaEncryptedKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["rsaEncryptedKey"] = transformedRsaEncryptedKey
+	}
+
 	transformedKmsKeySelfLink, err := expandComputeDiskSourceImageEncryptionKeyKmsKeySelfLink(original["kms_key_self_link"], d, config)
 	if err != nil {
 		return nil, err
@@ -360,6 +379,10 @@ func expandComputeDiskSourceImageEncryptionKey(v interface{}, d tpgresource.Terr
 }
 
 func expandComputeDiskSourceImageEncryptionKeyRawKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeDiskSourceImageEncryptionKeyRsaEncryptedKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -453,6 +476,13 @@ func expandComputeDiskSourceSnapshotEncryptionKey(v interface{}, d tpgresource.T
 		transformed["rawKey"] = transformedRawKey
 	}
 
+	transformedRsaEncryptedKey, err := expandComputeDiskSourceSnapshotEncryptionKeyRsaEncryptedKey(original["rsa_encrypted_key"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRsaEncryptedKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["rsaEncryptedKey"] = transformedRsaEncryptedKey
+	}
+
 	transformedKmsKeySelfLink, err := expandComputeDiskSourceSnapshotEncryptionKeyKmsKeySelfLink(original["kms_key_self_link"], d, config)
 	if err != nil {
 		return nil, err
@@ -471,6 +501,10 @@ func expandComputeDiskSourceSnapshotEncryptionKey(v interface{}, d tpgresource.T
 }
 
 func expandComputeDiskSourceSnapshotEncryptionKeyRawKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeDiskSourceSnapshotEncryptionKeyRsaEncryptedKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -507,6 +541,10 @@ func expandComputeDiskPhysicalBlockSizeBytes(v interface{}, d tpgresource.Terraf
 }
 
 func expandComputeDiskSourceDisk(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeDiskEraseWindowsVssSignature(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -643,6 +681,10 @@ func expandComputeDiskLicenses(v interface{}, d tpgresource.TerraformResourceDat
 		req = append(req, url)
 	}
 	return req, nil
+}
+
+func expandComputeDiskUserLicenses(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandComputeDiskStoragePool(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

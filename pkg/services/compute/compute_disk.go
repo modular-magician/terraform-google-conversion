@@ -520,6 +520,13 @@ this resource. You can provide either the rawKey or the rsaEncryptedKey.`,
 				Description: `Whether this disk is using confidential compute mode.
 Note: Only supported on hyperdisk skus, disk_encryption_key is required when setting to true`,
 			},
+			"erase_windows_vss_signature": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				ForceNew: true,
+				Description: `Specifies whether the disk restored from a source snapshot should erase
+Windows specific VSS signature.`,
+			},
 			"guest_os_features": {
 				Type:     schema.TypeSet,
 				Computed: true,
@@ -695,6 +702,14 @@ If absent, the Compute Engine Service Agent service account is used.`,
 							Description: `Specifies a 256-bit customer-supplied encryption key, encoded in
 RFC 4648 base64 to either encrypt or decrypt this resource.`,
 						},
+						"rsa_encrypted_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+							ForceNew: true,
+							Description: `Specifies an RFC 4648 base64 encoded, RSA-wrapped 2048-bit
+customer-supplied encryption key to either encrypt or decrypt
+this resource. You can provide either the rawKey or the rsaEncryptedKey.`,
+						},
 					},
 				},
 			},
@@ -745,6 +760,14 @@ If absent, the Compute Engine Service Agent service account is used.`,
 							Description: `Specifies a 256-bit customer-supplied encryption key, encoded in
 RFC 4648 base64 to either encrypt or decrypt this resource.`,
 						},
+						"rsa_encrypted_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+							ForceNew: true,
+							Description: `Specifies an RFC 4648 base64 encoded, RSA-wrapped 2048-bit
+customer-supplied encryption key to either encrypt or decrypt
+this resource. You can provide either the rawKey or the rsaEncryptedKey.`,
+						},
 					},
 				},
 			},
@@ -778,6 +801,18 @@ For example:
 				Description: `URL of the disk type resource describing which disk type to use to
 create the disk. Provide this when creating the disk.`,
 				Default: "pd-standard",
+			},
+			"user_licenses": {
+				Type:     schema.TypeList,
+				Optional: true,
+				ForceNew: true,
+				Description: `A list of publicly visible user-licenses. Unlike regular licenses, user
+provided licenses can be modified after the disk is created. This includes
+a list of URLs to the license resource. For example, to provide a debian license:
+https://www.googleapis.com/compute/v1/projects/debian-cloud/global/licenses/debian-9-stretch`,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
 			},
 			"zone": {
 				Type:             schema.TypeString,

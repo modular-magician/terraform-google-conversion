@@ -146,6 +146,7 @@ func (c *ComputeDiskCai2hclConverter) convertResourceData(asset caiasset.Asset) 
 	hclData["size"] = flattenComputeDiskSize(res["sizeGb"], d, config)
 	hclData["physical_block_size_bytes"] = flattenComputeDiskPhysicalBlockSizeBytes(res["physicalBlockSizeBytes"], d, config)
 	hclData["source_disk"] = flattenComputeDiskSourceDisk(res["sourceDisk"], d, config)
+	hclData["erase_windows_vss_signature"] = flattenComputeDiskEraseWindowsVssSignature(res["eraseWindowsVssSignature"], d, config)
 	hclData["type"] = flattenComputeDiskType(res["type"], d, config)
 	hclData["image"] = flattenComputeDiskImage(res["sourceImage"], d, config)
 	hclData["enable_confidential_compute"] = flattenComputeDiskEnableConfidentialCompute(res["enableConfidentialCompute"], d, config)
@@ -156,6 +157,7 @@ func (c *ComputeDiskCai2hclConverter) convertResourceData(asset caiasset.Asset) 
 	hclData["params"] = flattenComputeDiskParams(res["params"], d, config)
 	hclData["guest_os_features"] = flattenComputeDiskGuestOsFeatures(res["guestOsFeatures"], d, config)
 	hclData["licenses"] = flattenComputeDiskLicenses(res["licenses"], d, config)
+	hclData["user_licenses"] = flattenComputeDiskUserLicenses(res["userLicenses"], d, config)
 	hclData["storage_pool"] = flattenComputeDiskStoragePool(res["storagePool"], d, config)
 	hclData["access_mode"] = flattenComputeDiskAccessMode(res["accessMode"], d, config)
 	hclData["zone"] = flattenComputeDiskZone(res["zone"], d, config)
@@ -179,6 +181,8 @@ func flattenComputeDiskSourceImageEncryptionKey(v interface{}, d *schema.Resourc
 	transformed := make(map[string]interface{})
 	transformed["raw_key"] =
 		flattenComputeDiskSourceImageEncryptionKeyRawKey(original["rawKey"], d, config)
+	transformed["rsa_encrypted_key"] =
+		flattenComputeDiskSourceImageEncryptionKeyRsaEncryptedKey(original["rsaEncryptedKey"], d, config)
 	transformed["kms_key_self_link"] =
 		flattenComputeDiskSourceImageEncryptionKeyKmsKeySelfLink(original["kmsKeyName"], d, config)
 	transformed["kms_key_service_account"] =
@@ -190,6 +194,10 @@ func flattenComputeDiskSourceImageEncryptionKey(v interface{}, d *schema.Resourc
 }
 
 func flattenComputeDiskSourceImageEncryptionKeyRawKey(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenComputeDiskSourceImageEncryptionKeyRsaEncryptedKey(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
@@ -249,6 +257,8 @@ func flattenComputeDiskSourceSnapshotEncryptionKey(v interface{}, d *schema.Reso
 	transformed := make(map[string]interface{})
 	transformed["raw_key"] =
 		flattenComputeDiskSourceSnapshotEncryptionKeyRawKey(original["rawKey"], d, config)
+	transformed["rsa_encrypted_key"] =
+		flattenComputeDiskSourceSnapshotEncryptionKeyRsaEncryptedKey(original["rsaEncryptedKey"], d, config)
 	transformed["kms_key_self_link"] =
 		flattenComputeDiskSourceSnapshotEncryptionKeyKmsKeySelfLink(original["kmsKeyName"], d, config)
 	transformed["kms_key_service_account"] =
@@ -260,6 +270,10 @@ func flattenComputeDiskSourceSnapshotEncryptionKey(v interface{}, d *schema.Reso
 }
 
 func flattenComputeDiskSourceSnapshotEncryptionKeyRawKey(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenComputeDiskSourceSnapshotEncryptionKeyRsaEncryptedKey(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
@@ -328,6 +342,10 @@ func flattenComputeDiskPhysicalBlockSizeBytes(v interface{}, d *schema.ResourceD
 }
 
 func flattenComputeDiskSourceDisk(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenComputeDiskEraseWindowsVssSignature(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
@@ -462,6 +480,10 @@ func flattenComputeDiskLicenses(v interface{}, d *schema.ResourceData, config *t
 		return v
 	}
 	return tpgresource.ConvertAndMapStringArr(v.([]interface{}), tpgresource.ConvertSelfLinkToV1)
+}
+
+func flattenComputeDiskUserLicenses(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
 }
 
 func flattenComputeDiskStoragePool(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

@@ -35,6 +35,18 @@ func TestAccComputeDisk(t *testing.T) {
 		{
 			Name: "TestAccComputeDisk_diskFeaturesExample",
 		},
+		{
+			Name: "TestAccComputeDisk_diskUserLicensesExample",
+		},
+		{
+			Name: "TestAccComputeDisk_diskEraseWindowsVssExample",
+		},
+		{
+			Name: "TestAccComputeDisk_diskSourceSnapshotEncryptionExample",
+		},
+		{
+			Name: "TestAccComputeDisk_diskSourceImageEncryptionExample",
+		},
 	}
 
 	for _, tt := range tests {
