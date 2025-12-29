@@ -99,6 +99,13 @@ Note: if you set this argument's value as 'INTERNAL' you need to leave the 'netw
 				ForceNew:    true,
 				Description: `An optional description of this resource.`,
 			},
+			"ip_collection": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+				Description: `Reference to the source of external IPv4 addresses, like a PublicDelegatedPrefix (PDP) for BYOIP.
+The PDP must support enhanced IPv4 allocations.`,
+			},
 			"ip_version": {
 				Type:             schema.TypeString,
 				Optional:         true,

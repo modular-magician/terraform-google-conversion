@@ -62,6 +62,7 @@ func TestAccComputeAddress(t *testing.T) {
 					"count",
 					"depends_on",
 					"for_each",
+					"ip_collection",
 					"lifecycle",
 					"provider",
 					"timeouts",
