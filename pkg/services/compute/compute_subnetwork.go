@@ -180,6 +180,16 @@ Only networks that are in the distributed mode can have subnetworks.`,
 you create the resource. This field can be set only at resource
 creation time.`,
 			},
+			"enable_flow_logs": {
+				Type:     schema.TypeBool,
+				Computed: true,
+				Optional: true,
+				Description: `Whether to enable flow logging for this subnetwork. If this field is not explicitly
+set, it will not appear in get listings. If not set the default behavior is
+determined by the org policy, if there is no org policy specified, then it will
+default to disabled. This field isn't supported if the subnet purpose field is set
+to REGIONAL_MANAGED_PROXY.`,
+			},
 			"external_ipv6_prefix": {
 				Type:        schema.TypeString,
 				Computed:    true,

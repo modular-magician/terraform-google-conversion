@@ -140,6 +140,7 @@ func (c *ComputeSubnetworkCai2hclConverter) convertResourceData(asset caiasset.A
 	hclData["secondary_ip_range"] = flattenComputeSubnetworkSecondaryIpRange(res["secondaryIpRanges"], d, config)
 	hclData["private_ip_google_access"] = flattenComputeSubnetworkPrivateIpGoogleAccess(res["privateIpGoogleAccess"], d, config)
 	hclData["private_ipv6_google_access"] = flattenComputeSubnetworkPrivateIpv6GoogleAccess(res["privateIpv6GoogleAccess"], d, config)
+	hclData["enable_flow_logs"] = flattenComputeSubnetworkEnableFlowLogs(res["enableFlowLogs"], d, config)
 	hclData["region"] = flattenComputeSubnetworkRegion(res["region"], d, config)
 	hclData["log_config"] = flattenComputeSubnetworkLogConfig(res["logConfig"], d, config)
 	hclData["stack_type"] = flattenComputeSubnetworkStackType(res["stackType"], d, config)
@@ -260,6 +261,10 @@ func flattenComputeSubnetworkPrivateIpGoogleAccess(v interface{}, d *schema.Reso
 }
 
 func flattenComputeSubnetworkPrivateIpv6GoogleAccess(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenComputeSubnetworkEnableFlowLogs(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 

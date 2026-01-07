@@ -167,6 +167,12 @@ func GetComputeSubnetworkCaiObject(d tpgresource.TerraformResourceData, config *
 	} else if v, ok := d.GetOkExists("private_ipv6_google_access"); !tpgresource.IsEmptyValue(reflect.ValueOf(privateIpv6GoogleAccessProp)) && (ok || !reflect.DeepEqual(v, privateIpv6GoogleAccessProp)) {
 		obj["privateIpv6GoogleAccess"] = privateIpv6GoogleAccessProp
 	}
+	enableFlowLogsProp, err := expandComputeSubnetworkEnableFlowLogs(d.Get("enable_flow_logs"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("enable_flow_logs"); ok || !reflect.DeepEqual(v, enableFlowLogsProp) {
+		obj["enableFlowLogs"] = enableFlowLogsProp
+	}
 	regionProp, err := expandComputeSubnetworkRegion(d.Get("region"), d, config)
 	if err != nil {
 		return nil, err
@@ -308,6 +314,10 @@ func expandComputeSubnetworkPrivateIpGoogleAccess(v interface{}, d tpgresource.T
 }
 
 func expandComputeSubnetworkPrivateIpv6GoogleAccess(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeSubnetworkEnableFlowLogs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
