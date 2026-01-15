@@ -114,7 +114,7 @@ func GetCoreBillingProjectInfoApiObject(d tpgresource.TerraformResourceData, con
 	if err != nil {
 		return nil, err
 	} else if v, ok := d.GetOkExists("billing_account"); !tpgresource.IsEmptyValue(reflect.ValueOf(billingAccountProp)) && (ok || !reflect.DeepEqual(v, billingAccountProp)) {
-		obj["billing_account"] = billingAccountProp
+		obj["billingAccount"] = billingAccountProp
 	}
 
 	return resourceCoreBillingProjectInfoEncoder(d, config, obj)

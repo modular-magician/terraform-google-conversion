@@ -1557,7 +1557,7 @@ func expandCloudRunV2ServiceTemplateContainersBuildInfo(v interface{}, d tpgreso
 	if err != nil {
 		return nil, err
 	} else if val := reflect.ValueOf(transformedSourceLocation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["source_location"] = transformedSourceLocation
+		transformed["sourceLocation"] = transformedSourceLocation
 	}
 
 	return transformed, nil
