@@ -110,8 +110,8 @@ func GetMonitoringNotificationChannelCaiObject(d tpgresource.TerraformResourceDa
 			Name: name,
 			Type: MonitoringNotificationChannelAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "v3",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/monitoring/v3/rest",
+				Version:              "monitoring.googleapis.com",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/monitoring/monitoring.googleapis.com/rest",
 				DiscoveryName:        "NotificationChannel",
 				Data:                 obj,
 			},

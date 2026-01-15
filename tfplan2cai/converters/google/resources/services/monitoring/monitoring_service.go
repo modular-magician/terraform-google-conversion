@@ -97,8 +97,8 @@ func GetMonitoringServiceCaiObject(d tpgresource.TerraformResourceData, config *
 			Name: name,
 			Type: MonitoringServiceAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "v3",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/monitoring/v3/rest",
+				Version:              "monitoring.googleapis.com",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/monitoring/monitoring.googleapis.com/rest",
 				DiscoveryName:        "Service",
 				Data:                 obj,
 			},

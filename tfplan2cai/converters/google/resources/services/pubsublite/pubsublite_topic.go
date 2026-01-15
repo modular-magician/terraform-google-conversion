@@ -97,8 +97,8 @@ func GetPubsubLiteTopicCaiObject(d tpgresource.TerraformResourceData, config *tr
 			Name: name,
 			Type: PubsubLiteTopicAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "admin",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/pubsublite/admin/rest",
+				Version:              "v1",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/pubsublite/v1/rest",
 				DiscoveryName:        "Topic",
 				Data:                 obj,
 			},

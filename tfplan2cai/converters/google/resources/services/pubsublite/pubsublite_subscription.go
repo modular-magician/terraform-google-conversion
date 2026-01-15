@@ -97,8 +97,8 @@ func GetPubsubLiteSubscriptionCaiObject(d tpgresource.TerraformResourceData, con
 			Name: name,
 			Type: PubsubLiteSubscriptionAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "admin",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/pubsublite/admin/rest",
+				Version:              "v1",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/pubsublite/v1/rest",
 				DiscoveryName:        "Subscription",
 				Data:                 obj,
 			},

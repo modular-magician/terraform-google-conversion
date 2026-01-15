@@ -97,8 +97,8 @@ func GetBiglakeIcebergIcebergCatalogCaiObject(d tpgresource.TerraformResourceDat
 			Name: name,
 			Type: BiglakeIcebergIcebergCatalogAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/biglake/v1/rest",
+				Version:              "biglake.googleapis.com",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/biglake/biglake.googleapis.com/rest",
 				DiscoveryName:        "IcebergCatalog",
 				Data:                 obj,
 			},
