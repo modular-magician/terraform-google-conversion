@@ -309,6 +309,12 @@ func GetComputeVpnTunnelApiObject(d tpgresource.TerraformResourceData, config *t
 	} else if v, ok := d.GetOkExists("cipher_suite"); !tpgresource.IsEmptyValue(reflect.ValueOf(cipherSuiteProp)) && (ok || !reflect.DeepEqual(v, cipherSuiteProp)) {
 		obj["cipherSuite"] = cipherSuiteProp
 	}
+	capacityTierProp, err := expandComputeVpnTunnelCapacityTier(d.Get("capacity_tier"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("capacity_tier"); !tpgresource.IsEmptyValue(reflect.ValueOf(capacityTierProp)) && (ok || !reflect.DeepEqual(v, capacityTierProp)) {
+		obj["capacityTier"] = capacityTierProp
+	}
 	sharedSecretWoProp, err := expandComputeVpnTunnelSharedSecretWo(d.Get("shared_secret_wo"), d, config)
 	if err != nil {
 		return nil, err
@@ -574,6 +580,10 @@ func expandComputeVpnTunnelCipherSuitePhase2Integrity(v interface{}, d tpgresour
 }
 
 func expandComputeVpnTunnelCipherSuitePhase2Pfs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeVpnTunnelCapacityTier(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
