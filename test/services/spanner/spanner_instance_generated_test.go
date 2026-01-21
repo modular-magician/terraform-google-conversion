@@ -83,6 +83,9 @@ func TestAccSpannerInstance(t *testing.T) {
 		{
 			Name: "TestAccSpannerInstance_autoscalingWithTotalCPUUtilizationPercent",
 		},
+		{
+			Name: "TestAccSpannerInstance_asymmetricAutoscalingWithAllOverrideFields",
+		},
 	}
 
 	for _, tt := range tests {
