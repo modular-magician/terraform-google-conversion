@@ -134,6 +134,12 @@ func GetComputeFutureReservationApiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("name_prefix"); !tpgresource.IsEmptyValue(reflect.ValueOf(namePrefixProp)) && (ok || !reflect.DeepEqual(v, namePrefixProp)) {
 		obj["namePrefix"] = namePrefixProp
 	}
+	protectionTierProp, err := expandComputeFutureReservationProtectionTier(d.Get("protection_tier"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("protection_tier"); !tpgresource.IsEmptyValue(reflect.ValueOf(protectionTierProp)) && (ok || !reflect.DeepEqual(v, protectionTierProp)) {
+		obj["protectionTier"] = protectionTierProp
+	}
 	planningStatusProp, err := expandComputeFutureReservationPlanningStatus(d.Get("planning_status"), d, config)
 	if err != nil {
 		return nil, err
@@ -151,6 +157,12 @@ func GetComputeFutureReservationApiObject(d tpgresource.TerraformResourceData, c
 		return nil, err
 	} else if v, ok := d.GetOkExists("specific_reservation_required"); !tpgresource.IsEmptyValue(reflect.ValueOf(specificReservationRequiredProp)) && (ok || !reflect.DeepEqual(v, specificReservationRequiredProp)) {
 		obj["specificReservationRequired"] = specificReservationRequiredProp
+	}
+	enableEmergentMaintenanceProp, err := expandComputeFutureReservationEnableEmergentMaintenance(d.Get("enable_emergent_maintenance"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("enable_emergent_maintenance"); !tpgresource.IsEmptyValue(reflect.ValueOf(enableEmergentMaintenanceProp)) && (ok || !reflect.DeepEqual(v, enableEmergentMaintenanceProp)) {
+		obj["enableEmergentMaintenance"] = enableEmergentMaintenanceProp
 	}
 	reservationNameProp, err := expandComputeFutureReservationReservationName(d.Get("reservation_name"), d, config)
 	if err != nil {
@@ -378,6 +390,10 @@ func expandComputeFutureReservationNamePrefix(v interface{}, d tpgresource.Terra
 	return v, nil
 }
 
+func expandComputeFutureReservationProtectionTier(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandComputeFutureReservationPlanningStatus(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -387,6 +403,10 @@ func expandComputeFutureReservationAutoDeleteAutoCreatedReservations(v interface
 }
 
 func expandComputeFutureReservationSpecificReservationRequired(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeFutureReservationEnableEmergentMaintenance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
