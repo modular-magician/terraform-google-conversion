@@ -53,6 +53,20 @@ func ConvertResource(asset caiasset.Asset) ([]*models.TerraformResourceBlock, er
 			} else {
 				converter = ConverterMap[asset.Type]["SecretManagerSecretVersion"]
 			}
+		case "securitycenter.googleapis.com/BigQueryExport":
+			if strings.Contains(asset.Name, "folders") {
+				converter = ConverterMap[asset.Type]["SecurityCenterV2FolderSccBigQueryExport"]
+			} else if strings.Contains(asset.Name, "organizations") {
+				converter = ConverterMap[asset.Type]["SecurityCenterV2OrganizationSccBigQueryExport"]
+			} else if strings.Contains(asset.Name, "organizations") {
+				converter = ConverterMap[asset.Type]["SecurityCenterV2OrganizationSccBigQueryExports"]
+			}
+		case "securitycenter.googleapis.com/MuteConfig":
+			if strings.Contains(asset.Name, "folders") {
+				converter = ConverterMap[asset.Type]["SecurityCenterV2FolderMuteConfig"]
+			} else if strings.Contains(asset.Name, "organizations") {
+				converter = ConverterMap[asset.Type]["SecurityCenterV2OrganizationMuteConfig"]
+			}
 		}
 	}
 
