@@ -122,10 +122,21 @@ func (c *KMSAutokeyConfigCai2hclConverter) convertResourceData(asset caiasset.As
 	}
 	hclData := make(map[string]interface{})
 
-	outputFields := map[string]struct{}{"etag": struct{}{}}
-	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudkms.googleapis.com/folders/{{folder}}/autokeyConfig", outputFields, hclData)
+	res, err = resourceKMSAutokeyConfigDecoder(d, config, res)
+	if err != nil {
+		return nil, err
+	}
+
+	if res == nil {
+		// Decoding the object has resulted in it being gone. It may be marked deleted.
+		return nil, nil
+	}
+
+	outputFields := map[string]struct{}{"etag": struct{}{}, "name": struct{}{}}
+	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudkms.googleapis.com/{{name}}", outputFields, hclData)
 
 	hclData["key_project"] = flattenKMSAutokeyConfigKeyProject(res["keyProject"], d, config)
+	hclData["key_project_resolution_mode"] = flattenKMSAutokeyConfigKeyProjectResolutionMode(res["keyProjectResolutionMode"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -139,4 +150,36 @@ func (c *KMSAutokeyConfigCai2hclConverter) convertResourceData(asset caiasset.As
 
 func flattenKMSAutokeyConfigKeyProject(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
+}
+
+func flattenKMSAutokeyConfigKeyProjectResolutionMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func resourceKMSAutokeyConfigDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
+	// Set the resource ID to the name returned from the API
+	if name, ok := res["name"].(string); ok {
+		d.SetId(name)
+		if autokeyHasPrefix(name, autokeyFolderPrefix) {
+			d.Set("folder", autokeyTrimSuffix(name, autokeyConfigSuffix))
+			d.Set("project", nil)
+		} else if autokeyHasPrefix(name, autokeyProjectPrefix) {
+			d.Set("project", autokeyTrimSuffix(name, autokeyConfigSuffix))
+			d.Set("folder", nil)
+		}
+	}
+
+	if v, ok := res["keyProject"].(string); ok {
+		d.Set("key_project", v)
+	} else {
+		d.Set("key_project", nil)
+	}
+
+	if v, ok := res["keyProjectResolutionMode"].(string); ok {
+		d.Set("key_project_resolution_mode", v)
+	} else {
+		d.Set("key_project_resolution_mode", nil)
+	}
+
+	return res, nil
 }

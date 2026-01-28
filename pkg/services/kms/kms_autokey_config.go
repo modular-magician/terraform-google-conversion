@@ -38,9 +38,63 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/verify"
 )
 
-func folderPrefixSuppress(_, old, new string, d *schema.ResourceData) bool {
-	prefix := "folders/"
-	return prefix+old == new || prefix+new == old
+const (
+	autokeyFolderPrefix  = "folders/"
+	autokeyProjectPrefix = "projects/"
+	autokeyConfigSuffix  = "/autokeyConfig"
+)
+
+func autokeyHasPrefix(value, prefix string) bool {
+	return len(value) >= len(prefix) && value[:len(prefix)] == prefix
+}
+
+func autokeyTrimPrefix(value, prefix string) string {
+	if autokeyHasPrefix(value, prefix) {
+		return value[len(prefix):]
+	}
+	return value
+}
+
+func autokeyTrimSuffix(value, suffix string) string {
+	if len(value) >= len(suffix) && value[len(value)-len(suffix):] == suffix {
+		return value[:len(value)-len(suffix)]
+	}
+	return value
+}
+
+func autokeyJoin(fields []string) string {
+	result := ""
+	for i, field := range fields {
+		if i > 0 {
+			result += ","
+		}
+		result += field
+	}
+	return result
+}
+
+func normalizeParent(parent, kind string) string {
+	if parent == "" {
+		return parent
+	}
+	switch kind {
+	case "folder":
+		if !autokeyHasPrefix(parent, autokeyFolderPrefix) {
+			return autokeyFolderPrefix + parent
+		}
+	case "project":
+		if !autokeyHasPrefix(parent, autokeyProjectPrefix) {
+			return autokeyProjectPrefix + parent
+		}
+	}
+	return parent
+}
+
+func folderPrefixSuppress(k, old, new string, d *schema.ResourceData) bool {
+	return autokeyTrimPrefix(old, autokeyFolderPrefix) == autokeyTrimPrefix(new, autokeyFolderPrefix)
+}
+func projectPrefixSuppress(k, old, new string, d *schema.ResourceData) bool {
+	return autokeyTrimPrefix(old, autokeyProjectPrefix) == autokeyTrimPrefix(new, autokeyProjectPrefix)
 }
 
 var (
@@ -72,10 +126,11 @@ func ResourceKMSAutokeyConfig() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"folder": {
 				Type:             schema.TypeString,
-				Required:         true,
+				Optional:         true,
 				ForceNew:         true,
 				DiffSuppressFunc: folderPrefixSuppress,
 				Description:      `The folder for which to retrieve config.`,
+				ConflictsWith:    []string{},
 			},
 			"key_project": {
 				Type:     schema.TypeString,
@@ -84,10 +139,29 @@ func ResourceKMSAutokeyConfig() *schema.Resource {
 CryptoKey for any new KeyHandle the Developer creates. Should have the form
 'projects/<project_id_or_number>'.`,
 			},
+			"key_project_resolution_mode": {
+				Type:         schema.TypeString,
+				Optional:     true,
+				ValidateFunc: verify.ValidateEnum([]string{"KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED", "DEDICATED_KEY_PROJECT", "RESOURCE_PROJECT", "DISABLED", ""}),
+				Description:  `How Autokey determines which project to use when provisioning CMEK keys. Possible values: ["KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED", "DEDICATED_KEY_PROJECT", "RESOURCE_PROJECT", "DISABLED"]`,
+			},
+			"project": {
+				Type:             schema.TypeString,
+				Optional:         true,
+				ForceNew:         true,
+				DiffSuppressFunc: projectPrefixSuppress,
+				Description:      `The project for which to retrieve config.`,
+				ConflictsWith:    []string{},
+			},
 			"etag": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: `The etag of the AutokeyConfig for optimistic concurrency control.`,
+			},
+			"name": {
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: `The resource name for the 'AutokeyConfig' in the format 'folders/{{folder_id}}/autokeyConfig' or 'projects/{{project_id}}/autokeyConfig'.`,
 			},
 		},
 		UseJSONNumber: true,
