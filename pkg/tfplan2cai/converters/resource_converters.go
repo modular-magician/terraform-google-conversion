@@ -78,6 +78,8 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_binary_authorization_attestor":                 binaryauthorization.BinaryAuthorizationAttestorTfplan2caiConverter(),
 	"google_blockchain_node_engine_blockchain_nodes":       blockchainnodeengine.BlockchainNodeEngineBlockchainNodesTfplan2caiConverter(),
 	"google_certificate_manager_certificate":               certificatemanager.CertificateManagerCertificateTfplan2caiConverter(),
+	"google_certificate_manager_dns_authorization":         certificatemanager.CertificateManagerDnsAuthorizationTfplan2caiConverter(),
+	"google_certificate_manager_trust_config":              certificatemanager.CertificateManagerTrustConfigTfplan2caiConverter(),
 	"google_cloud_asset_folder_feed":                       cloudasset.CloudAssetFolderFeedTfplan2caiConverter(),
 	"google_cloud_asset_organization_feed":                 cloudasset.CloudAssetOrganizationFeedTfplan2caiConverter(),
 	"google_cloud_asset_project_feed":                      cloudasset.CloudAssetProjectFeedTfplan2caiConverter(),

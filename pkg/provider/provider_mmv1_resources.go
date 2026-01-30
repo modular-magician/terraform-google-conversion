@@ -49,7 +49,7 @@ var handwrittenTfplan2caiResources = map[string]*schema.Resource{
 	// ####### END handwritten resources ###########
 }
 
-// Generated resources: 101
+// Generated resources: 103
 var generatedResources = map[string]*schema.Resource{
 	"google_alloydb_backup":                                alloydb.ResourceAlloydbBackup(),
 	"google_alloydb_cluster":                               alloydb.ResourceAlloydbCluster(),
@@ -69,6 +69,8 @@ var generatedResources = map[string]*schema.Resource{
 	"google_binary_authorization_attestor":                 binaryauthorization.ResourceBinaryAuthorizationAttestor(),
 	"google_blockchain_node_engine_blockchain_nodes":       blockchainnodeengine.ResourceBlockchainNodeEngineBlockchainNodes(),
 	"google_certificate_manager_certificate":               certificatemanager.ResourceCertificateManagerCertificate(),
+	"google_certificate_manager_dns_authorization":         certificatemanager.ResourceCertificateManagerDnsAuthorization(),
+	"google_certificate_manager_trust_config":              certificatemanager.ResourceCertificateManagerTrustConfig(),
 	"google_cloud_asset_folder_feed":                       cloudasset.ResourceCloudAssetFolderFeed(),
 	"google_cloud_asset_organization_feed":                 cloudasset.ResourceCloudAssetOrganizationFeed(),
 	"google_cloud_asset_project_feed":                      cloudasset.ResourceCloudAssetProjectFeed(),

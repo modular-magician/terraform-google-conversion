@@ -124,6 +124,12 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	"certificatemanager.googleapis.com/Certificate": {
 		"Default": certificatemanager.NewCertificateManagerCertificateCai2hclConverter(provider),
 	},
+	"certificatemanager.googleapis.com/DnsAuthorization": {
+		"Default": certificatemanager.NewCertificateManagerDnsAuthorizationCai2hclConverter(provider),
+	},
+	"certificatemanager.googleapis.com/TrustConfig": {
+		"Default": certificatemanager.NewCertificateManagerTrustConfigCai2hclConverter(provider),
+	},
 	"cloudasset.googleapis.com/Feed": {
 		"CloudAssetFolderFeed":       cloudasset.NewCloudAssetFolderFeedCai2hclConverter(provider),
 		"CloudAssetOrganizationFeed": cloudasset.NewCloudAssetOrganizationFeedCai2hclConverter(provider),
