@@ -128,6 +128,18 @@ func GetDocumentAIProcessorApiObject(d tpgresource.TerraformResourceData, config
 	} else if v, ok := d.GetOkExists("kms_key_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(kmsKeyNameProp)) && (ok || !reflect.DeepEqual(v, kmsKeyNameProp)) {
 		obj["kmsKeyName"] = kmsKeyNameProp
 	}
+	defaultProcessorVersionProp, err := expandDocumentAIProcessorDefaultProcessorVersion(d.Get("default_processor_version"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("default_processor_version"); !tpgresource.IsEmptyValue(reflect.ValueOf(defaultProcessorVersionProp)) && (ok || !reflect.DeepEqual(v, defaultProcessorVersionProp)) {
+		obj["defaultProcessorVersion"] = defaultProcessorVersionProp
+	}
+	schemaProp, err := expandDocumentAIProcessorSchema(d.Get("schema"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("schema"); !tpgresource.IsEmptyValue(reflect.ValueOf(schemaProp)) && (ok || !reflect.DeepEqual(v, schemaProp)) {
+		obj["schema"] = schemaProp
+	}
 
 	return obj, nil
 }
@@ -141,5 +153,13 @@ func expandDocumentAIProcessorDisplayName(v interface{}, d tpgresource.Terraform
 }
 
 func expandDocumentAIProcessorKmsKeyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDocumentAIProcessorDefaultProcessorVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDocumentAIProcessorSchema(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
