@@ -18,6 +18,7 @@ package workbench
 
 import (
 	"fmt"
+	"net/http"
 	"regexp"
 	"strings"
 
@@ -171,6 +172,8 @@ func (u *WorkbenchInstanceIamUpdater) GetResourceIamPolicy() (*cloudresourcemana
 		return nil, err
 	}
 
+	headers := make(http.Header)
+
 	policy, err := transport_tpg.SendRequest(transport_tpg.SendRequestOptions{
 		Config:               u.Config,
 		Method:               "GET",
@@ -178,6 +181,7 @@ func (u *WorkbenchInstanceIamUpdater) GetResourceIamPolicy() (*cloudresourcemana
 		RawURL:               url,
 		UserAgent:            userAgent,
 		Body:                 obj,
+		Headers:              headers,
 		ErrorRetryPredicates: []transport_tpg.RetryErrorPredicateFunc{transport_tpg.IsWorkbenchQueueError},
 	})
 	if err != nil {
@@ -216,6 +220,8 @@ func (u *WorkbenchInstanceIamUpdater) SetResourceIamPolicy(policy *cloudresource
 		return err
 	}
 
+	headers := make(http.Header)
+
 	_, err = transport_tpg.SendRequest(transport_tpg.SendRequestOptions{
 		Config:               u.Config,
 		Method:               "POST",
@@ -223,6 +229,7 @@ func (u *WorkbenchInstanceIamUpdater) SetResourceIamPolicy(policy *cloudresource
 		RawURL:               url,
 		UserAgent:            userAgent,
 		Body:                 obj,
+		Headers:              headers,
 		Timeout:              u.d.Timeout(schema.TimeoutCreate),
 		ErrorRetryPredicates: []transport_tpg.RetryErrorPredicateFunc{transport_tpg.IsWorkbenchQueueError},
 	})

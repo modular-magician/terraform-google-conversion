@@ -18,6 +18,7 @@ package gemini
 
 import (
 	"fmt"
+	"net/http"
 	"regexp"
 	"strings"
 
@@ -186,6 +187,8 @@ func (u *GeminiRepositoryGroupIamUpdater) GetResourceIamPolicy() (*cloudresource
 		return nil, err
 	}
 
+	headers := make(http.Header)
+
 	policy, err := transport_tpg.SendRequest(transport_tpg.SendRequestOptions{
 		Config:               u.Config,
 		Method:               "GET",
@@ -193,6 +196,7 @@ func (u *GeminiRepositoryGroupIamUpdater) GetResourceIamPolicy() (*cloudresource
 		RawURL:               url,
 		UserAgent:            userAgent,
 		Body:                 obj,
+		Headers:              headers,
 		ErrorRetryPredicates: []transport_tpg.RetryErrorPredicateFunc{transport_tpg.IsCodeRepositoryIndexUnreadyError, transport_tpg.IsRepositoryGroupQueueError},
 	})
 	if err != nil {
@@ -231,6 +235,8 @@ func (u *GeminiRepositoryGroupIamUpdater) SetResourceIamPolicy(policy *cloudreso
 		return err
 	}
 
+	headers := make(http.Header)
+
 	_, err = transport_tpg.SendRequest(transport_tpg.SendRequestOptions{
 		Config:               u.Config,
 		Method:               "POST",
@@ -238,6 +244,7 @@ func (u *GeminiRepositoryGroupIamUpdater) SetResourceIamPolicy(policy *cloudreso
 		RawURL:               url,
 		UserAgent:            userAgent,
 		Body:                 obj,
+		Headers:              headers,
 		Timeout:              u.d.Timeout(schema.TimeoutCreate),
 		ErrorRetryPredicates: []transport_tpg.RetryErrorPredicateFunc{transport_tpg.IsCodeRepositoryIndexUnreadyError, transport_tpg.IsRepositoryGroupQueueError},
 	})

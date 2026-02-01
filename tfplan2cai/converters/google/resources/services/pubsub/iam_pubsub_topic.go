@@ -18,6 +18,7 @@ package pubsub
 
 import (
 	"fmt"
+	"net/http"
 	"regexp"
 	"strings"
 
@@ -147,6 +148,8 @@ func (u *PubsubTopicIamUpdater) GetResourceIamPolicy() (*cloudresourcemanager.Po
 		return nil, err
 	}
 
+	headers := make(http.Header)
+
 	policy, err := transport_tpg.SendRequest(transport_tpg.SendRequestOptions{
 		Config:               u.Config,
 		Method:               "GET",
@@ -154,6 +157,7 @@ func (u *PubsubTopicIamUpdater) GetResourceIamPolicy() (*cloudresourcemanager.Po
 		RawURL:               url,
 		UserAgent:            userAgent,
 		Body:                 obj,
+		Headers:              headers,
 		ErrorRetryPredicates: []transport_tpg.RetryErrorPredicateFunc{transport_tpg.PubsubTopicProjectNotReady},
 	})
 	if err != nil {
@@ -192,6 +196,8 @@ func (u *PubsubTopicIamUpdater) SetResourceIamPolicy(policy *cloudresourcemanage
 		return err
 	}
 
+	headers := make(http.Header)
+
 	_, err = transport_tpg.SendRequest(transport_tpg.SendRequestOptions{
 		Config:               u.Config,
 		Method:               "POST",
@@ -199,6 +205,7 @@ func (u *PubsubTopicIamUpdater) SetResourceIamPolicy(policy *cloudresourcemanage
 		RawURL:               url,
 		UserAgent:            userAgent,
 		Body:                 obj,
+		Headers:              headers,
 		Timeout:              u.d.Timeout(schema.TimeoutCreate),
 		ErrorRetryPredicates: []transport_tpg.RetryErrorPredicateFunc{transport_tpg.PubsubTopicProjectNotReady},
 	})
