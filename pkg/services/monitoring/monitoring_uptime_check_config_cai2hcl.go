@@ -318,10 +318,10 @@ func flattenMonitoringUptimeCheckConfigHttpCheckAuthInfo(v interface{}, d *schem
 	transformed := make(map[string]interface{})
 	transformed["password"] =
 		flattenMonitoringUptimeCheckConfigHttpCheckAuthInfoPassword(original["password"], d, config)
-	transformed["password_wo_version"] =
-		flattenMonitoringUptimeCheckConfigHttpCheckAuthInfoPasswordWoVersion(original["passwordWoVersion"], d, config)
 	transformed["username"] =
 		flattenMonitoringUptimeCheckConfigHttpCheckAuthInfoUsername(original["username"], d, config)
+	transformed["password_wo_version"] =
+		flattenMonitoringUptimeCheckConfigHttpCheckAuthInfoPasswordWoVersion(original["passwordWoVersion"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -330,10 +330,6 @@ func flattenMonitoringUptimeCheckConfigHttpCheckAuthInfo(v interface{}, d *schem
 
 func flattenMonitoringUptimeCheckConfigHttpCheckAuthInfoPassword(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return d.Get("http_check.0.auth_info.0.password")
-}
-
-func flattenMonitoringUptimeCheckConfigHttpCheckAuthInfoPasswordWoVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
 }
 
 func flattenMonitoringUptimeCheckConfigHttpCheckAuthInfoUsername(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -345,6 +341,10 @@ func flattenMonitoringUptimeCheckConfigHttpCheckAuthInfoUsername(v interface{}, 
 		return "unknown"
 	}
 	return v
+}
+
+func flattenMonitoringUptimeCheckConfigHttpCheckAuthInfoPasswordWoVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return d.Get("http_check.0.auth_info.0.password_wo_version")
 }
 
 func flattenMonitoringUptimeCheckConfigHttpCheckServiceAgentAuthentication(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

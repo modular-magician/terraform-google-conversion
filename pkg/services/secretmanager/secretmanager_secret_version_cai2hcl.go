@@ -169,7 +169,7 @@ func flattenSecretManagerSecretVersionPayload(v interface{}, d *schema.ResourceD
 	transformed["secret_data"] =
 		flattenSecretManagerSecretVersionPayloadSecretData(original["data"], d, config)
 	transformed["secret_data_wo_version"] =
-		flattenSecretManagerSecretVersionPayloadSecretDataWoVersion(original["SecretDataWoVersion"], d, config)
+		flattenSecretManagerSecretVersionPayloadSecretDataWoVersion(original["secretDataWoVersion"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -181,20 +181,7 @@ func flattenSecretManagerSecretVersionPayloadSecretData(v interface{}, d *schema
 }
 
 func flattenSecretManagerSecretVersionPayloadSecretDataWoVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	// Handles the string fixed64 format
-	if strVal, ok := v.(string); ok {
-		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
-			return intVal
-		}
-	}
-
-	// number values are represented as float64
-	if floatVal, ok := v.(float64); ok {
-		intVal := int(floatVal)
-		return intVal
-	}
-
-	return v // let terraform core handle it otherwise
+	return d.Get("secret_data_wo_version")
 }
 
 func resourceSecretManagerSecretVersionDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
