@@ -245,6 +245,13 @@ func expandNetworkSecurityServerTlsPolicyMtlsPolicy(v interface{}, d tpgresource
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
+	transformedTier, err := expandNetworkSecurityServerTlsPolicyMtlsPolicyTier(original["tier"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedTier); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["tier"] = transformedTier
+	}
+
 	transformedClientValidationMode, err := expandNetworkSecurityServerTlsPolicyMtlsPolicyClientValidationMode(original["client_validation_mode"], d, config)
 	if err != nil {
 		return nil, err
@@ -267,6 +274,10 @@ func expandNetworkSecurityServerTlsPolicyMtlsPolicy(v interface{}, d tpgresource
 	}
 
 	return transformed, nil
+}
+
+func expandNetworkSecurityServerTlsPolicyMtlsPolicyTier(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandNetworkSecurityServerTlsPolicyMtlsPolicyClientValidationMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

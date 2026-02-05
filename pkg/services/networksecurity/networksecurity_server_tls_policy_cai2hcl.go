@@ -224,6 +224,8 @@ func flattenNetworkSecurityServerTlsPolicyMtlsPolicy(v interface{}, d *schema.Re
 	}
 	original := v.(map[string]interface{})
 	transformed := make(map[string]interface{})
+	transformed["tier"] =
+		flattenNetworkSecurityServerTlsPolicyMtlsPolicyTier(original["tier"], d, config)
 	transformed["client_validation_mode"] =
 		flattenNetworkSecurityServerTlsPolicyMtlsPolicyClientValidationMode(original["clientValidationMode"], d, config)
 	transformed["client_validation_trust_config"] =
@@ -234,6 +236,10 @@ func flattenNetworkSecurityServerTlsPolicyMtlsPolicy(v interface{}, d *schema.Re
 		return nil
 	}
 	return []interface{}{transformed}
+}
+
+func flattenNetworkSecurityServerTlsPolicyMtlsPolicyTier(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
 }
 
 func flattenNetworkSecurityServerTlsPolicyMtlsPolicyClientValidationMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

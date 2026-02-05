@@ -166,6 +166,14 @@ Required if the policy is to be used with the external HTTPS load balancing. For
 If specified, the chain validation will be performed against certificates configured in the given TrustConfig.
 Allowed only if the policy is to be used with external HTTPS load balancers.`,
 						},
+						"tier": {
+							Type:         schema.TypeString,
+							Computed:     true,
+							Optional:     true,
+							ForceNew:     true,
+							ValidateFunc: verify.ValidateEnum([]string{"STANDARD", "ADVANCED", ""}),
+							Description:  `Mutual TLS tier for XLB. Allowed only if the policy is to be used with Application Load Balancers. Possible values: ["STANDARD", "ADVANCED"]`,
+						},
 					},
 				},
 			},
