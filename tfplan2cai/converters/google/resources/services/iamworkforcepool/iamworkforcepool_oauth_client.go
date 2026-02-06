@@ -152,6 +152,12 @@ func GetIAMWorkforcePoolOauthClientApiObject(d tpgresource.TerraformResourceData
 	} else if v, ok := d.GetOkExists("allowed_redirect_uris"); !tpgresource.IsEmptyValue(reflect.ValueOf(allowedRedirectUrisProp)) && (ok || !reflect.DeepEqual(v, allowedRedirectUrisProp)) {
 		obj["allowedRedirectUris"] = allowedRedirectUrisProp
 	}
+	pkceEnforcedProp, err := expandIAMWorkforcePoolOauthClientPkceEnforced(d.Get("pkce_enforced"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("pkce_enforced"); !tpgresource.IsEmptyValue(reflect.ValueOf(pkceEnforcedProp)) && (ok || !reflect.DeepEqual(v, pkceEnforcedProp)) {
+		obj["pkceEnforced"] = pkceEnforcedProp
+	}
 
 	return obj, nil
 }
@@ -181,5 +187,9 @@ func expandIAMWorkforcePoolOauthClientClientType(v interface{}, d tpgresource.Te
 }
 
 func expandIAMWorkforcePoolOauthClientAllowedRedirectUris(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIAMWorkforcePoolOauthClientPkceEnforced(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
