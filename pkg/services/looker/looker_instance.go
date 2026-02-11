@@ -115,6 +115,12 @@ existing list of allowed email domains.`,
 					},
 				},
 			},
+			"catalog_integration_enabled": {
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Description: `Catalog Integration Enablement for Looker (Google Cloud Core).`,
+				Default:     true,
+			},
 			"consumer_network": {
 				Type:     schema.TypeString,
 				Optional: true,

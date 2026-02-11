@@ -155,6 +155,12 @@ func GetLookerInstanceCaiObject(d tpgresource.TerraformResourceData, config *tra
 	} else if v, ok := d.GetOkExists("gemini_enabled"); !tpgresource.IsEmptyValue(reflect.ValueOf(geminiEnabledProp)) && (ok || !reflect.DeepEqual(v, geminiEnabledProp)) {
 		obj["geminiEnabled"] = geminiEnabledProp
 	}
+	catalogIntegrationEnabledProp, err := expandLookerInstanceCatalogIntegrationEnabled(d.Get("catalog_integration_enabled"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("catalog_integration_enabled"); !tpgresource.IsEmptyValue(reflect.ValueOf(catalogIntegrationEnabledProp)) && (ok || !reflect.DeepEqual(v, catalogIntegrationEnabledProp)) {
+		obj["catalogIntegrationEnabled"] = catalogIntegrationEnabledProp
+	}
 	maintenanceWindowProp, err := expandLookerInstanceMaintenanceWindow(d.Get("maintenance_window"), d, config)
 	if err != nil {
 		return nil, err
@@ -518,6 +524,10 @@ func expandLookerInstanceFipsEnabled(v interface{}, d tpgresource.TerraformResou
 }
 
 func expandLookerInstanceGeminiEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandLookerInstanceCatalogIntegrationEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

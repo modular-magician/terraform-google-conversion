@@ -133,6 +133,7 @@ func (c *LookerInstanceCai2hclConverter) convertResourceData(asset caiasset.Asse
 	hclData["encryption_config"] = flattenLookerInstanceEncryptionConfig(res["encryptionConfig"], d, config)
 	hclData["fips_enabled"] = flattenLookerInstanceFipsEnabled(res["fipsEnabled"], d, config)
 	hclData["gemini_enabled"] = flattenLookerInstanceGeminiEnabled(res["geminiEnabled"], d, config)
+	hclData["catalog_integration_enabled"] = flattenLookerInstanceCatalogIntegrationEnabled(res["catalogIntegrationEnabled"], d, config)
 	hclData["maintenance_window"] = flattenLookerInstanceMaintenanceWindow(res["maintenanceWindow"], d, config)
 	hclData["oauth_config"] = flattenLookerInstanceOauthConfig(res["oauthConfig"], d, config)
 	hclData["periodic_export_config"] = flattenLookerInstancePeriodicExportConfig(res["periodicExportConfig"], d, config)
@@ -472,6 +473,10 @@ func flattenLookerInstanceFipsEnabled(v interface{}, d *schema.ResourceData, con
 }
 
 func flattenLookerInstanceGeminiEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenLookerInstanceCatalogIntegrationEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
