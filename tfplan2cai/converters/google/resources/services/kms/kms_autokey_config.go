@@ -49,9 +49,64 @@ import (
 	"google.golang.org/api/googleapi"
 )
 
-func folderPrefixSuppress(_, old, new string, d *schema.ResourceData) bool {
-	prefix := "folders/"
-	return prefix+old == new || prefix+new == old
+const (
+	autokeyFolderPrefix  = "folders/"
+	autokeyProjectPrefix = "projects/"
+	autokeyConfigSuffix  = "/autokeyConfig"
+)
+
+func autokeyHasPrefix(value, prefix string) bool {
+	return len(value) >= len(prefix) && value[:len(prefix)] == prefix
+}
+
+func autokeyTrimPrefix(value, prefix string) string {
+	if autokeyHasPrefix(value, prefix) {
+		return value[len(prefix):]
+	}
+	return value
+}
+
+func autokeyTrimSuffix(value, suffix string) string {
+	if len(value) >= len(suffix) && value[len(value)-len(suffix):] == suffix {
+		return value[:len(value)-len(suffix)]
+	}
+	return value
+}
+
+func autokeyJoin(fields []string) string {
+	result := ""
+	for i, field := range fields {
+		if i > 0 {
+			result += ","
+		}
+		result += field
+	}
+	return result
+}
+
+func normalizeParent(parent, kind string) string {
+	if parent == "" {
+		return parent
+	}
+	switch kind {
+	case "folder":
+		if !autokeyHasPrefix(parent, autokeyFolderPrefix) {
+			return autokeyFolderPrefix + parent
+		}
+	case "project":
+		if !autokeyHasPrefix(parent, autokeyProjectPrefix) {
+			return autokeyProjectPrefix + parent
+		}
+	}
+	return parent
+}
+
+func folderPrefixSuppress(k, old, new string, d *schema.ResourceData) bool {
+	return autokeyTrimPrefix(old, autokeyFolderPrefix) == autokeyTrimPrefix(new, autokeyFolderPrefix)
+}
+
+func projectPrefixSuppress(k, old, new string, d *schema.ResourceData) bool {
+	return autokeyTrimPrefix(old, autokeyProjectPrefix) == autokeyTrimPrefix(new, autokeyProjectPrefix)
 }
 
 var (
@@ -93,7 +148,7 @@ func ResourceConverterKMSAutokeyConfig() cai.ResourceConverter {
 }
 
 func GetKMSAutokeyConfigCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//cloudkms.googleapis.com/folders/{{folder}}/autokeyConfig")
+	name, err := cai.AssetName(d, config, "//cloudkms.googleapis.com/{{name}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -121,10 +176,46 @@ func GetKMSAutokeyConfigApiObject(d tpgresource.TerraformResourceData, config *t
 	} else if v, ok := d.GetOkExists("key_project"); !tpgresource.IsEmptyValue(reflect.ValueOf(keyProjectProp)) && (ok || !reflect.DeepEqual(v, keyProjectProp)) {
 		obj["keyProject"] = keyProjectProp
 	}
+	keyProjectResolutionModeProp, err := expandKMSAutokeyConfigKeyProjectResolutionMode(d.Get("key_project_resolution_mode"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("key_project_resolution_mode"); !tpgresource.IsEmptyValue(reflect.ValueOf(keyProjectResolutionModeProp)) && (ok || !reflect.DeepEqual(v, keyProjectResolutionModeProp)) {
+		obj["keyProjectResolutionMode"] = keyProjectResolutionModeProp
+	}
 
-	return obj, nil
+	return resourceKMSAutokeyConfigEncoder(d, config, obj)
+}
+
+func resourceKMSAutokeyConfigEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
+	config := meta.(*transport_tpg.Config)
+
+	body := make(map[string]interface{})
+
+	if d.HasChange("key_project") {
+		keyProjectProp, _ := expandKMSAutokeyConfigKeyProject(d.Get("key_project"), d, config)
+		if v, ok := d.GetOkExists("key_project"); !tpgresource.IsEmptyValue(reflect.ValueOf(keyProjectProp)) && (ok || !reflect.DeepEqual(v, keyProjectProp)) {
+			body["keyProject"] = keyProjectProp
+		} else {
+			body["keyProject"] = nil
+		}
+	}
+
+	if d.HasChange("key_project_resolution_mode") {
+		keyProjectResolutionModeProp, _ := expandKMSAutokeyConfigKeyProjectResolutionMode(d.Get("key_project_resolution_mode"), d, config)
+		if v, ok := d.GetOkExists("key_project_resolution_mode"); !tpgresource.IsEmptyValue(reflect.ValueOf(keyProjectResolutionModeProp)) && (ok || !reflect.DeepEqual(v, keyProjectResolutionModeProp)) {
+			body["keyProjectResolutionMode"] = keyProjectResolutionModeProp
+		} else {
+			body["keyProjectResolutionMode"] = nil
+		}
+	}
+
+	return body, nil
 }
 
 func expandKMSAutokeyConfigKeyProject(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandKMSAutokeyConfigKeyProjectResolutionMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

@@ -78,7 +78,7 @@ func KMSAutokeyConfigTfplan2caiConverter() cai.Tfplan2caiConverter {
 }
 
 func GetKMSAutokeyConfigCaiAssets(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]caiasset.Asset, error) {
-	name, err := cai.AssetName(d, config, "//cloudkms.googleapis.com/folders/{{folder}}/autokeyConfig")
+	name, err := cai.AssetName(d, config, "//cloudkms.googleapis.com/{{name}}")
 	if err != nil {
 		return []caiasset.Asset{}, err
 	}
@@ -113,10 +113,53 @@ func GetKMSAutokeyConfigCaiObject(d tpgresource.TerraformResourceData, config *t
 	} else if v, ok := d.GetOkExists("key_project"); !tpgresource.IsEmptyValue(reflect.ValueOf(keyProjectProp)) && (ok || !reflect.DeepEqual(v, keyProjectProp)) {
 		obj["keyProject"] = keyProjectProp
 	}
+	keyProjectResolutionModeProp, err := expandKMSAutokeyConfigKeyProjectResolutionMode(d.Get("key_project_resolution_mode"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("key_project_resolution_mode"); !tpgresource.IsEmptyValue(reflect.ValueOf(keyProjectResolutionModeProp)) && (ok || !reflect.DeepEqual(v, keyProjectResolutionModeProp)) {
+		obj["keyProjectResolutionMode"] = keyProjectResolutionModeProp
+	}
 
+	obj, err = resourceKMSAutokeyConfigEncoder(d, config, obj)
+	if err != nil {
+		return nil, err
+	}
+	if obj == nil {
+		obj = make(map[string]interface{})
+	}
 	return obj, nil
 }
 
+func resourceKMSAutokeyConfigEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
+	config := meta.(*transport_tpg.Config)
+
+	body := make(map[string]interface{})
+
+	if d.HasChange("key_project") {
+		keyProjectProp, _ := expandKMSAutokeyConfigKeyProject(d.Get("key_project"), d, config)
+		if v, ok := d.GetOkExists("key_project"); !tpgresource.IsEmptyValue(reflect.ValueOf(keyProjectProp)) && (ok || !reflect.DeepEqual(v, keyProjectProp)) {
+			body["keyProject"] = keyProjectProp
+		} else {
+			body["keyProject"] = nil
+		}
+	}
+
+	if d.HasChange("key_project_resolution_mode") {
+		keyProjectResolutionModeProp, _ := expandKMSAutokeyConfigKeyProjectResolutionMode(d.Get("key_project_resolution_mode"), d, config)
+		if v, ok := d.GetOkExists("key_project_resolution_mode"); !tpgresource.IsEmptyValue(reflect.ValueOf(keyProjectResolutionModeProp)) && (ok || !reflect.DeepEqual(v, keyProjectResolutionModeProp)) {
+			body["keyProjectResolutionMode"] = keyProjectResolutionModeProp
+		} else {
+			body["keyProjectResolutionMode"] = nil
+		}
+	}
+
+	return body, nil
+}
+
 func expandKMSAutokeyConfigKeyProject(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandKMSAutokeyConfigKeyProjectResolutionMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
