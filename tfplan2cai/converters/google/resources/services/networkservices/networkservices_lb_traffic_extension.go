@@ -122,6 +122,12 @@ func GetNetworkServicesLbTrafficExtensionApiObject(d tpgresource.TerraformResour
 	} else if v, ok := d.GetOkExists("forwarding_rules"); !tpgresource.IsEmptyValue(reflect.ValueOf(forwardingRulesProp)) && (ok || !reflect.DeepEqual(v, forwardingRulesProp)) {
 		obj["forwardingRules"] = forwardingRulesProp
 	}
+	targetProp, err := expandNetworkServicesLbTrafficExtensionTarget(d.Get("target"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("target"); !tpgresource.IsEmptyValue(reflect.ValueOf(targetProp)) && (ok || !reflect.DeepEqual(v, targetProp)) {
+		obj["target"] = targetProp
+	}
 	extensionChainsProp, err := expandNetworkServicesLbTrafficExtensionExtensionChains(d.Get("extension_chains"), d, config)
 	if err != nil {
 		return nil, err
@@ -149,6 +155,32 @@ func expandNetworkServicesLbTrafficExtensionDescription(v interface{}, d tpgreso
 }
 
 func expandNetworkServicesLbTrafficExtensionForwardingRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkServicesLbTrafficExtensionTarget(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedResources, err := expandNetworkServicesLbTrafficExtensionTargetResources(original["resources"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedResources); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["resources"] = transformedResources
+	}
+
+	return transformed, nil
+}
+
+func expandNetworkServicesLbTrafficExtensionTargetResources(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
