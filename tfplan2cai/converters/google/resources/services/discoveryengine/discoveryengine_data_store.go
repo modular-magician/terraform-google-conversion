@@ -152,6 +152,12 @@ func GetDiscoveryEngineDataStoreApiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("document_processing_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(documentProcessingConfigProp)) && (ok || !reflect.DeepEqual(v, documentProcessingConfigProp)) {
 		obj["documentProcessingConfig"] = documentProcessingConfigProp
 	}
+	excludeFromGenAiFeaturesProp, err := expandDiscoveryEngineDataStoreExcludeFromGenAiFeatures(d.Get("exclude_from_gen_ai_features"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("exclude_from_gen_ai_features"); !tpgresource.IsEmptyValue(reflect.ValueOf(excludeFromGenAiFeaturesProp)) && (ok || !reflect.DeepEqual(v, excludeFromGenAiFeaturesProp)) {
+		obj["excludeFromGenAiFeatures"] = excludeFromGenAiFeaturesProp
+	}
 
 	return obj, nil
 }
@@ -656,5 +662,9 @@ func expandDiscoveryEngineDataStoreDocumentProcessingConfigParsingConfigOverride
 }
 
 func expandDiscoveryEngineDataStoreDocumentProcessingConfigParsingConfigOverridesLayoutParsingConfigExcludeHtmlIds(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineDataStoreExcludeFromGenAiFeatures(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
