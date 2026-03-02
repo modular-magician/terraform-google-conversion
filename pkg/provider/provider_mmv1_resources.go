@@ -65,7 +65,7 @@ var handwrittenResources = map[string]*schema.Resource{
 	// ####### END handwritten resources ###########
 }
 
-// Generated resources: 136
+// Generated resources: 140
 var generatedResources = map[string]*schema.Resource{
 	"google_alloydb_backup":                                  alloydb.ResourceAlloydbBackup(),
 	"google_alloydb_cluster":                                 alloydb.ResourceAlloydbCluster(),
@@ -168,6 +168,10 @@ var generatedResources = map[string]*schema.Resource{
 	"google_monitoring_uptime_check_config":                  monitoring.ResourceMonitoringUptimeCheckConfig(),
 	"google_netapp_active_directory":                         netapp.ResourceNetappActiveDirectory(),
 	"google_netapp_backup":                                   netapp.ResourceNetappBackup(),
+	"google_netapp_backup_policy":                            netapp.ResourceNetappBackupPolicy(),
+	"google_netapp_backup_vault":                             netapp.ResourceNetappBackupVault(),
+	"google_netapp_storage_pool":                             netapp.ResourceNetappStoragePool(),
+	"google_netapp_volume_snapshot":                          netapp.ResourceNetappVolumeSnapshot(),
 	"google_network_connectivity_group":                      networkconnectivity.ResourceNetworkConnectivityGroup(),
 	"google_network_connectivity_policy_based_route":         networkconnectivity.ResourceNetworkConnectivityPolicyBasedRoute(),
 	"google_network_security_address_group":                  networksecurity.ResourceNetworkSecurityAddressGroup(),
