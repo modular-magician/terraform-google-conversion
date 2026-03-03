@@ -244,14 +244,29 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	"compute.googleapis.com/Image": {
 		"Default": compute.NewComputeImageCai2hclConverter(provider),
 	},
+	"compute.googleapis.com/Interconnect": {
+		"Default": compute.NewComputeInterconnectCai2hclConverter(provider),
+	},
+	"compute.googleapis.com/InterconnectAttachment": {
+		"Default": compute.NewComputeInterconnectAttachmentCai2hclConverter(provider),
+	},
 	"compute.googleapis.com/Network": {
 		"Default": compute.NewComputeNetworkCai2hclConverter(provider),
+	},
+	"compute.googleapis.com/NetworkAttachment": {
+		"Default": compute.NewComputeNetworkAttachmentCai2hclConverter(provider),
+	},
+	"compute.googleapis.com/NetworkEndpointGroup": {
+		"Default": compute.NewComputeNetworkEndpointGroupCai2hclConverter(provider),
 	},
 	"compute.googleapis.com/NodeGroup": {
 		"Default": compute.NewComputeNodeGroupCai2hclConverter(provider),
 	},
 	"compute.googleapis.com/NodeTemplate": {
 		"Default": compute.NewComputeNodeTemplateCai2hclConverter(provider),
+	},
+	"compute.googleapis.com/PacketMirroring": {
+		"Default": compute.NewComputePacketMirroringCai2hclConverter(provider),
 	},
 	"compute.googleapis.com/ResourcePolicy": {
 		"Default": compute.NewComputeResourcePolicyCai2hclConverter(provider),
@@ -263,7 +278,8 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 		"Default": compute.NewComputeRouterCai2hclConverter(provider),
 	},
 	"compute.googleapis.com/SslCertificate": {
-		"Default": compute.NewComputeRegionSslCertificateCai2hclConverter(provider),
+		"ComputeManagedSslCertificate": compute.NewComputeManagedSslCertificateCai2hclConverter(provider),
+		"ComputeRegionSslCertificate":  compute.NewComputeRegionSslCertificateCai2hclConverter(provider),
 	},
 	"compute.googleapis.com/StoragePool": {
 		"Default": compute.NewComputeStoragePoolCai2hclConverter(provider),

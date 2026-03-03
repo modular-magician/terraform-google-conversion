@@ -66,7 +66,7 @@ var handwrittenResources = map[string]*schema.Resource{
 	// ####### END handwritten resources ###########
 }
 
-// Generated resources: 142
+// Generated resources: 148
 var generatedResources = map[string]*schema.Resource{
 	"google_alloydb_backup":                                  alloydb.ResourceAlloydbBackup(),
 	"google_alloydb_cluster":                                 alloydb.ResourceAlloydbCluster(),
@@ -113,9 +113,15 @@ var generatedResources = map[string]*schema.Resource{
 	"google_compute_ha_vpn_gateway":                          compute.ResourceComputeHaVpnGateway(),
 	"google_compute_health_check":                            compute.ResourceComputeHealthCheck(),
 	"google_compute_image":                                   compute.ResourceComputeImage(),
+	"google_compute_interconnect":                            compute.ResourceComputeInterconnect(),
+	"google_compute_interconnect_attachment":                 compute.ResourceComputeInterconnectAttachment(),
+	"google_compute_managed_ssl_certificate":                 compute.ResourceComputeManagedSslCertificate(),
 	"google_compute_network":                                 compute.ResourceComputeNetwork(),
+	"google_compute_network_attachment":                      compute.ResourceComputeNetworkAttachment(),
+	"google_compute_network_endpoint_group":                  compute.ResourceComputeNetworkEndpointGroup(),
 	"google_compute_node_group":                              compute.ResourceComputeNodeGroup(),
 	"google_compute_node_template":                           compute.ResourceComputeNodeTemplate(),
+	"google_compute_packet_mirroring":                        compute.ResourceComputePacketMirroring(),
 	"google_compute_region_autoscaler":                       compute.ResourceComputeRegionAutoscaler(),
 	"google_compute_region_health_check":                     compute.ResourceComputeRegionHealthCheck(),
 	"google_compute_region_ssl_certificate":                  compute.ResourceComputeRegionSslCertificate(),
