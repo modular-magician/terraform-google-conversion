@@ -65,6 +65,12 @@ func TestAccComputeResourcePolicy(t *testing.T) {
 		{
 			Name: "TestAccComputeResourcePolicy_guestFlushEmptyValue",
 		},
+		{
+			Name: "TestAccComputeResourcePolicy_workloadPolicyAcceleratorTopologyMode",
+		},
+		{
+			Name: "TestAccComputeResourcePolicy_groupPlacementPolicyAcceleratorTopologyMode",
+		},
 	}
 
 	for _, tt := range tests {
