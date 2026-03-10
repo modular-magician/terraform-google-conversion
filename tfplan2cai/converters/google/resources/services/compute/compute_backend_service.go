@@ -2267,6 +2267,13 @@ func expandComputeBackendServiceDynamicForwarding(v interface{}, d tpgresource.T
 		transformed["ipPortSelection"] = transformedIpPortSelection
 	}
 
+	transformedForwardProxy, err := expandComputeBackendServiceDynamicForwardingForwardProxy(original["forward_proxy"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedForwardProxy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["ForwardProxy"] = transformedForwardProxy
+	}
+
 	return transformed, nil
 }
 
@@ -2293,6 +2300,43 @@ func expandComputeBackendServiceDynamicForwardingIpPortSelection(v interface{}, 
 }
 
 func expandComputeBackendServiceDynamicForwardingIpPortSelectionEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeBackendServiceDynamicForwardingForwardProxy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnabled, err := expandComputeBackendServiceDynamicForwardingForwardProxyEnabled(original["enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEnabled); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["enabled"] = transformedEnabled
+	}
+
+	transformedProxyMode, err := expandComputeBackendServiceDynamicForwardingForwardProxyProxyMode(original["proxy_mode"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedProxyMode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["proxyMode"] = transformedProxyMode
+	}
+
+	return transformed, nil
+}
+
+func expandComputeBackendServiceDynamicForwardingForwardProxyEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeBackendServiceDynamicForwardingForwardProxyProxyMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
