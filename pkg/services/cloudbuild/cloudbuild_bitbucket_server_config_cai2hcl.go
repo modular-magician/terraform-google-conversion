@@ -132,6 +132,7 @@ func (c *CloudBuildBitbucketServerConfigCai2hclConverter) convertResourceData(as
 	hclData["connected_repositories"] = flattenCloudBuildBitbucketServerConfigConnectedRepositories(res["connectedRepositories"], d, config)
 	hclData["peered_network"] = flattenCloudBuildBitbucketServerConfigPeeredNetwork(res["peeredNetwork"], d, config)
 	hclData["ssl_ca"] = flattenCloudBuildBitbucketServerConfigSslCa(res["sslCa"], d, config)
+	hclData["peered_network_ip_range"] = flattenCloudBuildBitbucketServerConfigPeeredNetworkIpRange(res["peeredNetworkIpRange"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -274,5 +275,9 @@ func flattenCloudBuildBitbucketServerConfigPeeredNetwork(v interface{}, d *schem
 }
 
 func flattenCloudBuildBitbucketServerConfigSslCa(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenCloudBuildBitbucketServerConfigPeeredNetworkIpRange(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }

@@ -32,6 +32,9 @@ func TestAccCloudBuildBitbucketServerConfig(t *testing.T) {
 		{
 			Name: "TestAccCloudBuildBitbucketServerConfig_cloudbuildBitbucketServerConfigPeeredNetworkExample",
 		},
+		{
+			Name: "TestAccCloudBuildBitbucketServerConfig_cloudbuildBitbucketServerConfigPeeredNetworkIpRangeExample",
+		},
 	}
 
 	for _, tt := range tests {

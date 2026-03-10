@@ -149,6 +149,12 @@ func GetCloudBuildBitbucketServerConfigCaiObject(d tpgresource.TerraformResource
 	} else if v, ok := d.GetOkExists("ssl_ca"); !tpgresource.IsEmptyValue(reflect.ValueOf(sslCaProp)) && (ok || !reflect.DeepEqual(v, sslCaProp)) {
 		obj["sslCa"] = sslCaProp
 	}
+	peeredNetworkIpRangeProp, err := expandCloudBuildBitbucketServerConfigPeeredNetworkIpRange(d.Get("peered_network_ip_range"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("peered_network_ip_range"); !tpgresource.IsEmptyValue(reflect.ValueOf(peeredNetworkIpRangeProp)) && (ok || !reflect.DeepEqual(v, peeredNetworkIpRangeProp)) {
+		obj["peeredNetworkIpRange"] = peeredNetworkIpRangeProp
+	}
 
 	obj, err = resourceCloudBuildBitbucketServerConfigEncoder(d, config, obj)
 	if err != nil {
@@ -272,5 +278,9 @@ func expandCloudBuildBitbucketServerConfigPeeredNetwork(v interface{}, d tpgreso
 }
 
 func expandCloudBuildBitbucketServerConfigSslCa(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudBuildBitbucketServerConfigPeeredNetworkIpRange(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

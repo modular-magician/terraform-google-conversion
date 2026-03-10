@@ -137,6 +137,12 @@ This should be set if the Bitbucket Server instance is hosted on-premises and no
 no network peering will occur and calls to the Bitbucket Server instance will be made over the public internet. Must be in the format
 projects/{project}/global/networks/{network}, where {project} is a project number or id and {network} is the name of a VPC network in the project.`,
 			},
+			"peered_network_ip_range": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				ForceNew:    true,
+				Description: `IP range within the peered network. This is specified in CIDR notation with a slash and the subnet prefix size. You can optionally specify an IP address before the subnet prefix value. e.g. '192.168.0.0/29' would specify an IP range starting at 192.168.0.0 with a 29 bit prefix size. '/16' would specify a prefix size of 16 bits, with an automatically determined IP within the peered VPC. If unspecified, a value of '/24' will be used. The field only has an effect if peered_network is set.`,
+			},
 			"ssl_ca": {
 				Type:        schema.TypeString,
 				Optional:    true,
