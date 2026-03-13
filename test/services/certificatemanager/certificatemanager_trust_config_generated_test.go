@@ -58,6 +58,22 @@ func TestAccCertificateManagerTrustConfig(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// trustStores - WriteOnly=false - IgnoreRead=false
+					// allowlistedCertificates - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// trustAnchors - WriteOnly=false - IgnoreRead=false
+					// intermediateCas - WriteOnly=false - IgnoreRead=false
+					// pemCertificate - WriteOnly=false - IgnoreRead=false
+					// pemCertificate - WriteOnly=false - IgnoreRead=false
+					// pemCertificate - WriteOnly=false - IgnoreRead=false
 				},
 				"google_certificate_manager_trust_config",
 			)

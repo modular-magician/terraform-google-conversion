@@ -62,6 +62,20 @@ func TestAccNetworkSecurityGatewaySecurityPolicyRule(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// selfLink - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// enabled - WriteOnly=false - IgnoreRead=false
+					// priority - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// sessionMatcher - WriteOnly=false - IgnoreRead=false
+					// applicationMatcher - WriteOnly=false - IgnoreRead=false
+					// tlsInspectionEnabled - WriteOnly=false - IgnoreRead=false
+					// basicProfile - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// gateway_security_policy - WriteOnly=false - IgnoreRead=false
 				},
 				"google_network_security_gateway_security_policy_rule",
 			)

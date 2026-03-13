@@ -51,6 +51,19 @@ func TestAccCertificateManagerCertificateMapEntry(t *testing.T) {
 					"map",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// description - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// certificates - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// hostname - WriteOnly=false - IgnoreRead=false
+					// matcher - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// map - WriteOnly=false - IgnoreRead=false
 				},
 				"google_certificate_manager_certificate_map_entry",
 			)

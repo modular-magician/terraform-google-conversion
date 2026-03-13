@@ -58,6 +58,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/vmwareengine"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/vpcaccess"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/workbench"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/workflows"
 )
 
 var handwrittenResources = map[string]*schema.Resource{
@@ -67,7 +68,7 @@ var handwrittenResources = map[string]*schema.Resource{
 	// ####### END handwritten resources ###########
 }
 
-// Generated resources: 173
+// Generated resources: 175
 var generatedResources = map[string]*schema.Resource{
 	"google_alloydb_backup":                                  alloydb.ResourceAlloydbBackup(),
 	"google_alloydb_cluster":                                 alloydb.ResourceAlloydbCluster(),
@@ -153,6 +154,7 @@ var generatedResources = map[string]*schema.Resource{
 	"google_compute_target_ssl_proxy":                        compute.ResourceComputeTargetSslProxy(),
 	"google_compute_target_tcp_proxy":                        compute.ResourceComputeTargetTcpProxy(),
 	"google_compute_url_map":                                 compute.ResourceComputeUrlMap(),
+	"google_compute_vpn_tunnel":                              compute.ResourceComputeVpnTunnel(),
 	"google_database_migration_service_migration_job":        databasemigrationservice.ResourceDatabaseMigrationServiceMigrationJob(),
 	"google_data_fusion_instance":                            datafusion.ResourceDataFusionInstance(),
 	"google_dataproc_autoscaling_policy":                     dataproc.ResourceDataprocAutoscalingPolicy(),
@@ -242,4 +244,5 @@ var generatedResources = map[string]*schema.Resource{
 	"google_vmwareengine_network_policy":                     vmwareengine.ResourceVmwareengineNetworkPolicy(),
 	"google_vpc_access_connector":                            vpcaccess.ResourceVPCAccessConnector(),
 	"google_workbench_instance":                              workbench.ResourceWorkbenchInstance(),
+	"google_workflows_workflow":                              workflows.ResourceWorkflowsWorkflow(),
 }

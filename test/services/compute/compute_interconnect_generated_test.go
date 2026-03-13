@@ -52,6 +52,45 @@ func TestAccComputeInterconnect(t *testing.T) {
 					"params.resource_manager_tags",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// description - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// linkType - WriteOnly=false - IgnoreRead=false
+					// requestedLinkCount - WriteOnly=false - IgnoreRead=false
+					// interconnectType - WriteOnly=false - IgnoreRead=false
+					// adminEnabled - WriteOnly=false - IgnoreRead=false
+					// params - WriteOnly=false - IgnoreRead=true
+					// nocContactEmail - WriteOnly=false - IgnoreRead=false
+					// customerName - WriteOnly=false - IgnoreRead=false
+					// operationalStatus - WriteOnly=false - IgnoreRead=false
+					// provisionedLinkCount - WriteOnly=false - IgnoreRead=false
+					// interconnectAttachments - WriteOnly=false - IgnoreRead=false
+					// peerIpAddress - WriteOnly=false - IgnoreRead=false
+					// googleIpAddress - WriteOnly=false - IgnoreRead=false
+					// googleReferenceId - WriteOnly=false - IgnoreRead=false
+					// expectedOutages - WriteOnly=false - IgnoreRead=false
+					// circuitInfos - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// labelFingerprint - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// satisfiesPzs - WriteOnly=false - IgnoreRead=false
+					// macsec - WriteOnly=false - IgnoreRead=false
+					// macsecEnabled - WriteOnly=false - IgnoreRead=false
+					// remoteLocation - WriteOnly=false - IgnoreRead=false
+					// requestedFeatures - WriteOnly=false - IgnoreRead=false
+					// availableFeatures - WriteOnly=false - IgnoreRead=false
+					// wireGroups - WriteOnly=false - IgnoreRead=false
+					// interconnectGroups - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// resourceManagerTags - WriteOnly=false - IgnoreRead=true
+					// preSharedKeys - WriteOnly=false - IgnoreRead=false
+					// failOpen - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// failOpen - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_interconnect",
 			)

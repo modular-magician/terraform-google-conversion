@@ -56,6 +56,17 @@ func TestAccSecurityCenterV2OrganizationMuteConfig(t *testing.T) {
 					"organization",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// filter - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// mostRecentEditor - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// organization - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// mute_config_id - WriteOnly=false - IgnoreRead=false
 				},
 				"google_scc_v2_organization_mute_config",
 			)

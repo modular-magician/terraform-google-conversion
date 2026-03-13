@@ -59,6 +59,34 @@ func TestAccApphubService(t *testing.T) {
 					"provider",
 					"service_id",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// serviceReference - WriteOnly=false - IgnoreRead=false
+					// serviceProperties - WriteOnly=false - IgnoreRead=false
+					// attributes - WriteOnly=false - IgnoreRead=false
+					// discoveredService - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// applicationId - WriteOnly=false - IgnoreRead=false
+					// serviceId - WriteOnly=false - IgnoreRead=false
+					// criticality - WriteOnly=false - IgnoreRead=false
+					// environment - WriteOnly=false - IgnoreRead=false
+					// developerOwners - WriteOnly=false - IgnoreRead=false
+					// operatorOwners - WriteOnly=false - IgnoreRead=false
+					// businessOwners - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// email - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// email - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// email - WriteOnly=false - IgnoreRead=false
 				},
 				"google_apphub_service",
 			)

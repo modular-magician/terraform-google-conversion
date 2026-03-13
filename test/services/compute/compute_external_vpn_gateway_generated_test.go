@@ -64,6 +64,20 @@ func TestAccComputeExternalVpnGateway(t *testing.T) {
 					"params.resource_manager_tags",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// labelFingerprint - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// redundancyType - WriteOnly=false - IgnoreRead=false
+					// interface - WriteOnly=false - IgnoreRead=false
+					// params - WriteOnly=false - IgnoreRead=true
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// ipAddress - WriteOnly=false - IgnoreRead=false
+					// ipv6Address - WriteOnly=false - IgnoreRead=false
+					// resourceManagerTags - WriteOnly=false - IgnoreRead=true
 				},
 				"google_compute_external_vpn_gateway",
 			)

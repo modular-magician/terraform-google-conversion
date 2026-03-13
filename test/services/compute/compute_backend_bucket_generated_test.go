@@ -96,6 +96,35 @@ func TestAccComputeBackendBucket(t *testing.T) {
 					"params.resource_manager_tags",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// bucketName - WriteOnly=false - IgnoreRead=false
+					// cdnPolicy - WriteOnly=false - IgnoreRead=false
+					// compressionMode - WriteOnly=false - IgnoreRead=false
+					// edgeSecurityPolicy - WriteOnly=false - IgnoreRead=false
+					// customResponseHeaders - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// enableCdn - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// loadBalancingScheme - WriteOnly=false - IgnoreRead=false
+					// params - WriteOnly=false - IgnoreRead=true
+					// cacheKeyPolicy - WriteOnly=false - IgnoreRead=false
+					// signedUrlCacheMaxAgeSec - WriteOnly=false - IgnoreRead=false
+					// defaultTtl - WriteOnly=false - IgnoreRead=false
+					// maxTtl - WriteOnly=false - IgnoreRead=false
+					// clientTtl - WriteOnly=false - IgnoreRead=false
+					// negativeCaching - WriteOnly=false - IgnoreRead=false
+					// negativeCachingPolicy - WriteOnly=false - IgnoreRead=false
+					// cacheMode - WriteOnly=false - IgnoreRead=false
+					// serveWhileStale - WriteOnly=false - IgnoreRead=false
+					// requestCoalescing - WriteOnly=false - IgnoreRead=false
+					// bypassCacheOnRequestHeaders - WriteOnly=false - IgnoreRead=false
+					// queryStringWhitelist - WriteOnly=false - IgnoreRead=false
+					// includeHttpHeaders - WriteOnly=false - IgnoreRead=false
+					// code - WriteOnly=false - IgnoreRead=false
+					// ttl - WriteOnly=false - IgnoreRead=false
+					// headerName - WriteOnly=false - IgnoreRead=false
+					// resourceManagerTags - WriteOnly=false - IgnoreRead=true
 				},
 				"google_compute_backend_bucket",
 			)

@@ -58,6 +58,20 @@ func TestAccVmwareengineNetworkPolicy(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// vmwareEngineNetworkCanonical - WriteOnly=false - IgnoreRead=false
+					// edgeServicesCidr - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// vmwareEngineNetwork - WriteOnly=false - IgnoreRead=false
+					// internetAccess - WriteOnly=false - IgnoreRead=false
+					// externalIp - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// enabled - WriteOnly=false - IgnoreRead=false
+					// enabled - WriteOnly=false - IgnoreRead=false
 				},
 				"google_vmwareengine_network_policy",
 			)

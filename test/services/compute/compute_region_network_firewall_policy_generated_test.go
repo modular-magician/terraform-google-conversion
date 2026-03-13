@@ -61,6 +61,17 @@ func TestAccComputeRegionNetworkFirewallPolicy(t *testing.T) {
 					"provider",
 					"region",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// regionNetworkFirewallPolicyId - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// policyType - WriteOnly=false - IgnoreRead=false
+					// fingerprint - WriteOnly=false - IgnoreRead=false
+					// selfLink - WriteOnly=false - IgnoreRead=false
+					// selfLinkWithId - WriteOnly=false - IgnoreRead=false
+					// ruleTupleCount - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_region_network_firewall_policy",
 			)

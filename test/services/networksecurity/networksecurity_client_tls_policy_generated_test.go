@@ -58,6 +58,26 @@ func TestAccNetworkSecurityClientTlsPolicy(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// sni - WriteOnly=false - IgnoreRead=false
+					// clientCertificate - WriteOnly=false - IgnoreRead=false
+					// serverValidationCa - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// grpcEndpoint - WriteOnly=false - IgnoreRead=false
+					// certificateProviderInstance - WriteOnly=false - IgnoreRead=false
+					// targetUri - WriteOnly=false - IgnoreRead=false
+					// pluginInstance - WriteOnly=false - IgnoreRead=false
+					// grpcEndpoint - WriteOnly=false - IgnoreRead=false
+					// certificateProviderInstance - WriteOnly=false - IgnoreRead=false
+					// targetUri - WriteOnly=false - IgnoreRead=false
+					// pluginInstance - WriteOnly=false - IgnoreRead=false
 				},
 				"google_network_security_client_tls_policy",
 			)

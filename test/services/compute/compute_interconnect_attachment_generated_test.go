@@ -63,6 +63,57 @@ func TestAccComputeInterconnectAttachment(t *testing.T) {
 					"provider",
 					"subnet_length",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// adminEnabled - WriteOnly=false - IgnoreRead=false
+					// cloudRouterIpAddress - WriteOnly=false - IgnoreRead=false
+					// customerRouterIpAddress - WriteOnly=false - IgnoreRead=false
+					// interconnect - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// mtu - WriteOnly=false - IgnoreRead=false
+					// params - WriteOnly=false - IgnoreRead=true
+					// bandwidth - WriteOnly=false - IgnoreRead=false
+					// edgeAvailabilityDomain - WriteOnly=false - IgnoreRead=false
+					// pairingKey - WriteOnly=false - IgnoreRead=false
+					// partnerAsn - WriteOnly=false - IgnoreRead=false
+					// privateInterconnectInfo - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// googleReferenceId - WriteOnly=false - IgnoreRead=false
+					// router - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// candidateSubnets - WriteOnly=false - IgnoreRead=true
+					// vlanTag8021q - WriteOnly=false - IgnoreRead=false
+					// ipsecInternalAddresses - WriteOnly=false - IgnoreRead=false
+					// encryption - WriteOnly=false - IgnoreRead=false
+					// stackType - WriteOnly=false - IgnoreRead=false
+					// cloudRouterIpv6Address - WriteOnly=false - IgnoreRead=false
+					// customerRouterIpv6Address - WriteOnly=false - IgnoreRead=false
+					// subnetLength - WriteOnly=false - IgnoreRead=true
+					// labels - WriteOnly=false - IgnoreRead=false
+					// labelFingerprint - WriteOnly=false - IgnoreRead=false
+					// candidateCloudRouterIpAddress - WriteOnly=false - IgnoreRead=false
+					// candidateCustomerRouterIpAddress - WriteOnly=false - IgnoreRead=false
+					// candidateCloudRouterIpv6Address - WriteOnly=false - IgnoreRead=false
+					// candidateCustomerRouterIpv6Address - WriteOnly=false - IgnoreRead=false
+					// attachmentGroup - WriteOnly=false - IgnoreRead=false
+					// l2Forwarding - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// resourceManagerTags - WriteOnly=false - IgnoreRead=true
+					// network - WriteOnly=false - IgnoreRead=false
+					// tunnelEndpointIpAddress - WriteOnly=false - IgnoreRead=false
+					// defaultApplianceIpAddress - WriteOnly=false - IgnoreRead=false
+					// geneveHeader - WriteOnly=false - IgnoreRead=false
+					// applianceMappings - WriteOnly=false - IgnoreRead=false
+					// vni - WriteOnly=false - IgnoreRead=false
+					// vlanId - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// applianceIpAddress - WriteOnly=false - IgnoreRead=false
+					// innerVlanToApplianceMappings - WriteOnly=false - IgnoreRead=false
+					// innerVlanTags - WriteOnly=false - IgnoreRead=false
+					// innerApplianceIpAddress - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_interconnect_attachment",
 			)

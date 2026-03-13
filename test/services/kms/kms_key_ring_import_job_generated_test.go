@@ -52,6 +52,16 @@ func TestAccKMSKeyRingImportJob(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// importMethod - WriteOnly=false - IgnoreRead=false
+					// protectionLevel - WriteOnly=false - IgnoreRead=false
+					// expireTime - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// publicKey - WriteOnly=false - IgnoreRead=false
+					// attestation - WriteOnly=false - IgnoreRead=false
+					// keyRing - WriteOnly=false - IgnoreRead=true
+					// importJobId - WriteOnly=false - IgnoreRead=false
 				},
 				"google_kms_key_ring_import_job",
 			)

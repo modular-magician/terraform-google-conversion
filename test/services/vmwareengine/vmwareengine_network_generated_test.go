@@ -55,6 +55,17 @@ func TestAccVmwareengineNetwork(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// vpcNetworks - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
 				},
 				"google_vmwareengine_network",
 			)

@@ -53,6 +53,13 @@ func TestAccComputeTargetInstance(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// instance - WriteOnly=false - IgnoreRead=false
+					// natPolicy - WriteOnly=false - IgnoreRead=false
+					// zone - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_target_instance",
 			)

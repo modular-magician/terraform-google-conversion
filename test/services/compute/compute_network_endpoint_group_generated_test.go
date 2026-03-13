@@ -60,6 +60,16 @@ func TestAccComputeNetworkEndpointGroup(t *testing.T) {
 					"provider",
 					"timeouts",
 					"zone",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// networkEndpointType - WriteOnly=false - IgnoreRead=false
+					// size - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// subnetwork - WriteOnly=false - IgnoreRead=false
+					// defaultPort - WriteOnly=false - IgnoreRead=false
+					// generated_id - WriteOnly=false - IgnoreRead=false
+					// zone - WriteOnly=false - IgnoreRead=true
 				},
 				"google_compute_network_endpoint_group",
 			)

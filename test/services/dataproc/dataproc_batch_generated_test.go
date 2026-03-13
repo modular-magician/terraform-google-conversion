@@ -73,6 +73,67 @@ func TestAccDataprocBatch(t *testing.T) {
 					"spark_r_batch.args",
 					"spark_sql_batch.query_variables",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// uuid - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// runtimeInfo - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// stateMessage - WriteOnly=false - IgnoreRead=false
+					// stateTime - WriteOnly=false - IgnoreRead=false
+					// creator - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// runtimeConfig - WriteOnly=false - IgnoreRead=false
+					// environmentConfig - WriteOnly=false - IgnoreRead=false
+					// operation - WriteOnly=false - IgnoreRead=false
+					// stateHistory - WriteOnly=false - IgnoreRead=false
+					// pysparkBatch - WriteOnly=false - IgnoreRead=false
+					// sparkBatch - WriteOnly=false - IgnoreRead=false
+					// sparkRBatch - WriteOnly=false - IgnoreRead=false
+					// sparkSqlBatch - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// batchId - WriteOnly=false - IgnoreRead=false
+					// version - WriteOnly=false - IgnoreRead=false
+					// containerImage - WriteOnly=false - IgnoreRead=false
+					// properties - WriteOnly=false - IgnoreRead=false
+					// autotuningConfig - WriteOnly=false - IgnoreRead=false
+					// cohort - WriteOnly=false - IgnoreRead=false
+					// scenarios - WriteOnly=false - IgnoreRead=false
+					// executionConfig - WriteOnly=false - IgnoreRead=false
+					// peripheralsConfig - WriteOnly=false - IgnoreRead=false
+					// serviceAccount - WriteOnly=false - IgnoreRead=false
+					// networkTags - WriteOnly=false - IgnoreRead=false
+					// kmsKey - WriteOnly=false - IgnoreRead=false
+					// ttl - WriteOnly=false - IgnoreRead=false
+					// stagingBucket - WriteOnly=false - IgnoreRead=false
+					// networkUri - WriteOnly=false - IgnoreRead=false
+					// subnetworkUri - WriteOnly=false - IgnoreRead=false
+					// authenticationConfig - WriteOnly=false - IgnoreRead=false
+					// userWorkloadAuthenticationType - WriteOnly=false - IgnoreRead=false
+					// metastoreService - WriteOnly=false - IgnoreRead=false
+					// sparkHistoryServerConfig - WriteOnly=false - IgnoreRead=false
+					// dataprocCluster - WriteOnly=false - IgnoreRead=false
+					// mainPythonFileUri - WriteOnly=false - IgnoreRead=false
+					// args - WriteOnly=false - IgnoreRead=false
+					// pythonFileUris - WriteOnly=false - IgnoreRead=false
+					// jarFileUris - WriteOnly=false - IgnoreRead=false
+					// fileUris - WriteOnly=false - IgnoreRead=false
+					// archiveUris - WriteOnly=false - IgnoreRead=false
+					// args - WriteOnly=false - IgnoreRead=false
+					// jarFileUris - WriteOnly=false - IgnoreRead=false
+					// fileUris - WriteOnly=false - IgnoreRead=false
+					// archiveUris - WriteOnly=false - IgnoreRead=false
+					// mainJarFileUri - WriteOnly=false - IgnoreRead=false
+					// mainClass - WriteOnly=false - IgnoreRead=false
+					// mainRFileUri - WriteOnly=false - IgnoreRead=false
+					// args - WriteOnly=false - IgnoreRead=false
+					// fileUris - WriteOnly=false - IgnoreRead=false
+					// archiveUris - WriteOnly=false - IgnoreRead=false
+					// queryFileUri - WriteOnly=false - IgnoreRead=false
+					// jarFileUris - WriteOnly=false - IgnoreRead=false
+					// queryVariables - WriteOnly=false - IgnoreRead=false
 				},
 				"google_dataproc_batch",
 			)

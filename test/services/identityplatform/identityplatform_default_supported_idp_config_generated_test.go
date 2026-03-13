@@ -51,6 +51,12 @@ func TestAccIdentityPlatformDefaultSupportedIdpConfig(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// idpId - WriteOnly=false - IgnoreRead=false
+					// clientId - WriteOnly=false - IgnoreRead=false
+					// clientSecret - WriteOnly=false - IgnoreRead=false
+					// enabled - WriteOnly=false - IgnoreRead=false
 				},
 				"google_identity_platform_default_supported_idp_config",
 			)

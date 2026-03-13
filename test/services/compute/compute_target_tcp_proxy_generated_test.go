@@ -53,6 +53,14 @@ func TestAccComputeTargetTcpProxy(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// proxyId - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// proxyHeader - WriteOnly=false - IgnoreRead=false
+					// backendService - WriteOnly=false - IgnoreRead=false
+					// proxyBind - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_target_tcp_proxy",
 			)

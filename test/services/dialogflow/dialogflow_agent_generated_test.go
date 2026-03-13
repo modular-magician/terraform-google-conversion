@@ -55,6 +55,19 @@ func TestAccDialogflowAgent(t *testing.T) {
 					"provider",
 					"tier",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// defaultLanguageCode - WriteOnly=false - IgnoreRead=false
+					// supportedLanguageCodes - WriteOnly=false - IgnoreRead=false
+					// timeZone - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// avatarUri - WriteOnly=false - IgnoreRead=true
+					// avatarUriBackend - WriteOnly=false - IgnoreRead=false
+					// enableLogging - WriteOnly=false - IgnoreRead=false
+					// matchMode - WriteOnly=false - IgnoreRead=false
+					// classificationThreshold - WriteOnly=false - IgnoreRead=false
+					// apiVersion - WriteOnly=false - IgnoreRead=false
+					// tier - WriteOnly=false - IgnoreRead=true
 				},
 				"google_dialogflow_agent",
 			)

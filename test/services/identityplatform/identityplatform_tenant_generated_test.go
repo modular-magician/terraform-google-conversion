@@ -53,6 +53,16 @@ func TestAccIdentityPlatformTenant(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// allowPasswordSignup - WriteOnly=false - IgnoreRead=false
+					// enableEmailLinkSignin - WriteOnly=false - IgnoreRead=false
+					// disableAuth - WriteOnly=false - IgnoreRead=false
+					// client - WriteOnly=false - IgnoreRead=false
+					// permissions - WriteOnly=false - IgnoreRead=false
+					// disabledUserSignup - WriteOnly=false - IgnoreRead=false
+					// disabledUserDeletion - WriteOnly=false - IgnoreRead=false
 				},
 				"google_identity_platform_tenant",
 			)

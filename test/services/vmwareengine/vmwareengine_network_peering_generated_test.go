@@ -57,6 +57,22 @@ func TestAccVmwareengineNetworkPeering(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// peerNetwork - WriteOnly=false - IgnoreRead=false
+					// exportCustomRoutes - WriteOnly=false - IgnoreRead=false
+					// importCustomRoutes - WriteOnly=false - IgnoreRead=false
+					// exportCustomRoutesWithPublicIp - WriteOnly=false - IgnoreRead=false
+					// importCustomRoutesWithPublicIp - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// stateDetails - WriteOnly=false - IgnoreRead=false
+					// peerNetworkType - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// vmwareEngineNetwork - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// vmwareEngineNetworkCanonical - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
 				},
 				"google_vmwareengine_network_peering",
 			)

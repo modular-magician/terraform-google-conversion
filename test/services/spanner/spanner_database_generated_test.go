@@ -78,6 +78,17 @@ func TestAccSpannerDatabase(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// versionRetentionPeriod - WriteOnly=false - IgnoreRead=false
+					// ddl - WriteOnly=false - IgnoreRead=true
+					// state - WriteOnly=false - IgnoreRead=false
+					// encryptionConfig - WriteOnly=false - IgnoreRead=false
+					// databaseDialect - WriteOnly=false - IgnoreRead=false
+					// enableDropProtection - WriteOnly=false - IgnoreRead=false
+					// instance - WriteOnly=false - IgnoreRead=false
+					// kmsKeyName - WriteOnly=false - IgnoreRead=false
+					// kmsKeyNames - WriteOnly=false - IgnoreRead=false
 				},
 				"google_spanner_database",
 			)

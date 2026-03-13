@@ -59,6 +59,23 @@ func TestAccFilestoreBackup(t *testing.T) {
 					"provider",
 					"tags",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// capacityGb - WriteOnly=false - IgnoreRead=false
+					// storageBytes - WriteOnly=false - IgnoreRead=false
+					// sourceInstance - WriteOnly=false - IgnoreRead=false
+					// sourceFileShare - WriteOnly=false - IgnoreRead=false
+					// sourceInstanceTier - WriteOnly=false - IgnoreRead=false
+					// downloadBytes - WriteOnly=false - IgnoreRead=false
+					// kmsKeyName - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=true
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
 				},
 				"google_filestore_backup",
 			)

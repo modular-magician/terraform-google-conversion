@@ -58,6 +58,18 @@ func TestAccGKEHubMembership(t *testing.T) {
 					"membership_id",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// membershipId - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// endpoint - WriteOnly=false - IgnoreRead=false
+					// authority - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// gkeCluster - WriteOnly=false - IgnoreRead=false
+					// resourceLink - WriteOnly=false - IgnoreRead=false
+					// issuer - WriteOnly=false - IgnoreRead=false
 				},
 				"google_gke_hub_membership",
 			)

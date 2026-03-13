@@ -92,6 +92,30 @@ func TestAccComputeFirewall(t *testing.T) {
 					"params.resource_manager_tags",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// allow - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// deny - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// destinationRanges - WriteOnly=false - IgnoreRead=false
+					// direction - WriteOnly=false - IgnoreRead=false
+					// disabled - WriteOnly=false - IgnoreRead=false
+					// logConfig - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// priority - WriteOnly=false - IgnoreRead=false
+					// sourceRanges - WriteOnly=false - IgnoreRead=false
+					// sourceServiceAccounts - WriteOnly=false - IgnoreRead=false
+					// sourceTags - WriteOnly=false - IgnoreRead=false
+					// targetServiceAccounts - WriteOnly=false - IgnoreRead=false
+					// targetTags - WriteOnly=false - IgnoreRead=false
+					// params - WriteOnly=false - IgnoreRead=true
+					// protocol - WriteOnly=false - IgnoreRead=false
+					// ports - WriteOnly=false - IgnoreRead=false
+					// protocol - WriteOnly=false - IgnoreRead=false
+					// ports - WriteOnly=false - IgnoreRead=false
+					// metadata - WriteOnly=false - IgnoreRead=false
+					// resourceManagerTags - WriteOnly=false - IgnoreRead=true
 				},
 				"google_compute_firewall",
 			)

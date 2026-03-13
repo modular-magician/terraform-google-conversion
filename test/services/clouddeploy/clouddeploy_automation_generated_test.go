@@ -60,6 +60,54 @@ func TestAccClouddeployAutomation(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// suspended - WriteOnly=false - IgnoreRead=false
+					// serviceAccount - WriteOnly=false - IgnoreRead=false
+					// selector - WriteOnly=false - IgnoreRead=false
+					// rules - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// delivery_pipeline - WriteOnly=false - IgnoreRead=false
+					// targets - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// promoteReleaseRule - WriteOnly=false - IgnoreRead=false
+					// advanceRolloutRule - WriteOnly=false - IgnoreRead=false
+					// repairRolloutRule - WriteOnly=false - IgnoreRead=false
+					// timedPromoteReleaseRule - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// wait - WriteOnly=false - IgnoreRead=false
+					// destinationTargetId - WriteOnly=false - IgnoreRead=false
+					// destinationPhase - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// wait - WriteOnly=false - IgnoreRead=false
+					// sourcePhases - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// phases - WriteOnly=false - IgnoreRead=false
+					// jobs - WriteOnly=false - IgnoreRead=false
+					// repairPhases - WriteOnly=false - IgnoreRead=false
+					// retry - WriteOnly=false - IgnoreRead=false
+					// rollback - WriteOnly=false - IgnoreRead=false
+					// attempts - WriteOnly=false - IgnoreRead=false
+					// wait - WriteOnly=false - IgnoreRead=false
+					// backoffMode - WriteOnly=false - IgnoreRead=false
+					// destinationPhase - WriteOnly=false - IgnoreRead=false
+					// disableRollbackIfRolloutPending - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// destinationTargetId - WriteOnly=false - IgnoreRead=false
+					// schedule - WriteOnly=false - IgnoreRead=false
+					// timeZone - WriteOnly=false - IgnoreRead=false
+					// destinationPhase - WriteOnly=false - IgnoreRead=false
 				},
 				"google_clouddeploy_automation",
 			)

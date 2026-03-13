@@ -90,6 +90,82 @@ func TestAccDatastreamConnectionProfile(t *testing.T) {
 					"postgresql_profile.ssl_config.server_verification.ca_certificate",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// oracleProfile - WriteOnly=false - IgnoreRead=false
+					// gcsProfile - WriteOnly=false - IgnoreRead=false
+					// mysqlProfile - WriteOnly=false - IgnoreRead=false
+					// bigqueryProfile - WriteOnly=false - IgnoreRead=false
+					// postgresqlProfile - WriteOnly=false - IgnoreRead=false
+					// sqlServerProfile - WriteOnly=false - IgnoreRead=false
+					// mongodbProfile - WriteOnly=false - IgnoreRead=false
+					// forwardSshConnectivity - WriteOnly=false - IgnoreRead=false
+					// privateConnectivity - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// connectionProfileId - WriteOnly=false - IgnoreRead=false
+					// create_without_validation - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// hostname - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// username - WriteOnly=false - IgnoreRead=false
+					// password - WriteOnly=false - IgnoreRead=false
+					// secretManagerStoredPassword - WriteOnly=false - IgnoreRead=false
+					// databaseService - WriteOnly=false - IgnoreRead=false
+					// connectionAttributes - WriteOnly=false - IgnoreRead=false
+					// bucket - WriteOnly=false - IgnoreRead=false
+					// rootPath - WriteOnly=false - IgnoreRead=false
+					// hostname - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// username - WriteOnly=false - IgnoreRead=false
+					// password - WriteOnly=false - IgnoreRead=false
+					// secretManagerStoredPassword - WriteOnly=false - IgnoreRead=false
+					// sslConfig - WriteOnly=false - IgnoreRead=false
+					// clientKey - WriteOnly=false - IgnoreRead=false
+					// clientCertificate - WriteOnly=false - IgnoreRead=false
+					// caCertificate - WriteOnly=false - IgnoreRead=false
+					// hostname - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// username - WriteOnly=false - IgnoreRead=false
+					// password - WriteOnly=false - IgnoreRead=false
+					// secretManagerStoredPassword - WriteOnly=false - IgnoreRead=false
+					// database - WriteOnly=false - IgnoreRead=false
+					// sslConfig - WriteOnly=false - IgnoreRead=false
+					// serverVerification - WriteOnly=false - IgnoreRead=false
+					// serverAndClientVerification - WriteOnly=false - IgnoreRead=true
+					// caCertificate - WriteOnly=false - IgnoreRead=true
+					// clientCertificate - WriteOnly=false - IgnoreRead=true
+					// clientKey - WriteOnly=false - IgnoreRead=true
+					// caCertificate - WriteOnly=false - IgnoreRead=true
+					// hostname - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// username - WriteOnly=false - IgnoreRead=false
+					// password - WriteOnly=false - IgnoreRead=false
+					// secretManagerStoredPassword - WriteOnly=false - IgnoreRead=false
+					// database - WriteOnly=false - IgnoreRead=false
+					// hostAddresses - WriteOnly=false - IgnoreRead=false
+					// replicaSet - WriteOnly=false - IgnoreRead=false
+					// username - WriteOnly=false - IgnoreRead=false
+					// password - WriteOnly=false - IgnoreRead=false
+					// secretManagerStoredPassword - WriteOnly=false - IgnoreRead=false
+					// sslConfig - WriteOnly=false - IgnoreRead=false
+					// srvConnectionFormat - WriteOnly=false - IgnoreRead=false
+					// standardConnectionFormat - WriteOnly=false - IgnoreRead=false
+					// hostname - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// clientKey - WriteOnly=false - IgnoreRead=true
+					// clientCertificate - WriteOnly=false - IgnoreRead=true
+					// caCertificate - WriteOnly=false - IgnoreRead=true
+					// secretManagerStoredClientKey - WriteOnly=false - IgnoreRead=true
+					// directConnection - WriteOnly=false - IgnoreRead=false
+					// hostname - WriteOnly=false - IgnoreRead=false
+					// username - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// password - WriteOnly=false - IgnoreRead=false
+					// privateKey - WriteOnly=false - IgnoreRead=false
+					// privateConnection - WriteOnly=false - IgnoreRead=false
 				},
 				"google_datastream_connection_profile",
 			)

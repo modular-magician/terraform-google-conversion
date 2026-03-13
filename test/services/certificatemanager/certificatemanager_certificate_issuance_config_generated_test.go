@@ -52,6 +52,21 @@ func TestAccCertificateManagerCertificateIssuanceConfig(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// description - WriteOnly=false - IgnoreRead=false
+					// rotationWindowPercentage - WriteOnly=false - IgnoreRead=false
+					// keyAlgorithm - WriteOnly=false - IgnoreRead=false
+					// lifetime - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// certificateAuthorityConfig - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// certificateAuthorityServiceConfig - WriteOnly=false - IgnoreRead=false
+					// caPool - WriteOnly=false - IgnoreRead=false
 				},
 				"google_certificate_manager_certificate_issuance_config",
 			)

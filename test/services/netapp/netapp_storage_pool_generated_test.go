@@ -86,6 +86,35 @@ func TestAccNetappStoragePool(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// serviceLevel - WriteOnly=false - IgnoreRead=false
+					// capacityGib - WriteOnly=false - IgnoreRead=false
+					// volumeCapacityGib - WriteOnly=false - IgnoreRead=false
+					// volumeCount - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// activeDirectory - WriteOnly=false - IgnoreRead=false
+					// kmsConfig - WriteOnly=false - IgnoreRead=false
+					// ldapEnabled - WriteOnly=false - IgnoreRead=false
+					// encryptionType - WriteOnly=false - IgnoreRead=false
+					// zone - WriteOnly=false - IgnoreRead=false
+					// replicaZone - WriteOnly=false - IgnoreRead=false
+					// allowAutoTiering - WriteOnly=false - IgnoreRead=false
+					// customPerformanceEnabled - WriteOnly=false - IgnoreRead=false
+					// totalThroughputMibps - WriteOnly=false - IgnoreRead=false
+					// totalIops - WriteOnly=false - IgnoreRead=false
+					// hotTierSizeGib - WriteOnly=false - IgnoreRead=false
+					// enableHotTierAutoResize - WriteOnly=false - IgnoreRead=true
+					// qosType - WriteOnly=false - IgnoreRead=false
+					// availableThroughputMibps - WriteOnly=false - IgnoreRead=false
+					// coldTierSizeUsedGib - WriteOnly=false - IgnoreRead=false
+					// hotTierSizeUsedGib - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
 				},
 				"google_netapp_storage_pool",
 			)

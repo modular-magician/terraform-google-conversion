@@ -55,6 +55,28 @@ func TestAccBlockchainNodeEngineBlockchainNodes(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// connectionInfo - WriteOnly=false - IgnoreRead=false
+					// ethereumDetails - WriteOnly=false - IgnoreRead=false
+					// blockchainType - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// blockchainNodeId - WriteOnly=false - IgnoreRead=false
+					// validatorConfig - WriteOnly=false - IgnoreRead=false
+					// gethDetails - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// nodeType - WriteOnly=false - IgnoreRead=false
+					// executionClient - WriteOnly=false - IgnoreRead=false
+					// consensusClient - WriteOnly=false - IgnoreRead=false
+					// apiEnableAdmin - WriteOnly=false - IgnoreRead=false
+					// apiEnableDebug - WriteOnly=false - IgnoreRead=false
+					// mevRelayUrls - WriteOnly=false - IgnoreRead=false
+					// garbageCollectionMode - WriteOnly=false - IgnoreRead=false
 				},
 				"google_blockchain_node_engine_blockchain_nodes",
 			)

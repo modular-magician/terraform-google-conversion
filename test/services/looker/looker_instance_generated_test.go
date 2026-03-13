@@ -81,6 +81,75 @@ func TestAccLookerInstance(t *testing.T) {
 					"provider",
 					"region",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// adminSettings - WriteOnly=false - IgnoreRead=false
+					// consumerNetwork - WriteOnly=false - IgnoreRead=false
+					// controlledEgressConfig - WriteOnly=false - IgnoreRead=false
+					// controlledEgressEnabled - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// denyMaintenancePeriod - WriteOnly=false - IgnoreRead=false
+					// egressPublicIp - WriteOnly=false - IgnoreRead=false
+					// encryptionConfig - WriteOnly=false - IgnoreRead=false
+					// fipsEnabled - WriteOnly=false - IgnoreRead=false
+					// geminiEnabled - WriteOnly=false - IgnoreRead=false
+					// ingressPrivateIp - WriteOnly=false - IgnoreRead=false
+					// ingressPublicIp - WriteOnly=false - IgnoreRead=false
+					// lookerVersion - WriteOnly=false - IgnoreRead=false
+					// lookerUri - WriteOnly=false - IgnoreRead=false
+					// maintenanceWindow - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// oauthConfig - WriteOnly=false - IgnoreRead=true
+					// periodicExportConfig - WriteOnly=false - IgnoreRead=false
+					// platformEdition - WriteOnly=false - IgnoreRead=false
+					// privateIpEnabled - WriteOnly=false - IgnoreRead=false
+					// pscConfig - WriteOnly=false - IgnoreRead=false
+					// pscEnabled - WriteOnly=false - IgnoreRead=false
+					// publicIpEnabled - WriteOnly=false - IgnoreRead=false
+					// reservedRange - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// userMetadata - WriteOnly=false - IgnoreRead=false
+					// customDomain - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// allowedEmailDomains - WriteOnly=false - IgnoreRead=false
+					// marketplaceEnabled - WriteOnly=false - IgnoreRead=false
+					// egressFqdns - WriteOnly=false - IgnoreRead=false
+					// startDate - WriteOnly=false - IgnoreRead=false
+					// endDate - WriteOnly=false - IgnoreRead=false
+					// time - WriteOnly=false - IgnoreRead=false
+					// year - WriteOnly=false - IgnoreRead=false
+					// month - WriteOnly=false - IgnoreRead=false
+					// day - WriteOnly=false - IgnoreRead=false
+					// year - WriteOnly=false - IgnoreRead=false
+					// month - WriteOnly=false - IgnoreRead=false
+					// day - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// minutes - WriteOnly=false - IgnoreRead=false
+					// seconds - WriteOnly=false - IgnoreRead=false
+					// nanos - WriteOnly=false - IgnoreRead=false
+					// kmsKeyName - WriteOnly=false - IgnoreRead=false
+					// dayOfWeek - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// minutes - WriteOnly=false - IgnoreRead=false
+					// seconds - WriteOnly=false - IgnoreRead=false
+					// nanos - WriteOnly=false - IgnoreRead=false
+					// clientId - WriteOnly=false - IgnoreRead=false
+					// clientSecret - WriteOnly=false - IgnoreRead=false
+					// kmsKey - WriteOnly=false - IgnoreRead=false
+					// gcsUri - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// minutes - WriteOnly=false - IgnoreRead=false
+					// seconds - WriteOnly=false - IgnoreRead=false
+					// nanos - WriteOnly=false - IgnoreRead=false
+					// allowedVpcs - WriteOnly=false - IgnoreRead=false
+					// serviceAttachments - WriteOnly=false - IgnoreRead=false
+					// localFqdn - WriteOnly=false - IgnoreRead=false
+					// targetServiceAttachmentUri - WriteOnly=false - IgnoreRead=false
+					// additionalViewerUserCount - WriteOnly=false - IgnoreRead=false
+					// additionalStandardUserCount - WriteOnly=false - IgnoreRead=false
+					// additionalDeveloperUserCount - WriteOnly=false - IgnoreRead=false
+					// domain - WriteOnly=false - IgnoreRead=false
 				},
 				"google_looker_instance",
 			)

@@ -61,6 +61,35 @@ func TestAccNetappVolumeReplication(t *testing.T) {
 					"timeouts",
 					"volume_name",
 					"wait_for_mirror",
+					// DEBUG WriteOnly properties:
+					// state - WriteOnly=false - IgnoreRead=false
+					// stateDetails - WriteOnly=false - IgnoreRead=false
+					// role - WriteOnly=false - IgnoreRead=false
+					// replicationSchedule - WriteOnly=false - IgnoreRead=false
+					// mirrorState - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// destinationVolume - WriteOnly=false - IgnoreRead=false
+					// transferStats - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// destinationVolumeParameters - WriteOnly=false - IgnoreRead=true
+					// sourceVolume - WriteOnly=false - IgnoreRead=false
+					// healthy - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// hybridReplicationType - WriteOnly=false - IgnoreRead=false
+					// hybridPeeringDetails - WriteOnly=false - IgnoreRead=false
+					// hybridReplicationUserCommands - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// volumeName - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// storagePool - WriteOnly=false - IgnoreRead=false
+					// volumeId - WriteOnly=false - IgnoreRead=false
+					// shareName - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// tieringPolicy - WriteOnly=false - IgnoreRead=false
+					// coolingThresholdDays - WriteOnly=false - IgnoreRead=false
+					// tierAction - WriteOnly=false - IgnoreRead=false
 				},
 				"google_netapp_volume_replication",
 			)

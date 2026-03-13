@@ -68,6 +68,36 @@ func TestAccBackupDRBackupVault(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// backupMinimumEnforcedRetentionDuration - WriteOnly=false - IgnoreRead=false
+					// deletable - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// effectiveTime - WriteOnly=false - IgnoreRead=false
+					// backupCount - WriteOnly=false - IgnoreRead=false
+					// serviceAccount - WriteOnly=false - IgnoreRead=false
+					// totalStoredBytes - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// accessRestriction - WriteOnly=false - IgnoreRead=false
+					// backupRetentionInheritance - WriteOnly=false - IgnoreRead=true
+					// encryptionConfig - WriteOnly=false - IgnoreRead=true
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// backupVaultId - WriteOnly=false - IgnoreRead=false
+					// force_update - WriteOnly=false - IgnoreRead=false
+					// force_delete - WriteOnly=false - IgnoreRead=false
+					// ignore_inactive_datasources - WriteOnly=false - IgnoreRead=false
+					// ignore_backup_plan_references - WriteOnly=false - IgnoreRead=false
+					// allow_missing - WriteOnly=false - IgnoreRead=false
+					// kmsKeyName - WriteOnly=false - IgnoreRead=false
 				},
 				"google_backup_dr_backup_vault",
 			)

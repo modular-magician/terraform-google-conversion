@@ -59,6 +59,65 @@ func TestAccClouddeployDeployPolicy(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// suspended - WriteOnly=false - IgnoreRead=false
+					// selectors - WriteOnly=false - IgnoreRead=false
+					// rules - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// target - WriteOnly=false - IgnoreRead=false
+					// deliveryPipeline - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// rolloutRestriction - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// invokers - WriteOnly=false - IgnoreRead=false
+					// actions - WriteOnly=false - IgnoreRead=false
+					// timeWindows - WriteOnly=false - IgnoreRead=false
+					// timeZone - WriteOnly=false - IgnoreRead=false
+					// oneTimeWindows - WriteOnly=false - IgnoreRead=false
+					// weeklyWindows - WriteOnly=false - IgnoreRead=false
+					// startDate - WriteOnly=false - IgnoreRead=false
+					// endDate - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// endTime - WriteOnly=false - IgnoreRead=false
+					// year - WriteOnly=false - IgnoreRead=false
+					// month - WriteOnly=false - IgnoreRead=false
+					// day - WriteOnly=false - IgnoreRead=false
+					// year - WriteOnly=false - IgnoreRead=false
+					// month - WriteOnly=false - IgnoreRead=false
+					// day - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// minutes - WriteOnly=false - IgnoreRead=false
+					// seconds - WriteOnly=false - IgnoreRead=false
+					// nanos - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// minutes - WriteOnly=false - IgnoreRead=false
+					// seconds - WriteOnly=false - IgnoreRead=false
+					// nanos - WriteOnly=false - IgnoreRead=false
+					// daysOfWeek - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// endTime - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// minutes - WriteOnly=false - IgnoreRead=false
+					// seconds - WriteOnly=false - IgnoreRead=false
+					// nanos - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// minutes - WriteOnly=false - IgnoreRead=false
+					// seconds - WriteOnly=false - IgnoreRead=false
+					// nanos - WriteOnly=false - IgnoreRead=false
 				},
 				"google_clouddeploy_deploy_policy",
 			)

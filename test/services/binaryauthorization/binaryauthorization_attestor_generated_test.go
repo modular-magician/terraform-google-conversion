@@ -62,6 +62,18 @@ func TestAccBinaryAuthorizationAttestor(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// attestationAuthorityNote - WriteOnly=false - IgnoreRead=false
+					// noteReference - WriteOnly=false - IgnoreRead=false
+					// publicKeys - WriteOnly=false - IgnoreRead=false
+					// comment - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// asciiArmoredPgpPublicKey - WriteOnly=false - IgnoreRead=false
+					// pkixPublicKey - WriteOnly=false - IgnoreRead=false
+					// publicKeyPem - WriteOnly=false - IgnoreRead=false
+					// signatureAlgorithm - WriteOnly=false - IgnoreRead=false
 				},
 				"google_binary_authorization_attestor",
 			)

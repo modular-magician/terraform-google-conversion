@@ -126,6 +126,84 @@ func TestAccRedisCluster(t *testing.T) {
 					"psc_configs",
 					"region",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// labels - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// gcsSource - WriteOnly=false - IgnoreRead=true
+					// managedBackupSource - WriteOnly=false - IgnoreRead=true
+					// backupCollection - WriteOnly=false - IgnoreRead=false
+					// automatedBackupConfig - WriteOnly=false - IgnoreRead=false
+					// authorizationMode - WriteOnly=false - IgnoreRead=false
+					// transitEncryptionMode - WriteOnly=false - IgnoreRead=false
+					// nodeType - WriteOnly=false - IgnoreRead=false
+					// zoneDistributionConfig - WriteOnly=false - IgnoreRead=false
+					// pscConfigs - WriteOnly=false - IgnoreRead=true
+					// discoveryEndpoints - WriteOnly=false - IgnoreRead=false
+					// pscConnections - WriteOnly=false - IgnoreRead=false
+					// stateInfo - WriteOnly=false - IgnoreRead=false
+					// replicaCount - WriteOnly=false - IgnoreRead=false
+					// sizeGb - WriteOnly=false - IgnoreRead=false
+					// preciseSizeGb - WriteOnly=false - IgnoreRead=false
+					// shardCount - WriteOnly=false - IgnoreRead=false
+					// deletionProtectionEnabled - WriteOnly=false - IgnoreRead=false
+					// redisConfigs - WriteOnly=false - IgnoreRead=false
+					// persistenceConfig - WriteOnly=false - IgnoreRead=false
+					// maintenancePolicy - WriteOnly=false - IgnoreRead=false
+					// maintenanceSchedule - WriteOnly=false - IgnoreRead=false
+					// maintenanceVersion - WriteOnly=false - IgnoreRead=false
+					// effectiveMaintenanceVersion - WriteOnly=false - IgnoreRead=false
+					// availableMaintenanceVersions - WriteOnly=false - IgnoreRead=false
+					// crossClusterReplicationConfig - WriteOnly=false - IgnoreRead=false
+					// pscServiceAttachments - WriteOnly=false - IgnoreRead=false
+					// kmsKey - WriteOnly=false - IgnoreRead=false
+					// managedServerCa - WriteOnly=false - IgnoreRead=false
+					// serverCaMode - WriteOnly=false - IgnoreRead=false
+					// serverCaPool - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=true
+					// uris - WriteOnly=false - IgnoreRead=false
+					// backup - WriteOnly=false - IgnoreRead=false
+					// fixedFrequencySchedule - WriteOnly=false - IgnoreRead=false
+					// retention - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// mode - WriteOnly=false - IgnoreRead=false
+					// zone - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// address - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// pscConfig - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// pscConnectionId - WriteOnly=false - IgnoreRead=false
+					// address - WriteOnly=false - IgnoreRead=false
+					// forwardingRule - WriteOnly=false - IgnoreRead=false
+					// projectId - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// updateInfo - WriteOnly=false - IgnoreRead=false
+					// targetShardCount - WriteOnly=false - IgnoreRead=false
+					// targetReplicaCount - WriteOnly=false - IgnoreRead=false
+					// mode - WriteOnly=false - IgnoreRead=false
+					// rdbConfig - WriteOnly=false - IgnoreRead=false
+					// aofConfig - WriteOnly=false - IgnoreRead=false
+					// rdbSnapshotPeriod - WriteOnly=false - IgnoreRead=false
+					// rdbSnapshotStartTime - WriteOnly=false - IgnoreRead=false
+					// appendFsync - WriteOnly=false - IgnoreRead=false
+					// weeklyMaintenanceWindow - WriteOnly=false - IgnoreRead=false
+					// day - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// minutes - WriteOnly=false - IgnoreRead=false
+					// seconds - WriteOnly=false - IgnoreRead=false
+					// nanos - WriteOnly=false - IgnoreRead=false
+					// clusterRole - WriteOnly=false - IgnoreRead=false
+					// primaryCluster - WriteOnly=false - IgnoreRead=false
+					// secondaryClusters - WriteOnly=false - IgnoreRead=false
+					// cluster - WriteOnly=false - IgnoreRead=false
+					// cluster - WriteOnly=false - IgnoreRead=false
 				},
 				"google_redis_cluster",
 			)

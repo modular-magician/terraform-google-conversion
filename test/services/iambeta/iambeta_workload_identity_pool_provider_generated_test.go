@@ -89,6 +89,30 @@ func TestAccIAMBetaWorkloadIdentityPoolProvider(t *testing.T) {
 					"timeouts",
 					"workload_identity_pool_id",
 					"workload_identity_pool_provider_id",
+					// DEBUG WriteOnly properties:
+					// workloadIdentityPoolId - WriteOnly=false - IgnoreRead=false
+					// workloadIdentityPoolProviderId - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// disabled - WriteOnly=false - IgnoreRead=false
+					// attributeMapping - WriteOnly=false - IgnoreRead=false
+					// attributeCondition - WriteOnly=false - IgnoreRead=false
+					// aws - WriteOnly=false - IgnoreRead=false
+					// oidc - WriteOnly=false - IgnoreRead=false
+					// saml - WriteOnly=false - IgnoreRead=false
+					// x509 - WriteOnly=false - IgnoreRead=false
+					// accountId - WriteOnly=false - IgnoreRead=false
+					// allowedAudiences - WriteOnly=false - IgnoreRead=false
+					// issuerUri - WriteOnly=false - IgnoreRead=false
+					// jwksJson - WriteOnly=false - IgnoreRead=false
+					// idpMetadataXml - WriteOnly=false - IgnoreRead=false
+					// trustStore - WriteOnly=false - IgnoreRead=false
+					// trustAnchors - WriteOnly=false - IgnoreRead=false
+					// intermediateCas - WriteOnly=false - IgnoreRead=false
+					// pemCertificate - WriteOnly=false - IgnoreRead=false
+					// pemCertificate - WriteOnly=false - IgnoreRead=false
 				},
 				"google_iam_workload_identity_pool_provider",
 			)

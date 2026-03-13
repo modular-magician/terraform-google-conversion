@@ -53,6 +53,19 @@ func TestAccIdentityPlatformInboundSamlConfig(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// enabled - WriteOnly=false - IgnoreRead=false
+					// idpConfig - WriteOnly=false - IgnoreRead=false
+					// spConfig - WriteOnly=false - IgnoreRead=false
+					// idpEntityId - WriteOnly=false - IgnoreRead=false
+					// ssoUrl - WriteOnly=false - IgnoreRead=false
+					// signRequest - WriteOnly=false - IgnoreRead=false
+					// idpCertificates - WriteOnly=false - IgnoreRead=false
+					// x509Certificate - WriteOnly=false - IgnoreRead=false
+					// spEntityId - WriteOnly=false - IgnoreRead=false
+					// callbackUri - WriteOnly=false - IgnoreRead=false
 				},
 				"google_identity_platform_inbound_saml_config",
 			)

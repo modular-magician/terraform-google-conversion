@@ -75,6 +75,27 @@ func TestAccComputeRegionNetworkEndpointGroup(t *testing.T) {
 					"provider",
 					"psc_data.producer_port",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// networkEndpointType - WriteOnly=false - IgnoreRead=false
+					// pscTargetService - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// subnetwork - WriteOnly=false - IgnoreRead=false
+					// pscData - WriteOnly=false - IgnoreRead=false
+					// cloudRun - WriteOnly=false - IgnoreRead=false
+					// appEngine - WriteOnly=false - IgnoreRead=false
+					// cloudFunction - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// producerPort - WriteOnly=false - IgnoreRead=true
+					// service - WriteOnly=false - IgnoreRead=false
+					// tag - WriteOnly=false - IgnoreRead=false
+					// urlMask - WriteOnly=false - IgnoreRead=false
+					// service - WriteOnly=false - IgnoreRead=false
+					// version - WriteOnly=false - IgnoreRead=false
+					// urlMask - WriteOnly=false - IgnoreRead=false
+					// function - WriteOnly=false - IgnoreRead=false
+					// urlMask - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_region_network_endpoint_group",
 			)

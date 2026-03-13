@@ -110,6 +110,36 @@ func TestAccSpannerInstance(t *testing.T) {
 					"processing_units",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// config - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// num_nodes - WriteOnly=false - IgnoreRead=false
+					// processingUnits - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// autoscalingConfig - WriteOnly=false - IgnoreRead=false
+					// edition - WriteOnly=false - IgnoreRead=false
+					// instanceType - WriteOnly=false - IgnoreRead=false
+					// defaultBackupScheduleType - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// autoscalingLimits - WriteOnly=false - IgnoreRead=false
+					// autoscalingTargets - WriteOnly=false - IgnoreRead=false
+					// asymmetricAutoscalingOptions - WriteOnly=false - IgnoreRead=false
+					// minProcessingUnits - WriteOnly=false - IgnoreRead=false
+					// maxProcessingUnits - WriteOnly=false - IgnoreRead=false
+					// minNodes - WriteOnly=false - IgnoreRead=false
+					// maxNodes - WriteOnly=false - IgnoreRead=false
+					// highPriorityCpuUtilizationPercent - WriteOnly=false - IgnoreRead=false
+					// storageUtilizationPercent - WriteOnly=false - IgnoreRead=false
+					// totalCpuUtilizationPercent - WriteOnly=false - IgnoreRead=false
+					// replicaSelection - WriteOnly=false - IgnoreRead=false
+					// overrides - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// autoscalingLimits - WriteOnly=false - IgnoreRead=false
+					// minNodes - WriteOnly=false - IgnoreRead=false
+					// maxNodes - WriteOnly=false - IgnoreRead=false
 				},
 				"google_spanner_instance",
 			)

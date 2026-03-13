@@ -129,6 +129,25 @@ func TestAccComputeNetwork(t *testing.T) {
 					"params.resource_manager_tags",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// description - WriteOnly=false - IgnoreRead=false
+					// gateway_ipv4 - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// networkId - WriteOnly=false - IgnoreRead=false
+					// numericId - WriteOnly=false - IgnoreRead=false
+					// autoCreateSubnetworks - WriteOnly=false - IgnoreRead=false
+					// routingMode - WriteOnly=false - IgnoreRead=false
+					// bgpBestPathSelectionMode - WriteOnly=false - IgnoreRead=false
+					// bgpAlwaysCompareMed - WriteOnly=false - IgnoreRead=false
+					// bgpInterRegionCost - WriteOnly=false - IgnoreRead=false
+					// deleteBgpAlwaysCompareMed - WriteOnly=false - IgnoreRead=false
+					// mtu - WriteOnly=false - IgnoreRead=false
+					// enableUlaInternalIpv6 - WriteOnly=false - IgnoreRead=false
+					// internalIpv6Range - WriteOnly=false - IgnoreRead=false
+					// networkFirewallPolicyEnforcementOrder - WriteOnly=false - IgnoreRead=false
+					// networkProfile - WriteOnly=false - IgnoreRead=false
+					// params - WriteOnly=false - IgnoreRead=true
+					// resourceManagerTags - WriteOnly=false - IgnoreRead=true
 				},
 				"google_compute_network",
 			)

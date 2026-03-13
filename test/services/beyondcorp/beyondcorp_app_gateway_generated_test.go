@@ -55,6 +55,20 @@ func TestAccBeyondcorpAppGateway(t *testing.T) {
 					"provider",
 					"region",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// hostType - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// uri - WriteOnly=false - IgnoreRead=false
+					// allocatedConnections - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// pscUri - WriteOnly=false - IgnoreRead=false
+					// ingressPort - WriteOnly=false - IgnoreRead=false
 				},
 				"google_beyondcorp_app_gateway",
 			)

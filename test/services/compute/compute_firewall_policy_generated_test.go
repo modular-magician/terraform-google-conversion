@@ -53,6 +53,17 @@ func TestAccComputeFirewallPolicy(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// firewallPolicyId - WriteOnly=false - IgnoreRead=false
+					// shortName - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// parent - WriteOnly=false - IgnoreRead=false
+					// fingerprint - WriteOnly=false - IgnoreRead=false
+					// selfLink - WriteOnly=false - IgnoreRead=false
+					// selfLinkWithId - WriteOnly=false - IgnoreRead=false
+					// ruleTupleCount - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_firewall_policy",
 			)

@@ -54,6 +54,13 @@ func TestAccApphubServiceProjectAttachment(t *testing.T) {
 					"provider",
 					"service_project_attachment_id",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// serviceProject - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// serviceProjectAttachmentId - WriteOnly=false - IgnoreRead=false
 				},
 				"google_apphub_service_project_attachment",
 			)

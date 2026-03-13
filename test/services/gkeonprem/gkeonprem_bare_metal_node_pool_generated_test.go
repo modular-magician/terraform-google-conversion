@@ -59,6 +59,31 @@ func TestAccGkeonpremBareMetalNodePool(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// nodePoolConfig - WriteOnly=false - IgnoreRead=false
+					// status - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// reconciling - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// deleteTime - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// bareMetalCluster - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// nodeConfigs - WriteOnly=false - IgnoreRead=false
+					// operatingSystem - WriteOnly=false - IgnoreRead=false
+					// taints - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// nodeIp - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// key - WriteOnly=false - IgnoreRead=false
+					// value - WriteOnly=false - IgnoreRead=false
+					// effect - WriteOnly=false - IgnoreRead=false
 				},
 				"google_gkeonprem_bare_metal_node_pool",
 			)

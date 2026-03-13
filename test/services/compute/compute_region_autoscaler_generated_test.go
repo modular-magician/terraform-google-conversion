@@ -63,6 +63,40 @@ func TestAccComputeRegionAutoscaler(t *testing.T) {
 					"provider",
 					"region",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// autoscalingPolicy - WriteOnly=false - IgnoreRead=false
+					// target - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=true
+					// minReplicas - WriteOnly=false - IgnoreRead=false
+					// maxReplicas - WriteOnly=false - IgnoreRead=false
+					// cooldownPeriod - WriteOnly=false - IgnoreRead=false
+					// mode - WriteOnly=false - IgnoreRead=false
+					// scaleInControl - WriteOnly=false - IgnoreRead=false
+					// cpuUtilization - WriteOnly=false - IgnoreRead=false
+					// metric - WriteOnly=false - IgnoreRead=false
+					// loadBalancingUtilization - WriteOnly=false - IgnoreRead=false
+					// scalingSchedules - WriteOnly=false - IgnoreRead=false
+					// maxScaledInReplicas - WriteOnly=false - IgnoreRead=false
+					// timeWindowSec - WriteOnly=false - IgnoreRead=false
+					// fixed - WriteOnly=false - IgnoreRead=false
+					// percent - WriteOnly=false - IgnoreRead=false
+					// target - WriteOnly=false - IgnoreRead=false
+					// predictiveMethod - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// singleInstanceAssignment - WriteOnly=false - IgnoreRead=false
+					// target - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// filter - WriteOnly=false - IgnoreRead=false
+					// target - WriteOnly=false - IgnoreRead=false
+					// minRequiredReplicas - WriteOnly=false - IgnoreRead=false
+					// schedule - WriteOnly=false - IgnoreRead=false
+					// timeZone - WriteOnly=false - IgnoreRead=false
+					// durationSec - WriteOnly=false - IgnoreRead=false
+					// disabled - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_region_autoscaler",
 			)

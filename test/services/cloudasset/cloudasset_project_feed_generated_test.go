@@ -52,6 +52,21 @@ func TestAccCloudAssetProjectFeed(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// billing_project - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// feedId - WriteOnly=false - IgnoreRead=false
+					// assetNames - WriteOnly=false - IgnoreRead=false
+					// assetTypes - WriteOnly=false - IgnoreRead=false
+					// contentType - WriteOnly=false - IgnoreRead=false
+					// feedOutputConfig - WriteOnly=false - IgnoreRead=false
+					// condition - WriteOnly=false - IgnoreRead=false
+					// pubsubDestination - WriteOnly=false - IgnoreRead=false
+					// topic - WriteOnly=false - IgnoreRead=false
+					// expression - WriteOnly=false - IgnoreRead=false
+					// title - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
 				},
 				"google_cloud_asset_project_feed",
 			)

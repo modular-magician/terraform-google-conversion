@@ -59,6 +59,14 @@ func TestAccNetworkSecurityGatewaySecurityPolicy(t *testing.T) {
 					"provider",
 					"timeouts",
 					"tls_inspection_policy",
+					// DEBUG WriteOnly properties:
+					// selfLink - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// tlsInspectionPolicy - WriteOnly=false - IgnoreRead=true
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
 				},
 				"google_network_security_gateway_security_policy",
 			)

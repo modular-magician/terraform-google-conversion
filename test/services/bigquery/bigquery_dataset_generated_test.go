@@ -121,6 +121,57 @@ func TestAccBigQueryDataset(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// maxTimeTravelHours - WriteOnly=false - IgnoreRead=false
+					// access - WriteOnly=false - IgnoreRead=false
+					// creationTime - WriteOnly=false - IgnoreRead=false
+					// datasetId - WriteOnly=false - IgnoreRead=false
+					// defaultTableExpirationMs - WriteOnly=false - IgnoreRead=false
+					// defaultPartitionExpirationMs - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// externalDatasetReference - WriteOnly=false - IgnoreRead=false
+					// friendlyName - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// lastModifiedTime - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// defaultEncryptionConfiguration - WriteOnly=false - IgnoreRead=false
+					// isCaseInsensitive - WriteOnly=false - IgnoreRead=false
+					// defaultCollation - WriteOnly=false - IgnoreRead=false
+					// storageBillingModel - WriteOnly=false - IgnoreRead=false
+					// resourceTags - WriteOnly=false - IgnoreRead=false
+					// externalCatalogDatasetOptions - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// domain - WriteOnly=false - IgnoreRead=false
+					// groupByEmail - WriteOnly=false - IgnoreRead=false
+					// role - WriteOnly=false - IgnoreRead=false
+					// specialGroup - WriteOnly=false - IgnoreRead=false
+					// iamMember - WriteOnly=false - IgnoreRead=false
+					// userByEmail - WriteOnly=false - IgnoreRead=false
+					// view - WriteOnly=false - IgnoreRead=false
+					// dataset - WriteOnly=false - IgnoreRead=false
+					// routine - WriteOnly=false - IgnoreRead=false
+					// condition - WriteOnly=false - IgnoreRead=false
+					// datasetId - WriteOnly=false - IgnoreRead=false
+					// projectId - WriteOnly=false - IgnoreRead=false
+					// tableId - WriteOnly=false - IgnoreRead=false
+					// dataset - WriteOnly=false - IgnoreRead=false
+					// targetTypes - WriteOnly=false - IgnoreRead=false
+					// datasetId - WriteOnly=false - IgnoreRead=false
+					// projectId - WriteOnly=false - IgnoreRead=false
+					// datasetId - WriteOnly=false - IgnoreRead=false
+					// projectId - WriteOnly=false - IgnoreRead=false
+					// routineId - WriteOnly=false - IgnoreRead=false
+					// expression - WriteOnly=false - IgnoreRead=false
+					// title - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// externalSource - WriteOnly=false - IgnoreRead=false
+					// connection - WriteOnly=false - IgnoreRead=false
+					// kmsKeyName - WriteOnly=false - IgnoreRead=false
+					// parameters - WriteOnly=false - IgnoreRead=false
+					// defaultStorageLocationUri - WriteOnly=false - IgnoreRead=false
 				},
 				"google_bigquery_dataset",
 			)

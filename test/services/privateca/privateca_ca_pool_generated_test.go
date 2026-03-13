@@ -72,6 +72,83 @@ func TestAccPrivatecaCaPool(t *testing.T) {
 					"provider",
 					"timeouts",
 					"zero_max_issuer_path_length",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// tier - WriteOnly=false - IgnoreRead=false
+					// issuancePolicy - WriteOnly=false - IgnoreRead=false
+					// publishingOptions - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// encryptionSpec - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// allowedKeyTypes - WriteOnly=false - IgnoreRead=false
+					// backdateDuration - WriteOnly=false - IgnoreRead=false
+					// maximumLifetime - WriteOnly=false - IgnoreRead=false
+					// allowedIssuanceModes - WriteOnly=false - IgnoreRead=false
+					// identityConstraints - WriteOnly=false - IgnoreRead=false
+					// baselineValues - WriteOnly=false - IgnoreRead=false
+					// rsa - WriteOnly=false - IgnoreRead=false
+					// ellipticCurve - WriteOnly=false - IgnoreRead=false
+					// minModulusSize - WriteOnly=false - IgnoreRead=false
+					// maxModulusSize - WriteOnly=false - IgnoreRead=false
+					// signatureAlgorithm - WriteOnly=false - IgnoreRead=false
+					// allowCsrBasedIssuance - WriteOnly=false - IgnoreRead=false
+					// allowConfigBasedIssuance - WriteOnly=false - IgnoreRead=false
+					// allowSubjectPassthrough - WriteOnly=false - IgnoreRead=false
+					// allowSubjectAltNamesPassthrough - WriteOnly=false - IgnoreRead=false
+					// celExpression - WriteOnly=false - IgnoreRead=false
+					// expression - WriteOnly=false - IgnoreRead=false
+					// title - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// additionalExtensions - WriteOnly=false - IgnoreRead=false
+					// policyIds - WriteOnly=false - IgnoreRead=false
+					// aiaOcspServers - WriteOnly=false - IgnoreRead=false
+					// caOptions - WriteOnly=false - IgnoreRead=false
+					// keyUsage - WriteOnly=false - IgnoreRead=false
+					// nameConstraints - WriteOnly=false - IgnoreRead=false
+					// critical - WriteOnly=false - IgnoreRead=false
+					// value - WriteOnly=false - IgnoreRead=false
+					// objectId - WriteOnly=false - IgnoreRead=false
+					// objectIdPath - WriteOnly=false - IgnoreRead=false
+					// objectIdPath - WriteOnly=false - IgnoreRead=false
+					// isCa - WriteOnly=false - IgnoreRead=false
+					// nonCa - WriteOnly=false - IgnoreRead=false
+					// maxIssuerPathLength - WriteOnly=false - IgnoreRead=false
+					// zeroMaxIssuerPathLength - WriteOnly=false - IgnoreRead=false
+					// baseKeyUsage - WriteOnly=false - IgnoreRead=false
+					// extendedKeyUsage - WriteOnly=false - IgnoreRead=false
+					// unknownExtendedKeyUsages - WriteOnly=false - IgnoreRead=false
+					// digitalSignature - WriteOnly=false - IgnoreRead=false
+					// contentCommitment - WriteOnly=false - IgnoreRead=false
+					// keyEncipherment - WriteOnly=false - IgnoreRead=false
+					// dataEncipherment - WriteOnly=false - IgnoreRead=false
+					// keyAgreement - WriteOnly=false - IgnoreRead=false
+					// certSign - WriteOnly=false - IgnoreRead=false
+					// crlSign - WriteOnly=false - IgnoreRead=false
+					// encipherOnly - WriteOnly=false - IgnoreRead=false
+					// decipherOnly - WriteOnly=false - IgnoreRead=false
+					// serverAuth - WriteOnly=false - IgnoreRead=false
+					// clientAuth - WriteOnly=false - IgnoreRead=false
+					// codeSigning - WriteOnly=false - IgnoreRead=false
+					// emailProtection - WriteOnly=false - IgnoreRead=false
+					// timeStamping - WriteOnly=false - IgnoreRead=false
+					// ocspSigning - WriteOnly=false - IgnoreRead=false
+					// objectIdPath - WriteOnly=false - IgnoreRead=false
+					// critical - WriteOnly=false - IgnoreRead=false
+					// permittedDnsNames - WriteOnly=false - IgnoreRead=false
+					// excludedDnsNames - WriteOnly=false - IgnoreRead=false
+					// permittedIpRanges - WriteOnly=false - IgnoreRead=false
+					// excludedIpRanges - WriteOnly=false - IgnoreRead=false
+					// permittedEmailAddresses - WriteOnly=false - IgnoreRead=false
+					// excludedEmailAddresses - WriteOnly=false - IgnoreRead=false
+					// permittedUris - WriteOnly=false - IgnoreRead=false
+					// excludedUris - WriteOnly=false - IgnoreRead=false
+					// publishCaCert - WriteOnly=false - IgnoreRead=false
+					// publishCrl - WriteOnly=false - IgnoreRead=false
+					// encodingFormat - WriteOnly=false - IgnoreRead=false
+					// cloudKmsKey - WriteOnly=false - IgnoreRead=false
 				},
 				"google_privateca_ca_pool",
 			)

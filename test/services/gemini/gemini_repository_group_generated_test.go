@@ -56,6 +56,19 @@ func TestAccGeminiRepositoryGroup(t *testing.T) {
 					"provider",
 					"repository_group_id",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// repositories - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// codeRepositoryIndex - WriteOnly=false - IgnoreRead=false
+					// repositoryGroupId - WriteOnly=false - IgnoreRead=false
+					// resource - WriteOnly=false - IgnoreRead=false
+					// branchPattern - WriteOnly=false - IgnoreRead=false
 				},
 				"google_gemini_repository_group",
 			)

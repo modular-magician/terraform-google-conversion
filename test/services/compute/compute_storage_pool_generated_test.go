@@ -57,6 +57,25 @@ func TestAccComputeStoragePool(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// kind - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// poolProvisionedCapacityGb - WriteOnly=false - IgnoreRead=false
+					// poolProvisionedIops - WriteOnly=false - IgnoreRead=false
+					// poolProvisionedThroughput - WriteOnly=false - IgnoreRead=false
+					// labelFingerprint - WriteOnly=false - IgnoreRead=false
+					// resourceStatus - WriteOnly=false - IgnoreRead=false
+					// storagePoolType - WriteOnly=false - IgnoreRead=false
+					// status - WriteOnly=false - IgnoreRead=false
+					// capacityProvisioningType - WriteOnly=false - IgnoreRead=false
+					// performanceProvisioningType - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// zone - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_storage_pool",
 			)

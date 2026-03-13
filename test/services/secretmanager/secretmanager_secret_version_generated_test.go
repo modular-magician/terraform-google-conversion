@@ -81,6 +81,17 @@ func TestAccSecretManagerSecretVersion(t *testing.T) {
 					"secret_data_wo",
 					"secret_data_wo_version",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// enabled - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// version - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// destroyTime - WriteOnly=false - IgnoreRead=false
+					// secretData - WriteOnly=false - IgnoreRead=false
+					// secretDataWo - WriteOnly=false - IgnoreRead=false
+					// SecretDataWoVersion - WriteOnly=false - IgnoreRead=false
+					// project - WriteOnly=false - IgnoreRead=false
+					// secret - WriteOnly=false - IgnoreRead=false
 				},
 				"google_secret_manager_secret_version",
 			)

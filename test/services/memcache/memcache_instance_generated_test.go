@@ -60,6 +60,38 @@ func TestAccMemcacheInstance(t *testing.T) {
 					"region",
 					"reserved_ip_range_id",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// memcacheNodes - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// discoveryEndpoint - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// memcacheFullVersion - WriteOnly=false - IgnoreRead=false
+					// zones - WriteOnly=false - IgnoreRead=false
+					// authorizedNetwork - WriteOnly=false - IgnoreRead=false
+					// nodeCount - WriteOnly=false - IgnoreRead=false
+					// memcacheVersion - WriteOnly=false - IgnoreRead=false
+					// nodeConfig - WriteOnly=false - IgnoreRead=false
+					// memcacheParameters - WriteOnly=false - IgnoreRead=false
+					// maintenancePolicy - WriteOnly=false - IgnoreRead=false
+					// maintenanceSchedule - WriteOnly=false - IgnoreRead=false
+					// reservedIpRangeId - WriteOnly=false - IgnoreRead=true
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// cpuCount - WriteOnly=false - IgnoreRead=false
+					// memorySizeMb - WriteOnly=false - IgnoreRead=false
+					// params - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// weeklyMaintenanceWindow - WriteOnly=false - IgnoreRead=false
+					// day - WriteOnly=false - IgnoreRead=false
+					// duration - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// minutes - WriteOnly=false - IgnoreRead=false
+					// seconds - WriteOnly=false - IgnoreRead=false
+					// nanos - WriteOnly=false - IgnoreRead=false
 				},
 				"google_memcache_instance",
 			)

@@ -53,6 +53,23 @@ func TestAccDeveloperConnectGitRepositoryLink(t *testing.T) {
 					"parent_connection",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// cloneUri - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// deleteTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// reconciling - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// parent_connection - WriteOnly=false - IgnoreRead=false
+					// gitRepositoryLinkId - WriteOnly=false - IgnoreRead=false
 				},
 				"google_developer_connect_git_repository_link",
 			)

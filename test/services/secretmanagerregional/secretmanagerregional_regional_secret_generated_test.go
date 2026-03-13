@@ -109,6 +109,28 @@ func TestAccSecretManagerRegionalRegionalSecret(t *testing.T) {
 					"tags",
 					"timeouts",
 					"ttl",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// versionAliases - WriteOnly=false - IgnoreRead=false
+					// customerManagedEncryption - WriteOnly=false - IgnoreRead=false
+					// topics - WriteOnly=false - IgnoreRead=false
+					// rotation - WriteOnly=false - IgnoreRead=false
+					// expireTime - WriteOnly=false - IgnoreRead=false
+					// ttl - WriteOnly=false - IgnoreRead=true
+					// versionDestroyTtl - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=true
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// secretId - WriteOnly=false - IgnoreRead=false
+					// kmsKeyName - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// nextRotationTime - WriteOnly=false - IgnoreRead=false
+					// rotationPeriod - WriteOnly=false - IgnoreRead=false
 				},
 				"google_secret_manager_regional_secret",
 			)

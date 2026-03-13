@@ -61,6 +61,35 @@ func TestAccBackupDRBackupPlan(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// backupVault - WriteOnly=false - IgnoreRead=false
+					// backupVaultServiceAccount - WriteOnly=false - IgnoreRead=false
+					// supportedResourceTypes - WriteOnly=false - IgnoreRead=false
+					// resourceType - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// maxCustomOnDemandRetentionDays - WriteOnly=false - IgnoreRead=false
+					// backupRules - WriteOnly=false - IgnoreRead=false
+					// logRetentionDays - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// backup_plan_id - WriteOnly=false - IgnoreRead=false
+					// ruleId - WriteOnly=false - IgnoreRead=false
+					// backupRetentionDays - WriteOnly=false - IgnoreRead=false
+					// standardSchedule - WriteOnly=false - IgnoreRead=false
+					// recurrenceType - WriteOnly=false - IgnoreRead=false
+					// hourlyFrequency - WriteOnly=false - IgnoreRead=false
+					// daysOfWeek - WriteOnly=false - IgnoreRead=false
+					// daysOfMonth - WriteOnly=false - IgnoreRead=false
+					// weekDayOfMonth - WriteOnly=false - IgnoreRead=false
+					// months - WriteOnly=false - IgnoreRead=false
+					// timeZone - WriteOnly=false - IgnoreRead=false
+					// backupWindow - WriteOnly=false - IgnoreRead=false
+					// weekOfMonth - WriteOnly=false - IgnoreRead=false
+					// dayOfWeek - WriteOnly=false - IgnoreRead=false
+					// startHourOfDay - WriteOnly=false - IgnoreRead=false
+					// endHourOfDay - WriteOnly=false - IgnoreRead=false
 				},
 				"google_backup_dr_backup_plan",
 			)

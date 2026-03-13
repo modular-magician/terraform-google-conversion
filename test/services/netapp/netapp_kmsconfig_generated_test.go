@@ -55,6 +55,16 @@ func TestAccNetappkmsconfig(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// cryptoKeyName - WriteOnly=false - IgnoreRead=false
+					// instructions - WriteOnly=false - IgnoreRead=false
+					// serviceAccount - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
 				},
 				"google_netapp_kmsconfig",
 			)

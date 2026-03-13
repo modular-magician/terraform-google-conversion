@@ -58,6 +58,17 @@ func TestAccBeyondcorpAppConnector(t *testing.T) {
 					"provider",
 					"region",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// principalInfo - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// serviceAccount - WriteOnly=false - IgnoreRead=false
+					// email - WriteOnly=false - IgnoreRead=false
 				},
 				"google_beyondcorp_app_connector",
 			)

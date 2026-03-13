@@ -59,6 +59,33 @@ func TestAccManagedKafkaCluster(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// gcpConfig - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// capacityConfig - WriteOnly=false - IgnoreRead=false
+					// brokerCapacityConfig - WriteOnly=false - IgnoreRead=false
+					// rebalanceConfig - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// tlsConfig - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// clusterId - WriteOnly=false - IgnoreRead=false
+					// accessConfig - WriteOnly=false - IgnoreRead=false
+					// kmsKey - WriteOnly=false - IgnoreRead=false
+					// networkConfigs - WriteOnly=false - IgnoreRead=false
+					// subnet - WriteOnly=false - IgnoreRead=false
+					// vcpuCount - WriteOnly=false - IgnoreRead=false
+					// memoryBytes - WriteOnly=false - IgnoreRead=false
+					// diskSizeGib - WriteOnly=false - IgnoreRead=false
+					// mode - WriteOnly=false - IgnoreRead=false
+					// trustConfig - WriteOnly=false - IgnoreRead=false
+					// sslPrincipalMappingRules - WriteOnly=false - IgnoreRead=false
+					// casConfigs - WriteOnly=false - IgnoreRead=false
+					// caPool - WriteOnly=false - IgnoreRead=false
 				},
 				"google_managed_kafka_cluster",
 			)

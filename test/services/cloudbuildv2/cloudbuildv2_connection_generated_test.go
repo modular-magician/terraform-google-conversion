@@ -91,6 +91,58 @@ func TestAccCloudbuildv2Connection(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// githubConfig - WriteOnly=false - IgnoreRead=false
+					// githubEnterpriseConfig - WriteOnly=false - IgnoreRead=false
+					// gitlabConfig - WriteOnly=false - IgnoreRead=false
+					// bitbucketDataCenterConfig - WriteOnly=false - IgnoreRead=false
+					// bitbucketCloudConfig - WriteOnly=false - IgnoreRead=false
+					// installationState - WriteOnly=false - IgnoreRead=false
+					// disabled - WriteOnly=false - IgnoreRead=false
+					// reconciling - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// authorizerCredential - WriteOnly=false - IgnoreRead=false
+					// appInstallationId - WriteOnly=false - IgnoreRead=false
+					// oauthTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// hostUri - WriteOnly=false - IgnoreRead=false
+					// appId - WriteOnly=false - IgnoreRead=false
+					// appSlug - WriteOnly=false - IgnoreRead=false
+					// privateKeySecretVersion - WriteOnly=false - IgnoreRead=false
+					// webhookSecretSecretVersion - WriteOnly=false - IgnoreRead=false
+					// appInstallationId - WriteOnly=false - IgnoreRead=false
+					// serviceDirectoryConfig - WriteOnly=false - IgnoreRead=false
+					// sslCa - WriteOnly=false - IgnoreRead=false
+					// service - WriteOnly=false - IgnoreRead=false
+					// hostUri - WriteOnly=false - IgnoreRead=false
+					// webhookSecretSecretVersion - WriteOnly=false - IgnoreRead=false
+					// readAuthorizerCredential - WriteOnly=false - IgnoreRead=false
+					// authorizerCredential - WriteOnly=false - IgnoreRead=false
+					// serviceDirectoryConfig - WriteOnly=false - IgnoreRead=false
+					// sslCa - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// service - WriteOnly=false - IgnoreRead=false
+					// hostUri - WriteOnly=false - IgnoreRead=false
+					// webhookSecretSecretVersion - WriteOnly=false - IgnoreRead=false
+					// readAuthorizerCredential - WriteOnly=false - IgnoreRead=false
+					// authorizerCredential - WriteOnly=false - IgnoreRead=false
+					// serviceDirectoryConfig - WriteOnly=false - IgnoreRead=false
+					// sslCa - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// service - WriteOnly=false - IgnoreRead=false
+					// workspace - WriteOnly=false - IgnoreRead=false
+					// webhookSecretSecretVersion - WriteOnly=false - IgnoreRead=false
+					// readAuthorizerCredential - WriteOnly=false - IgnoreRead=false
+					// authorizerCredential - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
 				},
 				"google_cloudbuildv2_connection",
 			)

@@ -59,6 +59,16 @@ func TestAccComputeRegionSslPolicy(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// profile - WriteOnly=false - IgnoreRead=false
+					// minTlsVersion - WriteOnly=false - IgnoreRead=false
+					// enabledFeatures - WriteOnly=false - IgnoreRead=false
+					// customFeatures - WriteOnly=false - IgnoreRead=false
+					// fingerprint - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_region_ssl_policy",
 			)

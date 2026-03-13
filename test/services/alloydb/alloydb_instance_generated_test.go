@@ -110,6 +110,59 @@ func TestAccAlloydbInstance(t *testing.T) {
 					"reconciling",
 					"timeouts",
 					"update_time",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=true
+					// gceZone - WriteOnly=false - IgnoreRead=false
+					// reconciling - WriteOnly=false - IgnoreRead=false
+					// databaseFlags - WriteOnly=false - IgnoreRead=false
+					// availabilityType - WriteOnly=false - IgnoreRead=false
+					// activationPolicy - WriteOnly=false - IgnoreRead=false
+					// instanceType - WriteOnly=false - IgnoreRead=false
+					// ipAddress - WriteOnly=false - IgnoreRead=false
+					// queryInsightsConfig - WriteOnly=false - IgnoreRead=false
+					// readPoolConfig - WriteOnly=false - IgnoreRead=false
+					// machineConfig - WriteOnly=false - IgnoreRead=false
+					// clientConnectionConfig - WriteOnly=false - IgnoreRead=false
+					// pscInstanceConfig - WriteOnly=false - IgnoreRead=false
+					// networkConfig - WriteOnly=false - IgnoreRead=false
+					// publicIpAddress - WriteOnly=false - IgnoreRead=false
+					// outboundPublicIpAddresses - WriteOnly=false - IgnoreRead=false
+					// connectionPoolConfig - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// cluster - WriteOnly=false - IgnoreRead=false
+					// instanceId - WriteOnly=false - IgnoreRead=false
+					// queryStringLength - WriteOnly=false - IgnoreRead=false
+					// recordApplicationTags - WriteOnly=false - IgnoreRead=false
+					// recordClientAddress - WriteOnly=false - IgnoreRead=false
+					// queryPlansPerMinute - WriteOnly=false - IgnoreRead=false
+					// nodeCount - WriteOnly=false - IgnoreRead=false
+					// cpuCount - WriteOnly=false - IgnoreRead=false
+					// machineType - WriteOnly=false - IgnoreRead=false
+					// requireConnectors - WriteOnly=false - IgnoreRead=false
+					// sslConfig - WriteOnly=false - IgnoreRead=false
+					// sslMode - WriteOnly=false - IgnoreRead=false
+					// allowedConsumerProjects - WriteOnly=false - IgnoreRead=false
+					// pscInterfaceConfigs - WriteOnly=false - IgnoreRead=false
+					// pscAutoConnections - WriteOnly=false - IgnoreRead=false
+					// networkAttachmentResource - WriteOnly=false - IgnoreRead=false
+					// consumerProject - WriteOnly=false - IgnoreRead=false
+					// consumerNetwork - WriteOnly=false - IgnoreRead=false
+					// authorizedExternalNetworks - WriteOnly=false - IgnoreRead=false
+					// enablePublicIp - WriteOnly=false - IgnoreRead=false
+					// enableOutboundPublicIp - WriteOnly=false - IgnoreRead=false
+					// allocatedIpRangeOverride - WriteOnly=false - IgnoreRead=false
+					// cidrRange - WriteOnly=false - IgnoreRead=false
+					// enabled - WriteOnly=false - IgnoreRead=false
+					// flags - WriteOnly=false - IgnoreRead=false
 				},
 				"google_alloydb_instance",
 			)

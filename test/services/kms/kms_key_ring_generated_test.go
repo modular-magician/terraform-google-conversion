@@ -51,6 +51,9 @@ func TestAccKMSKeyRing(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=true
 				},
 				"google_kms_key_ring",
 			)

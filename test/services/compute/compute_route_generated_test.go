@@ -65,6 +65,31 @@ func TestAccComputeRoute(t *testing.T) {
 					"params.resource_manager_tags",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// destRange - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// priority - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=false
+					// nextHopGateway - WriteOnly=false - IgnoreRead=false
+					// nextHopInstance - WriteOnly=false - IgnoreRead=false
+					// nextHopIp - WriteOnly=false - IgnoreRead=false
+					// nextHopVpnTunnel - WriteOnly=false - IgnoreRead=false
+					// nextHopNetwork - WriteOnly=false - IgnoreRead=false
+					// nextHopOrigin - WriteOnly=false - IgnoreRead=false
+					// nextHopMed - WriteOnly=false - IgnoreRead=false
+					// nextHopInterRegionCost - WriteOnly=false - IgnoreRead=false
+					// nextHopIlb - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// nextHopPeering - WriteOnly=false - IgnoreRead=false
+					// warnings - WriteOnly=false - IgnoreRead=false
+					// nextHopHub - WriteOnly=false - IgnoreRead=false
+					// routeType - WriteOnly=false - IgnoreRead=false
+					// asPaths - WriteOnly=false - IgnoreRead=false
+					// routeStatus - WriteOnly=false - IgnoreRead=false
+					// params - WriteOnly=false - IgnoreRead=true
+					// resourceManagerTags - WriteOnly=false - IgnoreRead=true
 				},
 				"google_compute_route",
 			)

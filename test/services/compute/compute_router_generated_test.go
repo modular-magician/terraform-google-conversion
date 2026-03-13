@@ -84,6 +84,27 @@ func TestAccComputeRouter(t *testing.T) {
 					"params.resource_manager_tags",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// bgp - WriteOnly=false - IgnoreRead=false
+					// encryptedInterconnectRouter - WriteOnly=false - IgnoreRead=false
+					// md5AuthenticationKeys - WriteOnly=false - IgnoreRead=true
+					// params - WriteOnly=false - IgnoreRead=true
+					// region - WriteOnly=false - IgnoreRead=false
+					// asn - WriteOnly=false - IgnoreRead=false
+					// advertiseMode - WriteOnly=false - IgnoreRead=false
+					// advertisedGroups - WriteOnly=false - IgnoreRead=false
+					// advertisedIpRanges - WriteOnly=false - IgnoreRead=false
+					// keepaliveInterval - WriteOnly=false - IgnoreRead=false
+					// identifierRange - WriteOnly=false - IgnoreRead=false
+					// range - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// key - WriteOnly=false - IgnoreRead=false
+					// resourceManagerTags - WriteOnly=false - IgnoreRead=true
 				},
 				"google_compute_router",
 			)

@@ -64,6 +64,22 @@ func TestAccApigeeInstance(t *testing.T) {
 					"org_id",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// peeringCidrRange - WriteOnly=false - IgnoreRead=false
+					// ipRange - WriteOnly=false - IgnoreRead=true
+					// description - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// diskEncryptionKeyName - WriteOnly=false - IgnoreRead=false
+					// host - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// consumerAcceptList - WriteOnly=false - IgnoreRead=false
+					// serviceAttachment - WriteOnly=false - IgnoreRead=false
+					// accessLoggingConfig - WriteOnly=false - IgnoreRead=false
+					// orgId - WriteOnly=false - IgnoreRead=false
+					// enabled - WriteOnly=false - IgnoreRead=false
+					// filter - WriteOnly=false - IgnoreRead=false
 				},
 				"google_apigee_instance",
 			)

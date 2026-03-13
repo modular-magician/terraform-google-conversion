@@ -72,6 +72,24 @@ func TestAccSecureSourceManagerInstance(t *testing.T) {
 					"provider",
 					"timeouts",
 					"update_time",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// hostConfig - WriteOnly=false - IgnoreRead=false
+					// stateNote - WriteOnly=false - IgnoreRead=false
+					// kmsKey - WriteOnly=false - IgnoreRead=false
+					// privateConfig - WriteOnly=false - IgnoreRead=false
+					// workforceIdentityFederationConfig - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// instance_id - WriteOnly=false - IgnoreRead=false
+					// isPrivate - WriteOnly=false - IgnoreRead=false
+					// caPool - WriteOnly=false - IgnoreRead=false
+					// enabled - WriteOnly=false - IgnoreRead=false
 				},
 				"google_secure_source_manager_instance",
 			)

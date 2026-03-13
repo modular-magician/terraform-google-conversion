@@ -58,6 +58,32 @@ func TestAccStorageInsightsReportConfig(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// frequencyOptions - WriteOnly=false - IgnoreRead=false
+					// parquetOptions - WriteOnly=false - IgnoreRead=false
+					// csvOptions - WriteOnly=false - IgnoreRead=false
+					// objectMetadataReportOptions - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// frequency - WriteOnly=false - IgnoreRead=false
+					// startDate - WriteOnly=false - IgnoreRead=false
+					// endDate - WriteOnly=false - IgnoreRead=false
+					// day - WriteOnly=false - IgnoreRead=false
+					// month - WriteOnly=false - IgnoreRead=false
+					// year - WriteOnly=false - IgnoreRead=false
+					// day - WriteOnly=false - IgnoreRead=false
+					// month - WriteOnly=false - IgnoreRead=false
+					// year - WriteOnly=false - IgnoreRead=false
+					// recordSeparator - WriteOnly=false - IgnoreRead=false
+					// delimiter - WriteOnly=false - IgnoreRead=false
+					// headerRequired - WriteOnly=false - IgnoreRead=false
+					// metadataFields - WriteOnly=false - IgnoreRead=false
+					// storageFilters - WriteOnly=false - IgnoreRead=false
+					// storageDestinationOptions - WriteOnly=false - IgnoreRead=false
+					// bucket - WriteOnly=false - IgnoreRead=false
+					// bucket - WriteOnly=false - IgnoreRead=false
+					// destinationPath - WriteOnly=false - IgnoreRead=false
 				},
 				"google_storage_insights_report_config",
 			)

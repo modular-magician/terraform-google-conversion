@@ -68,6 +68,22 @@ func TestAccKMSCryptoKey(t *testing.T) {
 					"provider",
 					"skip_initial_version_creation",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=true
+					// labels - WriteOnly=false - IgnoreRead=false
+					// primary - WriteOnly=false - IgnoreRead=false
+					// purpose - WriteOnly=false - IgnoreRead=false
+					// rotationPeriod - WriteOnly=false - IgnoreRead=false
+					// versionTemplate - WriteOnly=false - IgnoreRead=false
+					// destroyScheduledDuration - WriteOnly=false - IgnoreRead=false
+					// importOnly - WriteOnly=false - IgnoreRead=false
+					// cryptoKeyBackend - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// keyRing - WriteOnly=false - IgnoreRead=true
+					// skipInitialVersionCreation - WriteOnly=false - IgnoreRead=true
+					// algorithm - WriteOnly=false - IgnoreRead=false
+					// protectionLevel - WriteOnly=false - IgnoreRead=false
 				},
 				"google_kms_crypto_key",
 			)

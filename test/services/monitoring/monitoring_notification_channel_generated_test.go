@@ -74,6 +74,19 @@ func TestAccMonitoringNotificationChannel(t *testing.T) {
 					"provider",
 					"sensitive_labels",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// labels - WriteOnly=false - IgnoreRead=false
+					// sensitiveLabels - WriteOnly=false - IgnoreRead=true
+					// name - WriteOnly=false - IgnoreRead=false
+					// verificationStatus - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// userLabels - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// enabled - WriteOnly=false - IgnoreRead=false
+					// authToken - WriteOnly=false - IgnoreRead=false
+					// password - WriteOnly=false - IgnoreRead=false
+					// serviceKey - WriteOnly=false - IgnoreRead=false
 				},
 				"google_monitoring_notification_channel",
 			)

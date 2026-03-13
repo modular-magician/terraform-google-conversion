@@ -95,6 +95,81 @@ func TestAccCloudfunctions2function(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// environment - WriteOnly=false - IgnoreRead=false
+					// url - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// buildConfig - WriteOnly=false - IgnoreRead=false
+					// serviceConfig - WriteOnly=false - IgnoreRead=false
+					// eventTrigger - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// kmsKeyName - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// runtime - WriteOnly=false - IgnoreRead=false
+					// entryPoint - WriteOnly=false - IgnoreRead=false
+					// source - WriteOnly=false - IgnoreRead=false
+					// workerPool - WriteOnly=false - IgnoreRead=false
+					// environmentVariables - WriteOnly=false - IgnoreRead=false
+					// dockerRepository - WriteOnly=false - IgnoreRead=false
+					// serviceAccount - WriteOnly=false - IgnoreRead=false
+					// automaticUpdatePolicy - WriteOnly=false - IgnoreRead=false
+					// onDeployUpdatePolicy - WriteOnly=false - IgnoreRead=false
+					// storageSource - WriteOnly=false - IgnoreRead=false
+					// repoSource - WriteOnly=false - IgnoreRead=false
+					// bucket - WriteOnly=false - IgnoreRead=false
+					// object - WriteOnly=false - IgnoreRead=false
+					// generation - WriteOnly=false - IgnoreRead=false
+					// projectId - WriteOnly=false - IgnoreRead=false
+					// repoName - WriteOnly=false - IgnoreRead=false
+					// branchName - WriteOnly=false - IgnoreRead=false
+					// tagName - WriteOnly=false - IgnoreRead=false
+					// commitSha - WriteOnly=false - IgnoreRead=false
+					// dir - WriteOnly=false - IgnoreRead=false
+					// invertRegex - WriteOnly=false - IgnoreRead=false
+					// timeoutSeconds - WriteOnly=false - IgnoreRead=false
+					// availableMemory - WriteOnly=false - IgnoreRead=false
+					// maxInstanceRequestConcurrency - WriteOnly=false - IgnoreRead=false
+					// availableCpu - WriteOnly=false - IgnoreRead=false
+					// environmentVariables - WriteOnly=false - IgnoreRead=false
+					// maxInstanceCount - WriteOnly=false - IgnoreRead=false
+					// minInstanceCount - WriteOnly=false - IgnoreRead=false
+					// vpcConnector - WriteOnly=false - IgnoreRead=false
+					// vpcConnectorEgressSettings - WriteOnly=false - IgnoreRead=false
+					// directVpcNetworkInterface - WriteOnly=false - IgnoreRead=false
+					// directVpcEgress - WriteOnly=false - IgnoreRead=false
+					// ingressSettings - WriteOnly=false - IgnoreRead=false
+					// serviceAccountEmail - WriteOnly=false - IgnoreRead=false
+					// allTrafficOnLatestRevision - WriteOnly=false - IgnoreRead=false
+					// secretEnvironmentVariables - WriteOnly=false - IgnoreRead=false
+					// secretVolumes - WriteOnly=false - IgnoreRead=false
+					// binaryAuthorizationPolicy - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// subnetwork - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=false
+					// key - WriteOnly=false - IgnoreRead=false
+					// projectId - WriteOnly=false - IgnoreRead=false
+					// secret - WriteOnly=false - IgnoreRead=false
+					// version - WriteOnly=false - IgnoreRead=false
+					// mountPath - WriteOnly=false - IgnoreRead=false
+					// projectId - WriteOnly=false - IgnoreRead=false
+					// secret - WriteOnly=false - IgnoreRead=false
+					// versions - WriteOnly=false - IgnoreRead=false
+					// version - WriteOnly=false - IgnoreRead=false
+					// path - WriteOnly=false - IgnoreRead=false
+					// triggerRegion - WriteOnly=false - IgnoreRead=false
+					// eventType - WriteOnly=false - IgnoreRead=false
+					// eventFilters - WriteOnly=false - IgnoreRead=false
+					// pubsubTopic - WriteOnly=false - IgnoreRead=false
+					// serviceAccountEmail - WriteOnly=false - IgnoreRead=false
+					// retryPolicy - WriteOnly=false - IgnoreRead=false
+					// attribute - WriteOnly=false - IgnoreRead=false
+					// value - WriteOnly=false - IgnoreRead=false
+					// operator - WriteOnly=false - IgnoreRead=false
 				},
 				"google_cloudfunctions2_function",
 			)

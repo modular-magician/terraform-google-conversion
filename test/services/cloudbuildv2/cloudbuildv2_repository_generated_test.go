@@ -59,6 +59,16 @@ func TestAccCloudbuildv2Repository(t *testing.T) {
 					"parent_connection",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=true
+					// remoteUri - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// parent_connection - WriteOnly=false - IgnoreRead=false
 				},
 				"google_cloudbuildv2_repository",
 			)

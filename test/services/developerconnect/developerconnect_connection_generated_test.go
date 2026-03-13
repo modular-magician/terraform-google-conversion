@@ -112,6 +112,84 @@ func TestAccDeveloperConnectConnection(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// githubConfig - WriteOnly=false - IgnoreRead=false
+					// githubEnterpriseConfig - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// reconciling - WriteOnly=false - IgnoreRead=false
+					// gitlabEnterpriseConfig - WriteOnly=false - IgnoreRead=false
+					// bitbucketCloudConfig - WriteOnly=false - IgnoreRead=false
+					// bitbucketDataCenterConfig - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// deleteTime - WriteOnly=false - IgnoreRead=false
+					// installationState - WriteOnly=false - IgnoreRead=false
+					// disabled - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// gitlabConfig - WriteOnly=false - IgnoreRead=false
+					// httpConfig - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// cryptoKeyConfig - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// connectionId - WriteOnly=false - IgnoreRead=false
+					// githubApp - WriteOnly=false - IgnoreRead=false
+					// authorizerCredential - WriteOnly=false - IgnoreRead=false
+					// appInstallationId - WriteOnly=false - IgnoreRead=false
+					// oauthTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// privateKeySecretVersion - WriteOnly=false - IgnoreRead=false
+					// serviceDirectoryConfig - WriteOnly=false - IgnoreRead=false
+					// sslCaCertificate - WriteOnly=false - IgnoreRead=false
+					// hostUri - WriteOnly=false - IgnoreRead=false
+					// appId - WriteOnly=false - IgnoreRead=false
+					// webhookSecretSecretVersion - WriteOnly=false - IgnoreRead=false
+					// appInstallationId - WriteOnly=false - IgnoreRead=false
+					// service - WriteOnly=false - IgnoreRead=false
+					// authorizerCredential - WriteOnly=false - IgnoreRead=false
+					// serviceDirectoryConfig - WriteOnly=false - IgnoreRead=false
+					// sslCaCertificate - WriteOnly=false - IgnoreRead=false
+					// hostUri - WriteOnly=false - IgnoreRead=false
+					// webhookSecretSecretVersion - WriteOnly=false - IgnoreRead=false
+					// readAuthorizerCredential - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// service - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// workspace - WriteOnly=false - IgnoreRead=false
+					// webhookSecretSecretVersion - WriteOnly=false - IgnoreRead=false
+					// readAuthorizerCredential - WriteOnly=false - IgnoreRead=false
+					// authorizerCredential - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// webhookSecretSecretVersion - WriteOnly=false - IgnoreRead=false
+					// readAuthorizerCredential - WriteOnly=false - IgnoreRead=false
+					// authorizerCredential - WriteOnly=false - IgnoreRead=false
+					// serviceDirectoryConfig - WriteOnly=false - IgnoreRead=false
+					// sslCaCertificate - WriteOnly=false - IgnoreRead=false
+					// hostUri - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// service - WriteOnly=false - IgnoreRead=false
+					// message - WriteOnly=false - IgnoreRead=false
+					// actionUri - WriteOnly=false - IgnoreRead=false
+					// webhookSecretSecretVersion - WriteOnly=false - IgnoreRead=false
+					// readAuthorizerCredential - WriteOnly=false - IgnoreRead=false
+					// authorizerCredential - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// userTokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// basicAuthentication - WriteOnly=false - IgnoreRead=false
+					// bearerTokenAuthentication - WriteOnly=false - IgnoreRead=false
+					// hostUri - WriteOnly=false - IgnoreRead=false
+					// serviceDirectoryConfig - WriteOnly=false - IgnoreRead=false
+					// sslCaCertificate - WriteOnly=false - IgnoreRead=false
+					// passwordSecretVersion - WriteOnly=false - IgnoreRead=false
+					// username - WriteOnly=false - IgnoreRead=false
+					// tokenSecretVersion - WriteOnly=false - IgnoreRead=false
+					// service - WriteOnly=false - IgnoreRead=false
+					// keyReference - WriteOnly=false - IgnoreRead=false
 				},
 				"google_developer_connect_connection",
 			)

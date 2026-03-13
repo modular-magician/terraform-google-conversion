@@ -80,6 +80,27 @@ func TestAccComputeServiceAttachment(t *testing.T) {
 					"send_propagated_connection_limit_if_zero",
 					"show_nat_ips",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// fingerprint - WriteOnly=false - IgnoreRead=false
+					// pscServiceAttachmentId - WriteOnly=false - IgnoreRead=false
+					// showNatIps - WriteOnly=false - IgnoreRead=false
+					// connectionPreference - WriteOnly=false - IgnoreRead=false
+					// connectedEndpoints - WriteOnly=false - IgnoreRead=false
+					// targetService - WriteOnly=false - IgnoreRead=false
+					// natSubnets - WriteOnly=false - IgnoreRead=false
+					// enableProxyProtocol - WriteOnly=false - IgnoreRead=false
+					// domainNames - WriteOnly=false - IgnoreRead=false
+					// consumerRejectLists - WriteOnly=false - IgnoreRead=false
+					// consumerAcceptLists - WriteOnly=false - IgnoreRead=false
+					// reconcileConnections - WriteOnly=false - IgnoreRead=false
+					// propagatedConnectionLimit - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=true
+					// projectIdOrNum - WriteOnly=false - IgnoreRead=false
+					// networkUrl - WriteOnly=false - IgnoreRead=false
+					// endpointUrl - WriteOnly=false - IgnoreRead=false
+					// connectionLimit - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_service_attachment",
 			)

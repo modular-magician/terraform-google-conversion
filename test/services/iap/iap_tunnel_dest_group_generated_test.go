@@ -55,6 +55,12 @@ func TestAccIapTunnelDestGroup(t *testing.T) {
 					"provider",
 					"region",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// cidrs - WriteOnly=false - IgnoreRead=false
+					// fqdns - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// group_name - WriteOnly=false - IgnoreRead=false
 				},
 				"google_iap_tunnel_dest_group",
 			)

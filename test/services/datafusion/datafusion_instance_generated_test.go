@@ -94,6 +94,49 @@ func TestAccDataFusionInstance(t *testing.T) {
 					"region",
 					"tags",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// enableStackdriverLogging - WriteOnly=false - IgnoreRead=false
+					// enableStackdriverMonitoring - WriteOnly=false - IgnoreRead=false
+					// enableRbac - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// options - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// stateMessage - WriteOnly=false - IgnoreRead=false
+					// serviceEndpoint - WriteOnly=false - IgnoreRead=false
+					// version - WriteOnly=false - IgnoreRead=false
+					// patchRevision - WriteOnly=false - IgnoreRead=false
+					// privateInstance - WriteOnly=false - IgnoreRead=false
+					// dataprocServiceAccount - WriteOnly=false - IgnoreRead=false
+					// tenantProjectId - WriteOnly=false - IgnoreRead=false
+					// gcsBucket - WriteOnly=false - IgnoreRead=false
+					// networkConfig - WriteOnly=false - IgnoreRead=false
+					// zone - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// apiEndpoint - WriteOnly=false - IgnoreRead=false
+					// p4ServiceAccount - WriteOnly=false - IgnoreRead=false
+					// cryptoKeyConfig - WriteOnly=false - IgnoreRead=false
+					// eventPublishConfig - WriteOnly=false - IgnoreRead=false
+					// accelerators - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=true
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=true
+					// ipAllocation - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// connectionType - WriteOnly=false - IgnoreRead=false
+					// privateServiceConnectConfig - WriteOnly=false - IgnoreRead=false
+					// networkAttachment - WriteOnly=false - IgnoreRead=false
+					// unreachableCidrBlock - WriteOnly=false - IgnoreRead=true
+					// keyReference - WriteOnly=false - IgnoreRead=false
+					// enabled - WriteOnly=false - IgnoreRead=false
+					// topic - WriteOnly=false - IgnoreRead=false
+					// acceleratorType - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
 				},
 				"google_data_fusion_instance",
 			)

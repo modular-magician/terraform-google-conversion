@@ -91,6 +91,49 @@ func TestAccComputeResourcePolicy(t *testing.T) {
 					"provider",
 					"region",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// snapshotSchedulePolicy - WriteOnly=false - IgnoreRead=false
+					// groupPlacementPolicy - WriteOnly=false - IgnoreRead=false
+					// instanceSchedulePolicy - WriteOnly=false - IgnoreRead=false
+					// diskConsistencyGroupPolicy - WriteOnly=false - IgnoreRead=false
+					// workloadPolicy - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=true
+					// schedule - WriteOnly=false - IgnoreRead=false
+					// retentionPolicy - WriteOnly=false - IgnoreRead=false
+					// snapshotProperties - WriteOnly=false - IgnoreRead=false
+					// hourlySchedule - WriteOnly=false - IgnoreRead=false
+					// dailySchedule - WriteOnly=false - IgnoreRead=false
+					// weeklySchedule - WriteOnly=false - IgnoreRead=false
+					// hoursInCycle - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// daysInCycle - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// dayOfWeeks - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// day - WriteOnly=false - IgnoreRead=false
+					// maxRetentionDays - WriteOnly=false - IgnoreRead=false
+					// onSourceDiskDelete - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// storageLocations - WriteOnly=false - IgnoreRead=false
+					// guestFlush - WriteOnly=false - IgnoreRead=false
+					// chainName - WriteOnly=false - IgnoreRead=false
+					// vmCount - WriteOnly=false - IgnoreRead=false
+					// availabilityDomainCount - WriteOnly=false - IgnoreRead=false
+					// collocation - WriteOnly=false - IgnoreRead=false
+					// gpuTopology - WriteOnly=false - IgnoreRead=false
+					// vmStartSchedule - WriteOnly=false - IgnoreRead=false
+					// vmStopSchedule - WriteOnly=false - IgnoreRead=false
+					// timeZone - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// expirationTime - WriteOnly=false - IgnoreRead=false
+					// schedule - WriteOnly=false - IgnoreRead=false
+					// schedule - WriteOnly=false - IgnoreRead=false
+					// enabled - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// maxTopologyDistance - WriteOnly=false - IgnoreRead=false
+					// acceleratorTopology - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_resource_policy",
 			)

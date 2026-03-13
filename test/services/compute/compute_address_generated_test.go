@@ -102,6 +102,26 @@ func TestAccComputeAddress(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// address - WriteOnly=false - IgnoreRead=false
+					// addressType - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// purpose - WriteOnly=false - IgnoreRead=false
+					// networkTier - WriteOnly=false - IgnoreRead=false
+					// subnetwork - WriteOnly=false - IgnoreRead=false
+					// users - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// labelFingerprint - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// prefixLength - WriteOnly=false - IgnoreRead=false
+					// ipVersion - WriteOnly=false - IgnoreRead=false
+					// ipv6EndpointType - WriteOnly=false - IgnoreRead=false
+					// ipCollection - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_address",
 			)

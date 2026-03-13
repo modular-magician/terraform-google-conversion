@@ -85,6 +85,58 @@ func TestAccMonitoringUptimeCheckConfig(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// uptimeCheckId - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// period - WriteOnly=false - IgnoreRead=false
+					// timeout - WriteOnly=false - IgnoreRead=false
+					// contentMatchers - WriteOnly=false - IgnoreRead=false
+					// selectedRegions - WriteOnly=false - IgnoreRead=false
+					// logCheckFailures - WriteOnly=false - IgnoreRead=false
+					// checkerType - WriteOnly=false - IgnoreRead=false
+					// userLabels - WriteOnly=false - IgnoreRead=false
+					// httpCheck - WriteOnly=false - IgnoreRead=false
+					// tcpCheck - WriteOnly=false - IgnoreRead=false
+					// resourceGroup - WriteOnly=false - IgnoreRead=false
+					// monitoredResource - WriteOnly=false - IgnoreRead=false
+					// syntheticMonitor - WriteOnly=false - IgnoreRead=false
+					// content - WriteOnly=false - IgnoreRead=false
+					// matcher - WriteOnly=false - IgnoreRead=false
+					// jsonPathMatcher - WriteOnly=false - IgnoreRead=false
+					// jsonPath - WriteOnly=false - IgnoreRead=false
+					// jsonMatcher - WriteOnly=false - IgnoreRead=false
+					// requestMethod - WriteOnly=false - IgnoreRead=false
+					// contentType - WriteOnly=false - IgnoreRead=false
+					// customContentType - WriteOnly=false - IgnoreRead=false
+					// authInfo - WriteOnly=false - IgnoreRead=false
+					// serviceAgentAuthentication - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// headers - WriteOnly=false - IgnoreRead=false
+					// path - WriteOnly=false - IgnoreRead=false
+					// useSsl - WriteOnly=false - IgnoreRead=false
+					// validateSsl - WriteOnly=false - IgnoreRead=false
+					// maskHeaders - WriteOnly=false - IgnoreRead=false
+					// body - WriteOnly=false - IgnoreRead=false
+					// acceptedResponseStatusCodes - WriteOnly=false - IgnoreRead=false
+					// pingConfig - WriteOnly=false - IgnoreRead=false
+					// password - WriteOnly=false - IgnoreRead=false
+					// passwordWo - WriteOnly=false - IgnoreRead=false
+					// passwordWoVersion - WriteOnly=false - IgnoreRead=true
+					// username - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// statusValue - WriteOnly=false - IgnoreRead=false
+					// statusClass - WriteOnly=false - IgnoreRead=false
+					// pingsCount - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// pingConfig - WriteOnly=false - IgnoreRead=false
+					// pingsCount - WriteOnly=false - IgnoreRead=false
+					// resourceType - WriteOnly=false - IgnoreRead=false
+					// groupId - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// cloudFunctionV2 - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
 				},
 				"google_monitoring_uptime_check_config",
 			)

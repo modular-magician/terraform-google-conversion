@@ -56,6 +56,24 @@ func TestAccDatastreamPrivateConnection(t *testing.T) {
 					"private_connection_id",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// error - WriteOnly=false - IgnoreRead=false
+					// vpcPeeringConfig - WriteOnly=false - IgnoreRead=false
+					// pscInterfaceConfig - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// privateConnectionId - WriteOnly=false - IgnoreRead=false
+					// create_without_validation - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// message - WriteOnly=false - IgnoreRead=false
+					// details - WriteOnly=false - IgnoreRead=false
+					// vpc - WriteOnly=false - IgnoreRead=false
+					// subnet - WriteOnly=false - IgnoreRead=false
+					// networkAttachment - WriteOnly=false - IgnoreRead=false
 				},
 				"google_datastream_private_connection",
 			)

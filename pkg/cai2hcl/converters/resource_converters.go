@@ -71,6 +71,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/vmwareengine"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/vpcaccess"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/workbench"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/workflows"
 
 	tpg_provider "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -343,6 +344,9 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	"compute.googleapis.com/VpnGateway": {
 		"Default": compute.NewComputeHaVpnGatewayCai2hclConverter(provider),
 	},
+	"compute.googleapis.com/VpnTunnel": {
+		"Default": compute.NewComputeVpnTunnelCai2hclConverter(provider),
+	},
 	"datafusion.googleapis.com/Instance": {
 		"Default": datafusion.NewDataFusionInstanceCai2hclConverter(provider),
 	},
@@ -576,5 +580,8 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	},
 	"vpcaccess.googleapis.com/Connector": {
 		"Default": vpcaccess.NewVPCAccessConnectorCai2hclConverter(provider),
+	},
+	"workflows.googleapis.com/Workflow": {
+		"Default": workflows.NewWorkflowsWorkflowCai2hclConverter(provider),
 	},
 }

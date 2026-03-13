@@ -67,6 +67,24 @@ func TestAccKMSCryptoKeyVersion(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// protectionLevel - WriteOnly=false - IgnoreRead=false
+					// generateTime - WriteOnly=false - IgnoreRead=false
+					// algorithm - WriteOnly=false - IgnoreRead=false
+					// attestation - WriteOnly=false - IgnoreRead=false
+					// externalProtectionLevelOptions - WriteOnly=false - IgnoreRead=false
+					// cryptoKey - WriteOnly=false - IgnoreRead=false
+					// certChains - WriteOnly=false - IgnoreRead=false
+					// externalProtectionLevelOptions - WriteOnly=false - IgnoreRead=false
+					// caviumCerts - WriteOnly=false - IgnoreRead=false
+					// googleCardCerts - WriteOnly=false - IgnoreRead=false
+					// googlePartitionCerts - WriteOnly=false - IgnoreRead=false
+					// externalKeyUri - WriteOnly=false - IgnoreRead=false
+					// ekmConnectionKeyPath - WriteOnly=false - IgnoreRead=false
+					// externalKeyUri - WriteOnly=false - IgnoreRead=false
+					// ekmConnectionKeyPath - WriteOnly=false - IgnoreRead=false
 				},
 				"google_kms_crypto_key_version",
 			)

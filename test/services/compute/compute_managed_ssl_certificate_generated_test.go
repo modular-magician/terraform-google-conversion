@@ -53,6 +53,16 @@ func TestAccComputeManagedSslCertificate(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// certificate_id - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// managed - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// subjectAlternativeNames - WriteOnly=false - IgnoreRead=false
+					// expireTime - WriteOnly=false - IgnoreRead=false
+					// domains - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_managed_ssl_certificate",
 			)

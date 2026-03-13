@@ -63,6 +63,25 @@ func TestAccComputeNodeGroup(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// nodeTemplate - WriteOnly=false - IgnoreRead=false
+					// size - WriteOnly=false - IgnoreRead=false
+					// initialSize - WriteOnly=false - IgnoreRead=false
+					// maintenancePolicy - WriteOnly=false - IgnoreRead=false
+					// maintenanceWindow - WriteOnly=false - IgnoreRead=false
+					// autoscalingPolicy - WriteOnly=false - IgnoreRead=false
+					// shareSettings - WriteOnly=false - IgnoreRead=false
+					// zone - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// mode - WriteOnly=false - IgnoreRead=false
+					// minNodes - WriteOnly=false - IgnoreRead=false
+					// maxNodes - WriteOnly=false - IgnoreRead=false
+					// shareType - WriteOnly=false - IgnoreRead=false
+					// projectMap - WriteOnly=false - IgnoreRead=false
+					// projectId - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_node_group",
 			)

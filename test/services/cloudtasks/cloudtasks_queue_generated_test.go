@@ -86,6 +86,46 @@ func TestAccCloudTasksQueue(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// appEngineRoutingOverride - WriteOnly=false - IgnoreRead=false
+					// rateLimits - WriteOnly=false - IgnoreRead=false
+					// retryConfig - WriteOnly=false - IgnoreRead=false
+					// stackdriverLoggingConfig - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// httpTarget - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// service - WriteOnly=false - IgnoreRead=false
+					// version - WriteOnly=false - IgnoreRead=false
+					// instance - WriteOnly=false - IgnoreRead=false
+					// maxDispatchesPerSecond - WriteOnly=false - IgnoreRead=false
+					// maxConcurrentDispatches - WriteOnly=false - IgnoreRead=false
+					// maxAttempts - WriteOnly=false - IgnoreRead=false
+					// maxRetryDuration - WriteOnly=false - IgnoreRead=false
+					// minBackoff - WriteOnly=false - IgnoreRead=false
+					// maxBackoff - WriteOnly=false - IgnoreRead=false
+					// maxDoublings - WriteOnly=false - IgnoreRead=false
+					// samplingRatio - WriteOnly=false - IgnoreRead=false
+					// httpMethod - WriteOnly=false - IgnoreRead=false
+					// uriOverride - WriteOnly=false - IgnoreRead=false
+					// headerOverrides - WriteOnly=false - IgnoreRead=false
+					// oauthToken - WriteOnly=false - IgnoreRead=false
+					// oidcToken - WriteOnly=false - IgnoreRead=false
+					// scheme - WriteOnly=false - IgnoreRead=false
+					// host - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// pathOverride - WriteOnly=false - IgnoreRead=false
+					// queryOverride - WriteOnly=false - IgnoreRead=false
+					// uriOverrideEnforceMode - WriteOnly=false - IgnoreRead=false
+					// path - WriteOnly=false - IgnoreRead=false
+					// queryParams - WriteOnly=false - IgnoreRead=false
+					// header - WriteOnly=false - IgnoreRead=false
+					// key - WriteOnly=false - IgnoreRead=false
+					// value - WriteOnly=false - IgnoreRead=false
+					// serviceAccountEmail - WriteOnly=false - IgnoreRead=false
+					// scope - WriteOnly=false - IgnoreRead=false
+					// serviceAccountEmail - WriteOnly=false - IgnoreRead=false
+					// audience - WriteOnly=false - IgnoreRead=false
 				},
 				"google_cloud_tasks_queue",
 			)

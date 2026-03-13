@@ -75,6 +75,61 @@ func TestAccGKEBackupBackupPlan(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// cluster - WriteOnly=false - IgnoreRead=false
+					// retentionPolicy - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// backupSchedule - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// deactivated - WriteOnly=false - IgnoreRead=false
+					// backupConfig - WriteOnly=false - IgnoreRead=false
+					// protectedPodCount - WriteOnly=false - IgnoreRead=false
+					// protectedNamespaceCount - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// stateReason - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// backupDeleteLockDays - WriteOnly=false - IgnoreRead=false
+					// backupRetainDays - WriteOnly=false - IgnoreRead=false
+					// locked - WriteOnly=false - IgnoreRead=false
+					// cronSchedule - WriteOnly=false - IgnoreRead=false
+					// paused - WriteOnly=false - IgnoreRead=false
+					// rpoConfig - WriteOnly=false - IgnoreRead=false
+					// targetRpoMinutes - WriteOnly=false - IgnoreRead=false
+					// exclusionWindows - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// duration - WriteOnly=false - IgnoreRead=false
+					// singleOccurrenceDate - WriteOnly=false - IgnoreRead=false
+					// daily - WriteOnly=false - IgnoreRead=false
+					// daysOfWeek - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// minutes - WriteOnly=false - IgnoreRead=false
+					// seconds - WriteOnly=false - IgnoreRead=false
+					// nanos - WriteOnly=false - IgnoreRead=false
+					// year - WriteOnly=false - IgnoreRead=false
+					// month - WriteOnly=false - IgnoreRead=false
+					// day - WriteOnly=false - IgnoreRead=false
+					// daysOfWeek - WriteOnly=false - IgnoreRead=false
+					// includeVolumeData - WriteOnly=false - IgnoreRead=false
+					// includeSecrets - WriteOnly=false - IgnoreRead=false
+					// encryptionKey - WriteOnly=false - IgnoreRead=false
+					// allNamespaces - WriteOnly=false - IgnoreRead=false
+					// selectedNamespaces - WriteOnly=false - IgnoreRead=false
+					// selectedApplications - WriteOnly=false - IgnoreRead=false
+					// selectedNamespaceLabels - WriteOnly=false - IgnoreRead=false
+					// permissiveMode - WriteOnly=false - IgnoreRead=false
+					// gcpKmsEncryptionKey - WriteOnly=false - IgnoreRead=false
+					// namespaces - WriteOnly=false - IgnoreRead=false
+					// namespacedNames - WriteOnly=false - IgnoreRead=false
+					// namespace - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// resourceLabels - WriteOnly=false - IgnoreRead=false
+					// key - WriteOnly=false - IgnoreRead=false
+					// value - WriteOnly=false - IgnoreRead=false
 				},
 				"google_gke_backup_backup_plan",
 			)

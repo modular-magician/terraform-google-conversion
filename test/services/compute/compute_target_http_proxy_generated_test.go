@@ -62,6 +62,15 @@ func TestAccComputeTargetHttpProxy(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// proxyId - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// urlMap - WriteOnly=false - IgnoreRead=false
+					// proxyBind - WriteOnly=false - IgnoreRead=false
+					// httpKeepAliveTimeoutSec - WriteOnly=false - IgnoreRead=false
+					// fingerprint - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_target_http_proxy",
 			)

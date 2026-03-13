@@ -60,6 +60,13 @@ func TestAccIAMBetaWorkloadIdentityPool(t *testing.T) {
 					"provider",
 					"timeouts",
 					"workload_identity_pool_id",
+					// DEBUG WriteOnly properties:
+					// workloadIdentityPoolId - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// disabled - WriteOnly=false - IgnoreRead=false
 				},
 				"google_iam_workload_identity_pool",
 			)

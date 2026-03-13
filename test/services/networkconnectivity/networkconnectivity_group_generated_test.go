@@ -54,6 +54,20 @@ func TestAccNetworkConnectivityGroup(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// autoAccept - WriteOnly=false - IgnoreRead=false
+					// routeTable - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// hub - WriteOnly=false - IgnoreRead=false
+					// autoAcceptProjects - WriteOnly=false - IgnoreRead=false
 				},
 				"google_network_connectivity_group",
 			)

@@ -78,6 +78,65 @@ func TestAccGKEBackupRestorePlan(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// backupPlan - WriteOnly=false - IgnoreRead=false
+					// cluster - WriteOnly=false - IgnoreRead=false
+					// restoreConfig - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// stateReason - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// allNamespaces - WriteOnly=false - IgnoreRead=false
+					// excludedNamespaces - WriteOnly=false - IgnoreRead=false
+					// selectedNamespaces - WriteOnly=false - IgnoreRead=false
+					// selectedApplications - WriteOnly=false - IgnoreRead=false
+					// noNamespaces - WriteOnly=false - IgnoreRead=false
+					// namespacedResourceRestoreMode - WriteOnly=false - IgnoreRead=false
+					// volumeDataRestorePolicy - WriteOnly=false - IgnoreRead=false
+					// clusterResourceRestoreScope - WriteOnly=false - IgnoreRead=false
+					// clusterResourceConflictPolicy - WriteOnly=false - IgnoreRead=false
+					// transformationRules - WriteOnly=false - IgnoreRead=false
+					// volumeDataRestorePolicyBindings - WriteOnly=false - IgnoreRead=false
+					// restoreOrder - WriteOnly=false - IgnoreRead=false
+					// namespaces - WriteOnly=false - IgnoreRead=false
+					// namespaces - WriteOnly=false - IgnoreRead=false
+					// namespacedNames - WriteOnly=false - IgnoreRead=false
+					// namespace - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// allGroupKinds - WriteOnly=false - IgnoreRead=false
+					// excludedGroupKinds - WriteOnly=false - IgnoreRead=false
+					// selectedGroupKinds - WriteOnly=false - IgnoreRead=false
+					// noGroupKinds - WriteOnly=false - IgnoreRead=false
+					// resourceGroup - WriteOnly=false - IgnoreRead=false
+					// resourceKind - WriteOnly=false - IgnoreRead=false
+					// resourceGroup - WriteOnly=false - IgnoreRead=false
+					// resourceKind - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// resourceFilter - WriteOnly=false - IgnoreRead=false
+					// fieldActions - WriteOnly=false - IgnoreRead=false
+					// namespaces - WriteOnly=false - IgnoreRead=false
+					// groupKinds - WriteOnly=false - IgnoreRead=false
+					// jsonPath - WriteOnly=false - IgnoreRead=false
+					// resourceGroup - WriteOnly=false - IgnoreRead=false
+					// resourceKind - WriteOnly=false - IgnoreRead=false
+					// op - WriteOnly=false - IgnoreRead=false
+					// fromPath - WriteOnly=false - IgnoreRead=false
+					// path - WriteOnly=false - IgnoreRead=false
+					// value - WriteOnly=false - IgnoreRead=false
+					// policy - WriteOnly=false - IgnoreRead=false
+					// volumeType - WriteOnly=false - IgnoreRead=false
+					// groupKindDependencies - WriteOnly=false - IgnoreRead=false
+					// satisfying - WriteOnly=false - IgnoreRead=false
+					// requiring - WriteOnly=false - IgnoreRead=false
+					// resourceGroup - WriteOnly=false - IgnoreRead=false
+					// resourceKind - WriteOnly=false - IgnoreRead=false
+					// resourceGroup - WriteOnly=false - IgnoreRead=false
+					// resourceKind - WriteOnly=false - IgnoreRead=false
 				},
 				"google_gke_backup_restore_plan",
 			)

@@ -74,6 +74,34 @@ func TestAccLoggingMetric(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// bucketName - WriteOnly=false - IgnoreRead=false
+					// disabled - WriteOnly=false - IgnoreRead=false
+					// filter - WriteOnly=false - IgnoreRead=false
+					// metricDescriptor - WriteOnly=false - IgnoreRead=false
+					// labelExtractors - WriteOnly=false - IgnoreRead=false
+					// valueExtractor - WriteOnly=false - IgnoreRead=false
+					// bucketOptions - WriteOnly=false - IgnoreRead=false
+					// unit - WriteOnly=false - IgnoreRead=false
+					// valueType - WriteOnly=false - IgnoreRead=false
+					// metricKind - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// key - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// valueType - WriteOnly=false - IgnoreRead=false
+					// linearBuckets - WriteOnly=false - IgnoreRead=false
+					// exponentialBuckets - WriteOnly=false - IgnoreRead=false
+					// explicitBuckets - WriteOnly=false - IgnoreRead=false
+					// numFiniteBuckets - WriteOnly=false - IgnoreRead=false
+					// width - WriteOnly=false - IgnoreRead=false
+					// offset - WriteOnly=false - IgnoreRead=false
+					// numFiniteBuckets - WriteOnly=false - IgnoreRead=false
+					// growthFactor - WriteOnly=false - IgnoreRead=false
+					// scale - WriteOnly=false - IgnoreRead=false
+					// bounds - WriteOnly=false - IgnoreRead=false
 				},
 				"google_logging_metric",
 			)

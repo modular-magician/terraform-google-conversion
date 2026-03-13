@@ -87,6 +87,53 @@ func TestAccRedisInstance(t *testing.T) {
 					"region",
 					"reserved_ip_range",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// alternativeLocationId - WriteOnly=false - IgnoreRead=false
+					// authEnabled - WriteOnly=false - IgnoreRead=false
+					// authorizedNetwork - WriteOnly=false - IgnoreRead=false
+					// connectMode - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// currentLocationId - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// host - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// redisConfigs - WriteOnly=false - IgnoreRead=false
+					// locationId - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// persistenceConfig - WriteOnly=false - IgnoreRead=false
+					// maintenancePolicy - WriteOnly=false - IgnoreRead=false
+					// maintenanceSchedule - WriteOnly=false - IgnoreRead=false
+					// maintenanceVersion - WriteOnly=false - IgnoreRead=false
+					// memorySizeGb - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// persistenceIamIdentity - WriteOnly=false - IgnoreRead=false
+					// redisVersion - WriteOnly=false - IgnoreRead=false
+					// reservedIpRange - WriteOnly=false - IgnoreRead=true
+					// effectiveReservedIpRange - WriteOnly=false - IgnoreRead=false
+					// tier - WriteOnly=false - IgnoreRead=false
+					// transitEncryptionMode - WriteOnly=false - IgnoreRead=false
+					// serverCaCerts - WriteOnly=false - IgnoreRead=false
+					// replicaCount - WriteOnly=false - IgnoreRead=false
+					// nodes - WriteOnly=false - IgnoreRead=false
+					// readEndpoint - WriteOnly=false - IgnoreRead=false
+					// readEndpointPort - WriteOnly=false - IgnoreRead=false
+					// readReplicasMode - WriteOnly=false - IgnoreRead=false
+					// secondaryIpRange - WriteOnly=false - IgnoreRead=false
+					// customerManagedKey - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=true
+					// persistenceMode - WriteOnly=false - IgnoreRead=false
+					// rdbSnapshotPeriod - WriteOnly=false - IgnoreRead=false
+					// rdbSnapshotStartTime - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// weeklyMaintenanceWindow - WriteOnly=false - IgnoreRead=false
+					// day - WriteOnly=false - IgnoreRead=false
+					// startTime - WriteOnly=false - IgnoreRead=false
+					// hours - WriteOnly=false - IgnoreRead=false
+					// minutes - WriteOnly=false - IgnoreRead=false
+					// seconds - WriteOnly=false - IgnoreRead=false
+					// nanos - WriteOnly=false - IgnoreRead=false
 				},
 				"google_redis_instance",
 			)

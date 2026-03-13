@@ -59,6 +59,42 @@ func TestAccColabRuntimeTemplate(t *testing.T) {
 					"software_config.env",
 					"software_config.post_startup_script_config",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// machineSpec - WriteOnly=false - IgnoreRead=false
+					// dataPersistentDiskSpec - WriteOnly=false - IgnoreRead=false
+					// networkSpec - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// idleShutdownConfig - WriteOnly=false - IgnoreRead=false
+					// eucConfig - WriteOnly=false - IgnoreRead=false
+					// shieldedVmConfig - WriteOnly=false - IgnoreRead=false
+					// networkTags - WriteOnly=false - IgnoreRead=false
+					// encryptionSpec - WriteOnly=false - IgnoreRead=false
+					// softwareConfig - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// machineType - WriteOnly=false - IgnoreRead=false
+					// acceleratorType - WriteOnly=false - IgnoreRead=false
+					// acceleratorCount - WriteOnly=false - IgnoreRead=false
+					// diskType - WriteOnly=false - IgnoreRead=false
+					// diskSizeGb - WriteOnly=false - IgnoreRead=false
+					// enableInternetAccess - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// subnetwork - WriteOnly=false - IgnoreRead=false
+					// idleTimeout - WriteOnly=false - IgnoreRead=false
+					// eucDisabled - WriteOnly=false - IgnoreRead=false
+					// enableSecureBoot - WriteOnly=false - IgnoreRead=false
+					// kmsKeyName - WriteOnly=false - IgnoreRead=false
+					// env - WriteOnly=false - IgnoreRead=false
+					// postStartupScriptConfig - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// value - WriteOnly=false - IgnoreRead=false
+					// postStartupScript - WriteOnly=false - IgnoreRead=false
+					// postStartupScriptUrl - WriteOnly=false - IgnoreRead=false
+					// postStartupScriptBehavior - WriteOnly=false - IgnoreRead=false
 				},
 				"google_colab_runtime_template",
 			)

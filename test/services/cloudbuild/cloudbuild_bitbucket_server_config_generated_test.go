@@ -55,6 +55,23 @@ func TestAccCloudBuildBitbucketServerConfig(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// hostUri - WriteOnly=false - IgnoreRead=false
+					// secrets - WriteOnly=false - IgnoreRead=false
+					// username - WriteOnly=false - IgnoreRead=false
+					// webhookKey - WriteOnly=false - IgnoreRead=false
+					// apiKey - WriteOnly=false - IgnoreRead=false
+					// connectedRepositories - WriteOnly=false - IgnoreRead=false
+					// peeredNetwork - WriteOnly=false - IgnoreRead=false
+					// sslCa - WriteOnly=false - IgnoreRead=false
+					// config_id - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// adminAccessTokenVersionName - WriteOnly=false - IgnoreRead=false
+					// readAccessTokenVersionName - WriteOnly=false - IgnoreRead=false
+					// webhookSecretVersionName - WriteOnly=false - IgnoreRead=false
+					// projectKey - WriteOnly=false - IgnoreRead=false
+					// repoSlug - WriteOnly=false - IgnoreRead=false
 				},
 				"google_cloudbuild_bitbucket_server_config",
 			)

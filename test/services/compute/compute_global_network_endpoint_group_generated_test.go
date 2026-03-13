@@ -53,6 +53,11 @@ func TestAccComputeGlobalNetworkEndpointGroup(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// networkEndpointType - WriteOnly=false - IgnoreRead=false
+					// defaultPort - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_global_network_endpoint_group",
 			)

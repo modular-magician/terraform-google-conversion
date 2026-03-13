@@ -114,6 +114,41 @@ func TestAccComputeSubnetwork(t *testing.T) {
 					"provider",
 					"send_secondary_ip_range_if_empty",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// subnetworkId - WriteOnly=false - IgnoreRead=false
+					// gatewayAddress - WriteOnly=false - IgnoreRead=false
+					// ipCidrRange - WriteOnly=false - IgnoreRead=false
+					// reservedInternalRange - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// purpose - WriteOnly=false - IgnoreRead=false
+					// role - WriteOnly=false - IgnoreRead=false
+					// secondaryIpRange - WriteOnly=false - IgnoreRead=false
+					// privateIpGoogleAccess - WriteOnly=false - IgnoreRead=false
+					// privateIpv6GoogleAccess - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// logConfig - WriteOnly=false - IgnoreRead=false
+					// stackType - WriteOnly=false - IgnoreRead=false
+					// ipv6AccessType - WriteOnly=false - IgnoreRead=false
+					// ipv6CidrRange - WriteOnly=false - IgnoreRead=false
+					// internalIpv6Prefix - WriteOnly=false - IgnoreRead=false
+					// externalIpv6Prefix - WriteOnly=false - IgnoreRead=false
+					// ipCollection - WriteOnly=false - IgnoreRead=true
+					// ipv6GceEndpoint - WriteOnly=false - IgnoreRead=false
+					// allowSubnetCidrRoutesOverlap - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// params - WriteOnly=false - IgnoreRead=true
+					// rangeName - WriteOnly=false - IgnoreRead=false
+					// ipCidrRange - WriteOnly=false - IgnoreRead=false
+					// reservedInternalRange - WriteOnly=false - IgnoreRead=false
+					// aggregationInterval - WriteOnly=false - IgnoreRead=false
+					// flowSampling - WriteOnly=false - IgnoreRead=false
+					// metadata - WriteOnly=false - IgnoreRead=false
+					// metadataFields - WriteOnly=false - IgnoreRead=false
+					// filterExpr - WriteOnly=false - IgnoreRead=false
+					// resourceManagerTags - WriteOnly=false - IgnoreRead=true
 				},
 				"google_compute_subnetwork",
 			)

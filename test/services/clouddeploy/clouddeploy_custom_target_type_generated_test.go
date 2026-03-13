@@ -64,6 +64,36 @@ func TestAccClouddeployCustomTargetType(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// customTargetTypeId - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// customActions - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// renderAction - WriteOnly=false - IgnoreRead=false
+					// deployAction - WriteOnly=false - IgnoreRead=false
+					// includeSkaffoldModules - WriteOnly=false - IgnoreRead=false
+					// configs - WriteOnly=false - IgnoreRead=false
+					// git - WriteOnly=false - IgnoreRead=false
+					// googleCloudStorage - WriteOnly=false - IgnoreRead=false
+					// googleCloudBuildRepo - WriteOnly=false - IgnoreRead=false
+					// repo - WriteOnly=false - IgnoreRead=false
+					// path - WriteOnly=false - IgnoreRead=false
+					// ref - WriteOnly=false - IgnoreRead=false
+					// source - WriteOnly=false - IgnoreRead=false
+					// path - WriteOnly=false - IgnoreRead=false
+					// repository - WriteOnly=false - IgnoreRead=false
+					// path - WriteOnly=false - IgnoreRead=false
+					// ref - WriteOnly=false - IgnoreRead=false
 				},
 				"google_clouddeploy_custom_target_type",
 			)

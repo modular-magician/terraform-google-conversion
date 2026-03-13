@@ -119,6 +119,77 @@ func TestAccWorkbenchInstance(t *testing.T) {
 					"provider",
 					"timeouts",
 					"update_time",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// gceSetup - WriteOnly=false - IgnoreRead=false
+					// proxyUri - WriteOnly=false - IgnoreRead=false
+					// instanceOwners - WriteOnly=false - IgnoreRead=true
+					// creator - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// upgradeHistory - WriteOnly=false - IgnoreRead=false
+					// healthState - WriteOnly=false - IgnoreRead=false
+					// healthInfo - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// disableProxyAccess - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// enableThirdPartyIdentity - WriteOnly=false - IgnoreRead=false
+					// enableManagedEuc - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// instanceId - WriteOnly=false - IgnoreRead=false
+					// machineType - WriteOnly=false - IgnoreRead=false
+					// acceleratorConfigs - WriteOnly=false - IgnoreRead=false
+					// shieldedInstanceConfig - WriteOnly=false - IgnoreRead=false
+					// serviceAccounts - WriteOnly=false - IgnoreRead=false
+					// vmImage - WriteOnly=false - IgnoreRead=false
+					// containerImage - WriteOnly=false - IgnoreRead=false
+					// bootDisk - WriteOnly=false - IgnoreRead=false
+					// dataDisks - WriteOnly=false - IgnoreRead=false
+					// networkInterfaces - WriteOnly=false - IgnoreRead=false
+					// disablePublicIp - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=false
+					// metadata - WriteOnly=false - IgnoreRead=false
+					// enableIpForwarding - WriteOnly=false - IgnoreRead=false
+					// confidentialInstanceConfig - WriteOnly=false - IgnoreRead=false
+					// reservationAffinity - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// coreCount - WriteOnly=false - IgnoreRead=false
+					// enableSecureBoot - WriteOnly=false - IgnoreRead=false
+					// enableVtpm - WriteOnly=false - IgnoreRead=false
+					// enableIntegrityMonitoring - WriteOnly=false - IgnoreRead=false
+					// email - WriteOnly=false - IgnoreRead=false
+					// project - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// family - WriteOnly=false - IgnoreRead=false
+					// repository - WriteOnly=false - IgnoreRead=false
+					// tag - WriteOnly=false - IgnoreRead=false
+					// diskSizeGb - WriteOnly=false - IgnoreRead=false
+					// diskType - WriteOnly=false - IgnoreRead=false
+					// diskEncryption - WriteOnly=false - IgnoreRead=false
+					// kmsKey - WriteOnly=false - IgnoreRead=false
+					// diskSizeGb - WriteOnly=false - IgnoreRead=false
+					// diskType - WriteOnly=false - IgnoreRead=false
+					// diskEncryption - WriteOnly=false - IgnoreRead=false
+					// kmsKey - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// subnet - WriteOnly=false - IgnoreRead=false
+					// nicType - WriteOnly=false - IgnoreRead=false
+					// accessConfigs - WriteOnly=false - IgnoreRead=false
+					// externalIp - WriteOnly=false - IgnoreRead=false
+					// confidentialInstanceType - WriteOnly=false - IgnoreRead=false
+					// consumeReservationType - WriteOnly=false - IgnoreRead=false
+					// key - WriteOnly=false - IgnoreRead=false
+					// values - WriteOnly=false - IgnoreRead=false
+					// snapshot - WriteOnly=false - IgnoreRead=false
+					// vmImage - WriteOnly=false - IgnoreRead=false
+					// containerImage - WriteOnly=false - IgnoreRead=false
+					// framework - WriteOnly=false - IgnoreRead=false
+					// version - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// action - WriteOnly=false - IgnoreRead=false
+					// targetVersion - WriteOnly=false - IgnoreRead=false
 				},
 				"google_workbench_instance",
 			)

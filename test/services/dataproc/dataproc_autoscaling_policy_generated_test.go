@@ -54,6 +54,26 @@ func TestAccDataprocAutoscalingPolicy(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// policy_id - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// workerConfig - WriteOnly=false - IgnoreRead=false
+					// secondaryWorkerConfig - WriteOnly=false - IgnoreRead=false
+					// basicAlgorithm - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// minInstances - WriteOnly=false - IgnoreRead=false
+					// maxInstances - WriteOnly=false - IgnoreRead=false
+					// weight - WriteOnly=false - IgnoreRead=false
+					// minInstances - WriteOnly=false - IgnoreRead=false
+					// maxInstances - WriteOnly=false - IgnoreRead=false
+					// weight - WriteOnly=false - IgnoreRead=false
+					// cooldownPeriod - WriteOnly=false - IgnoreRead=false
+					// yarnConfig - WriteOnly=false - IgnoreRead=false
+					// gracefulDecommissionTimeout - WriteOnly=false - IgnoreRead=false
+					// scaleUpFactor - WriteOnly=false - IgnoreRead=false
+					// scaleDownFactor - WriteOnly=false - IgnoreRead=false
+					// scaleUpMinWorkerFraction - WriteOnly=false - IgnoreRead=false
+					// scaleDownMinWorkerFraction - WriteOnly=false - IgnoreRead=false
 				},
 				"google_dataproc_autoscaling_policy",
 			)

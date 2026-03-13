@@ -51,6 +51,19 @@ func TestAccKMSEkmConnection(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// serviceResolvers - WriteOnly=false - IgnoreRead=false
+					// keyManagementMode - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// cryptoSpacePath - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=true
+					// serviceDirectoryService - WriteOnly=false - IgnoreRead=false
+					// hostname - WriteOnly=false - IgnoreRead=false
+					// serverCertificates - WriteOnly=false - IgnoreRead=false
+					// endpointFilter - WriteOnly=false - IgnoreRead=false
+					// rawDer - WriteOnly=false - IgnoreRead=false
 				},
 				"google_kms_ekm_connection",
 			)

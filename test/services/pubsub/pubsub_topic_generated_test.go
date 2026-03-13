@@ -119,6 +119,60 @@ func TestAccPubsubTopic(t *testing.T) {
 					"schema_settings",
 					"tags",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// kmsKeyName - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// messageStoragePolicy - WriteOnly=false - IgnoreRead=false
+					// schemaSettings - WriteOnly=false - IgnoreRead=false
+					// messageRetentionDuration - WriteOnly=false - IgnoreRead=false
+					// ingestionDataSourceSettings - WriteOnly=false - IgnoreRead=false
+					// messageTransforms - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=true
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// allowedPersistenceRegions - WriteOnly=false - IgnoreRead=false
+					// enforceInTransit - WriteOnly=false - IgnoreRead=false
+					// schema - WriteOnly=false - IgnoreRead=false
+					// encoding - WriteOnly=false - IgnoreRead=false
+					// awsKinesis - WriteOnly=false - IgnoreRead=false
+					// cloudStorage - WriteOnly=false - IgnoreRead=false
+					// platformLogsSettings - WriteOnly=false - IgnoreRead=false
+					// azureEventHubs - WriteOnly=false - IgnoreRead=false
+					// awsMsk - WriteOnly=false - IgnoreRead=false
+					// confluentCloud - WriteOnly=false - IgnoreRead=false
+					// streamArn - WriteOnly=false - IgnoreRead=false
+					// consumerArn - WriteOnly=false - IgnoreRead=false
+					// awsRoleArn - WriteOnly=false - IgnoreRead=false
+					// gcpServiceAccount - WriteOnly=false - IgnoreRead=false
+					// bucket - WriteOnly=false - IgnoreRead=false
+					// textFormat - WriteOnly=false - IgnoreRead=false
+					// avroFormat - WriteOnly=false - IgnoreRead=false
+					// pubsubAvroFormat - WriteOnly=false - IgnoreRead=false
+					// minimumObjectCreateTime - WriteOnly=false - IgnoreRead=false
+					// matchGlob - WriteOnly=false - IgnoreRead=false
+					// delimiter - WriteOnly=false - IgnoreRead=false
+					// severity - WriteOnly=false - IgnoreRead=false
+					// resourceGroup - WriteOnly=false - IgnoreRead=false
+					// namespace - WriteOnly=false - IgnoreRead=false
+					// eventHub - WriteOnly=false - IgnoreRead=false
+					// clientId - WriteOnly=false - IgnoreRead=false
+					// tenantId - WriteOnly=false - IgnoreRead=false
+					// subscriptionId - WriteOnly=false - IgnoreRead=false
+					// gcpServiceAccount - WriteOnly=false - IgnoreRead=false
+					// clusterArn - WriteOnly=false - IgnoreRead=false
+					// topic - WriteOnly=false - IgnoreRead=false
+					// awsRoleArn - WriteOnly=false - IgnoreRead=false
+					// gcpServiceAccount - WriteOnly=false - IgnoreRead=false
+					// bootstrapServer - WriteOnly=false - IgnoreRead=false
+					// clusterId - WriteOnly=false - IgnoreRead=false
+					// topic - WriteOnly=false - IgnoreRead=false
+					// identityPoolId - WriteOnly=false - IgnoreRead=false
+					// gcpServiceAccount - WriteOnly=false - IgnoreRead=false
+					// javascriptUdf - WriteOnly=false - IgnoreRead=false
+					// disabled - WriteOnly=false - IgnoreRead=false
+					// functionName - WriteOnly=false - IgnoreRead=false
+					// code - WriteOnly=false - IgnoreRead=false
 				},
 				"google_pubsub_topic",
 			)

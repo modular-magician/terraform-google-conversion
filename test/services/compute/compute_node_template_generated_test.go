@@ -59,6 +59,26 @@ func TestAccComputeNodeTemplate(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// nodeAffinityLabels - WriteOnly=false - IgnoreRead=false
+					// nodeType - WriteOnly=false - IgnoreRead=false
+					// nodeTypeFlexibility - WriteOnly=false - IgnoreRead=false
+					// serverBinding - WriteOnly=false - IgnoreRead=false
+					// accelerators - WriteOnly=false - IgnoreRead=false
+					// cpuOvercommitType - WriteOnly=false - IgnoreRead=false
+					// disks - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// cpus - WriteOnly=false - IgnoreRead=false
+					// memory - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// acceleratorCount - WriteOnly=false - IgnoreRead=false
+					// acceleratorType - WriteOnly=false - IgnoreRead=false
+					// diskCount - WriteOnly=false - IgnoreRead=false
+					// diskType - WriteOnly=false - IgnoreRead=false
+					// diskSizeGb - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_node_template",
 			)

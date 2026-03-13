@@ -59,6 +59,44 @@ func TestAccGkeonpremVmwareNodePool(t *testing.T) {
 					"provider",
 					"timeouts",
 					"vmware_cluster",
+					// DEBUG WriteOnly properties:
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// annotations - WriteOnly=false - IgnoreRead=false
+					// nodePoolAutoscaling - WriteOnly=false - IgnoreRead=false
+					// config - WriteOnly=false - IgnoreRead=false
+					// status - WriteOnly=false - IgnoreRead=false
+					// uid - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// reconciling - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// deleteTime - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// onPremVersion - WriteOnly=false - IgnoreRead=false
+					// effectiveAnnotations - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// vmwareCluster - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// minReplicas - WriteOnly=false - IgnoreRead=false
+					// maxReplicas - WriteOnly=false - IgnoreRead=false
+					// cpus - WriteOnly=false - IgnoreRead=false
+					// memoryMb - WriteOnly=false - IgnoreRead=false
+					// replicas - WriteOnly=false - IgnoreRead=false
+					// imageType - WriteOnly=false - IgnoreRead=false
+					// image - WriteOnly=false - IgnoreRead=false
+					// bootDiskSizeGb - WriteOnly=false - IgnoreRead=false
+					// taints - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// vsphereConfig - WriteOnly=false - IgnoreRead=false
+					// enableLoadBalancer - WriteOnly=false - IgnoreRead=false
+					// key - WriteOnly=false - IgnoreRead=false
+					// value - WriteOnly=false - IgnoreRead=false
+					// effect - WriteOnly=false - IgnoreRead=false
+					// datastore - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=false
+					// hostGroups - WriteOnly=false - IgnoreRead=false
+					// category - WriteOnly=false - IgnoreRead=false
+					// tag - WriteOnly=false - IgnoreRead=false
 				},
 				"google_gkeonprem_vmware_node_pool",
 			)

@@ -64,6 +64,34 @@ func TestAccLustreInstance(t *testing.T) {
 					"location",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// capacityGib - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// gkeSupportEnabled - WriteOnly=false - IgnoreRead=false
+					// filesystem - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// mountPoint - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// perUnitStorageThroughput - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// placementPolicy - WriteOnly=false - IgnoreRead=false
+					// kmsKey - WriteOnly=false - IgnoreRead=false
+					// stateReason - WriteOnly=false - IgnoreRead=false
+					// accessRulesOptions - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// instanceId - WriteOnly=false - IgnoreRead=false
+					// defaultSquashMode - WriteOnly=false - IgnoreRead=false
+					// defaultSquashUid - WriteOnly=false - IgnoreRead=false
+					// defaultSquashGid - WriteOnly=false - IgnoreRead=false
+					// accessRules - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// ipAddressRanges - WriteOnly=false - IgnoreRead=false
+					// squashMode - WriteOnly=false - IgnoreRead=false
 				},
 				"google_lustre_instance",
 			)

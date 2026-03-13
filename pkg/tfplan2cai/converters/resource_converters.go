@@ -70,6 +70,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/vmwareengine"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/vpcaccess"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/workbench"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/workflows"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/tfplan2cai/converters/cai"
 )
 
@@ -162,6 +163,7 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_compute_target_ssl_proxy":                        compute.ComputeTargetSslProxyTfplan2caiConverter(),
 	"google_compute_target_tcp_proxy":                        compute.ComputeTargetTcpProxyTfplan2caiConverter(),
 	"google_compute_url_map":                                 compute.ComputeUrlMapTfplan2caiConverter(),
+	"google_compute_vpn_tunnel":                              compute.ComputeVpnTunnelTfplan2caiConverter(),
 	"google_database_migration_service_migration_job":        databasemigrationservice.DatabaseMigrationServiceMigrationJobTfplan2caiConverter(),
 	"google_data_fusion_instance":                            datafusion.DataFusionInstanceTfplan2caiConverter(),
 	"google_dataproc_autoscaling_policy":                     dataproc.DataprocAutoscalingPolicyTfplan2caiConverter(),
@@ -251,4 +253,5 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_vmwareengine_network_policy":                     vmwareengine.VmwareengineNetworkPolicyTfplan2caiConverter(),
 	"google_vpc_access_connector":                            vpcaccess.VPCAccessConnectorTfplan2caiConverter(),
 	"google_workbench_instance":                              workbench.WorkbenchInstanceTfplan2caiConverter(),
+	"google_workflows_workflow":                              workflows.WorkflowsWorkflowTfplan2caiConverter(),
 }

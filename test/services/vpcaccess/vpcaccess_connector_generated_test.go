@@ -74,6 +74,22 @@ func TestAccVPCAccessConnector(t *testing.T) {
 					"region",
 					"self_link",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// ipCidrRange - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// machineType - WriteOnly=false - IgnoreRead=false
+					// minThroughput - WriteOnly=false - IgnoreRead=false
+					// minInstances - WriteOnly=false - IgnoreRead=false
+					// maxInstances - WriteOnly=false - IgnoreRead=false
+					// maxThroughput - WriteOnly=false - IgnoreRead=false
+					// selfLink - WriteOnly=false - IgnoreRead=true
+					// connectedProjects - WriteOnly=false - IgnoreRead=false
+					// subnet - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// projectId - WriteOnly=false - IgnoreRead=false
 				},
 				"google_vpc_access_connector",
 			)

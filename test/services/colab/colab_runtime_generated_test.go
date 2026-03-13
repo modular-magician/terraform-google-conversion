@@ -63,6 +63,18 @@ func TestAccColabRuntime(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// notebookRuntimeTemplateRef - WriteOnly=false - IgnoreRead=false
+					// runtimeUser - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// isUpgradable - WriteOnly=false - IgnoreRead=false
+					// expirationTime - WriteOnly=false - IgnoreRead=false
+					// notebookRuntimeType - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// notebookRuntimeTemplate - WriteOnly=false - IgnoreRead=false
 				},
 				"google_colab_runtime",
 			)

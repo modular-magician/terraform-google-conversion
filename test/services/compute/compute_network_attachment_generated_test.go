@@ -55,6 +55,22 @@ func TestAccComputeNetworkAttachment(t *testing.T) {
 					"producer_reject_lists",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// kind - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// selfLink - WriteOnly=false - IgnoreRead=false
+					// selfLinkWithId - WriteOnly=false - IgnoreRead=false
+					// connectionPreference - WriteOnly=false - IgnoreRead=false
+					// connectionEndpoints - WriteOnly=false - IgnoreRead=false
+					// subnetworks - WriteOnly=false - IgnoreRead=false
+					// producerRejectLists - WriteOnly=false - IgnoreRead=false
+					// producerAcceptLists - WriteOnly=false - IgnoreRead=false
+					// fingerprint - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_network_attachment",
 			)

@@ -129,6 +129,78 @@ func TestAccArtifactRegistryRepository(t *testing.T) {
 					"remote_repository_config.upstream_credentials",
 					"repository_id",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// format - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// registryUri - WriteOnly=false - IgnoreRead=false
+					// kmsKeyName - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// dockerConfig - WriteOnly=false - IgnoreRead=false
+					// mavenConfig - WriteOnly=false - IgnoreRead=false
+					// mode - WriteOnly=false - IgnoreRead=false
+					// virtualRepositoryConfig - WriteOnly=false - IgnoreRead=false
+					// cleanupPolicies - WriteOnly=false - IgnoreRead=false
+					// remoteRepositoryConfig - WriteOnly=false - IgnoreRead=false
+					// cleanupPolicyDryRun - WriteOnly=false - IgnoreRead=false
+					// vulnerabilityScanningConfig - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// repository_id - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// immutableTags - WriteOnly=false - IgnoreRead=false
+					// allowSnapshotOverwrites - WriteOnly=false - IgnoreRead=false
+					// versionPolicy - WriteOnly=false - IgnoreRead=false
+					// upstreamPolicies - WriteOnly=false - IgnoreRead=false
+					// id - WriteOnly=false - IgnoreRead=false
+					// repository - WriteOnly=false - IgnoreRead=false
+					// priority - WriteOnly=false - IgnoreRead=false
+					// action - WriteOnly=false - IgnoreRead=false
+					// condition - WriteOnly=false - IgnoreRead=false
+					// mostRecentVersions - WriteOnly=false - IgnoreRead=false
+					// tagState - WriteOnly=false - IgnoreRead=false
+					// tagPrefixes - WriteOnly=false - IgnoreRead=false
+					// versionNamePrefixes - WriteOnly=false - IgnoreRead=false
+					// packageNamePrefixes - WriteOnly=false - IgnoreRead=false
+					// olderThan - WriteOnly=false - IgnoreRead=false
+					// newerThan - WriteOnly=false - IgnoreRead=false
+					// packageNamePrefixes - WriteOnly=false - IgnoreRead=false
+					// keepCount - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// aptRepository - WriteOnly=false - IgnoreRead=false
+					// dockerRepository - WriteOnly=false - IgnoreRead=false
+					// mavenRepository - WriteOnly=false - IgnoreRead=false
+					// npmRepository - WriteOnly=false - IgnoreRead=false
+					// pythonRepository - WriteOnly=false - IgnoreRead=false
+					// yumRepository - WriteOnly=false - IgnoreRead=false
+					// commonRepository - WriteOnly=false - IgnoreRead=false
+					// upstreamCredentials - WriteOnly=false - IgnoreRead=false
+					// disableUpstreamValidation - WriteOnly=false - IgnoreRead=false
+					// publicRepository - WriteOnly=false - IgnoreRead=false
+					// repositoryBase - WriteOnly=false - IgnoreRead=false
+					// repositoryPath - WriteOnly=false - IgnoreRead=false
+					// publicRepository - WriteOnly=false - IgnoreRead=false
+					// customRepository - WriteOnly=false - IgnoreRead=false
+					// uri - WriteOnly=false - IgnoreRead=false
+					// publicRepository - WriteOnly=false - IgnoreRead=false
+					// customRepository - WriteOnly=false - IgnoreRead=false
+					// uri - WriteOnly=false - IgnoreRead=false
+					// publicRepository - WriteOnly=false - IgnoreRead=false
+					// customRepository - WriteOnly=false - IgnoreRead=false
+					// uri - WriteOnly=false - IgnoreRead=false
+					// publicRepository - WriteOnly=false - IgnoreRead=false
+					// customRepository - WriteOnly=false - IgnoreRead=false
+					// uri - WriteOnly=false - IgnoreRead=false
+					// publicRepository - WriteOnly=false - IgnoreRead=false
+					// repositoryBase - WriteOnly=false - IgnoreRead=false
+					// repositoryPath - WriteOnly=false - IgnoreRead=false
+					// uri - WriteOnly=false - IgnoreRead=false
+					// usernamePasswordCredentials - WriteOnly=false - IgnoreRead=false
+					// username - WriteOnly=false - IgnoreRead=false
+					// passwordSecretVersion - WriteOnly=false - IgnoreRead=false
+					// enablementConfig - WriteOnly=false - IgnoreRead=false
 				},
 				"google_artifact_registry_repository",
 			)

@@ -53,6 +53,14 @@ func TestAccComputeTargetGrpcProxy(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// selfLinkWithId - WriteOnly=false - IgnoreRead=false
+					// urlMap - WriteOnly=false - IgnoreRead=false
+					// validateForProxyless - WriteOnly=false - IgnoreRead=false
+					// fingerprint - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_target_grpc_proxy",
 			)

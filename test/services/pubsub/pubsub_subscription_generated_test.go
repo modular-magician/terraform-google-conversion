@@ -154,6 +154,60 @@ func TestAccPubsubSubscription(t *testing.T) {
 					"push_config.no_wrapper.write_metadata",
 					"tags",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// topic - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// bigqueryConfig - WriteOnly=false - IgnoreRead=false
+					// cloudStorageConfig - WriteOnly=false - IgnoreRead=false
+					// pushConfig - WriteOnly=false - IgnoreRead=false
+					// ackDeadlineSeconds - WriteOnly=false - IgnoreRead=false
+					// messageRetentionDuration - WriteOnly=false - IgnoreRead=false
+					// retainAckedMessages - WriteOnly=false - IgnoreRead=false
+					// expirationPolicy - WriteOnly=false - IgnoreRead=false
+					// filter - WriteOnly=false - IgnoreRead=false
+					// deadLetterPolicy - WriteOnly=false - IgnoreRead=false
+					// retryPolicy - WriteOnly=false - IgnoreRead=false
+					// enableMessageOrdering - WriteOnly=false - IgnoreRead=false
+					// enableExactlyOnceDelivery - WriteOnly=false - IgnoreRead=false
+					// messageTransforms - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=true
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// table - WriteOnly=false - IgnoreRead=false
+					// useTopicSchema - WriteOnly=false - IgnoreRead=false
+					// useTableSchema - WriteOnly=false - IgnoreRead=false
+					// writeMetadata - WriteOnly=false - IgnoreRead=false
+					// dropUnknownFields - WriteOnly=false - IgnoreRead=false
+					// serviceAccountEmail - WriteOnly=false - IgnoreRead=false
+					// bucket - WriteOnly=false - IgnoreRead=false
+					// filenamePrefix - WriteOnly=false - IgnoreRead=false
+					// filenameSuffix - WriteOnly=false - IgnoreRead=false
+					// filenameDatetimeFormat - WriteOnly=false - IgnoreRead=false
+					// maxDuration - WriteOnly=false - IgnoreRead=false
+					// maxBytes - WriteOnly=false - IgnoreRead=false
+					// maxMessages - WriteOnly=false - IgnoreRead=false
+					// avroConfig - WriteOnly=false - IgnoreRead=false
+					// textConfig - WriteOnly=false - IgnoreRead=false
+					// serviceAccountEmail - WriteOnly=false - IgnoreRead=false
+					// writeMetadata - WriteOnly=false - IgnoreRead=false
+					// useTopicSchema - WriteOnly=false - IgnoreRead=false
+					// oidcToken - WriteOnly=false - IgnoreRead=false
+					// pushEndpoint - WriteOnly=false - IgnoreRead=false
+					// attributes - WriteOnly=false - IgnoreRead=false
+					// noWrapper - WriteOnly=false - IgnoreRead=false
+					// serviceAccountEmail - WriteOnly=false - IgnoreRead=false
+					// audience - WriteOnly=false - IgnoreRead=false
+					// writeMetadata - WriteOnly=false - IgnoreRead=false
+					// ttl - WriteOnly=false - IgnoreRead=false
+					// deadLetterTopic - WriteOnly=false - IgnoreRead=false
+					// maxDeliveryAttempts - WriteOnly=false - IgnoreRead=false
+					// minimumBackoff - WriteOnly=false - IgnoreRead=false
+					// maximumBackoff - WriteOnly=false - IgnoreRead=false
+					// javascriptUdf - WriteOnly=false - IgnoreRead=false
+					// disabled - WriteOnly=false - IgnoreRead=false
+					// functionName - WriteOnly=false - IgnoreRead=false
+					// code - WriteOnly=false - IgnoreRead=false
 				},
 				"google_pubsub_subscription",
 			)

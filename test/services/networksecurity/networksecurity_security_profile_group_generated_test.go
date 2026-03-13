@@ -60,6 +60,21 @@ func TestAccNetworkSecuritySecurityProfileGroup(t *testing.T) {
 					"provider",
 					"timeouts",
 					"url_filtering_profile",
+					// DEBUG WriteOnly properties:
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// threatPreventionProfile - WriteOnly=false - IgnoreRead=false
+					// urlFilteringProfile - WriteOnly=false - IgnoreRead=false
+					// customMirroringProfile - WriteOnly=false - IgnoreRead=false
+					// customInterceptProfile - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// parent - WriteOnly=false - IgnoreRead=false
 				},
 				"google_network_security_security_profile_group",
 			)

@@ -62,6 +62,15 @@ func TestAccComputeRegionSslCertificate(t *testing.T) {
 					"private_key",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// certificate - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// expireTime - WriteOnly=false - IgnoreRead=false
+					// certificate_id - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// privateKey - WriteOnly=false - IgnoreRead=true
+					// region - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_region_ssl_certificate",
 			)

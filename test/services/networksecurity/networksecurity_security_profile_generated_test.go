@@ -80,6 +80,39 @@ func TestAccNetworkSecuritySecurityProfile(t *testing.T) {
 					"provider",
 					"timeouts",
 					"url_filtering_profile",
+					// DEBUG WriteOnly properties:
+					// selfLink - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// threatPreventionProfile - WriteOnly=false - IgnoreRead=false
+					// urlFilteringProfile - WriteOnly=false - IgnoreRead=false
+					// customMirroringProfile - WriteOnly=false - IgnoreRead=false
+					// customInterceptProfile - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// parent - WriteOnly=false - IgnoreRead=false
+					// severityOverrides - WriteOnly=false - IgnoreRead=false
+					// threatOverrides - WriteOnly=false - IgnoreRead=false
+					// antivirusOverrides - WriteOnly=false - IgnoreRead=false
+					// action - WriteOnly=false - IgnoreRead=false
+					// severity - WriteOnly=false - IgnoreRead=false
+					// action - WriteOnly=false - IgnoreRead=false
+					// threatId - WriteOnly=false - IgnoreRead=false
+					// protocol - WriteOnly=false - IgnoreRead=false
+					// action - WriteOnly=false - IgnoreRead=false
+					// urlFilters - WriteOnly=false - IgnoreRead=false
+					// filteringAction - WriteOnly=false - IgnoreRead=false
+					// urls - WriteOnly=false - IgnoreRead=false
+					// priority - WriteOnly=false - IgnoreRead=false
+					// mirroringEndpointGroup - WriteOnly=false - IgnoreRead=false
+					// mirroringDeploymentGroups - WriteOnly=false - IgnoreRead=false
+					// interceptEndpointGroup - WriteOnly=false - IgnoreRead=false
 				},
 				"google_network_security_security_profile",
 			)

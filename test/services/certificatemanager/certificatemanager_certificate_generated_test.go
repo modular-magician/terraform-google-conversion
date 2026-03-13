@@ -77,6 +77,24 @@ func TestAccCertificateManagerCertificate(t *testing.T) {
 					"self_managed.pem_private_key",
 					"self_managed.private_key_pem",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// scope - WriteOnly=false - IgnoreRead=false
+					// sanDnsnames - WriteOnly=false - IgnoreRead=false
+					// selfManaged - WriteOnly=false - IgnoreRead=true
+					// managed - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// certificatePem - WriteOnly=false - IgnoreRead=false
+					// privateKeyPem - WriteOnly=false - IgnoreRead=false
+					// pemCertificate - WriteOnly=false - IgnoreRead=false
+					// pemPrivateKey - WriteOnly=false - IgnoreRead=false
+					// domains - WriteOnly=false - IgnoreRead=false
+					// dnsAuthorizations - WriteOnly=false - IgnoreRead=false
+					// issuanceConfig - WriteOnly=false - IgnoreRead=false
 				},
 				"google_certificate_manager_certificate",
 			)

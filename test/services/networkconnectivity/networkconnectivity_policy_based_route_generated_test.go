@@ -54,6 +54,29 @@ func TestAccNetworkConnectivityPolicyBasedRoute(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// filter - WriteOnly=false - IgnoreRead=false
+					// nextHopOtherRoutes - WriteOnly=false - IgnoreRead=false
+					// nextHopIlbIp - WriteOnly=false - IgnoreRead=false
+					// priority - WriteOnly=false - IgnoreRead=false
+					// virtualMachine - WriteOnly=false - IgnoreRead=false
+					// interconnectAttachment - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// kind - WriteOnly=false - IgnoreRead=false
+					// warnings - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// protocolVersion - WriteOnly=false - IgnoreRead=false
+					// ipProtocol - WriteOnly=false - IgnoreRead=false
+					// srcRange - WriteOnly=false - IgnoreRead=false
+					// destRange - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
 				},
 				"google_network_connectivity_policy_based_route",
 			)

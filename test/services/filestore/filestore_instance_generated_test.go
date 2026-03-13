@@ -93,6 +93,58 @@ func TestAccFilestoreInstance(t *testing.T) {
 					"tags",
 					"timeouts",
 					"zone",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// tier - WriteOnly=false - IgnoreRead=false
+					// protocol - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// fileShares - WriteOnly=false - IgnoreRead=false
+					// networks - WriteOnly=false - IgnoreRead=false
+					// etag - WriteOnly=false - IgnoreRead=false
+					// kmsKeyName - WriteOnly=false - IgnoreRead=false
+					// deletionProtectionEnabled - WriteOnly=false - IgnoreRead=false
+					// deletionProtectionReason - WriteOnly=false - IgnoreRead=false
+					// performanceConfig - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=true
+					// initialReplication - WriteOnly=false - IgnoreRead=true
+					// effectiveReplication - WriteOnly=false - IgnoreRead=false
+					// directoryServices - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// zone - WriteOnly=false - IgnoreRead=true
+					// location - WriteOnly=false - IgnoreRead=true
+					// name - WriteOnly=false - IgnoreRead=false
+					// capacityGb - WriteOnly=false - IgnoreRead=false
+					// sourceBackup - WriteOnly=false - IgnoreRead=false
+					// sourceBackupdrBackup - WriteOnly=false - IgnoreRead=false
+					// nfsExportOptions - WriteOnly=false - IgnoreRead=false
+					// ipRanges - WriteOnly=false - IgnoreRead=false
+					// accessMode - WriteOnly=false - IgnoreRead=false
+					// squashMode - WriteOnly=false - IgnoreRead=false
+					// anonUid - WriteOnly=false - IgnoreRead=false
+					// anonGid - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// modes - WriteOnly=false - IgnoreRead=false
+					// reservedIpRange - WriteOnly=false - IgnoreRead=false
+					// connectMode - WriteOnly=false - IgnoreRead=false
+					// pscConfig - WriteOnly=false - IgnoreRead=false
+					// endpointProject - WriteOnly=false - IgnoreRead=false
+					// iopsPerTb - WriteOnly=false - IgnoreRead=false
+					// fixedIops - WriteOnly=false - IgnoreRead=false
+					// maxIopsPerTb - WriteOnly=false - IgnoreRead=false
+					// maxIops - WriteOnly=false - IgnoreRead=false
+					// role - WriteOnly=false - IgnoreRead=false
+					// replicas - WriteOnly=false - IgnoreRead=false
+					// peerInstance - WriteOnly=false - IgnoreRead=false
+					// replicas - WriteOnly=false - IgnoreRead=false
+					// ldap - WriteOnly=false - IgnoreRead=false
+					// domain - WriteOnly=false - IgnoreRead=false
+					// servers - WriteOnly=false - IgnoreRead=false
+					// usersOu - WriteOnly=false - IgnoreRead=false
+					// groupsOu - WriteOnly=false - IgnoreRead=false
 				},
 				"google_filestore_instance",
 			)

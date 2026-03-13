@@ -61,6 +61,37 @@ func TestAccDatabaseMigrationServiceMigrationJob(t *testing.T) {
 					"migration_job_id",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// displayName - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// phase - WriteOnly=false - IgnoreRead=false
+					// error - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// source - WriteOnly=false - IgnoreRead=false
+					// destination - WriteOnly=false - IgnoreRead=false
+					// dumpFlags - WriteOnly=false - IgnoreRead=false
+					// performanceConfig - WriteOnly=false - IgnoreRead=false
+					// dumpPath - WriteOnly=false - IgnoreRead=false
+					// dumpType - WriteOnly=false - IgnoreRead=false
+					// staticIpConnectivity - WriteOnly=false - IgnoreRead=false
+					// reverseSshConnectivity - WriteOnly=false - IgnoreRead=false
+					// vpcPeeringConnectivity - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// migrationJobId - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// dumpFlags - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// value - WriteOnly=false - IgnoreRead=false
+					// dumpParallelLevel - WriteOnly=false - IgnoreRead=false
+					// vmIp - WriteOnly=false - IgnoreRead=false
+					// vmPort - WriteOnly=false - IgnoreRead=false
+					// vm - WriteOnly=false - IgnoreRead=false
+					// vpc - WriteOnly=false - IgnoreRead=false
+					// vpc - WriteOnly=false - IgnoreRead=false
 				},
 				"google_database_migration_service_migration_job",
 			)

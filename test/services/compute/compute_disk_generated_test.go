@@ -157,6 +157,57 @@ func TestAccComputeDisk(t *testing.T) {
 					"provider",
 					"source_storage_object",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// sourceImageEncryptionKey - WriteOnly=false - IgnoreRead=false
+					// sourceInstantSnapshot - WriteOnly=false - IgnoreRead=false
+					// sourceInstantSnapshotId - WriteOnly=false - IgnoreRead=false
+					// sourceImageId - WriteOnly=false - IgnoreRead=false
+					// diskEncryptionKey - WriteOnly=false - IgnoreRead=false
+					// sourceSnapshotEncryptionKey - WriteOnly=false - IgnoreRead=false
+					// sourceSnapshotId - WriteOnly=false - IgnoreRead=false
+					// sourceStorageObject - WriteOnly=false - IgnoreRead=true
+					// labelFingerprint - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// lastAttachTimestamp - WriteOnly=false - IgnoreRead=false
+					// lastDetachTimestamp - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// size - WriteOnly=false - IgnoreRead=false
+					// users - WriteOnly=false - IgnoreRead=false
+					// physicalBlockSizeBytes - WriteOnly=false - IgnoreRead=false
+					// sourceDisk - WriteOnly=false - IgnoreRead=false
+					// sourceDiskId - WriteOnly=false - IgnoreRead=false
+					// DiskId - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// image - WriteOnly=false - IgnoreRead=false
+					// enableConfidentialCompute - WriteOnly=false - IgnoreRead=false
+					// provisionedIops - WriteOnly=false - IgnoreRead=false
+					// provisionedThroughput - WriteOnly=false - IgnoreRead=false
+					// asyncPrimaryDisk - WriteOnly=false - IgnoreRead=false
+					// architecture - WriteOnly=false - IgnoreRead=true
+					// params - WriteOnly=false - IgnoreRead=true
+					// guestOsFeatures - WriteOnly=false - IgnoreRead=false
+					// licenses - WriteOnly=false - IgnoreRead=false
+					// storagePool - WriteOnly=false - IgnoreRead=false
+					// accessMode - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// zone - WriteOnly=false - IgnoreRead=false
+					// snapshot - WriteOnly=false - IgnoreRead=false
+					// rawKey - WriteOnly=false - IgnoreRead=false
+					// kmsKeySelfLink - WriteOnly=false - IgnoreRead=false
+					// kmsKeyServiceAccount - WriteOnly=false - IgnoreRead=false
+					// rawKey - WriteOnly=false - IgnoreRead=false
+					// rsaEncryptedKey - WriteOnly=false - IgnoreRead=false
+					// kmsKeySelfLink - WriteOnly=false - IgnoreRead=false
+					// kmsKeyServiceAccount - WriteOnly=false - IgnoreRead=false
+					// rawKey - WriteOnly=false - IgnoreRead=false
+					// kmsKeySelfLink - WriteOnly=false - IgnoreRead=false
+					// kmsKeyServiceAccount - WriteOnly=false - IgnoreRead=false
+					// disk - WriteOnly=false - IgnoreRead=false
+					// resourceManagerTags - WriteOnly=false - IgnoreRead=true
+					// type - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_disk",
 			)

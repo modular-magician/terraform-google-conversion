@@ -99,6 +99,61 @@ func TestAccComputeImage(t *testing.T) {
 					"source_image_encryption_key",
 					"source_snapshot_encryption_key",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// archiveSizeBytes - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// storageLocations - WriteOnly=false - IgnoreRead=false
+					// diskSizeGb - WriteOnly=false - IgnoreRead=false
+					// family - WriteOnly=false - IgnoreRead=false
+					// guestOsFeatures - WriteOnly=false - IgnoreRead=false
+					// imageEncryptionKey - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// labelFingerprint - WriteOnly=false - IgnoreRead=false
+					// licenses - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// rawDisk - WriteOnly=false - IgnoreRead=true
+					// sourceDisk - WriteOnly=false - IgnoreRead=false
+					// sourceDiskEncryptionKey - WriteOnly=false - IgnoreRead=true
+					// sourceImage - WriteOnly=false - IgnoreRead=false
+					// sourceImageEncryptionKey - WriteOnly=false - IgnoreRead=true
+					// sourceSnapshot - WriteOnly=false - IgnoreRead=false
+					// shieldedInstanceInitialState - WriteOnly=false - IgnoreRead=false
+					// sourceSnapshotEncryptionKey - WriteOnly=false - IgnoreRead=true
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// kmsKeySelfLink - WriteOnly=false - IgnoreRead=false
+					// kmsKeyServiceAccount - WriteOnly=false - IgnoreRead=false
+					// rawKey - WriteOnly=false - IgnoreRead=true
+					// rsaEncryptedKey - WriteOnly=false - IgnoreRead=true
+					// containerType - WriteOnly=false - IgnoreRead=false
+					// sha1 - WriteOnly=false - IgnoreRead=false
+					// source - WriteOnly=false - IgnoreRead=false
+					// rawKey - WriteOnly=false - IgnoreRead=false
+					// rsaEncryptedKey - WriteOnly=false - IgnoreRead=false
+					// kmsKeySelfLink - WriteOnly=false - IgnoreRead=false
+					// kmsKeyServiceAccount - WriteOnly=false - IgnoreRead=false
+					// rawKey - WriteOnly=false - IgnoreRead=false
+					// rsaEncryptedKey - WriteOnly=false - IgnoreRead=false
+					// kmsKeySelfLink - WriteOnly=false - IgnoreRead=false
+					// kmsKeyServiceAccount - WriteOnly=false - IgnoreRead=false
+					// pk - WriteOnly=false - IgnoreRead=false
+					// keks - WriteOnly=false - IgnoreRead=false
+					// dbs - WriteOnly=false - IgnoreRead=false
+					// dbxs - WriteOnly=false - IgnoreRead=false
+					// content - WriteOnly=false - IgnoreRead=false
+					// fileType - WriteOnly=false - IgnoreRead=false
+					// content - WriteOnly=false - IgnoreRead=false
+					// fileType - WriteOnly=false - IgnoreRead=false
+					// content - WriteOnly=false - IgnoreRead=false
+					// fileType - WriteOnly=false - IgnoreRead=false
+					// content - WriteOnly=false - IgnoreRead=false
+					// fileType - WriteOnly=false - IgnoreRead=false
+					// rawKey - WriteOnly=false - IgnoreRead=false
+					// rsaEncryptedKey - WriteOnly=false - IgnoreRead=false
+					// kmsKeySelfLink - WriteOnly=false - IgnoreRead=false
+					// kmsKeyServiceAccount - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_image",
 			)

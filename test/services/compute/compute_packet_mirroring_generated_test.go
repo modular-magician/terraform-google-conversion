@@ -53,6 +53,26 @@ func TestAccComputePacketMirroring(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// name - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// network - WriteOnly=false - IgnoreRead=false
+					// priority - WriteOnly=false - IgnoreRead=false
+					// collectorIlb - WriteOnly=false - IgnoreRead=false
+					// filter - WriteOnly=false - IgnoreRead=false
+					// mirroredResources - WriteOnly=false - IgnoreRead=false
+					// enable - WriteOnly=false - IgnoreRead=false
+					// url - WriteOnly=false - IgnoreRead=false
+					// url - WriteOnly=false - IgnoreRead=false
+					// ipProtocols - WriteOnly=false - IgnoreRead=false
+					// cidrRanges - WriteOnly=false - IgnoreRead=false
+					// direction - WriteOnly=false - IgnoreRead=false
+					// subnetworks - WriteOnly=false - IgnoreRead=false
+					// instances - WriteOnly=false - IgnoreRead=false
+					// tags - WriteOnly=false - IgnoreRead=false
+					// url - WriteOnly=false - IgnoreRead=false
+					// url - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_packet_mirroring",
 			)

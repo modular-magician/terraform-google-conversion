@@ -52,6 +52,26 @@ func TestAccNetappBackupVault(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// state - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// backupVaultType - WriteOnly=false - IgnoreRead=false
+					// backupRegion - WriteOnly=false - IgnoreRead=false
+					// sourceRegion - WriteOnly=false - IgnoreRead=false
+					// sourceBackupVault - WriteOnly=false - IgnoreRead=false
+					// destinationBackupVault - WriteOnly=false - IgnoreRead=false
+					// backupRetentionPolicy - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// backupMinimumEnforcedRetentionDays - WriteOnly=false - IgnoreRead=false
+					// dailyBackupImmutable - WriteOnly=false - IgnoreRead=false
+					// weeklyBackupImmutable - WriteOnly=false - IgnoreRead=false
+					// monthlyBackupImmutable - WriteOnly=false - IgnoreRead=false
+					// manualBackupImmutable - WriteOnly=false - IgnoreRead=false
 				},
 				"google_netapp_backup_vault",
 			)

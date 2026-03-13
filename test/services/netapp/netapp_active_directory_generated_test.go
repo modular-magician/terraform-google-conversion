@@ -60,6 +60,32 @@ func TestAccNetappActiveDirectory(t *testing.T) {
 					"security_operators",
 					"timeouts",
 					"username",
+					// DEBUG WriteOnly properties:
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// domain - WriteOnly=false - IgnoreRead=false
+					// site - WriteOnly=false - IgnoreRead=false
+					// dns - WriteOnly=false - IgnoreRead=false
+					// netBiosPrefix - WriteOnly=false - IgnoreRead=false
+					// organizationalUnit - WriteOnly=false - IgnoreRead=false
+					// aesEncryption - WriteOnly=false - IgnoreRead=false
+					// username - WriteOnly=false - IgnoreRead=false
+					// password - WriteOnly=false - IgnoreRead=true
+					// backupOperators - WriteOnly=false - IgnoreRead=false
+					// administrators - WriteOnly=false - IgnoreRead=false
+					// securityOperators - WriteOnly=false - IgnoreRead=false
+					// kdcHostname - WriteOnly=false - IgnoreRead=false
+					// kdcIp - WriteOnly=false - IgnoreRead=false
+					// nfsUsersWithLdap - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// ldapSigning - WriteOnly=false - IgnoreRead=false
+					// encryptDcConnections - WriteOnly=false - IgnoreRead=false
+					// labels - WriteOnly=false - IgnoreRead=false
+					// stateDetails - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
 				},
 				"google_netapp_active_directory",
 			)

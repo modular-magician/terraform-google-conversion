@@ -56,6 +56,22 @@ func TestAccNetworkSecurityFirewallEndpoint(t *testing.T) {
 					"parent",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// labels - WriteOnly=false - IgnoreRead=false
+					// selfLink - WriteOnly=false - IgnoreRead=false
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// reconciling - WriteOnly=false - IgnoreRead=false
+					// associatedNetworks - WriteOnly=false - IgnoreRead=false
+					// state - WriteOnly=false - IgnoreRead=false
+					// billingProjectId - WriteOnly=false - IgnoreRead=false
+					// endpointSettings - WriteOnly=false - IgnoreRead=false
+					// terraformLabels - WriteOnly=false - IgnoreRead=false
+					// effectiveLabels - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
+					// parent - WriteOnly=false - IgnoreRead=false
+					// jumboFramesEnabled - WriteOnly=false - IgnoreRead=false
 				},
 				"google_network_security_firewall_endpoint",
 			)

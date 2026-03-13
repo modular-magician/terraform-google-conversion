@@ -119,6 +119,66 @@ func TestAccComputeRegionHealthCheck(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// checkIntervalSec - WriteOnly=false - IgnoreRead=false
+					// creationTimestamp - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// healthCheckId - WriteOnly=false - IgnoreRead=false
+					// healthyThreshold - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// unhealthyThreshold - WriteOnly=false - IgnoreRead=false
+					// timeoutSec - WriteOnly=false - IgnoreRead=false
+					// type - WriteOnly=false - IgnoreRead=false
+					// httpHealthCheck - WriteOnly=false - IgnoreRead=false
+					// httpsHealthCheck - WriteOnly=false - IgnoreRead=false
+					// tcpHealthCheck - WriteOnly=false - IgnoreRead=false
+					// sslHealthCheck - WriteOnly=false - IgnoreRead=false
+					// http2HealthCheck - WriteOnly=false - IgnoreRead=false
+					// grpcHealthCheck - WriteOnly=false - IgnoreRead=false
+					// grpcTlsHealthCheck - WriteOnly=false - IgnoreRead=false
+					// logConfig - WriteOnly=false - IgnoreRead=false
+					// region - WriteOnly=false - IgnoreRead=false
+					// host - WriteOnly=false - IgnoreRead=false
+					// requestPath - WriteOnly=false - IgnoreRead=false
+					// response - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// portName - WriteOnly=false - IgnoreRead=false
+					// proxyHeader - WriteOnly=false - IgnoreRead=false
+					// portSpecification - WriteOnly=false - IgnoreRead=false
+					// host - WriteOnly=false - IgnoreRead=false
+					// requestPath - WriteOnly=false - IgnoreRead=false
+					// response - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// portName - WriteOnly=false - IgnoreRead=false
+					// proxyHeader - WriteOnly=false - IgnoreRead=false
+					// portSpecification - WriteOnly=false - IgnoreRead=false
+					// request - WriteOnly=false - IgnoreRead=false
+					// response - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// portName - WriteOnly=false - IgnoreRead=false
+					// proxyHeader - WriteOnly=false - IgnoreRead=false
+					// portSpecification - WriteOnly=false - IgnoreRead=false
+					// request - WriteOnly=false - IgnoreRead=false
+					// response - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// portName - WriteOnly=false - IgnoreRead=false
+					// proxyHeader - WriteOnly=false - IgnoreRead=false
+					// portSpecification - WriteOnly=false - IgnoreRead=false
+					// host - WriteOnly=false - IgnoreRead=false
+					// requestPath - WriteOnly=false - IgnoreRead=false
+					// response - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// portName - WriteOnly=false - IgnoreRead=false
+					// proxyHeader - WriteOnly=false - IgnoreRead=false
+					// portSpecification - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// portName - WriteOnly=false - IgnoreRead=false
+					// portSpecification - WriteOnly=false - IgnoreRead=false
+					// grpcServiceName - WriteOnly=false - IgnoreRead=false
+					// port - WriteOnly=false - IgnoreRead=false
+					// portSpecification - WriteOnly=false - IgnoreRead=false
+					// grpcServiceName - WriteOnly=false - IgnoreRead=false
+					// enable - WriteOnly=false - IgnoreRead=false
 				},
 				"google_compute_region_health_check",
 			)

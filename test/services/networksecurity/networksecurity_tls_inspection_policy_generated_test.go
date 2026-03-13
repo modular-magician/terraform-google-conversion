@@ -55,6 +55,18 @@ func TestAccNetworkSecurityTlsInspectionPolicy(t *testing.T) {
 					"name",
 					"provider",
 					"timeouts",
+					// DEBUG WriteOnly properties:
+					// createTime - WriteOnly=false - IgnoreRead=false
+					// updateTime - WriteOnly=false - IgnoreRead=false
+					// description - WriteOnly=false - IgnoreRead=false
+					// caPool - WriteOnly=false - IgnoreRead=false
+					// trustConfig - WriteOnly=false - IgnoreRead=false
+					// minTlsVersion - WriteOnly=false - IgnoreRead=false
+					// tlsFeatureProfile - WriteOnly=false - IgnoreRead=false
+					// customTlsFeatures - WriteOnly=false - IgnoreRead=false
+					// excludePublicCaSet - WriteOnly=false - IgnoreRead=false
+					// name - WriteOnly=false - IgnoreRead=false
+					// location - WriteOnly=false - IgnoreRead=false
 				},
 				"google_network_security_tls_inspection_policy",
 			)
