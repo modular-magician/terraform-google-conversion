@@ -201,6 +201,7 @@ func TestAccComputeBackendService(t *testing.T) {
 					"cdn_policy",
 					"count",
 					"depends_on",
+					"dynamic_forwarding",
 					"for_each",
 					"iap.oauth2_client_secret",
 					"lifecycle",

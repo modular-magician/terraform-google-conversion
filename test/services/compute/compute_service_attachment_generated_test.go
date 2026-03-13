@@ -80,6 +80,7 @@ func TestAccComputeServiceAttachment(t *testing.T) {
 					"send_propagated_connection_limit_if_zero",
 					"show_nat_ips",
 					"timeouts",
+					"tunneling_config",
 				},
 				"google_compute_service_attachment",
 			)
