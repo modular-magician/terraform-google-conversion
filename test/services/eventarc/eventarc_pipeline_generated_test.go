@@ -12,7 +12,7 @@
 //
 // ----------------------------------------------------------------------------
 
-package colab_test
+package eventarc_test
 
 import (
 	"os"
@@ -21,22 +21,31 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
-func TestAccColabRuntime(t *testing.T) {
+func TestAccEventarcPipeline(t *testing.T) {
 	if os.Getenv("WRITE_FILES") != "" {
 		t.Parallel()
 	}
 	tests := []test.TestCase{
 		{
-			Name: "TestAccColabRuntime_colabRuntimeBasicExample",
+			Name: "TestAccEventarcPipeline_eventarcPipelineWithTopicDestinationExample",
 		},
 		{
-			Name: "TestAccColabRuntime_colabRuntimeStoppedExample",
+			Name: "TestAccEventarcPipeline_eventarcPipelineWithHttpDestinationExample",
 		},
 		{
-			Name: "TestAccColabRuntime_colabRuntimeFullExample",
+			Name: "TestAccEventarcPipeline_eventarcPipelineWithWorkflowDestinationExample",
 		},
 		{
-			Name: "TestAccColabRuntime_update",
+			Name: "TestAccEventarcPipeline_eventarcPipelineWithOidcAndJsonFormatExample",
+		},
+		{
+			Name: "TestAccEventarcPipeline_eventarcPipelineWithOauthAndProtobufFormatExample",
+		},
+		{
+			Name: "TestAccEventarcPipeline_eventarcPipelineWithCmekAndAvroFormatExample",
+		},
+		{
+			Name: "TestAccEventarcPipeline_update",
 		},
 	}
 
@@ -53,19 +62,16 @@ func TestAccColabRuntime(t *testing.T) {
 			test.BidirectionalConversion(
 				t,
 				[]string{
-					"auto_upgrade",
 					"count",
 					"depends_on",
-					"desired_state",
-					"expiration_time",
 					"for_each",
 					"lifecycle",
 					"location",
-					"name",
+					"pipeline_id",
 					"provider",
 					"timeouts",
 				},
-				"google_colab_runtime",
+				"google_eventarc_pipeline",
 			)
 		})
 	}

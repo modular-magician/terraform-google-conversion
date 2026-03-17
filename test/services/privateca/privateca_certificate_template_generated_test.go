@@ -12,7 +12,7 @@
 //
 // ----------------------------------------------------------------------------
 
-package colab_test
+package privateca_test
 
 import (
 	"os"
@@ -21,22 +21,25 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
-func TestAccColabRuntime(t *testing.T) {
+func TestAccPrivatecaCertificateTemplate(t *testing.T) {
 	if os.Getenv("WRITE_FILES") != "" {
 		t.Parallel()
 	}
 	tests := []test.TestCase{
 		{
-			Name: "TestAccColabRuntime_colabRuntimeBasicExample",
+			Name: "TestAccPrivatecaCertificateTemplate_privatecaTemplateBasicExample",
 		},
 		{
-			Name: "TestAccColabRuntime_colabRuntimeStoppedExample",
+			Name: "TestAccPrivatecaCertificateTemplate_privatecaTemplateZeroMaxIssuerPathLengthNullCaExample",
 		},
 		{
-			Name: "TestAccColabRuntime_colabRuntimeFullExample",
+			Name: "TestAccPrivatecaCertificateTemplate_BasicCertificateTemplate",
 		},
 		{
-			Name: "TestAccColabRuntime_update",
+			Name: "TestAccPrivatecaCertificateTemplate_BasicCertificateTemplateLongForm",
+		},
+		{
+			Name: "TestAccPrivatecaCertificateTemplate_updateCaOption",
 		},
 	}
 
@@ -53,19 +56,18 @@ func TestAccColabRuntime(t *testing.T) {
 			test.BidirectionalConversion(
 				t,
 				[]string{
-					"auto_upgrade",
 					"count",
 					"depends_on",
-					"desired_state",
-					"expiration_time",
 					"for_each",
 					"lifecycle",
 					"location",
 					"name",
+					"null_ca",
 					"provider",
 					"timeouts",
+					"zero_max_issuer_path_length",
 				},
-				"google_colab_runtime",
+				"google_privateca_certificate_template",
 			)
 		})
 	}
