@@ -12,7 +12,7 @@
 //
 // ----------------------------------------------------------------------------
 
-package backupdr_test
+package kms_test
 
 import (
 	"os"
@@ -21,25 +21,13 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/test"
 )
 
-func TestAccBackupDRBackupPlan(t *testing.T) {
+func TestAccKMSAutokeyConfig(t *testing.T) {
 	if os.Getenv("WRITE_FILES") != "" {
 		t.Parallel()
 	}
 	tests := []test.TestCase{
 		{
-			Name: "TestAccBackupDRBackupPlan_backupDrBackupPlanSimpleExample",
-		},
-		{
-			Name: "TestAccBackupDRBackupPlan_backupDrBackupPlanForDiskResourceExample",
-		},
-		{
-			Name: "TestAccBackupDRBackupPlan_backupDrBackupPlanForCsqlResourceExample",
-		},
-		{
-			Name: "TestAccBackupDRBackupPlan_backupDrBackupPlanForFilestoreResourceExample",
-		},
-		{
-			Name: "TestAccBackupDRBackupPlan_fullUpdate",
+			Name: "TestAccKMSAutokeyConfig_kmsAutokeyUpdate",
 		},
 	}
 
@@ -56,16 +44,15 @@ func TestAccBackupDRBackupPlan(t *testing.T) {
 			test.BidirectionalConversion(
 				t,
 				[]string{
-					"backup_plan_id",
 					"count",
 					"depends_on",
+					"folder",
 					"for_each",
 					"lifecycle",
-					"location",
 					"provider",
 					"timeouts",
 				},
-				"google_backup_dr_backup_plan",
+				"google_kms_autokey_config",
 			)
 		})
 	}
