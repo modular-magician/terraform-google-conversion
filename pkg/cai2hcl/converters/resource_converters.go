@@ -36,6 +36,7 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/container"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/databasemigrationservice"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/datafusion"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/dataplex"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/dataproc"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/datastream"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/developerconnect"
@@ -88,6 +89,9 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	},
 	"compute.googleapis.com/Instance": {
 		"Default": compute.NewComputeInstanceCai2hclConverter(provider),
+	},
+	"container.googleapis.com/NodePool": {
+		"Default": container.NewContainerNodePoolCai2hclConverter(provider),
 	},
 	// ####### END handwritten resources ###########
 	"aiplatform.googleapis.com/NotebookRuntime": {
@@ -345,14 +349,17 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	"compute.googleapis.com/VpnGateway": {
 		"Default": compute.NewComputeHaVpnGatewayCai2hclConverter(provider),
 	},
-	"container.googleapis.com/NodePool": {
-		"Default": container.NewContainerNodePoolCai2hclConverter(provider),
-	},
 	"datafusion.googleapis.com/Instance": {
 		"Default": datafusion.NewDataFusionInstanceCai2hclConverter(provider),
 	},
 	"datamigration.googleapis.com/MigrationJob": {
 		"Default": databasemigrationservice.NewDatabaseMigrationServiceMigrationJobCai2hclConverter(provider),
+	},
+	"dataplex.googleapis.com/Glossary": {
+		"Default": dataplex.NewDataplexGlossaryCai2hclConverter(provider),
+	},
+	"dataplex.googleapis.com/Task": {
+		"Default": dataplex.NewDataplexTaskCai2hclConverter(provider),
 	},
 	"dataproc.googleapis.com/AutoscalingPolicy": {
 		"Default": dataproc.NewDataprocAutoscalingPolicyCai2hclConverter(provider),
