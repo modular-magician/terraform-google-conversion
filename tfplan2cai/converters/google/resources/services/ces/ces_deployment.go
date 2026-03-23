@@ -190,6 +190,13 @@ func expandCESDeploymentChannelProfile(v interface{}, d tpgresource.TerraformRes
 		transformed["webWidgetConfig"] = transformedWebWidgetConfig
 	}
 
+	transformedNoiseSuppressionLevel, err := expandCESDeploymentChannelProfileNoiseSuppressionLevel(original["noise_suppression_level"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedNoiseSuppressionLevel); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["noiseSuppressionLevel"] = transformedNoiseSuppressionLevel
+	}
+
 	return transformed, nil
 }
 
@@ -280,6 +287,10 @@ func expandCESDeploymentChannelProfileWebWidgetConfigTheme(v interface{}, d tpgr
 }
 
 func expandCESDeploymentChannelProfileWebWidgetConfigWebWidgetTitle(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESDeploymentChannelProfileNoiseSuppressionLevel(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
