@@ -192,6 +192,12 @@ func GetComputeNetworkFirewallPolicyRuleApiObject(d tpgresource.TerraformResourc
 	} else if v, ok := d.GetOkExists("disabled"); ok || !reflect.DeepEqual(v, disabledProp) {
 		obj["disabled"] = disabledProp
 	}
+	policySourceProp, err := expandComputeNetworkFirewallPolicyRulePolicySource(d.Get("policy_source"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("policy_source"); !tpgresource.IsEmptyValue(reflect.ValueOf(policySourceProp)) && (ok || !reflect.DeepEqual(v, policySourceProp)) {
+		obj["policySource"] = policySourceProp
+	}
 
 	return obj, nil
 }
@@ -547,5 +553,9 @@ func expandComputeNetworkFirewallPolicyRuleTargetSecureTagsState(v interface{}, 
 }
 
 func expandComputeNetworkFirewallPolicyRuleDisabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeNetworkFirewallPolicyRulePolicySource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
