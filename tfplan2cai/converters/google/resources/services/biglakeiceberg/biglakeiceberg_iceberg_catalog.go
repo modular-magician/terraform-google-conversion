@@ -122,6 +122,18 @@ func GetBiglakeIcebergIcebergCatalogApiObject(d tpgresource.TerraformResourceDat
 	} else if v, ok := d.GetOkExists("catalog_type"); !tpgresource.IsEmptyValue(reflect.ValueOf(catalogTypeProp)) && (ok || !reflect.DeepEqual(v, catalogTypeProp)) {
 		obj["catalog-type"] = catalogTypeProp
 	}
+	defaultLocationProp, err := expandBiglakeIcebergIcebergCatalogDefaultLocation(d.Get("default_location"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("default_location"); !tpgresource.IsEmptyValue(reflect.ValueOf(defaultLocationProp)) && (ok || !reflect.DeepEqual(v, defaultLocationProp)) {
+		obj["default-location"] = defaultLocationProp
+	}
+	additionalLocationsProp, err := expandBiglakeIcebergIcebergCatalogAdditionalLocations(d.Get("additional_locations"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("additional_locations"); !tpgresource.IsEmptyValue(reflect.ValueOf(additionalLocationsProp)) && (ok || !reflect.DeepEqual(v, additionalLocationsProp)) {
+		obj["additional-locations"] = additionalLocationsProp
+	}
 
 	return obj, nil
 }
@@ -131,5 +143,13 @@ func expandBiglakeIcebergIcebergCatalogCredentialMode(v interface{}, d tpgresour
 }
 
 func expandBiglakeIcebergIcebergCatalogCatalogType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBiglakeIcebergIcebergCatalogDefaultLocation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBiglakeIcebergIcebergCatalogAdditionalLocations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
