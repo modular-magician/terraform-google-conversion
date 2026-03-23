@@ -30,6 +30,9 @@ func TestAccMemcacheInstance(t *testing.T) {
 			Name: "TestAccMemcacheInstance_memcacheInstanceBasicTestExample",
 		},
 		{
+			Name: "TestAccMemcacheInstance_memcacheInstanceMaintenanceVersionExample",
+		},
+		{
 			Name: "TestAccMemcacheInstance_update",
 		},
 		{

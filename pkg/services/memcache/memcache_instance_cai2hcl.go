@@ -135,6 +135,7 @@ func (c *MemcacheInstanceCai2hclConverter) convertResourceData(asset caiasset.As
 	hclData["memcache_parameters"] = flattenMemcacheInstanceMemcacheParameters(res["parameters"], d, config)
 	hclData["maintenance_policy"] = flattenMemcacheInstanceMaintenancePolicy(res["maintenancePolicy"], d, config)
 	hclData["reserved_ip_range_id"] = flattenMemcacheInstanceReservedIpRangeId(res["reservedIpRangeId"], d, config)
+	hclData["maintenance_version"] = flattenMemcacheInstanceMaintenanceVersion(res["maintenanceVersion"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -404,5 +405,9 @@ func flattenMemcacheInstanceMaintenancePolicyWeeklyMaintenanceWindowStartTimeNan
 }
 
 func flattenMemcacheInstanceReservedIpRangeId(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenMemcacheInstanceMaintenanceVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }

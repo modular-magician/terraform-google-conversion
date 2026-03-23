@@ -209,6 +209,11 @@ length is greater than 512.`,
 					},
 				},
 			},
+			"maintenance_version": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: `Last self service update maintenance version triggered by the customer. If it is empty, it means that the maintenance version is not set by the user.`,
+			},
 			"memcache_parameters": {
 				Type:        schema.TypeList,
 				Optional:    true,
