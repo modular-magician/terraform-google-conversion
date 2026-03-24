@@ -122,7 +122,7 @@ func (c *MemcacheInstanceCai2hclConverter) convertResourceData(asset caiasset.As
 	}
 	hclData := make(map[string]interface{})
 
-	outputFields := map[string]struct{}{"create_time": struct{}{}, "discovery_endpoint": struct{}{}, "effective_labels": struct{}{}, "maintenance_schedule": struct{}{}, "memcache_full_version": struct{}{}, "memcache_nodes": struct{}{}, "terraform_labels": struct{}{}}
+	outputFields := map[string]struct{}{"available_maintenance_versions": struct{}{}, "create_time": struct{}{}, "discovery_endpoint": struct{}{}, "effective_labels": struct{}{}, "effective_maintenance_version": struct{}{}, "maintenance_schedule": struct{}{}, "memcache_full_version": struct{}{}, "memcache_nodes": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//memcache.googleapis.com/projects/{{project}}/locations/{{region}}/instances/{{name}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenMemcacheInstanceDisplayName(res["displayName"], d, config)
@@ -135,6 +135,7 @@ func (c *MemcacheInstanceCai2hclConverter) convertResourceData(asset caiasset.As
 	hclData["memcache_parameters"] = flattenMemcacheInstanceMemcacheParameters(res["parameters"], d, config)
 	hclData["maintenance_policy"] = flattenMemcacheInstanceMaintenancePolicy(res["maintenancePolicy"], d, config)
 	hclData["reserved_ip_range_id"] = flattenMemcacheInstanceReservedIpRangeId(res["reservedIpRangeId"], d, config)
+	hclData["maintenance_version"] = flattenMemcacheInstanceMaintenanceVersion(res["maintenance_version"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -404,5 +405,9 @@ func flattenMemcacheInstanceMaintenancePolicyWeeklyMaintenanceWindowStartTimeNan
 }
 
 func flattenMemcacheInstanceReservedIpRangeId(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenMemcacheInstanceMaintenanceVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }

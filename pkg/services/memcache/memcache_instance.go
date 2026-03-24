@@ -209,6 +209,11 @@ length is greater than 512.`,
 					},
 				},
 			},
+			"maintenance_version": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: `The version of the maintenance running on the instance.`,
+			},
 			"memcache_parameters": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -265,6 +270,14 @@ provided, all zones will be used.`,
 				},
 				Set: schema.HashString,
 			},
+			"available_maintenance_versions": {
+				Type:        schema.TypeList,
+				Computed:    true,
+				Description: `The versions of available maintenance for the instance.`,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+			},
 			"create_time": {
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -280,6 +293,11 @@ provided, all zones will be used.`,
 				Computed:    true,
 				Description: `All of labels (key/value pairs) present on the resource in GCP, including the labels configured through Terraform, other clients and services.`,
 				Elem:        &schema.Schema{Type: schema.TypeString},
+			},
+			"effective_maintenance_version": {
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: `The maintenance version that the instance is planned to be upgraded to.`,
 			},
 			"maintenance_schedule": {
 				Type:        schema.TypeList,
