@@ -464,6 +464,13 @@ func expandColabRuntimeTemplateSoftwareConfig(v interface{}, d tpgresource.Terra
 		transformed["env"] = transformedEnv
 	}
 
+	transformedColabImage, err := expandColabRuntimeTemplateSoftwareConfigColabImage(original["colab_image"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedColabImage); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["colabImage"] = transformedColabImage
+	}
+
 	transformedPostStartupScriptConfig, err := expandColabRuntimeTemplateSoftwareConfigPostStartupScriptConfig(original["post_startup_script_config"], d, config)
 	if err != nil {
 		return nil, err
@@ -518,6 +525,43 @@ func expandColabRuntimeTemplateSoftwareConfigEnvName(v interface{}, d tpgresourc
 }
 
 func expandColabRuntimeTemplateSoftwareConfigEnvValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandColabRuntimeTemplateSoftwareConfigColabImage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedReleaseName, err := expandColabRuntimeTemplateSoftwareConfigColabImageReleaseName(original["release_name"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedReleaseName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["releaseName"] = transformedReleaseName
+	}
+
+	transformedDescription, err := expandColabRuntimeTemplateSoftwareConfigColabImageDescription(original["description"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDescription); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["description"] = transformedDescription
+	}
+
+	return transformed, nil
+}
+
+func expandColabRuntimeTemplateSoftwareConfigColabImageReleaseName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandColabRuntimeTemplateSoftwareConfigColabImageDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

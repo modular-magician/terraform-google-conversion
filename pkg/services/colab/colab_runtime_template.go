@@ -284,6 +284,21 @@ Please refer to the field 'effective_labels' for all of the labels present on th
 					Schema: map[string]*schema.Schema{
 						"colab_image": {
 							Type:        schema.TypeList,
+							Optional:    true,
+							Description: `Colab image of the runtime.`,
+							MaxItems:    1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"release_name": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: `The release name of the NotebookRuntime Colab image, e.g. "py310". If not specified, detault to the latest release.`,
+									},
+								},
+							},
+						},
+						"colab_image": {
+							Type:        schema.TypeList,
 							Computed:    true,
 							Optional:    true,
 							Description: `Colab Image Configuration.`,
