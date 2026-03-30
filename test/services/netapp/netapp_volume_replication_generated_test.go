@@ -30,6 +30,9 @@ func TestAccNetappVolumeReplication(t *testing.T) {
 			Name: "TestAccNetappVolumeReplication_netappVolumeReplicationCreateExample",
 		},
 		{
+			Name: "TestAccNetappVolumeReplication_netappVolumeInRegionReplicationIntraZonesFileExample",
+		},
+		{
 			Name: "TestAccNetappVolumeReplication_NetappVolumeReplicationCreateExample_update",
 		},
 	}
