@@ -170,6 +170,12 @@ func flattenNetappStoragePoolCapacityGib(v interface{}, d *schema.ResourceData, 
 }
 
 func flattenNetappStoragePoolDescription(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
 	return v
 }
 
@@ -188,10 +194,22 @@ func flattenNetappStoragePoolNetwork(v interface{}, d *schema.ResourceData, conf
 }
 
 func flattenNetappStoragePoolActiveDirectory(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
 	return v
 }
 
 func flattenNetappStoragePoolKmsConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
 	return v
 }
 
@@ -204,6 +222,12 @@ func flattenNetappStoragePoolZone(v interface{}, d *schema.ResourceData, config 
 }
 
 func flattenNetappStoragePoolReplicaZone(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
 	return v
 }
 
@@ -224,6 +248,12 @@ func flattenNetappStoragePoolTotalIops(v interface{}, d *schema.ResourceData, co
 }
 
 func flattenNetappStoragePoolHotTierSizeGib(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
 	return v
 }
 
