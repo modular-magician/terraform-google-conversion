@@ -104,6 +104,9 @@ func TestAccArtifactRegistryRepository(t *testing.T) {
 		{
 			Name: "TestAccArtifactRegistryRepository_remote",
 		},
+		{
+			Name: "TestAccArtifactRegistryRepository_updateUpstreamCredentials",
+		},
 	}
 
 	for _, tt := range tests {
