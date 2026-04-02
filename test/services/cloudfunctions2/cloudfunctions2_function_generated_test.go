@@ -71,6 +71,9 @@ func TestAccCloudfunctions2function(t *testing.T) {
 		{
 			Name: "TestAccCloudfunctions2function_cloudfunctions2DirectvpcExample_update",
 		},
+		{
+			Name: "TestAccCloudFunctions2Function_trafficSplit",
+		},
 	}
 
 	for _, tt := range tests {
