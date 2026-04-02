@@ -41,6 +41,9 @@ func TestAccNetappBackup(t *testing.T) {
 		{
 			Name: "TestAccNetappBackup_NetappImmutableBackup",
 		},
+		{
+			Name: "TestAccNetappBackup_NetappCrossRegionBackup",
+		},
 	}
 
 	for _, tt := range tests {
