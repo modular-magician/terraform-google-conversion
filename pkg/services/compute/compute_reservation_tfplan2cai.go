@@ -161,6 +161,12 @@ func GetComputeReservationCaiObject(d tpgresource.TerraformResourceData, config 
 	} else if v, ok := d.GetOkExists("reservation_sharing_policy"); !tpgresource.IsEmptyValue(reflect.ValueOf(reservationSharingPolicyProp)) && (ok || !reflect.DeepEqual(v, reservationSharingPolicyProp)) {
 		obj["reservationSharingPolicy"] = reservationSharingPolicyProp
 	}
+	enableEmergentMaintenanceProp, err := expandComputeReservationEnableEmergentMaintenance(d.Get("enable_emergent_maintenance"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("enable_emergent_maintenance"); !tpgresource.IsEmptyValue(reflect.ValueOf(enableEmergentMaintenanceProp)) && (ok || !reflect.DeepEqual(v, enableEmergentMaintenanceProp)) {
+		obj["enableEmergentMaintenance"] = enableEmergentMaintenanceProp
+	}
 	zoneProp, err := expandComputeReservationZone(d.Get("zone"), d, config)
 	if err != nil {
 		return nil, err
@@ -484,6 +490,10 @@ func expandComputeReservationReservationSharingPolicy(v interface{}, d tpgresour
 }
 
 func expandComputeReservationReservationSharingPolicyServiceShareType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeReservationEnableEmergentMaintenance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

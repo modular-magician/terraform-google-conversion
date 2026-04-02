@@ -68,6 +68,7 @@ func TestAccComputeReservation(t *testing.T) {
 					"deletion_protection",
 					"depends_on",
 					"dynamic",
+					"enable_emergent_maintenance",
 					"for_each",
 					"lifecycle",
 					"provider",

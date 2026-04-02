@@ -233,6 +233,11 @@ Cannot be used with delete_after_duration.`,
 				ForceNew:    true,
 				Description: `An optional description of this resource.`,
 			},
+			"enable_emergent_maintenance": {
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Description: `Indicates if this group of VMs have emergent maintenance enabled.`,
+			},
 			"reservation_sharing_policy": {
 				Type:        schema.TypeList,
 				Computed:    true,
