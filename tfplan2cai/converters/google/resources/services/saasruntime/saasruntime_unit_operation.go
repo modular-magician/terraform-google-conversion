@@ -134,6 +134,12 @@ func GetSaasRuntimeUnitOperationApiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("upgrade"); !tpgresource.IsEmptyValue(reflect.ValueOf(upgradeProp)) && (ok || !reflect.DeepEqual(v, upgradeProp)) {
 		obj["upgrade"] = upgradeProp
 	}
+	rolloutProp, err := expandSaasRuntimeUnitOperationRollout(d.Get("rollout"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("rollout"); !tpgresource.IsEmptyValue(reflect.ValueOf(rolloutProp)) && (ok || !reflect.DeepEqual(v, rolloutProp)) {
+		obj["rollout"] = rolloutProp
+	}
 	effectiveAnnotationsProp, err := expandSaasRuntimeUnitOperationEffectiveAnnotations(d.Get("effective_annotations"), d, config)
 	if err != nil {
 		return nil, err
@@ -337,6 +343,10 @@ func expandSaasRuntimeUnitOperationUpgradeInputVariablesVariable(v interface{}, 
 }
 
 func expandSaasRuntimeUnitOperationUpgradeRelease(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandSaasRuntimeUnitOperationRollout(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
