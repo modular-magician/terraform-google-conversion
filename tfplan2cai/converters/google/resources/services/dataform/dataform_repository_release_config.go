@@ -228,6 +228,13 @@ func expandDataformRepositoryReleaseConfigCodeCompilationConfig(v interface{}, d
 		transformed["tablePrefix"] = transformedTablePrefix
 	}
 
+	transformedBuiltinAssertionNamePrefix, err := expandDataformRepositoryReleaseConfigCodeCompilationConfigBuiltinAssertionNamePrefix(original["builtin_assertion_name_prefix"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedBuiltinAssertionNamePrefix); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["builtinAssertionNamePrefix"] = transformedBuiltinAssertionNamePrefix
+	}
+
 	return transformed, nil
 }
 
@@ -267,5 +274,9 @@ func expandDataformRepositoryReleaseConfigCodeCompilationConfigSchemaSuffix(v in
 }
 
 func expandDataformRepositoryReleaseConfigCodeCompilationConfigTablePrefix(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDataformRepositoryReleaseConfigCodeCompilationConfigBuiltinAssertionNamePrefix(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
