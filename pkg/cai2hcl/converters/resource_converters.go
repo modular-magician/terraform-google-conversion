@@ -40,7 +40,6 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/dataproc"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/datastream"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/developerconnect"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/dialogflow"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/eventarc"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/filestore"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/firebasedataconnect"
@@ -410,9 +409,6 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	},
 	"developerconnect.googleapis.com/GitRepositoryLink": {
 		"Default": developerconnect.NewDeveloperConnectGitRepositoryLinkCai2hclConverter(provider),
-	},
-	"dialogflow.googleapis.com/Agent": {
-		"Default": dialogflow.NewDialogflowAgentCai2hclConverter(provider),
 	},
 	"eventarc.googleapis.com/Pipeline": {
 		"Default": eventarc.NewEventarcPipelineCai2hclConverter(provider),

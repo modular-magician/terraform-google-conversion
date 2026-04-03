@@ -28,7 +28,6 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/dataproc"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/datastream"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/developerconnect"
-	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/dialogflow"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/eventarc"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/filestore"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/firebasedataconnect"
@@ -72,7 +71,7 @@ var handwrittenResources = map[string]*schema.Resource{
 	// ####### END handwritten resources ###########
 }
 
-// Generated resources: 187
+// Generated resources: 186
 var generatedResources = map[string]*schema.Resource{
 	"google_alloydb_backup":                                  alloydb.ResourceAlloydbBackup(),
 	"google_alloydb_cluster":                                 alloydb.ResourceAlloydbCluster(),
@@ -179,7 +178,6 @@ var generatedResources = map[string]*schema.Resource{
 	"google_datastream_stream":                               datastream.ResourceDatastreamStream(),
 	"google_developer_connect_connection":                    developerconnect.ResourceDeveloperConnectConnection(),
 	"google_developer_connect_git_repository_link":           developerconnect.ResourceDeveloperConnectGitRepositoryLink(),
-	"google_dialogflow_agent":                                dialogflow.ResourceDialogflowAgent(),
 	"google_eventarc_pipeline":                               eventarc.ResourceEventarcPipeline(),
 	"google_filestore_backup":                                filestore.ResourceFilestoreBackup(),
 	"google_filestore_instance":                              filestore.ResourceFilestoreInstance(),
