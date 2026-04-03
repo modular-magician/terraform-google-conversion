@@ -122,6 +122,12 @@ func GetServiceUsageConsumerQuotaOverrideApiObject(d tpgresource.TerraformResour
 	} else if v, ok := d.GetOkExists("dimensions"); !tpgresource.IsEmptyValue(reflect.ValueOf(dimensionsProp)) && (ok || !reflect.DeepEqual(v, dimensionsProp)) {
 		obj["dimensions"] = dimensionsProp
 	}
+	adminOverrideAncestorProp, err := expandServiceUsageConsumerQuotaOverrideAdminOverrideAncestor(d.Get("admin_override_ancestor"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("admin_override_ancestor"); !tpgresource.IsEmptyValue(reflect.ValueOf(adminOverrideAncestorProp)) && (ok || !reflect.DeepEqual(v, adminOverrideAncestorProp)) {
+		obj["adminOverrideAncestor"] = adminOverrideAncestorProp
+	}
 
 	return obj, nil
 }
@@ -139,4 +145,8 @@ func expandServiceUsageConsumerQuotaOverrideDimensions(v interface{}, d tpgresou
 		m[k] = val.(string)
 	}
 	return m, nil
+}
+
+func expandServiceUsageConsumerQuotaOverrideAdminOverrideAncestor(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
