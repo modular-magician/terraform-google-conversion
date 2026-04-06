@@ -71,7 +71,6 @@ func TestAccComputeReservation(t *testing.T) {
 					"for_each",
 					"lifecycle",
 					"provider",
-					"share_settings",
 					"timeouts",
 				},
 				"google_compute_reservation",
