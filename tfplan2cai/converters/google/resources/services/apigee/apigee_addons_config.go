@@ -167,6 +167,13 @@ func expandApigeeAddonsConfigAddonsConfig(v interface{}, d tpgresource.Terraform
 		transformed["connectorsPlatformConfig"] = transformedConnectorsPlatformConfig
 	}
 
+	transformedAnalyticsConfig, err := expandApigeeAddonsConfigAddonsConfigAnalyticsConfig(original["analytics_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAnalyticsConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["analyticsConfig"] = transformedAnalyticsConfig
+	}
+
 	return transformed, nil
 }
 
@@ -319,5 +326,42 @@ func expandApigeeAddonsConfigAddonsConfigConnectorsPlatformConfigEnabled(v inter
 }
 
 func expandApigeeAddonsConfigAddonsConfigConnectorsPlatformConfigExpiresAt(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApigeeAddonsConfigAddonsConfigAnalyticsConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnabled, err := expandApigeeAddonsConfigAddonsConfigAnalyticsConfigEnabled(original["enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEnabled); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["enabled"] = transformedEnabled
+	}
+
+	transformedExpiresAt, err := expandApigeeAddonsConfigAddonsConfigAnalyticsConfigExpiresAt(original["expires_at"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedExpiresAt); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["expiresAt"] = transformedExpiresAt
+	}
+
+	return transformed, nil
+}
+
+func expandApigeeAddonsConfigAddonsConfigAnalyticsConfigEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApigeeAddonsConfigAddonsConfigAnalyticsConfigExpiresAt(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
