@@ -134,6 +134,12 @@ func GetSaasRuntimeUnitOperationApiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("upgrade"); !tpgresource.IsEmptyValue(reflect.ValueOf(upgradeProp)) && (ok || !reflect.DeepEqual(v, upgradeProp)) {
 		obj["upgrade"] = upgradeProp
 	}
+	cancelProp, err := expandSaasRuntimeUnitOperationCancel(d.Get("cancel"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("cancel"); !tpgresource.IsEmptyValue(reflect.ValueOf(cancelProp)) && (ok || !reflect.DeepEqual(v, cancelProp)) {
+		obj["cancel"] = cancelProp
+	}
 	effectiveAnnotationsProp, err := expandSaasRuntimeUnitOperationEffectiveAnnotations(d.Get("effective_annotations"), d, config)
 	if err != nil {
 		return nil, err
@@ -337,6 +343,10 @@ func expandSaasRuntimeUnitOperationUpgradeInputVariablesVariable(v interface{}, 
 }
 
 func expandSaasRuntimeUnitOperationUpgradeRelease(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandSaasRuntimeUnitOperationCancel(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
