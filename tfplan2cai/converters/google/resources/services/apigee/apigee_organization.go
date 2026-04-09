@@ -182,6 +182,12 @@ func GetApigeeOrganizationApiObject(d tpgresource.TerraformResourceData, config 
 	} else if v, ok := d.GetOkExists("properties"); !tpgresource.IsEmptyValue(reflect.ValueOf(propertiesProp)) && (ok || !reflect.DeepEqual(v, propertiesProp)) {
 		obj["properties"] = propertiesProp
 	}
+	addonsConfigProp, err := expandApigeeOrganizationAddonsConfig(d.Get("addons_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("addons_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(addonsConfigProp)) && (ok || !reflect.DeepEqual(v, addonsConfigProp)) {
+		obj["addonsConfig"] = addonsConfigProp
+	}
 
 	return resourceApigeeOrganizationEncoder(d, config, obj)
 }
@@ -294,5 +300,207 @@ func expandApigeeOrganizationPropertiesPropertyName(v interface{}, d tpgresource
 }
 
 func expandApigeeOrganizationPropertiesPropertyValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApigeeOrganizationAddonsConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedAdvancedApiOpsConfig, err := expandApigeeOrganizationAddonsConfigAdvancedApiOpsConfig(original["advanced_api_ops_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAdvancedApiOpsConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["advancedApiOpsConfig"] = transformedAdvancedApiOpsConfig
+	}
+
+	transformedIntegrationConfig, err := expandApigeeOrganizationAddonsConfigIntegrationConfig(original["integration_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedIntegrationConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["integrationConfig"] = transformedIntegrationConfig
+	}
+
+	transformedMonetizationConfig, err := expandApigeeOrganizationAddonsConfigMonetizationConfig(original["monetization_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedMonetizationConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["monetizationConfig"] = transformedMonetizationConfig
+	}
+
+	transformedApiSecurityConfig, err := expandApigeeOrganizationAddonsConfigApiSecurityConfig(original["api_security_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedApiSecurityConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["apiSecurityConfig"] = transformedApiSecurityConfig
+	}
+
+	transformedConnectorsPlatformConfig, err := expandApigeeOrganizationAddonsConfigConnectorsPlatformConfig(original["connectors_platform_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedConnectorsPlatformConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["connectorsPlatformConfig"] = transformedConnectorsPlatformConfig
+	}
+
+	return transformed, nil
+}
+
+func expandApigeeOrganizationAddonsConfigAdvancedApiOpsConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnabled, err := expandApigeeOrganizationAddonsConfigAdvancedApiOpsConfigEnabled(original["enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["enabled"] = transformedEnabled
+	}
+
+	return transformed, nil
+}
+
+func expandApigeeOrganizationAddonsConfigAdvancedApiOpsConfigEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApigeeOrganizationAddonsConfigIntegrationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnabled, err := expandApigeeOrganizationAddonsConfigIntegrationConfigEnabled(original["enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["enabled"] = transformedEnabled
+	}
+
+	return transformed, nil
+}
+
+func expandApigeeOrganizationAddonsConfigIntegrationConfigEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApigeeOrganizationAddonsConfigMonetizationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnabled, err := expandApigeeOrganizationAddonsConfigMonetizationConfigEnabled(original["enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["enabled"] = transformedEnabled
+	}
+
+	return transformed, nil
+}
+
+func expandApigeeOrganizationAddonsConfigMonetizationConfigEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApigeeOrganizationAddonsConfigApiSecurityConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnabled, err := expandApigeeOrganizationAddonsConfigApiSecurityConfigEnabled(original["enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["enabled"] = transformedEnabled
+	}
+
+	transformedExpiresAt, err := expandApigeeOrganizationAddonsConfigApiSecurityConfigExpiresAt(original["expires_at"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedExpiresAt); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["expiresAt"] = transformedExpiresAt
+	}
+
+	return transformed, nil
+}
+
+func expandApigeeOrganizationAddonsConfigApiSecurityConfigEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApigeeOrganizationAddonsConfigApiSecurityConfigExpiresAt(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApigeeOrganizationAddonsConfigConnectorsPlatformConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnabled, err := expandApigeeOrganizationAddonsConfigConnectorsPlatformConfigEnabled(original["enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["enabled"] = transformedEnabled
+	}
+
+	transformedExpiresAt, err := expandApigeeOrganizationAddonsConfigConnectorsPlatformConfigExpiresAt(original["expires_at"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedExpiresAt); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["expiresAt"] = transformedExpiresAt
+	}
+
+	return transformed, nil
+}
+
+func expandApigeeOrganizationAddonsConfigConnectorsPlatformConfigEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApigeeOrganizationAddonsConfigConnectorsPlatformConfigExpiresAt(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
