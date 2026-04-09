@@ -164,6 +164,12 @@ func GetSecurityScannerScanConfigApiObject(d tpgresource.TerraformResourceData, 
 	} else if v, ok := d.GetOkExists("export_to_security_command_center"); !tpgresource.IsEmptyValue(reflect.ValueOf(exportToSecurityCommandCenterProp)) && (ok || !reflect.DeepEqual(v, exportToSecurityCommandCenterProp)) {
 		obj["exportToSecurityCommandCenter"] = exportToSecurityCommandCenterProp
 	}
+	riskLevelProp, err := expandSecurityScannerScanConfigRiskLevel(d.Get("risk_level"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("risk_level"); !tpgresource.IsEmptyValue(reflect.ValueOf(riskLevelProp)) && (ok || !reflect.DeepEqual(v, riskLevelProp)) {
+		obj["riskLevel"] = riskLevelProp
+	}
 
 	return obj, nil
 }
@@ -344,5 +350,9 @@ func expandSecurityScannerScanConfigTargetPlatforms(v interface{}, d tpgresource
 }
 
 func expandSecurityScannerScanConfigExportToSecurityCommandCenter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandSecurityScannerScanConfigRiskLevel(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
