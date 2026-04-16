@@ -122,6 +122,12 @@ func GetServiceUsageConsumerQuotaOverrideApiObject(d tpgresource.TerraformResour
 	} else if v, ok := d.GetOkExists("dimensions"); !tpgresource.IsEmptyValue(reflect.ValueOf(dimensionsProp)) && (ok || !reflect.DeepEqual(v, dimensionsProp)) {
 		obj["dimensions"] = dimensionsProp
 	}
+	unitProp, err := expandServiceUsageConsumerQuotaOverrideUnit(d.Get("unit"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("unit"); !tpgresource.IsEmptyValue(reflect.ValueOf(unitProp)) && (ok || !reflect.DeepEqual(v, unitProp)) {
+		obj["unit"] = unitProp
+	}
 
 	return obj, nil
 }
@@ -139,4 +145,8 @@ func expandServiceUsageConsumerQuotaOverrideDimensions(v interface{}, d tpgresou
 		m[k] = val.(string)
 	}
 	return m, nil
+}
+
+func expandServiceUsageConsumerQuotaOverrideUnit(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
