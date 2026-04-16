@@ -164,6 +164,12 @@ func GetSecurityScannerScanConfigApiObject(d tpgresource.TerraformResourceData, 
 	} else if v, ok := d.GetOkExists("export_to_security_command_center"); !tpgresource.IsEmptyValue(reflect.ValueOf(exportToSecurityCommandCenterProp)) && (ok || !reflect.DeepEqual(v, exportToSecurityCommandCenterProp)) {
 		obj["exportToSecurityCommandCenter"] = exportToSecurityCommandCenterProp
 	}
+	staticIpScanProp, err := expandSecurityScannerScanConfigStaticIpScan(d.Get("static_ip_scan"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("static_ip_scan"); !tpgresource.IsEmptyValue(reflect.ValueOf(staticIpScanProp)) && (ok || !reflect.DeepEqual(v, staticIpScanProp)) {
+		obj["staticIpScan"] = staticIpScanProp
+	}
 
 	return obj, nil
 }
@@ -344,5 +350,9 @@ func expandSecurityScannerScanConfigTargetPlatforms(v interface{}, d tpgresource
 }
 
 func expandSecurityScannerScanConfigExportToSecurityCommandCenter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandSecurityScannerScanConfigStaticIpScan(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
