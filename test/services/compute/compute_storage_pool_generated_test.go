@@ -56,6 +56,8 @@ func TestAccComputeStoragePool(t *testing.T) {
 					"dynamic",
 					"for_each",
 					"lifecycle",
+					"params",
+					"params.resource_manager_tags",
 					"provider",
 					"timeouts",
 				},
