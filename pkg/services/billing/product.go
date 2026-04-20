@@ -23,7 +23,9 @@ const ProductName = "billing"
 
 func init() {
 	registry.Product{
-		Name:    "billing",
-		BaseUrl: "https://billingbudgets.googleapis.com/v1/",
+		Name:                 "billing",
+		BaseUrl:              "https://billingbudgets.googleapis.com/v1/",
+		CustomEndpointField:  "billing_custom_endpoint",
+		CustomEndpointEnvVar: "GOOGLE_BILLING_CUSTOM_ENDPOINT",
 	}.Register()
 }

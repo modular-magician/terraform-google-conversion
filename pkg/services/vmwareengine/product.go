@@ -23,7 +23,9 @@ const ProductName = "vmwareengine"
 
 func init() {
 	registry.Product{
-		Name:    "vmwareengine",
-		BaseUrl: "https://vmwareengine.googleapis.com/v1/",
+		Name:                 "vmwareengine",
+		BaseUrl:              "https://vmwareengine.googleapis.com/v1/",
+		CustomEndpointField:  "vmwareengine_custom_endpoint",
+		CustomEndpointEnvVar: "GOOGLE_VMWAREENGINE_CUSTOM_ENDPOINT",
 	}.Register()
 }

@@ -23,7 +23,9 @@ const ProductName = "cloudrun"
 
 func init() {
 	registry.Product{
-		Name:    "cloudrun",
-		BaseUrl: "https://{{location}}-run.googleapis.com/",
+		Name:                 "cloudrun",
+		BaseUrl:              "https://{{location}}-run.googleapis.com/",
+		CustomEndpointField:  "cloud_run_custom_endpoint",
+		CustomEndpointEnvVar: "GOOGLE_CLOUD_RUN_CUSTOM_ENDPOINT",
 	}.Register()
 }
