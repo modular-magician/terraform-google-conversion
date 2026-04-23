@@ -27,6 +27,10 @@ func TestAccComputeUrlMap(t *testing.T) {
 	}
 	tests := []test.TestCase{
 		{
+			Name: "TestAccComputeUrlMap_cachePolicyMultiLevelUpdate",
+			Skip: "Index mismatch in path_matcher due to test framework limitation",
+		},
+		{
 			Name: "TestAccComputeUrlMap_urlMapBucketAndServiceExample",
 		},
 		{
@@ -106,9 +110,6 @@ func TestAccComputeUrlMap(t *testing.T) {
 		},
 		{
 			Name: "TestAccComputeUrlMap_routeRulesCustomErrorResponsePolicy",
-		},
-		{
-			Name: "TestAccComputeUrlMap_cachePolicyMultiLevelUpdate",
 		},
 	}
 
