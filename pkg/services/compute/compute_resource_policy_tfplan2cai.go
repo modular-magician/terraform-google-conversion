@@ -528,6 +528,20 @@ func expandComputeResourcePolicyGroupPlacementPolicy(v interface{}, d tpgresourc
 		transformed["gpuTopology"] = transformedGpuTopology
 	}
 
+	transformedAcceleratorTopologyMode, err := expandComputeResourcePolicyGroupPlacementPolicyAcceleratorTopologyMode(original["accelerator_topology_mode"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAcceleratorTopologyMode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["acceleratorTopologyMode"] = transformedAcceleratorTopologyMode
+	}
+
+	transformedSliceCount, err := expandComputeResourcePolicyGroupPlacementPolicySliceCount(original["slice_count"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSliceCount); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["sliceCount"] = transformedSliceCount
+	}
+
 	return transformed, nil
 }
 
@@ -544,6 +558,14 @@ func expandComputeResourcePolicyGroupPlacementPolicyCollocation(v interface{}, d
 }
 
 func expandComputeResourcePolicyGroupPlacementPolicyGpuTopology(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeResourcePolicyGroupPlacementPolicyAcceleratorTopologyMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeResourcePolicyGroupPlacementPolicySliceCount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

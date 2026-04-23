@@ -445,6 +445,10 @@ func flattenComputeResourcePolicyGroupPlacementPolicy(v interface{}, d *schema.R
 		flattenComputeResourcePolicyGroupPlacementPolicyCollocation(original["collocation"], d, config)
 	transformed["gpu_topology"] =
 		flattenComputeResourcePolicyGroupPlacementPolicyGpuTopology(original["gpuTopology"], d, config)
+	transformed["accelerator_topology_mode"] =
+		flattenComputeResourcePolicyGroupPlacementPolicyAcceleratorTopologyMode(original["acceleratorTopologyMode"], d, config)
+	transformed["slice_count"] =
+		flattenComputeResourcePolicyGroupPlacementPolicySliceCount(original["sliceCount"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -497,6 +501,27 @@ func flattenComputeResourcePolicyGroupPlacementPolicyGpuTopology(v interface{}, 
 		return nil
 	}
 	return v
+}
+
+func flattenComputeResourcePolicyGroupPlacementPolicyAcceleratorTopologyMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenComputeResourcePolicyGroupPlacementPolicySliceCount(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
 }
 
 func flattenComputeResourcePolicyInstanceSchedulePolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

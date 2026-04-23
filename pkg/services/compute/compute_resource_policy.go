@@ -123,6 +123,13 @@ which cannot be a dash.`,
 				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"accelerator_topology_mode": {
+							Type:         schema.TypeString,
+							Optional:     true,
+							ValidateFunc: verify.ValidateEnum([]string{"AUTO_CONNECT", "PROVISION_ONLY", ""}),
+							Description: `Specifies the connection mode for the accelerator topology. If not
+specified, the default is AUTO_CONNECT. Possible values: ["AUTO_CONNECT", "PROVISION_ONLY"]`,
+						},
 						"availability_domain_count": {
 							Type:     schema.TypeInt,
 							Optional: true,
@@ -144,6 +151,11 @@ attached. Possible values: ["COLLOCATED"]`,
 							ForceNew:      true,
 							Description:   `Specifies the shape of the GPU slice, in slice based GPU families eg. A4X.`,
 							ConflictsWith: []string{},
+						},
+						"slice_count": {
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Description: `Specifies the number of slices in a multislice workload.`,
 						},
 						"vm_count": {
 							Type:     schema.TypeInt,
