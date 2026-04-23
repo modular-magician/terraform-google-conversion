@@ -116,6 +116,12 @@ func GetComputeRegionDiskResourcePolicyAttachmentApiObject(d tpgresource.Terrafo
 	} else if v, ok := d.GetOkExists("name"); !tpgresource.IsEmptyValue(reflect.ValueOf(nameProp)) && (ok || !reflect.DeepEqual(v, nameProp)) {
 		obj["name"] = nameProp
 	}
+	locationHintProp, err := expandComputeRegionDiskResourcePolicyAttachmentLocationHint(d.Get("location_hint"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("location_hint"); !tpgresource.IsEmptyValue(reflect.ValueOf(locationHintProp)) && (ok || !reflect.DeepEqual(v, locationHintProp)) {
+		obj["locationHint"] = locationHintProp
+	}
 
 	return resourceComputeRegionDiskResourcePolicyAttachmentEncoder(d, config, obj)
 }
@@ -141,5 +147,9 @@ func resourceComputeRegionDiskResourcePolicyAttachmentEncoder(d tpgresource.Terr
 }
 
 func expandComputeRegionDiskResourcePolicyAttachmentName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionDiskResourcePolicyAttachmentLocationHint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
