@@ -296,6 +296,7 @@ type Config struct {
 	DataCatalogBasePath              string
 	DataformBasePath                 string
 	DataFusionBasePath               string
+	DataLineageBasePath              string
 	DataLossPreventionBasePath       string
 	DataPipelineBasePath             string
 	DataplexBasePath                 string
@@ -479,6 +480,7 @@ const DatabaseMigrationServiceBasePathKey = "DatabaseMigrationService"
 const DataCatalogBasePathKey = "DataCatalog"
 const DataformBasePathKey = "Dataform"
 const DataFusionBasePathKey = "DataFusion"
+const DataLineageBasePathKey = "DataLineage"
 const DataLossPreventionBasePathKey = "DataLossPrevention"
 const DataPipelineBasePathKey = "DataPipeline"
 const DataplexBasePathKey = "Dataplex"
@@ -649,6 +651,7 @@ var DefaultBasePaths = map[string]string{
 	DataCatalogBasePathKey:              "https://datacatalog.googleapis.com/v1/",
 	DataformBasePathKey:                 "https://dataform.googleapis.com/v1/",
 	DataFusionBasePathKey:               "https://datafusion.googleapis.com/v1/",
+	DataLineageBasePathKey:              "https://datalineage.googleapis.com/v1/",
 	DataLossPreventionBasePathKey:       "https://dlp.googleapis.com/v2/",
 	DataPipelineBasePathKey:             "https://datapipelines.googleapis.com/v1/",
 	DataplexBasePathKey:                 "https://dataplex.googleapis.com/v1/",
@@ -828,6 +831,7 @@ var DefaultRepStatus = map[string]bool{
 	DataCatalogBasePathKey:              false,
 	DataformBasePathKey:                 false,
 	DataFusionBasePathKey:               false,
+	DataLineageBasePathKey:              false,
 	DataLossPreventionBasePathKey:       false,
 	DataPipelineBasePathKey:             false,
 	DataplexBasePathKey:                 false,
@@ -1277,6 +1281,11 @@ func SetEndpointDefaults(d *schema.ResourceData) error {
 		d.Set("data_fusion_custom_endpoint", MultiEnvDefault([]string{
 			"GOOGLE_DATA_FUSION_CUSTOM_ENDPOINT",
 		}, DefaultBasePaths[DataFusionBasePathKey]))
+	}
+	if d.Get("data_lineage_custom_endpoint") == "" {
+		d.Set("data_lineage_custom_endpoint", MultiEnvDefault([]string{
+			"GOOGLE_DATA_LINEAGE_CUSTOM_ENDPOINT",
+		}, DefaultBasePaths[DataLineageBasePathKey]))
 	}
 	if d.Get("data_loss_prevention_custom_endpoint") == "" {
 		d.Set("data_loss_prevention_custom_endpoint", MultiEnvDefault([]string{
@@ -2901,6 +2910,7 @@ func ConfigureBasePaths(c *Config) {
 	c.DataCatalogBasePath = DefaultBasePaths[DataCatalogBasePathKey]
 	c.DataformBasePath = DefaultBasePaths[DataformBasePathKey]
 	c.DataFusionBasePath = DefaultBasePaths[DataFusionBasePathKey]
+	c.DataLineageBasePath = DefaultBasePaths[DataLineageBasePathKey]
 	c.DataLossPreventionBasePath = DefaultBasePaths[DataLossPreventionBasePathKey]
 	c.DataPipelineBasePath = DefaultBasePaths[DataPipelineBasePathKey]
 	c.DataplexBasePath = DefaultBasePaths[DataplexBasePathKey]
