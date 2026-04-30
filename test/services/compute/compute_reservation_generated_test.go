@@ -39,6 +39,9 @@ func TestAccComputeReservation(t *testing.T) {
 			Name: "TestAccComputeReservation_sharedReservationBasicExample",
 		},
 		{
+			Name: "TestAccComputeReservation_resourcePolicies",
+		},
+		{
 			Name: "TestAccComputeReservation_update",
 		},
 		{

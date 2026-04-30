@@ -163,6 +163,12 @@ func GetComputeReservationCaiObject(d tpgresource.TerraformResourceData, config 
 	} else if v, ok := d.GetOkExists("reservation_sharing_policy"); !tpgresource.IsEmptyValue(reflect.ValueOf(reservationSharingPolicyProp)) && (ok || !reflect.DeepEqual(v, reservationSharingPolicyProp)) {
 		obj["reservationSharingPolicy"] = reservationSharingPolicyProp
 	}
+	resourcePoliciesProp, err := expandComputeReservationResourcePolicies(d.Get("resource_policies"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("resource_policies"); !tpgresource.IsEmptyValue(reflect.ValueOf(resourcePoliciesProp)) && (ok || !reflect.DeepEqual(v, resourcePoliciesProp)) {
+		obj["resourcePolicies"] = resourcePoliciesProp
+	}
 	zoneProp, err := expandComputeReservationZone(d.Get("zone"), d, config)
 	if err != nil {
 		return nil, err
@@ -487,6 +493,17 @@ func expandComputeReservationReservationSharingPolicy(v interface{}, d tpgresour
 
 func expandComputeReservationReservationSharingPolicyServiceShareType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandComputeReservationResourcePolicies(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
 
 func expandComputeReservationZone(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
