@@ -193,6 +193,9 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	"cloudbuild.googleapis.com/Connection": {
 		"Default": cloudbuildv2.NewCloudbuildv2ConnectionCai2hclConverter(provider),
 	},
+	"cloudbuild.googleapis.com/GitLabConfig": {
+		"Default": cloudbuild.NewCloudBuildGitLabConfigCai2hclConverter(provider),
+	},
 	"cloudbuild.googleapis.com/Repository": {
 		"Default": cloudbuildv2.NewCloudbuildv2RepositoryCai2hclConverter(provider),
 	},

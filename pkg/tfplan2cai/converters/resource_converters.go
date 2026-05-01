@@ -114,6 +114,7 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_cloud_asset_organization_feed":                   cloudasset.CloudAssetOrganizationFeedTfplan2caiConverter(),
 	"google_cloud_asset_project_feed":                        cloudasset.CloudAssetProjectFeedTfplan2caiConverter(),
 	"google_cloudbuild_bitbucket_server_config":              cloudbuild.CloudBuildBitbucketServerConfigTfplan2caiConverter(),
+	"google_cloudbuild_git_lab_config":                       cloudbuild.CloudBuildGitLabConfigTfplan2caiConverter(),
 	"google_cloudbuildv2_connection":                         cloudbuildv2.Cloudbuildv2ConnectionTfplan2caiConverter(),
 	"google_cloudbuildv2_repository":                         cloudbuildv2.Cloudbuildv2RepositoryTfplan2caiConverter(),
 	"google_clouddeploy_automation":                          clouddeploy.ClouddeployAutomationTfplan2caiConverter(),
