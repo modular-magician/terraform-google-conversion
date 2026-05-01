@@ -53,7 +53,6 @@ terraform {
 		}
 	}
 
-	terraformInit(t, "terraform", dir, project)
 	terraformPlan(t, "terraform", dir, project, name+".tfplan")
 	payload := terraformShow(t, "terraform", dir, project, name+".tfplan")
 	saveFile(t, dir, name+".tfplan.json", payload)
