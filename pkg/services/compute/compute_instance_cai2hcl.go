@@ -59,7 +59,7 @@ func (c *ComputeInstanceCai2hclConverter) convertResourceData(asset caiasset.Ass
 		hclData["can_ip_forward"] = instance.CanIpForward
 	}
 	hclData["machine_type"] = tpgresource.GetResourceNameFromSelfLink(instance.MachineType)
-	hclData["network_performance_config"] = flattenNetworkPerformanceConfig(instance.NetworkPerformanceConfig)
+	hclData["network_performance_config"] = flattenNetworkPerformanceConfig(typedToMap(instance.NetworkPerformanceConfig))
 
 	// Set the networks
 	networkInterfaces, _, _, err := flattenNetworkInterfacesTgc(instance.NetworkInterfaces, project)
@@ -83,8 +83,8 @@ func (c *ComputeInstanceCai2hclConverter) convertResourceData(asset caiasset.Ass
 
 	hclData["scheduling"] = flattenSchedulingTgc(instance.Scheduling)
 	hclData["guest_accelerator"] = flattenGuestAcceleratorsTgc(instance.GuestAccelerators)
-	hclData["shielded_instance_config"] = flattenShieldedVmConfig(instance.ShieldedInstanceConfig)
-	hclData["enable_display"] = flattenEnableDisplay(instance.DisplayDevice)
+	hclData["shielded_instance_config"] = flattenShieldedVmConfig(typedToMap(instance.ShieldedInstanceConfig))
+	hclData["enable_display"] = flattenEnableDisplay(typedToMap(instance.DisplayDevice))
 	hclData["min_cpu_platform"] = instance.MinCpuPlatform
 
 	// Only convert the field when its value is not default false
@@ -95,11 +95,11 @@ func (c *ComputeInstanceCai2hclConverter) convertResourceData(asset caiasset.Ass
 	hclData["name"] = instance.Name
 	hclData["description"] = instance.Description
 	hclData["hostname"] = instance.Hostname
-	hclData["confidential_instance_config"] = flattenConfidentialInstanceConfig(instance.ConfidentialInstanceConfig)
-	hclData["advanced_machine_features"] = flattenAdvancedMachineFeatures(instance.AdvancedMachineFeatures)
+	hclData["confidential_instance_config"] = flattenConfidentialInstanceConfig(typedToMap(instance.ConfidentialInstanceConfig))
+	hclData["advanced_machine_features"] = flattenAdvancedMachineFeatures(typedToMap(instance.AdvancedMachineFeatures))
 	hclData["reservation_affinity"] = flattenReservationAffinityTgc(instance.ReservationAffinity)
 	hclData["key_revocation_action_type"] = strings.TrimSuffix(instance.KeyRevocationActionType, "_ON_KEY_REVOCATION")
-	hclData["instance_encryption_key"] = flattenComputeInstanceEncryptionKey(instance.InstanceEncryptionKey)
+	hclData["instance_encryption_key"] = flattenComputeInstanceEncryptionKey(typedToMap(instance.InstanceEncryptionKey))
 
 	// TODO: convert details from the boot disk assets (separate disk assets) into initialize_params in cai2hcl?
 	// It needs to integrate the disk assets into instance assets with the resolver.
@@ -206,7 +206,7 @@ func flattenBootDisk(disk *compute.AttachedDisk, instanceName string) []map[stri
 	result["interface"] = disk.Interface
 	// "source" field is converted and "initialize_params" is not converted as these two fields conflict with each other.
 	result["source"] = tpgresource.ConvertSelfLinkToV1(disk.Source)
-	result["guest_os_features"] = flattenComputeInstanceGuestOsFeatures(disk.GuestOsFeatures)
+	result["guest_os_features"] = flattenComputeInstanceGuestOsFeatures(typedToSlice(disk.GuestOsFeatures))
 
 	if len(result) == 0 {
 		return nil
