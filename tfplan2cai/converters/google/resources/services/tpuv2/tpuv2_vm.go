@@ -240,6 +240,12 @@ func GetTpuV2VmApiObject(d tpgresource.TerraformResourceData, config *transport_
 	} else if v, ok := d.GetOkExists("tags"); !tpgresource.IsEmptyValue(reflect.ValueOf(tagsProp)) && (ok || !reflect.DeepEqual(v, tagsProp)) {
 		obj["tags"] = tagsProp
 	}
+	autocheckpointEnabledProp, err := expandTpuV2VmAutocheckpointEnabled(d.Get("autocheckpoint_enabled"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("autocheckpoint_enabled"); !tpgresource.IsEmptyValue(reflect.ValueOf(autocheckpointEnabledProp)) && (ok || !reflect.DeepEqual(v, autocheckpointEnabledProp)) {
+		obj["autocheckpointEnabled"] = autocheckpointEnabledProp
+	}
 	effectiveLabelsProp, err := expandTpuV2VmEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -613,6 +619,10 @@ func expandTpuV2VmMetadata(v interface{}, d tpgresource.TerraformResourceData, c
 }
 
 func expandTpuV2VmTags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandTpuV2VmAutocheckpointEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
