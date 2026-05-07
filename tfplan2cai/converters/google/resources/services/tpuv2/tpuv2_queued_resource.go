@@ -122,6 +122,12 @@ func GetTpuV2QueuedResourceApiObject(d tpgresource.TerraformResourceData, config
 	} else if v, ok := d.GetOkExists("tpu"); !tpgresource.IsEmptyValue(reflect.ValueOf(tpuProp)) && (ok || !reflect.DeepEqual(v, tpuProp)) {
 		obj["tpu"] = tpuProp
 	}
+	provisioningModelProp, err := expandTpuV2QueuedResourceProvisioningModel(d.Get("provisioning_model"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("provisioning_model"); !tpgresource.IsEmptyValue(reflect.ValueOf(provisioningModelProp)) && (ok || !reflect.DeepEqual(v, provisioningModelProp)) {
+		obj["provisioningModel"] = provisioningModelProp
+	}
 
 	return obj, nil
 }
@@ -321,5 +327,9 @@ func expandTpuV2QueuedResourceTpuNodeSpecNodeNetworkConfigCanIpForward(v interfa
 }
 
 func expandTpuV2QueuedResourceTpuNodeSpecNodeNetworkConfigQueueCount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandTpuV2QueuedResourceProvisioningModel(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
