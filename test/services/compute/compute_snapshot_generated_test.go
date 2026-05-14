@@ -67,6 +67,8 @@ func TestAccComputeSnapshot(t *testing.T) {
 					"snapshot_encryption_key.raw_key",
 					"snapshot_encryption_key.rsa_encrypted_key",
 					"source_disk_encryption_key",
+					"source_disk_encryption_key.raw_key",
+					"source_disk_encryption_key.rsa_encrypted_key",
 					"source_instant_snapshot",
 					"timeouts",
 					"zone",

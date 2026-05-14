@@ -158,6 +158,8 @@ func TestAccComputeDisk(t *testing.T) {
 					"params",
 					"params.resource_manager_tags",
 					"provider",
+					"source_image_encryption_key.raw_key",
+					"source_snapshot_encryption_key.raw_key",
 					"source_storage_object",
 					"timeouts",
 				},

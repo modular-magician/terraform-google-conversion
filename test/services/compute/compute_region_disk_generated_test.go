@@ -110,6 +110,7 @@ func TestAccComputeRegionDisk(t *testing.T) {
 					"source_image_encryption_key",
 					"source_image_encryption_key.raw_key",
 					"source_image_encryption_key.rsa_encrypted_key",
+					"source_snapshot_encryption_key.raw_key",
 					"timeouts",
 				},
 				"google_compute_region_disk",
