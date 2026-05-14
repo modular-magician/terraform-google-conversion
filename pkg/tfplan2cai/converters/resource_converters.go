@@ -268,6 +268,7 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_privateca_ca_pool":                               privateca.PrivatecaCaPoolTfplan2caiConverter(),
 	"google_privateca_certificate":                           privateca.PrivatecaCertificateTfplan2caiConverter(),
 	"google_privateca_certificate_template":                  privateca.PrivatecaCertificateTemplateTfplan2caiConverter(),
+	"google_pubsub_snapshot":                                 pubsub.PubsubSnapshotTfplan2caiConverter(),
 	"google_pubsub_subscription":                             pubsub.PubsubSubscriptionTfplan2caiConverter(),
 	"google_pubsub_topic":                                    pubsub.PubsubTopicTfplan2caiConverter(),
 	"google_redis_cluster":                                   redis.RedisClusterTfplan2caiConverter(),

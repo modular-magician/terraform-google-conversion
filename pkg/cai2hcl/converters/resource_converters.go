@@ -613,6 +613,9 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	"privateca.googleapis.com/CertificateTemplate": {
 		"Default": privateca.NewPrivatecaCertificateTemplateCai2hclConverter(provider),
 	},
+	"pubsub.googleapis.com/Snapshot": {
+		"Default": pubsub.NewPubsubSnapshotCai2hclConverter(provider),
+	},
 	"pubsub.googleapis.com/Subscription": {
 		"Default": pubsub.NewPubsubSubscriptionCai2hclConverter(provider),
 	},
