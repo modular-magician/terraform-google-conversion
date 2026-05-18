@@ -363,6 +363,27 @@ func expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSugge
 		transformed["disableHighLatencyFeaturesSyncDelivery"] = transformedDisableHighLatencyFeaturesSyncDelivery
 	}
 
+	transformedSkipEmptyEventBasedSuggestion, err := expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSuggestionConfigSkipEmptyEventBasedSuggestion(original["skip_empty_event_based_suggestion"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSkipEmptyEventBasedSuggestion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["skipEmptyEventBasedSuggestion"] = transformedSkipEmptyEventBasedSuggestion
+	}
+
+	transformedUseUnredactedConversationData, err := expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSuggestionConfigUseUnredactedConversationData(original["use_unredacted_conversation_data"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUseUnredactedConversationData); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["useUnredactedConversationData"] = transformedUseUnredactedConversationData
+	}
+
+	transformedEnableAsyncToolCall, err := expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSuggestionConfigEnableAsyncToolCall(original["enable_async_tool_call"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEnableAsyncToolCall); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["enableAsyncToolCall"] = transformedEnableAsyncToolCall
+	}
+
 	return transformed, nil
 }
 
@@ -447,6 +468,13 @@ func expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSugge
 			return nil, err
 		} else if val := reflect.ValueOf(transformedConversationProcessConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 			transformed["conversationProcessConfig"] = transformedConversationProcessConfig
+		}
+
+		transformedEnableResponseDebugInfo, err := expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSuggestionConfigFeatureConfigsEnableResponseDebugInfo(original["enable_response_debug_info"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedEnableResponseDebugInfo); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["enableResponseDebugInfo"] = transformedEnableResponseDebugInfo
 		}
 
 		req = append(req, transformed)
@@ -791,6 +819,10 @@ func expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSugge
 	return v, nil
 }
 
+func expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSuggestionConfigFeatureConfigsEnableResponseDebugInfo(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSuggestionConfigGroupSuggestionResponses(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -800,6 +832,18 @@ func expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSugge
 }
 
 func expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSuggestionConfigDisableHighLatencyFeaturesSyncDelivery(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSuggestionConfigSkipEmptyEventBasedSuggestion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSuggestionConfigUseUnredactedConversationData(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDialogflowConversationProfileHumanAgentAssistantConfigHumanAgentSuggestionConfigEnableAsyncToolCall(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -841,6 +885,27 @@ func expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggesti
 		return nil, err
 	} else if val := reflect.ValueOf(transformedDisableHighLatencyFeaturesSyncDelivery); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 		transformed["disableHighLatencyFeaturesSyncDelivery"] = transformedDisableHighLatencyFeaturesSyncDelivery
+	}
+
+	transformedSkipEmptyEventBasedSuggestion, err := expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggestionConfigSkipEmptyEventBasedSuggestion(original["skip_empty_event_based_suggestion"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSkipEmptyEventBasedSuggestion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["skipEmptyEventBasedSuggestion"] = transformedSkipEmptyEventBasedSuggestion
+	}
+
+	transformedUseUnredactedConversationData, err := expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggestionConfigUseUnredactedConversationData(original["use_unredacted_conversation_data"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUseUnredactedConversationData); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["useUnredactedConversationData"] = transformedUseUnredactedConversationData
+	}
+
+	transformedEnableAsyncToolCall, err := expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggestionConfigEnableAsyncToolCall(original["enable_async_tool_call"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEnableAsyncToolCall); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["enableAsyncToolCall"] = transformedEnableAsyncToolCall
 	}
 
 	return transformed, nil
@@ -927,6 +992,13 @@ func expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggesti
 			return nil, err
 		} else if val := reflect.ValueOf(transformedConversationProcessConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 			transformed["conversationProcessConfig"] = transformedConversationProcessConfig
+		}
+
+		transformedEnableResponseDebugInfo, err := expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggestionConfigFeatureConfigsEnableResponseDebugInfo(original["enable_response_debug_info"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedEnableResponseDebugInfo); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["enableResponseDebugInfo"] = transformedEnableResponseDebugInfo
 		}
 
 		req = append(req, transformed)
@@ -1337,6 +1409,10 @@ func expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggesti
 	return v, nil
 }
 
+func expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggestionConfigFeatureConfigsEnableResponseDebugInfo(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggestionConfigGroupSuggestionResponses(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -1346,6 +1422,18 @@ func expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggesti
 }
 
 func expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggestionConfigDisableHighLatencyFeaturesSyncDelivery(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggestionConfigSkipEmptyEventBasedSuggestion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggestionConfigUseUnredactedConversationData(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDialogflowConversationProfileHumanAgentAssistantConfigEndUserSuggestionConfigEnableAsyncToolCall(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
