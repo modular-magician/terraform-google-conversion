@@ -51,6 +51,12 @@ func TestAccSpannerDatabase(t *testing.T) {
 		{
 			Name: "TestAccSpannerDatabase_mrcmek",
 		},
+		{
+			Name: "TestAccSpannerDatabase_cmekReencryption",
+		},
+		{
+			Name: "TestAccSpannerDatabase_mrcmekReencryption",
+		},
 	}
 
 	for _, tt := range tests {

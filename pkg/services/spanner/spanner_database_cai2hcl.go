@@ -224,7 +224,7 @@ func flattenSpannerDatabaseEnableDropProtection(v interface{}, d *schema.Resourc
 
 func resourceSpannerDatabaseTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
 	// Ignore `kms_key_names` if `kms_key_name` is set, because that field takes precedence.
-	if raw, ok := res["encryptionConfig"]; ok {
+	if raw, ok := res["encryptionConfig"]; ok && raw != nil {
 		v := raw.(map[string]interface{})
 		if _, ok := v["kmsKeyName"]; ok {
 			v["kmsKeyNames"] = nil

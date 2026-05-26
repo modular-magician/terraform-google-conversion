@@ -106,7 +106,6 @@ func resourceSpannerEncryptionConfigCustomDiffFunc(diff tpgresource.TerraformRes
 		if len(newKeys) == 0 && len(oldKeys) == 1 && oldKeys[0] == kmsKeyName {
 			return diff.Clear("encryption_config.0.kms_key_names")
 		}
-		return diff.ForceNew("encryption_config.0.kms_key_names")
 	}
 	return nil
 }
@@ -208,7 +207,6 @@ whereas setting “enableDropProtection” to true protects the database from de
 			"encryption_config": {
 				Type:        schema.TypeList,
 				Optional:    true,
-				ForceNew:    true,
 				Description: `Encryption configuration for the database`,
 				MaxItems:    1,
 				Elem: &schema.Resource{
@@ -216,7 +214,6 @@ whereas setting “enableDropProtection” to true protects the database from de
 						"kms_key_name": {
 							Type:     schema.TypeString,
 							Optional: true,
-							ForceNew: true,
 							Description: `Fully qualified name of the KMS key to use to encrypt this database. This key must exist
 in the same location as the Spanner Database.`,
 							ExactlyOneOf: []string{"encryption_config.0.kms_key_name", "encryption_config.0.kms_key_names"},
@@ -225,7 +222,6 @@ in the same location as the Spanner Database.`,
 							Type:     schema.TypeList,
 							Computed: true,
 							Optional: true,
-							ForceNew: true,
 							Description: `Fully qualified name of the KMS keys to use to encrypt this database. The keys must exist
 in the same locations as the Spanner Database.`,
 							Elem: &schema.Schema{

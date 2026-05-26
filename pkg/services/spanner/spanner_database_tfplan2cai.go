@@ -136,7 +136,7 @@ func GetSpannerDatabaseCaiObject(d tpgresource.TerraformResourceData, config *tr
 	encryptionConfigProp, err := expandSpannerDatabaseEncryptionConfig(d.Get("encryption_config"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("encryption_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(encryptionConfigProp)) && (ok || !reflect.DeepEqual(v, encryptionConfigProp)) {
+	} else if v, ok := d.GetOkExists("encryption_config"); ok || !reflect.DeepEqual(v, encryptionConfigProp) {
 		obj["encryptionConfig"] = encryptionConfigProp
 	}
 	databaseDialectProp, err := expandSpannerDatabaseDatabaseDialect(d.Get("database_dialect"), d, config)
