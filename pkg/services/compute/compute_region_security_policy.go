@@ -187,6 +187,17 @@ Specifically, the name must be 1-63 characters long and match the regular expres
 				Optional:    true,
 				Description: `An optional description of this resource. Provide this property when you create the resource.`,
 			},
+			"labels": {
+				Type:     schema.TypeMap,
+				Optional: true,
+				Description: `Labels for this resource. These can only be added or modified by the setLabels method.
+Each label key/value pair must comply with RFC1035. Label values may be empty.
+
+
+**Note**: This field is non-authoritative, and will only manage the labels present in your configuration.
+Please refer to the field 'effective_labels' for all of the labels present on the resource.`,
+				Elem: &schema.Schema{Type: schema.TypeString},
+			},
 			"region": {
 				Type:             schema.TypeString,
 				Computed:         true,
@@ -713,11 +724,26 @@ The last byte of the field (in network byte order) corresponds to the least sign
 					},
 				},
 			},
+			"effective_labels": {
+				Type:        schema.TypeMap,
+				Computed:    true,
+				Description: `All of labels (key/value pairs) present on the resource in GCP, including the labels configured through Terraform, other clients and services.`,
+				Elem:        &schema.Schema{Type: schema.TypeString},
+			},
 			"fingerprint": {
 				Type:     schema.TypeString,
 				Computed: true,
 				Description: `Fingerprint of this resource. This field is used internally during
 updates of this resource.`,
+			},
+			"label_fingerprint": {
+				Type:     schema.TypeString,
+				Computed: true,
+				Description: `A fingerprint for the labels being applied to this security policy, which is essentially
+a hash of the labels set used for optimistic locking. The fingerprint is initially generated
+by Compute Engine and changes after every request to modify or update labels.
+You must always provide an up-to-date fingerprint hash in order to update or change labels,
+otherwise the request will fail with error 412 conditionNotMet.`,
 			},
 			"policy_id": {
 				Type:        schema.TypeString,
@@ -733,6 +759,13 @@ updates of this resource.`,
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: `Server-defined URL for this resource with the resource id.`,
+			},
+			"terraform_labels": {
+				Type:     schema.TypeMap,
+				Computed: true,
+				Description: `The combination of labels configured directly on the resource
+ and default labels configured on the provider.`,
+				Elem: &schema.Schema{Type: schema.TypeString},
 			},
 			"project": {
 				Type:     schema.TypeString,

@@ -124,11 +124,12 @@ func (c *ComputeRegionSecurityPolicyCai2hclConverter) convertResourceData(asset 
 	}
 	hclData := make(map[string]interface{})
 
-	outputFields := map[string]struct{}{"fingerprint": struct{}{}, "policy_id": struct{}{}, "self_link": struct{}{}, "self_link_with_policy_id": struct{}{}}
+	outputFields := map[string]struct{}{"effective_labels": struct{}{}, "fingerprint": struct{}{}, "label_fingerprint": struct{}{}, "policy_id": struct{}{}, "self_link": struct{}{}, "self_link_with_policy_id": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/securityPolicies/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeRegionSecurityPolicyName(res["name"], d, config)
 	hclData["description"] = flattenComputeRegionSecurityPolicyDescription(res["description"], d, config)
+	hclData["labels"] = flattenComputeRegionSecurityPolicyLabels(res["labels"], d, config)
 	hclData["type"] = flattenComputeRegionSecurityPolicyType(res["type"], d, config)
 	hclData["ddos_protection_config"] = flattenComputeRegionSecurityPolicyDdosProtectionConfig(res["ddosProtectionConfig"], d, config)
 	hclData["advanced_options_config"] = flattenComputeRegionSecurityPolicyAdvancedOptionsConfig(res["advancedOptionsConfig"], d, config)
@@ -165,6 +166,10 @@ func flattenComputeRegionSecurityPolicyDescription(v interface{}, d *schema.Reso
 		return nil
 	}
 	return v
+}
+
+func flattenComputeRegionSecurityPolicyLabels(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return tgcresource.RemoveTerraformAttributionLabel(v)
 }
 
 func flattenComputeRegionSecurityPolicyType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

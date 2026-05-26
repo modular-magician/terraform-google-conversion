@@ -128,6 +128,12 @@ func GetComputeRegionSecurityPolicyApiObject(d tpgresource.TerraformResourceData
 	} else if v, ok := d.GetOkExists("fingerprint"); !tpgresource.IsEmptyValue(reflect.ValueOf(fingerprintProp)) && (ok || !reflect.DeepEqual(v, fingerprintProp)) {
 		obj["fingerprint"] = fingerprintProp
 	}
+	labelFingerprintProp, err := expandComputeRegionSecurityPolicyLabelFingerprint(d.Get("label_fingerprint"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("label_fingerprint"); !tpgresource.IsEmptyValue(reflect.ValueOf(labelFingerprintProp)) && (ok || !reflect.DeepEqual(v, labelFingerprintProp)) {
+		obj["labelFingerprint"] = labelFingerprintProp
+	}
 	typeProp, err := expandComputeRegionSecurityPolicyType(d.Get("type"), d, config)
 	if err != nil {
 		return nil, err
@@ -158,6 +164,12 @@ func GetComputeRegionSecurityPolicyApiObject(d tpgresource.TerraformResourceData
 	} else if v, ok := d.GetOkExists("rules"); !tpgresource.IsEmptyValue(reflect.ValueOf(rulesProp)) && (ok || !reflect.DeepEqual(v, rulesProp)) {
 		obj["rules"] = rulesProp
 	}
+	effectiveLabelsProp, err := expandComputeRegionSecurityPolicyEffectiveLabels(d.Get("effective_labels"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("effective_labels"); !tpgresource.IsEmptyValue(reflect.ValueOf(effectiveLabelsProp)) && (ok || !reflect.DeepEqual(v, effectiveLabelsProp)) {
+		obj["labels"] = effectiveLabelsProp
+	}
 	regionProp, err := expandComputeRegionSecurityPolicyRegion(d.Get("region"), d, config)
 	if err != nil {
 		return nil, err
@@ -177,6 +189,10 @@ func expandComputeRegionSecurityPolicyDescription(v interface{}, d tpgresource.T
 }
 
 func expandComputeRegionSecurityPolicyFingerprint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionSecurityPolicyLabelFingerprint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -1151,6 +1167,17 @@ func expandComputeRegionSecurityPolicyRulesNetworkMatchSrcRegionCodes(v interfac
 
 func expandComputeRegionSecurityPolicyRulesNetworkMatchSrcAsns(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandComputeRegionSecurityPolicyEffectiveLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
 
 func expandComputeRegionSecurityPolicyRegion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
