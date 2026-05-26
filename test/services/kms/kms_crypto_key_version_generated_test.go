@@ -42,6 +42,12 @@ func TestAccKMSCryptoKeyVersion(t *testing.T) {
 		{
 			Name: "TestAccKmsCryptoKeyVersion_externalProtectionLevelOptionsVpc",
 		},
+		{
+			Name: "TestAccKmsCryptoKeyVersion_destroyScheduled",
+		},
+		{
+			Name: "TestAccKmsCryptoKeyVersion_delete",
+		},
 	}
 
 	for _, tt := range tests {
@@ -60,6 +66,7 @@ func TestAccKMSCryptoKeyVersion(t *testing.T) {
 					"ASSETNAME",
 					"count",
 					"crypto_key",
+					"deletion_policy",
 					"deletion_protection",
 					"depends_on",
 					"dynamic",

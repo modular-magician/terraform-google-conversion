@@ -99,6 +99,14 @@ Format: ''projects/{{project}}/locations/{{location}}/keyRings/{{keyRing}}''.`,
 				Description: `The resource name of the backend environment associated with all CryptoKeyVersions within this CryptoKey.
 The resource name is in the format "projects/*/locations/*/ekmConnections/*" and only applies to "EXTERNAL_VPC" keys.`,
 			},
+			"deletion_policy": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Description: `The deletion policy for the CryptoKey.
+- 'SCHEDULE_DESTROY' (Default): Destroy all versions and abandon the key in state (legacy behavior).
+- 'DELETE': Requires all versions to be permanently deleted first, then deletes the CryptoKey.`,
+				Default: "SCHEDULE_DESTROY",
+			},
 			"destroy_scheduled_duration": {
 				Type:     schema.TypeString,
 				Computed: true,

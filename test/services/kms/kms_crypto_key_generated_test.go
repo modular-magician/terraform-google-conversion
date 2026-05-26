@@ -42,6 +42,12 @@ func TestAccKMSCryptoKey(t *testing.T) {
 		{
 			Name: "TestAccKmsCryptoKey_importOnly",
 		},
+		{
+			Name: "TestAccKmsCryptoKey_deleteSuccess",
+		},
+		{
+			Name: "TestAccKmsCryptoKey_deleteFailure",
+		},
 	}
 
 	for _, tt := range tests {
@@ -58,6 +64,7 @@ func TestAccKMSCryptoKey(t *testing.T) {
 				t,
 				[]string{
 					"count",
+					"deletion_policy",
 					"deletion_protection",
 					"depends_on",
 					"dynamic",

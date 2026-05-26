@@ -84,6 +84,14 @@ func ResourceKMSCryptoKeyVersion() *schema.Resource {
 				Description: `The name of the cryptoKey associated with the CryptoKeyVersions.
 Format: ''projects/{{project}}/locations/{{location}}/keyRings/{{keyring}}/cryptoKeys/{{cryptoKey}}''`,
 			},
+			"deletion_policy": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Description: `The deletion policy for the CryptoKeyVersion.
+- 'SCHEDULE_DESTROY' (Default): When the resource block is removed from configuration, the provider will call the destroy API endpoint to schedule the key for destruction, and then immediately drop the resource from the Terraform state. The API resource itself is not permanently removed (legacy behavior).
+- 'DELETE': When the resource block is removed from configuration, the provider will verify the resource state is DESTROYED and call the permanent delete API endpoint. If the resource has not completed its scheduled destruction period, the Terraform destroy operation will fail and return an error.`,
+				Default: "SCHEDULE_DESTROY",
+			},
 			"external_protection_level_options": {
 				Type:        schema.TypeList,
 				Optional:    true,
