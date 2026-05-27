@@ -51,6 +51,7 @@ func TestAccComputeManagedSslCertificate(t *testing.T) {
 					"dynamic",
 					"for_each",
 					"lifecycle",
+					"name_prefix",
 					"provider",
 					"timeouts",
 				},

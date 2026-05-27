@@ -117,6 +117,7 @@ there can be up to 100 domains in this list.`,
 			},
 			"name": {
 				Type:     schema.TypeString,
+				Computed: true,
 				Optional: true,
 				ForceNew: true,
 				Description: `Name of the resource. Provided by the client when the resource is
@@ -159,6 +160,24 @@ which type this is. Default value: "MANAGED" Possible values: ["MANAGED"]`,
 				Description: `Domains associated with the certificate via Subject Alternative Name.`,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
+				},
+			},
+			"name_prefix": {
+				Type:          schema.TypeString,
+				Optional:      true,
+				Computed:      true,
+				ForceNew:      true,
+				ConflictsWith: []string{"name"},
+				Description:   "Creates a unique name beginning with the specified prefix. Conflicts with name.",
+				ValidateFunc: func(v interface{}, k string) (ws []string, errors []error) {
+					// https://cloud.google.com/compute/docs/reference/latest/sslCertificates#resource
+					// uuid is 9 characters, limit the prefix to 54.
+					value := v.(string)
+					if len(value) > 54 {
+						errors = append(errors, fmt.Errorf(
+							"%q cannot be longer than 54 characters, name is limited to 63", k))
+					}
+					return
 				},
 			},
 			"project": {
