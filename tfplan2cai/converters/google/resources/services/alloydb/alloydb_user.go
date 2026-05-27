@@ -122,6 +122,12 @@ func GetAlloydbUserApiObject(d tpgresource.TerraformResourceData, config *transp
 	} else if v, ok := d.GetOkExists("database_roles"); !tpgresource.IsEmptyValue(reflect.ValueOf(databaseRolesProp)) && (ok || !reflect.DeepEqual(v, databaseRolesProp)) {
 		obj["databaseRoles"] = databaseRolesProp
 	}
+	keepExtraRolesProp, err := expandAlloydbUserKeepExtraRoles(d.Get("keep_extra_roles"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("keep_extra_roles"); !tpgresource.IsEmptyValue(reflect.ValueOf(keepExtraRolesProp)) && (ok || !reflect.DeepEqual(v, keepExtraRolesProp)) {
+		obj["keepExtraRoles"] = keepExtraRolesProp
+	}
 	userTypeProp, err := expandAlloydbUserUserType(d.Get("user_type"), d, config)
 	if err != nil {
 		return nil, err
@@ -137,6 +143,10 @@ func expandAlloydbUserPassword(v interface{}, d tpgresource.TerraformResourceDat
 }
 
 func expandAlloydbUserDatabaseRoles(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandAlloydbUserKeepExtraRoles(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
