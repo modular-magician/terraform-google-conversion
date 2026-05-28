@@ -146,6 +146,12 @@ func GetDataformRepositoryReleaseConfigApiObject(d tpgresource.TerraformResource
 	} else if v, ok := d.GetOkExists("disabled"); !tpgresource.IsEmptyValue(reflect.ValueOf(disabledProp)) && (ok || !reflect.DeepEqual(v, disabledProp)) {
 		obj["disabled"] = disabledProp
 	}
+	releaseCompilationResultProp, err := expandDataformRepositoryReleaseConfigReleaseCompilationResult(d.Get("release_compilation_result"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("release_compilation_result"); !tpgresource.IsEmptyValue(reflect.ValueOf(releaseCompilationResultProp)) && (ok || !reflect.DeepEqual(v, releaseCompilationResultProp)) {
+		obj["releaseCompilationResult"] = releaseCompilationResultProp
+	}
 
 	return obj, nil
 }
@@ -277,5 +283,9 @@ func expandDataformRepositoryReleaseConfigCodeCompilationConfigTablePrefix(v int
 }
 
 func expandDataformRepositoryReleaseConfigDisabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDataformRepositoryReleaseConfigReleaseCompilationResult(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
