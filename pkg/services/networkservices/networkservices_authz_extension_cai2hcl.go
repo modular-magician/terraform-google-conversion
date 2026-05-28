@@ -135,6 +135,7 @@ func (c *NetworkServicesAuthzExtensionCai2hclConverter) convertResourceData(asse
 	hclData["timeout"] = flattenNetworkServicesAuthzExtensionTimeout(res["timeout"], d, config)
 	hclData["fail_open"] = flattenNetworkServicesAuthzExtensionFailOpen(res["failOpen"], d, config)
 	hclData["metadata"] = flattenNetworkServicesAuthzExtensionMetadata(res["metadata"], d, config)
+	hclData["forward_attributes"] = flattenNetworkServicesAuthzExtensionForwardAttributes(res["forwardAttributes"], d, config)
 	hclData["forward_headers"] = flattenNetworkServicesAuthzExtensionForwardHeaders(res["forwardHeaders"], d, config)
 	hclData["wire_format"] = flattenNetworkServicesAuthzExtensionWireFormat(res["wireFormat"], d, config)
 	hclData["name"] = flattenNetworkServicesAuthzExtensionName(res["name"], d, config)
@@ -204,6 +205,10 @@ func flattenNetworkServicesAuthzExtensionFailOpen(v interface{}, d *schema.Resou
 }
 
 func flattenNetworkServicesAuthzExtensionMetadata(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenNetworkServicesAuthzExtensionForwardAttributes(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 

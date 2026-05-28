@@ -269,6 +269,13 @@ func expandNetworkServicesLbTrafficExtensionExtensionChainsExtensions(v interfac
 			transformed["failOpen"] = transformedFailOpen
 		}
 
+		transformedForwardAttributes, err := expandNetworkServicesLbTrafficExtensionExtensionChainsExtensionsForwardAttributes(original["forward_attributes"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedForwardAttributes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["forwardAttributes"] = transformedForwardAttributes
+		}
+
 		transformedForwardHeaders, err := expandNetworkServicesLbTrafficExtensionExtensionChainsExtensionsForwardHeaders(original["forward_headers"], d, config)
 		if err != nil {
 			return nil, err
@@ -312,6 +319,10 @@ func expandNetworkServicesLbTrafficExtensionExtensionChainsExtensionsTimeout(v i
 }
 
 func expandNetworkServicesLbTrafficExtensionExtensionChainsExtensionsFailOpen(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkServicesLbTrafficExtensionExtensionChainsExtensionsForwardAttributes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
