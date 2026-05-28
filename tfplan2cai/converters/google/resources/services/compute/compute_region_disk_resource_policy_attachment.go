@@ -116,6 +116,12 @@ func GetComputeRegionDiskResourcePolicyAttachmentApiObject(d tpgresource.Terrafo
 	} else if v, ok := d.GetOkExists("name"); !tpgresource.IsEmptyValue(reflect.ValueOf(nameProp)) && (ok || !reflect.DeepEqual(v, nameProp)) {
 		obj["name"] = nameProp
 	}
+	optionsProp, err := expandComputeRegionDiskResourcePolicyAttachmentOptions(d.Get("options"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("options"); !tpgresource.IsEmptyValue(reflect.ValueOf(optionsProp)) && (ok || !reflect.DeepEqual(v, optionsProp)) {
+		obj["options"] = optionsProp
+	}
 
 	return resourceComputeRegionDiskResourcePolicyAttachmentEncoder(d, config, obj)
 }
@@ -141,5 +147,9 @@ func resourceComputeRegionDiskResourcePolicyAttachmentEncoder(d tpgresource.Terr
 }
 
 func expandComputeRegionDiskResourcePolicyAttachmentName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionDiskResourcePolicyAttachmentOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
