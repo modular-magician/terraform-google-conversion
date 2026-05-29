@@ -462,6 +462,13 @@ func expandComputeResourcePolicySnapshotSchedulePolicySnapshotProperties(v inter
 		transformed["chainName"] = transformedChainName
 	}
 
+	transformedRegion, err := expandComputeResourcePolicySnapshotSchedulePolicySnapshotPropertiesRegion(original["region"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRegion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["region"] = transformedRegion
+	}
+
 	return transformed, nil
 }
 
@@ -486,6 +493,10 @@ func expandComputeResourcePolicySnapshotSchedulePolicySnapshotPropertiesGuestFlu
 }
 
 func expandComputeResourcePolicySnapshotSchedulePolicySnapshotPropertiesChainName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeResourcePolicySnapshotSchedulePolicySnapshotPropertiesRegion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

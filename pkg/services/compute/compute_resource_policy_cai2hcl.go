@@ -400,6 +400,8 @@ func flattenComputeResourcePolicySnapshotSchedulePolicySnapshotProperties(v inte
 		flattenComputeResourcePolicySnapshotSchedulePolicySnapshotPropertiesGuestFlush(original["guestFlush"], d, config)
 	transformed["chain_name"] =
 		flattenComputeResourcePolicySnapshotSchedulePolicySnapshotPropertiesChainName(original["chainName"], d, config)
+	transformed["region"] =
+		flattenComputeResourcePolicySnapshotSchedulePolicySnapshotPropertiesRegion(original["region"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -429,6 +431,13 @@ func flattenComputeResourcePolicySnapshotSchedulePolicySnapshotPropertiesChainNa
 		return nil
 	}
 	return v
+}
+
+func flattenComputeResourcePolicySnapshotSchedulePolicySnapshotPropertiesRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return v
+	}
+	return tpgresource.GetResourceNameFromSelfLink(v.(string))
 }
 
 func flattenComputeResourcePolicyGroupPlacementPolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

@@ -62,6 +62,9 @@ func TestAccComputeResourcePolicy(t *testing.T) {
 			Name: "TestAccComputeResourcePolicy_resourcePolicyPlacementPolicyGpuTopologyExample",
 		},
 		{
+			Name: "TestAccComputeResourcePolicy_resourcePolicySnapshotScheduleRegionExample",
+		},
+		{
 			Name: "TestAccComputeResourcePolicy_attached",
 		},
 		{

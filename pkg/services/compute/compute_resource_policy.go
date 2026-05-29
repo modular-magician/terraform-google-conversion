@@ -360,6 +360,11 @@ with RFC1035.`,
 										Elem:         &schema.Schema{Type: schema.TypeString},
 										AtLeastOneOf: []string{"snapshot_schedule_policy.0.snapshot_properties.0.guest_flush", "snapshot_schedule_policy.0.snapshot_properties.0.labels", "snapshot_schedule_policy.0.snapshot_properties.0.storage_locations"},
 									},
+									"region": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: `Region where the snapshot is scoped to.`,
+									},
 									"storage_locations": {
 										Type:     schema.TypeSet,
 										Optional: true,
