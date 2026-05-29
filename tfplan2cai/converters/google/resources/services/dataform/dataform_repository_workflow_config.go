@@ -206,6 +206,13 @@ func expandDataformRepositoryWorkflowConfigInvocationConfig(v interface{}, d tpg
 		transformed["serviceAccount"] = transformedServiceAccount
 	}
 
+	transformedQueryPriority, err := expandDataformRepositoryWorkflowConfigInvocationConfigQueryPriority(original["query_priority"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedQueryPriority); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["queryPriority"] = transformedQueryPriority
+	}
+
 	return transformed, nil
 }
 
@@ -277,6 +284,10 @@ func expandDataformRepositoryWorkflowConfigInvocationConfigFullyRefreshIncrement
 }
 
 func expandDataformRepositoryWorkflowConfigInvocationConfigServiceAccount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDataformRepositoryWorkflowConfigInvocationConfigQueryPriority(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
