@@ -122,12 +122,6 @@ func GetCESAppApiObject(d tpgresource.TerraformResourceData, config *transport_t
 	} else if v, ok := d.GetOkExists("pinned"); !tpgresource.IsEmptyValue(reflect.ValueOf(pinnedProp)) && (ok || !reflect.DeepEqual(v, pinnedProp)) {
 		obj["pinned"] = pinnedProp
 	}
-	dataStoreSettingsProp, err := expandCESAppDataStoreSettings(d.Get("data_store_settings"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("data_store_settings"); !tpgresource.IsEmptyValue(reflect.ValueOf(dataStoreSettingsProp)) && (ok || !reflect.DeepEqual(v, dataStoreSettingsProp)) {
-		obj["dataStoreSettings"] = dataStoreSettingsProp
-	}
 	defaultChannelProfileProp, err := expandCESAppDefaultChannelProfile(d.Get("default_channel_profile"), d, config)
 	if err != nil {
 		return nil, err
@@ -384,68 +378,6 @@ func expandCESAppAudioProcessingConfigSynthesizeSpeechConfigsSpeakingRate(v inte
 }
 
 func expandCESAppPinned(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCESAppDataStoreSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedEngines, err := expandCESAppDataStoreSettingsEngines(original["engines"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedEngines); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["engines"] = transformedEngines
-	}
-
-	return transformed, nil
-}
-
-func expandCESAppDataStoreSettingsEngines(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-	l := v.([]interface{})
-	req := make([]interface{}, 0, len(l))
-	for _, raw := range l {
-		if raw == nil {
-			continue
-		}
-		original := raw.(map[string]interface{})
-		transformed := make(map[string]interface{})
-
-		transformedName, err := expandCESAppDataStoreSettingsEnginesName(original["name"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["name"] = transformedName
-		}
-
-		transformedType, err := expandCESAppDataStoreSettingsEnginesType(original["type"], d, config)
-		if err != nil {
-			return nil, err
-		} else if val := reflect.ValueOf(transformedType); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["type"] = transformedType
-		}
-
-		req = append(req, transformed)
-	}
-	return req, nil
-}
-
-func expandCESAppDataStoreSettingsEnginesName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCESAppDataStoreSettingsEnginesType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
