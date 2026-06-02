@@ -49,6 +49,16 @@ import (
 	"google.golang.org/api/googleapi"
 )
 
+// chronicleRuleTextDiffSuppress compares two Rule texts, ignoring differences
+// between whitespaces and newlines (including trailing newline) that are removed
+// or added by the server.
+func chronicleRuleTextDiffSuppress(_, old, new string, _ *schema.ResourceData) bool {
+	r := strings.NewReplacer("\n", "")
+	normalizedOld := r.Replace(old)
+	normalizedNew := r.Replace(new)
+	return normalizedOld == normalizedNew
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
