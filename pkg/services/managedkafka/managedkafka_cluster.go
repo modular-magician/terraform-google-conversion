@@ -132,6 +132,24 @@ func ResourceManagedKafkaCluster() *schema.Resource {
 											},
 										},
 									},
+									"public_cluster_config": {
+										Type:        schema.TypeList,
+										Optional:    true,
+										Description: `Public connection configuration for the Kafka cluster.`,
+										MaxItems:    1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"allowed_source_ip_ranges": {
+													Type:        schema.TypeList,
+													Required:    true,
+													Description: `A list of IPv4 addresses or CIDR ranges that are allowed to connect to the cluster.`,
+													Elem: &schema.Schema{
+														Type: schema.TypeString,
+													},
+												},
+											},
+										},
+									},
 								},
 							},
 						},

@@ -31,6 +31,9 @@ func TestAccManagedKafkaCluster(t *testing.T) {
 			Name: "TestAccManagedKafkaCluster_managedkafkaClusterMtlsExample",
 		},
 		{
+			Name: "TestAccManagedKafkaCluster_managedkafkaClusterPublicExample",
+		},
+		{
 			Name: "TestAccManagedKafkaCluster_update",
 		},
 	}

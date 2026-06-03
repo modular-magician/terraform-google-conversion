@@ -168,6 +168,8 @@ func flattenManagedKafkaClusterGcpConfigAccessConfig(v interface{}, d *schema.Re
 	transformed := make(map[string]interface{})
 	transformed["network_configs"] =
 		flattenManagedKafkaClusterGcpConfigAccessConfigNetworkConfigs(original["networkConfigs"], d, config)
+	transformed["public_cluster_config"] =
+		flattenManagedKafkaClusterGcpConfigAccessConfigPublicClusterConfig(original["publicClusterConfig"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -201,6 +203,24 @@ func flattenManagedKafkaClusterGcpConfigAccessConfigNetworkConfigsSubnet(v inter
 	if transformed == "" {
 		return "unknown"
 	}
+	return v
+}
+
+func flattenManagedKafkaClusterGcpConfigAccessConfigPublicClusterConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["allowed_source_ip_ranges"] =
+		flattenManagedKafkaClusterGcpConfigAccessConfigPublicClusterConfigAllowedSourceIpRanges(original["allowedSourceIpRanges"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenManagedKafkaClusterGcpConfigAccessConfigPublicClusterConfigAllowedSourceIpRanges(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
