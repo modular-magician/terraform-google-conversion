@@ -26,7 +26,7 @@ func TestAccAlloydbInstance(t *testing.T) {
 	tests := []test.TestCase{
 		{
 			Name: "TestAccAlloydbInstance_connectionPoolConfig",
-			Skip: "fix it after the next release, as connection_pool_config will be in the next release",
+			Skip: "test fix it after the next release, as connection_pool_config will be in the next release",
 		},
 		{
 			Name: "TestAccAlloydbInstance_alloydbInstanceBasicTestExample",
