@@ -97,6 +97,9 @@ func TestAccContainerNodePool(t *testing.T) {
 			Name: "TestAccContainerNodePool_withKubeletConfig",
 		},
 		{
+			Name: "TestAccContainerNodePool_withShutdownGracePeriodConfig",
+		},
+		{
 			Name: "TestAccContainerNodePool_withInvalidKubeletCpuManagerPolicy",
 		},
 		{
