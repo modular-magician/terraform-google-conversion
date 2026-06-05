@@ -57,6 +57,7 @@ func TestAccApigeeInstance(t *testing.T) {
 			test.BidirectionalConversion(
 				t,
 				[]string{
+					"consumer_accept_list",
 					"count",
 					"deletion_protection",
 					"depends_on",
