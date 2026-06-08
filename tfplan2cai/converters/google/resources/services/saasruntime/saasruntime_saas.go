@@ -110,6 +110,12 @@ func GetSaasRuntimeSaasCaiObject(d tpgresource.TerraformResourceData, config *tr
 
 func GetSaasRuntimeSaasApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
+	applicationTemplateProp, err := expandSaasRuntimeSaasApplicationTemplate(d.Get("application_template"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("application_template"); !tpgresource.IsEmptyValue(reflect.ValueOf(applicationTemplateProp)) && (ok || !reflect.DeepEqual(v, applicationTemplateProp)) {
+		obj["applicationTemplate"] = applicationTemplateProp
+	}
 	locationsProp, err := expandSaasRuntimeSaasLocations(d.Get("locations"), d, config)
 	if err != nil {
 		return nil, err
@@ -130,6 +136,54 @@ func GetSaasRuntimeSaasApiObject(d tpgresource.TerraformResourceData, config *tr
 	}
 
 	return obj, nil
+}
+
+func expandSaasRuntimeSaasApplicationTemplate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedApplicationTemplate, err := expandSaasRuntimeSaasApplicationTemplateApplicationTemplate(original["application_template"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedApplicationTemplate); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["applicationTemplate"] = transformedApplicationTemplate
+	}
+
+	transformedRevision, err := expandSaasRuntimeSaasApplicationTemplateRevision(original["revision"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRevision); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["revision"] = transformedRevision
+	}
+
+	transformedSyncOperation, err := expandSaasRuntimeSaasApplicationTemplateSyncOperation(original["sync_operation"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSyncOperation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["syncOperation"] = transformedSyncOperation
+	}
+
+	return transformed, nil
+}
+
+func expandSaasRuntimeSaasApplicationTemplateApplicationTemplate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandSaasRuntimeSaasApplicationTemplateRevision(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandSaasRuntimeSaasApplicationTemplateSyncOperation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandSaasRuntimeSaasLocations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
