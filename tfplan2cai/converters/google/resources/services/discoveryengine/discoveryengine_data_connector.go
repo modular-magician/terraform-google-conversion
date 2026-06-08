@@ -186,6 +186,24 @@ func GetDiscoveryEngineDataConnectorApiObject(d tpgresource.TerraformResourceDat
 	} else if v, ok := d.GetOkExists("connector_modes"); !tpgresource.IsEmptyValue(reflect.ValueOf(connectorModesProp)) && (ok || !reflect.DeepEqual(v, connectorModesProp)) {
 		obj["connectorModes"] = connectorModesProp
 	}
+	endUserConfigProp, err := expandDiscoveryEngineDataConnectorEndUserConfig(d.Get("end_user_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("end_user_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(endUserConfigProp)) && (ok || !reflect.DeepEqual(v, endUserConfigProp)) {
+		obj["endUserConfig"] = endUserConfigProp
+	}
+	federatedConfigProp, err := expandDiscoveryEngineDataConnectorFederatedConfig(d.Get("federated_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("federated_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(federatedConfigProp)) && (ok || !reflect.DeepEqual(v, federatedConfigProp)) {
+		obj["federatedConfig"] = federatedConfigProp
+	}
+	createEuaSaasProp, err := expandDiscoveryEngineDataConnectorCreateEuaSaas(d.Get("create_eua_saas"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("create_eua_saas"); !tpgresource.IsEmptyValue(reflect.ValueOf(createEuaSaasProp)) && (ok || !reflect.DeepEqual(v, createEuaSaasProp)) {
+		obj["createEuaSaas"] = createEuaSaasProp
+	}
 	syncModeProp, err := expandDiscoveryEngineDataConnectorSyncMode(d.Get("sync_mode"), d, config)
 	if err != nil {
 		return nil, err
@@ -514,6 +532,193 @@ func expandDiscoveryEngineDataConnectorDestinationConfigsParams(v interface{}, d
 }
 
 func expandDiscoveryEngineDataConnectorConnectorModes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineDataConnectorEndUserConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedAuthParams, err := expandDiscoveryEngineDataConnectorEndUserConfigAuthParams(original["auth_params"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAuthParams); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["authParams"] = transformedAuthParams
+	}
+
+	transformedJsonAuthParams, err := expandDiscoveryEngineDataConnectorEndUserConfigJsonAuthParams(original["json_auth_params"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedJsonAuthParams); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["jsonAuthParams"] = transformedJsonAuthParams
+	}
+
+	transformedAdditionalParams, err := expandDiscoveryEngineDataConnectorEndUserConfigAdditionalParams(original["additional_params"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAdditionalParams); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["additionalParams"] = transformedAdditionalParams
+	}
+
+	transformedTenant, err := expandDiscoveryEngineDataConnectorEndUserConfigTenant(original["tenant"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedTenant); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["tenant"] = transformedTenant
+	}
+
+	return transformed, nil
+}
+
+func expandDiscoveryEngineDataConnectorEndUserConfigAuthParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func expandDiscoveryEngineDataConnectorEndUserConfigJsonAuthParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineDataConnectorEndUserConfigAdditionalParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func expandDiscoveryEngineDataConnectorEndUserConfigTenant(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedId, err := expandDiscoveryEngineDataConnectorEndUserConfigTenantId(original["id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["id"] = transformedId
+	}
+
+	transformedUri, err := expandDiscoveryEngineDataConnectorEndUserConfigTenantUri(original["uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["uri"] = transformedUri
+	}
+
+	transformedDisplayName, err := expandDiscoveryEngineDataConnectorEndUserConfigTenantDisplayName(original["display_name"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDisplayName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["displayName"] = transformedDisplayName
+	}
+
+	return transformed, nil
+}
+
+func expandDiscoveryEngineDataConnectorEndUserConfigTenantId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineDataConnectorEndUserConfigTenantUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineDataConnectorEndUserConfigTenantDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineDataConnectorFederatedConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedAuthParams, err := expandDiscoveryEngineDataConnectorFederatedConfigAuthParams(original["auth_params"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAuthParams); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["authParams"] = transformedAuthParams
+	}
+
+	transformedJsonAuthParams, err := expandDiscoveryEngineDataConnectorFederatedConfigJsonAuthParams(original["json_auth_params"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedJsonAuthParams); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["jsonAuthParams"] = transformedJsonAuthParams
+	}
+
+	transformedAdditionalParams, err := expandDiscoveryEngineDataConnectorFederatedConfigAdditionalParams(original["additional_params"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAdditionalParams); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["additionalParams"] = transformedAdditionalParams
+	}
+
+	return transformed, nil
+}
+
+func expandDiscoveryEngineDataConnectorFederatedConfigAuthParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func expandDiscoveryEngineDataConnectorFederatedConfigJsonAuthParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineDataConnectorFederatedConfigAdditionalParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func expandDiscoveryEngineDataConnectorCreateEuaSaas(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
