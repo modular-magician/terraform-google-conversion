@@ -137,19 +137,35 @@ func (c *ComputeInterconnectCai2hclConverter) convertResourceData(asset caiasset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/interconnects/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeInterconnectDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeInterconnectName(res["name"], d, config)
+
 	hclData["location"] = flattenComputeInterconnectLocation(res["location"], d, config)
+
 	hclData["link_type"] = flattenComputeInterconnectLinkType(res["linkType"], d, config)
+
 	hclData["requested_link_count"] = flattenComputeInterconnectRequestedLinkCount(res["requestedLinkCount"], d, config)
+
 	hclData["interconnect_type"] = flattenComputeInterconnectInterconnectType(res["interconnectType"], d, config)
+
 	hclData["admin_enabled"] = flattenComputeInterconnectAdminEnabled(res["adminEnabled"], d, config)
+
 	hclData["params"] = flattenComputeInterconnectParams(res["params"], d, config)
+
 	hclData["noc_contact_email"] = flattenComputeInterconnectNocContactEmail(res["nocContactEmail"], d, config)
+
 	hclData["customer_name"] = flattenComputeInterconnectCustomerName(res["customerName"], d, config)
-	hclData["labels"] = flattenComputeInterconnectLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeInterconnectLabels(res["labels"], d, config)
+	}
+
 	hclData["macsec"] = flattenComputeInterconnectMacsec(res["macsec"], d, config)
+
 	hclData["macsec_enabled"] = flattenComputeInterconnectMacsecEnabled(res["macsecEnabled"], d, config)
+
 	hclData["remote_location"] = flattenComputeInterconnectRemoteLocation(res["remoteLocation"], d, config)
+
 	hclData["requested_features"] = flattenComputeInterconnectRequestedFeatures(res["requestedFeatures"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

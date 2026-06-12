@@ -137,8 +137,11 @@ func (c *AccessApprovalProjectSettingsCai2hclConverter) convertResourceData(asse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//accessapproval.googleapis.com/projects/{{project_id}}/accessApprovalSettings", outputFields, hclData)
 
 	hclData["notification_emails"] = flattenAccessApprovalProjectSettingsNotificationEmails(res["notificationEmails"], d, config)
+
 	hclData["enrolled_services"] = flattenAccessApprovalProjectSettingsEnrolledServices(res["enrolledServices"], d, config)
+
 	hclData["active_key_version"] = flattenAccessApprovalProjectSettingsActiveKeyVersion(res["activeKeyVersion"], d, config)
+
 	hclData["project"] = flattenAccessApprovalProjectSettingsProject(res["project"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

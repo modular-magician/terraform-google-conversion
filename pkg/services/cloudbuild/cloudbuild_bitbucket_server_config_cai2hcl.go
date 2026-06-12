@@ -137,11 +137,17 @@ func (c *CloudBuildBitbucketServerConfigCai2hclConverter) convertResourceData(as
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudbuild.googleapis.com/projects/{{project}}/locations/{{location}}/bitbucketServerConfigs/{{config_id}}", outputFields, hclData)
 
 	hclData["host_uri"] = flattenCloudBuildBitbucketServerConfigHostUri(res["hostUri"], d, config)
+
 	hclData["secrets"] = flattenCloudBuildBitbucketServerConfigSecrets(res["secrets"], d, config)
+
 	hclData["username"] = flattenCloudBuildBitbucketServerConfigUsername(res["username"], d, config)
+
 	hclData["api_key"] = flattenCloudBuildBitbucketServerConfigApiKey(res["apiKey"], d, config)
+
 	hclData["connected_repositories"] = flattenCloudBuildBitbucketServerConfigConnectedRepositories(res["connectedRepositories"], d, config)
+
 	hclData["peered_network"] = flattenCloudBuildBitbucketServerConfigPeeredNetwork(res["peeredNetwork"], d, config)
+
 	hclData["ssl_ca"] = flattenCloudBuildBitbucketServerConfigSslCa(res["sslCa"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

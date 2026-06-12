@@ -137,8 +137,11 @@ func (c *ApphubServiceCai2hclConverter) convertResourceData(asset caiasset.Asset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//apphub.googleapis.com/projects/{{project}}/locations/{{location}}/applications/{{application_id}}/services/{{service_id}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenApphubServiceDisplayName(res["displayName"], d, config)
+
 	hclData["description"] = flattenApphubServiceDescription(res["description"], d, config)
+
 	hclData["attributes"] = flattenApphubServiceAttributes(res["attributes"], d, config)
+
 	hclData["discovered_service"] = flattenApphubServiceDiscoveredService(res["discoveredService"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,13 +137,21 @@ func (c *ComputeHttpHealthCheckCai2hclConverter) convertResourceData(asset caias
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/httpHealthChecks/{{name}}", outputFields, hclData)
 
 	hclData["check_interval_sec"] = flattenComputeHttpHealthCheckCheckIntervalSec(res["checkIntervalSec"], d, config)
+
 	hclData["description"] = flattenComputeHttpHealthCheckDescription(res["description"], d, config)
+
 	hclData["healthy_threshold"] = flattenComputeHttpHealthCheckHealthyThreshold(res["healthyThreshold"], d, config)
+
 	hclData["host"] = flattenComputeHttpHealthCheckHost(res["host"], d, config)
+
 	hclData["name"] = flattenComputeHttpHealthCheckName(res["name"], d, config)
+
 	hclData["port"] = flattenComputeHttpHealthCheckPort(res["port"], d, config)
+
 	hclData["request_path"] = flattenComputeHttpHealthCheckRequestPath(res["requestPath"], d, config)
+
 	hclData["timeout_sec"] = flattenComputeHttpHealthCheckTimeoutSec(res["timeoutSec"], d, config)
+
 	hclData["unhealthy_threshold"] = flattenComputeHttpHealthCheckUnhealthyThreshold(res["unhealthyThreshold"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

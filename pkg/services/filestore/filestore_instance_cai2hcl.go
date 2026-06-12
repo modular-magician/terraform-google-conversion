@@ -137,17 +137,31 @@ func (c *FilestoreInstanceCai2hclConverter) convertResourceData(asset caiasset.A
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//file.googleapis.com/projects/{{project}}/locations/{{location}}/instances/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenFilestoreInstanceDescription(res["description"], d, config)
+
 	hclData["tier"] = flattenFilestoreInstanceTier(res["tier"], d, config)
+
 	hclData["protocol"] = flattenFilestoreInstanceProtocol(res["protocol"], d, config)
-	hclData["labels"] = flattenFilestoreInstanceLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenFilestoreInstanceLabels(res["labels"], d, config)
+	}
+
 	hclData["file_shares"] = flattenFilestoreInstanceFileShares(res["fileShares"], d, config)
+
 	hclData["networks"] = flattenFilestoreInstanceNetworks(res["networks"], d, config)
+
 	hclData["kms_key_name"] = flattenFilestoreInstanceKmsKeyName(res["kmsKeyName"], d, config)
+
 	hclData["deletion_protection_enabled"] = flattenFilestoreInstanceDeletionProtectionEnabled(res["deletionProtectionEnabled"], d, config)
+
 	hclData["deletion_protection_reason"] = flattenFilestoreInstanceDeletionProtectionReason(res["deletionProtectionReason"], d, config)
+
 	hclData["performance_config"] = flattenFilestoreInstancePerformanceConfig(res["performanceConfig"], d, config)
+
 	hclData["tags"] = flattenFilestoreInstanceTags(res["tags"], d, config)
+
 	hclData["initial_replication"] = flattenFilestoreInstanceInitialReplication(res["replication"], d, config)
+
 	hclData["directory_services"] = flattenFilestoreInstanceDirectoryServices(res["directoryServices"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

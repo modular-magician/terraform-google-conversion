@@ -136,9 +136,14 @@ func (c *SecureSourceManagerInstanceCai2hclConverter) convertResourceData(asset 
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_labels": struct{}{}, "host_config": struct{}{}, "name": struct{}{}, "state": struct{}{}, "state_note": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//securesourcemanager.googleapis.com/projects/{{project}}/locations/{{location}}/instances/{{instance_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenSecureSourceManagerInstanceLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenSecureSourceManagerInstanceLabels(res["labels"], d, config)
+	}
+
 	hclData["kms_key"] = flattenSecureSourceManagerInstanceKmsKey(res["kmsKey"], d, config)
+
 	hclData["private_config"] = flattenSecureSourceManagerInstancePrivateConfig(res["privateConfig"], d, config)
+
 	hclData["workforce_identity_federation_config"] = flattenSecureSourceManagerInstanceWorkforceIdentityFederationConfig(res["workforceIdentityFederationConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

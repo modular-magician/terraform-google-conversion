@@ -137,10 +137,15 @@ func (c *ComputeRegionTargetTcpProxyCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/targetTcpProxies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeRegionTargetTcpProxyDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeRegionTargetTcpProxyName(res["name"], d, config)
+
 	hclData["proxy_header"] = flattenComputeRegionTargetTcpProxyProxyHeader(res["proxyHeader"], d, config)
+
 	hclData["backend_service"] = flattenComputeRegionTargetTcpProxyBackendService(res["service"], d, config)
+
 	hclData["proxy_bind"] = flattenComputeRegionTargetTcpProxyProxyBind(res["proxyBind"], d, config)
+
 	hclData["region"] = flattenComputeRegionTargetTcpProxyRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

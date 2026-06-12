@@ -147,29 +147,55 @@ func (c *ComputeDiskCai2hclConverter) convertResourceData(asset caiasset.Asset, 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/zones/{{zone}}/disks/{{name}}", outputFields, hclData)
 
 	hclData["source_image_encryption_key"] = flattenComputeDiskSourceImageEncryptionKey(res["sourceImageEncryptionKey"], d, config)
+
 	hclData["source_instant_snapshot"] = flattenComputeDiskSourceInstantSnapshot(res["sourceInstantSnapshot"], d, config)
+
 	hclData["disk_encryption_key"] = flattenComputeDiskDiskEncryptionKey(res["diskEncryptionKey"], d, config)
+
 	hclData["source_snapshot_encryption_key"] = flattenComputeDiskSourceSnapshotEncryptionKey(res["sourceSnapshotEncryptionKey"], d, config)
+
 	hclData["source_storage_object"] = flattenComputeDiskSourceStorageObject(res["sourceStorageObject"], d, config)
+
 	hclData["description"] = flattenComputeDiskDescription(res["description"], d, config)
-	hclData["labels"] = flattenComputeDiskLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeDiskLabels(res["labels"], d, config)
+	}
+
 	hclData["name"] = flattenComputeDiskName(res["name"], d, config)
+
 	hclData["size"] = flattenComputeDiskSize(res["sizeGb"], d, config)
+
 	hclData["physical_block_size_bytes"] = flattenComputeDiskPhysicalBlockSizeBytes(res["physicalBlockSizeBytes"], d, config)
+
 	hclData["source_disk"] = flattenComputeDiskSourceDisk(res["sourceDisk"], d, config)
+
 	hclData["type"] = flattenComputeDiskType(res["type"], d, config)
+
 	hclData["image"] = flattenComputeDiskImage(res["sourceImage"], d, config)
+
 	hclData["enable_confidential_compute"] = flattenComputeDiskEnableConfidentialCompute(res["enableConfidentialCompute"], d, config)
+
 	hclData["provisioned_iops"] = flattenComputeDiskProvisionedIops(res["provisionedIops"], d, config)
+
 	hclData["provisioned_throughput"] = flattenComputeDiskProvisionedThroughput(res["provisionedThroughput"], d, config)
+
 	hclData["async_primary_disk"] = flattenComputeDiskAsyncPrimaryDisk(res["asyncPrimaryDisk"], d, config)
+
 	hclData["architecture"] = flattenComputeDiskArchitecture(res["architecture"], d, config)
+
 	hclData["params"] = flattenComputeDiskParams(res["params"], d, config)
+
 	hclData["guest_os_features"] = flattenComputeDiskGuestOsFeatures(res["guestOsFeatures"], d, config)
+
 	hclData["licenses"] = flattenComputeDiskLicenses(res["licenses"], d, config)
+
 	hclData["storage_pool"] = flattenComputeDiskStoragePool(res["storagePool"], d, config)
+
 	hclData["access_mode"] = flattenComputeDiskAccessMode(res["accessMode"], d, config)
+
 	hclData["zone"] = flattenComputeDiskZone(res["zone"], d, config)
+
 	hclData["snapshot"] = flattenComputeDiskSnapshot(res["sourceSnapshot"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

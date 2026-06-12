@@ -137,8 +137,11 @@ func (c *ComputeManagedSslCertificateCai2hclConverter) convertResourceData(asset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/sslCertificates/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeManagedSslCertificateDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeManagedSslCertificateName(res["name"], d, config)
+
 	hclData["managed"] = flattenComputeManagedSslCertificateManaged(res["managed"], d, config)
+
 	hclData["type"] = flattenComputeManagedSslCertificateType(res["type"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

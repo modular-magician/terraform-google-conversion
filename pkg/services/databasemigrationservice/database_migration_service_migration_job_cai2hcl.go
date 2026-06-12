@@ -137,20 +137,37 @@ func (c *DatabaseMigrationServiceMigrationJobCai2hclConverter) convertResourceDa
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//datamigration.googleapis.com/projects/{{project}}/locations/{{location}}/migrationJobs/{{migration_job_id}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenDatabaseMigrationServiceMigrationJobDisplayName(res["displayName"], d, config)
-	hclData["labels"] = flattenDatabaseMigrationServiceMigrationJobLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenDatabaseMigrationServiceMigrationJobLabels(res["labels"], d, config)
+	}
+
 	hclData["stop_on_warnings"] = flattenDatabaseMigrationServiceMigrationJobStopOnWarnings(res["stopOnWarnings"], d, config)
+
 	hclData["desired_state"] = flattenDatabaseMigrationServiceMigrationJobDesiredState(res["state"], d, config)
+
 	hclData["type"] = flattenDatabaseMigrationServiceMigrationJobType(res["type"], d, config)
+
 	hclData["source"] = flattenDatabaseMigrationServiceMigrationJobSource(res["source"], d, config)
+
 	hclData["destination"] = flattenDatabaseMigrationServiceMigrationJobDestination(res["destination"], d, config)
+
 	hclData["dump_flags"] = flattenDatabaseMigrationServiceMigrationJobDumpFlags(res["dumpFlags"], d, config)
+
 	hclData["performance_config"] = flattenDatabaseMigrationServiceMigrationJobPerformanceConfig(res["performanceConfig"], d, config)
+
 	hclData["postgres_homogeneous_config"] = flattenDatabaseMigrationServiceMigrationJobPostgresHomogeneousConfig(res["postgresHomogeneousConfig"], d, config)
+
 	hclData["dump_path"] = flattenDatabaseMigrationServiceMigrationJobDumpPath(res["dumpPath"], d, config)
+
 	hclData["dump_type"] = flattenDatabaseMigrationServiceMigrationJobDumpType(res["dumpType"], d, config)
+
 	hclData["static_ip_connectivity"] = flattenDatabaseMigrationServiceMigrationJobStaticIpConnectivity(res["staticIpConnectivity"], d, config)
+
 	hclData["reverse_ssh_connectivity"] = flattenDatabaseMigrationServiceMigrationJobReverseSshConnectivity(res["reverseSshConnectivity"], d, config)
+
 	hclData["vpc_peering_connectivity"] = flattenDatabaseMigrationServiceMigrationJobVpcPeeringConnectivity(res["vpcPeeringConnectivity"], d, config)
+
 	hclData["objects_config"] = flattenDatabaseMigrationServiceMigrationJobObjectsConfig(res["objectsConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

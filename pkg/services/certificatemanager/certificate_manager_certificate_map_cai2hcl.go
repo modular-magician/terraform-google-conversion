@@ -137,7 +137,10 @@ func (c *CertificateManagerCertificateMapCai2hclConverter) convertResourceData(a
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//certificatemanager.googleapis.com/projects/{{project}}/locations/global/certificateMaps/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenCertificateManagerCertificateMapDescription(res["description"], d, config)
-	hclData["labels"] = flattenCertificateManagerCertificateMapLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenCertificateManagerCertificateMapLabels(res["labels"], d, config)
+	}
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {

@@ -137,13 +137,23 @@ func (c *NetworkManagementConnectivityTestCai2hclConverter) convertResourceData(
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networkmanagement.googleapis.com/projects/{{project}}/locations/global/connectivityTests/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenNetworkManagementConnectivityTestName(res["name"], d, config)
+
 	hclData["description"] = flattenNetworkManagementConnectivityTestDescription(res["description"], d, config)
+
 	hclData["source"] = flattenNetworkManagementConnectivityTestSource(res["source"], d, config)
+
 	hclData["destination"] = flattenNetworkManagementConnectivityTestDestination(res["destination"], d, config)
+
 	hclData["protocol"] = flattenNetworkManagementConnectivityTestProtocol(res["protocol"], d, config)
+
 	hclData["related_projects"] = flattenNetworkManagementConnectivityTestRelatedProjects(res["relatedProjects"], d, config)
-	hclData["labels"] = flattenNetworkManagementConnectivityTestLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetworkManagementConnectivityTestLabels(res["labels"], d, config)
+	}
+
 	hclData["round_trip"] = flattenNetworkManagementConnectivityTestRoundTrip(res["roundTrip"], d, config)
+
 	hclData["bypass_firewall_checks"] = flattenNetworkManagementConnectivityTestBypassFirewallChecks(res["bypassFirewallChecks"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -136,10 +136,16 @@ func (c *NetworkSecurityClientTlsPolicyCai2hclConverter) convertResourceData(ass
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_labels": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/projects/{{project}}/locations/{{location}}/clientTlsPolicies/{{name}}", outputFields, hclData)
 
-	hclData["labels"] = flattenNetworkSecurityClientTlsPolicyLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetworkSecurityClientTlsPolicyLabels(res["labels"], d, config)
+	}
+
 	hclData["description"] = flattenNetworkSecurityClientTlsPolicyDescription(res["description"], d, config)
+
 	hclData["sni"] = flattenNetworkSecurityClientTlsPolicySni(res["sni"], d, config)
+
 	hclData["client_certificate"] = flattenNetworkSecurityClientTlsPolicyClientCertificate(res["clientCertificate"], d, config)
+
 	hclData["server_validation_ca"] = flattenNetworkSecurityClientTlsPolicyServerValidationCa(res["serverValidationCa"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

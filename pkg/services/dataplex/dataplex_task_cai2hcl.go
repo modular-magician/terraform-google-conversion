@@ -137,11 +137,19 @@ func (c *DataplexTaskCai2hclConverter) convertResourceData(asset caiasset.Asset,
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//dataplex.googleapis.com/projects/{{project}}/locations/{{location}}/lakes/{{lake}}/tasks/{{task_id}}", outputFields, hclData)
 
 	hclData["description"] = flattenDataplexTaskDescription(res["description"], d, config)
+
 	hclData["display_name"] = flattenDataplexTaskDisplayName(res["displayName"], d, config)
-	hclData["labels"] = flattenDataplexTaskLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenDataplexTaskLabels(res["labels"], d, config)
+	}
+
 	hclData["trigger_spec"] = flattenDataplexTaskTriggerSpec(res["triggerSpec"], d, config)
+
 	hclData["execution_spec"] = flattenDataplexTaskExecutionSpec(res["executionSpec"], d, config)
+
 	hclData["spark"] = flattenDataplexTaskSpark(res["spark"], d, config)
+
 	hclData["notebook"] = flattenDataplexTaskNotebook(res["notebook"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

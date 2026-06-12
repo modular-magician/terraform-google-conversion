@@ -152,11 +152,17 @@ func (c *IAMBetaWorkloadIdentityPoolCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//iam.googleapis.com/projects/{{project}}/locations/global/workloadIdentityPools/{{workload_identity_pool_id}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenIAMBetaWorkloadIdentityPoolDisplayName(res["displayName"], d, config)
+
 	hclData["description"] = flattenIAMBetaWorkloadIdentityPoolDescription(res["description"], d, config)
+
 	hclData["disabled"] = flattenIAMBetaWorkloadIdentityPoolDisabled(res["disabled"], d, config)
+
 	hclData["mode"] = flattenIAMBetaWorkloadIdentityPoolMode(res["mode"], d, config)
+
 	hclData["inline_certificate_issuance_config"] = flattenIAMBetaWorkloadIdentityPoolInlineCertificateIssuanceConfig(res["inlineCertificateIssuanceConfig"], d, config)
+
 	hclData["inline_trust_config"] = flattenIAMBetaWorkloadIdentityPoolInlineTrustConfig(res["inlineTrustConfig"], d, config)
+
 	hclData["attestation_rules"] = flattenIAMBetaWorkloadIdentityPoolAttestationRules(res["attestationRules"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

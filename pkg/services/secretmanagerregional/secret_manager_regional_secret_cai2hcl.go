@@ -136,15 +136,26 @@ func (c *SecretManagerRegionalRegionalSecretCai2hclConverter) convertResourceDat
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_annotations": struct{}{}, "effective_labels": struct{}{}, "name": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//secretmanager.googleapis.com/projects/{{project}}/locations/{{location}}/secrets/{{secret_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenSecretManagerRegionalRegionalSecretLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenSecretManagerRegionalRegionalSecretLabels(res["labels"], d, config)
+	}
+
 	hclData["annotations"] = flattenSecretManagerRegionalRegionalSecretAnnotations(res["annotations"], d, config)
+
 	hclData["version_aliases"] = flattenSecretManagerRegionalRegionalSecretVersionAliases(res["versionAliases"], d, config)
+
 	hclData["customer_managed_encryption"] = flattenSecretManagerRegionalRegionalSecretCustomerManagedEncryption(res["customerManagedEncryption"], d, config)
+
 	hclData["topics"] = flattenSecretManagerRegionalRegionalSecretTopics(res["topics"], d, config)
+
 	hclData["rotation"] = flattenSecretManagerRegionalRegionalSecretRotation(res["rotation"], d, config)
+
 	hclData["expire_time"] = flattenSecretManagerRegionalRegionalSecretExpireTime(res["expireTime"], d, config)
+
 	hclData["ttl"] = flattenSecretManagerRegionalRegionalSecretTtl(res["ttl"], d, config)
+
 	hclData["version_destroy_ttl"] = flattenSecretManagerRegionalRegionalSecretVersionDestroyTtl(res["versionDestroyTtl"], d, config)
+
 	hclData["tags"] = flattenSecretManagerRegionalRegionalSecretTags(res["tags"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

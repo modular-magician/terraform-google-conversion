@@ -137,8 +137,11 @@ func (c *ComputeGlobalNetworkEndpointGroupCai2hclConverter) convertResourceData(
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/networkEndpointGroups/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeGlobalNetworkEndpointGroupName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeGlobalNetworkEndpointGroupDescription(res["description"], d, config)
+
 	hclData["network_endpoint_type"] = flattenComputeGlobalNetworkEndpointGroupNetworkEndpointType(res["networkEndpointType"], d, config)
+
 	hclData["default_port"] = flattenComputeGlobalNetworkEndpointGroupDefaultPort(res["defaultPort"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

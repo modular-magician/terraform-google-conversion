@@ -137,7 +137,9 @@ func (c *GkeonpremBareMetalNodePoolCai2hclConverter) convertResourceData(asset c
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//gkeonprem.googleapis.com/projects/{{project}}/locations/{{location}}/bareMetalClusters/{{bare_metal_cluster}}/bareMetalNodePools/{{name}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenGkeonpremBareMetalNodePoolDisplayName(res["displayName"], d, config)
+
 	hclData["annotations"] = flattenGkeonpremBareMetalNodePoolAnnotations(res["annotations"], d, config)
+
 	hclData["node_pool_config"] = flattenGkeonpremBareMetalNodePoolNodePoolConfig(res["nodePoolConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

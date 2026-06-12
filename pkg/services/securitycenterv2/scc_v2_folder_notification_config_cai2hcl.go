@@ -137,7 +137,9 @@ func (c *SecurityCenterV2FolderNotificationConfigCai2hclConverter) convertResour
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//securitycenter.googleapis.com/folders/{{folder}}/locations/{{location}}/notificationConfigs/{{config_id}}", outputFields, hclData)
 
 	hclData["description"] = flattenSecurityCenterV2FolderNotificationConfigDescription(res["description"], d, config)
+
 	hclData["pubsub_topic"] = flattenSecurityCenterV2FolderNotificationConfigPubsubTopic(res["pubsubTopic"], d, config)
+
 	hclData["streaming_config"] = flattenSecurityCenterV2FolderNotificationConfigStreamingConfig(res["streamingConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

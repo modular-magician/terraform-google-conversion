@@ -137,11 +137,19 @@ func (c *AlloydbBackupCai2hclConverter) convertResourceData(asset caiasset.Asset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//alloydb.googleapis.com/projects/{{project}}/locations/{{location}}/backups/{{backup_id}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenAlloydbBackupDisplayName(res["displayName"], d, config)
-	hclData["labels"] = flattenAlloydbBackupLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenAlloydbBackupLabels(res["labels"], d, config)
+	}
+
 	hclData["type"] = flattenAlloydbBackupType(res["type"], d, config)
+
 	hclData["description"] = flattenAlloydbBackupDescription(res["description"], d, config)
+
 	hclData["cluster_name"] = flattenAlloydbBackupClusterName(res["clusterName"], d, config)
+
 	hclData["encryption_config"] = flattenAlloydbBackupEncryptionConfig(res["encryptionConfig"], d, config)
+
 	hclData["annotations"] = flattenAlloydbBackupAnnotations(res["annotations"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -146,12 +146,20 @@ func (c *MonitoringNotificationChannelCai2hclConverter) convertResourceData(asse
 	outputFields := map[string]struct{}{"name": struct{}{}, "verification_status": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//monitoring.googleapis.com/{{name}}", outputFields, hclData)
 
-	hclData["labels"] = flattenMonitoringNotificationChannelLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenMonitoringNotificationChannelLabels(res["labels"], d, config)
+	}
+
 	hclData["sensitive_labels"] = flattenMonitoringNotificationChannelSensitiveLabels(res["sensitiveLabels"], d, config)
+
 	hclData["type"] = flattenMonitoringNotificationChannelType(res["type"], d, config)
+
 	hclData["user_labels"] = flattenMonitoringNotificationChannelUserLabels(res["userLabels"], d, config)
+
 	hclData["description"] = flattenMonitoringNotificationChannelDescription(res["description"], d, config)
+
 	hclData["display_name"] = flattenMonitoringNotificationChannelDisplayName(res["displayName"], d, config)
+
 	hclData["enabled"] = flattenMonitoringNotificationChannelEnabled(res["enabled"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

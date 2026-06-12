@@ -137,10 +137,17 @@ func (c *CertificateManagerCertificateMapEntryCai2hclConverter) convertResourceD
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//certificatemanager.googleapis.com/projects/{{project}}/locations/global/certificateMaps/{{map}}/certificateMapEntries/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenCertificateManagerCertificateMapEntryDescription(res["description"], d, config)
-	hclData["labels"] = flattenCertificateManagerCertificateMapEntryLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenCertificateManagerCertificateMapEntryLabels(res["labels"], d, config)
+	}
+
 	hclData["certificates"] = flattenCertificateManagerCertificateMapEntryCertificates(res["certificates"], d, config)
+
 	hclData["hostname"] = flattenCertificateManagerCertificateMapEntryHostname(res["hostname"], d, config)
+
 	hclData["matcher"] = flattenCertificateManagerCertificateMapEntryMatcher(res["matcher"], d, config)
+
 	hclData["name"] = flattenCertificateManagerCertificateMapEntryName(res["name"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,12 +137,21 @@ func (c *NetworkSecurityAuthzPolicyCai2hclConverter) convertResourceData(asset c
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/projects/{{project}}/locations/{{location}}/authzPolicies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetworkSecurityAuthzPolicyDescription(res["description"], d, config)
+
 	hclData["policy_profile"] = flattenNetworkSecurityAuthzPolicyPolicyProfile(res["policyProfile"], d, config)
-	hclData["labels"] = flattenNetworkSecurityAuthzPolicyLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetworkSecurityAuthzPolicyLabels(res["labels"], d, config)
+	}
+
 	hclData["target"] = flattenNetworkSecurityAuthzPolicyTarget(res["target"], d, config)
+
 	hclData["http_rules"] = flattenNetworkSecurityAuthzPolicyHttpRules(res["httpRules"], d, config)
+
 	hclData["action"] = flattenNetworkSecurityAuthzPolicyAction(res["action"], d, config)
+
 	hclData["custom_provider"] = flattenNetworkSecurityAuthzPolicyCustomProvider(res["customProvider"], d, config)
+
 	hclData["name"] = flattenNetworkSecurityAuthzPolicyName(res["name"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,13 +137,23 @@ func (c *ComputeGlobalAddressCai2hclConverter) convertResourceData(asset caiasse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/addresses/{{name}}", outputFields, hclData)
 
 	hclData["address"] = flattenComputeGlobalAddressAddress(res["address"], d, config)
+
 	hclData["description"] = flattenComputeGlobalAddressDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeGlobalAddressName(res["name"], d, config)
-	hclData["labels"] = flattenComputeGlobalAddressLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeGlobalAddressLabels(res["labels"], d, config)
+	}
+
 	hclData["ip_version"] = flattenComputeGlobalAddressIpVersion(res["ipVersion"], d, config)
+
 	hclData["prefix_length"] = flattenComputeGlobalAddressPrefixLength(res["prefixLength"], d, config)
+
 	hclData["address_type"] = flattenComputeGlobalAddressAddressType(res["addressType"], d, config)
+
 	hclData["purpose"] = flattenComputeGlobalAddressPurpose(res["purpose"], d, config)
+
 	hclData["network"] = flattenComputeGlobalAddressNetwork(res["network"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

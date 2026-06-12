@@ -137,7 +137,10 @@ func (c *NetappVolumeSnapshotCai2hclConverter) convertResourceData(asset caiasse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/volumes/{{volume_name}}/snapshots/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetappVolumeSnapshotDescription(res["description"], d, config)
-	hclData["labels"] = flattenNetappVolumeSnapshotLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetappVolumeSnapshotLabels(res["labels"], d, config)
+	}
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {

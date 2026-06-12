@@ -136,15 +136,26 @@ func (c *SecretManagerSecretCai2hclConverter) convertResourceData(asset caiasset
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_annotations": struct{}{}, "effective_labels": struct{}{}, "name": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//secretmanager.googleapis.com/projects/{{project}}/secrets/{{secret_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenSecretManagerSecretLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenSecretManagerSecretLabels(res["labels"], d, config)
+	}
+
 	hclData["annotations"] = flattenSecretManagerSecretAnnotations(res["annotations"], d, config)
+
 	hclData["version_aliases"] = flattenSecretManagerSecretVersionAliases(res["versionAliases"], d, config)
+
 	hclData["version_destroy_ttl"] = flattenSecretManagerSecretVersionDestroyTtl(res["versionDestroyTtl"], d, config)
+
 	hclData["replication"] = flattenSecretManagerSecretReplication(res["replication"], d, config)
+
 	hclData["topics"] = flattenSecretManagerSecretTopics(res["topics"], d, config)
+
 	hclData["expire_time"] = flattenSecretManagerSecretExpireTime(res["expireTime"], d, config)
+
 	hclData["ttl"] = flattenSecretManagerSecretTtl(res["ttl"], d, config)
+
 	hclData["rotation"] = flattenSecretManagerSecretRotation(res["rotation"], d, config)
+
 	hclData["tags"] = flattenSecretManagerSecretTags(res["tags"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,7 +137,9 @@ func (c *SecurityCenterV2FolderSccBigQueryExportCai2hclConverter) convertResourc
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//securitycenter.googleapis.com/folders/{{folder}}/locations/{{location}}/bigQueryExports/{{big_query_export_id}}", outputFields, hclData)
 
 	hclData["description"] = flattenSecurityCenterV2FolderSccBigQueryExportDescription(res["description"], d, config)
+
 	hclData["dataset"] = flattenSecurityCenterV2FolderSccBigQueryExportDataset(res["dataset"], d, config)
+
 	hclData["filter"] = flattenSecurityCenterV2FolderSccBigQueryExportFilter(res["filter"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

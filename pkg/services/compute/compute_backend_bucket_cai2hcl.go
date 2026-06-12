@@ -137,14 +137,23 @@ func (c *ComputeBackendBucketCai2hclConverter) convertResourceData(asset caiasse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/backendBuckets/{{name}}", outputFields, hclData)
 
 	hclData["bucket_name"] = flattenComputeBackendBucketBucketName(res["bucketName"], d, config)
+
 	hclData["cdn_policy"] = flattenComputeBackendBucketCdnPolicy(res["cdnPolicy"], d, config)
+
 	hclData["compression_mode"] = flattenComputeBackendBucketCompressionMode(res["compressionMode"], d, config)
+
 	hclData["edge_security_policy"] = flattenComputeBackendBucketEdgeSecurityPolicy(res["edgeSecurityPolicy"], d, config)
+
 	hclData["custom_response_headers"] = flattenComputeBackendBucketCustomResponseHeaders(res["customResponseHeaders"], d, config)
+
 	hclData["description"] = flattenComputeBackendBucketDescription(res["description"], d, config)
+
 	hclData["enable_cdn"] = flattenComputeBackendBucketEnableCdn(res["enableCdn"], d, config)
+
 	hclData["name"] = flattenComputeBackendBucketName(res["name"], d, config)
+
 	hclData["load_balancing_scheme"] = flattenComputeBackendBucketLoadBalancingScheme(res["loadBalancingScheme"], d, config)
+
 	hclData["params"] = flattenComputeBackendBucketParams(res["params"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

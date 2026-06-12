@@ -137,14 +137,25 @@ func (c *MemcacheInstanceCai2hclConverter) convertResourceData(asset caiasset.As
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//memcache.googleapis.com/projects/{{project}}/locations/{{region}}/instances/{{name}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenMemcacheInstanceDisplayName(res["displayName"], d, config)
-	hclData["labels"] = flattenMemcacheInstanceLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenMemcacheInstanceLabels(res["labels"], d, config)
+	}
+
 	hclData["zones"] = flattenMemcacheInstanceZones(res["zones"], d, config)
+
 	hclData["authorized_network"] = flattenMemcacheInstanceAuthorizedNetwork(res["authorizedNetwork"], d, config)
+
 	hclData["node_count"] = flattenMemcacheInstanceNodeCount(res["nodeCount"], d, config)
+
 	hclData["memcache_version"] = flattenMemcacheInstanceMemcacheVersion(res["memcacheVersion"], d, config)
+
 	hclData["node_config"] = flattenMemcacheInstanceNodeConfig(res["nodeConfig"], d, config)
+
 	hclData["memcache_parameters"] = flattenMemcacheInstanceMemcacheParameters(res["parameters"], d, config)
+
 	hclData["maintenance_policy"] = flattenMemcacheInstanceMaintenancePolicy(res["maintenancePolicy"], d, config)
+
 	hclData["reserved_ip_range_id"] = flattenMemcacheInstanceReservedIpRangeId(res["reservedIpRangeId"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

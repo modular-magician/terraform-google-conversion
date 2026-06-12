@@ -137,8 +137,11 @@ func (c *ComputeTargetGrpcProxyCai2hclConverter) convertResourceData(asset caias
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/targetGrpcProxies/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeTargetGrpcProxyName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeTargetGrpcProxyDescription(res["description"], d, config)
+
 	hclData["url_map"] = flattenComputeTargetGrpcProxyUrlMap(res["urlMap"], d, config)
+
 	hclData["validate_for_proxyless"] = flattenComputeTargetGrpcProxyValidateForProxyless(res["validateForProxyless"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,9 +137,13 @@ func (c *VmwareengineNetworkPolicyCai2hclConverter) convertResourceData(asset ca
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//vmwareengine.googleapis.com/projects/{{project}}/locations/{{location}}/networkPolicies/{{name}}", outputFields, hclData)
 
 	hclData["edge_services_cidr"] = flattenVmwareengineNetworkPolicyEdgeServicesCidr(res["edgeServicesCidr"], d, config)
+
 	hclData["description"] = flattenVmwareengineNetworkPolicyDescription(res["description"], d, config)
+
 	hclData["vmware_engine_network"] = flattenVmwareengineNetworkPolicyVmwareEngineNetwork(res["vmwareEngineNetwork"], d, config)
+
 	hclData["internet_access"] = flattenVmwareengineNetworkPolicyInternetAccess(res["internetAccess"], d, config)
+
 	hclData["external_ip"] = flattenVmwareengineNetworkPolicyExternalIp(res["externalIp"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

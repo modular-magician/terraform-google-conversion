@@ -147,16 +147,27 @@ func (c *ComputeTargetHttpsProxyCai2hclConverter) convertResourceData(asset caia
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/targetHttpsProxies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeTargetHttpsProxyDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeTargetHttpsProxyName(res["name"], d, config)
+
 	hclData["quic_override"] = flattenComputeTargetHttpsProxyQuicOverride(res["quicOverride"], d, config)
+
 	hclData["tls_early_data"] = flattenComputeTargetHttpsProxyTlsEarlyData(res["tlsEarlyData"], d, config)
+
 	hclData["certificate_manager_certificates"] = flattenComputeTargetHttpsProxyCertificateManagerCertificates(res["certificateManagerCertificates"], d, config)
+
 	hclData["ssl_certificates"] = flattenComputeTargetHttpsProxySslCertificates(res["sslCertificates"], d, config)
+
 	hclData["certificate_map"] = flattenComputeTargetHttpsProxyCertificateMap(res["certificateMap"], d, config)
+
 	hclData["ssl_policy"] = flattenComputeTargetHttpsProxySslPolicy(res["sslPolicy"], d, config)
+
 	hclData["url_map"] = flattenComputeTargetHttpsProxyUrlMap(res["urlMap"], d, config)
+
 	hclData["proxy_bind"] = flattenComputeTargetHttpsProxyProxyBind(res["proxyBind"], d, config)
+
 	hclData["http_keep_alive_timeout_sec"] = flattenComputeTargetHttpsProxyHttpKeepAliveTimeoutSec(res["httpKeepAliveTimeoutSec"], d, config)
+
 	hclData["server_tls_policy"] = flattenComputeTargetHttpsProxyServerTlsPolicy(res["serverTlsPolicy"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,10 +137,17 @@ func (c *WorkbenchInstanceCai2hclConverter) convertResourceData(asset caiasset.A
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//notebooks.googleapis.com/projects/{{project}}/locations/{{location}}/instances/{{name}}", outputFields, hclData)
 
 	hclData["gce_setup"] = flattenWorkbenchInstanceGceSetup(res["gceSetup"], d, config)
+
 	hclData["instance_owners"] = flattenWorkbenchInstanceInstanceOwners(res["instanceOwners"], d, config)
+
 	hclData["disable_proxy_access"] = flattenWorkbenchInstanceDisableProxyAccess(res["disableProxyAccess"], d, config)
-	hclData["labels"] = flattenWorkbenchInstanceLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenWorkbenchInstanceLabels(res["labels"], d, config)
+	}
+
 	hclData["enable_third_party_identity"] = flattenWorkbenchInstanceEnableThirdPartyIdentity(res["enableThirdPartyIdentity"], d, config)
+
 	hclData["enable_managed_euc"] = flattenWorkbenchInstanceEnableManagedEuc(res["enableManagedEuc"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

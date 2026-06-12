@@ -137,11 +137,19 @@ func (c *ClouddeployAutomationCai2hclConverter) convertResourceData(asset caiass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//clouddeploy.googleapis.com/projects/{{project}}/locations/{{location}}/deliveryPipelines/{{delivery_pipeline}}/automations/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenClouddeployAutomationDescription(res["description"], d, config)
+
 	hclData["annotations"] = flattenClouddeployAutomationAnnotations(res["annotations"], d, config)
-	hclData["labels"] = flattenClouddeployAutomationLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenClouddeployAutomationLabels(res["labels"], d, config)
+	}
+
 	hclData["suspended"] = flattenClouddeployAutomationSuspended(res["suspended"], d, config)
+
 	hclData["service_account"] = flattenClouddeployAutomationServiceAccount(res["serviceAccount"], d, config)
+
 	hclData["selector"] = flattenClouddeployAutomationSelector(res["selector"], d, config)
+
 	hclData["rules"] = flattenClouddeployAutomationRules(res["rules"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,12 +137,19 @@ func (c *ComputeNodeGroupCai2hclConverter) convertResourceData(asset caiasset.As
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/zones/{{zone}}/nodeGroups/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeNodeGroupDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeNodeGroupName(res["name"], d, config)
+
 	hclData["node_template"] = flattenComputeNodeGroupNodeTemplate(res["nodeTemplate"], d, config)
+
 	hclData["maintenance_policy"] = flattenComputeNodeGroupMaintenancePolicy(res["maintenancePolicy"], d, config)
+
 	hclData["maintenance_window"] = flattenComputeNodeGroupMaintenanceWindow(res["maintenanceWindow"], d, config)
+
 	hclData["autoscaling_policy"] = flattenComputeNodeGroupAutoscalingPolicy(res["autoscalingPolicy"], d, config)
+
 	hclData["share_settings"] = flattenComputeNodeGroupShareSettings(res["shareSettings"], d, config)
+
 	hclData["zone"] = flattenComputeNodeGroupZone(res["zone"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

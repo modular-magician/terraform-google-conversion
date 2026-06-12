@@ -137,8 +137,12 @@ func (c *FirebaseDataConnectServiceCai2hclConverter) convertResourceData(asset c
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//firebasedataconnect.googleapis.com/projects/{{project}}/locations/{{location}}/services/{{service_id}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenFirebaseDataConnectServiceDisplayName(res["displayName"], d, config)
+
 	hclData["annotations"] = flattenFirebaseDataConnectServiceAnnotations(res["annotations"], d, config)
-	hclData["labels"] = flattenFirebaseDataConnectServiceLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenFirebaseDataConnectServiceLabels(res["labels"], d, config)
+	}
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {

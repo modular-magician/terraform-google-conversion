@@ -137,7 +137,10 @@ func (c *GeminiRepositoryGroupCai2hclConverter) convertResourceData(asset caiass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudaicompanion.googleapis.com/projects/{{project}}/locations/{{location}}/codeRepositoryIndexes/{{code_repository_index}}/repositoryGroups/{{repository_group_id}}", outputFields, hclData)
 
 	hclData["repositories"] = flattenGeminiRepositoryGroupRepositories(res["repositories"], d, config)
-	hclData["labels"] = flattenGeminiRepositoryGroupLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenGeminiRepositoryGroupLabels(res["labels"], d, config)
+	}
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {

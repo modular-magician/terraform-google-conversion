@@ -141,9 +141,14 @@ func (c *DatastreamPrivateConnectionCai2hclConverter) convertResourceData(asset 
 	outputFields := map[string]struct{}{"effective_labels": struct{}{}, "error": struct{}{}, "name": struct{}{}, "state": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//datastream.googleapis.com/projects/{{project}}/locations/{{location}}/privateConnections/{{private_connection_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenDatastreamPrivateConnectionLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenDatastreamPrivateConnectionLabels(res["labels"], d, config)
+	}
+
 	hclData["display_name"] = flattenDatastreamPrivateConnectionDisplayName(res["displayName"], d, config)
+
 	hclData["vpc_peering_config"] = flattenDatastreamPrivateConnectionVpcPeeringConfig(res["vpcPeeringConfig"], d, config)
+
 	hclData["psc_interface_config"] = flattenDatastreamPrivateConnectionPscInterfaceConfig(res["pscInterfaceConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

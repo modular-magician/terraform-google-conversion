@@ -137,23 +137,41 @@ func (c *LookerInstanceCai2hclConverter) convertResourceData(asset caiasset.Asse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//looker.googleapis.com/projects/{{project}}/locations/{{region}}/instances/{{name}}", outputFields, hclData)
 
 	hclData["admin_settings"] = flattenLookerInstanceAdminSettings(res["adminSettings"], d, config)
+
 	hclData["consumer_network"] = flattenLookerInstanceConsumerNetwork(res["consumerNetwork"], d, config)
+
 	hclData["controlled_egress_config"] = flattenLookerInstanceControlledEgressConfig(res["controlledEgressConfig"], d, config)
+
 	hclData["controlled_egress_enabled"] = flattenLookerInstanceControlledEgressEnabled(res["controlledEgressEnabled"], d, config)
+
 	hclData["deny_maintenance_period"] = flattenLookerInstanceDenyMaintenancePeriod(res["denyMaintenancePeriod"], d, config)
+
 	hclData["encryption_config"] = flattenLookerInstanceEncryptionConfig(res["encryptionConfig"], d, config)
+
 	hclData["fips_enabled"] = flattenLookerInstanceFipsEnabled(res["fipsEnabled"], d, config)
+
 	hclData["gemini_enabled"] = flattenLookerInstanceGeminiEnabled(res["geminiEnabled"], d, config)
+
 	hclData["maintenance_window"] = flattenLookerInstanceMaintenanceWindow(res["maintenanceWindow"], d, config)
+
 	hclData["oauth_config"] = flattenLookerInstanceOauthConfig(res["oauthConfig"], d, config)
+
 	hclData["periodic_export_config"] = flattenLookerInstancePeriodicExportConfig(res["periodicExportConfig"], d, config)
+
 	hclData["platform_edition"] = flattenLookerInstancePlatformEdition(res["platformEdition"], d, config)
+
 	hclData["private_ip_enabled"] = flattenLookerInstancePrivateIpEnabled(res["privateIpEnabled"], d, config)
+
 	hclData["psc_config"] = flattenLookerInstancePscConfig(res["pscConfig"], d, config)
+
 	hclData["psc_enabled"] = flattenLookerInstancePscEnabled(res["pscEnabled"], d, config)
+
 	hclData["public_ip_enabled"] = flattenLookerInstancePublicIpEnabled(res["publicIpEnabled"], d, config)
+
 	hclData["reserved_range"] = flattenLookerInstanceReservedRange(res["reservedRange"], d, config)
+
 	hclData["user_metadata"] = flattenLookerInstanceUserMetadata(res["userMetadata"], d, config)
+
 	hclData["custom_domain"] = flattenLookerInstanceCustomDomain(res["customDomain"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

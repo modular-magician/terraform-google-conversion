@@ -137,10 +137,17 @@ func (c *CertificateManagerCertificateIssuanceConfigCai2hclConverter) convertRes
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//certificatemanager.googleapis.com/projects/{{project}}/locations/{{location}}/certificateIssuanceConfigs/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenCertificateManagerCertificateIssuanceConfigDescription(res["description"], d, config)
+
 	hclData["rotation_window_percentage"] = flattenCertificateManagerCertificateIssuanceConfigRotationWindowPercentage(res["rotationWindowPercentage"], d, config)
+
 	hclData["key_algorithm"] = flattenCertificateManagerCertificateIssuanceConfigKeyAlgorithm(res["keyAlgorithm"], d, config)
+
 	hclData["lifetime"] = flattenCertificateManagerCertificateIssuanceConfigLifetime(res["lifetime"], d, config)
-	hclData["labels"] = flattenCertificateManagerCertificateIssuanceConfigLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenCertificateManagerCertificateIssuanceConfigLabels(res["labels"], d, config)
+	}
+
 	hclData["certificate_authority_config"] = flattenCertificateManagerCertificateIssuanceConfigCertificateAuthorityConfig(res["certificateAuthorityConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

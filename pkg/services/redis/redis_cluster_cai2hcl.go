@@ -136,25 +136,46 @@ func (c *RedisClusterCai2hclConverter) convertResourceData(asset caiasset.Asset,
 	outputFields := map[string]struct{}{"available_maintenance_versions": struct{}{}, "backup_collection": struct{}{}, "create_time": struct{}{}, "discovery_endpoints": struct{}{}, "effective_labels": struct{}{}, "effective_maintenance_version": struct{}{}, "maintenance_schedule": struct{}{}, "managed_server_ca": struct{}{}, "precise_size_gb": struct{}{}, "psc_connections": struct{}{}, "psc_service_attachments": struct{}{}, "size_gb": struct{}{}, "state": struct{}{}, "state_info": struct{}{}, "terraform_labels": struct{}{}, "uid": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//redis.googleapis.com/projects/{{project}}/locations/{{region}}/clusters/{{name}}", outputFields, hclData)
 
-	hclData["labels"] = flattenRedisClusterLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenRedisClusterLabels(res["labels"], d, config)
+	}
+
 	hclData["gcs_source"] = flattenRedisClusterGcsSource(res["gcsSource"], d, config)
+
 	hclData["managed_backup_source"] = flattenRedisClusterManagedBackupSource(res["managedBackupSource"], d, config)
+
 	hclData["automated_backup_config"] = flattenRedisClusterAutomatedBackupConfig(res["automatedBackupConfig"], d, config)
+
 	hclData["authorization_mode"] = flattenRedisClusterAuthorizationMode(res["authorizationMode"], d, config)
+
 	hclData["transit_encryption_mode"] = flattenRedisClusterTransitEncryptionMode(res["transitEncryptionMode"], d, config)
+
 	hclData["node_type"] = flattenRedisClusterNodeType(res["nodeType"], d, config)
+
 	hclData["zone_distribution_config"] = flattenRedisClusterZoneDistributionConfig(res["zoneDistributionConfig"], d, config)
+
 	hclData["psc_configs"] = flattenRedisClusterPscConfigs(res["pscConfigs"], d, config)
+
 	hclData["replica_count"] = flattenRedisClusterReplicaCount(res["replicaCount"], d, config)
+
 	hclData["shard_count"] = flattenRedisClusterShardCount(res["shardCount"], d, config)
+
 	hclData["deletion_protection_enabled"] = flattenRedisClusterDeletionProtectionEnabled(res["deletionProtectionEnabled"], d, config)
+
 	hclData["redis_configs"] = flattenRedisClusterRedisConfigs(res["redisConfigs"], d, config)
+
 	hclData["persistence_config"] = flattenRedisClusterPersistenceConfig(res["persistenceConfig"], d, config)
+
 	hclData["maintenance_policy"] = flattenRedisClusterMaintenancePolicy(res["maintenancePolicy"], d, config)
+
 	hclData["maintenance_version"] = flattenRedisClusterMaintenanceVersion(res["maintenanceVersion"], d, config)
+
 	hclData["cross_cluster_replication_config"] = flattenRedisClusterCrossClusterReplicationConfig(res["crossClusterReplicationConfig"], d, config)
+
 	hclData["kms_key"] = flattenRedisClusterKmsKey(res["kmsKey"], d, config)
+
 	hclData["server_ca_mode"] = flattenRedisClusterServerCaMode(res["serverCaMode"], d, config)
+
 	hclData["server_ca_pool"] = flattenRedisClusterServerCaPool(res["serverCaPool"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

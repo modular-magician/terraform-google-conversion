@@ -137,10 +137,17 @@ func (c *ComputeExternalVpnGatewayCai2hclConverter) convertResourceData(asset ca
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/externalVpnGateways/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeExternalVpnGatewayDescription(res["description"], d, config)
-	hclData["labels"] = flattenComputeExternalVpnGatewayLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeExternalVpnGatewayLabels(res["labels"], d, config)
+	}
+
 	hclData["name"] = flattenComputeExternalVpnGatewayName(res["name"], d, config)
+
 	hclData["redundancy_type"] = flattenComputeExternalVpnGatewayRedundancyType(res["redundancyType"], d, config)
+
 	hclData["interface"] = flattenComputeExternalVpnGatewayInterface(res["interfaces"], d, config)
+
 	hclData["params"] = flattenComputeExternalVpnGatewayParams(res["params"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

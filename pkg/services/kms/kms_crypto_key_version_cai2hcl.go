@@ -137,6 +137,7 @@ func (c *KMSCryptoKeyVersionCai2hclConverter) convertResourceData(asset caiasset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudkms.googleapis.com/{{crypto_key}}/cryptoKeyVersions/", outputFields, hclData)
 
 	hclData["state"] = flattenKMSCryptoKeyVersionState(res["state"], d, config)
+
 	hclData["external_protection_level_options"] = flattenKMSCryptoKeyVersionExternalProtectionLevelOptions(res["externalProtectionLevelOptions"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

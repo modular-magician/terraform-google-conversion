@@ -137,6 +137,7 @@ func (c *NetworkSecurityGatewaySecurityPolicyCai2hclConverter) convertResourceDa
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/projects/{{project}}/locations/{{location}}/gatewaySecurityPolicies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetworkSecurityGatewaySecurityPolicyDescription(res["description"], d, config)
+
 	hclData["tls_inspection_policy"] = flattenNetworkSecurityGatewaySecurityPolicyTlsInspectionPolicy(res["tlsInspectionPolicy"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

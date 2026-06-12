@@ -137,7 +137,10 @@ func (c *FilestoreSnapshotCai2hclConverter) convertResourceData(asset caiasset.A
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//file.googleapis.com/projects/{{project}}/locations/{{location}}/instances/{{instance}}/snapshots/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenFilestoreSnapshotDescription(res["description"], d, config)
-	hclData["labels"] = flattenFilestoreSnapshotLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenFilestoreSnapshotLabels(res["labels"], d, config)
+	}
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {

@@ -137,13 +137,23 @@ func (c *EventarcPipelineCai2hclConverter) convertResourceData(asset caiasset.As
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//eventarc.googleapis.com/projects/{{project}}/locations/{{location}}/pipelines/{{pipeline_id}}", outputFields, hclData)
 
 	hclData["annotations"] = flattenEventarcPipelineAnnotations(res["annotations"], d, config)
+
 	hclData["display_name"] = flattenEventarcPipelineDisplayName(res["displayName"], d, config)
+
 	hclData["crypto_key_name"] = flattenEventarcPipelineCryptoKeyName(res["cryptoKeyName"], d, config)
+
 	hclData["input_payload_format"] = flattenEventarcPipelineInputPayloadFormat(res["inputPayloadFormat"], d, config)
+
 	hclData["retry_policy"] = flattenEventarcPipelineRetryPolicy(res["retryPolicy"], d, config)
-	hclData["labels"] = flattenEventarcPipelineLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenEventarcPipelineLabels(res["labels"], d, config)
+	}
+
 	hclData["destinations"] = flattenEventarcPipelineDestinations(res["destinations"], d, config)
+
 	hclData["mediations"] = flattenEventarcPipelineMediations(res["mediations"], d, config)
+
 	hclData["logging_config"] = flattenEventarcPipelineLoggingConfig(res["loggingConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

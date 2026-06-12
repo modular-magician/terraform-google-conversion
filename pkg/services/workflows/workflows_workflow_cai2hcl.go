@@ -137,14 +137,25 @@ func (c *WorkflowsWorkflowCai2hclConverter) convertResourceData(asset caiasset.A
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//workflows.googleapis.com/projects/{{project}}/locations/{{region}}/workflows/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenWorkflowsWorkflowName(res["name"], d, config)
+
 	hclData["description"] = flattenWorkflowsWorkflowDescription(res["description"], d, config)
-	hclData["labels"] = flattenWorkflowsWorkflowLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenWorkflowsWorkflowLabels(res["labels"], d, config)
+	}
+
 	hclData["service_account"] = flattenWorkflowsWorkflowServiceAccount(res["serviceAccount"], d, config)
+
 	hclData["source_contents"] = flattenWorkflowsWorkflowSourceContents(res["sourceContents"], d, config)
+
 	hclData["crypto_key_name"] = flattenWorkflowsWorkflowCryptoKeyName(res["cryptoKeyName"], d, config)
+
 	hclData["call_log_level"] = flattenWorkflowsWorkflowCallLogLevel(res["callLogLevel"], d, config)
+
 	hclData["execution_history_level"] = flattenWorkflowsWorkflowExecutionHistoryLevel(res["executionHistoryLevel"], d, config)
+
 	hclData["user_env_vars"] = flattenWorkflowsWorkflowUserEnvVars(res["userEnvVars"], d, config)
+
 	hclData["tags"] = flattenWorkflowsWorkflowTags(res["tags"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

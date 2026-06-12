@@ -137,11 +137,19 @@ func (c *Cloudfunctions2functionCai2hclConverter) convertResourceData(asset caia
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudfunctions.googleapis.com/projects/{{project}}/locations/{{location}}/functions/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenCloudfunctions2functionName(res["name"], d, config)
+
 	hclData["description"] = flattenCloudfunctions2functionDescription(res["description"], d, config)
+
 	hclData["build_config"] = flattenCloudfunctions2functionBuildConfig(res["buildConfig"], d, config)
+
 	hclData["service_config"] = flattenCloudfunctions2functionServiceConfig(res["serviceConfig"], d, config)
+
 	hclData["event_trigger"] = flattenCloudfunctions2functionEventTrigger(res["eventTrigger"], d, config)
-	hclData["labels"] = flattenCloudfunctions2functionLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenCloudfunctions2functionLabels(res["labels"], d, config)
+	}
+
 	hclData["kms_key_name"] = flattenCloudfunctions2functionKmsKeyName(res["kmsKeyName"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

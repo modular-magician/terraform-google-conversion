@@ -137,7 +137,9 @@ func (c *AccessApprovalFolderSettingsCai2hclConverter) convertResourceData(asset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//accessapproval.googleapis.com/folders/{{folder_id}}/accessApprovalSettings", outputFields, hclData)
 
 	hclData["notification_emails"] = flattenAccessApprovalFolderSettingsNotificationEmails(res["notificationEmails"], d, config)
+
 	hclData["enrolled_services"] = flattenAccessApprovalFolderSettingsEnrolledServices(res["enrolledServices"], d, config)
+
 	hclData["active_key_version"] = flattenAccessApprovalFolderSettingsActiveKeyVersion(res["activeKeyVersion"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

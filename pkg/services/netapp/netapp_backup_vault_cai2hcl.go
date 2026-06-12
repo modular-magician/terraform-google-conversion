@@ -137,10 +137,17 @@ func (c *NetappBackupVaultCai2hclConverter) convertResourceData(asset caiasset.A
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/backupVaults/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetappBackupVaultDescription(res["description"], d, config)
-	hclData["labels"] = flattenNetappBackupVaultLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetappBackupVaultLabels(res["labels"], d, config)
+	}
+
 	hclData["backup_vault_type"] = flattenNetappBackupVaultBackupVaultType(res["backupVaultType"], d, config)
+
 	hclData["backup_region"] = flattenNetappBackupVaultBackupRegion(res["backupRegion"], d, config)
+
 	hclData["backup_retention_policy"] = flattenNetappBackupVaultBackupRetentionPolicy(res["backupRetentionPolicy"], d, config)
+
 	hclData["kms_config"] = flattenNetappBackupVaultKmsConfig(res["kmsConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

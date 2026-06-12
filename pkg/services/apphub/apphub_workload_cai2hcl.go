@@ -137,8 +137,11 @@ func (c *ApphubWorkloadCai2hclConverter) convertResourceData(asset caiasset.Asse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//apphub.googleapis.com/projects/{{project}}/locations/{{location}}/applications/{{application_id}}/workloads/{{workload_id}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenApphubWorkloadDisplayName(res["displayName"], d, config)
+
 	hclData["description"] = flattenApphubWorkloadDescription(res["description"], d, config)
+
 	hclData["discovered_workload"] = flattenApphubWorkloadDiscoveredWorkload(res["discoveredWorkload"], d, config)
+
 	hclData["attributes"] = flattenApphubWorkloadAttributes(res["attributes"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,11 +137,18 @@ func (c *PrivatecaCertificateTemplateCai2hclConverter) convertResourceData(asset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//privateca.googleapis.com/projects/{{project}}/locations/{{location}}/certificateTemplates/{{name}}", outputFields, hclData)
 
 	hclData["predefined_values"] = flattenPrivatecaCertificateTemplatePredefinedValues(res["predefinedValues"], d, config)
+
 	hclData["identity_constraints"] = flattenPrivatecaCertificateTemplateIdentityConstraints(res["identityConstraints"], d, config)
+
 	hclData["passthrough_extensions"] = flattenPrivatecaCertificateTemplatePassthroughExtensions(res["passthroughExtensions"], d, config)
+
 	hclData["maximum_lifetime"] = flattenPrivatecaCertificateTemplateMaximumLifetime(res["maximumLifetime"], d, config)
+
 	hclData["description"] = flattenPrivatecaCertificateTemplateDescription(res["description"], d, config)
-	hclData["labels"] = flattenPrivatecaCertificateTemplateLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenPrivatecaCertificateTemplateLabels(res["labels"], d, config)
+	}
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {

@@ -137,11 +137,17 @@ func (c *CloudQuotasQuotaPreferenceCai2hclConverter) convertResourceData(asset c
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudquotas.googleapis.com/{{parent}}/locations/global/quotaPreferences/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenCloudQuotasQuotaPreferenceName(res["name"], d, config)
+
 	hclData["service"] = flattenCloudQuotasQuotaPreferenceService(res["service"], d, config)
+
 	hclData["quota_id"] = flattenCloudQuotasQuotaPreferenceQuotaId(res["quotaId"], d, config)
+
 	hclData["quota_config"] = flattenCloudQuotasQuotaPreferenceQuotaConfig(res["quotaConfig"], d, config)
+
 	hclData["dimensions"] = flattenCloudQuotasQuotaPreferenceDimensions(res["dimensions"], d, config)
+
 	hclData["justification"] = flattenCloudQuotasQuotaPreferenceJustification(res["justification"], d, config)
+
 	hclData["contact_email"] = flattenCloudQuotasQuotaPreferenceContactEmail(res["contactEmail"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,11 +137,17 @@ func (c *ComputeTargetSslProxyCai2hclConverter) convertResourceData(asset caiass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/targetSslProxies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeTargetSslProxyDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeTargetSslProxyName(res["name"], d, config)
+
 	hclData["proxy_header"] = flattenComputeTargetSslProxyProxyHeader(res["proxyHeader"], d, config)
+
 	hclData["backend_service"] = flattenComputeTargetSslProxyBackendService(res["service"], d, config)
+
 	hclData["ssl_certificates"] = flattenComputeTargetSslProxySslCertificates(res["sslCertificates"], d, config)
+
 	hclData["certificate_map"] = flattenComputeTargetSslProxyCertificateMap(res["certificateMap"], d, config)
+
 	hclData["ssl_policy"] = flattenComputeTargetSslProxySslPolicy(res["sslPolicy"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

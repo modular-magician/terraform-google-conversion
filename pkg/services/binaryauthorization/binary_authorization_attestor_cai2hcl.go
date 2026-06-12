@@ -137,7 +137,9 @@ func (c *BinaryAuthorizationAttestorCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//binaryauthorization.googleapis.com/projects/{{project}}/attestors/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenBinaryAuthorizationAttestorName(res["name"], d, config)
+
 	hclData["description"] = flattenBinaryAuthorizationAttestorDescription(res["description"], d, config)
+
 	hclData["attestation_authority_note"] = flattenBinaryAuthorizationAttestorAttestationAuthorityNote(res["userOwnedGrafeasNote"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,11 +137,17 @@ func (c *NetworkSecurityTlsInspectionPolicyCai2hclConverter) convertResourceData
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/projects/{{project}}/locations/{{location}}/tlsInspectionPolicies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetworkSecurityTlsInspectionPolicyDescription(res["description"], d, config)
+
 	hclData["ca_pool"] = flattenNetworkSecurityTlsInspectionPolicyCaPool(res["caPool"], d, config)
+
 	hclData["trust_config"] = flattenNetworkSecurityTlsInspectionPolicyTrustConfig(res["trustConfig"], d, config)
+
 	hclData["min_tls_version"] = flattenNetworkSecurityTlsInspectionPolicyMinTlsVersion(res["minTlsVersion"], d, config)
+
 	hclData["tls_feature_profile"] = flattenNetworkSecurityTlsInspectionPolicyTlsFeatureProfile(res["tlsFeatureProfile"], d, config)
+
 	hclData["custom_tls_features"] = flattenNetworkSecurityTlsInspectionPolicyCustomTlsFeatures(res["customTlsFeatures"], d, config)
+
 	hclData["exclude_public_ca_set"] = flattenNetworkSecurityTlsInspectionPolicyExcludePublicCaSet(res["excludePublicCaSet"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

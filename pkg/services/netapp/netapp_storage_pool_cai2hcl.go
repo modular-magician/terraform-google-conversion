@@ -137,24 +137,45 @@ func (c *NetappStoragePoolCai2hclConverter) convertResourceData(asset caiasset.A
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/storagePools/{{name}}", outputFields, hclData)
 
 	hclData["service_level"] = flattenNetappStoragePoolServiceLevel(res["serviceLevel"], d, config)
+
 	hclData["capacity_gib"] = flattenNetappStoragePoolCapacityGib(res["capacityGib"], d, config)
+
 	hclData["description"] = flattenNetappStoragePoolDescription(res["description"], d, config)
-	hclData["labels"] = flattenNetappStoragePoolLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetappStoragePoolLabels(res["labels"], d, config)
+	}
+
 	hclData["network"] = flattenNetappStoragePoolNetwork(res["network"], d, config)
+
 	hclData["active_directory"] = flattenNetappStoragePoolActiveDirectory(res["activeDirectory"], d, config)
+
 	hclData["kms_config"] = flattenNetappStoragePoolKmsConfig(res["kmsConfig"], d, config)
+
 	hclData["ldap_enabled"] = flattenNetappStoragePoolLdapEnabled(res["ldapEnabled"], d, config)
+
 	hclData["zone"] = flattenNetappStoragePoolZone(res["zone"], d, config)
+
 	hclData["replica_zone"] = flattenNetappStoragePoolReplicaZone(res["replicaZone"], d, config)
+
 	hclData["allow_auto_tiering"] = flattenNetappStoragePoolAllowAutoTiering(res["allowAutoTiering"], d, config)
+
 	hclData["custom_performance_enabled"] = flattenNetappStoragePoolCustomPerformanceEnabled(res["customPerformanceEnabled"], d, config)
+
 	hclData["total_throughput_mibps"] = flattenNetappStoragePoolTotalThroughputMibps(res["totalThroughputMibps"], d, config)
+
 	hclData["total_iops"] = flattenNetappStoragePoolTotalIops(res["totalIops"], d, config)
+
 	hclData["hot_tier_size_gib"] = flattenNetappStoragePoolHotTierSizeGib(res["hotTierSizeGib"], d, config)
+
 	hclData["enable_hot_tier_auto_resize"] = flattenNetappStoragePoolEnableHotTierAutoResize(res["enableHotTierAutoResize"], d, config)
+
 	hclData["qos_type"] = flattenNetappStoragePoolQosType(res["qosType"], d, config)
+
 	hclData["type"] = flattenNetappStoragePoolType(res["type"], d, config)
+
 	hclData["scale_type"] = flattenNetappStoragePoolScaleType(res["scaleType"], d, config)
+
 	hclData["mode"] = flattenNetappStoragePoolMode(res["mode"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

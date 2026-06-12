@@ -137,8 +137,11 @@ func (c *ComputeSslCertificateCai2hclConverter) convertResourceData(asset caiass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/sslCertificates/{{name}}", outputFields, hclData)
 
 	hclData["certificate"] = flattenComputeSslCertificateCertificate(res["certificate"], d, config)
+
 	hclData["description"] = flattenComputeSslCertificateDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeSslCertificateName(res["name"], d, config)
+
 	hclData["private_key"] = flattenComputeSslCertificatePrivateKey(res["privateKey"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

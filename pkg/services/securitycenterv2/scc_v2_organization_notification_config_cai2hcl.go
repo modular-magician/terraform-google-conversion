@@ -137,7 +137,9 @@ func (c *SecurityCenterV2OrganizationNotificationConfigCai2hclConverter) convert
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//securitycenter.googleapis.com/organizations/{{organization}}/locations/{{location}}/notificationConfigs/{{config_id}}", outputFields, hclData)
 
 	hclData["description"] = flattenSecurityCenterV2OrganizationNotificationConfigDescription(res["description"], d, config)
+
 	hclData["pubsub_topic"] = flattenSecurityCenterV2OrganizationNotificationConfigPubsubTopic(res["pubsubTopic"], d, config)
+
 	hclData["streaming_config"] = flattenSecurityCenterV2OrganizationNotificationConfigStreamingConfig(res["streamingConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

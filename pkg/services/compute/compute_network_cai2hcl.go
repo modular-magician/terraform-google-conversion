@@ -147,18 +147,26 @@ func (c *ComputeNetworkCai2hclConverter) convertResourceData(asset caiasset.Asse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/networks/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeNetworkDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeNetworkName(res["name"], d, config)
+
 	hclData["auto_create_subnetworks"] = flattenComputeNetworkAutoCreateSubnetworks(res["autoCreateSubnetworks"], d, config)
 	if flattenedProp := flattenComputeNetworkRoutingConfig(res["routingConfig"], d, config); flattenedProp != nil {
 		if err := tgcresource.MergeFlattenedProperties(hclData, flattenedProp); err != nil {
 			return nil, fmt.Errorf("error merging flattened properties from routingConfig: %s", err)
 		}
 	}
+
 	hclData["mtu"] = flattenComputeNetworkMtu(res["mtu"], d, config)
+
 	hclData["enable_ula_internal_ipv6"] = flattenComputeNetworkEnableUlaInternalIpv6(res["enableUlaInternalIpv6"], d, config)
+
 	hclData["internal_ipv6_range"] = flattenComputeNetworkInternalIpv6Range(res["internalIpv6Range"], d, config)
+
 	hclData["network_firewall_policy_enforcement_order"] = flattenComputeNetworkNetworkFirewallPolicyEnforcementOrder(res["networkFirewallPolicyEnforcementOrder"], d, config)
+
 	hclData["network_profile"] = flattenComputeNetworkNetworkProfile(res["networkProfile"], d, config)
+
 	hclData["params"] = flattenComputeNetworkParams(res["params"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

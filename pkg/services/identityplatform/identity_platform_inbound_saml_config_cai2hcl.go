@@ -137,9 +137,13 @@ func (c *IdentityPlatformInboundSamlConfigCai2hclConverter) convertResourceData(
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//identitytoolkit.googleapis.com/projects/{{project}}/inboundSamlConfigs/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenIdentityPlatformInboundSamlConfigName(res["name"], d, config)
+
 	hclData["display_name"] = flattenIdentityPlatformInboundSamlConfigDisplayName(res["displayName"], d, config)
+
 	hclData["enabled"] = flattenIdentityPlatformInboundSamlConfigEnabled(res["enabled"], d, config)
+
 	hclData["idp_config"] = flattenIdentityPlatformInboundSamlConfigIdpConfig(res["idpConfig"], d, config)
+
 	hclData["sp_config"] = flattenIdentityPlatformInboundSamlConfigSpConfig(res["spConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

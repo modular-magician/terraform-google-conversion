@@ -137,13 +137,21 @@ func (c *MonitoringAlertPolicyCai2hclConverter) convertResourceData(asset caiass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//monitoring.googleapis.com/{{name}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenMonitoringAlertPolicyDisplayName(res["displayName"], d, config)
+
 	hclData["combiner"] = flattenMonitoringAlertPolicyCombiner(res["combiner"], d, config)
+
 	hclData["enabled"] = flattenMonitoringAlertPolicyEnabled(res["enabled"], d, config)
+
 	hclData["conditions"] = flattenMonitoringAlertPolicyConditions(res["conditions"], d, config)
+
 	hclData["notification_channels"] = flattenMonitoringAlertPolicyNotificationChannels(res["notificationChannels"], d, config)
+
 	hclData["alert_strategy"] = flattenMonitoringAlertPolicyAlertStrategy(res["alertStrategy"], d, config)
+
 	hclData["user_labels"] = flattenMonitoringAlertPolicyUserLabels(res["userLabels"], d, config)
+
 	hclData["severity"] = flattenMonitoringAlertPolicySeverity(res["severity"], d, config)
+
 	hclData["documentation"] = flattenMonitoringAlertPolicyDocumentation(res["documentation"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,13 +137,21 @@ func (c *ApigeeInstanceCai2hclConverter) convertResourceData(asset caiasset.Asse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//apigee.googleapis.com/{{org_id}}/instances/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenApigeeInstanceName(res["name"], d, config)
+
 	hclData["location"] = flattenApigeeInstanceLocation(res["location"], d, config)
+
 	hclData["peering_cidr_range"] = flattenApigeeInstancePeeringCidrRange(res["peeringCidrRange"], d, config)
+
 	hclData["ip_range"] = flattenApigeeInstanceIpRange(res["ipRange"], d, config)
+
 	hclData["description"] = flattenApigeeInstanceDescription(res["description"], d, config)
+
 	hclData["display_name"] = flattenApigeeInstanceDisplayName(res["displayName"], d, config)
+
 	hclData["disk_encryption_key_name"] = flattenApigeeInstanceDiskEncryptionKeyName(res["diskEncryptionKeyName"], d, config)
+
 	hclData["consumer_accept_list"] = flattenApigeeInstanceConsumerAcceptList(res["consumerAcceptList"], d, config)
+
 	hclData["access_logging_config"] = flattenApigeeInstanceAccessLoggingConfig(res["accessLoggingConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -136,12 +136,20 @@ func (c *DataprocBatchCai2hclConverter) convertResourceData(asset caiasset.Asset
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "creator": struct{}{}, "effective_labels": struct{}{}, "name": struct{}{}, "operation": struct{}{}, "runtime_info": struct{}{}, "state": struct{}{}, "state_history": struct{}{}, "state_message": struct{}{}, "state_time": struct{}{}, "terraform_labels": struct{}{}, "uuid": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//dataproc.googleapis.com/projects/{{project}}/locations/{{location}}/batches/{{batch_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenDataprocBatchLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenDataprocBatchLabels(res["labels"], d, config)
+	}
+
 	hclData["runtime_config"] = flattenDataprocBatchRuntimeConfig(res["runtimeConfig"], d, config)
+
 	hclData["environment_config"] = flattenDataprocBatchEnvironmentConfig(res["environmentConfig"], d, config)
+
 	hclData["pyspark_batch"] = flattenDataprocBatchPysparkBatch(res["pysparkBatch"], d, config)
+
 	hclData["spark_batch"] = flattenDataprocBatchSparkBatch(res["sparkBatch"], d, config)
+
 	hclData["spark_r_batch"] = flattenDataprocBatchSparkRBatch(res["sparkRBatch"], d, config)
+
 	hclData["spark_sql_batch"] = flattenDataprocBatchSparkSqlBatch(res["sparkSqlBatch"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

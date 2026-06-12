@@ -137,9 +137,15 @@ func (c *EventarcMessageBusCai2hclConverter) convertResourceData(asset caiasset.
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//eventarc.googleapis.com/projects/{{project}}/locations/{{location}}/messageBuses/{{message_bus_id}}", outputFields, hclData)
 
 	hclData["logging_config"] = flattenEventarcMessageBusLoggingConfig(res["loggingConfig"], d, config)
-	hclData["labels"] = flattenEventarcMessageBusLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenEventarcMessageBusLabels(res["labels"], d, config)
+	}
+
 	hclData["annotations"] = flattenEventarcMessageBusAnnotations(res["annotations"], d, config)
+
 	hclData["display_name"] = flattenEventarcMessageBusDisplayName(res["displayName"], d, config)
+
 	hclData["crypto_key_name"] = flattenEventarcMessageBusCryptoKeyName(res["cryptoKeyName"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

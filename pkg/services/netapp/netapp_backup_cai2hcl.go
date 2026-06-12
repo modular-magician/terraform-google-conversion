@@ -137,9 +137,15 @@ func (c *NetappBackupCai2hclConverter) convertResourceData(asset caiasset.Asset,
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/backupVaults/{{vault_name}}/backups/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetappBackupDescription(res["description"], d, config)
+
 	hclData["source_volume"] = flattenNetappBackupSourceVolume(res["sourceVolume"], d, config)
-	hclData["labels"] = flattenNetappBackupLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetappBackupLabels(res["labels"], d, config)
+	}
+
 	hclData["source_snapshot"] = flattenNetappBackupSourceSnapshot(res["sourceSnapshot"], d, config)
+
 	hclData["ontap_source"] = flattenNetappBackupOntapSource(res["ontapSource"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

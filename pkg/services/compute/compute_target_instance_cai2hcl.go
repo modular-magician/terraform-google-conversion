@@ -137,9 +137,13 @@ func (c *ComputeTargetInstanceCai2hclConverter) convertResourceData(asset caiass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/zones/{{zone}}/targetInstances/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeTargetInstanceName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeTargetInstanceDescription(res["description"], d, config)
+
 	hclData["instance"] = flattenComputeTargetInstanceInstance(res["instance"], d, config)
+
 	hclData["nat_policy"] = flattenComputeTargetInstanceNatPolicy(res["natPolicy"], d, config)
+
 	hclData["zone"] = flattenComputeTargetInstanceZone(res["zone"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

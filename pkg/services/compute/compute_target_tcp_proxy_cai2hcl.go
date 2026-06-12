@@ -137,9 +137,13 @@ func (c *ComputeTargetTcpProxyCai2hclConverter) convertResourceData(asset caiass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/targetTcpProxies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeTargetTcpProxyDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeTargetTcpProxyName(res["name"], d, config)
+
 	hclData["proxy_header"] = flattenComputeTargetTcpProxyProxyHeader(res["proxyHeader"], d, config)
+
 	hclData["backend_service"] = flattenComputeTargetTcpProxyBackendService(res["service"], d, config)
+
 	hclData["proxy_bind"] = flattenComputeTargetTcpProxyProxyBind(res["proxyBind"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -136,11 +136,18 @@ func (c *NetappBackupPolicyCai2hclConverter) convertResourceData(asset caiasset.
 	outputFields := map[string]struct{}{"assigned_volume_count": struct{}{}, "create_time": struct{}{}, "effective_labels": struct{}{}, "state": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/backupPolicies/{{name}}", outputFields, hclData)
 
-	hclData["labels"] = flattenNetappBackupPolicyLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetappBackupPolicyLabels(res["labels"], d, config)
+	}
+
 	hclData["daily_backup_limit"] = flattenNetappBackupPolicyDailyBackupLimit(res["dailyBackupLimit"], d, config)
+
 	hclData["weekly_backup_limit"] = flattenNetappBackupPolicyWeeklyBackupLimit(res["weeklyBackupLimit"], d, config)
+
 	hclData["monthly_backup_limit"] = flattenNetappBackupPolicyMonthlyBackupLimit(res["monthlyBackupLimit"], d, config)
+
 	hclData["description"] = flattenNetappBackupPolicyDescription(res["description"], d, config)
+
 	hclData["enabled"] = flattenNetappBackupPolicyEnabled(res["enabled"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,6 +137,7 @@ func (c *NetworkSecurityUrlListsCai2hclConverter) convertResourceData(asset caia
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/projects/{{project}}/locations/{{location}}/urlLists/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetworkSecurityUrlListsDescription(res["description"], d, config)
+
 	hclData["values"] = flattenNetworkSecurityUrlListsValues(res["values"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

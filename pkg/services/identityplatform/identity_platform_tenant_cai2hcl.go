@@ -137,9 +137,13 @@ func (c *IdentityPlatformTenantCai2hclConverter) convertResourceData(asset caias
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//identitytoolkit.googleapis.com/projects/{{project}}/tenants/{{name}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenIdentityPlatformTenantDisplayName(res["displayName"], d, config)
+
 	hclData["allow_password_signup"] = flattenIdentityPlatformTenantAllowPasswordSignup(res["allowPasswordSignup"], d, config)
+
 	hclData["enable_email_link_signin"] = flattenIdentityPlatformTenantEnableEmailLinkSignin(res["enableEmailLinkSignin"], d, config)
+
 	hclData["disable_auth"] = flattenIdentityPlatformTenantDisableAuth(res["disableAuth"], d, config)
+
 	hclData["client"] = flattenIdentityPlatformTenantClient(res["client"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

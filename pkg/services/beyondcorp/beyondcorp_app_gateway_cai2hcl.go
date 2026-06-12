@@ -137,9 +137,14 @@ func (c *BeyondcorpAppGatewayCai2hclConverter) convertResourceData(asset caiasse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//beyondcorp.googleapis.com/projects/{{project}}/locations/{{region}}/appGateways/{{name}}", outputFields, hclData)
 
 	hclData["type"] = flattenBeyondcorpAppGatewayType(res["type"], d, config)
+
 	hclData["host_type"] = flattenBeyondcorpAppGatewayHostType(res["hostType"], d, config)
+
 	hclData["display_name"] = flattenBeyondcorpAppGatewayDisplayName(res["displayName"], d, config)
-	hclData["labels"] = flattenBeyondcorpAppGatewayLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenBeyondcorpAppGatewayLabels(res["labels"], d, config)
+	}
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {

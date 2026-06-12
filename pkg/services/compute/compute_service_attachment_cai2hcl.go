@@ -137,16 +137,27 @@ func (c *ComputeServiceAttachmentCai2hclConverter) convertResourceData(asset cai
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/serviceAttachments/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeServiceAttachmentName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeServiceAttachmentDescription(res["description"], d, config)
+
 	hclData["connection_preference"] = flattenComputeServiceAttachmentConnectionPreference(res["connectionPreference"], d, config)
+
 	hclData["target_service"] = flattenComputeServiceAttachmentTargetService(res["targetService"], d, config)
+
 	hclData["nat_subnets"] = flattenComputeServiceAttachmentNatSubnets(res["natSubnets"], d, config)
+
 	hclData["enable_proxy_protocol"] = flattenComputeServiceAttachmentEnableProxyProtocol(res["enableProxyProtocol"], d, config)
+
 	hclData["domain_names"] = flattenComputeServiceAttachmentDomainNames(res["domainNames"], d, config)
+
 	hclData["consumer_reject_lists"] = flattenComputeServiceAttachmentConsumerRejectLists(res["consumerRejectLists"], d, config)
+
 	hclData["consumer_accept_lists"] = flattenComputeServiceAttachmentConsumerAcceptLists(res["consumerAcceptLists"], d, config)
+
 	hclData["reconcile_connections"] = flattenComputeServiceAttachmentReconcileConnections(res["reconcileConnections"], d, config)
+
 	hclData["propagated_connection_limit"] = flattenComputeServiceAttachmentPropagatedConnectionLimit(res["propagatedConnectionLimit"], d, config)
+
 	hclData["region"] = flattenComputeServiceAttachmentRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

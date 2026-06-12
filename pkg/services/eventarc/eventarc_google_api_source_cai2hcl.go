@@ -136,11 +136,18 @@ func (c *EventarcGoogleApiSourceCai2hclConverter) convertResourceData(asset caia
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_annotations": struct{}{}, "effective_labels": struct{}{}, "etag": struct{}{}, "name": struct{}{}, "terraform_labels": struct{}{}, "uid": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//eventarc.googleapis.com/projects/{{project}}/locations/{{location}}/googleApiSources/{{google_api_source_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenEventarcGoogleApiSourceLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenEventarcGoogleApiSourceLabels(res["labels"], d, config)
+	}
+
 	hclData["crypto_key_name"] = flattenEventarcGoogleApiSourceCryptoKeyName(res["cryptoKeyName"], d, config)
+
 	hclData["annotations"] = flattenEventarcGoogleApiSourceAnnotations(res["annotations"], d, config)
+
 	hclData["display_name"] = flattenEventarcGoogleApiSourceDisplayName(res["displayName"], d, config)
+
 	hclData["destination"] = flattenEventarcGoogleApiSourceDestination(res["destination"], d, config)
+
 	hclData["logging_config"] = flattenEventarcGoogleApiSourceLoggingConfig(res["loggingConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

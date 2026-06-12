@@ -142,9 +142,15 @@ func (c *PrivatecaCaPoolCai2hclConverter) convertResourceData(asset caiasset.Ass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//privateca.googleapis.com/projects/{{project}}/locations/{{location}}/caPools/{{name}}", outputFields, hclData)
 
 	hclData["tier"] = flattenPrivatecaCaPoolTier(res["tier"], d, config)
+
 	hclData["issuance_policy"] = flattenPrivatecaCaPoolIssuancePolicy(res["issuancePolicy"], d, config)
+
 	hclData["publishing_options"] = flattenPrivatecaCaPoolPublishingOptions(res["publishingOptions"], d, config)
-	hclData["labels"] = flattenPrivatecaCaPoolLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenPrivatecaCaPoolLabels(res["labels"], d, config)
+	}
+
 	hclData["encryption_spec"] = flattenPrivatecaCaPoolEncryptionSpec(res["encryptionSpec"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

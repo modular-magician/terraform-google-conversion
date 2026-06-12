@@ -136,8 +136,12 @@ func (c *GKEHubMembershipCai2hclConverter) convertResourceData(asset caiasset.As
 	outputFields := map[string]struct{}{"effective_labels": struct{}{}, "name": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//gkehub.googleapis.com/projects/{{project}}/locations/{{location}}/memberships/{{membership_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenGKEHubMembershipLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenGKEHubMembershipLabels(res["labels"], d, config)
+	}
+
 	hclData["endpoint"] = flattenGKEHubMembershipEndpoint(res["endpoint"], d, config)
+
 	hclData["authority"] = flattenGKEHubMembershipAuthority(res["authority"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

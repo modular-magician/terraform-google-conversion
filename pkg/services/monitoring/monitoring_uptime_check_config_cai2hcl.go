@@ -137,17 +137,29 @@ func (c *MonitoringUptimeCheckConfigCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//monitoring.googleapis.com/{{name}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenMonitoringUptimeCheckConfigDisplayName(res["displayName"], d, config)
+
 	hclData["period"] = flattenMonitoringUptimeCheckConfigPeriod(res["period"], d, config)
+
 	hclData["timeout"] = flattenMonitoringUptimeCheckConfigTimeout(res["timeout"], d, config)
+
 	hclData["content_matchers"] = flattenMonitoringUptimeCheckConfigContentMatchers(res["contentMatchers"], d, config)
+
 	hclData["selected_regions"] = flattenMonitoringUptimeCheckConfigSelectedRegions(res["selectedRegions"], d, config)
+
 	hclData["log_check_failures"] = flattenMonitoringUptimeCheckConfigLogCheckFailures(res["logCheckFailures"], d, config)
+
 	hclData["checker_type"] = flattenMonitoringUptimeCheckConfigCheckerType(res["checkerType"], d, config)
+
 	hclData["user_labels"] = flattenMonitoringUptimeCheckConfigUserLabels(res["userLabels"], d, config)
+
 	hclData["http_check"] = flattenMonitoringUptimeCheckConfigHttpCheck(res["httpCheck"], d, config)
+
 	hclData["tcp_check"] = flattenMonitoringUptimeCheckConfigTcpCheck(res["tcpCheck"], d, config)
+
 	hclData["resource_group"] = flattenMonitoringUptimeCheckConfigResourceGroup(res["resourceGroup"], d, config)
+
 	hclData["monitored_resource"] = flattenMonitoringUptimeCheckConfigMonitoredResource(res["monitoredResource"], d, config)
+
 	hclData["synthetic_monitor"] = flattenMonitoringUptimeCheckConfigSyntheticMonitor(res["syntheticMonitor"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

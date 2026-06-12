@@ -137,12 +137,19 @@ func (c *ComputeResourcePolicyCai2hclConverter) convertResourceData(asset caiass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/resourcePolicies/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeResourcePolicyName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeResourcePolicyDescription(res["description"], d, config)
+
 	hclData["snapshot_schedule_policy"] = flattenComputeResourcePolicySnapshotSchedulePolicy(res["snapshotSchedulePolicy"], d, config)
+
 	hclData["group_placement_policy"] = flattenComputeResourcePolicyGroupPlacementPolicy(res["groupPlacementPolicy"], d, config)
+
 	hclData["instance_schedule_policy"] = flattenComputeResourcePolicyInstanceSchedulePolicy(res["instanceSchedulePolicy"], d, config)
+
 	hclData["disk_consistency_group_policy"] = flattenComputeResourcePolicyDiskConsistencyGroupPolicy(res["diskConsistencyGroupPolicy"], d, config)
+
 	hclData["workload_policy"] = flattenComputeResourcePolicyWorkloadPolicy(res["workloadPolicy"], d, config)
+
 	hclData["region"] = flattenComputeResourcePolicyRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

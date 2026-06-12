@@ -142,14 +142,25 @@ func (c *SpannerInstanceCai2hclConverter) convertResourceData(asset caiasset.Ass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//spanner.googleapis.com/projects/{{project}}/instances/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenSpannerInstanceName(res["name"], d, config)
+
 	hclData["config"] = flattenSpannerInstanceConfig(res["config"], d, config)
+
 	hclData["display_name"] = flattenSpannerInstanceDisplayName(res["displayName"], d, config)
+
 	hclData["num_nodes"] = flattenSpannerInstanceNumNodes(res["nodeCount"], d, config)
+
 	hclData["processing_units"] = flattenSpannerInstanceProcessingUnits(res["processingUnits"], d, config)
-	hclData["labels"] = flattenSpannerInstanceLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenSpannerInstanceLabels(res["labels"], d, config)
+	}
+
 	hclData["autoscaling_config"] = flattenSpannerInstanceAutoscalingConfig(res["autoscalingConfig"], d, config)
+
 	hclData["edition"] = flattenSpannerInstanceEdition(res["edition"], d, config)
+
 	hclData["instance_type"] = flattenSpannerInstanceInstanceType(res["instanceType"], d, config)
+
 	hclData["default_backup_schedule_type"] = flattenSpannerInstanceDefaultBackupScheduleType(res["defaultBackupScheduleType"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

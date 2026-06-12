@@ -142,9 +142,13 @@ func (c *CloudAssetFolderFeedCai2hclConverter) convertResourceData(asset caiasse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudasset.googleapis.com/folders/{{folder}}/feeds/{{feed_id}}", outputFields, hclData)
 
 	hclData["asset_names"] = flattenCloudAssetFolderFeedAssetNames(res["assetNames"], d, config)
+
 	hclData["asset_types"] = flattenCloudAssetFolderFeedAssetTypes(res["assetTypes"], d, config)
+
 	hclData["content_type"] = flattenCloudAssetFolderFeedContentType(res["contentType"], d, config)
+
 	hclData["feed_output_config"] = flattenCloudAssetFolderFeedFeedOutputConfig(res["feedOutputConfig"], d, config)
+
 	hclData["condition"] = flattenCloudAssetFolderFeedCondition(res["condition"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

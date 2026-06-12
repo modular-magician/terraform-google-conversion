@@ -136,8 +136,12 @@ func (c *BlockchainNodeEngineBlockchainNodesCai2hclConverter) convertResourceDat
 	outputFields := map[string]struct{}{"connection_info": struct{}{}, "create_time": struct{}{}, "effective_labels": struct{}{}, "name": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//blockchainnodeengine.googleapis.com/projects/{{project}}/locations/{{location}}/blockchainNodes/{{blockchain_node_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenBlockchainNodeEngineBlockchainNodesLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenBlockchainNodeEngineBlockchainNodesLabels(res["labels"], d, config)
+	}
+
 	hclData["ethereum_details"] = flattenBlockchainNodeEngineBlockchainNodesEthereumDetails(res["ethereumDetails"], d, config)
+
 	hclData["blockchain_type"] = flattenBlockchainNodeEngineBlockchainNodesBlockchainType(res["blockchainType"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

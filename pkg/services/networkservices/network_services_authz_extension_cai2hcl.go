@@ -137,15 +137,27 @@ func (c *NetworkServicesAuthzExtensionCai2hclConverter) convertResourceData(asse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networkservices.googleapis.com/projects/{{project}}/locations/{{location}}/authzExtensions/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetworkServicesAuthzExtensionDescription(res["description"], d, config)
-	hclData["labels"] = flattenNetworkServicesAuthzExtensionLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetworkServicesAuthzExtensionLabels(res["labels"], d, config)
+	}
+
 	hclData["load_balancing_scheme"] = flattenNetworkServicesAuthzExtensionLoadBalancingScheme(res["loadBalancingScheme"], d, config)
+
 	hclData["authority"] = flattenNetworkServicesAuthzExtensionAuthority(res["authority"], d, config)
+
 	hclData["service"] = flattenNetworkServicesAuthzExtensionService(res["service"], d, config)
+
 	hclData["timeout"] = flattenNetworkServicesAuthzExtensionTimeout(res["timeout"], d, config)
+
 	hclData["fail_open"] = flattenNetworkServicesAuthzExtensionFailOpen(res["failOpen"], d, config)
+
 	hclData["metadata"] = flattenNetworkServicesAuthzExtensionMetadata(res["metadata"], d, config)
+
 	hclData["forward_headers"] = flattenNetworkServicesAuthzExtensionForwardHeaders(res["forwardHeaders"], d, config)
+
 	hclData["wire_format"] = flattenNetworkServicesAuthzExtensionWireFormat(res["wireFormat"], d, config)
+
 	hclData["name"] = flattenNetworkServicesAuthzExtensionName(res["name"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

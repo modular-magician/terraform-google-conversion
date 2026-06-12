@@ -137,10 +137,17 @@ func (c *ManagedKafkaClusterCai2hclConverter) convertResourceData(asset caiasset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//managedkafka.googleapis.com/projects/{{project}}/locations/{{location}}/clusters/{{cluster_id}}", outputFields, hclData)
 
 	hclData["gcp_config"] = flattenManagedKafkaClusterGcpConfig(res["gcpConfig"], d, config)
-	hclData["labels"] = flattenManagedKafkaClusterLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenManagedKafkaClusterLabels(res["labels"], d, config)
+	}
+
 	hclData["capacity_config"] = flattenManagedKafkaClusterCapacityConfig(res["capacityConfig"], d, config)
+
 	hclData["broker_capacity_config"] = flattenManagedKafkaClusterBrokerCapacityConfig(res["brokerCapacityConfig"], d, config)
+
 	hclData["rebalance_config"] = flattenManagedKafkaClusterRebalanceConfig(res["rebalanceConfig"], d, config)
+
 	hclData["tls_config"] = flattenManagedKafkaClusterTlsConfig(res["tlsConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

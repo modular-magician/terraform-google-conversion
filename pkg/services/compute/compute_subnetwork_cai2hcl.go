@@ -142,24 +142,43 @@ func (c *ComputeSubnetworkCai2hclConverter) convertResourceData(asset caiasset.A
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/subnetworks/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeSubnetworkDescription(res["description"], d, config)
+
 	hclData["ip_cidr_range"] = flattenComputeSubnetworkIpCidrRange(res["ipCidrRange"], d, config)
+
 	hclData["reserved_internal_range"] = flattenComputeSubnetworkReservedInternalRange(res["reservedInternalRange"], d, config)
+
 	hclData["name"] = flattenComputeSubnetworkName(res["name"], d, config)
+
 	hclData["network"] = flattenComputeSubnetworkNetwork(res["network"], d, config)
+
 	hclData["purpose"] = flattenComputeSubnetworkPurpose(res["purpose"], d, config)
+
 	hclData["role"] = flattenComputeSubnetworkRole(res["role"], d, config)
+
 	hclData["secondary_ip_range"] = flattenComputeSubnetworkSecondaryIpRange(res["secondaryIpRanges"], d, config)
+
 	hclData["private_ip_google_access"] = flattenComputeSubnetworkPrivateIpGoogleAccess(res["privateIpGoogleAccess"], d, config)
+
 	hclData["private_ipv6_google_access"] = flattenComputeSubnetworkPrivateIpv6GoogleAccess(res["privateIpv6GoogleAccess"], d, config)
+
 	hclData["region"] = flattenComputeSubnetworkRegion(res["region"], d, config)
+
 	hclData["log_config"] = flattenComputeSubnetworkLogConfig(res["logConfig"], d, config)
+
 	hclData["stack_type"] = flattenComputeSubnetworkStackType(res["stackType"], d, config)
+
 	hclData["ipv6_access_type"] = flattenComputeSubnetworkIpv6AccessType(res["ipv6AccessType"], d, config)
+
 	hclData["internal_ipv6_prefix"] = flattenComputeSubnetworkInternalIpv6Prefix(res["internalIpv6Prefix"], d, config)
+
 	hclData["external_ipv6_prefix"] = flattenComputeSubnetworkExternalIpv6Prefix(res["externalIpv6Prefix"], d, config)
+
 	hclData["ip_collection"] = flattenComputeSubnetworkIpCollection(res["ipCollection"], d, config)
+
 	hclData["allow_subnet_cidr_routes_overlap"] = flattenComputeSubnetworkAllowSubnetCidrRoutesOverlap(res["allowSubnetCidrRoutesOverlap"], d, config)
+
 	hclData["params"] = flattenComputeSubnetworkParams(res["params"], d, config)
+
 	hclData["resolve_subnet_mask"] = flattenComputeSubnetworkResolveSubnetMask(res["resolveSubnetMask"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

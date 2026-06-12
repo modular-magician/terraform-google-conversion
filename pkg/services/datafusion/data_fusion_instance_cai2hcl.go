@@ -137,24 +137,45 @@ func (c *DataFusionInstanceCai2hclConverter) convertResourceData(asset caiasset.
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//datafusion.googleapis.com/projects/{{project}}/locations/{{region}}/instances/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenDataFusionInstanceName(res["name"], d, config)
+
 	hclData["description"] = flattenDataFusionInstanceDescription(res["description"], d, config)
+
 	hclData["type"] = flattenDataFusionInstanceType(res["type"], d, config)
+
 	hclData["enable_stackdriver_logging"] = flattenDataFusionInstanceEnableStackdriverLogging(res["enableStackdriverLogging"], d, config)
+
 	hclData["enable_stackdriver_monitoring"] = flattenDataFusionInstanceEnableStackdriverMonitoring(res["enableStackdriverMonitoring"], d, config)
+
 	hclData["enable_rbac"] = flattenDataFusionInstanceEnableRbac(res["enableRbac"], d, config)
-	hclData["labels"] = flattenDataFusionInstanceLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenDataFusionInstanceLabels(res["labels"], d, config)
+	}
+
 	hclData["options"] = flattenDataFusionInstanceOptions(res["options"], d, config)
+
 	hclData["version"] = flattenDataFusionInstanceVersion(res["version"], d, config)
+
 	hclData["patch_revision"] = flattenDataFusionInstancePatchRevision(res["patchRevision"], d, config)
+
 	hclData["private_instance"] = flattenDataFusionInstancePrivateInstance(res["privateInstance"], d, config)
+
 	hclData["dataproc_service_account"] = flattenDataFusionInstanceDataprocServiceAccount(res["dataprocServiceAccount"], d, config)
+
 	hclData["network_config"] = flattenDataFusionInstanceNetworkConfig(res["networkConfig"], d, config)
+
 	hclData["zone"] = flattenDataFusionInstanceZone(res["zone"], d, config)
+
 	hclData["display_name"] = flattenDataFusionInstanceDisplayName(res["displayName"], d, config)
+
 	hclData["crypto_key_config"] = flattenDataFusionInstanceCryptoKeyConfig(res["cryptoKeyConfig"], d, config)
+
 	hclData["event_publish_config"] = flattenDataFusionInstanceEventPublishConfig(res["eventPublishConfig"], d, config)
+
 	hclData["accelerators"] = flattenDataFusionInstanceAccelerators(res["accelerators"], d, config)
+
 	hclData["maintenance_policy"] = flattenDataFusionInstanceMaintenancePolicy(res["maintenancePolicy"], d, config)
+
 	hclData["tags"] = flattenDataFusionInstanceTags(res["tags"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

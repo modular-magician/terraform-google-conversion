@@ -142,14 +142,23 @@ func (c *ComputeReservationCai2hclConverter) convertResourceData(asset caiasset.
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/zones/{{zone}}/reservations/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeReservationDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeReservationName(res["name"], d, config)
+
 	hclData["specific_reservation_required"] = flattenComputeReservationSpecificReservationRequired(res["specificReservationRequired"], d, config)
+
 	hclData["share_settings"] = flattenComputeReservationShareSettings(res["shareSettings"], d, config)
+
 	hclData["specific_reservation"] = flattenComputeReservationSpecificReservation(res["specificReservation"], d, config)
+
 	hclData["delete_at_time"] = flattenComputeReservationDeleteAtTime(res["deleteAtTime"], d, config)
+
 	hclData["delete_after_duration"] = flattenComputeReservationDeleteAfterDuration(res["deleteAfterDuration"], d, config)
+
 	hclData["reservation_sharing_policy"] = flattenComputeReservationReservationSharingPolicy(res["reservationSharingPolicy"], d, config)
+
 	hclData["params"] = flattenComputeReservationParams(res["params"], d, config)
+
 	hclData["zone"] = flattenComputeReservationZone(res["zone"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

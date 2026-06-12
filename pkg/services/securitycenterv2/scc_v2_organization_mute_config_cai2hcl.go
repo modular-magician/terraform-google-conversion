@@ -137,7 +137,9 @@ func (c *SecurityCenterV2OrganizationMuteConfigCai2hclConverter) convertResource
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//securitycenter.googleapis.com/organizations/{{organization}}/locations/{{location}}/muteConfigs/{{mute_config_id}}", outputFields, hclData)
 
 	hclData["description"] = flattenSecurityCenterV2OrganizationMuteConfigDescription(res["description"], d, config)
+
 	hclData["filter"] = flattenSecurityCenterV2OrganizationMuteConfigFilter(res["filter"], d, config)
+
 	hclData["type"] = flattenSecurityCenterV2OrganizationMuteConfigType(res["type"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

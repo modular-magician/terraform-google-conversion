@@ -137,21 +137,37 @@ func (c *GkeonpremBareMetalClusterCai2hclConverter) convertResourceData(asset ca
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//gkeonprem.googleapis.com/projects/{{project}}/locations/{{location}}/bareMetalClusters/{{name}}", outputFields, hclData)
 
 	hclData["admin_cluster_membership"] = flattenGkeonpremBareMetalClusterAdminClusterMembership(res["adminClusterMembership"], d, config)
+
 	hclData["description"] = flattenGkeonpremBareMetalClusterDescription(res["description"], d, config)
+
 	hclData["bare_metal_version"] = flattenGkeonpremBareMetalClusterBareMetalVersion(res["bareMetalVersion"], d, config)
+
 	hclData["annotations"] = flattenGkeonpremBareMetalClusterAnnotations(res["annotations"], d, config)
+
 	hclData["network_config"] = flattenGkeonpremBareMetalClusterNetworkConfig(res["networkConfig"], d, config)
+
 	hclData["control_plane"] = flattenGkeonpremBareMetalClusterControlPlane(res["controlPlane"], d, config)
+
 	hclData["load_balancer"] = flattenGkeonpremBareMetalClusterLoadBalancer(res["loadBalancer"], d, config)
+
 	hclData["storage"] = flattenGkeonpremBareMetalClusterStorage(res["storage"], d, config)
+
 	hclData["proxy"] = flattenGkeonpremBareMetalClusterProxy(res["proxy"], d, config)
+
 	hclData["cluster_operations"] = flattenGkeonpremBareMetalClusterClusterOperations(res["clusterOperations"], d, config)
+
 	hclData["maintenance_config"] = flattenGkeonpremBareMetalClusterMaintenanceConfig(res["maintenanceConfig"], d, config)
+
 	hclData["node_config"] = flattenGkeonpremBareMetalClusterNodeConfig(res["nodeConfig"], d, config)
+
 	hclData["node_access_config"] = flattenGkeonpremBareMetalClusterNodeAccessConfig(res["nodeAccessConfig"], d, config)
+
 	hclData["os_environment_config"] = flattenGkeonpremBareMetalClusterOsEnvironmentConfig(res["osEnvironmentConfig"], d, config)
+
 	hclData["security_config"] = flattenGkeonpremBareMetalClusterSecurityConfig(res["securityConfig"], d, config)
+
 	hclData["binary_authorization"] = flattenGkeonpremBareMetalClusterBinaryAuthorization(res["binaryAuthorization"], d, config)
+
 	hclData["upgrade_policy"] = flattenGkeonpremBareMetalClusterUpgradePolicy(res["upgradePolicy"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

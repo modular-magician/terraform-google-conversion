@@ -137,22 +137,41 @@ func (c *ComputeVpnTunnelCai2hclConverter) convertResourceData(asset caiasset.As
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/vpnTunnels/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeVpnTunnelName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeVpnTunnelDescription(res["description"], d, config)
+
 	hclData["target_vpn_gateway"] = flattenComputeVpnTunnelTargetVpnGateway(res["targetVpnGateway"], d, config)
+
 	hclData["vpn_gateway"] = flattenComputeVpnTunnelVpnGateway(res["vpnGateway"], d, config)
+
 	hclData["vpn_gateway_interface"] = flattenComputeVpnTunnelVpnGatewayInterface(res["vpnGatewayInterface"], d, config)
+
 	hclData["peer_external_gateway"] = flattenComputeVpnTunnelPeerExternalGateway(res["peerExternalGateway"], d, config)
+
 	hclData["peer_external_gateway_interface"] = flattenComputeVpnTunnelPeerExternalGatewayInterface(res["peerExternalGatewayInterface"], d, config)
+
 	hclData["peer_gcp_gateway"] = flattenComputeVpnTunnelPeerGcpGateway(res["peerGcpGateway"], d, config)
+
 	hclData["router"] = flattenComputeVpnTunnelRouter(res["router"], d, config)
+
 	hclData["peer_ip"] = flattenComputeVpnTunnelPeerIp(res["peerIp"], d, config)
+
 	hclData["shared_secret"] = flattenComputeVpnTunnelSharedSecret(res["sharedSecret"], d, config)
+
 	hclData["ike_version"] = flattenComputeVpnTunnelIkeVersion(res["ikeVersion"], d, config)
+
 	hclData["local_traffic_selector"] = flattenComputeVpnTunnelLocalTrafficSelector(res["localTrafficSelector"], d, config)
+
 	hclData["remote_traffic_selector"] = flattenComputeVpnTunnelRemoteTrafficSelector(res["remoteTrafficSelector"], d, config)
-	hclData["labels"] = flattenComputeVpnTunnelLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeVpnTunnelLabels(res["labels"], d, config)
+	}
+
 	hclData["params"] = flattenComputeVpnTunnelParams(res["params"], d, config)
+
 	hclData["cipher_suite"] = flattenComputeVpnTunnelCipherSuite(res["cipherSuite"], d, config)
+
 	hclData["region"] = flattenComputeVpnTunnelRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

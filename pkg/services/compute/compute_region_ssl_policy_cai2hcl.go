@@ -137,11 +137,17 @@ func (c *ComputeRegionSslPolicyCai2hclConverter) convertResourceData(asset caias
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/sslPolicies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeRegionSslPolicyDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeRegionSslPolicyName(res["name"], d, config)
+
 	hclData["profile"] = flattenComputeRegionSslPolicyProfile(res["profile"], d, config)
+
 	hclData["min_tls_version"] = flattenComputeRegionSslPolicyMinTlsVersion(res["minTlsVersion"], d, config)
+
 	hclData["custom_features"] = flattenComputeRegionSslPolicyCustomFeatures(res["customFeatures"], d, config)
+
 	hclData["post_quantum_key_exchange"] = flattenComputeRegionSslPolicyPostQuantumKeyExchange(res["postQuantumKeyExchange"], d, config)
+
 	hclData["region"] = flattenComputeRegionSslPolicyRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

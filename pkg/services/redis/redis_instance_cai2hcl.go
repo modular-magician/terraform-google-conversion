@@ -137,25 +137,47 @@ func (c *RedisInstanceCai2hclConverter) convertResourceData(asset caiasset.Asset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//redis.googleapis.com/projects/{{project}}/locations/{{region}}/instances/{{name}}", outputFields, hclData)
 
 	hclData["alternative_location_id"] = flattenRedisInstanceAlternativeLocationId(res["alternativeLocationId"], d, config)
+
 	hclData["auth_enabled"] = flattenRedisInstanceAuthEnabled(res["authEnabled"], d, config)
+
 	hclData["authorized_network"] = flattenRedisInstanceAuthorizedNetwork(res["authorizedNetwork"], d, config)
+
 	hclData["connect_mode"] = flattenRedisInstanceConnectMode(res["connectMode"], d, config)
+
 	hclData["display_name"] = flattenRedisInstanceDisplayName(res["displayName"], d, config)
-	hclData["labels"] = flattenRedisInstanceLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenRedisInstanceLabels(res["labels"], d, config)
+	}
+
 	hclData["redis_configs"] = flattenRedisInstanceRedisConfigs(res["redisConfigs"], d, config)
+
 	hclData["location_id"] = flattenRedisInstanceLocationId(res["locationId"], d, config)
+
 	hclData["name"] = flattenRedisInstanceName(res["name"], d, config)
+
 	hclData["persistence_config"] = flattenRedisInstancePersistenceConfig(res["persistenceConfig"], d, config)
+
 	hclData["maintenance_policy"] = flattenRedisInstanceMaintenancePolicy(res["maintenancePolicy"], d, config)
+
 	hclData["maintenance_version"] = flattenRedisInstanceMaintenanceVersion(res["maintenanceVersion"], d, config)
+
 	hclData["memory_size_gb"] = flattenRedisInstanceMemorySizeGb(res["memorySizeGb"], d, config)
+
 	hclData["redis_version"] = flattenRedisInstanceRedisVersion(res["redisVersion"], d, config)
+
 	hclData["reserved_ip_range"] = flattenRedisInstanceReservedIpRange(res["reservedIpRange"], d, config)
+
 	hclData["tier"] = flattenRedisInstanceTier(res["tier"], d, config)
+
 	hclData["transit_encryption_mode"] = flattenRedisInstanceTransitEncryptionMode(res["transitEncryptionMode"], d, config)
+
 	hclData["replica_count"] = flattenRedisInstanceReplicaCount(res["replicaCount"], d, config)
+
 	hclData["read_replicas_mode"] = flattenRedisInstanceReadReplicasMode(res["readReplicasMode"], d, config)
+
 	hclData["secondary_ip_range"] = flattenRedisInstanceSecondaryIpRange(res["secondaryIpRange"], d, config)
+
 	hclData["customer_managed_key"] = flattenRedisInstanceCustomerManagedKey(res["customerManagedKey"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

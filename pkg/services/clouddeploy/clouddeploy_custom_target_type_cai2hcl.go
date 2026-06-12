@@ -137,9 +137,15 @@ func (c *ClouddeployCustomTargetTypeCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//clouddeploy.googleapis.com/projects/{{project}}/locations/{{location}}/customTargetTypes/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenClouddeployCustomTargetTypeDescription(res["description"], d, config)
+
 	hclData["annotations"] = flattenClouddeployCustomTargetTypeAnnotations(res["annotations"], d, config)
-	hclData["labels"] = flattenClouddeployCustomTargetTypeLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenClouddeployCustomTargetTypeLabels(res["labels"], d, config)
+	}
+
 	hclData["custom_actions"] = flattenClouddeployCustomTargetTypeCustomActions(res["customActions"], d, config)
+
 	hclData["tasks"] = flattenClouddeployCustomTargetTypeTasks(res["tasks"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

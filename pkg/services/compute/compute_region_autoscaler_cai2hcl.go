@@ -137,9 +137,13 @@ func (c *ComputeRegionAutoscalerCai2hclConverter) convertResourceData(asset caia
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/autoscalers/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeRegionAutoscalerName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeRegionAutoscalerDescription(res["description"], d, config)
+
 	hclData["autoscaling_policy"] = flattenComputeRegionAutoscalerAutoscalingPolicy(res["autoscalingPolicy"], d, config)
+
 	hclData["target"] = flattenComputeRegionAutoscalerTarget(res["target"], d, config)
+
 	hclData["region"] = flattenComputeRegionAutoscalerRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

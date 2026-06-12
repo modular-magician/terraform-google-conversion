@@ -137,12 +137,19 @@ func (c *ComputeRegionSecurityPolicyCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/securityPolicies/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeRegionSecurityPolicyName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeRegionSecurityPolicyDescription(res["description"], d, config)
+
 	hclData["type"] = flattenComputeRegionSecurityPolicyType(res["type"], d, config)
+
 	hclData["ddos_protection_config"] = flattenComputeRegionSecurityPolicyDdosProtectionConfig(res["ddosProtectionConfig"], d, config)
+
 	hclData["advanced_options_config"] = flattenComputeRegionSecurityPolicyAdvancedOptionsConfig(res["advancedOptionsConfig"], d, config)
+
 	hclData["user_defined_fields"] = flattenComputeRegionSecurityPolicyUserDefinedFields(res["userDefinedFields"], d, config)
+
 	hclData["rules"] = flattenComputeRegionSecurityPolicyRules(res["rules"], d, config)
+
 	hclData["region"] = flattenComputeRegionSecurityPolicyRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

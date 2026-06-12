@@ -137,16 +137,29 @@ func (c *DeveloperConnectConnectionCai2hclConverter) convertResourceData(asset c
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//developerconnect.googleapis.com/projects/{{project}}/locations/{{location}}/connections/{{connection_id}}", outputFields, hclData)
 
 	hclData["github_config"] = flattenDeveloperConnectConnectionGithubConfig(res["githubConfig"], d, config)
+
 	hclData["github_enterprise_config"] = flattenDeveloperConnectConnectionGithubEnterpriseConfig(res["githubEnterpriseConfig"], d, config)
-	hclData["labels"] = flattenDeveloperConnectConnectionLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenDeveloperConnectConnectionLabels(res["labels"], d, config)
+	}
+
 	hclData["etag"] = flattenDeveloperConnectConnectionEtag(res["etag"], d, config)
+
 	hclData["gitlab_enterprise_config"] = flattenDeveloperConnectConnectionGitlabEnterpriseConfig(res["gitlabEnterpriseConfig"], d, config)
+
 	hclData["bitbucket_cloud_config"] = flattenDeveloperConnectConnectionBitbucketCloudConfig(res["bitbucketCloudConfig"], d, config)
+
 	hclData["bitbucket_data_center_config"] = flattenDeveloperConnectConnectionBitbucketDataCenterConfig(res["bitbucketDataCenterConfig"], d, config)
+
 	hclData["disabled"] = flattenDeveloperConnectConnectionDisabled(res["disabled"], d, config)
+
 	hclData["annotations"] = flattenDeveloperConnectConnectionAnnotations(res["annotations"], d, config)
+
 	hclData["gitlab_config"] = flattenDeveloperConnectConnectionGitlabConfig(res["gitlabConfig"], d, config)
+
 	hclData["http_config"] = flattenDeveloperConnectConnectionHttpConfig(res["httpConfig"], d, config)
+
 	hclData["crypto_key_config"] = flattenDeveloperConnectConnectionCryptoKeyConfig(res["cryptoKeyConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

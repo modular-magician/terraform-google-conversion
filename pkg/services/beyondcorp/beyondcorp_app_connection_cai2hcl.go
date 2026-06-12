@@ -137,10 +137,17 @@ func (c *BeyondcorpAppConnectionCai2hclConverter) convertResourceData(asset caia
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//beyondcorp.googleapis.com/projects/{{project}}/locations/{{region}}/appConnections/{{name}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenBeyondcorpAppConnectionDisplayName(res["displayName"], d, config)
-	hclData["labels"] = flattenBeyondcorpAppConnectionLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenBeyondcorpAppConnectionLabels(res["labels"], d, config)
+	}
+
 	hclData["type"] = flattenBeyondcorpAppConnectionType(res["type"], d, config)
+
 	hclData["application_endpoint"] = flattenBeyondcorpAppConnectionApplicationEndpoint(res["applicationEndpoint"], d, config)
+
 	hclData["connectors"] = flattenBeyondcorpAppConnectionConnectors(res["connectors"], d, config)
+
 	hclData["gateway"] = flattenBeyondcorpAppConnectionGateway(res["gateway"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

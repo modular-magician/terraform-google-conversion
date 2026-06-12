@@ -152,15 +152,27 @@ func (c *ComputeSnapshotCai2hclConverter) convertResourceData(asset caiasset.Ass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/snapshots/{{name}}", outputFields, hclData)
 
 	hclData["source_disk"] = flattenComputeSnapshotSourceDisk(res["sourceDisk"], d, config)
+
 	hclData["source_instant_snapshot"] = flattenComputeSnapshotSourceInstantSnapshot(res["sourceInstantSnapshot"], d, config)
+
 	hclData["chain_name"] = flattenComputeSnapshotChainName(res["chainName"], d, config)
+
 	hclData["name"] = flattenComputeSnapshotName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeSnapshotDescription(res["description"], d, config)
+
 	hclData["storage_locations"] = flattenComputeSnapshotStorageLocations(res["storageLocations"], d, config)
-	hclData["labels"] = flattenComputeSnapshotLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeSnapshotLabels(res["labels"], d, config)
+	}
+
 	hclData["snapshot_type"] = flattenComputeSnapshotSnapshotType(res["snapshotType"], d, config)
+
 	hclData["zone"] = flattenComputeSnapshotZone(res["zone"], d, config)
+
 	hclData["snapshot_encryption_key"] = flattenComputeSnapshotSnapshotEncryptionKey(res["snapshotEncryptionKey"], d, config)
+
 	hclData["source_disk_encryption_key"] = flattenComputeSnapshotSourceDiskEncryptionKey(res["sourceDiskEncryptionKey"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

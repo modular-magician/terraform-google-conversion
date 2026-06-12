@@ -137,6 +137,7 @@ func (c *Cloudbuildv2RepositoryCai2hclConverter) convertResourceData(asset caias
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudbuild.googleapis.com/projects/{{project}}/locations/{{location}}/connections/{{parent_connection}}/repositories/{{name}}", outputFields, hclData)
 
 	hclData["remote_uri"] = flattenCloudbuildv2RepositoryRemoteUri(res["remoteUri"], d, config)
+
 	hclData["annotations"] = flattenCloudbuildv2RepositoryAnnotations(res["annotations"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

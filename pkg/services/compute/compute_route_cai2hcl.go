@@ -152,16 +152,27 @@ func (c *ComputeRouteCai2hclConverter) convertResourceData(asset caiasset.Asset,
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/routes/{{name}}", outputFields, hclData)
 
 	hclData["dest_range"] = flattenComputeRouteDestRange(res["destRange"], d, config)
+
 	hclData["description"] = flattenComputeRouteDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeRouteName(res["name"], d, config)
+
 	hclData["network"] = flattenComputeRouteNetwork(res["network"], d, config)
+
 	hclData["priority"] = flattenComputeRoutePriority(res["priority"], d, config)
+
 	hclData["tags"] = flattenComputeRouteTags(res["tags"], d, config)
+
 	hclData["next_hop_gateway"] = flattenComputeRouteNextHopGateway(res["nextHopGateway"], d, config)
+
 	hclData["next_hop_instance"] = flattenComputeRouteNextHopInstance(res["nextHopInstance"], d, config)
+
 	hclData["next_hop_ip"] = flattenComputeRouteNextHopIp(res["nextHopIp"], d, config)
+
 	hclData["next_hop_vpn_tunnel"] = flattenComputeRouteNextHopVpnTunnel(res["nextHopVpnTunnel"], d, config)
+
 	hclData["next_hop_ilb"] = flattenComputeRouteNextHopIlb(res["nextHopIlb"], d, config)
+
 	hclData["params"] = flattenComputeRouteParams(res["params"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,8 +137,13 @@ func (c *NetappVolumeReplicationCai2hclConverter) convertResourceData(asset caia
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/volumes/{{volume_name}}/replications/{{name}}", outputFields, hclData)
 
 	hclData["replication_schedule"] = flattenNetappVolumeReplicationReplicationSchedule(res["replicationSchedule"], d, config)
-	hclData["labels"] = flattenNetappVolumeReplicationLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetappVolumeReplicationLabels(res["labels"], d, config)
+	}
+
 	hclData["destination_volume_parameters"] = flattenNetappVolumeReplicationDestinationVolumeParameters(res["destinationVolumeParameters"], d, config)
+
 	hclData["description"] = flattenNetappVolumeReplicationDescription(res["description"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

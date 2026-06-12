@@ -137,8 +137,13 @@ func (c *CertificateManagerDnsAuthorizationCai2hclConverter) convertResourceData
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//certificatemanager.googleapis.com/projects/{{project}}/locations/{{location}}/dnsAuthorizations/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenCertificateManagerDnsAuthorizationDescription(res["description"], d, config)
-	hclData["labels"] = flattenCertificateManagerDnsAuthorizationLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenCertificateManagerDnsAuthorizationLabels(res["labels"], d, config)
+	}
+
 	hclData["domain"] = flattenCertificateManagerDnsAuthorizationDomain(res["domain"], d, config)
+
 	hclData["type"] = flattenCertificateManagerDnsAuthorizationType(res["type"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

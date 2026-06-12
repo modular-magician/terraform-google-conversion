@@ -137,13 +137,21 @@ func (c *LoggingMetricCai2hclConverter) convertResourceData(asset caiasset.Asset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//logging.googleapis.com/projects/{{project}}/metrics/{{%name}}", outputFields, hclData)
 
 	hclData["name"] = flattenLoggingMetricName(res["name"], d, config)
+
 	hclData["description"] = flattenLoggingMetricDescription(res["description"], d, config)
+
 	hclData["bucket_name"] = flattenLoggingMetricBucketName(res["bucketName"], d, config)
+
 	hclData["disabled"] = flattenLoggingMetricDisabled(res["disabled"], d, config)
+
 	hclData["filter"] = flattenLoggingMetricFilter(res["filter"], d, config)
+
 	hclData["metric_descriptor"] = flattenLoggingMetricMetricDescriptor(res["metricDescriptor"], d, config)
+
 	hclData["label_extractors"] = flattenLoggingMetricLabelExtractors(res["labelExtractors"], d, config)
+
 	hclData["value_extractor"] = flattenLoggingMetricValueExtractor(res["valueExtractor"], d, config)
+
 	hclData["bucket_options"] = flattenLoggingMetricBucketOptions(res["bucketOptions"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

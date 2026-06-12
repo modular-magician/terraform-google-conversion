@@ -137,6 +137,7 @@ func (c *KMSKeyRingImportJobCai2hclConverter) convertResourceData(asset caiasset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudkms.googleapis.com/{{key_ring}}/importJobs/{{import_job_id}}", outputFields, hclData)
 
 	hclData["import_method"] = flattenKMSKeyRingImportJobImportMethod(res["importMethod"], d, config)
+
 	hclData["protection_level"] = flattenKMSKeyRingImportJobProtectionLevel(res["protectionLevel"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -142,9 +142,15 @@ func (c *CertificateManagerCertificateCai2hclConverter) convertResourceData(asse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//certificatemanager.googleapis.com/projects/{{project}}/locations/{{location}}/certificates/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenCertificateManagerCertificateDescription(res["description"], d, config)
-	hclData["labels"] = flattenCertificateManagerCertificateLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenCertificateManagerCertificateLabels(res["labels"], d, config)
+	}
+
 	hclData["scope"] = flattenCertificateManagerCertificateScope(res["scope"], d, config)
+
 	hclData["self_managed"] = flattenCertificateManagerCertificateSelfManaged(res["selfManaged"], d, config)
+
 	hclData["managed"] = flattenCertificateManagerCertificateManaged(res["managed"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

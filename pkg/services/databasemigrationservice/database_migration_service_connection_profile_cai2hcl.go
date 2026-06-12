@@ -142,12 +142,21 @@ func (c *DatabaseMigrationServiceConnectionProfileCai2hclConverter) convertResou
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//datamigration.googleapis.com/projects/{{project}}/locations/{{location}}/connectionProfiles/{{connection_profile_id}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenDatabaseMigrationServiceConnectionProfileDisplayName(res["displayName"], d, config)
-	hclData["labels"] = flattenDatabaseMigrationServiceConnectionProfileLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenDatabaseMigrationServiceConnectionProfileLabels(res["labels"], d, config)
+	}
+
 	hclData["role"] = flattenDatabaseMigrationServiceConnectionProfileRole(res["role"], d, config)
+
 	hclData["mysql"] = flattenDatabaseMigrationServiceConnectionProfileMysql(res["mysql"], d, config)
+
 	hclData["postgresql"] = flattenDatabaseMigrationServiceConnectionProfilePostgresql(res["postgresql"], d, config)
+
 	hclData["oracle"] = flattenDatabaseMigrationServiceConnectionProfileOracle(res["oracle"], d, config)
+
 	hclData["cloudsql"] = flattenDatabaseMigrationServiceConnectionProfileCloudsql(res["cloudsql"], d, config)
+
 	hclData["alloydb"] = flattenDatabaseMigrationServiceConnectionProfileAlloydb(res["alloydb"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

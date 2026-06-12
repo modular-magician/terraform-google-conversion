@@ -137,14 +137,23 @@ func (c *ColabNotebookExecutionCai2hclConverter) convertResourceData(asset caias
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//aiplatform.googleapis.com/projects/{{project}}/locations/{{location}}/notebookExecutionJobs/{{notebook_execution_job_id}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenColabNotebookExecutionDisplayName(res["displayName"], d, config)
+
 	hclData["dataform_repository_source"] = flattenColabNotebookExecutionDataformRepositorySource(res["dataformRepositorySource"], d, config)
+
 	hclData["gcs_notebook_source"] = flattenColabNotebookExecutionGcsNotebookSource(res["gcsNotebookSource"], d, config)
+
 	hclData["direct_notebook_source"] = flattenColabNotebookExecutionDirectNotebookSource(res["directNotebookSource"], d, config)
+
 	hclData["execution_timeout"] = flattenColabNotebookExecutionExecutionTimeout(res["executionTimeout"], d, config)
+
 	hclData["notebook_runtime_template_resource_name"] = flattenColabNotebookExecutionNotebookRuntimeTemplateResourceName(res["notebookRuntimeTemplateResourceName"], d, config)
+
 	hclData["custom_environment_spec"] = flattenColabNotebookExecutionCustomEnvironmentSpec(res["customEnvironmentSpec"], d, config)
+
 	hclData["gcs_output_uri"] = flattenColabNotebookExecutionGcsOutputUri(res["gcsOutputUri"], d, config)
+
 	hclData["execution_user"] = flattenColabNotebookExecutionExecutionUser(res["executionUser"], d, config)
+
 	hclData["service_account"] = flattenColabNotebookExecutionServiceAccount(res["serviceAccount"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

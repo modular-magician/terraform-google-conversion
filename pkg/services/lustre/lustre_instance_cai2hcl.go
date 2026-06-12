@@ -137,16 +137,29 @@ func (c *LustreInstanceCai2hclConverter) convertResourceData(asset caiasset.Asse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//lustre.googleapis.com/projects/{{project}}/locations/{{location}}/instances/{{instance_id}}", outputFields, hclData)
 
 	hclData["access_rules_options"] = flattenLustreInstanceAccessRulesOptions(res["accessRulesOptions"], d, config)
+
 	hclData["capacity_gib"] = flattenLustreInstanceCapacityGib(res["capacityGib"], d, config)
+
 	hclData["description"] = flattenLustreInstanceDescription(res["description"], d, config)
+
 	hclData["dynamic_tier_options"] = flattenLustreInstanceDynamicTierOptions(res["dynamicTierOptions"], d, config)
+
 	hclData["filesystem"] = flattenLustreInstanceFilesystem(res["filesystem"], d, config)
+
 	hclData["gke_support_enabled"] = flattenLustreInstanceGkeSupportEnabled(res["gkeSupportEnabled"], d, config)
+
 	hclData["kms_key"] = flattenLustreInstanceKmsKey(res["kmsKey"], d, config)
-	hclData["labels"] = flattenLustreInstanceLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenLustreInstanceLabels(res["labels"], d, config)
+	}
+
 	hclData["maintenance_policy"] = flattenLustreInstanceMaintenancePolicy(res["maintenancePolicy"], d, config)
+
 	hclData["network"] = flattenLustreInstanceNetwork(res["network"], d, config)
+
 	hclData["per_unit_storage_throughput"] = flattenLustreInstancePerUnitStorageThroughput(res["perUnitStorageThroughput"], d, config)
+
 	hclData["placement_policy"] = flattenLustreInstancePlacementPolicy(res["placementPolicy"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

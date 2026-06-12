@@ -137,9 +137,13 @@ func (c *StorageInsightsReportConfigCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//storageinsights.googleapis.com/projects/{{project}}/locations/{{location}}/reportConfigs/{{name}}", outputFields, hclData)
 
 	hclData["frequency_options"] = flattenStorageInsightsReportConfigFrequencyOptions(res["frequencyOptions"], d, config)
+
 	hclData["parquet_options"] = flattenStorageInsightsReportConfigParquetOptions(res["parquetOptions"], d, config)
+
 	hclData["csv_options"] = flattenStorageInsightsReportConfigCsvOptions(res["csvOptions"], d, config)
+
 	hclData["object_metadata_report_options"] = flattenStorageInsightsReportConfigObjectMetadataReportOptions(res["objectMetadataReportOptions"], d, config)
+
 	hclData["display_name"] = flattenStorageInsightsReportConfigDisplayName(res["displayName"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

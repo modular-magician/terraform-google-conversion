@@ -137,17 +137,31 @@ func (c *ColabRuntimeTemplateCai2hclConverter) convertResourceData(asset caiasse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//aiplatform.googleapis.com/projects/{{project}}/locations/{{location}}/notebookRuntimeTemplates/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenColabRuntimeTemplateName(res["name"], d, config)
+
 	hclData["display_name"] = flattenColabRuntimeTemplateDisplayName(res["displayName"], d, config)
+
 	hclData["description"] = flattenColabRuntimeTemplateDescription(res["description"], d, config)
+
 	hclData["machine_spec"] = flattenColabRuntimeTemplateMachineSpec(res["machineSpec"], d, config)
+
 	hclData["data_persistent_disk_spec"] = flattenColabRuntimeTemplateDataPersistentDiskSpec(res["dataPersistentDiskSpec"], d, config)
+
 	hclData["network_spec"] = flattenColabRuntimeTemplateNetworkSpec(res["networkSpec"], d, config)
-	hclData["labels"] = flattenColabRuntimeTemplateLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenColabRuntimeTemplateLabels(res["labels"], d, config)
+	}
+
 	hclData["idle_shutdown_config"] = flattenColabRuntimeTemplateIdleShutdownConfig(res["idleShutdownConfig"], d, config)
+
 	hclData["euc_config"] = flattenColabRuntimeTemplateEucConfig(res["eucConfig"], d, config)
+
 	hclData["shielded_vm_config"] = flattenColabRuntimeTemplateShieldedVmConfig(res["shieldedVmConfig"], d, config)
+
 	hclData["network_tags"] = flattenColabRuntimeTemplateNetworkTags(res["networkTags"], d, config)
+
 	hclData["encryption_spec"] = flattenColabRuntimeTemplateEncryptionSpec(res["encryptionSpec"], d, config)
+
 	hclData["software_config"] = flattenColabRuntimeTemplateSoftwareConfig(res["softwareConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

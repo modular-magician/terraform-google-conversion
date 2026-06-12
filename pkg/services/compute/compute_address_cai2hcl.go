@@ -137,18 +137,33 @@ func (c *ComputeAddressCai2hclConverter) convertResourceData(asset caiasset.Asse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/addresses/{{name}}", outputFields, hclData)
 
 	hclData["address"] = flattenComputeAddressAddress(res["address"], d, config)
+
 	hclData["address_type"] = flattenComputeAddressAddressType(res["addressType"], d, config)
+
 	hclData["description"] = flattenComputeAddressDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeAddressName(res["name"], d, config)
+
 	hclData["purpose"] = flattenComputeAddressPurpose(res["purpose"], d, config)
+
 	hclData["network_tier"] = flattenComputeAddressNetworkTier(res["networkTier"], d, config)
+
 	hclData["subnetwork"] = flattenComputeAddressSubnetwork(res["subnetwork"], d, config)
-	hclData["labels"] = flattenComputeAddressLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeAddressLabels(res["labels"], d, config)
+	}
+
 	hclData["network"] = flattenComputeAddressNetwork(res["network"], d, config)
+
 	hclData["prefix_length"] = flattenComputeAddressPrefixLength(res["prefixLength"], d, config)
+
 	hclData["ip_version"] = flattenComputeAddressIpVersion(res["ipVersion"], d, config)
+
 	hclData["ipv6_endpoint_type"] = flattenComputeAddressIpv6EndpointType(res["ipv6EndpointType"], d, config)
+
 	hclData["ip_collection"] = flattenComputeAddressIpCollection(res["ipCollection"], d, config)
+
 	hclData["region"] = flattenComputeAddressRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

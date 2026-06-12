@@ -136,16 +136,28 @@ func (c *DatastreamConnectionProfileCai2hclConverter) convertResourceData(asset 
 	outputFields := map[string]struct{}{"effective_labels": struct{}{}, "name": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//datastream.googleapis.com/projects/{{project}}/locations/{{location}}/connectionProfiles/{{connection_profile_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenDatastreamConnectionProfileLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenDatastreamConnectionProfileLabels(res["labels"], d, config)
+	}
+
 	hclData["display_name"] = flattenDatastreamConnectionProfileDisplayName(res["displayName"], d, config)
+
 	hclData["oracle_profile"] = flattenDatastreamConnectionProfileOracleProfile(res["oracleProfile"], d, config)
+
 	hclData["gcs_profile"] = flattenDatastreamConnectionProfileGcsProfile(res["gcsProfile"], d, config)
+
 	hclData["mysql_profile"] = flattenDatastreamConnectionProfileMysqlProfile(res["mysqlProfile"], d, config)
+
 	hclData["bigquery_profile"] = flattenDatastreamConnectionProfileBigqueryProfile(res["bigqueryProfile"], d, config)
+
 	hclData["postgresql_profile"] = flattenDatastreamConnectionProfilePostgresqlProfile(res["postgresqlProfile"], d, config)
+
 	hclData["sql_server_profile"] = flattenDatastreamConnectionProfileSqlServerProfile(res["sqlServerProfile"], d, config)
+
 	hclData["mongodb_profile"] = flattenDatastreamConnectionProfileMongodbProfile(res["mongodbProfile"], d, config)
+
 	hclData["forward_ssh_connectivity"] = flattenDatastreamConnectionProfileForwardSshConnectivity(res["forwardSshConnectivity"], d, config)
+
 	hclData["private_connectivity"] = flattenDatastreamConnectionProfilePrivateConnectivity(res["privateConnectivity"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

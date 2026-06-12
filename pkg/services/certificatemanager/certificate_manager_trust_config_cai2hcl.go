@@ -136,9 +136,14 @@ func (c *CertificateManagerTrustConfigCai2hclConverter) convertResourceData(asse
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_labels": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//certificatemanager.googleapis.com/projects/{{project}}/locations/{{location}}/trustConfigs/{{name}}", outputFields, hclData)
 
-	hclData["labels"] = flattenCertificateManagerTrustConfigLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenCertificateManagerTrustConfigLabels(res["labels"], d, config)
+	}
+
 	hclData["description"] = flattenCertificateManagerTrustConfigDescription(res["description"], d, config)
+
 	hclData["trust_stores"] = flattenCertificateManagerTrustConfigTrustStores(res["trustStores"], d, config)
+
 	hclData["allowlisted_certificates"] = flattenCertificateManagerTrustConfigAllowlistedCertificates(res["allowlistedCertificates"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

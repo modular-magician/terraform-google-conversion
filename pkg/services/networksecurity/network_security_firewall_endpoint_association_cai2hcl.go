@@ -137,9 +137,15 @@ func (c *NetworkSecurityFirewallEndpointAssociationCai2hclConverter) convertReso
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/{{parent}}/locations/{{location}}/firewallEndpointAssociations/{{name}}", outputFields, hclData)
 
 	hclData["firewall_endpoint"] = flattenNetworkSecurityFirewallEndpointAssociationFirewallEndpoint(res["firewallEndpoint"], d, config)
+
 	hclData["network"] = flattenNetworkSecurityFirewallEndpointAssociationNetwork(res["network"], d, config)
+
 	hclData["tls_inspection_policy"] = flattenNetworkSecurityFirewallEndpointAssociationTlsInspectionPolicy(res["tlsInspectionPolicy"], d, config)
-	hclData["labels"] = flattenNetworkSecurityFirewallEndpointAssociationLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetworkSecurityFirewallEndpointAssociationLabels(res["labels"], d, config)
+	}
+
 	hclData["disabled"] = flattenNetworkSecurityFirewallEndpointAssociationDisabled(res["disabled"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

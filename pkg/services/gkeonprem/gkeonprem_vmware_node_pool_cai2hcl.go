@@ -137,9 +137,13 @@ func (c *GkeonpremVmwareNodePoolCai2hclConverter) convertResourceData(asset caia
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//gkeonprem.googleapis.com/projects/{{project}}/locations/{{location}}/vmwareClusters/{{vmware_cluster}}/vmwareNodePools/{{name}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenGkeonpremVmwareNodePoolDisplayName(res["displayName"], d, config)
+
 	hclData["annotations"] = flattenGkeonpremVmwareNodePoolAnnotations(res["annotations"], d, config)
+
 	hclData["node_pool_autoscaling"] = flattenGkeonpremVmwareNodePoolNodePoolAutoscaling(res["nodePoolAutoscaling"], d, config)
+
 	hclData["config"] = flattenGkeonpremVmwareNodePoolConfig(res["config"], d, config)
+
 	hclData["on_prem_version"] = flattenGkeonpremVmwareNodePoolOnPremVersion(res["onPremVersion"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

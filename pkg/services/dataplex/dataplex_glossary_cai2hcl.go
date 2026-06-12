@@ -137,8 +137,12 @@ func (c *DataplexGlossaryCai2hclConverter) convertResourceData(asset caiasset.As
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//dataplex.googleapis.com/projects/{{project}}/locations/{{location}}/glossaries/{{glossary_id}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenDataplexGlossaryDisplayName(res["displayName"], d, config)
+
 	hclData["description"] = flattenDataplexGlossaryDescription(res["description"], d, config)
-	hclData["labels"] = flattenDataplexGlossaryLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenDataplexGlossaryLabels(res["labels"], d, config)
+	}
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {

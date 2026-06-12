@@ -137,11 +137,17 @@ func (c *NetworkSecurityGatewaySecurityPolicyRuleCai2hclConverter) convertResour
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/projects/{{project}}/locations/{{location}}/gatewaySecurityPolicies/{{gateway_security_policy}}/rules/{{name}}", outputFields, hclData)
 
 	hclData["enabled"] = flattenNetworkSecurityGatewaySecurityPolicyRuleEnabled(res["enabled"], d, config)
+
 	hclData["priority"] = flattenNetworkSecurityGatewaySecurityPolicyRulePriority(res["priority"], d, config)
+
 	hclData["description"] = flattenNetworkSecurityGatewaySecurityPolicyRuleDescription(res["description"], d, config)
+
 	hclData["session_matcher"] = flattenNetworkSecurityGatewaySecurityPolicyRuleSessionMatcher(res["sessionMatcher"], d, config)
+
 	hclData["application_matcher"] = flattenNetworkSecurityGatewaySecurityPolicyRuleApplicationMatcher(res["applicationMatcher"], d, config)
+
 	hclData["tls_inspection_enabled"] = flattenNetworkSecurityGatewaySecurityPolicyRuleTlsInspectionEnabled(res["tlsInspectionEnabled"], d, config)
+
 	hclData["basic_profile"] = flattenNetworkSecurityGatewaySecurityPolicyRuleBasicProfile(res["basicProfile"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

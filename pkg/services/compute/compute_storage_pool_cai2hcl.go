@@ -137,15 +137,27 @@ func (c *ComputeStoragePoolCai2hclConverter) convertResourceData(asset caiasset.
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/zones/{{zone}}/storagePools/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeStoragePoolName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeStoragePoolDescription(res["description"], d, config)
+
 	hclData["pool_provisioned_capacity_gb"] = flattenComputeStoragePoolPoolProvisionedCapacityGb(res["poolProvisionedCapacityGb"], d, config)
+
 	hclData["pool_provisioned_iops"] = flattenComputeStoragePoolPoolProvisionedIops(res["poolProvisionedIops"], d, config)
+
 	hclData["pool_provisioned_throughput"] = flattenComputeStoragePoolPoolProvisionedThroughput(res["poolProvisionedThroughput"], d, config)
+
 	hclData["storage_pool_type"] = flattenComputeStoragePoolStoragePoolType(res["storagePoolType"], d, config)
+
 	hclData["capacity_provisioning_type"] = flattenComputeStoragePoolCapacityProvisioningType(res["capacityProvisioningType"], d, config)
+
 	hclData["performance_provisioning_type"] = flattenComputeStoragePoolPerformanceProvisioningType(res["performanceProvisioningType"], d, config)
-	hclData["labels"] = flattenComputeStoragePoolLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeStoragePoolLabels(res["labels"], d, config)
+	}
+
 	hclData["params"] = flattenComputeStoragePoolParams(res["params"], d, config)
+
 	hclData["zone"] = flattenComputeStoragePoolZone(res["zone"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

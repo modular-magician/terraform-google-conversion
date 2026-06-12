@@ -137,10 +137,17 @@ func (c *GKEBackupRestorePlanCai2hclConverter) convertResourceData(asset caiasse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//gkebackup.googleapis.com/projects/{{project}}/locations/{{location}}/restorePlans/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenGKEBackupRestorePlanName(res["name"], d, config)
+
 	hclData["description"] = flattenGKEBackupRestorePlanDescription(res["description"], d, config)
-	hclData["labels"] = flattenGKEBackupRestorePlanLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenGKEBackupRestorePlanLabels(res["labels"], d, config)
+	}
+
 	hclData["backup_plan"] = flattenGKEBackupRestorePlanBackupPlan(res["backupPlan"], d, config)
+
 	hclData["cluster"] = flattenGKEBackupRestorePlanCluster(res["cluster"], d, config)
+
 	hclData["restore_config"] = flattenGKEBackupRestorePlanRestoreConfig(res["restoreConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,14 +137,23 @@ func (c *ComputeNodeTemplateCai2hclConverter) convertResourceData(asset caiasset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/nodeTemplates/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeNodeTemplateDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeNodeTemplateName(res["name"], d, config)
+
 	hclData["node_affinity_labels"] = flattenComputeNodeTemplateNodeAffinityLabels(res["nodeAffinityLabels"], d, config)
+
 	hclData["node_type"] = flattenComputeNodeTemplateNodeType(res["nodeType"], d, config)
+
 	hclData["node_type_flexibility"] = flattenComputeNodeTemplateNodeTypeFlexibility(res["nodeTypeFlexibility"], d, config)
+
 	hclData["server_binding"] = flattenComputeNodeTemplateServerBinding(res["serverBinding"], d, config)
+
 	hclData["accelerators"] = flattenComputeNodeTemplateAccelerators(res["accelerators"], d, config)
+
 	hclData["cpu_overcommit_type"] = flattenComputeNodeTemplateCpuOvercommitType(res["cpuOvercommitType"], d, config)
+
 	hclData["disks"] = flattenComputeNodeTemplateDisks(res["disks"], d, config)
+
 	hclData["region"] = flattenComputeNodeTemplateRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

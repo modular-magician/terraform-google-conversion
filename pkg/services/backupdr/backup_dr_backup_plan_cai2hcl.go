@@ -142,12 +142,19 @@ func (c *BackupDRBackupPlanCai2hclConverter) convertResourceData(asset caiasset.
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//backupdr.googleapis.com/projects/{{project}}/locations/{{location}}/backupPlans/{{backup_plan_id}}", outputFields, hclData)
 
 	hclData["description"] = flattenBackupDRBackupPlanDescription(res["description"], d, config)
+
 	hclData["backup_vault"] = flattenBackupDRBackupPlanBackupVault(res["backupVault"], d, config)
+
 	hclData["resource_type"] = flattenBackupDRBackupPlanResourceType(res["resourceType"], d, config)
+
 	hclData["max_custom_on_demand_retention_days"] = flattenBackupDRBackupPlanMaxCustomOnDemandRetentionDays(res["maxCustomOnDemandRetentionDays"], d, config)
+
 	hclData["backup_rules"] = flattenBackupDRBackupPlanBackupRules(res["backupRules"], d, config)
+
 	hclData["log_retention_days"] = flattenBackupDRBackupPlanLogRetentionDays(res["logRetentionDays"], d, config)
+
 	hclData["disk_backup_plan_properties"] = flattenBackupDRBackupPlanDiskBackupPlanProperties(res["diskBackupPlanProperties"], d, config)
+
 	hclData["compute_instance_backup_plan_properties"] = flattenBackupDRBackupPlanComputeInstanceBackupPlanProperties(res["computeInstanceBackupPlanProperties"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

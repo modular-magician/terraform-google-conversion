@@ -136,8 +136,12 @@ func (c *NetworkSecurityFirewallEndpointCai2hclConverter) convertResourceData(as
 	outputFields := map[string]struct{}{"associated_networks": struct{}{}, "create_time": struct{}{}, "effective_labels": struct{}{}, "reconciling": struct{}{}, "self_link": struct{}{}, "state": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/{{parent}}/locations/{{location}}/firewallEndpoints/{{name}}", outputFields, hclData)
 
-	hclData["labels"] = flattenNetworkSecurityFirewallEndpointLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetworkSecurityFirewallEndpointLabels(res["labels"], d, config)
+	}
+
 	hclData["billing_project_id"] = flattenNetworkSecurityFirewallEndpointBillingProjectId(res["billingProjectId"], d, config)
+
 	hclData["endpoint_settings"] = flattenNetworkSecurityFirewallEndpointEndpointSettings(res["endpointSettings"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

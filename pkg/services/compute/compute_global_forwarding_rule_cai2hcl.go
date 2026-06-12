@@ -137,22 +137,41 @@ func (c *ComputeGlobalForwardingRuleCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/forwardingRules/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeGlobalForwardingRuleDescription(res["description"], d, config)
+
 	hclData["ip_address"] = flattenComputeGlobalForwardingRuleIPAddress(res["IPAddress"], d, config)
+
 	hclData["ip_protocol"] = flattenComputeGlobalForwardingRuleIPProtocol(res["IPProtocol"], d, config)
+
 	hclData["ip_version"] = flattenComputeGlobalForwardingRuleIpVersion(res["ipVersion"], d, config)
-	hclData["labels"] = flattenComputeGlobalForwardingRuleLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeGlobalForwardingRuleLabels(res["labels"], d, config)
+	}
+
 	hclData["load_balancing_scheme"] = flattenComputeGlobalForwardingRuleLoadBalancingScheme(res["loadBalancingScheme"], d, config)
+
 	hclData["metadata_filters"] = flattenComputeGlobalForwardingRuleMetadataFilters(res["metadataFilters"], d, config)
+
 	hclData["name"] = flattenComputeGlobalForwardingRuleName(res["name"], d, config)
+
 	hclData["network"] = flattenComputeGlobalForwardingRuleNetwork(res["network"], d, config)
+
 	hclData["port_range"] = flattenComputeGlobalForwardingRulePortRange(res["portRange"], d, config)
+
 	hclData["subnetwork"] = flattenComputeGlobalForwardingRuleSubnetwork(res["subnetwork"], d, config)
+
 	hclData["target"] = flattenComputeGlobalForwardingRuleTarget(res["target"], d, config)
+
 	hclData["network_tier"] = flattenComputeGlobalForwardingRuleNetworkTier(res["networkTier"], d, config)
+
 	hclData["external_managed_backend_bucket_migration_state"] = flattenComputeGlobalForwardingRuleExternalManagedBackendBucketMigrationState(res["externalManagedBackendBucketMigrationState"], d, config)
+
 	hclData["external_managed_backend_bucket_migration_testing_percentage"] = flattenComputeGlobalForwardingRuleExternalManagedBackendBucketMigrationTestingPercentage(res["externalManagedBackendBucketMigrationTestingPercentage"], d, config)
+
 	hclData["service_directory_registrations"] = flattenComputeGlobalForwardingRuleServiceDirectoryRegistrations(res["serviceDirectoryRegistrations"], d, config)
+
 	hclData["source_ip_ranges"] = flattenComputeGlobalForwardingRuleSourceIpRanges(res["sourceIpRanges"], d, config)
+
 	hclData["no_automate_dns_zone"] = flattenComputeGlobalForwardingRuleNoAutomateDnsZone(res["noAutomateDnsZone"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

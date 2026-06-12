@@ -137,8 +137,13 @@ func (c *DeveloperConnectGitRepositoryLinkCai2hclConverter) convertResourceData(
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//developerconnect.googleapis.com/projects/{{project}}/locations/{{location}}/connections/{{parent_connection}}/gitRepositoryLinks/{{git_repository_link_id}}", outputFields, hclData)
 
 	hclData["clone_uri"] = flattenDeveloperConnectGitRepositoryLinkCloneUri(res["cloneUri"], d, config)
-	hclData["labels"] = flattenDeveloperConnectGitRepositoryLinkLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenDeveloperConnectGitRepositoryLinkLabels(res["labels"], d, config)
+	}
+
 	hclData["etag"] = flattenDeveloperConnectGitRepositoryLinkEtag(res["etag"], d, config)
+
 	hclData["annotations"] = flattenDeveloperConnectGitRepositoryLinkAnnotations(res["annotations"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

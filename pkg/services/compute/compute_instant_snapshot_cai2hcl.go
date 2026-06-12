@@ -137,10 +137,17 @@ func (c *ComputeInstantSnapshotCai2hclConverter) convertResourceData(asset caias
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/zones/{{zone}}/instantSnapshots/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeInstantSnapshotName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeInstantSnapshotDescription(res["description"], d, config)
-	hclData["labels"] = flattenComputeInstantSnapshotLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeInstantSnapshotLabels(res["labels"], d, config)
+	}
+
 	hclData["params"] = flattenComputeInstantSnapshotParams(res["params"], d, config)
+
 	hclData["source_disk"] = flattenComputeInstantSnapshotSourceDisk(res["sourceDisk"], d, config)
+
 	hclData["zone"] = flattenComputeInstantSnapshotZone(res["zone"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

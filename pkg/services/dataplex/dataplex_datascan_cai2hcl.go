@@ -142,14 +142,25 @@ func (c *DataplexDatascanCai2hclConverter) convertResourceData(asset caiasset.As
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//dataplex.googleapis.com/projects/{{project}}/locations/{{location}}/dataScans/{{data_scan_id}}", outputFields, hclData)
 
 	hclData["description"] = flattenDataplexDatascanDescription(res["description"], d, config)
+
 	hclData["display_name"] = flattenDataplexDatascanDisplayName(res["displayName"], d, config)
-	hclData["labels"] = flattenDataplexDatascanLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenDataplexDatascanLabels(res["labels"], d, config)
+	}
+
 	hclData["data"] = flattenDataplexDatascanData(res["data"], d, config)
+
 	hclData["execution_spec"] = flattenDataplexDatascanExecutionSpec(res["executionSpec"], d, config)
+
 	hclData["execution_identity"] = flattenDataplexDatascanExecutionIdentity(res["executionIdentity"], d, config)
+
 	hclData["data_quality_spec"] = flattenDataplexDatascanDataQualitySpec(res["dataQualitySpec"], d, config)
+
 	hclData["data_profile_spec"] = flattenDataplexDatascanDataProfileSpec(res["dataProfileSpec"], d, config)
+
 	hclData["data_discovery_spec"] = flattenDataplexDatascanDataDiscoverySpec(res["dataDiscoverySpec"], d, config)
+
 	hclData["data_documentation_spec"] = flattenDataplexDatascanDataDocumentationSpec(res["dataDocumentationSpec"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

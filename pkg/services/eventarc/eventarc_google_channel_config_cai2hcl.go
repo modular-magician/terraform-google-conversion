@@ -137,6 +137,7 @@ func (c *EventarcGoogleChannelConfigCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//eventarc.googleapis.com/projects/{{project}}/locations/{{location}}/googleChannelConfig", outputFields, hclData)
 
 	hclData["name"] = flattenEventarcGoogleChannelConfigName(res["name"], d, config)
+
 	hclData["crypto_key_name"] = flattenEventarcGoogleChannelConfigCryptoKeyName(res["cryptoKeyName"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

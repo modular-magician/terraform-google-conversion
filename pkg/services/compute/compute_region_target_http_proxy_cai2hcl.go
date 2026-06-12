@@ -137,9 +137,13 @@ func (c *ComputeRegionTargetHttpProxyCai2hclConverter) convertResourceData(asset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/targetHttpProxies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeRegionTargetHttpProxyDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeRegionTargetHttpProxyName(res["name"], d, config)
+
 	hclData["url_map"] = flattenComputeRegionTargetHttpProxyUrlMap(res["urlMap"], d, config)
+
 	hclData["http_keep_alive_timeout_sec"] = flattenComputeRegionTargetHttpProxyHttpKeepAliveTimeoutSec(res["httpKeepAliveTimeoutSec"], d, config)
+
 	hclData["region"] = flattenComputeRegionTargetHttpProxyRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

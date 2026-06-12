@@ -137,7 +137,9 @@ func (c *ComputeRegionNetworkFirewallPolicyCai2hclConverter) convertResourceData
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/firewallPolicies/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeRegionNetworkFirewallPolicyName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeRegionNetworkFirewallPolicyDescription(res["description"], d, config)
+
 	hclData["policy_type"] = flattenComputeRegionNetworkFirewallPolicyPolicyType(res["policyType"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -142,14 +142,23 @@ func (c *ComputeUrlMapCai2hclConverter) convertResourceData(asset caiasset.Asset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/urlMaps/{{name}}", outputFields, hclData)
 
 	hclData["default_service"] = flattenComputeUrlMapDefaultService(res["defaultService"], d, config)
+
 	hclData["description"] = flattenComputeUrlMapDescription(res["description"], d, config)
+
 	hclData["header_action"] = flattenComputeUrlMapHeaderAction(res["headerAction"], d, config)
+
 	hclData["host_rule"] = flattenComputeUrlMapHostRule(res["hostRules"], d, config)
+
 	hclData["name"] = flattenComputeUrlMapName(res["name"], d, config)
+
 	hclData["path_matcher"] = flattenComputeUrlMapPathMatcher(res["pathMatchers"], d, config)
+
 	hclData["default_custom_error_response_policy"] = flattenComputeUrlMapDefaultCustomErrorResponsePolicy(res["defaultCustomErrorResponsePolicy"], d, config)
+
 	hclData["test"] = flattenComputeUrlMapTest(res["tests"], d, config)
+
 	hclData["default_url_redirect"] = flattenComputeUrlMapDefaultUrlRedirect(res["defaultUrlRedirect"], d, config)
+
 	hclData["default_route_action"] = flattenComputeUrlMapDefaultRouteAction(res["defaultRouteAction"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -142,9 +142,13 @@ func (c *SpannerDatabaseCai2hclConverter) convertResourceData(asset caiasset.Ass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//spanner.googleapis.com/projects/{{project}}/instances/{{instance}}/databases/{{name}}", outputFields, hclData)
 
 	hclData["version_retention_period"] = flattenSpannerDatabaseVersionRetentionPeriod(res["versionRetentionPeriod"], d, config)
+
 	hclData["ddl"] = flattenSpannerDatabaseDdl(res["extraStatements"], d, config)
+
 	hclData["encryption_config"] = flattenSpannerDatabaseEncryptionConfig(res["encryptionConfig"], d, config)
+
 	hclData["database_dialect"] = flattenSpannerDatabaseDatabaseDialect(res["databaseDialect"], d, config)
+
 	hclData["enable_drop_protection"] = flattenSpannerDatabaseEnableDropProtection(res["enableDropProtection"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

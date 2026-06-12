@@ -137,13 +137,23 @@ func (c *NetworkConnectivityPolicyBasedRouteCai2hclConverter) convertResourceDat
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networkconnectivity.googleapis.com/projects/{{project}}/locations/global/policyBasedRoutes/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetworkConnectivityPolicyBasedRouteDescription(res["description"], d, config)
-	hclData["labels"] = flattenNetworkConnectivityPolicyBasedRouteLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetworkConnectivityPolicyBasedRouteLabels(res["labels"], d, config)
+	}
+
 	hclData["network"] = flattenNetworkConnectivityPolicyBasedRouteNetwork(res["network"], d, config)
+
 	hclData["filter"] = flattenNetworkConnectivityPolicyBasedRouteFilter(res["filter"], d, config)
+
 	hclData["next_hop_other_routes"] = flattenNetworkConnectivityPolicyBasedRouteNextHopOtherRoutes(res["nextHopOtherRoutes"], d, config)
+
 	hclData["next_hop_ilb_ip"] = flattenNetworkConnectivityPolicyBasedRouteNextHopIlbIp(res["nextHopIlbIp"], d, config)
+
 	hclData["priority"] = flattenNetworkConnectivityPolicyBasedRoutePriority(res["priority"], d, config)
+
 	hclData["virtual_machine"] = flattenNetworkConnectivityPolicyBasedRouteVirtualMachine(res["virtualMachine"], d, config)
+
 	hclData["interconnect_attachment"] = flattenNetworkConnectivityPolicyBasedRouteInterconnectAttachment(res["interconnectAttachment"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

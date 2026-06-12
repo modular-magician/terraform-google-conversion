@@ -137,8 +137,13 @@ func (c *NetworkConnectivityGroupCai2hclConverter) convertResourceData(asset cai
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networkconnectivity.googleapis.com/projects/{{project}}/locations/global/hubs/{{hub}}/groups/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenNetworkConnectivityGroupName(res["name"], d, config)
-	hclData["labels"] = flattenNetworkConnectivityGroupLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetworkConnectivityGroupLabels(res["labels"], d, config)
+	}
+
 	hclData["description"] = flattenNetworkConnectivityGroupDescription(res["description"], d, config)
+
 	hclData["auto_accept"] = flattenNetworkConnectivityGroupAutoAccept(res["autoAccept"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

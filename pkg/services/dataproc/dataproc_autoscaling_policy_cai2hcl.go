@@ -137,8 +137,11 @@ func (c *DataprocAutoscalingPolicyCai2hclConverter) convertResourceData(asset ca
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//dataproc.googleapis.com/projects/{{project}}/regions/{{location}}/autoscalingPolicies/{{policy_id}}", outputFields, hclData)
 
 	hclData["policy_id"] = flattenDataprocAutoscalingPolicyPolicyId(res["id"], d, config)
+
 	hclData["worker_config"] = flattenDataprocAutoscalingPolicyWorkerConfig(res["workerConfig"], d, config)
+
 	hclData["secondary_worker_config"] = flattenDataprocAutoscalingPolicySecondaryWorkerConfig(res["secondaryWorkerConfig"], d, config)
+
 	hclData["basic_algorithm"] = flattenDataprocAutoscalingPolicyBasicAlgorithm(res["basicAlgorithm"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

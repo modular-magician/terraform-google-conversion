@@ -137,12 +137,21 @@ func (c *BackupDRBackupVaultCai2hclConverter) convertResourceData(asset caiasset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//backupdr.googleapis.com/projects/{{project}}/locations/{{location}}/backupVaults/{{backup_vault_id}}", outputFields, hclData)
 
 	hclData["description"] = flattenBackupDRBackupVaultDescription(res["description"], d, config)
-	hclData["labels"] = flattenBackupDRBackupVaultLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenBackupDRBackupVaultLabels(res["labels"], d, config)
+	}
+
 	hclData["backup_minimum_enforced_retention_duration"] = flattenBackupDRBackupVaultBackupMinimumEnforcedRetentionDuration(res["backupMinimumEnforcedRetentionDuration"], d, config)
+
 	hclData["effective_time"] = flattenBackupDRBackupVaultEffectiveTime(res["effectiveTime"], d, config)
+
 	hclData["annotations"] = flattenBackupDRBackupVaultAnnotations(res["annotations"], d, config)
+
 	hclData["access_restriction"] = flattenBackupDRBackupVaultAccessRestriction(res["accessRestriction"], d, config)
+
 	hclData["backup_retention_inheritance"] = flattenBackupDRBackupVaultBackupRetentionInheritance(res["backupRetentionInheritance"], d, config)
+
 	hclData["encryption_config"] = flattenBackupDRBackupVaultEncryptionConfig(res["encryptionConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -152,43 +152,76 @@ func (c *ComputeBackendServiceCai2hclConverter) convertResourceData(asset caiass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/backendServices/{{name}}", outputFields, hclData)
 
 	hclData["affinity_cookie_ttl_sec"] = flattenComputeBackendServiceAffinityCookieTtlSec(res["affinityCookieTtlSec"], d, config)
+
 	hclData["backend"] = flattenComputeBackendServiceBackend(res["backends"], d, config)
+
 	hclData["circuit_breakers"] = flattenComputeBackendServiceCircuitBreakers(res["circuitBreakers"], d, config)
+
 	hclData["compression_mode"] = flattenComputeBackendServiceCompressionMode(res["compressionMode"], d, config)
+
 	hclData["consistent_hash"] = flattenComputeBackendServiceConsistentHash(res["consistentHash"], d, config)
+
 	hclData["cdn_policy"] = flattenComputeBackendServiceCdnPolicy(res["cdnPolicy"], d, config)
 	if flattenedProp := flattenComputeBackendServiceConnectionDraining(res["connectionDraining"], d, config); flattenedProp != nil {
 		if err := tgcresource.MergeFlattenedProperties(hclData, flattenedProp); err != nil {
 			return nil, fmt.Errorf("error merging flattened properties from connectionDraining: %s", err)
 		}
 	}
+
 	hclData["custom_request_headers"] = flattenComputeBackendServiceCustomRequestHeaders(res["customRequestHeaders"], d, config)
+
 	hclData["custom_response_headers"] = flattenComputeBackendServiceCustomResponseHeaders(res["customResponseHeaders"], d, config)
+
 	hclData["description"] = flattenComputeBackendServiceDescription(res["description"], d, config)
+
 	hclData["enable_cdn"] = flattenComputeBackendServiceEnableCDN(res["enableCDN"], d, config)
+
 	hclData["health_checks"] = flattenComputeBackendServiceHealthChecks(res["healthChecks"], d, config)
+
 	hclData["iap"] = flattenComputeBackendServiceIap(res["iap"], d, config)
+
 	hclData["ip_address_selection_policy"] = flattenComputeBackendServiceIpAddressSelectionPolicy(res["ipAddressSelectionPolicy"], d, config)
+
 	hclData["load_balancing_scheme"] = flattenComputeBackendServiceLoadBalancingScheme(res["loadBalancingScheme"], d, config)
+
 	hclData["external_managed_migration_state"] = flattenComputeBackendServiceExternalManagedMigrationState(res["externalManagedMigrationState"], d, config)
+
 	hclData["external_managed_migration_testing_percentage"] = flattenComputeBackendServiceExternalManagedMigrationTestingPercentage(res["externalManagedMigrationTestingPercentage"], d, config)
+
 	hclData["locality_lb_policy"] = flattenComputeBackendServiceLocalityLbPolicy(res["localityLbPolicy"], d, config)
+
 	hclData["locality_lb_policies"] = flattenComputeBackendServiceLocalityLbPolicies(res["localityLbPolicies"], d, config)
+
 	hclData["custom_metrics"] = flattenComputeBackendServiceCustomMetrics(res["customMetrics"], d, config)
+
 	hclData["name"] = flattenComputeBackendServiceName(res["name"], d, config)
+
 	hclData["outlier_detection"] = flattenComputeBackendServiceOutlierDetection(res["outlierDetection"], d, config)
+
 	hclData["port_name"] = flattenComputeBackendServicePortName(res["portName"], d, config)
+
 	hclData["protocol"] = flattenComputeBackendServiceProtocol(res["protocol"], d, config)
+
 	hclData["security_policy"] = flattenComputeBackendServiceSecurityPolicy(res["securityPolicy"], d, config)
+
 	hclData["edge_security_policy"] = flattenComputeBackendServiceEdgeSecurityPolicy(res["edgeSecurityPolicy"], d, config)
+
 	hclData["security_settings"] = flattenComputeBackendServiceSecuritySettings(res["securitySettings"], d, config)
+
 	hclData["session_affinity"] = flattenComputeBackendServiceSessionAffinity(res["sessionAffinity"], d, config)
+
 	hclData["strong_session_affinity_cookie"] = flattenComputeBackendServiceStrongSessionAffinityCookie(res["strongSessionAffinityCookie"], d, config)
+
 	hclData["timeout_sec"] = flattenComputeBackendServiceTimeoutSec(res["timeoutSec"], d, config)
+
 	hclData["log_config"] = flattenComputeBackendServiceLogConfig(res["logConfig"], d, config)
+
 	hclData["service_lb_policy"] = flattenComputeBackendServiceServiceLbPolicy(res["serviceLbPolicy"], d, config)
+
 	hclData["tls_settings"] = flattenComputeBackendServiceTlsSettings(res["tlsSettings"], d, config)
+
 	hclData["max_stream_duration"] = flattenComputeBackendServiceMaxStreamDuration(res["maxStreamDuration"], d, config)
+
 	hclData["params"] = flattenComputeBackendServiceParams(res["params"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,10 +137,17 @@ func (c *EventarcEnrollmentCai2hclConverter) convertResourceData(asset caiasset.
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//eventarc.googleapis.com/projects/{{project}}/locations/{{location}}/enrollments/{{enrollment_id}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenEventarcEnrollmentDisplayName(res["displayName"], d, config)
+
 	hclData["message_bus"] = flattenEventarcEnrollmentMessageBus(res["messageBus"], d, config)
-	hclData["labels"] = flattenEventarcEnrollmentLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenEventarcEnrollmentLabels(res["labels"], d, config)
+	}
+
 	hclData["cel_match"] = flattenEventarcEnrollmentCelMatch(res["celMatch"], d, config)
+
 	hclData["destination"] = flattenEventarcEnrollmentDestination(res["destination"], d, config)
+
 	hclData["annotations"] = flattenEventarcEnrollmentAnnotations(res["annotations"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

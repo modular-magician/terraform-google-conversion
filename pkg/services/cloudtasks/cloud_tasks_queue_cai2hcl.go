@@ -137,10 +137,15 @@ func (c *CloudTasksQueueCai2hclConverter) convertResourceData(asset caiasset.Ass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudtasks.googleapis.com/projects/{{project}}/locations/{{location}}/queues/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenCloudTasksQueueName(res["name"], d, config)
+
 	hclData["app_engine_routing_override"] = flattenCloudTasksQueueAppEngineRoutingOverride(res["appEngineRoutingOverride"], d, config)
+
 	hclData["rate_limits"] = flattenCloudTasksQueueRateLimits(res["rateLimits"], d, config)
+
 	hclData["retry_config"] = flattenCloudTasksQueueRetryConfig(res["retryConfig"], d, config)
+
 	hclData["stackdriver_logging_config"] = flattenCloudTasksQueueStackdriverLoggingConfig(res["stackdriverLoggingConfig"], d, config)
+
 	hclData["http_target"] = flattenCloudTasksQueueHttpTarget(res["httpTarget"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

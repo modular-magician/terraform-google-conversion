@@ -137,11 +137,17 @@ func (c *ComputeNetworkEndpointGroupCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/zones/{{zone}}/networkEndpointGroups/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeNetworkEndpointGroupName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeNetworkEndpointGroupDescription(res["description"], d, config)
+
 	hclData["network_endpoint_type"] = flattenComputeNetworkEndpointGroupNetworkEndpointType(res["networkEndpointType"], d, config)
+
 	hclData["network"] = flattenComputeNetworkEndpointGroupNetwork(res["network"], d, config)
+
 	hclData["subnetwork"] = flattenComputeNetworkEndpointGroupSubnetwork(res["subnetwork"], d, config)
+
 	hclData["default_port"] = flattenComputeNetworkEndpointGroupDefaultPort(res["defaultPort"], d, config)
+
 	hclData["zone"] = flattenComputeNetworkEndpointGroupZone(res["zone"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

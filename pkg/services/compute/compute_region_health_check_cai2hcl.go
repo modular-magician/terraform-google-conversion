@@ -137,19 +137,33 @@ func (c *ComputeRegionHealthCheckCai2hclConverter) convertResourceData(asset cai
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/healthChecks/{{name}}", outputFields, hclData)
 
 	hclData["check_interval_sec"] = flattenComputeRegionHealthCheckCheckIntervalSec(res["checkIntervalSec"], d, config)
+
 	hclData["description"] = flattenComputeRegionHealthCheckDescription(res["description"], d, config)
+
 	hclData["healthy_threshold"] = flattenComputeRegionHealthCheckHealthyThreshold(res["healthyThreshold"], d, config)
+
 	hclData["name"] = flattenComputeRegionHealthCheckName(res["name"], d, config)
+
 	hclData["unhealthy_threshold"] = flattenComputeRegionHealthCheckUnhealthyThreshold(res["unhealthyThreshold"], d, config)
+
 	hclData["timeout_sec"] = flattenComputeRegionHealthCheckTimeoutSec(res["timeoutSec"], d, config)
+
 	hclData["http_health_check"] = flattenComputeRegionHealthCheckHttpHealthCheck(res["httpHealthCheck"], d, config)
+
 	hclData["https_health_check"] = flattenComputeRegionHealthCheckHttpsHealthCheck(res["httpsHealthCheck"], d, config)
+
 	hclData["tcp_health_check"] = flattenComputeRegionHealthCheckTcpHealthCheck(res["tcpHealthCheck"], d, config)
+
 	hclData["ssl_health_check"] = flattenComputeRegionHealthCheckSslHealthCheck(res["sslHealthCheck"], d, config)
+
 	hclData["http2_health_check"] = flattenComputeRegionHealthCheckHttp2HealthCheck(res["http2HealthCheck"], d, config)
+
 	hclData["grpc_health_check"] = flattenComputeRegionHealthCheckGrpcHealthCheck(res["grpcHealthCheck"], d, config)
+
 	hclData["grpc_tls_health_check"] = flattenComputeRegionHealthCheckGrpcTlsHealthCheck(res["grpcTlsHealthCheck"], d, config)
+
 	hclData["log_config"] = flattenComputeRegionHealthCheckLogConfig(res["logConfig"], d, config)
+
 	hclData["region"] = flattenComputeRegionHealthCheckRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

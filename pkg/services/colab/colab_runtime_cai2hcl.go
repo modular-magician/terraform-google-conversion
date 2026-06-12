@@ -137,8 +137,11 @@ func (c *ColabRuntimeCai2hclConverter) convertResourceData(asset caiasset.Asset,
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//aiplatform.googleapis.com/projects/{{project}}/locations/{{location}}/notebookRuntimes/{{name}}", outputFields, hclData)
 
 	hclData["notebook_runtime_template_ref"] = flattenColabRuntimeNotebookRuntimeTemplateRef(res["notebookRuntimeTemplateRef"], d, config)
+
 	hclData["runtime_user"] = flattenColabRuntimeRuntimeUser(res["runtimeUser"], d, config)
+
 	hclData["display_name"] = flattenColabRuntimeDisplayName(res["displayName"], d, config)
+
 	hclData["description"] = flattenColabRuntimeDescription(res["description"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

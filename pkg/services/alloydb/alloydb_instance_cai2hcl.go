@@ -136,20 +136,36 @@ func (c *AlloydbInstanceCai2hclConverter) convertResourceData(asset caiasset.Ass
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_annotations": struct{}{}, "effective_labels": struct{}{}, "ip_address": struct{}{}, "name": struct{}{}, "outbound_public_ip_addresses": struct{}{}, "public_ip_address": struct{}{}, "reconciling": struct{}{}, "state": struct{}{}, "terraform_labels": struct{}{}, "uid": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//alloydb.googleapis.com/{{cluster}}/instances/{{instance_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenAlloydbInstanceLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenAlloydbInstanceLabels(res["labels"], d, config)
+	}
+
 	hclData["annotations"] = flattenAlloydbInstanceAnnotations(res["annotations"], d, config)
+
 	hclData["display_name"] = flattenAlloydbInstanceDisplayName(res["displayName"], d, config)
+
 	hclData["gce_zone"] = flattenAlloydbInstanceGceZone(res["gceZone"], d, config)
+
 	hclData["database_flags"] = flattenAlloydbInstanceDatabaseFlags(res["databaseFlags"], d, config)
+
 	hclData["availability_type"] = flattenAlloydbInstanceAvailabilityType(res["availabilityType"], d, config)
+
 	hclData["activation_policy"] = flattenAlloydbInstanceActivationPolicy(res["activationPolicy"], d, config)
+
 	hclData["instance_type"] = flattenAlloydbInstanceInstanceType(res["instanceType"], d, config)
+
 	hclData["query_insights_config"] = flattenAlloydbInstanceQueryInsightsConfig(res["queryInsightsConfig"], d, config)
+
 	hclData["read_pool_config"] = flattenAlloydbInstanceReadPoolConfig(res["readPoolConfig"], d, config)
+
 	hclData["machine_config"] = flattenAlloydbInstanceMachineConfig(res["machineConfig"], d, config)
+
 	hclData["client_connection_config"] = flattenAlloydbInstanceClientConnectionConfig(res["clientConnectionConfig"], d, config)
+
 	hclData["psc_instance_config"] = flattenAlloydbInstancePscInstanceConfig(res["pscInstanceConfig"], d, config)
+
 	hclData["network_config"] = flattenAlloydbInstanceNetworkConfig(res["networkConfig"], d, config)
+
 	hclData["connection_pool_config"] = flattenAlloydbInstanceConnectionPoolConfig(res["connectionPoolConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,8 +137,11 @@ func (c *SecurityCenterV2OrganizationSccBigQueryExportsCai2hclConverter) convert
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//securitycenter.googleapis.com/organizations/{{organization}}/locations/{{location}}/bigQueryExports/{{big_query_export_id}}", outputFields, hclData)
 
 	hclData["name"] = flattenSecurityCenterV2OrganizationSccBigQueryExportsName(res["name"], d, config)
+
 	hclData["description"] = flattenSecurityCenterV2OrganizationSccBigQueryExportsDescription(res["description"], d, config)
+
 	hclData["dataset"] = flattenSecurityCenterV2OrganizationSccBigQueryExportsDataset(res["dataset"], d, config)
+
 	hclData["filter"] = flattenSecurityCenterV2OrganizationSccBigQueryExportsFilter(res["filter"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

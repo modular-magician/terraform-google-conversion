@@ -137,22 +137,39 @@ func (c *GkeonpremVmwareClusterCai2hclConverter) convertResourceData(asset caias
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//gkeonprem.googleapis.com/projects/{{project}}/locations/{{location}}/vmwareClusters/{{name}}", outputFields, hclData)
 
 	hclData["admin_cluster_membership"] = flattenGkeonpremVmwareClusterAdminClusterMembership(res["adminClusterMembership"], d, config)
+
 	hclData["description"] = flattenGkeonpremVmwareClusterDescription(res["description"], d, config)
+
 	hclData["on_prem_version"] = flattenGkeonpremVmwareClusterOnPremVersion(res["onPremVersion"], d, config)
+
 	hclData["annotations"] = flattenGkeonpremVmwareClusterAnnotations(res["annotations"], d, config)
+
 	hclData["control_plane_node"] = flattenGkeonpremVmwareClusterControlPlaneNode(res["controlPlaneNode"], d, config)
+
 	hclData["anti_affinity_groups"] = flattenGkeonpremVmwareClusterAntiAffinityGroups(res["antiAffinityGroups"], d, config)
+
 	hclData["storage"] = flattenGkeonpremVmwareClusterStorage(res["storage"], d, config)
+
 	hclData["network_config"] = flattenGkeonpremVmwareClusterNetworkConfig(res["networkConfig"], d, config)
+
 	hclData["load_balancer"] = flattenGkeonpremVmwareClusterLoadBalancer(res["loadBalancer"], d, config)
+
 	hclData["dataplane_v2"] = flattenGkeonpremVmwareClusterDataplaneV2(res["dataplaneV2"], d, config)
+
 	hclData["vm_tracking_enabled"] = flattenGkeonpremVmwareClusterVmTrackingEnabled(res["vmTrackingEnabled"], d, config)
+
 	hclData["auto_repair_config"] = flattenGkeonpremVmwareClusterAutoRepairConfig(res["autoRepairConfig"], d, config)
+
 	hclData["authorization"] = flattenGkeonpremVmwareClusterAuthorization(res["authorization"], d, config)
+
 	hclData["enable_control_plane_v2"] = flattenGkeonpremVmwareClusterEnableControlPlaneV2(res["enableControlPlaneV2"], d, config)
+
 	hclData["enable_advanced_cluster"] = flattenGkeonpremVmwareClusterEnableAdvancedCluster(res["enableAdvancedCluster"], d, config)
+
 	hclData["disable_bundled_ingress"] = flattenGkeonpremVmwareClusterDisableBundledIngress(res["disableBundledIngress"], d, config)
+
 	hclData["upgrade_policy"] = flattenGkeonpremVmwareClusterUpgradePolicy(res["upgradePolicy"], d, config)
+
 	hclData["vcenter"] = flattenGkeonpremVmwareClusterVcenter(res["vcenter"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

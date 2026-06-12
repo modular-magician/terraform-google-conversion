@@ -137,13 +137,23 @@ func (c *ComputeHaVpnGatewayCai2hclConverter) convertResourceData(asset caiasset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/vpnGateways/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeHaVpnGatewayDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeHaVpnGatewayName(res["name"], d, config)
+
 	hclData["network"] = flattenComputeHaVpnGatewayNetwork(res["network"], d, config)
+
 	hclData["stack_type"] = flattenComputeHaVpnGatewayStackType(res["stackType"], d, config)
+
 	hclData["gateway_ip_version"] = flattenComputeHaVpnGatewayGatewayIpVersion(res["gatewayIpVersion"], d, config)
+
 	hclData["vpn_interfaces"] = flattenComputeHaVpnGatewayVpnInterfaces(res["vpnInterfaces"], d, config)
-	hclData["labels"] = flattenComputeHaVpnGatewayLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeHaVpnGatewayLabels(res["labels"], d, config)
+	}
+
 	hclData["params"] = flattenComputeHaVpnGatewayParams(res["params"], d, config)
+
 	hclData["region"] = flattenComputeHaVpnGatewayRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

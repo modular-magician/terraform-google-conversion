@@ -137,13 +137,21 @@ func (c *ComputePacketMirroringCai2hclConverter) convertResourceData(asset caias
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/packetMirrorings/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputePacketMirroringName(res["name"], d, config)
+
 	hclData["description"] = flattenComputePacketMirroringDescription(res["description"], d, config)
+
 	hclData["region"] = flattenComputePacketMirroringRegion(res["region"], d, config)
+
 	hclData["network"] = flattenComputePacketMirroringNetwork(res["network"], d, config)
+
 	hclData["priority"] = flattenComputePacketMirroringPriority(res["priority"], d, config)
+
 	hclData["collector_ilb"] = flattenComputePacketMirroringCollectorIlb(res["collectorIlb"], d, config)
+
 	hclData["filter"] = flattenComputePacketMirroringFilter(res["filter"], d, config)
+
 	hclData["mirrored_resources"] = flattenComputePacketMirroringMirroredResources(res["mirroredResources"], d, config)
+
 	hclData["enable"] = flattenComputePacketMirroringEnable(res["enable"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

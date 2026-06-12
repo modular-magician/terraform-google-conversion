@@ -137,9 +137,15 @@ func (c *FilestoreBackupCai2hclConverter) convertResourceData(asset caiasset.Ass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//file.googleapis.com/projects/{{project}}/locations/{{location}}/backups/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenFilestoreBackupDescription(res["description"], d, config)
-	hclData["labels"] = flattenFilestoreBackupLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenFilestoreBackupLabels(res["labels"], d, config)
+	}
+
 	hclData["source_instance"] = flattenFilestoreBackupSourceInstance(res["sourceInstance"], d, config)
+
 	hclData["source_file_share"] = flattenFilestoreBackupSourceFileShare(res["sourceFileShare"], d, config)
+
 	hclData["tags"] = flattenFilestoreBackupTags(res["tags"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

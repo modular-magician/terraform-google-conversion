@@ -142,12 +142,19 @@ func (c *VPCAccessConnectorCai2hclConverter) convertResourceData(asset caiasset.
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//vpcaccess.googleapis.com/projects/{{project}}/locations/{{region}}/connectors/{{name}}", outputFields, hclData)
 
 	hclData["network"] = flattenVPCAccessConnectorNetwork(res["network"], d, config)
+
 	hclData["ip_cidr_range"] = flattenVPCAccessConnectorIpCidrRange(res["ipCidrRange"], d, config)
+
 	hclData["machine_type"] = flattenVPCAccessConnectorMachineType(res["machineType"], d, config)
+
 	hclData["min_throughput"] = flattenVPCAccessConnectorMinThroughput(res["minThroughput"], d, config)
+
 	hclData["min_instances"] = flattenVPCAccessConnectorMinInstances(res["minInstances"], d, config)
+
 	hclData["max_instances"] = flattenVPCAccessConnectorMaxInstances(res["maxInstances"], d, config)
+
 	hclData["max_throughput"] = flattenVPCAccessConnectorMaxThroughput(res["maxThroughput"], d, config)
+
 	hclData["subnet"] = flattenVPCAccessConnectorSubnet(res["subnet"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

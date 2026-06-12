@@ -137,9 +137,15 @@ func (c *NetworkSecurityAddressGroupCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/{{parent}}/locations/{{location}}/addressGroups/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetworkSecurityAddressGroupDescription(res["description"], d, config)
-	hclData["labels"] = flattenNetworkSecurityAddressGroupLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetworkSecurityAddressGroupLabels(res["labels"], d, config)
+	}
+
 	hclData["type"] = flattenNetworkSecurityAddressGroupType(res["type"], d, config)
+
 	hclData["items"] = flattenNetworkSecurityAddressGroupItems(res["items"], d, config)
+
 	hclData["capacity"] = flattenNetworkSecurityAddressGroupCapacity(res["capacity"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

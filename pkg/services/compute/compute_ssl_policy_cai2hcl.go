@@ -137,10 +137,15 @@ func (c *ComputeSslPolicyCai2hclConverter) convertResourceData(asset caiasset.As
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/sslPolicies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeSslPolicyDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeSslPolicyName(res["name"], d, config)
+
 	hclData["profile"] = flattenComputeSslPolicyProfile(res["profile"], d, config)
+
 	hclData["min_tls_version"] = flattenComputeSslPolicyMinTlsVersion(res["minTlsVersion"], d, config)
+
 	hclData["custom_features"] = flattenComputeSslPolicyCustomFeatures(res["customFeatures"], d, config)
+
 	hclData["post_quantum_key_exchange"] = flattenComputeSslPolicyPostQuantumKeyExchange(res["postQuantumKeyExchange"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

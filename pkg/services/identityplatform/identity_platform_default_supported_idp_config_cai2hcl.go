@@ -137,7 +137,9 @@ func (c *IdentityPlatformDefaultSupportedIdpConfigCai2hclConverter) convertResou
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//identitytoolkit.googleapis.com/projects/{{project}}/defaultSupportedIdpConfigs/{{idp_id}}", outputFields, hclData)
 
 	hclData["client_id"] = flattenIdentityPlatformDefaultSupportedIdpConfigClientId(res["clientId"], d, config)
+
 	hclData["client_secret"] = flattenIdentityPlatformDefaultSupportedIdpConfigClientSecret(res["clientSecret"], d, config)
+
 	hclData["enabled"] = flattenIdentityPlatformDefaultSupportedIdpConfigEnabled(res["enabled"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

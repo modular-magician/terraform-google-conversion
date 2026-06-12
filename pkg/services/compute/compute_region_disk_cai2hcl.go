@@ -147,24 +147,45 @@ func (c *ComputeRegionDiskCai2hclConverter) convertResourceData(asset caiasset.A
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/disks/{{name}}", outputFields, hclData)
 
 	hclData["disk_encryption_key"] = flattenComputeRegionDiskDiskEncryptionKey(res["diskEncryptionKey"], d, config)
+
 	hclData["source_image_encryption_key"] = flattenComputeRegionDiskSourceImageEncryptionKey(res["sourceImageEncryptionKey"], d, config)
+
 	hclData["source_snapshot_encryption_key"] = flattenComputeRegionDiskSourceSnapshotEncryptionKey(res["sourceSnapshotEncryptionKey"], d, config)
+
 	hclData["description"] = flattenComputeRegionDiskDescription(res["description"], d, config)
-	hclData["labels"] = flattenComputeRegionDiskLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeRegionDiskLabels(res["labels"], d, config)
+	}
+
 	hclData["name"] = flattenComputeRegionDiskName(res["name"], d, config)
+
 	hclData["size"] = flattenComputeRegionDiskSize(res["sizeGb"], d, config)
+
 	hclData["physical_block_size_bytes"] = flattenComputeRegionDiskPhysicalBlockSizeBytes(res["physicalBlockSizeBytes"], d, config)
+
 	hclData["replica_zones"] = flattenComputeRegionDiskReplicaZones(res["replicaZones"], d, config)
+
 	hclData["type"] = flattenComputeRegionDiskType(res["type"], d, config)
+
 	hclData["source_disk"] = flattenComputeRegionDiskSourceDisk(res["sourceDisk"], d, config)
+
 	hclData["async_primary_disk"] = flattenComputeRegionDiskAsyncPrimaryDisk(res["asyncPrimaryDisk"], d, config)
+
 	hclData["guest_os_features"] = flattenComputeRegionDiskGuestOsFeatures(res["guestOsFeatures"], d, config)
+
 	hclData["licenses"] = flattenComputeRegionDiskLicenses(res["licenses"], d, config)
+
 	hclData["access_mode"] = flattenComputeRegionDiskAccessMode(res["accessMode"], d, config)
+
 	hclData["provisioned_iops"] = flattenComputeRegionDiskProvisionedIops(res["provisionedIops"], d, config)
+
 	hclData["provisioned_throughput"] = flattenComputeRegionDiskProvisionedThroughput(res["provisionedThroughput"], d, config)
+
 	hclData["region"] = flattenComputeRegionDiskRegion(res["region"], d, config)
+
 	hclData["snapshot"] = flattenComputeRegionDiskSnapshot(res["sourceSnapshot"], d, config)
+
 	hclData["image"] = flattenComputeRegionDiskImage(res["sourceImage"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

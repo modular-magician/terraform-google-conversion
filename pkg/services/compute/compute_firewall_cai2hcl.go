@@ -137,20 +137,35 @@ func (c *ComputeFirewallCai2hclConverter) convertResourceData(asset caiasset.Ass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/global/firewalls/{{name}}", outputFields, hclData)
 
 	hclData["allow"] = flattenComputeFirewallAllow(res["allowed"], d, config)
+
 	hclData["deny"] = flattenComputeFirewallDeny(res["denied"], d, config)
+
 	hclData["description"] = flattenComputeFirewallDescription(res["description"], d, config)
+
 	hclData["destination_ranges"] = flattenComputeFirewallDestinationRanges(res["destinationRanges"], d, config)
+
 	hclData["direction"] = flattenComputeFirewallDirection(res["direction"], d, config)
+
 	hclData["disabled"] = flattenComputeFirewallDisabled(res["disabled"], d, config)
+
 	hclData["log_config"] = flattenComputeFirewallLogConfig(res["logConfig"], d, config)
+
 	hclData["name"] = flattenComputeFirewallName(res["name"], d, config)
+
 	hclData["network"] = flattenComputeFirewallNetwork(res["network"], d, config)
+
 	hclData["priority"] = flattenComputeFirewallPriority(res["priority"], d, config)
+
 	hclData["source_ranges"] = flattenComputeFirewallSourceRanges(res["sourceRanges"], d, config)
+
 	hclData["source_service_accounts"] = flattenComputeFirewallSourceServiceAccounts(res["sourceServiceAccounts"], d, config)
+
 	hclData["source_tags"] = flattenComputeFirewallSourceTags(res["sourceTags"], d, config)
+
 	hclData["target_service_accounts"] = flattenComputeFirewallTargetServiceAccounts(res["targetServiceAccounts"], d, config)
+
 	hclData["target_tags"] = flattenComputeFirewallTargetTags(res["targetTags"], d, config)
+
 	hclData["params"] = flattenComputeFirewallParams(res["params"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

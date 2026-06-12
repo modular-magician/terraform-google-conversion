@@ -137,10 +137,17 @@ func (c *NetworkSecuritySecurityProfileGroupCai2hclConverter) convertResourceDat
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/{{parent}}/locations/{{location}}/securityProfileGroups/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetworkSecuritySecurityProfileGroupDescription(res["description"], d, config)
-	hclData["labels"] = flattenNetworkSecuritySecurityProfileGroupLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetworkSecuritySecurityProfileGroupLabels(res["labels"], d, config)
+	}
+
 	hclData["threat_prevention_profile"] = flattenNetworkSecuritySecurityProfileGroupThreatPreventionProfile(res["threatPreventionProfile"], d, config)
+
 	hclData["url_filtering_profile"] = flattenNetworkSecuritySecurityProfileGroupUrlFilteringProfile(res["urlFilteringProfile"], d, config)
+
 	hclData["custom_mirroring_profile"] = flattenNetworkSecuritySecurityProfileGroupCustomMirroringProfile(res["customMirroringProfile"], d, config)
+
 	hclData["custom_intercept_profile"] = flattenNetworkSecuritySecurityProfileGroupCustomInterceptProfile(res["customInterceptProfile"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

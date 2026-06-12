@@ -137,9 +137,15 @@ func (c *PrivatecaCertificateCai2hclConverter) convertResourceData(asset caiasse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//privateca.googleapis.com/projects/{{project}}/locations/{{location}}/caPools/{{pool}}/certificates/{{name}}", outputFields, hclData)
 
 	hclData["lifetime"] = flattenPrivatecaCertificateLifetime(res["lifetime"], d, config)
+
 	hclData["certificate_template"] = flattenPrivatecaCertificateCertificateTemplate(res["certificateTemplate"], d, config)
-	hclData["labels"] = flattenPrivatecaCertificateLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenPrivatecaCertificateLabels(res["labels"], d, config)
+	}
+
 	hclData["pem_csr"] = flattenPrivatecaCertificatePemCsr(res["pemCsr"], d, config)
+
 	hclData["config"] = flattenPrivatecaCertificateConfig(res["config"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

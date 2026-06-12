@@ -137,24 +137,43 @@ func (c *DialogflowCXAgentCai2hclConverter) convertResourceData(asset caiasset.A
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//dialogflow.googleapis.com/projects/{{project}}/locations/{{location}}/agents/{{name}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenDialogflowCXAgentDisplayName(res["displayName"], d, config)
+
 	hclData["default_language_code"] = flattenDialogflowCXAgentDefaultLanguageCode(res["defaultLanguageCode"], d, config)
+
 	hclData["supported_language_codes"] = flattenDialogflowCXAgentSupportedLanguageCodes(res["supportedLanguageCodes"], d, config)
+
 	hclData["time_zone"] = flattenDialogflowCXAgentTimeZone(res["timeZone"], d, config)
+
 	hclData["description"] = flattenDialogflowCXAgentDescription(res["description"], d, config)
+
 	hclData["avatar_uri"] = flattenDialogflowCXAgentAvatarUri(res["avatarUri"], d, config)
+
 	hclData["speech_to_text_settings"] = flattenDialogflowCXAgentSpeechToTextSettings(res["speechToTextSettings"], d, config)
+
 	hclData["security_settings"] = flattenDialogflowCXAgentSecuritySettings(res["securitySettings"], d, config)
+
 	hclData["enable_stackdriver_logging"] = flattenDialogflowCXAgentEnableStackdriverLogging(res["enableStackdriverLogging"], d, config)
+
 	hclData["enable_spell_correction"] = flattenDialogflowCXAgentEnableSpellCorrection(res["enableSpellCorrection"], d, config)
+
 	hclData["advanced_settings"] = flattenDialogflowCXAgentAdvancedSettings(res["advancedSettings"], d, config)
+
 	hclData["git_integration_settings"] = flattenDialogflowCXAgentGitIntegrationSettings(res["gitIntegrationSettings"], d, config)
+
 	hclData["text_to_speech_settings"] = flattenDialogflowCXAgentTextToSpeechSettings(res["textToSpeechSettings"], d, config)
+
 	hclData["gen_app_builder_settings"] = flattenDialogflowCXAgentGenAppBuilderSettings(res["genAppBuilderSettings"], d, config)
+
 	hclData["start_playbook"] = flattenDialogflowCXAgentStartPlaybook(res["startPlaybook"], d, config)
+
 	hclData["enable_multi_language_training"] = flattenDialogflowCXAgentEnableMultiLanguageTraining(res["enableMultiLanguageTraining"], d, config)
+
 	hclData["locked"] = flattenDialogflowCXAgentLocked(res["locked"], d, config)
+
 	hclData["answer_feedback_settings"] = flattenDialogflowCXAgentAnswerFeedbackSettings(res["answerFeedbackSettings"], d, config)
+
 	hclData["personalization_settings"] = flattenDialogflowCXAgentPersonalizationSettings(res["personalizationSettings"], d, config)
+
 	hclData["client_certificate_settings"] = flattenDialogflowCXAgentClientCertificateSettings(res["clientCertificateSettings"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

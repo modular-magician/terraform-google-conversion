@@ -137,27 +137,51 @@ func (c *ComputeInterconnectAttachmentCai2hclConverter) convertResourceData(asse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/interconnectAttachments/{{name}}", outputFields, hclData)
 
 	hclData["admin_enabled"] = flattenComputeInterconnectAttachmentAdminEnabled(res["adminEnabled"], d, config)
+
 	hclData["interconnect"] = flattenComputeInterconnectAttachmentInterconnect(res["interconnect"], d, config)
+
 	hclData["description"] = flattenComputeInterconnectAttachmentDescription(res["description"], d, config)
+
 	hclData["mtu"] = flattenComputeInterconnectAttachmentMtu(res["mtu"], d, config)
+
 	hclData["params"] = flattenComputeInterconnectAttachmentParams(res["params"], d, config)
+
 	hclData["bandwidth"] = flattenComputeInterconnectAttachmentBandwidth(res["bandwidth"], d, config)
+
 	hclData["edge_availability_domain"] = flattenComputeInterconnectAttachmentEdgeAvailabilityDomain(res["edgeAvailabilityDomain"], d, config)
+
 	hclData["type"] = flattenComputeInterconnectAttachmentType(res["type"], d, config)
+
 	hclData["router"] = flattenComputeInterconnectAttachmentRouter(res["router"], d, config)
+
 	hclData["name"] = flattenComputeInterconnectAttachmentName(res["name"], d, config)
+
 	hclData["candidate_subnets"] = flattenComputeInterconnectAttachmentCandidateSubnets(res["candidateSubnets"], d, config)
+
 	hclData["vlan_tag8021q"] = flattenComputeInterconnectAttachmentVlanTag8021q(res["vlanTag8021q"], d, config)
+
 	hclData["ipsec_internal_addresses"] = flattenComputeInterconnectAttachmentIpsecInternalAddresses(res["ipsecInternalAddresses"], d, config)
+
 	hclData["encryption"] = flattenComputeInterconnectAttachmentEncryption(res["encryption"], d, config)
+
 	hclData["stack_type"] = flattenComputeInterconnectAttachmentStackType(res["stackType"], d, config)
+
 	hclData["subnet_length"] = flattenComputeInterconnectAttachmentSubnetLength(res["subnetLength"], d, config)
-	hclData["labels"] = flattenComputeInterconnectAttachmentLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeInterconnectAttachmentLabels(res["labels"], d, config)
+	}
+
 	hclData["candidate_cloud_router_ip_address"] = flattenComputeInterconnectAttachmentCandidateCloudRouterIpAddress(res["candidateCloudRouterIpAddress"], d, config)
+
 	hclData["candidate_customer_router_ip_address"] = flattenComputeInterconnectAttachmentCandidateCustomerRouterIpAddress(res["candidateCustomerRouterIpAddress"], d, config)
+
 	hclData["candidate_cloud_router_ipv6_address"] = flattenComputeInterconnectAttachmentCandidateCloudRouterIpv6Address(res["candidateCloudRouterIpv6Address"], d, config)
+
 	hclData["candidate_customer_router_ipv6_address"] = flattenComputeInterconnectAttachmentCandidateCustomerRouterIpv6Address(res["candidateCustomerRouterIpv6Address"], d, config)
+
 	hclData["l2_forwarding"] = flattenComputeInterconnectAttachmentL2Forwarding(res["l2Forwarding"], d, config)
+
 	hclData["region"] = flattenComputeInterconnectAttachmentRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,15 +137,25 @@ func (c *ComputeRegionNetworkEndpointGroupCai2hclConverter) convertResourceData(
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/networkEndpointGroups/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeRegionNetworkEndpointGroupName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeRegionNetworkEndpointGroupDescription(res["description"], d, config)
+
 	hclData["network_endpoint_type"] = flattenComputeRegionNetworkEndpointGroupNetworkEndpointType(res["networkEndpointType"], d, config)
+
 	hclData["psc_target_service"] = flattenComputeRegionNetworkEndpointGroupPscTargetService(res["pscTargetService"], d, config)
+
 	hclData["network"] = flattenComputeRegionNetworkEndpointGroupNetwork(res["network"], d, config)
+
 	hclData["subnetwork"] = flattenComputeRegionNetworkEndpointGroupSubnetwork(res["subnetwork"], d, config)
+
 	hclData["psc_data"] = flattenComputeRegionNetworkEndpointGroupPscData(res["pscData"], d, config)
+
 	hclData["cloud_run"] = flattenComputeRegionNetworkEndpointGroupCloudRun(res["cloudRun"], d, config)
+
 	hclData["app_engine"] = flattenComputeRegionNetworkEndpointGroupAppEngine(res["appEngine"], d, config)
+
 	hclData["cloud_function"] = flattenComputeRegionNetworkEndpointGroupCloudFunction(res["cloudFunction"], d, config)
+
 	hclData["region"] = flattenComputeRegionNetworkEndpointGroupRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -152,13 +152,21 @@ func (c *IAMBetaWorkloadIdentityPoolProviderCai2hclConverter) convertResourceDat
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//iam.googleapis.com/projects/{{project}}/locations/global/workloadIdentityPools/{{workload_identity_pool_id}}/providers/{{workload_identity_pool_provider_id}}", outputFields, hclData)
 
 	hclData["display_name"] = flattenIAMBetaWorkloadIdentityPoolProviderDisplayName(res["displayName"], d, config)
+
 	hclData["description"] = flattenIAMBetaWorkloadIdentityPoolProviderDescription(res["description"], d, config)
+
 	hclData["disabled"] = flattenIAMBetaWorkloadIdentityPoolProviderDisabled(res["disabled"], d, config)
+
 	hclData["attribute_mapping"] = flattenIAMBetaWorkloadIdentityPoolProviderAttributeMapping(res["attributeMapping"], d, config)
+
 	hclData["attribute_condition"] = flattenIAMBetaWorkloadIdentityPoolProviderAttributeCondition(res["attributeCondition"], d, config)
+
 	hclData["aws"] = flattenIAMBetaWorkloadIdentityPoolProviderAws(res["aws"], d, config)
+
 	hclData["oidc"] = flattenIAMBetaWorkloadIdentityPoolProviderOidc(res["oidc"], d, config)
+
 	hclData["saml"] = flattenIAMBetaWorkloadIdentityPoolProviderSaml(res["saml"], d, config)
+
 	hclData["x509"] = flattenIAMBetaWorkloadIdentityPoolProviderX509(res["x509"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

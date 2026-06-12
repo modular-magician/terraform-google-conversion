@@ -137,9 +137,13 @@ func (c *ComputeRegionSslCertificateCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/sslCertificates/{{name}}", outputFields, hclData)
 
 	hclData["certificate"] = flattenComputeRegionSslCertificateCertificate(res["certificate"], d, config)
+
 	hclData["description"] = flattenComputeRegionSslCertificateDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeRegionSslCertificateName(res["name"], d, config)
+
 	hclData["private_key"] = flattenComputeRegionSslCertificatePrivateKey(res["privateKey"], d, config)
+
 	hclData["region"] = flattenComputeRegionSslCertificateRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

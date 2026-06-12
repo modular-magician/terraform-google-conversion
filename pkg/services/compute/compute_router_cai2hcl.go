@@ -137,12 +137,19 @@ func (c *ComputeRouterCai2hclConverter) convertResourceData(asset caiasset.Asset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/routers/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeRouterName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeRouterDescription(res["description"], d, config)
+
 	hclData["network"] = flattenComputeRouterNetwork(res["network"], d, config)
+
 	hclData["bgp"] = flattenComputeRouterBgp(res["bgp"], d, config)
+
 	hclData["encrypted_interconnect_router"] = flattenComputeRouterEncryptedInterconnectRouter(res["encryptedInterconnectRouter"], d, config)
+
 	hclData["md5_authentication_keys"] = flattenComputeRouterMd5AuthenticationKeys(res["md5AuthenticationKeys"], d, config)
+
 	hclData["params"] = flattenComputeRouterParams(res["params"], d, config)
+
 	hclData["region"] = flattenComputeRouterRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -136,25 +136,46 @@ func (c *AlloydbClusterCai2hclConverter) convertResourceData(asset caiasset.Asse
 	outputFields := map[string]struct{}{"backup_source": struct{}{}, "backupdr_backup_source": struct{}{}, "continuous_backup_info": struct{}{}, "effective_annotations": struct{}{}, "effective_labels": struct{}{}, "encryption_info": struct{}{}, "migration_source": struct{}{}, "name": struct{}{}, "reconciling": struct{}{}, "state": struct{}{}, "terraform_labels": struct{}{}, "trial_metadata": struct{}{}, "uid": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//alloydb.googleapis.com/projects/{{project}}/locations/{{location}}/clusters/{{cluster_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenAlloydbClusterLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenAlloydbClusterLabels(res["labels"], d, config)
+	}
+
 	hclData["encryption_config"] = flattenAlloydbClusterEncryptionConfig(res["encryptionConfig"], d, config)
+
 	hclData["network_config"] = flattenAlloydbClusterNetworkConfig(res["networkConfig"], d, config)
+
 	hclData["display_name"] = flattenAlloydbClusterDisplayName(res["displayName"], d, config)
+
 	hclData["etag"] = flattenAlloydbClusterEtag(res["etag"], d, config)
+
 	hclData["annotations"] = flattenAlloydbClusterAnnotations(res["annotations"], d, config)
+
 	hclData["database_version"] = flattenAlloydbClusterDatabaseVersion(res["databaseVersion"], d, config)
+
 	hclData["psc_config"] = flattenAlloydbClusterPscConfig(res["pscConfig"], d, config)
+
 	hclData["initial_user"] = flattenAlloydbClusterInitialUser(res["initialUser"], d, config)
+
 	hclData["restore_backup_source"] = flattenAlloydbClusterRestoreBackupSource(res["restoreBackupSource"], d, config)
+
 	hclData["restore_continuous_backup_source"] = flattenAlloydbClusterRestoreContinuousBackupSource(res["restoreContinuousBackupSource"], d, config)
+
 	hclData["restore_backupdr_backup_source"] = flattenAlloydbClusterRestoreBackupdrBackupSource(res["restoreBackupdrBackupSource"], d, config)
+
 	hclData["restore_backupdr_pitr_source"] = flattenAlloydbClusterRestoreBackupdrPitrSource(res["restoreBackupdrPitrSource"], d, config)
+
 	hclData["continuous_backup_config"] = flattenAlloydbClusterContinuousBackupConfig(res["continuousBackupConfig"], d, config)
+
 	hclData["automated_backup_policy"] = flattenAlloydbClusterAutomatedBackupPolicy(res["automatedBackupPolicy"], d, config)
+
 	hclData["cluster_type"] = flattenAlloydbClusterClusterType(res["clusterType"], d, config)
+
 	hclData["secondary_config"] = flattenAlloydbClusterSecondaryConfig(res["secondaryConfig"], d, config)
+
 	hclData["maintenance_update_policy"] = flattenAlloydbClusterMaintenanceUpdatePolicy(res["maintenanceUpdatePolicy"], d, config)
+
 	hclData["subscription_type"] = flattenAlloydbClusterSubscriptionType(res["subscriptionType"], d, config)
+
 	hclData["dataplex_config"] = flattenAlloydbClusterDataplexConfig(res["dataplexConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

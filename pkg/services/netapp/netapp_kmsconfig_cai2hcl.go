@@ -137,7 +137,11 @@ func (c *NetappkmsconfigCai2hclConverter) convertResourceData(asset caiasset.Ass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/kmsConfigs/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenNetappkmsconfigDescription(res["description"], d, config)
-	hclData["labels"] = flattenNetappkmsconfigLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetappkmsconfigLabels(res["labels"], d, config)
+	}
+
 	hclData["crypto_key_name"] = flattenNetappkmsconfigCryptoKeyName(res["cryptoKeyName"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

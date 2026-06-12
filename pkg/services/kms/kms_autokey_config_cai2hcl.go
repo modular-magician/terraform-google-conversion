@@ -137,6 +137,7 @@ func (c *KMSAutokeyConfigCai2hclConverter) convertResourceData(asset caiasset.As
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudkms.googleapis.com/folders/{{folder}}/autokeyConfig", outputFields, hclData)
 
 	hclData["key_project"] = flattenKMSAutokeyConfigKeyProject(res["keyProject"], d, config)
+
 	hclData["key_project_resolution_mode"] = flattenKMSAutokeyConfigKeyProjectResolutionMode(res["keyProjectResolutionMode"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

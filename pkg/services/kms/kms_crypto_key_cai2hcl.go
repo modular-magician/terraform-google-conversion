@@ -146,12 +146,20 @@ func (c *KMSCryptoKeyCai2hclConverter) convertResourceData(asset caiasset.Asset,
 	outputFields := map[string]struct{}{"effective_labels": struct{}{}, "primary": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudkms.googleapis.com/{{key_ring}}/cryptoKeys/{{name}}", outputFields, hclData)
 
-	hclData["labels"] = flattenKMSCryptoKeyLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenKMSCryptoKeyLabels(res["labels"], d, config)
+	}
+
 	hclData["purpose"] = flattenKMSCryptoKeyPurpose(res["purpose"], d, config)
+
 	hclData["rotation_period"] = flattenKMSCryptoKeyRotationPeriod(res["rotationPeriod"], d, config)
+
 	hclData["version_template"] = flattenKMSCryptoKeyVersionTemplate(res["versionTemplate"], d, config)
+
 	hclData["destroy_scheduled_duration"] = flattenKMSCryptoKeyDestroyScheduledDuration(res["destroyScheduledDuration"], d, config)
+
 	hclData["import_only"] = flattenKMSCryptoKeyImportOnly(res["importOnly"], d, config)
+
 	hclData["crypto_key_backend"] = flattenKMSCryptoKeyCryptoKeyBackend(res["cryptoKeyBackend"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

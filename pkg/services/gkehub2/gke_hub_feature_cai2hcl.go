@@ -141,8 +141,12 @@ func (c *GKEHub2FeatureCai2hclConverter) convertResourceData(asset caiasset.Asse
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "delete_time": struct{}{}, "effective_labels": struct{}{}, "resource_state": struct{}{}, "state": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//gkehub.googleapis.com/projects/{{project}}/locations/{{location}}/features/{{name}}", outputFields, hclData)
 
-	hclData["labels"] = flattenGKEHub2FeatureLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenGKEHub2FeatureLabels(res["labels"], d, config)
+	}
+
 	hclData["spec"] = flattenGKEHub2FeatureSpec(res["spec"], d, config)
+
 	hclData["fleet_default_member_config"] = flattenGKEHub2FeatureFleetDefaultMemberConfig(res["fleetDefaultMemberConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

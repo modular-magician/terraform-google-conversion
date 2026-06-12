@@ -147,13 +147,21 @@ func (c *ComputeRegionTargetHttpsProxyCai2hclConverter) convertResourceData(asse
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/targetHttpsProxies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenComputeRegionTargetHttpsProxyDescription(res["description"], d, config)
+
 	hclData["name"] = flattenComputeRegionTargetHttpsProxyName(res["name"], d, config)
+
 	hclData["certificate_manager_certificates"] = flattenComputeRegionTargetHttpsProxyCertificateManagerCertificates(res["certificateManagerCertificates"], d, config)
+
 	hclData["ssl_certificates"] = flattenComputeRegionTargetHttpsProxySslCertificates(res["sslCertificates"], d, config)
+
 	hclData["ssl_policy"] = flattenComputeRegionTargetHttpsProxySslPolicy(res["sslPolicy"], d, config)
+
 	hclData["url_map"] = flattenComputeRegionTargetHttpsProxyUrlMap(res["urlMap"], d, config)
+
 	hclData["http_keep_alive_timeout_sec"] = flattenComputeRegionTargetHttpsProxyHttpKeepAliveTimeoutSec(res["httpKeepAliveTimeoutSec"], d, config)
+
 	hclData["server_tls_policy"] = flattenComputeRegionTargetHttpsProxyServerTlsPolicy(res["serverTlsPolicy"], d, config)
+
 	hclData["region"] = flattenComputeRegionTargetHttpsProxyRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

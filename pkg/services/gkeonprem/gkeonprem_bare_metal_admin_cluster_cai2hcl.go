@@ -137,17 +137,29 @@ func (c *GkeonpremBareMetalAdminClusterCai2hclConverter) convertResourceData(ass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//gkeonprem.googleapis.com/projects/{{project}}/locations/{{location}}/bareMetalAdminClusters/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenGkeonpremBareMetalAdminClusterDescription(res["description"], d, config)
+
 	hclData["bare_metal_version"] = flattenGkeonpremBareMetalAdminClusterBareMetalVersion(res["bareMetalVersion"], d, config)
+
 	hclData["annotations"] = flattenGkeonpremBareMetalAdminClusterAnnotations(res["annotations"], d, config)
+
 	hclData["network_config"] = flattenGkeonpremBareMetalAdminClusterNetworkConfig(res["networkConfig"], d, config)
+
 	hclData["control_plane"] = flattenGkeonpremBareMetalAdminClusterControlPlane(res["controlPlane"], d, config)
+
 	hclData["load_balancer"] = flattenGkeonpremBareMetalAdminClusterLoadBalancer(res["loadBalancer"], d, config)
+
 	hclData["storage"] = flattenGkeonpremBareMetalAdminClusterStorage(res["storage"], d, config)
+
 	hclData["proxy"] = flattenGkeonpremBareMetalAdminClusterProxy(res["proxy"], d, config)
+
 	hclData["cluster_operations"] = flattenGkeonpremBareMetalAdminClusterClusterOperations(res["clusterOperations"], d, config)
+
 	hclData["maintenance_config"] = flattenGkeonpremBareMetalAdminClusterMaintenanceConfig(res["maintenanceConfig"], d, config)
+
 	hclData["node_config"] = flattenGkeonpremBareMetalAdminClusterNodeConfig(res["nodeConfig"], d, config)
+
 	hclData["node_access_config"] = flattenGkeonpremBareMetalAdminClusterNodeAccessConfig(res["nodeAccessConfig"], d, config)
+
 	hclData["security_config"] = flattenGkeonpremBareMetalAdminClusterSecurityConfig(res["securityConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

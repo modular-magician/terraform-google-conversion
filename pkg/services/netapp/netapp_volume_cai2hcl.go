@@ -137,28 +137,53 @@ func (c *NetappVolumeCai2hclConverter) convertResourceData(asset caiasset.Asset,
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/volumes/{{name}}", outputFields, hclData)
 
 	hclData["share_name"] = flattenNetappVolumeShareName(res["shareName"], d, config)
+
 	hclData["storage_pool"] = flattenNetappVolumeStoragePool(res["storagePool"], d, config)
+
 	hclData["capacity_gib"] = flattenNetappVolumeCapacityGib(res["capacityGib"], d, config)
+
 	hclData["export_policy"] = flattenNetappVolumeExportPolicy(res["exportPolicy"], d, config)
+
 	hclData["protocols"] = flattenNetappVolumeProtocols(res["protocols"], d, config)
+
 	hclData["smb_settings"] = flattenNetappVolumeSmbSettings(res["smbSettings"], d, config)
+
 	hclData["unix_permissions"] = flattenNetappVolumeUnixPermissions(res["unixPermissions"], d, config)
-	hclData["labels"] = flattenNetappVolumeLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetappVolumeLabels(res["labels"], d, config)
+	}
+
 	hclData["description"] = flattenNetappVolumeDescription(res["description"], d, config)
+
 	hclData["snapshot_directory"] = flattenNetappVolumeSnapshotDirectory(res["snapshotDirectory"], d, config)
+
 	hclData["security_style"] = flattenNetappVolumeSecurityStyle(res["securityStyle"], d, config)
+
 	hclData["kerberos_enabled"] = flattenNetappVolumeKerberosEnabled(res["kerberosEnabled"], d, config)
+
 	hclData["restore_parameters"] = flattenNetappVolumeRestoreParameters(res["restoreParameters"], d, config)
+
 	hclData["restricted_actions"] = flattenNetappVolumeRestrictedActions(res["restrictedActions"], d, config)
+
 	hclData["snapshot_policy"] = flattenNetappVolumeSnapshotPolicy(res["snapshotPolicy"], d, config)
+
 	hclData["backup_config"] = flattenNetappVolumeBackupConfig(res["backupConfig"], d, config)
+
 	hclData["large_capacity"] = flattenNetappVolumeLargeCapacity(res["largeCapacity"], d, config)
+
 	hclData["multiple_endpoints"] = flattenNetappVolumeMultipleEndpoints(res["multipleEndpoints"], d, config)
+
 	hclData["tiering_policy"] = flattenNetappVolumeTieringPolicy(res["tieringPolicy"], d, config)
+
 	hclData["hybrid_replication_parameters"] = flattenNetappVolumeHybridReplicationParameters(res["hybridReplicationParameters"], d, config)
+
 	hclData["throughput_mibps"] = flattenNetappVolumeThroughputMibps(res["throughputMibps"], d, config)
+
 	hclData["cache_parameters"] = flattenNetappVolumeCacheParameters(res["cacheParameters"], d, config)
+
 	hclData["block_devices"] = flattenNetappVolumeBlockDevices(res["blockDevices"], d, config)
+
 	hclData["large_capacity_config"] = flattenNetappVolumeLargeCapacityConfig(res["largeCapacityConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

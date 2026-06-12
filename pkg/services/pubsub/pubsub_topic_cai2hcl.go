@@ -137,13 +137,23 @@ func (c *PubsubTopicCai2hclConverter) convertResourceData(asset caiasset.Asset, 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//pubsub.googleapis.com/projects/{{project}}/topics/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenPubsubTopicName(res["name"], d, config)
+
 	hclData["kms_key_name"] = flattenPubsubTopicKmsKeyName(res["kmsKeyName"], d, config)
-	hclData["labels"] = flattenPubsubTopicLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenPubsubTopicLabels(res["labels"], d, config)
+	}
+
 	hclData["message_storage_policy"] = flattenPubsubTopicMessageStoragePolicy(res["messageStoragePolicy"], d, config)
+
 	hclData["schema_settings"] = flattenPubsubTopicSchemaSettings(res["schemaSettings"], d, config)
+
 	hclData["message_retention_duration"] = flattenPubsubTopicMessageRetentionDuration(res["messageRetentionDuration"], d, config)
+
 	hclData["ingestion_data_source_settings"] = flattenPubsubTopicIngestionDataSourceSettings(res["ingestionDataSourceSettings"], d, config)
+
 	hclData["message_transforms"] = flattenPubsubTopicMessageTransforms(res["messageTransforms"], d, config)
+
 	hclData["tags"] = flattenPubsubTopicTags(res["tags"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

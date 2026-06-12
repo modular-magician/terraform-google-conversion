@@ -152,39 +152,68 @@ func (c *ComputeRegionBackendServiceCai2hclConverter) convertResourceData(asset 
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/backendServices/{{name}}", outputFields, hclData)
 
 	hclData["affinity_cookie_ttl_sec"] = flattenComputeRegionBackendServiceAffinityCookieTtlSec(res["affinityCookieTtlSec"], d, config)
+
 	hclData["backend"] = flattenComputeRegionBackendServiceBackend(res["backends"], d, config)
+
 	hclData["circuit_breakers"] = flattenComputeRegionBackendServiceCircuitBreakers(res["circuitBreakers"], d, config)
+
 	hclData["consistent_hash"] = flattenComputeRegionBackendServiceConsistentHash(res["consistentHash"], d, config)
+
 	hclData["cdn_policy"] = flattenComputeRegionBackendServiceCdnPolicy(res["cdnPolicy"], d, config)
 	if flattenedProp := flattenComputeRegionBackendServiceConnectionDraining(res["connectionDraining"], d, config); flattenedProp != nil {
 		if err := tgcresource.MergeFlattenedProperties(hclData, flattenedProp); err != nil {
 			return nil, fmt.Errorf("error merging flattened properties from connectionDraining: %s", err)
 		}
 	}
+
 	hclData["description"] = flattenComputeRegionBackendServiceDescription(res["description"], d, config)
+
 	hclData["failover_policy"] = flattenComputeRegionBackendServiceFailoverPolicy(res["failoverPolicy"], d, config)
+
 	hclData["enable_cdn"] = flattenComputeRegionBackendServiceEnableCDN(res["enableCDN"], d, config)
+
 	hclData["health_checks"] = flattenComputeRegionBackendServiceHealthChecks(res["healthChecks"], d, config)
+
 	hclData["iap"] = flattenComputeRegionBackendServiceIap(res["iap"], d, config)
+
 	hclData["ip_address_selection_policy"] = flattenComputeRegionBackendServiceIpAddressSelectionPolicy(res["ipAddressSelectionPolicy"], d, config)
+
 	hclData["load_balancing_scheme"] = flattenComputeRegionBackendServiceLoadBalancingScheme(res["loadBalancingScheme"], d, config)
+
 	hclData["locality_lb_policy"] = flattenComputeRegionBackendServiceLocalityLbPolicy(res["localityLbPolicy"], d, config)
+
 	hclData["name"] = flattenComputeRegionBackendServiceName(res["name"], d, config)
+
 	hclData["custom_metrics"] = flattenComputeRegionBackendServiceCustomMetrics(res["customMetrics"], d, config)
+
 	hclData["network_pass_through_lb_traffic_policy"] = flattenComputeRegionBackendServiceNetworkPassThroughLbTrafficPolicy(res["networkPassThroughLbTrafficPolicy"], d, config)
+
 	hclData["outlier_detection"] = flattenComputeRegionBackendServiceOutlierDetection(res["outlierDetection"], d, config)
+
 	hclData["port_name"] = flattenComputeRegionBackendServicePortName(res["portName"], d, config)
+
 	hclData["protocol"] = flattenComputeRegionBackendServiceProtocol(res["protocol"], d, config)
+
 	hclData["security_policy"] = flattenComputeRegionBackendServiceSecurityPolicy(res["securityPolicy"], d, config)
+
 	hclData["session_affinity"] = flattenComputeRegionBackendServiceSessionAffinity(res["sessionAffinity"], d, config)
+
 	hclData["strong_session_affinity_cookie"] = flattenComputeRegionBackendServiceStrongSessionAffinityCookie(res["strongSessionAffinityCookie"], d, config)
+
 	hclData["connection_tracking_policy"] = flattenComputeRegionBackendServiceConnectionTrackingPolicy(res["connectionTrackingPolicy"], d, config)
+
 	hclData["timeout_sec"] = flattenComputeRegionBackendServiceTimeoutSec(res["timeoutSec"], d, config)
+
 	hclData["log_config"] = flattenComputeRegionBackendServiceLogConfig(res["logConfig"], d, config)
+
 	hclData["network"] = flattenComputeRegionBackendServiceNetwork(res["network"], d, config)
+
 	hclData["ha_policy"] = flattenComputeRegionBackendServiceHaPolicy(res["haPolicy"], d, config)
+
 	hclData["params"] = flattenComputeRegionBackendServiceParams(res["params"], d, config)
+
 	hclData["tls_settings"] = flattenComputeRegionBackendServiceTlsSettings(res["tlsSettings"], d, config)
+
 	hclData["region"] = flattenComputeRegionBackendServiceRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

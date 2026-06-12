@@ -137,10 +137,17 @@ func (c *ComputeRegionInstantSnapshotCai2hclConverter) convertResourceData(asset
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/instantSnapshots/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenComputeRegionInstantSnapshotName(res["name"], d, config)
+
 	hclData["description"] = flattenComputeRegionInstantSnapshotDescription(res["description"], d, config)
-	hclData["labels"] = flattenComputeRegionInstantSnapshotLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeRegionInstantSnapshotLabels(res["labels"], d, config)
+	}
+
 	hclData["params"] = flattenComputeRegionInstantSnapshotParams(res["params"], d, config)
+
 	hclData["source_disk"] = flattenComputeRegionInstantSnapshotSourceDisk(res["sourceDisk"], d, config)
+
 	hclData["region"] = flattenComputeRegionInstantSnapshotRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

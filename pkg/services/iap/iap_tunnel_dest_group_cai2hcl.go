@@ -137,6 +137,7 @@ func (c *IapTunnelDestGroupCai2hclConverter) convertResourceData(asset caiasset.
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//iap.googleapis.com/projects/{{project}}/iap_tunnel/locations/{{region}}/destGroups/{{group_name}}", outputFields, hclData)
 
 	hclData["cidrs"] = flattenIapTunnelDestGroupCidrs(res["cidrs"], d, config)
+
 	hclData["fqdns"] = flattenIapTunnelDestGroupFqdns(res["fqdns"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,10 +137,17 @@ func (c *ClouddeployDeployPolicyCai2hclConverter) convertResourceData(asset caia
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//clouddeploy.googleapis.com/projects/{{project}}/locations/{{location}}/deployPolicies/{{name}}", outputFields, hclData)
 
 	hclData["description"] = flattenClouddeployDeployPolicyDescription(res["description"], d, config)
+
 	hclData["annotations"] = flattenClouddeployDeployPolicyAnnotations(res["annotations"], d, config)
-	hclData["labels"] = flattenClouddeployDeployPolicyLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenClouddeployDeployPolicyLabels(res["labels"], d, config)
+	}
+
 	hclData["suspended"] = flattenClouddeployDeployPolicySuspended(res["suspended"], d, config)
+
 	hclData["selectors"] = flattenClouddeployDeployPolicySelectors(res["selectors"], d, config)
+
 	hclData["rules"] = flattenClouddeployDeployPolicyRules(res["rules"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,9 +137,13 @@ func (c *KMSEkmConnectionCai2hclConverter) convertResourceData(asset caiasset.As
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudkms.googleapis.com/projects/{{project}}/locations/{{location}}/ekmConnections/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenKMSEkmConnectionName(res["name"], d, config)
+
 	hclData["service_resolvers"] = flattenKMSEkmConnectionServiceResolvers(res["serviceResolvers"], d, config)
+
 	hclData["key_management_mode"] = flattenKMSEkmConnectionKeyManagementMode(res["keyManagementMode"], d, config)
+
 	hclData["etag"] = flattenKMSEkmConnectionEtag(res["etag"], d, config)
+
 	hclData["crypto_space_path"] = flattenKMSEkmConnectionCryptoSpacePath(res["cryptoSpacePath"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

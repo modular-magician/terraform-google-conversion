@@ -137,23 +137,42 @@ func (c *NetappActiveDirectoryCai2hclConverter) convertResourceData(asset caiass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//netapp.googleapis.com/projects/{{project}}/locations/{{location}}/activeDirectories/{{name}}", outputFields, hclData)
 
 	hclData["domain"] = flattenNetappActiveDirectoryDomain(res["domain"], d, config)
+
 	hclData["site"] = flattenNetappActiveDirectorySite(res["site"], d, config)
+
 	hclData["dns"] = flattenNetappActiveDirectoryDns(res["dns"], d, config)
+
 	hclData["net_bios_prefix"] = flattenNetappActiveDirectoryNetBiosPrefix(res["netBiosPrefix"], d, config)
+
 	hclData["organizational_unit"] = flattenNetappActiveDirectoryOrganizationalUnit(res["organizationalUnit"], d, config)
+
 	hclData["aes_encryption"] = flattenNetappActiveDirectoryAesEncryption(res["aesEncryption"], d, config)
+
 	hclData["username"] = flattenNetappActiveDirectoryUsername(res["username"], d, config)
+
 	hclData["password"] = flattenNetappActiveDirectoryPassword(res["password"], d, config)
+
 	hclData["backup_operators"] = flattenNetappActiveDirectoryBackupOperators(res["backupOperators"], d, config)
+
 	hclData["administrators"] = flattenNetappActiveDirectoryAdministrators(res["administrators"], d, config)
+
 	hclData["security_operators"] = flattenNetappActiveDirectorySecurityOperators(res["securityOperators"], d, config)
+
 	hclData["kdc_hostname"] = flattenNetappActiveDirectoryKdcHostname(res["kdcHostname"], d, config)
+
 	hclData["kdc_ip"] = flattenNetappActiveDirectoryKdcIp(res["kdcIp"], d, config)
+
 	hclData["nfs_users_with_ldap"] = flattenNetappActiveDirectoryNfsUsersWithLdap(res["nfsUsersWithLdap"], d, config)
+
 	hclData["description"] = flattenNetappActiveDirectoryDescription(res["description"], d, config)
+
 	hclData["ldap_signing"] = flattenNetappActiveDirectoryLdapSigning(res["ldapSigning"], d, config)
+
 	hclData["encrypt_dc_connections"] = flattenNetappActiveDirectoryEncryptDcConnections(res["encryptDcConnections"], d, config)
-	hclData["labels"] = flattenNetappActiveDirectoryLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetappActiveDirectoryLabels(res["labels"], d, config)
+	}
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {

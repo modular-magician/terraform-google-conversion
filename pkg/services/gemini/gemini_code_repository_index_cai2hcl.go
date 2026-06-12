@@ -136,7 +136,10 @@ func (c *GeminiCodeRepositoryIndexCai2hclConverter) convertResourceData(asset ca
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_labels": struct{}{}, "name": struct{}{}, "state": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//cloudaicompanion.googleapis.com/projects/{{project}}/locations/{{location}}/codeRepositoryIndexes/{{code_repository_index_id}}", outputFields, hclData)
 
-	hclData["labels"] = flattenGeminiCodeRepositoryIndexLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenGeminiCodeRepositoryIndexLabels(res["labels"], d, config)
+	}
+
 	hclData["kms_key"] = flattenGeminiCodeRepositoryIndexKmsKey(res["kmsKey"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

@@ -137,9 +137,13 @@ func (c *CloudIdsEndpointCai2hclConverter) convertResourceData(asset caiasset.As
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//ids.googleapis.com/projects/{{project}}/locations/{{location}}/endpoints/{{name}}", outputFields, hclData)
 
 	hclData["name"] = flattenCloudIdsEndpointName(res["name"], d, config)
+
 	hclData["network"] = flattenCloudIdsEndpointNetwork(res["network"], d, config)
+
 	hclData["description"] = flattenCloudIdsEndpointDescription(res["description"], d, config)
+
 	hclData["severity"] = flattenCloudIdsEndpointSeverity(res["severity"], d, config)
+
 	hclData["threat_exceptions"] = flattenCloudIdsEndpointThreatExceptions(res["threatExceptions"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

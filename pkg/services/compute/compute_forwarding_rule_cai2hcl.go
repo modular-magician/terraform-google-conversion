@@ -137,28 +137,53 @@ func (c *ComputeForwardingRuleCai2hclConverter) convertResourceData(asset caiass
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//compute.googleapis.com/projects/{{project}}/regions/{{region}}/forwardingRules/{{name}}", outputFields, hclData)
 
 	hclData["is_mirroring_collector"] = flattenComputeForwardingRuleIsMirroringCollector(res["isMirroringCollector"], d, config)
+
 	hclData["description"] = flattenComputeForwardingRuleDescription(res["description"], d, config)
+
 	hclData["ip_address"] = flattenComputeForwardingRuleIPAddress(res["IPAddress"], d, config)
+
 	hclData["ip_protocol"] = flattenComputeForwardingRuleIPProtocol(res["IPProtocol"], d, config)
+
 	hclData["backend_service"] = flattenComputeForwardingRuleBackendService(res["backendService"], d, config)
+
 	hclData["load_balancing_scheme"] = flattenComputeForwardingRuleLoadBalancingScheme(res["loadBalancingScheme"], d, config)
+
 	hclData["name"] = flattenComputeForwardingRuleName(res["name"], d, config)
+
 	hclData["network"] = flattenComputeForwardingRuleNetwork(res["network"], d, config)
+
 	hclData["port_range"] = flattenComputeForwardingRulePortRange(res["portRange"], d, config)
+
 	hclData["ports"] = flattenComputeForwardingRulePorts(res["ports"], d, config)
+
 	hclData["subnetwork"] = flattenComputeForwardingRuleSubnetwork(res["subnetwork"], d, config)
+
 	hclData["target"] = flattenComputeForwardingRuleTarget(res["target"], d, config)
+
 	hclData["allow_global_access"] = flattenComputeForwardingRuleAllowGlobalAccess(res["allowGlobalAccess"], d, config)
-	hclData["labels"] = flattenComputeForwardingRuleLabels(res["labels"], d, config)
+
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenComputeForwardingRuleLabels(res["labels"], d, config)
+	}
+
 	hclData["all_ports"] = flattenComputeForwardingRuleAllPorts(res["allPorts"], d, config)
+
 	hclData["network_tier"] = flattenComputeForwardingRuleNetworkTier(res["networkTier"], d, config)
+
 	hclData["service_directory_registrations"] = flattenComputeForwardingRuleServiceDirectoryRegistrations(res["serviceDirectoryRegistrations"], d, config)
+
 	hclData["service_label"] = flattenComputeForwardingRuleServiceLabel(res["serviceLabel"], d, config)
+
 	hclData["source_ip_ranges"] = flattenComputeForwardingRuleSourceIpRanges(res["sourceIpRanges"], d, config)
+
 	hclData["allow_psc_global_access"] = flattenComputeForwardingRuleAllowPscGlobalAccess(res["allowPscGlobalAccess"], d, config)
+
 	hclData["no_automate_dns_zone"] = flattenComputeForwardingRuleNoAutomateDnsZone(res["noAutomateDnsZone"], d, config)
+
 	hclData["ip_version"] = flattenComputeForwardingRuleIpVersion(res["ipVersion"], d, config)
+
 	hclData["ip_collection"] = flattenComputeForwardingRuleIpCollection(res["ipCollection"], d, config)
+
 	hclData["region"] = flattenComputeForwardingRuleRegion(res["region"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)

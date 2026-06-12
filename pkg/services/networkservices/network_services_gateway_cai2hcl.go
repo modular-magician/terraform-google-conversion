@@ -136,20 +136,36 @@ func (c *NetworkServicesGatewayCai2hclConverter) convertResourceData(asset caias
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_labels": struct{}{}, "self_link": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networkservices.googleapis.com/projects/{{project}}/locations/{{location}}/gateways/{{name}}", outputFields, hclData)
 
-	hclData["labels"] = flattenNetworkServicesGatewayLabels(res["labels"], d, config)
+	if options != nil && options.AreNewResources {
+		hclData["labels"] = flattenNetworkServicesGatewayLabels(res["labels"], d, config)
+	}
+
 	hclData["description"] = flattenNetworkServicesGatewayDescription(res["description"], d, config)
+
 	hclData["type"] = flattenNetworkServicesGatewayType(res["type"], d, config)
+
 	hclData["addresses"] = flattenNetworkServicesGatewayAddresses(res["addresses"], d, config)
+
 	hclData["all_ports"] = flattenNetworkServicesGatewayAllPorts(res["allPorts"], d, config)
+
 	hclData["ports"] = flattenNetworkServicesGatewayPorts(res["ports"], d, config)
+
 	hclData["scope"] = flattenNetworkServicesGatewayScope(res["scope"], d, config)
+
 	hclData["server_tls_policy"] = flattenNetworkServicesGatewayServerTlsPolicy(res["serverTlsPolicy"], d, config)
+
 	hclData["certificate_urls"] = flattenNetworkServicesGatewayCertificateUrls(res["certificateUrls"], d, config)
+
 	hclData["gateway_security_policy"] = flattenNetworkServicesGatewayGatewaySecurityPolicy(res["gatewaySecurityPolicy"], d, config)
+
 	hclData["network"] = flattenNetworkServicesGatewayNetwork(res["network"], d, config)
+
 	hclData["subnetwork"] = flattenNetworkServicesGatewaySubnetwork(res["subnetwork"], d, config)
+
 	hclData["ip_version"] = flattenNetworkServicesGatewayIpVersion(res["ipVersion"], d, config)
+
 	hclData["envoy_headers"] = flattenNetworkServicesGatewayEnvoyHeaders(res["envoyHeaders"], d, config)
+
 	hclData["routing_mode"] = flattenNetworkServicesGatewayRoutingMode(res["routingMode"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
