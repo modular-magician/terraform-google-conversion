@@ -179,6 +179,9 @@ func TestAccComputeBackendService(t *testing.T) {
 			Name: "TestAccComputeBackendService_resourceManagerTags",
 		},
 		{
+			Name: "TestAccComputeBackendService_withWriteOnlyValues",
+		},
+		{
 			Name: "TestAccComputeBackendService_updateCanaryMigration",
 		},
 		{
@@ -206,6 +209,7 @@ func TestAccComputeBackendService(t *testing.T) {
 					"depends_on",
 					"dynamic",
 					"for_each",
+					"iap.oauth2_client_id",
 					"iap.oauth2_client_secret",
 					"lifecycle",
 					"params",
