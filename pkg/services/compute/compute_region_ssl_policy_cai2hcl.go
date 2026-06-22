@@ -176,10 +176,16 @@ func flattenComputeRegionSslPolicyName(v interface{}, d *schema.ResourceData, co
 }
 
 func flattenComputeRegionSslPolicyProfile(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "COMPATIBLE" {
+		return nil
+	}
 	return v
 }
 
 func flattenComputeRegionSslPolicyMinTlsVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "TLS_1_0" {
+		return nil
+	}
 	return v
 }
 

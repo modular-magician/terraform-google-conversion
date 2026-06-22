@@ -346,6 +346,9 @@ func flattenComputeImageRawDisk(v interface{}, d *schema.ResourceData, config *t
 }
 
 func flattenComputeImageRawDiskContainerType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "TAR" {
+		return nil
+	}
 	return v
 }
 

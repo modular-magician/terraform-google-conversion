@@ -186,10 +186,16 @@ func flattenNetworkSecurityTlsInspectionPolicyTrustConfig(v interface{}, d *sche
 }
 
 func flattenNetworkSecurityTlsInspectionPolicyMinTlsVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "TLS_VERSION_UNSPECIFIED" {
+		return nil
+	}
 	return v
 }
 
 func flattenNetworkSecurityTlsInspectionPolicyTlsFeatureProfile(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "PROFILE_UNSPECIFIED" {
+		return nil
+	}
 	return v
 }
 

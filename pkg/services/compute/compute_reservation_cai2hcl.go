@@ -194,6 +194,9 @@ func flattenComputeReservationName(v interface{}, d *schema.ResourceData, config
 }
 
 func flattenComputeReservationSpecificReservationRequired(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -388,6 +391,9 @@ func flattenComputeReservationSpecificReservationInstancePropertiesLocalSsds(v i
 }
 
 func flattenComputeReservationSpecificReservationInstancePropertiesLocalSsdsInterface(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "SCSI" {
+		return nil
+	}
 	return v
 }
 

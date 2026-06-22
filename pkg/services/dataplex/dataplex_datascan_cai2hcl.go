@@ -607,6 +607,9 @@ func flattenDataplexDatascanDataQualitySpecRulesName(v interface{}, d *schema.Re
 }
 
 func flattenDataplexDatascanDataQualitySpecRulesSuspended(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -665,10 +668,16 @@ func flattenDataplexDatascanDataQualitySpecRulesRangeExpectationMaxValue(v inter
 }
 
 func flattenDataplexDatascanDataQualitySpecRulesRangeExpectationStrictMinEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
 func flattenDataplexDatascanDataQualitySpecRulesRangeExpectationStrictMaxEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -778,10 +787,16 @@ func flattenDataplexDatascanDataQualitySpecRulesStatisticRangeExpectationMaxValu
 }
 
 func flattenDataplexDatascanDataQualitySpecRulesStatisticRangeExpectationStrictMinEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
 func flattenDataplexDatascanDataQualitySpecRulesStatisticRangeExpectationStrictMaxEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 

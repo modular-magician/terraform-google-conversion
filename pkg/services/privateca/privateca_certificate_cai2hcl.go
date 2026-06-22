@@ -153,6 +153,9 @@ func (c *PrivatecaCertificateCai2hclConverter) convertResourceData(asset caiasse
 }
 
 func flattenPrivatecaCertificateLifetime(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "315360000s" {
+		return nil
+	}
 	return v
 }
 

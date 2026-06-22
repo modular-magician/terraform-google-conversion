@@ -321,6 +321,9 @@ func flattenPubsubSubscriptionCloudStorageConfigFilenameDatetimeFormat(v interfa
 }
 
 func flattenPubsubSubscriptionCloudStorageConfigMaxDuration(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "300s" {
+		return nil
+	}
 	return v
 }
 
@@ -504,6 +507,9 @@ func flattenPubsubSubscriptionAckDeadlineSeconds(v interface{}, d *schema.Resour
 }
 
 func flattenPubsubSubscriptionMessageRetentionDuration(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "604800s" {
+		return nil
+	}
 	return v
 }
 
@@ -732,6 +738,9 @@ func flattenPubsubSubscriptionMessageTransformsJavascriptUdfCode(v interface{}, 
 }
 
 func flattenPubsubSubscriptionMessageTransformsDisabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 

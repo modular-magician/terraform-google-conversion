@@ -530,6 +530,9 @@ func flattenNetworkManagementConnectivityTestDestinationNetworkType(v interface{
 }
 
 func flattenNetworkManagementConnectivityTestProtocol(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "TCP" {
+		return nil
+	}
 	return v
 }
 

@@ -171,6 +171,9 @@ func (c *ComputeInterconnectAttachmentCai2hclConverter) convertResourceData(asse
 }
 
 func flattenComputeInterconnectAttachmentAdminEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 

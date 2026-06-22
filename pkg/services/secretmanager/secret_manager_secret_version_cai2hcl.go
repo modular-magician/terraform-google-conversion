@@ -201,6 +201,9 @@ func flattenSecretManagerSecretVersionPayloadSecretDataWoVersion(v interface{}, 
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 0 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -208,7 +211,16 @@ func flattenSecretManagerSecretVersionPayloadSecretDataWoVersion(v interface{}, 
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 0 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 0 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 0 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise

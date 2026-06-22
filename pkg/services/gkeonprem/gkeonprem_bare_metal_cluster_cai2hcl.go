@@ -369,6 +369,9 @@ func flattenGkeonpremBareMetalClusterControlPlaneControlPlaneNodePoolConfigNodeP
 }
 
 func flattenGkeonpremBareMetalClusterControlPlaneControlPlaneNodePoolConfigNodePoolConfigOperatingSystem(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "LINUX" {
+		return nil
+	}
 	return v
 }
 
@@ -1052,6 +1055,9 @@ func flattenGkeonpremBareMetalClusterLoadBalancerBgpLbConfigLoadBalancerNodePool
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 5 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -1059,7 +1065,16 @@ func flattenGkeonpremBareMetalClusterLoadBalancerBgpLbConfigLoadBalancerNodePool
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 5 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 5 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 5 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -1069,6 +1084,9 @@ func flattenGkeonpremBareMetalClusterLoadBalancerBgpLbConfigLoadBalancerNodePool
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 10 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -1076,7 +1094,16 @@ func flattenGkeonpremBareMetalClusterLoadBalancerBgpLbConfigLoadBalancerNodePool
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 10 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 10 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 10 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise

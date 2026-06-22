@@ -252,6 +252,9 @@ func flattenMonitoringNotificationChannelDisplayName(v interface{}, d *schema.Re
 }
 
 func flattenMonitoringNotificationChannelEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 

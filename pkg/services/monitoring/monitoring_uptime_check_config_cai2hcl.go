@@ -172,6 +172,9 @@ func flattenMonitoringUptimeCheckConfigDisplayName(v interface{}, d *schema.Reso
 }
 
 func flattenMonitoringUptimeCheckConfigPeriod(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "300s" {
+		return nil
+	}
 	return v
 }
 
@@ -219,6 +222,9 @@ func flattenMonitoringUptimeCheckConfigContentMatchersContent(v interface{}, d *
 }
 
 func flattenMonitoringUptimeCheckConfigContentMatchersMatcher(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "CONTAINS_STRING" {
+		return nil
+	}
 	return v
 }
 
@@ -250,6 +256,9 @@ func flattenMonitoringUptimeCheckConfigContentMatchersJsonPathMatcherJsonPath(v 
 }
 
 func flattenMonitoringUptimeCheckConfigContentMatchersJsonPathMatcherJsonMatcher(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "EXACT_MATCH" {
+		return nil
+	}
 	return v
 }
 
@@ -310,6 +319,9 @@ func flattenMonitoringUptimeCheckConfigHttpCheck(v interface{}, d *schema.Resour
 }
 
 func flattenMonitoringUptimeCheckConfigHttpCheckRequestMethod(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "GET" {
+		return nil
+	}
 	return v
 }
 
@@ -410,6 +422,9 @@ func flattenMonitoringUptimeCheckConfigHttpCheckHeaders(v interface{}, d *schema
 }
 
 func flattenMonitoringUptimeCheckConfigHttpCheckPath(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "/" {
+		return nil
+	}
 	return v
 }
 

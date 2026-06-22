@@ -444,6 +444,9 @@ func flattenComputeBackendServiceCircuitBreakersMaxConnections(v interface{}, d 
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1024 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -451,7 +454,16 @@ func flattenComputeBackendServiceCircuitBreakersMaxConnections(v interface{}, d 
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1024 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1024 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1024 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -461,6 +473,9 @@ func flattenComputeBackendServiceCircuitBreakersMaxPendingRequests(v interface{}
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1024 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -468,7 +483,16 @@ func flattenComputeBackendServiceCircuitBreakersMaxPendingRequests(v interface{}
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1024 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1024 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1024 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -478,6 +502,9 @@ func flattenComputeBackendServiceCircuitBreakersMaxRequests(v interface{}, d *sc
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1024 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -485,7 +512,16 @@ func flattenComputeBackendServiceCircuitBreakersMaxRequests(v interface{}, d *sc
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1024 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1024 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1024 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -495,6 +531,9 @@ func flattenComputeBackendServiceCircuitBreakersMaxRetries(v interface{}, d *sch
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 3 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -502,7 +541,16 @@ func flattenComputeBackendServiceCircuitBreakersMaxRetries(v interface{}, d *sch
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 3 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 3 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 3 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -635,6 +683,9 @@ func flattenComputeBackendServiceConsistentHashMinimumRingSize(v interface{}, d 
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1024 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -642,7 +693,16 @@ func flattenComputeBackendServiceConsistentHashMinimumRingSize(v interface{}, d 
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1024 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1024 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1024 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -945,6 +1005,9 @@ func flattenComputeBackendServiceConnectionDrainingConnectionDrainingTimeoutSec(
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 300 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -952,7 +1015,16 @@ func flattenComputeBackendServiceConnectionDrainingConnectionDrainingTimeoutSec(
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 300 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 300 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 300 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -1031,6 +1103,9 @@ func flattenComputeBackendServiceIpAddressSelectionPolicy(v interface{}, d *sche
 }
 
 func flattenComputeBackendServiceLoadBalancingScheme(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "EXTERNAL" {
+		return nil
+	}
 	return v
 }
 
@@ -1715,6 +1790,9 @@ func flattenComputeBackendServiceLogConfigEnable(v interface{}, d *schema.Resour
 }
 
 func flattenComputeBackendServiceLogConfigSampleRate(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if floatVal, ok := v.(float64); ok && floatVal == 1.0 {
+		return nil
+	}
 	return v
 }
 

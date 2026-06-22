@@ -634,6 +634,9 @@ func flattenCloudfunctions2functionServiceConfigDirectVpcEgress(v interface{}, d
 }
 
 func flattenCloudfunctions2functionServiceConfigIngressSettings(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "ALLOW_ALL" {
+		return nil
+	}
 	return v
 }
 
@@ -642,6 +645,9 @@ func flattenCloudfunctions2functionServiceConfigServiceAccountEmail(v interface{
 }
 
 func flattenCloudfunctions2functionServiceConfigAllTrafficOnLatestRevision(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 

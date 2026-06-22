@@ -173,6 +173,9 @@ func flattenRedisInstanceAlternativeLocationId(v interface{}, d *schema.Resource
 }
 
 func flattenRedisInstanceAuthEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -181,6 +184,9 @@ func flattenRedisInstanceAuthorizedNetwork(v interface{}, d *schema.ResourceData
 }
 
 func flattenRedisInstanceConnectMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "DIRECT_PEERING" {
+		return nil
+	}
 	return v
 }
 
@@ -411,10 +417,16 @@ func flattenRedisInstanceReservedIpRange(v interface{}, d *schema.ResourceData, 
 }
 
 func flattenRedisInstanceTier(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "BASIC" {
+		return nil
+	}
 	return v
 }
 
 func flattenRedisInstanceTransitEncryptionMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "DISABLED" {
+		return nil
+	}
 	return v
 }
 

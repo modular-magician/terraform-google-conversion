@@ -189,5 +189,8 @@ func flattenNetworkSecurityFirewallEndpointAssociationLabels(v interface{}, d *s
 }
 
 func flattenNetworkSecurityFirewallEndpointAssociationDisabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }

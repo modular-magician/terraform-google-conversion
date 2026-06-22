@@ -244,6 +244,9 @@ func flattenNetappVolumeReplicationDestinationVolumeParametersTieringPolicyCooli
 }
 
 func flattenNetappVolumeReplicationDestinationVolumeParametersTieringPolicyTierAction(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "PAUSED" {
+		return nil
+	}
 	return v
 }
 

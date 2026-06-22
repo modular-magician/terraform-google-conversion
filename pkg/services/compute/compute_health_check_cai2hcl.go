@@ -166,6 +166,9 @@ func flattenComputeHealthCheckCheckIntervalSec(v interface{}, d *schema.Resource
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 5 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -173,7 +176,16 @@ func flattenComputeHealthCheckCheckIntervalSec(v interface{}, d *schema.Resource
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 5 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 5 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 5 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -187,6 +199,9 @@ func flattenComputeHealthCheckHealthyThreshold(v interface{}, d *schema.Resource
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 2 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -194,7 +209,16 @@ func flattenComputeHealthCheckHealthyThreshold(v interface{}, d *schema.Resource
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 2 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 2 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 2 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -215,6 +239,9 @@ func flattenComputeHealthCheckTimeoutSec(v interface{}, d *schema.ResourceData, 
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 5 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -222,7 +249,16 @@ func flattenComputeHealthCheckTimeoutSec(v interface{}, d *schema.ResourceData, 
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 5 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 5 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 5 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -236,6 +272,9 @@ func flattenComputeHealthCheckUnhealthyThreshold(v interface{}, d *schema.Resour
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 2 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -243,7 +282,16 @@ func flattenComputeHealthCheckUnhealthyThreshold(v interface{}, d *schema.Resour
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 2 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 2 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 2 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -286,6 +334,9 @@ func flattenComputeHealthCheckHttpHealthCheckHost(v interface{}, d *schema.Resou
 }
 
 func flattenComputeHealthCheckHttpHealthCheckRequestPath(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "/" {
+		return nil
+	}
 	return v
 }
 
@@ -327,6 +378,9 @@ func flattenComputeHealthCheckHttpHealthCheckPortName(v interface{}, d *schema.R
 }
 
 func flattenComputeHealthCheckHttpHealthCheckProxyHeader(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "NONE" {
+		return nil
+	}
 	return v
 }
 
@@ -371,6 +425,9 @@ func flattenComputeHealthCheckHttpsHealthCheckHost(v interface{}, d *schema.Reso
 }
 
 func flattenComputeHealthCheckHttpsHealthCheckRequestPath(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "/" {
+		return nil
+	}
 	return v
 }
 
@@ -412,6 +469,9 @@ func flattenComputeHealthCheckHttpsHealthCheckPortName(v interface{}, d *schema.
 }
 
 func flattenComputeHealthCheckHttpsHealthCheckProxyHeader(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "NONE" {
+		return nil
+	}
 	return v
 }
 
@@ -491,6 +551,9 @@ func flattenComputeHealthCheckTcpHealthCheckPortName(v interface{}, d *schema.Re
 }
 
 func flattenComputeHealthCheckTcpHealthCheckProxyHeader(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "NONE" {
+		return nil
+	}
 	return v
 }
 
@@ -570,6 +633,9 @@ func flattenComputeHealthCheckSslHealthCheckPortName(v interface{}, d *schema.Re
 }
 
 func flattenComputeHealthCheckSslHealthCheckProxyHeader(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "NONE" {
+		return nil
+	}
 	return v
 }
 
@@ -614,6 +680,9 @@ func flattenComputeHealthCheckHttp2HealthCheckHost(v interface{}, d *schema.Reso
 }
 
 func flattenComputeHealthCheckHttp2HealthCheckRequestPath(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "/" {
+		return nil
+	}
 	return v
 }
 
@@ -655,6 +724,9 @@ func flattenComputeHealthCheckHttp2HealthCheckPortName(v interface{}, d *schema.
 }
 
 func flattenComputeHealthCheckHttp2HealthCheckProxyHeader(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "NONE" {
+		return nil
+	}
 	return v
 }
 

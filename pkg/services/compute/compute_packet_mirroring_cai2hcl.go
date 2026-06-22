@@ -278,6 +278,9 @@ func flattenComputePacketMirroringFilterCidrRanges(v interface{}, d *schema.Reso
 }
 
 func flattenComputePacketMirroringFilterDirection(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "BOTH" {
+		return nil
+	}
 	return v
 }
 

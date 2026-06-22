@@ -172,6 +172,9 @@ func flattenMonitoringAlertPolicyCombiner(v interface{}, d *schema.ResourceData,
 }
 
 func flattenMonitoringAlertPolicyEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 
@@ -1203,6 +1206,9 @@ func flattenMonitoringAlertPolicyDocumentationContent(v interface{}, d *schema.R
 }
 
 func flattenMonitoringAlertPolicyDocumentationMimeType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "text/markdown" {
+		return nil
+	}
 	return v
 }
 

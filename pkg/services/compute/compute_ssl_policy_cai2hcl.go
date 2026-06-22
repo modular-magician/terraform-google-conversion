@@ -175,10 +175,16 @@ func flattenComputeSslPolicyName(v interface{}, d *schema.ResourceData, config *
 }
 
 func flattenComputeSslPolicyProfile(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "COMPATIBLE" {
+		return nil
+	}
 	return v
 }
 
 func flattenComputeSslPolicyMinTlsVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "TLS_1_0" {
+		return nil
+	}
 	return v
 }
 

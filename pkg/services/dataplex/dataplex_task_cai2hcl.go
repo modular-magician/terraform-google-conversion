@@ -380,6 +380,9 @@ func flattenDataplexTaskSparkInfrastructureSpecBatchExecutorsCount(v interface{}
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 2 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -387,7 +390,16 @@ func flattenDataplexTaskSparkInfrastructureSpecBatchExecutorsCount(v interface{}
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 2 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 2 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 2 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -397,6 +409,9 @@ func flattenDataplexTaskSparkInfrastructureSpecBatchMaxExecutorsCount(v interfac
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1000 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -404,7 +419,16 @@ func flattenDataplexTaskSparkInfrastructureSpecBatchMaxExecutorsCount(v interfac
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1000 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1000 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1000 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -613,6 +637,9 @@ func flattenDataplexTaskNotebookInfrastructureSpecBatchExecutorsCount(v interfac
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 2 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -620,7 +647,16 @@ func flattenDataplexTaskNotebookInfrastructureSpecBatchExecutorsCount(v interfac
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 2 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 2 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 2 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -630,6 +666,9 @@ func flattenDataplexTaskNotebookInfrastructureSpecBatchMaxExecutorsCount(v inter
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1000 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -637,7 +676,16 @@ func flattenDataplexTaskNotebookInfrastructureSpecBatchMaxExecutorsCount(v inter
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1000 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1000 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1000 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise

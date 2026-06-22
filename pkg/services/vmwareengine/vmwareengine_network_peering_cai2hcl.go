@@ -167,18 +167,30 @@ func flattenVmwareengineNetworkPeeringPeerNetwork(v interface{}, d *schema.Resou
 }
 
 func flattenVmwareengineNetworkPeeringExportCustomRoutes(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 
 func flattenVmwareengineNetworkPeeringImportCustomRoutes(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 
 func flattenVmwareengineNetworkPeeringExportCustomRoutesWithPublicIp(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 
 func flattenVmwareengineNetworkPeeringImportCustomRoutesWithPublicIp(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 

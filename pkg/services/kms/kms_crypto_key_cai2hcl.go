@@ -169,6 +169,9 @@ func flattenKMSCryptoKeyLabels(v interface{}, d *schema.ResourceData, config *tr
 }
 
 func flattenKMSCryptoKeyPurpose(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "ENCRYPT_DECRYPT" {
+		return nil
+	}
 	return v
 }
 
@@ -210,6 +213,9 @@ func flattenKMSCryptoKeyVersionTemplateAlgorithm(v interface{}, d *schema.Resour
 }
 
 func flattenKMSCryptoKeyVersionTemplateProtectionLevel(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "SOFTWARE" {
+		return nil
+	}
 	return v
 }
 

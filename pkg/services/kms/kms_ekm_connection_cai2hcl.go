@@ -238,6 +238,9 @@ func flattenKMSEkmConnectionServiceResolversEndpointFilter(v interface{}, d *sch
 }
 
 func flattenKMSEkmConnectionKeyManagementMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "MANUAL" {
+		return nil
+	}
 	return v
 }
 

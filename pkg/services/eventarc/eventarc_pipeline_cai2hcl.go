@@ -273,6 +273,9 @@ func flattenEventarcPipelineRetryPolicy(v interface{}, d *schema.ResourceData, c
 }
 
 func flattenEventarcPipelineRetryPolicyMaxRetryDelay(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "60s" {
+		return nil
+	}
 	return v
 }
 
@@ -280,6 +283,9 @@ func flattenEventarcPipelineRetryPolicyMaxAttempts(v interface{}, d *schema.Reso
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 5 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -287,13 +293,25 @@ func flattenEventarcPipelineRetryPolicyMaxAttempts(v interface{}, d *schema.Reso
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 5 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 5 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 5 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
 }
 
 func flattenEventarcPipelineRetryPolicyMinRetryDelay(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "5s" {
+		return nil
+	}
 	return v
 }
 

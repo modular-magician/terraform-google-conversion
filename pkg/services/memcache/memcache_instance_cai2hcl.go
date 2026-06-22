@@ -197,6 +197,9 @@ func flattenMemcacheInstanceNodeCount(v interface{}, d *schema.ResourceData, con
 }
 
 func flattenMemcacheInstanceMemcacheVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "MEMCACHE_1_5" {
+		return nil
+	}
 	return v
 }
 

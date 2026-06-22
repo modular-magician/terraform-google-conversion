@@ -392,6 +392,9 @@ func flattenComputeResourcePolicySnapshotSchedulePolicyRetentionPolicyMaxRetenti
 }
 
 func flattenComputeResourcePolicySnapshotSchedulePolicyRetentionPolicyOnSourceDiskDelete(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "KEEP_AUTO_SNAPSHOTS" {
+		return nil
+	}
 	return v
 }
 

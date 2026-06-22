@@ -235,6 +235,9 @@ func flattenArtifactRegistryRepositoryMavenConfigVersionPolicy(v interface{}, d 
 }
 
 func flattenArtifactRegistryRepositoryMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "STANDARD_REPOSITORY" {
+		return nil
+	}
 	return v
 }
 
@@ -357,6 +360,9 @@ func flattenArtifactRegistryRepositoryCleanupPoliciesCondition(v interface{}, d 
 }
 
 func flattenArtifactRegistryRepositoryCleanupPoliciesConditionTagState(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "ANY" {
+		return nil
+	}
 	return v
 }
 

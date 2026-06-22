@@ -354,6 +354,9 @@ func flattenNetappVolumeSecurityStyle(v interface{}, d *schema.ResourceData, con
 }
 
 func flattenNetappVolumeKerberosEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -420,6 +423,9 @@ func flattenNetappVolumeSnapshotPolicy(v interface{}, d *schema.ResourceData, co
 }
 
 func flattenNetappVolumeSnapshotPolicyEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -463,6 +469,9 @@ func flattenNetappVolumeSnapshotPolicyHourlyScheduleMinute(v interface{}, d *sch
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 0 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -470,7 +479,16 @@ func flattenNetappVolumeSnapshotPolicyHourlyScheduleMinute(v interface{}, d *sch
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 0 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 0 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 0 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -518,6 +536,9 @@ func flattenNetappVolumeSnapshotPolicyDailyScheduleMinute(v interface{}, d *sche
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 0 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -525,7 +546,16 @@ func flattenNetappVolumeSnapshotPolicyDailyScheduleMinute(v interface{}, d *sche
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 0 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 0 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 0 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -535,6 +565,9 @@ func flattenNetappVolumeSnapshotPolicyDailyScheduleHour(v interface{}, d *schema
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 0 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -542,7 +575,16 @@ func flattenNetappVolumeSnapshotPolicyDailyScheduleHour(v interface{}, d *schema
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 0 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 0 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 0 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -592,6 +634,9 @@ func flattenNetappVolumeSnapshotPolicyWeeklyScheduleMinute(v interface{}, d *sch
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 0 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -599,7 +644,16 @@ func flattenNetappVolumeSnapshotPolicyWeeklyScheduleMinute(v interface{}, d *sch
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 0 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 0 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 0 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -609,6 +663,9 @@ func flattenNetappVolumeSnapshotPolicyWeeklyScheduleHour(v interface{}, d *schem
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 0 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -616,13 +673,25 @@ func flattenNetappVolumeSnapshotPolicyWeeklyScheduleHour(v interface{}, d *schem
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 0 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 0 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 0 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
 }
 
 func flattenNetappVolumeSnapshotPolicyWeeklyScheduleDay(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "Sunday" {
+		return nil
+	}
 	return v
 }
 
@@ -670,6 +739,9 @@ func flattenNetappVolumeSnapshotPolicyMonthlyScheduleMinute(v interface{}, d *sc
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 0 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -677,7 +749,16 @@ func flattenNetappVolumeSnapshotPolicyMonthlyScheduleMinute(v interface{}, d *sc
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 0 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 0 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 0 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -687,6 +768,9 @@ func flattenNetappVolumeSnapshotPolicyMonthlyScheduleHour(v interface{}, d *sche
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 0 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -694,13 +778,25 @@ func flattenNetappVolumeSnapshotPolicyMonthlyScheduleHour(v interface{}, d *sche
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 0 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 0 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 0 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
 }
 
 func flattenNetappVolumeSnapshotPolicyMonthlyScheduleDaysOfMonth(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "1" {
+		return nil
+	}
 	return v
 }
 
@@ -784,6 +880,9 @@ func flattenNetappVolumeTieringPolicyCoolingThresholdDays(v interface{}, d *sche
 }
 
 func flattenNetappVolumeTieringPolicyTierAction(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "PAUSED" {
+		return nil
+	}
 	return v
 }
 

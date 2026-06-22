@@ -206,14 +206,23 @@ func flattenNetworkConnectivityPolicyBasedRouteFilterProtocolVersion(v interface
 }
 
 func flattenNetworkConnectivityPolicyBasedRouteFilterIpProtocol(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "ALL" {
+		return nil
+	}
 	return v
 }
 
 func flattenNetworkConnectivityPolicyBasedRouteFilterSrcRange(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "0.0.0.0/0" {
+		return nil
+	}
 	return v
 }
 
 func flattenNetworkConnectivityPolicyBasedRouteFilterDestRange(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "0.0.0.0/0" {
+		return nil
+	}
 	return v
 }
 
@@ -235,6 +244,9 @@ func flattenNetworkConnectivityPolicyBasedRoutePriority(v interface{}, d *schema
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1000 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -242,7 +254,16 @@ func flattenNetworkConnectivityPolicyBasedRoutePriority(v interface{}, d *schema
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1000 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1000 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1000 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise

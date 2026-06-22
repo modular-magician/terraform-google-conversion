@@ -816,6 +816,9 @@ func flattenComputeUrlMapPathMatcherPathRuleRouteActionCorsPolicy(v interface{},
 }
 
 func flattenComputeUrlMapPathMatcherPathRuleRouteActionCorsPolicyAllowCredentials(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -1789,6 +1792,9 @@ func flattenComputeUrlMapPathMatcherPathRuleUrlRedirectHostRedirect(v interface{
 }
 
 func flattenComputeUrlMapPathMatcherPathRuleUrlRedirectHttpsRedirect(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -2091,6 +2097,9 @@ func flattenComputeUrlMapPathMatcherRouteRulesMatchRulesHeaderMatchesHeaderName(
 }
 
 func flattenComputeUrlMapPathMatcherRouteRulesMatchRulesHeaderMatchesInvertMatch(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -2185,6 +2194,9 @@ func flattenComputeUrlMapPathMatcherRouteRulesMatchRulesHeaderMatchesSuffixMatch
 }
 
 func flattenComputeUrlMapPathMatcherRouteRulesMatchRulesIgnoreCase(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -2400,6 +2412,9 @@ func flattenComputeUrlMapPathMatcherRouteRulesRouteActionCorsPolicy(v interface{
 }
 
 func flattenComputeUrlMapPathMatcherRouteRulesRouteActionCorsPolicyAllowCredentials(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -2420,6 +2435,9 @@ func flattenComputeUrlMapPathMatcherRouteRulesRouteActionCorsPolicyAllowOrigins(
 }
 
 func flattenComputeUrlMapPathMatcherRouteRulesRouteActionCorsPolicyDisabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -3382,6 +3400,9 @@ func flattenComputeUrlMapPathMatcherRouteRulesUrlRedirectHostRedirect(v interfac
 }
 
 func flattenComputeUrlMapPathMatcherRouteRulesUrlRedirectHttpsRedirect(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -3410,6 +3431,9 @@ func flattenComputeUrlMapPathMatcherRouteRulesUrlRedirectRedirectResponseCode(v 
 }
 
 func flattenComputeUrlMapPathMatcherRouteRulesUrlRedirectStripQuery(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -3527,6 +3551,9 @@ func flattenComputeUrlMapPathMatcherDefaultUrlRedirectHostRedirect(v interface{}
 }
 
 func flattenComputeUrlMapPathMatcherDefaultUrlRedirectHttpsRedirect(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -3706,6 +3733,9 @@ func flattenComputeUrlMapPathMatcherDefaultRouteActionWeightedBackendServicesHea
 }
 
 func flattenComputeUrlMapPathMatcherDefaultRouteActionWeightedBackendServicesHeaderActionRequestHeadersToAddReplace(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -3755,6 +3785,9 @@ func flattenComputeUrlMapPathMatcherDefaultRouteActionWeightedBackendServicesHea
 }
 
 func flattenComputeUrlMapPathMatcherDefaultRouteActionWeightedBackendServicesHeaderActionResponseHeadersToAddReplace(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -3907,6 +3940,9 @@ func flattenComputeUrlMapPathMatcherDefaultRouteActionRetryPolicyNumRetries(v in
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -3914,7 +3950,16 @@ func flattenComputeUrlMapPathMatcherDefaultRouteActionRetryPolicyNumRetries(v in
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -4054,10 +4099,16 @@ func flattenComputeUrlMapPathMatcherDefaultRouteActionCorsPolicyMaxAge(v interfa
 }
 
 func flattenComputeUrlMapPathMatcherDefaultRouteActionCorsPolicyAllowCredentials(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
 func flattenComputeUrlMapPathMatcherDefaultRouteActionCorsPolicyDisabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -4787,6 +4838,9 @@ func flattenComputeUrlMapDefaultUrlRedirectHostRedirect(v interface{}, d *schema
 }
 
 func flattenComputeUrlMapDefaultUrlRedirectHttpsRedirect(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -4966,6 +5020,9 @@ func flattenComputeUrlMapDefaultRouteActionWeightedBackendServicesHeaderActionRe
 }
 
 func flattenComputeUrlMapDefaultRouteActionWeightedBackendServicesHeaderActionRequestHeadersToAddReplace(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -5015,6 +5072,9 @@ func flattenComputeUrlMapDefaultRouteActionWeightedBackendServicesHeaderActionRe
 }
 
 func flattenComputeUrlMapDefaultRouteActionWeightedBackendServicesHeaderActionResponseHeadersToAddReplace(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -5167,6 +5227,9 @@ func flattenComputeUrlMapDefaultRouteActionRetryPolicyNumRetries(v interface{}, 
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -5174,7 +5237,16 @@ func flattenComputeUrlMapDefaultRouteActionRetryPolicyNumRetries(v interface{}, 
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -5314,10 +5386,16 @@ func flattenComputeUrlMapDefaultRouteActionCorsPolicyMaxAge(v interface{}, d *sc
 }
 
 func flattenComputeUrlMapDefaultRouteActionCorsPolicyAllowCredentials(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
 func flattenComputeUrlMapDefaultRouteActionCorsPolicyDisabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 

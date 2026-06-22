@@ -193,6 +193,9 @@ func flattenComputeNetworkName(v interface{}, d *schema.ResourceData, config *tr
 }
 
 func flattenComputeNetworkAutoCreateSubnetworks(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 
@@ -235,6 +238,9 @@ func flattenComputeNetworkRoutingConfigBgpInterRegionCost(v interface{}, d *sche
 }
 
 func flattenComputeNetworkRoutingConfigDeleteBgpAlwaysCompareMed(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -264,6 +270,9 @@ func flattenComputeNetworkInternalIpv6Range(v interface{}, d *schema.ResourceDat
 }
 
 func flattenComputeNetworkNetworkFirewallPolicyEnforcementOrder(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "AFTER_CLASSIC_FIREWALL" {
+		return nil
+	}
 	return v
 }
 

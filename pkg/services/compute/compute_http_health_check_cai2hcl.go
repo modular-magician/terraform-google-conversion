@@ -160,6 +160,9 @@ func flattenComputeHttpHealthCheckCheckIntervalSec(v interface{}, d *schema.Reso
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 5 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -167,7 +170,16 @@ func flattenComputeHttpHealthCheckCheckIntervalSec(v interface{}, d *schema.Reso
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 5 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 5 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 5 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -187,6 +199,9 @@ func flattenComputeHttpHealthCheckHealthyThreshold(v interface{}, d *schema.Reso
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 2 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -194,7 +209,16 @@ func flattenComputeHttpHealthCheckHealthyThreshold(v interface{}, d *schema.Reso
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 2 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 2 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 2 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -225,6 +249,9 @@ func flattenComputeHttpHealthCheckPort(v interface{}, d *schema.ResourceData, co
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 80 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -232,13 +259,25 @@ func flattenComputeHttpHealthCheckPort(v interface{}, d *schema.ResourceData, co
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 80 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 80 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 80 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
 }
 
 func flattenComputeHttpHealthCheckRequestPath(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "/" {
+		return nil
+	}
 	return v
 }
 
@@ -246,6 +285,9 @@ func flattenComputeHttpHealthCheckTimeoutSec(v interface{}, d *schema.ResourceDa
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 5 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -253,7 +295,16 @@ func flattenComputeHttpHealthCheckTimeoutSec(v interface{}, d *schema.ResourceDa
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 5 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 5 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 5 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -263,6 +314,9 @@ func flattenComputeHttpHealthCheckUnhealthyThreshold(v interface{}, d *schema.Re
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 2 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -270,7 +324,16 @@ func flattenComputeHttpHealthCheckUnhealthyThreshold(v interface{}, d *schema.Re
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 2 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 2 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 2 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise

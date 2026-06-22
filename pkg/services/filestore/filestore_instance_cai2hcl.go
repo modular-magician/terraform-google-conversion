@@ -296,10 +296,16 @@ func flattenFilestoreInstanceFileSharesNfsExportOptionsIpRanges(v interface{}, d
 }
 
 func flattenFilestoreInstanceFileSharesNfsExportOptionsAccessMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "READ_WRITE" {
+		return nil
+	}
 	return v
 }
 
 func flattenFilestoreInstanceFileSharesNfsExportOptionsSquashMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "NO_ROOT_SQUASH" {
+		return nil
+	}
 	return v
 }
 
@@ -544,6 +550,9 @@ func flattenFilestoreInstanceInitialReplication(v interface{}, d *schema.Resourc
 }
 
 func flattenFilestoreInstanceInitialReplicationRole(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "STANDBY" {
+		return nil
+	}
 	return v
 }
 

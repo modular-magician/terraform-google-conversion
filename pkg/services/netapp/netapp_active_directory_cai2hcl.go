@@ -213,6 +213,9 @@ func flattenNetappActiveDirectoryOrganizationalUnit(v interface{}, d *schema.Res
 }
 
 func flattenNetappActiveDirectoryAesEncryption(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 

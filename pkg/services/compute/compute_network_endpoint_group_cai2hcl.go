@@ -176,6 +176,9 @@ func flattenComputeNetworkEndpointGroupDescription(v interface{}, d *schema.Reso
 }
 
 func flattenComputeNetworkEndpointGroupNetworkEndpointType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "GCE_VM_IP_PORT" {
+		return nil
+	}
 	return v
 }
 

@@ -185,6 +185,9 @@ func flattenComputeTargetInstanceInstance(v interface{}, d *schema.ResourceData,
 }
 
 func flattenComputeTargetInstanceNatPolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "NO_NAT" {
+		return nil
+	}
 	return v
 }
 

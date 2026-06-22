@@ -226,6 +226,9 @@ func flattenComputeRouterBgpAsn(v interface{}, d *schema.ResourceData, config *t
 }
 
 func flattenComputeRouterBgpAdvertiseMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "DEFAULT" {
+		return nil
+	}
 	return v
 }
 
@@ -272,6 +275,9 @@ func flattenComputeRouterBgpKeepaliveInterval(v interface{}, d *schema.ResourceD
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 20 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -279,7 +285,16 @@ func flattenComputeRouterBgpKeepaliveInterval(v interface{}, d *schema.ResourceD
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 20 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 20 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 20 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise

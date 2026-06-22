@@ -773,10 +773,16 @@ func flattenLookerInstancePeriodicExportConfigStartTimeNanos(v interface{}, d *s
 }
 
 func flattenLookerInstancePlatformEdition(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "LOOKER_CORE_TRIAL" {
+		return nil
+	}
 	return v
 }
 
 func flattenLookerInstancePrivateIpEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 
@@ -845,6 +851,9 @@ func flattenLookerInstancePscEnabled(v interface{}, d *schema.ResourceData, conf
 }
 
 func flattenLookerInstancePublicIpEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 

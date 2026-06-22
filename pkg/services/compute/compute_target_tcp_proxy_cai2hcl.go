@@ -174,6 +174,9 @@ func flattenComputeTargetTcpProxyName(v interface{}, d *schema.ResourceData, con
 }
 
 func flattenComputeTargetTcpProxyProxyHeader(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "NONE" {
+		return nil
+	}
 	return v
 }
 

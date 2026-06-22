@@ -188,6 +188,9 @@ func flattenComputeNodeGroupNodeTemplate(v interface{}, d *schema.ResourceData, 
 }
 
 func flattenComputeNodeGroupMaintenancePolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "DEFAULT" {
+		return nil
+	}
 	return v
 }
 

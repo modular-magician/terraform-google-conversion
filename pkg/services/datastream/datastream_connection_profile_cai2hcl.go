@@ -214,6 +214,9 @@ func flattenDatastreamConnectionProfileOracleProfilePort(v interface{}, d *schem
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1521 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -221,7 +224,16 @@ func flattenDatastreamConnectionProfileOracleProfilePort(v interface{}, d *schem
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1521 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1521 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1521 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -349,6 +361,9 @@ func flattenDatastreamConnectionProfileMysqlProfilePort(v interface{}, d *schema
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 3306 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -356,7 +371,16 @@ func flattenDatastreamConnectionProfileMysqlProfilePort(v interface{}, d *schema
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 3306 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 3306 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 3306 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -490,6 +514,9 @@ func flattenDatastreamConnectionProfilePostgresqlProfilePort(v interface{}, d *s
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 5432 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -497,7 +524,16 @@ func flattenDatastreamConnectionProfilePostgresqlProfilePort(v interface{}, d *s
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 5432 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 5432 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 5432 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -676,6 +712,9 @@ func flattenDatastreamConnectionProfileSqlServerProfilePort(v interface{}, d *sc
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1433 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -683,7 +722,16 @@ func flattenDatastreamConnectionProfileSqlServerProfilePort(v interface{}, d *sc
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1433 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1433 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1433 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -985,6 +1033,9 @@ func flattenDatastreamConnectionProfileForwardSshConnectivityPort(v interface{},
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 22 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -992,7 +1043,16 @@ func flattenDatastreamConnectionProfileForwardSshConnectivityPort(v interface{},
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 22 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 22 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 22 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise

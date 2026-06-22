@@ -225,6 +225,9 @@ func flattenLoggingMetricMetricDescriptor(v interface{}, d *schema.ResourceData,
 }
 
 func flattenLoggingMetricMetricDescriptorUnit(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "1" {
+		return nil
+	}
 	return v
 }
 

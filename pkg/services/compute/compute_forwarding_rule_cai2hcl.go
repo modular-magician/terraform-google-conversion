@@ -205,6 +205,9 @@ func flattenComputeForwardingRuleBackendService(v interface{}, d *schema.Resourc
 }
 
 func flattenComputeForwardingRuleLoadBalancingScheme(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "EXTERNAL" {
+		return nil
+	}
 	return v
 }
 

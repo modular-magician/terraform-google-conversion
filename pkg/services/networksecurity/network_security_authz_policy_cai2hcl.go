@@ -346,6 +346,9 @@ func flattenNetworkSecurityAuthzPolicyHttpRulesFromSourcesPrincipals(v interface
 }
 
 func flattenNetworkSecurityAuthzPolicyHttpRulesFromSourcesPrincipalsPrincipalSelector(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "CLIENT_CERT_URI_SAN" {
+		return nil
+	}
 	return v
 }
 
@@ -661,6 +664,9 @@ func flattenNetworkSecurityAuthzPolicyHttpRulesFromNotSourcesPrincipals(v interf
 }
 
 func flattenNetworkSecurityAuthzPolicyHttpRulesFromNotSourcesPrincipalsPrincipalSelector(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "CLIENT_CERT_URI_SAN" {
+		return nil
+	}
 	return v
 }
 
@@ -1182,6 +1188,9 @@ func flattenNetworkSecurityAuthzPolicyHttpRulesToOperationsMcp(v interface{}, d 
 }
 
 func flattenNetworkSecurityAuthzPolicyHttpRulesToOperationsMcpBaseProtocolMethodsOption(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "SKIP_BASE_PROTOCOL_METHODS" {
+		return nil
+	}
 	return v
 }
 
@@ -1691,6 +1700,9 @@ func flattenNetworkSecurityAuthzPolicyNetworkRulesFromSourcesPrincipals(v interf
 }
 
 func flattenNetworkSecurityAuthzPolicyNetworkRulesFromSourcesPrincipalsPrincipalSelector(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "CLIENT_CERT_URI_SAN" {
+		return nil
+	}
 	return v
 }
 
@@ -1810,6 +1822,9 @@ func flattenNetworkSecurityAuthzPolicyNetworkRulesFromNotSourcesPrincipals(v int
 }
 
 func flattenNetworkSecurityAuthzPolicyNetworkRulesFromNotSourcesPrincipalsPrincipalSelector(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "CLIENT_CERT_URI_SAN" {
+		return nil
+	}
 	return v
 }
 

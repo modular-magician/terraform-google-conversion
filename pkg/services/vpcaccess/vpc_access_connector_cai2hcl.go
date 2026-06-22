@@ -178,6 +178,9 @@ func flattenVPCAccessConnectorIpCidrRange(v interface{}, d *schema.ResourceData,
 }
 
 func flattenVPCAccessConnectorMachineType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "e2-micro" {
+		return nil
+	}
 	return v
 }
 

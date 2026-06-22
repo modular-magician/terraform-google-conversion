@@ -284,10 +284,16 @@ func flattenRedisClusterAutomatedBackupConfigRetention(v interface{}, d *schema.
 }
 
 func flattenRedisClusterAuthorizationMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "AUTH_MODE_DISABLED" {
+		return nil
+	}
 	return v
 }
 
 func flattenRedisClusterTransitEncryptionMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "TRANSIT_ENCRYPTION_MODE_DISABLED" {
+		return nil
+	}
 	return v
 }
 
@@ -393,6 +399,9 @@ func flattenRedisClusterShardCount(v interface{}, d *schema.ResourceData, config
 }
 
 func flattenRedisClusterDeletionProtectionEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == true {
+		return nil
+	}
 	return v
 }
 

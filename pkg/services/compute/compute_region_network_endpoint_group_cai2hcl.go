@@ -180,6 +180,9 @@ func flattenComputeRegionNetworkEndpointGroupDescription(v interface{}, d *schem
 }
 
 func flattenComputeRegionNetworkEndpointGroupNetworkEndpointType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "SERVERLESS" {
+		return nil
+	}
 	return v
 }
 

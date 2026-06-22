@@ -207,6 +207,9 @@ func flattenComputeGlobalAddressPrefixLength(v interface{}, d *schema.ResourceDa
 }
 
 func flattenComputeGlobalAddressAddressType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "EXTERNAL" {
+		return nil
+	}
 	return v
 }
 

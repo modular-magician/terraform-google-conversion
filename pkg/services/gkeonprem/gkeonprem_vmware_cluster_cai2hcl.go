@@ -225,6 +225,9 @@ func flattenGkeonpremVmwareClusterControlPlaneNodeCpus(v interface{}, d *schema.
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 4 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -232,7 +235,16 @@ func flattenGkeonpremVmwareClusterControlPlaneNodeCpus(v interface{}, d *schema.
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 4 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 4 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 4 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -242,6 +254,9 @@ func flattenGkeonpremVmwareClusterControlPlaneNodeMemory(v interface{}, d *schem
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 8192 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -249,7 +264,16 @@ func flattenGkeonpremVmwareClusterControlPlaneNodeMemory(v interface{}, d *schem
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 8192 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 8192 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 8192 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -259,6 +283,9 @@ func flattenGkeonpremVmwareClusterControlPlaneNodeReplicas(v interface{}, d *sch
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -266,7 +293,16 @@ func flattenGkeonpremVmwareClusterControlPlaneNodeReplicas(v interface{}, d *sch
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise

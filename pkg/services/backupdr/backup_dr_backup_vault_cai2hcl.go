@@ -195,6 +195,9 @@ func flattenBackupDRBackupVaultAnnotations(v interface{}, d *schema.ResourceData
 }
 
 func flattenBackupDRBackupVaultAccessRestriction(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "WITHIN_ORGANIZATION" {
+		return nil
+	}
 	return v
 }
 

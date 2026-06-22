@@ -161,6 +161,9 @@ func (c *BackupDRBackupPlanCai2hclConverter) convertResourceData(asset caiasset.
 }
 
 func flattenBackupDRBackupPlanDescription(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
 	return v
 }
 

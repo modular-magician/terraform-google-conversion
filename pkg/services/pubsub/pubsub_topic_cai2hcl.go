@@ -236,6 +236,9 @@ func flattenPubsubTopicSchemaSettingsSchema(v interface{}, d *schema.ResourceDat
 }
 
 func flattenPubsubTopicSchemaSettingsEncoding(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "ENCODING_UNSPECIFIED" {
+		return nil
+	}
 	return v
 }
 
@@ -407,6 +410,9 @@ func flattenPubsubTopicIngestionDataSourceSettingsCloudStorageTextFormat(v inter
 }
 
 func flattenPubsubTopicIngestionDataSourceSettingsCloudStorageTextFormatDelimiter(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "\n" {
+		return nil
+	}
 	return v
 }
 
@@ -461,6 +467,9 @@ func flattenPubsubTopicIngestionDataSourceSettingsPlatformLogsSettings(v interfa
 }
 
 func flattenPubsubTopicIngestionDataSourceSettingsPlatformLogsSettingsSeverity(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "SEVERITY_UNSPECIFIED" {
+		return nil
+	}
 	return v
 }
 
@@ -817,6 +826,9 @@ func flattenPubsubTopicMessageTransformsJavascriptUdfCode(v interface{}, d *sche
 }
 
 func flattenPubsubTopicMessageTransformsDisabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 

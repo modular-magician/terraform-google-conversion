@@ -184,6 +184,9 @@ func flattenDataprocAutoscalingPolicyWorkerConfigMinInstances(v interface{}, d *
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 2 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -191,7 +194,16 @@ func flattenDataprocAutoscalingPolicyWorkerConfigMinInstances(v interface{}, d *
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 2 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 2 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 2 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -221,6 +233,9 @@ func flattenDataprocAutoscalingPolicyWorkerConfigWeight(v interface{}, d *schema
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -228,7 +243,16 @@ func flattenDataprocAutoscalingPolicyWorkerConfigWeight(v interface{}, d *schema
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -256,6 +280,9 @@ func flattenDataprocAutoscalingPolicySecondaryWorkerConfigMinInstances(v interfa
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 0 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -263,7 +290,16 @@ func flattenDataprocAutoscalingPolicySecondaryWorkerConfigMinInstances(v interfa
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 0 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 0 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 0 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -273,6 +309,9 @@ func flattenDataprocAutoscalingPolicySecondaryWorkerConfigMaxInstances(v interfa
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 0 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -280,7 +319,16 @@ func flattenDataprocAutoscalingPolicySecondaryWorkerConfigMaxInstances(v interfa
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 0 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 0 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 0 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -290,6 +338,9 @@ func flattenDataprocAutoscalingPolicySecondaryWorkerConfigWeight(v interface{}, 
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 1 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -297,7 +348,16 @@ func flattenDataprocAutoscalingPolicySecondaryWorkerConfigWeight(v interface{}, 
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 1 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 1 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 1 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -320,6 +380,9 @@ func flattenDataprocAutoscalingPolicyBasicAlgorithm(v interface{}, d *schema.Res
 }
 
 func flattenDataprocAutoscalingPolicyBasicAlgorithmCooldownPeriod(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "120s" {
+		return nil
+	}
 	return v
 }
 
@@ -365,9 +428,15 @@ func flattenDataprocAutoscalingPolicyBasicAlgorithmYarnConfigScaleDownFactor(v i
 }
 
 func flattenDataprocAutoscalingPolicyBasicAlgorithmYarnConfigScaleUpMinWorkerFraction(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if floatVal, ok := v.(float64); ok && floatVal == 0.0 {
+		return nil
+	}
 	return v
 }
 
 func flattenDataprocAutoscalingPolicyBasicAlgorithmYarnConfigScaleDownMinWorkerFraction(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if floatVal, ok := v.(float64); ok && floatVal == 0.0 {
+		return nil
+	}
 	return v
 }

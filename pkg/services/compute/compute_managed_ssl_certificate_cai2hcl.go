@@ -190,5 +190,8 @@ func flattenComputeManagedSslCertificateManagedDomains(v interface{}, d *schema.
 }
 
 func flattenComputeManagedSslCertificateType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "MANAGED" {
+		return nil
+	}
 	return v
 }

@@ -249,6 +249,9 @@ func flattenComputeAutoscalerAutoscalingPolicyCooldownPeriod(v interface{}, d *s
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			if intVal == 60 {
+				return nil
+			}
 			return intVal
 		}
 	}
@@ -256,7 +259,16 @@ func flattenComputeAutoscalerAutoscalingPolicyCooldownPeriod(v interface{}, d *s
 	// number values are represented as float64
 	if floatVal, ok := v.(float64); ok {
 		intVal := int(floatVal)
+		if intVal == 60 {
+			return nil
+		}
 		return intVal
+	}
+	if intVal, ok := v.(int); ok && intVal == 60 {
+		return nil
+	}
+	if floatVal, ok := v.(float64); ok && floatVal == 60 {
+		return nil
 	}
 
 	return v // let terraform core handle it otherwise
@@ -280,6 +292,9 @@ func flattenComputeAutoscalerAutoscalingPolicyStabilizationPeriod(v interface{},
 }
 
 func flattenComputeAutoscalerAutoscalingPolicyMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "ON" {
+		return nil
+	}
 	return v
 }
 
@@ -441,6 +456,9 @@ func flattenComputeAutoscalerAutoscalingPolicyMetricType(v interface{}, d *schem
 }
 
 func flattenComputeAutoscalerAutoscalingPolicyMetricFilter(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "resource.type = gce_instance" {
+		return nil
+	}
 	return v
 }
 
@@ -515,6 +533,9 @@ func flattenComputeAutoscalerAutoscalingPolicyScalingSchedulesSchedule(v interfa
 }
 
 func flattenComputeAutoscalerAutoscalingPolicyScalingSchedulesTimeZone(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "UTC" {
+		return nil
+	}
 	return v
 }
 
@@ -539,6 +560,9 @@ func flattenComputeAutoscalerAutoscalingPolicyScalingSchedulesDurationSec(v inte
 }
 
 func flattenComputeAutoscalerAutoscalingPolicyScalingSchedulesDisabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if boolVal, ok := v.(bool); ok && boolVal == false {
+		return nil
+	}
 	return v
 }
 

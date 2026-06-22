@@ -152,10 +152,16 @@ func (c *BeyondcorpAppGatewayCai2hclConverter) convertResourceData(asset caiasse
 }
 
 func flattenBeyondcorpAppGatewayType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "TYPE_UNSPECIFIED" {
+		return nil
+	}
 	return v
 }
 
 func flattenBeyondcorpAppGatewayHostType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if strVal, ok := v.(string); ok && strVal == "HOST_TYPE_UNSPECIFIED" {
+		return nil
+	}
 	return v
 }
 
