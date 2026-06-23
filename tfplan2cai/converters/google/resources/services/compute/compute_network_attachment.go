@@ -191,6 +191,7 @@ func expandComputeNetworkAttachmentProducerRejectLists(v interface{}, d tpgresou
 }
 
 func expandComputeNetworkAttachmentProducerAcceptLists(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	v = v.(*schema.Set).List()
 	return v, nil
 }
 
