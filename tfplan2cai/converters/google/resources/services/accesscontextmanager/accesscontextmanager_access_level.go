@@ -97,8 +97,8 @@ func GetAccessContextManagerAccessLevelCaiObject(d tpgresource.TerraformResource
 			Name: name,
 			Type: AccessContextManagerAccessLevelAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/accesscontextmanager/v1/rest",
+				Version:              "v1alpha",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/accesscontextmanager/v1alpha/rest",
 				DiscoveryName:        "AccessLevel",
 				Data:                 obj,
 			},

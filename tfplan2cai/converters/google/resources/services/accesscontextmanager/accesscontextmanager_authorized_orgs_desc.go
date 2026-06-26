@@ -97,8 +97,8 @@ func GetAccessContextManagerAuthorizedOrgsDescCaiObject(d tpgresource.TerraformR
 			Name: name,
 			Type: AccessContextManagerAuthorizedOrgsDescAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/accesscontextmanager/v1/rest",
+				Version:              "v1alpha",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/accesscontextmanager/v1alpha/rest",
 				DiscoveryName:        "AuthorizedOrgsDesc",
 				Data:                 obj,
 			},

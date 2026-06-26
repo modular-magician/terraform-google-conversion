@@ -97,8 +97,8 @@ func GetAccessContextManagerAccessPolicyCaiObject(d tpgresource.TerraformResourc
 			Name: name,
 			Type: AccessContextManagerAccessPolicyAssetType,
 			Resource: &cai.AssetResource{
-				Version:              "v1",
-				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/accesscontextmanager/v1/rest",
+				Version:              "v1alpha",
+				DiscoveryDocumentURI: "https://www.googleapis.com/discovery/v1/apis/accesscontextmanager/v1alpha/rest",
 				DiscoveryName:        "AccessPolicy",
 				Data:                 obj,
 			},
