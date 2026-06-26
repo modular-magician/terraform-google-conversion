@@ -47,6 +47,12 @@ func TestAccComputeBackendService(t *testing.T) {
 			Name: "TestAccComputeBackendService_backendServiceCacheExample",
 		},
 		{
+			Name: "TestAccComputeBackendService_backendServiceCacheZeroTtlExample",
+		},
+		{
+			Name: "TestAccComputeBackendService_backendServiceCacheOmittedTtlExample",
+		},
+		{
 			Name: "TestAccComputeBackendService_backendServiceCacheBypassCacheOnRequestHeadersExample",
 		},
 		{
