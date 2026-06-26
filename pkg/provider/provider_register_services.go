@@ -21,6 +21,8 @@ import (
 	_ "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudfunctions2"
 	_ "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudids"
 	_ "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudquotas"
+	_ "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudrunv2"
+	_ "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudscheduler"
 	_ "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudtasks"
 	_ "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/colab"
 	_ "github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/compute"

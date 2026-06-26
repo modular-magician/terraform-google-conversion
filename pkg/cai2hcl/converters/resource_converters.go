@@ -33,6 +33,8 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudfunctions2"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudids"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudquotas"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudrunv2"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudscheduler"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudtasks"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/colab"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/compute"
@@ -243,6 +245,9 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	},
 	"cloudresourcemanager.googleapis.com/TagBinding": {
 		"Default": tags.NewTagsTagBindingCai2hclConverter(provider),
+	},
+	"cloudscheduler.googleapis.com/Job": {
+		"Default": cloudscheduler.NewCloudSchedulerJobCai2hclConverter(provider),
 	},
 	"cloudtasks.googleapis.com/Queue": {
 		"Default": cloudtasks.NewCloudTasksQueueCai2hclConverter(provider),
@@ -638,6 +643,9 @@ var ConverterMap = map[string]map[string]models.Cai2hclConverter{
 	},
 	"redis.googleapis.com/Instance": {
 		"Default": redis.NewRedisInstanceCai2hclConverter(provider),
+	},
+	"run.googleapis.com/Job": {
+		"Default": cloudrunv2.NewCloudRunV2JobCai2hclConverter(provider),
 	},
 	"secretmanager.googleapis.com/Secret": {
 		"SecretManagerRegionalRegionalSecret": secretmanagerregional.NewSecretManagerRegionalRegionalSecretCai2hclConverter(provider),

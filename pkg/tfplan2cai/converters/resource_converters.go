@@ -32,6 +32,8 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudfunctions2"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudids"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudquotas"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudrunv2"
+	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudscheduler"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/cloudtasks"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/colab"
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/services/compute"
@@ -129,6 +131,8 @@ var ConverterMap = map[string]cai.Tfplan2caiConverter{
 	"google_cloudfunctions2_function":                        cloudfunctions2.Cloudfunctions2functionTfplan2caiConverter(),
 	"google_cloud_ids_endpoint":                              cloudids.CloudIdsEndpointTfplan2caiConverter(),
 	"google_cloud_quotas_quota_preference":                   cloudquotas.CloudQuotasQuotaPreferenceTfplan2caiConverter(),
+	"google_cloud_run_v2_job":                                cloudrunv2.CloudRunV2JobTfplan2caiConverter(),
+	"google_cloud_scheduler_job":                             cloudscheduler.CloudSchedulerJobTfplan2caiConverter(),
 	"google_cloud_tasks_queue":                               cloudtasks.CloudTasksQueueTfplan2caiConverter(),
 	"google_colab_notebook_execution":                        colab.ColabNotebookExecutionTfplan2caiConverter(),
 	"google_colab_runtime":                                   colab.ColabRuntimeTfplan2caiConverter(),
