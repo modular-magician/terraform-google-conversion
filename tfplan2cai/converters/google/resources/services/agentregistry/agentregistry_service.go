@@ -307,9 +307,28 @@ func expandAgentRegistryServiceEndpointSpec(v interface{}, d tpgresource.Terrafo
 		transformed["type"] = transformedType
 	}
 
+	transformedContent, err := expandAgentRegistryServiceEndpointSpecContent(original["content"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedContent); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["content"] = transformedContent
+	}
+
 	return transformed, nil
 }
 
 func expandAgentRegistryServiceEndpointSpecType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandAgentRegistryServiceEndpointSpecContent(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
