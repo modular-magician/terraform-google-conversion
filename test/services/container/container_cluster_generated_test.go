@@ -217,6 +217,9 @@ func TestAccContainerCluster(t *testing.T) {
 			Name: "TestAccContainerCluster_withLoggingVariantUpdates",
 		},
 		{
+			Name: "TestAccContainerCluster_withoutNodeConfigBlock",
+		},
+		{
 			Name: "TestAccContainerCluster_withAdvancedMachineFeaturesInNodePool",
 		},
 		{
