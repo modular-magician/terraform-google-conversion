@@ -110,6 +110,12 @@ func GetCESToolsetCaiObject(d tpgresource.TerraformResourceData, config *transpo
 
 func GetCESToolsetApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
+	connectorToolsetProp, err := expandCESToolsetConnectorToolset(d.Get("connector_toolset"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("connector_toolset"); !tpgresource.IsEmptyValue(reflect.ValueOf(connectorToolsetProp)) && (ok || !reflect.DeepEqual(v, connectorToolsetProp)) {
+		obj["connectorToolset"] = connectorToolsetProp
+	}
 	descriptionProp, err := expandCESToolsetDescription(d.Get("description"), d, config)
 	if err != nil {
 		return nil, err
@@ -146,8 +152,252 @@ func GetCESToolsetApiObject(d tpgresource.TerraformResourceData, config *transpo
 	} else if v, ok := d.GetOkExists("tool_fake_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(toolFakeConfigProp)) && (ok || !reflect.DeepEqual(v, toolFakeConfigProp)) {
 		obj["toolFakeConfig"] = toolFakeConfigProp
 	}
+	timeoutProp, err := expandCESToolsetTimeout(d.Get("timeout"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("timeout"); !tpgresource.IsEmptyValue(reflect.ValueOf(timeoutProp)) && (ok || !reflect.DeepEqual(v, timeoutProp)) {
+		obj["timeout"] = timeoutProp
+	}
 
 	return obj, nil
+}
+
+func expandCESToolsetConnectorToolset(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedConnection, err := expandCESToolsetConnectorToolsetConnection(original["connection"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedConnection); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["connection"] = transformedConnection
+	}
+
+	transformedAuthConfig, err := expandCESToolsetConnectorToolsetAuthConfig(original["auth_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAuthConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["authConfig"] = transformedAuthConfig
+	}
+
+	transformedConnectorActions, err := expandCESToolsetConnectorToolsetConnectorActions(original["connector_actions"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedConnectorActions); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["connectorActions"] = transformedConnectorActions
+	}
+
+	return transformed, nil
+}
+
+func expandCESToolsetConnectorToolsetConnection(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetConnectorToolsetAuthConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedOauth2AuthCodeConfig, err := expandCESToolsetConnectorToolsetAuthConfigOauth2AuthCodeConfig(original["oauth2_auth_code_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedOauth2AuthCodeConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["oauth2AuthCodeConfig"] = transformedOauth2AuthCodeConfig
+	}
+
+	transformedOauth2JwtBearerConfig, err := expandCESToolsetConnectorToolsetAuthConfigOauth2JwtBearerConfig(original["oauth2_jwt_bearer_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedOauth2JwtBearerConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["oauth2JwtBearerConfig"] = transformedOauth2JwtBearerConfig
+	}
+
+	return transformed, nil
+}
+
+func expandCESToolsetConnectorToolsetAuthConfigOauth2AuthCodeConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedOauthToken, err := expandCESToolsetConnectorToolsetAuthConfigOauth2AuthCodeConfigOauthToken(original["oauth_token"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedOauthToken); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["oauthToken"] = transformedOauthToken
+	}
+
+	return transformed, nil
+}
+
+func expandCESToolsetConnectorToolsetAuthConfigOauth2AuthCodeConfigOauthToken(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetConnectorToolsetAuthConfigOauth2JwtBearerConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedClientKey, err := expandCESToolsetConnectorToolsetAuthConfigOauth2JwtBearerConfigClientKey(original["client_key"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientKey"] = transformedClientKey
+	}
+
+	transformedIssuer, err := expandCESToolsetConnectorToolsetAuthConfigOauth2JwtBearerConfigIssuer(original["issuer"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedIssuer); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["issuer"] = transformedIssuer
+	}
+
+	transformedSubject, err := expandCESToolsetConnectorToolsetAuthConfigOauth2JwtBearerConfigSubject(original["subject"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSubject); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["subject"] = transformedSubject
+	}
+
+	return transformed, nil
+}
+
+func expandCESToolsetConnectorToolsetAuthConfigOauth2JwtBearerConfigClientKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetConnectorToolsetAuthConfigOauth2JwtBearerConfigIssuer(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetConnectorToolsetAuthConfigOauth2JwtBearerConfigSubject(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetConnectorToolsetConnectorActions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedConnectionActionId, err := expandCESToolsetConnectorToolsetConnectorActionsConnectionActionId(original["connection_action_id"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedConnectionActionId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["connectionActionId"] = transformedConnectionActionId
+		}
+
+		transformedEntityOperation, err := expandCESToolsetConnectorToolsetConnectorActionsEntityOperation(original["entity_operation"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedEntityOperation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["entityOperation"] = transformedEntityOperation
+		}
+
+		transformedInputFields, err := expandCESToolsetConnectorToolsetConnectorActionsInputFields(original["input_fields"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedInputFields); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["inputFields"] = transformedInputFields
+		}
+
+		transformedOutputFields, err := expandCESToolsetConnectorToolsetConnectorActionsOutputFields(original["output_fields"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedOutputFields); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["outputFields"] = transformedOutputFields
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandCESToolsetConnectorToolsetConnectorActionsConnectionActionId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetConnectorToolsetConnectorActionsEntityOperation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEntityId, err := expandCESToolsetConnectorToolsetConnectorActionsEntityOperationEntityId(original["entity_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEntityId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["entityId"] = transformedEntityId
+	}
+
+	transformedOperation, err := expandCESToolsetConnectorToolsetConnectorActionsEntityOperationOperation(original["operation"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedOperation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["operation"] = transformedOperation
+	}
+
+	return transformed, nil
+}
+
+func expandCESToolsetConnectorToolsetConnectorActionsEntityOperationEntityId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetConnectorToolsetConnectorActionsEntityOperationOperation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetConnectorToolsetConnectorActionsInputFields(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetConnectorToolsetConnectorActionsOutputFields(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandCESToolsetDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -615,6 +865,13 @@ func expandCESToolsetMcpToolset(v interface{}, d tpgresource.TerraformResourceDa
 		transformed["customHeaders"] = transformedCustomHeaders
 	}
 
+	transformedToolOverrides, err := expandCESToolsetMcpToolsetToolOverrides(original["tool_overrides"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedToolOverrides); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["toolOverrides"] = transformedToolOverrides
+	}
+
 	return transformed, nil
 }
 
@@ -970,6 +1227,57 @@ func expandCESToolsetMcpToolsetCustomHeaders(v interface{}, d tpgresource.Terraf
 	return m, nil
 }
 
+func expandCESToolsetMcpToolsetToolOverrides(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedDescriptionOverride, err := expandCESToolsetMcpToolsetToolOverridesDescriptionOverride(original["description_override"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDescriptionOverride); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["descriptionOverride"] = transformedDescriptionOverride
+		}
+
+		transformedNameOverride, err := expandCESToolsetMcpToolsetToolOverridesNameOverride(original["name_override"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedNameOverride); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["nameOverride"] = transformedNameOverride
+		}
+
+		transformedTool, err := expandCESToolsetMcpToolsetToolOverridesTool(original["tool"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedTool); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["tool"] = transformedTool
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandCESToolsetMcpToolsetToolOverridesDescriptionOverride(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetMcpToolsetToolOverridesNameOverride(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetMcpToolsetToolOverridesTool(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandCESToolsetToolFakeConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -1026,5 +1334,9 @@ func expandCESToolsetToolFakeConfigCodeBlock(v interface{}, d tpgresource.Terraf
 }
 
 func expandCESToolsetToolFakeConfigCodeBlockPythonCode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolsetTimeout(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

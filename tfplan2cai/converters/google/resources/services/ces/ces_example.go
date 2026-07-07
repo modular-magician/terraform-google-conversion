@@ -212,11 +212,32 @@ func expandCESExampleMessagesChunks(v interface{}, d tpgresource.TerraformResour
 			transformed["agentTransfer"] = transformedAgentTransfer
 		}
 
+		transformedBlob, err := expandCESExampleMessagesChunksBlob(original["blob"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedBlob); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["blob"] = transformedBlob
+		}
+
+		transformedDefaultVariables, err := expandCESExampleMessagesChunksDefaultVariables(original["default_variables"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDefaultVariables); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["defaultVariables"] = transformedDefaultVariables
+		}
+
 		transformedImage, err := expandCESExampleMessagesChunksImage(original["image"], d, config)
 		if err != nil {
 			return nil, err
 		} else if val := reflect.ValueOf(transformedImage); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 			transformed["image"] = transformedImage
+		}
+
+		transformedPayload, err := expandCESExampleMessagesChunksPayload(original["payload"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPayload); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["payload"] = transformedPayload
 		}
 
 		transformedText, err := expandCESExampleMessagesChunksText(original["text"], d, config)
@@ -238,6 +259,13 @@ func expandCESExampleMessagesChunks(v interface{}, d tpgresource.TerraformResour
 			return nil, err
 		} else if val := reflect.ValueOf(transformedToolResponse); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 			transformed["toolResponse"] = transformedToolResponse
+		}
+
+		transformedTranscript, err := expandCESExampleMessagesChunksTranscript(original["transcript"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedTranscript); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["transcript"] = transformedTranscript
 		}
 
 		transformedUpdatedVariables, err := expandCESExampleMessagesChunksUpdatedVariables(original["updated_variables"], d, config)
@@ -289,6 +317,55 @@ func expandCESExampleMessagesChunksAgentTransferTargetAgent(v interface{}, d tpg
 	return v, nil
 }
 
+func expandCESExampleMessagesChunksBlob(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedData, err := expandCESExampleMessagesChunksBlobData(original["data"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedData); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["data"] = transformedData
+	}
+
+	transformedMimeType, err := expandCESExampleMessagesChunksBlobMimeType(original["mime_type"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedMimeType); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["mimeType"] = transformedMimeType
+	}
+
+	return transformed, nil
+}
+
+func expandCESExampleMessagesChunksBlobData(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESExampleMessagesChunksBlobMimeType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESExampleMessagesChunksDefaultVariables(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func expandCESExampleMessagesChunksImage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -324,6 +401,18 @@ func expandCESExampleMessagesChunksImageData(v interface{}, d tpgresource.Terraf
 
 func expandCESExampleMessagesChunksImageMimeType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandCESExampleMessagesChunksPayload(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func expandCESExampleMessagesChunksText(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -549,6 +638,10 @@ func expandCESExampleMessagesChunksToolResponseToolsetToolToolset(v interface{},
 }
 
 func expandCESExampleMessagesChunksToolResponseToolsetToolToolId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESExampleMessagesChunksTranscript(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
