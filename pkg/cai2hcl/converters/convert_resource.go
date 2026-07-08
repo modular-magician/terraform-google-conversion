@@ -127,7 +127,7 @@ func ConvertResource(assets []caiasset.Asset, options *models.ResourceConverterO
 				converter = ConverterMap[asset.Type]["SecretManagerSecret"]
 			}
 		case "secretmanager.googleapis.com/SecretVersion":
-			if true && strings.Contains(asset.Name, "locations") {
+			if true && strings.Contains(asset.Name, "projects") && strings.Contains(asset.Name, "locations") && strings.Contains(asset.Name, "secrets") {
 				converter = ConverterMap[asset.Type]["SecretManagerRegionalRegionalSecretVersion"]
 			} else if true {
 				converter = ConverterMap[asset.Type]["SecretManagerSecretVersion"]
