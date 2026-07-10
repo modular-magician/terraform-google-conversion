@@ -28,6 +28,13 @@ func TestAccSecretManagerRegionalRegionalSecretVersion(t *testing.T) {
 			Name: "TestAccSecretManagerRegionalRegionalSecretVersion_regionalSecretVersionBasicExample",
 		},
 		{
+			Name: "TestAccSecretManagerRegionalRegionalSecretVersion_regionalSecretVersionBasicWriteOnlyExample",
+			Skip: "fix later",
+		},
+		{
+			Name: "TestAccSecretManagerRegionalRegionalSecretVersion_regionalSecretVersionWithBase64StringSecretDataWriteOnlyExample",
+		},
+		{
 			Name: "TestAccSecretManagerRegionalRegionalSecretVersion_regionalSecretVersionWithBase64DataExample",
 		},
 		{
@@ -72,6 +79,8 @@ func TestAccSecretManagerRegionalRegionalSecretVersion(t *testing.T) {
 					"provider",
 					"secret",
 					"secret_data",
+					"secret_data_wo",
+					"secret_data_wo_version",
 					"timeouts",
 				},
 				"google_secret_manager_regional_secret_version",

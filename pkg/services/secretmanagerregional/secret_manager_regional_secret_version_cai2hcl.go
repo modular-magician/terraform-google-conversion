@@ -172,13 +172,15 @@ func flattenSecretManagerRegionalRegionalSecretVersionEnabled(v interface{}, d *
 }
 
 func flattenSecretManagerRegionalRegionalSecretVersionPayload(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	original := make(map[string]interface{}, 0)
-	if v != nil {
-		original = v.(map[string]interface{})
+	if v == nil {
+		return nil
 	}
+	original := v.(map[string]interface{})
 	transformed := make(map[string]interface{})
 	transformed["secret_data"] =
 		flattenSecretManagerRegionalRegionalSecretVersionPayloadSecretData(original["data"], d, config)
+	transformed["secret_data_wo_version"] =
+		flattenSecretManagerRegionalRegionalSecretVersionPayloadSecretDataWoVersion(original["SecretDataWoVersion"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -187,13 +189,29 @@ func flattenSecretManagerRegionalRegionalSecretVersionPayload(v interface{}, d *
 
 func flattenSecretManagerRegionalRegionalSecretVersionPayloadSecretData(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
-		return "unknown"
+		return nil
 	}
-	transformed := v.(string)
-	if transformed == "" {
-		return "unknown"
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
 	}
 	return v
+}
+
+func flattenSecretManagerRegionalRegionalSecretVersionPayloadSecretDataWoVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
 }
 
 func resourceSecretManagerRegionalRegionalSecretVersionDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
