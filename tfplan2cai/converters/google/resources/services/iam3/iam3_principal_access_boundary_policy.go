@@ -199,6 +199,13 @@ func expandIAM3PrincipalAccessBoundaryPolicyDetailsRules(v interface{}, d tpgres
 			transformed["effect"] = transformedEffect
 		}
 
+		transformedOperation, err := expandIAM3PrincipalAccessBoundaryPolicyDetailsRulesOperation(original["operation"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedOperation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["operation"] = transformedOperation
+		}
+
 		req = append(req, transformed)
 	}
 	return req, nil
@@ -213,6 +220,45 @@ func expandIAM3PrincipalAccessBoundaryPolicyDetailsRulesResources(v interface{},
 }
 
 func expandIAM3PrincipalAccessBoundaryPolicyDetailsRulesEffect(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIAM3PrincipalAccessBoundaryPolicyDetailsRulesOperation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedPermissions, err := expandIAM3PrincipalAccessBoundaryPolicyDetailsRulesOperationPermissions(original["permissions"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPermissions); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["permissions"] = transformedPermissions
+	}
+
+	transformedExcludedPermissions, err := expandIAM3PrincipalAccessBoundaryPolicyDetailsRulesOperationExcludedPermissions(original["excluded_permissions"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedExcludedPermissions); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["excludedPermissions"] = transformedExcludedPermissions
+	}
+
+	return transformed, nil
+}
+
+func expandIAM3PrincipalAccessBoundaryPolicyDetailsRulesOperationPermissions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	v = v.(*schema.Set).List()
+	return v, nil
+}
+
+func expandIAM3PrincipalAccessBoundaryPolicyDetailsRulesOperationExcludedPermissions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	v = v.(*schema.Set).List()
 	return v, nil
 }
 
