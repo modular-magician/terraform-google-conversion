@@ -194,6 +194,12 @@ supported is 1.`,
 					Type: schema.TypeString,
 				},
 			},
+			"nat_ips_per_endpoint": {
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Optional:    true,
+				Description: `The number of NAT IPs allocated per connected endpoint.`,
+			},
 			"propagated_connection_limit": {
 				Type:     schema.TypeInt,
 				Computed: true,

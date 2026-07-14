@@ -157,6 +157,12 @@ func GetComputeServiceAttachmentCaiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("enable_proxy_protocol"); ok || !reflect.DeepEqual(v, enableProxyProtocolProp) {
 		obj["enableProxyProtocol"] = enableProxyProtocolProp
 	}
+	natIpsPerEndpointProp, err := expandComputeServiceAttachmentNatIpsPerEndpoint(d.Get("nat_ips_per_endpoint"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("nat_ips_per_endpoint"); !tpgresource.IsEmptyValue(reflect.ValueOf(natIpsPerEndpointProp)) && (ok || !reflect.DeepEqual(v, natIpsPerEndpointProp)) {
+		obj["natIpsPerEndpoint"] = natIpsPerEndpointProp
+	}
 	domainNamesProp, err := expandComputeServiceAttachmentDomainNames(d.Get("domain_names"), d, config)
 	if err != nil {
 		return nil, err
@@ -258,6 +264,10 @@ func expandComputeServiceAttachmentNatSubnets(v interface{}, d tpgresource.Terra
 }
 
 func expandComputeServiceAttachmentEnableProxyProtocol(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeServiceAttachmentNatIpsPerEndpoint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
