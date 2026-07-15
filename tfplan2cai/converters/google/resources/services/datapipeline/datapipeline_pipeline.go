@@ -49,6 +49,22 @@ import (
 	"google.golang.org/api/googleapi"
 )
 
+func resourceDataPipelinePipelineCustomDiffFunc(diff tpgresource.TerraformResourceDiff) error {
+	if diff.HasChange("desired_state") {
+		_, new := diff.GetChange("desired_state")
+		newState := new.(string)
+
+		if newState != "STATE_ACTIVE" && newState != "STATE_ARCHIVED" {
+			return fmt.Errorf("`desired_state` can only be set to `STATE_ACTIVE` or `STATE_ARCHIVED`")
+		}
+	}
+	return nil
+}
+
+func resourceDataPipelinePipelineCustomDiff(_ context.Context, diff *schema.ResourceDiff, meta interface{}) error {
+	return resourceDataPipelinePipelineCustomDiffFunc(diff)
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
@@ -159,6 +175,13 @@ func GetDataPipelinePipelineApiObject(d tpgresource.TerraformResourceData, confi
 		obj["pipelineSources"] = pipelineSourcesProp
 	}
 
+	return resourceDataPipelinePipelineEncoder(d, config, obj)
+}
+
+func resourceDataPipelinePipelineEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
+	// The Data Pipelines API does not support changing state via PATCH.
+	// State management is handled by post_create for the initial pause request
+	// and by pre_update for archiving.
 	return obj, nil
 }
 
