@@ -146,6 +146,12 @@ func GetNetworkSecuritySecurityProfileApiObject(d tpgresource.TerraformResourceD
 	} else if v, ok := d.GetOkExists("type"); !tpgresource.IsEmptyValue(reflect.ValueOf(typeProp)) && (ok || !reflect.DeepEqual(v, typeProp)) {
 		obj["type"] = typeProp
 	}
+	wildfireAnalysisProfileProp, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfile(d.Get("wildfire_analysis_profile"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("wildfire_analysis_profile"); !tpgresource.IsEmptyValue(reflect.ValueOf(wildfireAnalysisProfileProp)) && (ok || !reflect.DeepEqual(v, wildfireAnalysisProfileProp)) {
+		obj["wildfireAnalysisProfile"] = wildfireAnalysisProfileProp
+	}
 	effectiveLabelsProp, err := expandNetworkSecuritySecurityProfileEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -479,6 +485,203 @@ func expandNetworkSecuritySecurityProfileCustomInterceptProfileInterceptEndpoint
 }
 
 func expandNetworkSecuritySecurityProfileType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedWildfireRealtimeLookup, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireRealtimeLookup(original["wildfire_realtime_lookup"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedWildfireRealtimeLookup); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["wildfireRealtimeLookup"] = transformedWildfireRealtimeLookup
+	}
+
+	transformedWildfireSubmissionRules, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireSubmissionRules(original["wildfire_submission_rules"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedWildfireSubmissionRules); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["wildfireSubmissionRules"] = transformedWildfireSubmissionRules
+	}
+
+	transformedWildfireInlineCloudAnalysisRules, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRules(original["wildfire_inline_cloud_analysis_rules"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedWildfireInlineCloudAnalysisRules); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["wildfireInlineCloudAnalysisRules"] = transformedWildfireInlineCloudAnalysisRules
+	}
+
+	return transformed, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireRealtimeLookup(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireSubmissionRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedFileSelectionMode, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireSubmissionRulesFileSelectionMode(original["file_selection_mode"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedFileSelectionMode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["fileSelectionMode"] = transformedFileSelectionMode
+		}
+
+		transformedDirection, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireSubmissionRulesDirection(original["direction"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDirection); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["direction"] = transformedDirection
+		}
+
+		transformedCustomFileTypes, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireSubmissionRulesCustomFileTypes(original["custom_file_types"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedCustomFileTypes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["customFileTypes"] = transformedCustomFileTypes
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireSubmissionRulesFileSelectionMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireSubmissionRulesDirection(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireSubmissionRulesCustomFileTypes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedFileTypes, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireSubmissionRulesCustomFileTypesFileTypes(original["file_types"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedFileTypes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["fileTypes"] = transformedFileTypes
+	}
+
+	return transformed, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireSubmissionRulesCustomFileTypesFileTypes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedFileSelectionMode, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRulesFileSelectionMode(original["file_selection_mode"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedFileSelectionMode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["fileSelectionMode"] = transformedFileSelectionMode
+		}
+
+		transformedDirection, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRulesDirection(original["direction"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDirection); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["direction"] = transformedDirection
+		}
+
+		transformedAction, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRulesAction(original["action"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedAction); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["action"] = transformedAction
+		}
+
+		transformedCustomFileTypes, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRulesCustomFileTypes(original["custom_file_types"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedCustomFileTypes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["customFileTypes"] = transformedCustomFileTypes
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRulesFileSelectionMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRulesDirection(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRulesAction(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRulesCustomFileTypes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedFileTypes, err := expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRulesCustomFileTypesFileTypes(original["file_types"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedFileTypes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["fileTypes"] = transformedFileTypes
+	}
+
+	return transformed, nil
+}
+
+func expandNetworkSecuritySecurityProfileWildfireAnalysisProfileWildfireInlineCloudAnalysisRulesCustomFileTypesFileTypes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

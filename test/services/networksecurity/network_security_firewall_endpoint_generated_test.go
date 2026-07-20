@@ -30,6 +30,9 @@ func TestAccNetworkSecurityFirewallEndpoint(t *testing.T) {
 		{
 			Name: "TestAccNetworkSecurityFirewallEndpoints_enableJumboFrames",
 		},
+		{
+			Name: "TestAccNetworkSecurityFirewallEndpoints_wildfire",
+		},
 	}
 
 	for _, tt := range tests {
