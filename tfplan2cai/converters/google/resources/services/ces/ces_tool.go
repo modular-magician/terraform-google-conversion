@@ -1500,6 +1500,13 @@ func expandCESToolDataStoreToolModalityConfigs(v interface{}, d tpgresource.Terr
 			transformed["rewriterConfig"] = transformedRewriterConfig
 		}
 
+		transformedSnippetsConfig, err := expandCESToolDataStoreToolModalityConfigsSnippetsConfig(original["snippets_config"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedSnippetsConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["snippetsConfig"] = transformedSnippetsConfig
+		}
+
 		transformedSummarizationConfig, err := expandCESToolDataStoreToolModalityConfigsSummarizationConfig(original["summarization_config"], d, config)
 		if err != nil {
 			return nil, err
@@ -1631,6 +1638,32 @@ func expandCESToolDataStoreToolModalityConfigsRewriterConfigModelSettingsTempera
 }
 
 func expandCESToolDataStoreToolModalityConfigsRewriterConfigPrompt(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESToolDataStoreToolModalityConfigsSnippetsConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnableSnippets, err := expandCESToolDataStoreToolModalityConfigsSnippetsConfigEnableSnippets(original["enable_snippets"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEnableSnippets); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["enableSnippets"] = transformedEnableSnippets
+	}
+
+	return transformed, nil
+}
+
+func expandCESToolDataStoreToolModalityConfigsSnippetsConfigEnableSnippets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
