@@ -128,6 +128,12 @@ func GetCESDeploymentApiObject(d tpgresource.TerraformResourceData, config *tran
 	} else if v, ok := d.GetOkExists("display_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(displayNameProp)) && (ok || !reflect.DeepEqual(v, displayNameProp)) {
 		obj["displayName"] = displayNameProp
 	}
+	modalityProp, err := expandCESDeploymentModality(d.Get("modality"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("modality"); !tpgresource.IsEmptyValue(reflect.ValueOf(modalityProp)) && (ok || !reflect.DeepEqual(v, modalityProp)) {
+		obj["modality"] = modalityProp
+	}
 
 	return obj, nil
 }
@@ -350,5 +356,9 @@ func expandCESDeploymentChannelProfileWebWidgetConfigSecuritySettingsEnableRecap
 }
 
 func expandCESDeploymentDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESDeploymentModality(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
