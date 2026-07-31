@@ -97,6 +97,9 @@ func TestAccContainerNodePool(t *testing.T) {
 			Name: "TestAccContainerNodePool_withSandboxConfigType",
 		},
 		{
+			Name: "TestAccContainerNodePool_withSandboxConfigMicroVM",
+		},
+		{
 			Name: "TestAccContainerNodePool_withKubeletConfig",
 		},
 		{
