@@ -49,6 +49,24 @@ import (
 	"google.golang.org/api/googleapi"
 )
 
+var DiscoveryEngineSearchEngineServerProvidedFeatures = []string{
+	"enable-end-user-sharing-with-groups",
+}
+
+func DiscoveryEngineSearchEngineFeaturesDiffSuppress(k, old, new string, _ *schema.ResourceData) bool {
+	for _, feature := range DiscoveryEngineSearchEngineServerProvidedFeatures {
+		if strings.Contains(k, feature) && new == "" {
+			return true
+		}
+	}
+
+	if strings.Contains(k, "features.%") {
+		return true
+	}
+
+	return false
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
