@@ -138,6 +138,7 @@ func (c *CertificateManagerCertificateMapCai2hclConverter) convertResourceData(a
 
 	hclData["description"] = flattenCertificateManagerCertificateMapDescription(res["description"], d, config)
 	hclData["labels"] = flattenCertificateManagerCertificateMapLabels(res["labels"], d, config)
+	hclData["tags"] = flattenCertificateManagerCertificateMapTags(res["tags"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -161,4 +162,8 @@ func flattenCertificateManagerCertificateMapDescription(v interface{}, d *schema
 
 func flattenCertificateManagerCertificateMapLabels(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return tgcresource.RemoveTerraformAttributionLabel(v)
+}
+
+func flattenCertificateManagerCertificateMapTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
 }

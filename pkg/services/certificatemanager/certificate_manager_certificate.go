@@ -226,6 +226,15 @@ Leaf certificate comes first, followed by intermediate ones if any.`,
 				},
 				ExactlyOneOf: []string{"managed", "self_managed"},
 			},
+			"tags": {
+				Type:     schema.TypeMap,
+				Optional: true,
+				ForceNew: true,
+				Description: `A map of resource manager tags.
+Resource manager tag keys and values have the same definition as resource manager tags.
+Keys must be in the format tagKeys/{tag_key_id}, and values are in the format tagValues/{tag_value_id}.`,
+				Elem: &schema.Schema{Type: schema.TypeString},
+			},
 			"effective_labels": {
 				Type:        schema.TypeMap,
 				Computed:    true,

@@ -133,6 +133,12 @@ func GetCertificateManagerTrustConfigCaiObject(d tpgresource.TerraformResourceDa
 	} else if v, ok := d.GetOkExists("allowlisted_certificates"); !tpgresource.IsEmptyValue(reflect.ValueOf(allowlistedCertificatesProp)) && (ok || !reflect.DeepEqual(v, allowlistedCertificatesProp)) {
 		obj["allowlistedCertificates"] = allowlistedCertificatesProp
 	}
+	tagsProp, err := expandCertificateManagerTrustConfigTags(d.Get("tags"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("tags"); !tpgresource.IsEmptyValue(reflect.ValueOf(tagsProp)) && (ok || !reflect.DeepEqual(v, tagsProp)) {
+		obj["tags"] = tagsProp
+	}
 	effectiveLabelsProp, err := expandCertificateManagerTrustConfigEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -264,6 +270,17 @@ func expandCertificateManagerTrustConfigAllowlistedCertificates(v interface{}, d
 
 func expandCertificateManagerTrustConfigAllowlistedCertificatesPemCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandCertificateManagerTrustConfigTags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
 
 func expandCertificateManagerTrustConfigEffectiveLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {

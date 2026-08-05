@@ -142,6 +142,7 @@ func (c *CertificateManagerCertificateIssuanceConfigCai2hclConverter) convertRes
 	hclData["lifetime"] = flattenCertificateManagerCertificateIssuanceConfigLifetime(res["lifetime"], d, config)
 	hclData["labels"] = flattenCertificateManagerCertificateIssuanceConfigLabels(res["labels"], d, config)
 	hclData["certificate_authority_config"] = flattenCertificateManagerCertificateIssuanceConfigCertificateAuthorityConfig(res["certificateAuthorityConfig"], d, config)
+	hclData["tags"] = flattenCertificateManagerCertificateIssuanceConfigTags(res["tags"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -238,5 +239,9 @@ func flattenCertificateManagerCertificateIssuanceConfigCertificateAuthorityConfi
 	if transformed == "" {
 		return "unknown"
 	}
+	return v
+}
+
+func flattenCertificateManagerCertificateIssuanceConfigTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }

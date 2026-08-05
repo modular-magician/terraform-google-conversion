@@ -50,6 +50,7 @@ func TestAccCertificateManagerCertificateMap(t *testing.T) {
 					"lifecycle",
 					"name",
 					"provider",
+					"tags",
 					"timeouts",
 				},
 				"google_certificate_manager_certificate_map",
