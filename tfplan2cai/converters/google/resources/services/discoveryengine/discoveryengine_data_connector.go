@@ -222,13 +222,14 @@ func expandDiscoveryEngineDataConnectorDataSourceVersion(v interface{}, d tpgres
 	return v, nil
 }
 
-func expandDiscoveryEngineDataConnectorParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
-	if v == nil {
-		return map[string]string{}, nil
+func expandDiscoveryEngineDataConnectorParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
 	}
-	m := make(map[string]string)
-	for k, val := range v.(map[string]interface{}) {
-		m[k] = val.(string)
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
 	}
 	return m, nil
 }
