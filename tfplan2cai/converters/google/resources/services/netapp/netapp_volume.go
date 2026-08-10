@@ -92,6 +92,13 @@ func SuppressHasRootAccessDiff(k, old, new string, d *schema.ResourceData) bool 
 	return false
 }
 
+// netappVolumeHybridReplicationParametersDiffSuppress suppresses diffs for existing resources
+// when state (old) is empty. This prevents forced recreations when upgrading from provider versions
+// where hybrid_replication_parameters was omitted from state due to being CREATE-only.
+func netappVolumeHybridReplicationParametersDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
+	return d.Id() != "" && (old == "" || old == "0")
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel

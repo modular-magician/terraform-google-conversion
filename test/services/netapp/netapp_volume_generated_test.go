@@ -72,6 +72,7 @@ func TestAccNetappVolume(t *testing.T) {
 					"depends_on",
 					"dynamic",
 					"for_each",
+					"hybrid_replication_parameters",
 					"lifecycle",
 					"location",
 					"name",

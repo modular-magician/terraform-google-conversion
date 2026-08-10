@@ -83,6 +83,13 @@ func SuppressHasRootAccessDiff(k, old, new string, d *schema.ResourceData) bool 
 	return false
 }
 
+// netappVolumeHybridReplicationParametersDiffSuppress suppresses diffs for existing resources
+// when state (old) is empty. This prevents forced recreations when upgrading from provider versions
+// where hybrid_replication_parameters was omitted from state due to being CREATE-only.
+func netappVolumeHybridReplicationParametersDiffSuppress(k, old, new string, d *schema.ResourceData) bool {
+	return d.Id() != "" && (old == "" || old == "0")
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
@@ -380,28 +387,35 @@ Use either squash_mode or has_root_access, but never both at the same time. Thes
 				},
 			},
 			"hybrid_replication_parameters": {
-				Type:     schema.TypeList,
-				Optional: true,
+				Type:             schema.TypeList,
+				Optional:         true,
+				ForceNew:         true,
+				DiffSuppressFunc: netappVolumeHybridReplicationParametersDiffSuppress,
 				Description: `[Volume migration](https://docs.cloud.google.com/netapp/volumes/docs/migrate/ontap/overview) and
 [external replication](https://docs.cloud.google.com/netapp/volumes/docs/protect-data/replicate-ontap/overview)
-are two types of Hybrid Replication. This parameter block specifies the parameters for a hybrid replication.`,
+are two types of Hybrid Replication. This parameter block specifies the parameters for a hybrid replication.
+This field will suppress diffs that change the value from empty to non-empty. To force changing this field
+from empty to non-empty, change another field at the same time.`,
 				MaxItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"cluster_location": {
 							Type:     schema.TypeString,
 							Optional: true,
+							ForceNew: true,
 							Description: `Optional. Name of source cluster location associated with the replication. This is a free-form field
 for display purposes only.`,
 						},
 						"description": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							ForceNew:    true,
 							Description: `Optional. Description of the replication.`,
 						},
 						"hybrid_replication_type": {
 							Type:         schema.TypeString,
 							Optional:     true,
+							ForceNew:     true,
 							ValidateFunc: verify.ValidateEnum([]string{"MIGRATION", "CONTINUOUS_REPLICATION", "ONPREM_REPLICATION", "REVERSE_ONPREM_REPLICATION", ""}),
 							Description: `Optional. Type of the hybrid replication. Use 'MIGRATION' to create a volume migration
 and 'ONPREM_REPLICATION' to create an external replication.
@@ -411,6 +425,7 @@ replication which got reversed. Default is 'MIGRATION'. Possible values: ["MIGRA
 						"labels": {
 							Type:     schema.TypeMap,
 							Optional: true,
+							ForceNew: true,
 							Description: `Optional. Labels to be added to the replication as the key value pairs.
 An object containing a list of "key": value pairs. Example: { "name": "wrench", "mass": "1.3kg", "count": "3" }.`,
 							Elem: &schema.Schema{Type: schema.TypeString},
@@ -418,16 +433,19 @@ An object containing a list of "key": value pairs. Example: { "name": "wrench", 
 						"large_volume_constituent_count": {
 							Type:        schema.TypeInt,
 							Optional:    true,
+							ForceNew:    true,
 							Description: `Optional. If the source is a FlexGroup volume, this field needs to match the number of constituents in the FlexGroup.`,
 						},
 						"peer_cluster_name": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							ForceNew:    true,
 							Description: `Required. Name of the ONTAP source cluster to be peered with NetApp Volumes.`,
 						},
 						"peer_ip_addresses": {
 							Type:        schema.TypeList,
 							Optional:    true,
+							ForceNew:    true,
 							Description: `Required. List of all intercluster LIF IP addresses of the ONTAP source cluster.`,
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
@@ -436,21 +454,25 @@ An object containing a list of "key": value pairs. Example: { "name": "wrench", 
 						"peer_svm_name": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							ForceNew:    true,
 							Description: `Required. Name of the ONTAP source vserver SVM to be peered with NetApp Volumes.`,
 						},
 						"peer_volume_name": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							ForceNew:    true,
 							Description: `Required. Name of the ONTAP source volume to be replicated to NetApp Volumes destination volume.`,
 						},
 						"replication": {
 							Type:        schema.TypeString,
 							Optional:    true,
+							ForceNew:    true,
 							Description: `Required. Desired name for the replication of this volume.`,
 						},
 						"replication_schedule": {
 							Type:         schema.TypeString,
 							Optional:     true,
+							ForceNew:     true,
 							ValidateFunc: verify.ValidateEnum([]string{"EVERY_10_MINUTES", "HOURLY", "DAILY", ""}),
 							Description:  `Optional. Replication Schedule for the replication created. Possible values: ["EVERY_10_MINUTES", "HOURLY", "DAILY"]`,
 						},
