@@ -692,6 +692,10 @@ func flattenNetworkInterfaces(d *schema.ResourceData, config *transport_tpg.Conf
 		if !ok && iface["subnetwork"] != nil {
 			log.Printf("[WARN] flattenNetworkInterfaces: unexpected type for subnetwork at index %d: %T", i, iface["subnetwork"])
 		}
+		serviceClassId, ok := iface["serviceClassId"].(string)
+		if !ok && iface["serviceClassId"] != nil {
+			log.Printf("[WARN] flattenNetworkInterfaces: unexpected type for serviceClassId at index %d: %T", i, iface["serviceClassId"])
+		}
 		parentNicName, ok := iface["parentNicName"].(string)
 		if !ok && iface["parentNicName"] != nil {
 			log.Printf("[WARN] flattenNetworkInterfaces: unexpected type for parentNicName at index %d: %T", i, iface["parentNicName"])
@@ -722,6 +726,7 @@ func flattenNetworkInterfaces(d *schema.ResourceData, config *transport_tpg.Conf
 		flattened[i] = map[string]interface{}{
 			"network_ip":                  networkIP,
 			"network":                     tpgresource.ConvertSelfLinkToV1(network),
+			"service_class_id":            serviceClassId,
 			"parent_nic_name":             parentNicName,
 			"vlan":                        flattenNetworkInterfaceInt64(iface["vlan"]),
 			"subnetwork":                  tpgresource.ConvertSelfLinkToV1(subnetwork),
@@ -933,6 +938,9 @@ func expandNetworkInterfaces(d tpgresource.TerraformResourceData, config *transp
 		}
 		if air6 := expandAliasIpRanges(data["alias_ipv6_range"].([]interface{})); len(air6) > 0 {
 			iface["aliasIpv6Ranges"] = air6
+		}
+		if v := data["service_class_id"].(string); v != "" {
+			iface["serviceClassId"] = v
 		}
 		if v := data["nic_type"].(string); v != "" {
 			iface["nicType"] = v

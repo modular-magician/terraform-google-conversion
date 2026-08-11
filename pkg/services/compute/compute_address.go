@@ -191,6 +191,13 @@ Please refer to the field 'effective_labels' for all of the labels present on th
 can only be used with INTERNAL type with the VPC_PEERING and
 IPSEC_INTERCONNECT purposes.`,
 			},
+			"network_attachment": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+				Description: `The URL of the network attachment that this interface should connect to in the following format:
+projects/{project_number}/regions/{region_name}/networkAttachments/{network_attachment_name}`,
+			},
 			"network_tier": {
 				Type:         schema.TypeString,
 				Computed:     true,
@@ -241,6 +248,13 @@ This should only be set when using an Internal address.`,
 				DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
 				Description: `The Region in which the created address should reside.
 If it is not provided, the provider region is used.`,
+			},
+			"service_class_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+				Description: `Producer Service's Service class Id for the region of this network interface. Can only be used with network_attachment.
+It is not possible to use on its own; however, network_attachment can be used without service_class_id.`,
 			},
 			"subnetwork": {
 				Type:             schema.TypeString,

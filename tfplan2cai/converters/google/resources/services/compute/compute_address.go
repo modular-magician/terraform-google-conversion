@@ -215,6 +215,18 @@ func GetComputeAddressApiObject(d tpgresource.TerraformResourceData, config *tra
 	} else if v, ok := d.GetOkExists("ip_collection"); !tpgresource.IsEmptyValue(reflect.ValueOf(ipCollectionProp)) && (ok || !reflect.DeepEqual(v, ipCollectionProp)) {
 		obj["ipCollection"] = ipCollectionProp
 	}
+	networkAttachmentProp, err := expandComputeAddressNetworkAttachment(d.Get("network_attachment"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("network_attachment"); !tpgresource.IsEmptyValue(reflect.ValueOf(networkAttachmentProp)) && (ok || !reflect.DeepEqual(v, networkAttachmentProp)) {
+		obj["networkAttachment"] = networkAttachmentProp
+	}
+	serviceClassIdProp, err := expandComputeAddressServiceClassId(d.Get("service_class_id"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("service_class_id"); !tpgresource.IsEmptyValue(reflect.ValueOf(serviceClassIdProp)) && (ok || !reflect.DeepEqual(v, serviceClassIdProp)) {
+		obj["serviceClassId"] = serviceClassIdProp
+	}
 	effectiveLabelsProp, err := expandComputeAddressEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -288,6 +300,14 @@ func expandComputeAddressIpv6EndpointType(v interface{}, d tpgresource.Terraform
 }
 
 func expandComputeAddressIpCollection(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeAddressNetworkAttachment(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeAddressServiceClassId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

@@ -455,6 +455,9 @@ func TestAccComputeInstance(t *testing.T) {
 			Name: "TestAccComputeInstance_NetworkAttachmentUpdate",
 		},
 		{
+			Name: "TestAccComputeInstance_ServiceClassNetworkAttachment",
+		},
+		{
 			Name: "TestAccComputeInstance_NicStackTypeUpdate",
 		},
 		{
