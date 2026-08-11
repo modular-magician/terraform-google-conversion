@@ -133,7 +133,7 @@ func (c *AlloydbInstanceCai2hclConverter) convertResourceData(asset caiasset.Ass
 	}
 	hclData := make(map[string]interface{})
 
-	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_annotations": struct{}{}, "effective_labels": struct{}{}, "ip_address": struct{}{}, "name": struct{}{}, "outbound_public_ip_addresses": struct{}{}, "public_ip_address": struct{}{}, "reconciling": struct{}{}, "state": struct{}{}, "terraform_labels": struct{}{}, "uid": struct{}{}, "update_time": struct{}{}}
+	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_annotations": struct{}{}, "effective_labels": struct{}{}, "ip_address": struct{}{}, "name": struct{}{}, "outbound_public_ip_addresses": struct{}{}, "psc_instance_info": struct{}{}, "public_ip_address": struct{}{}, "reconciling": struct{}{}, "state": struct{}{}, "terraform_labels": struct{}{}, "uid": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//alloydb.googleapis.com/{{cluster}}/instances/{{instance_id}}", outputFields, hclData)
 
 	hclData["labels"] = flattenAlloydbInstanceLabels(res["labels"], d, config)
@@ -382,10 +382,14 @@ func flattenAlloydbInstancePscInstanceConfig(v interface{}, d *schema.ResourceDa
 	transformed := make(map[string]interface{})
 	transformed["allowed_consumer_projects"] =
 		flattenAlloydbInstancePscInstanceConfigAllowedConsumerProjects(original["allowedConsumerProjects"], d, config)
+	transformed["psc_auto_connection_policy_state"] =
+		flattenAlloydbInstancePscInstanceConfigPscAutoConnectionPolicyState(original["pscAutoConnectionPolicyState"], d, config)
 	transformed["psc_interface_configs"] =
 		flattenAlloydbInstancePscInstanceConfigPscInterfaceConfigs(original["pscInterfaceConfigs"], d, config)
 	transformed["psc_auto_connections"] =
 		flattenAlloydbInstancePscInstanceConfigPscAutoConnections(original["pscAutoConnections"], d, config)
+	transformed["psc_auto_dns_state"] =
+		flattenAlloydbInstancePscInstanceConfigPscAutoDnsState(original["pscAutoDnsState"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -393,6 +397,10 @@ func flattenAlloydbInstancePscInstanceConfig(v interface{}, d *schema.ResourceDa
 }
 
 func flattenAlloydbInstancePscInstanceConfigAllowedConsumerProjects(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenAlloydbInstancePscInstanceConfigPscAutoConnectionPolicyState(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
@@ -438,8 +446,9 @@ func flattenAlloydbInstancePscInstanceConfigPscAutoConnections(v interface{}, d 
 			continue
 		}
 		transformed = append(transformed, map[string]interface{}{
-			"consumer_project": flattenAlloydbInstancePscInstanceConfigPscAutoConnectionsConsumerProject(original["consumerProject"], d, config),
-			"consumer_network": flattenAlloydbInstancePscInstanceConfigPscAutoConnectionsConsumerNetwork(original["consumerNetwork"], d, config),
+			"consumer_project":     flattenAlloydbInstancePscInstanceConfigPscAutoConnectionsConsumerProject(original["consumerProject"], d, config),
+			"consumer_network":     flattenAlloydbInstancePscInstanceConfigPscAutoConnectionsConsumerNetwork(original["consumerNetwork"], d, config),
+			"dns_automation_infos": flattenAlloydbInstancePscInstanceConfigPscAutoConnectionsDnsAutomationInfos(original["dnsAutomationInfos"], d, config),
 		})
 	}
 	return transformed
@@ -462,6 +471,44 @@ func flattenAlloydbInstancePscInstanceConfigPscAutoConnectionsConsumerNetwork(v 
 	if strVal, ok := v.(string); ok && strVal == "" {
 		return nil
 	}
+	return v
+}
+
+func flattenAlloydbInstancePscInstanceConfigPscAutoConnectionsDnsAutomationInfos(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return v
+	}
+	l := v.([]interface{})
+	transformed := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		original := raw.(map[string]interface{})
+		if len(original) < 1 {
+			// Do not include empty json objects coming back from the api
+			continue
+		}
+		transformed = append(transformed, map[string]interface{}{
+			"state":                       flattenAlloydbInstancePscInstanceConfigPscAutoConnectionsDnsAutomationInfosState(original["state"], d, config),
+			"fully_qualified_domain_name": flattenAlloydbInstancePscInstanceConfigPscAutoConnectionsDnsAutomationInfosFullyQualifiedDomainName(original["fullyQualifiedDomainName"], d, config),
+		})
+	}
+	return transformed
+}
+
+func flattenAlloydbInstancePscInstanceConfigPscAutoConnectionsDnsAutomationInfosState(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenAlloydbInstancePscInstanceConfigPscAutoConnectionsDnsAutomationInfosFullyQualifiedDomainName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenAlloydbInstancePscInstanceConfigPscAutoDnsState(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 

@@ -319,6 +319,12 @@ These should be specified as project numbers only.`,
 								ValidateFunc: verify.ValidateRegexp(`^\d+$`),
 							},
 						},
+						"psc_auto_connection_policy_state": {
+							Type:         schema.TypeString,
+							Optional:     true,
+							ValidateFunc: verify.ValidateEnum([]string{"PSC_AUTO_CONNECTION_POLICY_STATE_UNSPECIFIED", "ENABLED", "DISABLED", ""}),
+							Description:  `The state of the PSC auto connection policy for the instance. Possible values: ["PSC_AUTO_CONNECTION_POLICY_STATE_UNSPECIFIED", "ENABLED", "DISABLED"]`,
+						},
 						"psc_auto_connections": {
 							Type:        schema.TypeList,
 							Optional:    true,
@@ -341,8 +347,39 @@ the project ID (and not the project number)`,
 be created. The API expects the consumer project to be the project ID(
 and not the project number).`,
 									},
+									"dns_automation_infos": {
+										Type:        schema.TypeList,
+										Optional:    true,
+										Description: `Information about the DNS automation for the PSC auto connection.`,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"fully_qualified_domain_name": {
+													Type:     schema.TypeString,
+													Optional: true,
+													Description: `The fully qualified domain name of the instance for DNS automation.
+Example: "<cluster-uid>.<instance-uid>.<region>.alloydb-psc-auto.goog.".`,
+												},
+												"state": {
+													Type:         schema.TypeString,
+													Optional:     true,
+													ValidateFunc: verify.ValidateEnum([]string{"STATE_UNSPECIFIED", "PENDING_CREATE", "ACTIVE", "PENDING_DELETE", "CREATE_FAILED", "DELETE_FAILED", ""}),
+													Description:  `The state of the DNS automation for the PSC auto connection. Possible values: ["STATE_UNSPECIFIED", "PENDING_CREATE", "ACTIVE", "PENDING_DELETE", "CREATE_FAILED", "DELETE_FAILED"]`,
+												},
+											},
+										},
+									},
 								},
 							},
+						},
+						"psc_auto_dns_state": {
+							Type:         schema.TypeString,
+							Computed:     true,
+							Optional:     true,
+							ValidateFunc: verify.ValidateEnum([]string{"PSC_AUTO_DNS_STATE_UNSPECIFIED", "PSC_AUTO_DNS_STATE_ENABLED", "PSC_AUTO_DNS_STATE_DISABLED", ""}),
+							Description: `The state of the PSC auto DNS.
+For new instances, the PSC auto DNS is enabled
+by default. Use 'effective_psc_auto_dns_enabled' to check the
+effective state of the PSC auto DNS. Possible values: ["PSC_AUTO_DNS_STATE_UNSPECIFIED", "PSC_AUTO_DNS_STATE_ENABLED", "PSC_AUTO_DNS_STATE_DISABLED"]`,
 						},
 						"psc_interface_configs": {
 							Type:     schema.TypeList,
@@ -445,6 +482,14 @@ networkConfig.enableOutboundPublicIp is set to true. These IP addresses are used
 for outbound connections.`,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
+				},
+			},
+			"psc_instance_info": {
+				Type:        schema.TypeList,
+				Computed:    true,
+				Description: `Instance-level PSC information.`,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{},
 				},
 			},
 			"public_ip_address": {
