@@ -129,6 +129,34 @@ func pollCheckForPrivateCloudAbsence(resp map[string]interface{}, respErr error)
 	return transport_tpg.PendingStatusPollResult("found")
 }
 
+func vmwareenginePrivateCloudEncryptionConfigCustomizeDiff(_ context.Context, diff *schema.ResourceDiff, meta interface{}) error {
+	v, ok := diff.GetOk("encryption_config")
+	if !ok || v == nil {
+		return nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil
+	}
+	original := l[0].(map[string]interface{})
+
+	// Validate kms_key_name based on type
+	if original["type"] == "GMEK" {
+		if vKey, ok := original["kms_key_name"]; ok && vKey != nil && vKey.(string) != "" {
+			return fmt.Errorf("encryption_config.kms_key_name cannot be set when encryption_config.type is GMEK")
+		}
+	}
+
+	if original["type"] == "CMEK" {
+		vKey, ok := original["kms_key_name"]
+		if !ok || vKey == nil || vKey.(string) == "" {
+			return fmt.Errorf("encryption_config.kms_key_name must be set when encryption_config.type is CMEK")
+		}
+	}
+
+	return nil
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
@@ -207,6 +235,12 @@ func GetVmwareenginePrivateCloudApiObject(d tpgresource.TerraformResourceData, c
 		return nil, err
 	} else if v, ok := d.GetOkExists("management_cluster"); !tpgresource.IsEmptyValue(reflect.ValueOf(managementClusterProp)) && (ok || !reflect.DeepEqual(v, managementClusterProp)) {
 		obj["managementCluster"] = managementClusterProp
+	}
+	encryptionConfigProp, err := expandVmwareenginePrivateCloudEncryptionConfig(d.Get("encryption_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("encryption_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(encryptionConfigProp)) && (ok || !reflect.DeepEqual(v, encryptionConfigProp)) {
+		obj["encryptionConfig"] = encryptionConfigProp
 	}
 	typeProp, err := expandVmwareenginePrivateCloudType(d.Get("type"), d, config)
 	if err != nil {
@@ -641,6 +675,35 @@ func expandVmwareenginePrivateCloudManagementClusterAutoscalingSettingsMaxCluste
 
 func expandVmwareenginePrivateCloudManagementClusterAutoscalingSettingsCoolDownPeriod(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandVmwareenginePrivateCloudEncryptionConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+
+	// If type is GMEK, we return nil to represent GMEK (null) on the backend
+	if original["type"] == "GMEK" {
+		return nil, nil
+	}
+
+	transformed := make(map[string]interface{})
+
+	if vType, ok := original["type"]; ok && vType != nil {
+		transformed["type"] = vType.(string)
+	}
+
+	if vKey, ok := original["kms_key_name"]; ok && vKey != nil {
+		transformed["cryptoKeyName"] = vKey.(string)
+	}
+
+	return transformed, nil
 }
 
 func expandVmwareenginePrivateCloudType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
