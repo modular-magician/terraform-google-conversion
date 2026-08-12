@@ -57,6 +57,10 @@ func TestAccColabNotebookExecution(t *testing.T) {
 					"notebook_execution_job_id",
 					"provider",
 					"timeouts",
+					"workbench_runtime",
+					"workbench_runtime.vm_image.family",
+					"workbench_runtime.vm_image.name",
+					"workbench_runtime.vm_image.project",
 				},
 				"google_colab_notebook_execution",
 			)

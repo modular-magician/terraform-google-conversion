@@ -291,6 +291,50 @@ func ResourceColabNotebookExecution() *schema.Resource {
 				Description:  `The service account to run the execution as.`,
 				ExactlyOneOf: []string{"execution_user", "service_account"},
 			},
+			"workbench_runtime": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				ForceNew:    true,
+				Description: `Configuration for a Workbench Instances-based environment.`,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"vm_image": {
+							Type:     schema.TypeList,
+							Optional: true,
+							ForceNew: true,
+							Description: `Definition of a custom Compute Engine virtual machine image for starting
+a notebook execution with the environment installed directly on the VM.`,
+							MaxItems: 1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"project": {
+										Type:     schema.TypeString,
+										Required: true,
+										ForceNew: true,
+										Description: `The name of the Google Cloud project that this VM image belongs to.
+Format: '{project_id}'`,
+									},
+									"family": {
+										Type:         schema.TypeString,
+										Optional:     true,
+										ForceNew:     true,
+										Description:  `Use this VM image family to find the image; the newest image in this family will be used.`,
+										ExactlyOneOf: []string{"workbench_runtime.0.vm_image.0.family", "workbench_runtime.0.vm_image.0.name"},
+									},
+									"name": {
+										Type:         schema.TypeString,
+										Optional:     true,
+										ForceNew:     true,
+										Description:  `Use this VM image name to find the image.`,
+										ExactlyOneOf: []string{"workbench_runtime.0.vm_image.0.family", "workbench_runtime.0.vm_image.0.name"},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 			"project": {
 				Type:     schema.TypeString,
 				Optional: true,

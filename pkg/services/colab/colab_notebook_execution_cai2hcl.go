@@ -146,6 +146,7 @@ func (c *ColabNotebookExecutionCai2hclConverter) convertResourceData(asset caias
 	hclData["gcs_output_uri"] = flattenColabNotebookExecutionGcsOutputUri(res["gcsOutputUri"], d, config)
 	hclData["execution_user"] = flattenColabNotebookExecutionExecutionUser(res["executionUser"], d, config)
 	hclData["service_account"] = flattenColabNotebookExecutionServiceAccount(res["serviceAccount"], d, config)
+	hclData["workbench_runtime"] = flattenColabNotebookExecutionWorkbenchRuntime(res["workbenchRuntime"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -460,6 +461,69 @@ func flattenColabNotebookExecutionExecutionUser(v interface{}, d *schema.Resourc
 }
 
 func flattenColabNotebookExecutionServiceAccount(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenColabNotebookExecutionWorkbenchRuntime(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["vm_image"] =
+		flattenColabNotebookExecutionWorkbenchRuntimeVmImage(original["vmImage"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenColabNotebookExecutionWorkbenchRuntimeVmImage(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["project"] =
+		flattenColabNotebookExecutionWorkbenchRuntimeVmImageProject(original["project"], d, config)
+	transformed["name"] =
+		flattenColabNotebookExecutionWorkbenchRuntimeVmImageName(original["name"], d, config)
+	transformed["family"] =
+		flattenColabNotebookExecutionWorkbenchRuntimeVmImageFamily(original["family"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenColabNotebookExecutionWorkbenchRuntimeVmImageProject(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return "unknown"
+	}
+	transformed := v.(string)
+	if transformed == "" {
+		return "unknown"
+	}
+	return v
+}
+
+func flattenColabNotebookExecutionWorkbenchRuntimeVmImageName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenColabNotebookExecutionWorkbenchRuntimeVmImageFamily(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
 	}
