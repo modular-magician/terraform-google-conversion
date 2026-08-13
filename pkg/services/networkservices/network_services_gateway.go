@@ -143,6 +143,7 @@ func ResourceNetworkServicesGateway() *schema.Resource {
 			"name": {
 				Type:        schema.TypeString,
 				Required:    true,
+				ForceNew:    true,
 				Description: `Name of the Gateway resource.`,
 			},
 			"type": {
