@@ -85,6 +85,7 @@ func ResourceNetworkSecurityTlsInspectionPolicy() *schema.Resource {
 			"name": {
 				Type:        schema.TypeString,
 				Required:    true,
+				ForceNew:    true,
 				Description: `Short name of the TlsInspectionPolicy resource to be created.`,
 			},
 			"custom_tls_features": {
@@ -108,6 +109,7 @@ func ResourceNetworkSecurityTlsInspectionPolicy() *schema.Resource {
 			"location": {
 				Type:        schema.TypeString,
 				Optional:    true,
+				ForceNew:    true,
 				Description: `The location of the tls inspection policy.`,
 			},
 			"min_tls_version": {
