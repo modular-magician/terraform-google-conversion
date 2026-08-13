@@ -51,6 +51,7 @@ func TestAccCertificateManagerCertificateIssuanceConfig(t *testing.T) {
 					"location",
 					"name",
 					"provider",
+					"tags",
 					"timeouts",
 				},
 				"google_certificate_manager_certificate_issuance_config",

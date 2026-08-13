@@ -34,6 +34,9 @@ func TestAccCertificateManagerDnsAuthorization(t *testing.T) {
 			Name: "TestAccCertificateManagerDnsAuthorization_update",
 		},
 		{
+			Name: "TestAccCertificateManagerDnsAuthorization_tags",
+		},
+		{
 			Name: "TestAccCertificateManagerDnsAuthorization_migration",
 		},
 	}
@@ -60,6 +63,7 @@ func TestAccCertificateManagerDnsAuthorization(t *testing.T) {
 					"location",
 					"name",
 					"provider",
+					"tags",
 					"timeouts",
 				},
 				"google_certificate_manager_dns_authorization",

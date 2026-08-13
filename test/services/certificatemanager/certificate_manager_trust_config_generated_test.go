@@ -33,6 +33,9 @@ func TestAccCertificateManagerTrustConfig(t *testing.T) {
 		{
 			Name: "TestAccCertificateManagerTrustConfig_update",
 		},
+		{
+			Name: "TestAccCertificateManagerTrustConfig_tags",
+		},
 	}
 
 	for _, tt := range tests {
@@ -57,6 +60,7 @@ func TestAccCertificateManagerTrustConfig(t *testing.T) {
 					"location",
 					"name",
 					"provider",
+					"tags",
 					"timeouts",
 				},
 				"google_certificate_manager_trust_config",

@@ -49,6 +49,9 @@ func TestAccCertificateManagerCertificate(t *testing.T) {
 			Name: "TestAccCertificateManagerCertificate_certificateManagerClientAuthCertificateExample",
 		},
 		{
+			Name: "TestAccCertificateManagerCertificate_tags",
+		},
+		{
 			Name: "TestAccCertificateManagerCertificate_migration",
 		},
 	}
@@ -79,6 +82,7 @@ func TestAccCertificateManagerCertificate(t *testing.T) {
 					"self_managed.certificate_pem",
 					"self_managed.pem_private_key",
 					"self_managed.private_key_pem",
+					"tags",
 					"timeouts",
 				},
 				"google_certificate_manager_certificate",

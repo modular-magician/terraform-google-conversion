@@ -146,6 +146,7 @@ func (c *CertificateManagerCertificateCai2hclConverter) convertResourceData(asse
 	hclData["scope"] = flattenCertificateManagerCertificateScope(res["scope"], d, config)
 	hclData["self_managed"] = flattenCertificateManagerCertificateSelfManaged(res["selfManaged"], d, config)
 	hclData["managed"] = flattenCertificateManagerCertificateManaged(res["managed"], d, config)
+	hclData["tags"] = flattenCertificateManagerCertificateTags(res["tags"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -268,6 +269,10 @@ func flattenCertificateManagerCertificateManagedIssuanceConfig(v interface{}, d 
 	if strVal, ok := v.(string); ok && strVal == "" {
 		return nil
 	}
+	return v
+}
+
+func flattenCertificateManagerCertificateTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 

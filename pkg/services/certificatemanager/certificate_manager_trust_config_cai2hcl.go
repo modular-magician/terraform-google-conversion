@@ -140,6 +140,7 @@ func (c *CertificateManagerTrustConfigCai2hclConverter) convertResourceData(asse
 	hclData["description"] = flattenCertificateManagerTrustConfigDescription(res["description"], d, config)
 	hclData["trust_stores"] = flattenCertificateManagerTrustConfigTrustStores(res["trustStores"], d, config)
 	hclData["allowlisted_certificates"] = flattenCertificateManagerTrustConfigAllowlistedCertificates(res["allowlistedCertificates"], d, config)
+	hclData["tags"] = flattenCertificateManagerTrustConfigTags(res["tags"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -270,5 +271,9 @@ func flattenCertificateManagerTrustConfigAllowlistedCertificatesPemCertificate(v
 	if transformed == "" {
 		return "unknown"
 	}
+	return v
+}
+
+func flattenCertificateManagerTrustConfigTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }

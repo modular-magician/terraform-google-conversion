@@ -140,6 +140,7 @@ func (c *CertificateManagerDnsAuthorizationCai2hclConverter) convertResourceData
 	hclData["labels"] = flattenCertificateManagerDnsAuthorizationLabels(res["labels"], d, config)
 	hclData["domain"] = flattenCertificateManagerDnsAuthorizationDomain(res["domain"], d, config)
 	hclData["type"] = flattenCertificateManagerDnsAuthorizationType(res["type"], d, config)
+	hclData["tags"] = flattenCertificateManagerDnsAuthorizationTags(res["tags"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -177,5 +178,9 @@ func flattenCertificateManagerDnsAuthorizationDomain(v interface{}, d *schema.Re
 }
 
 func flattenCertificateManagerDnsAuthorizationType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenCertificateManagerDnsAuthorizationTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }

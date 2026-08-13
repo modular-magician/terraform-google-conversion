@@ -27,6 +27,9 @@ func TestAccCertificateManagerCertificateMap(t *testing.T) {
 		{
 			Name: "TestAccCertificateManagerCertificateMap_certificateManagerCertificateMapBasicExample",
 		},
+		{
+			Name: "TestAccCertificateManagerCertificateMap_tags",
+		},
 	}
 
 	for _, tt := range tests {
@@ -50,6 +53,7 @@ func TestAccCertificateManagerCertificateMap(t *testing.T) {
 					"lifecycle",
 					"name",
 					"provider",
+					"tags",
 					"timeouts",
 				},
 				"google_certificate_manager_certificate_map",
