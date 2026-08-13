@@ -97,6 +97,9 @@ func TestAccWorkbenchInstance(t *testing.T) {
 			Name: "TestAccWorkbenchInstance_updateResourcePolicies",
 		},
 		{
+			Name: "TestAccWorkbenchInstance_metadataValidation",
+		},
+		{
 			Name: "TestAccWorkbenchInstance_shielded_config_update",
 		},
 		{
