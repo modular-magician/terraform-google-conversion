@@ -391,6 +391,13 @@ func expandAccessContextManagerAccessLevelsAccessLevelsBasicConditionsDevicePoli
 			transformed["minimumVersion"] = transformedMinimumVersion
 		}
 
+		transformedRequireVerifiedChromeOs, err := expandAccessContextManagerAccessLevelsAccessLevelsBasicConditionsDevicePolicyOsConstraintsRequireVerifiedChromeOs(original["require_verified_chrome_os"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedRequireVerifiedChromeOs); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["requireVerifiedChromeOs"] = transformedRequireVerifiedChromeOs
+		}
+
 		transformedOsType, err := expandAccessContextManagerAccessLevelsAccessLevelsBasicConditionsDevicePolicyOsConstraintsOsType(original["os_type"], d, config)
 		if err != nil {
 			return nil, err
@@ -404,6 +411,10 @@ func expandAccessContextManagerAccessLevelsAccessLevelsBasicConditionsDevicePoli
 }
 
 func expandAccessContextManagerAccessLevelsAccessLevelsBasicConditionsDevicePolicyOsConstraintsMinimumVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandAccessContextManagerAccessLevelsAccessLevelsBasicConditionsDevicePolicyOsConstraintsRequireVerifiedChromeOs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
