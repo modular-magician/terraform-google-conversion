@@ -40,6 +40,15 @@ func TestAccComputeSnapshot(t *testing.T) {
 			Name: "TestAccComputeSnapshot_encryptionCMEK",
 		},
 		{
+			Name: "TestAccComputeSnapshot_kmsKeyVersionBehaviors",
+		},
+		{
+			Name: "TestAccComputeSnapshot_updateKmsKey",
+		},
+		{
+			Name: "TestAccComputeSnapshot_disallowCmekToGmek",
+		},
+		{
 			Name: "TestAccComputeSnapshot_snapshotType",
 		},
 		{

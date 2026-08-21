@@ -61,6 +61,15 @@ func TestAccComputeDisk(t *testing.T) {
 			Name: "TestAccComputeDisk_encryptionKMS",
 		},
 		{
+			Name: "TestAccComputeDisk_kmsKeyVersionBehaviors",
+		},
+		{
+			Name: "TestAccComputeDisk_updateKmsKey",
+		},
+		{
+			Name: "TestAccComputeDisk_disallowCmekToGmek",
+		},
+		{
 			Name: "TestAccComputeDisk_pdHyperDiskEnableConfidentialCompute",
 		},
 		{

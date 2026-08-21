@@ -81,6 +81,15 @@ func TestAccComputeRegionDisk(t *testing.T) {
 		{
 			Name: "TestAccComputeRegionDisk_fromImageKMSWithServiceAccount",
 		},
+		{
+			Name: "TestAccComputeRegionDisk_kmsKeyVersionBehaviors",
+		},
+		{
+			Name: "TestAccComputeRegionDisk_updateKmsKey",
+		},
+		{
+			Name: "TestAccComputeRegionDisk_disallowCmekToGmek",
+		},
 	}
 
 	for _, tt := range tests {
