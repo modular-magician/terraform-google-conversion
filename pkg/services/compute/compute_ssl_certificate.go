@@ -89,7 +89,7 @@ The chain must include at least one intermediate cert.`,
 				Required:         true,
 				ForceNew:         true,
 				DiffSuppressFunc: sha256DiffSuppress,
-				Description:      `The write-only private key in PEM format.`,
+				Description:      `The private key in PEM format.`,
 				Sensitive:        true,
 			},
 			"description": {
