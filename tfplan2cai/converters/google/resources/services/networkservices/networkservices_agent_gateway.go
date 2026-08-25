@@ -152,6 +152,12 @@ func GetNetworkServicesAgentGatewayApiObject(d tpgresource.TerraformResourceData
 	} else if v, ok := d.GetOkExists("network_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(networkConfigProp)) && (ok || !reflect.DeepEqual(v, networkConfigProp)) {
 		obj["networkConfig"] = networkConfigProp
 	}
+	agentConnectivityTemplateProp, err := expandNetworkServicesAgentGatewayAgentConnectivityTemplate(d.Get("agent_connectivity_template"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("agent_connectivity_template"); !tpgresource.IsEmptyValue(reflect.ValueOf(agentConnectivityTemplateProp)) && (ok || !reflect.DeepEqual(v, agentConnectivityTemplateProp)) {
+		obj["agentConnectivityTemplate"] = agentConnectivityTemplateProp
+	}
 	effectiveLabelsProp, err := expandNetworkServicesAgentGatewayEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -336,6 +342,10 @@ func expandNetworkServicesAgentGatewayNetworkConfigDnsPeeringConfigTargetProject
 }
 
 func expandNetworkServicesAgentGatewayNetworkConfigDnsPeeringConfigTargetNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandNetworkServicesAgentGatewayAgentConnectivityTemplate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
