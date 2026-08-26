@@ -42,6 +42,10 @@ func TestAccDatastreamConnectionProfile(t *testing.T) {
 			Skip: "fix it after ssl_config is released in v7.16.0",
 		},
 		{
+			Name: "TestAccDatastreamConnectionProfile_datastreamConnectionProfilePostgresqlSslconfigServerVerificationExample",
+			Skip: "ssl_config examples are not supported in the TGC suite",
+		},
+		{
 			Name: "TestAccDatastreamConnectionProfile_datastreamConnectionProfilePostgresSecretManagerExample",
 		},
 		{
@@ -88,6 +92,7 @@ func TestAccDatastreamConnectionProfile(t *testing.T) {
 					"postgresql_profile.ssl_config.server_and_client_verification.ca_certificate",
 					"postgresql_profile.ssl_config.server_and_client_verification.client_certificate",
 					"postgresql_profile.ssl_config.server_and_client_verification.client_key",
+					"postgresql_profile.ssl_config.server_verification",
 					"postgresql_profile.ssl_config.server_verification.ca_certificate",
 					"provider",
 					"timeouts",
