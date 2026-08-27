@@ -655,6 +655,27 @@ func expandCloudRunV2WorkerPoolTemplateContainers(v interface{}, d tpgresource.T
 			transformed["startupProbe"] = transformedStartupProbe
 		}
 
+		transformedBaseImageUri, err := expandCloudRunV2WorkerPoolTemplateContainersBaseImageUri(original["base_image_uri"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedBaseImageUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["baseImageUri"] = transformedBaseImageUri
+		}
+
+		transformedBuildInfo, err := expandCloudRunV2WorkerPoolTemplateContainersBuildInfo(original["build_info"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedBuildInfo); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["buildInfo"] = transformedBuildInfo
+		}
+
+		transformedSourceCode, err := expandCloudRunV2WorkerPoolTemplateContainersSourceCode(original["source_code"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedSourceCode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["sourceCode"] = transformedSourceCode
+		}
+
 		req = append(req, transformed)
 	}
 	return req, nil
@@ -1330,6 +1351,186 @@ func expandCloudRunV2WorkerPoolTemplateContainersStartupProbeGrpcPort(v interfac
 }
 
 func expandCloudRunV2WorkerPoolTemplateContainersStartupProbeGrpcService(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersBaseImageUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersBuildInfo(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedFunctionTarget, err := expandCloudRunV2WorkerPoolTemplateContainersBuildInfoFunctionTarget(original["function_target"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedFunctionTarget); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["functionTarget"] = transformedFunctionTarget
+	}
+
+	transformedSourceLocation, err := expandCloudRunV2WorkerPoolTemplateContainersBuildInfoSourceLocation(original["source_location"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSourceLocation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["source_location"] = transformedSourceLocation
+	}
+
+	return transformed, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersBuildInfoFunctionTarget(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersBuildInfoSourceLocation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersSourceCode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedCloudStorageSource, err := expandCloudRunV2WorkerPoolTemplateContainersSourceCodeCloudStorageSource(original["cloud_storage_source"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCloudStorageSource); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["cloudStorageSource"] = transformedCloudStorageSource
+	}
+
+	transformedInlinedSource, err := expandCloudRunV2WorkerPoolTemplateContainersSourceCodeInlinedSource(original["inlined_source"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedInlinedSource); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["inlinedSource"] = transformedInlinedSource
+	}
+
+	return transformed, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersSourceCodeCloudStorageSource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedBucket, err := expandCloudRunV2WorkerPoolTemplateContainersSourceCodeCloudStorageSourceBucket(original["bucket"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedBucket); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["bucket"] = transformedBucket
+	}
+
+	transformedObject, err := expandCloudRunV2WorkerPoolTemplateContainersSourceCodeCloudStorageSourceObject(original["object"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedObject); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["object"] = transformedObject
+	}
+
+	transformedGeneration, err := expandCloudRunV2WorkerPoolTemplateContainersSourceCodeCloudStorageSourceGeneration(original["generation"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedGeneration); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["generation"] = transformedGeneration
+	}
+
+	return transformed, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersSourceCodeCloudStorageSourceBucket(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersSourceCodeCloudStorageSourceObject(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersSourceCodeCloudStorageSourceGeneration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersSourceCodeInlinedSource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedSources, err := expandCloudRunV2WorkerPoolTemplateContainersSourceCodeInlinedSourceSources(original["sources"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSources); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["sources"] = transformedSources
+	}
+
+	return transformed, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersSourceCodeInlinedSourceSources(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedFilename, err := expandCloudRunV2WorkerPoolTemplateContainersSourceCodeInlinedSourceSourcesFilename(original["filename"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedFilename); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["filename"] = transformedFilename
+		}
+
+		transformedContent, err := expandCloudRunV2WorkerPoolTemplateContainersSourceCodeInlinedSourceSourcesContent(original["content"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedContent); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["content"] = transformedContent
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersSourceCodeInlinedSourceSourcesFilename(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudRunV2WorkerPoolTemplateContainersSourceCodeInlinedSourceSourcesContent(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
