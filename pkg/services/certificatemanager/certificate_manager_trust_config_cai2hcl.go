@@ -133,6 +133,16 @@ func (c *CertificateManagerTrustConfigCai2hclConverter) convertResourceData(asse
 	}
 	hclData := make(map[string]interface{})
 
+	res, err = resourceCertificateManagerTrustConfigDecoder(d, config, res)
+	if err != nil {
+		return nil, err
+	}
+
+	if res == nil {
+		// Decoding the object has resulted in it being gone. It may be marked deleted.
+		return nil, nil
+	}
+
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_labels": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//certificatemanager.googleapis.com/projects/{{project}}/locations/{{location}}/trustConfigs/{{name}}", outputFields, hclData)
 
@@ -271,4 +281,11 @@ func flattenCertificateManagerTrustConfigAllowlistedCertificatesPemCertificate(v
 		return "unknown"
 	}
 	return v
+}
+
+func resourceCertificateManagerTrustConfigDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
+	if v, ok := res["name"].(string); ok && v != "" {
+		res["name"] = tpgresource.GetResourceNameFromSelfLink(v)
+	}
+	return res, nil
 }

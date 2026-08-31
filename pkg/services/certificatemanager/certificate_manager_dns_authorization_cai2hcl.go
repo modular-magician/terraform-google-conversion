@@ -133,6 +133,16 @@ func (c *CertificateManagerDnsAuthorizationCai2hclConverter) convertResourceData
 	}
 	hclData := make(map[string]interface{})
 
+	res, err = resourceCertificateManagerDnsAuthorizationDecoder(d, config, res)
+	if err != nil {
+		return nil, err
+	}
+
+	if res == nil {
+		// Decoding the object has resulted in it being gone. It may be marked deleted.
+		return nil, nil
+	}
+
 	outputFields := map[string]struct{}{"dns_resource_record": struct{}{}, "effective_labels": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//certificatemanager.googleapis.com/projects/{{project}}/locations/{{location}}/dnsAuthorizations/{{name}}", outputFields, hclData)
 
@@ -178,4 +188,11 @@ func flattenCertificateManagerDnsAuthorizationDomain(v interface{}, d *schema.Re
 
 func flattenCertificateManagerDnsAuthorizationType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
+}
+
+func resourceCertificateManagerDnsAuthorizationDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
+	if v, ok := res["name"].(string); ok && v != "" {
+		res["name"] = tpgresource.GetResourceNameFromSelfLink(v)
+	}
+	return res, nil
 }

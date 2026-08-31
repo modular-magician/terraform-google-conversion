@@ -133,6 +133,16 @@ func (c *CertificateManagerCertificateMapCai2hclConverter) convertResourceData(a
 	}
 	hclData := make(map[string]interface{})
 
+	res, err = resourceCertificateManagerCertificateMapDecoder(d, config, res)
+	if err != nil {
+		return nil, err
+	}
+
+	if res == nil {
+		// Decoding the object has resulted in it being gone. It may be marked deleted.
+		return nil, nil
+	}
+
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_labels": struct{}{}, "gclb_targets": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//certificatemanager.googleapis.com/projects/{{project}}/locations/global/certificateMaps/{{name}}", outputFields, hclData)
 
@@ -161,4 +171,11 @@ func flattenCertificateManagerCertificateMapDescription(v interface{}, d *schema
 
 func flattenCertificateManagerCertificateMapLabels(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return tgcresource.RemoveTerraformAttributionLabel(v)
+}
+
+func resourceCertificateManagerCertificateMapDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
+	if v, ok := res["name"].(string); ok && v != "" {
+		res["name"] = tpgresource.GetResourceNameFromSelfLink(v)
+	}
+	return res, nil
 }

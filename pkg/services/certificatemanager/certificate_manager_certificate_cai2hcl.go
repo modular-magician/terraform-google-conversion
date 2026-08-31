@@ -138,6 +138,16 @@ func (c *CertificateManagerCertificateCai2hclConverter) convertResourceData(asse
 		return nil, err
 	}
 
+	res, err = resourceCertificateManagerCertificateDecoder(d, config, res)
+	if err != nil {
+		return nil, err
+	}
+
+	if res == nil {
+		// Decoding the object has resulted in it being gone. It may be marked deleted.
+		return nil, nil
+	}
+
 	outputFields := map[string]struct{}{"effective_labels": struct{}{}, "san_dnsnames": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//certificatemanager.googleapis.com/projects/{{project}}/locations/{{location}}/certificates/{{name}}", outputFields, hclData)
 
@@ -281,4 +291,10 @@ func resourceCertificateManagerCertificateTgcDecoder(d *schema.ResourceData, met
 		delete(res, "scope")
 	}
 	return res, hclData, nil
+}
+func resourceCertificateManagerCertificateDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
+	if v, ok := res["name"].(string); ok && v != "" {
+		res["name"] = tpgresource.GetResourceNameFromSelfLink(v)
+	}
+	return res, nil
 }

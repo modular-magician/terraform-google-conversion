@@ -25,10 +25,10 @@ func TestAccCertificateManagerDnsAuthorization(t *testing.T) {
 
 	tests := []test.TestCase{
 		{
-			Name: "TestAccCertificateManagerDnsAuthorization_certificateManagerDnsAuthorizationBasicExample",
+			Name: "TestAccCertificateManagerDnsAuthorization_certificateManagerDnsAuthorizationRegionalExample",
 		},
 		{
-			Name: "TestAccCertificateManagerDnsAuthorization_certificateManagerDnsAuthorizationRegionalExample",
+			Name: "TestAccCertificateManagerDnsAuthorization_certificateManagerDnsAuthorizationBasicExample",
 		},
 		{
 			Name: "TestAccCertificateManagerDnsAuthorization_update",

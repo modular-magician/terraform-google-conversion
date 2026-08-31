@@ -25,6 +25,9 @@ func TestAccCertificateManagerCertificate(t *testing.T) {
 
 	tests := []test.TestCase{
 		{
+			Name: "TestAccCertificateManagerCertificate_certificateManagerSelfManagedCertificateRegionalExample",
+		},
+		{
 			Name: "TestAccCertificateManagerCertificate_certificateManagerGoogleManagedCertificateDnsExample",
 		},
 		{
@@ -35,9 +38,6 @@ func TestAccCertificateManagerCertificate(t *testing.T) {
 		},
 		{
 			Name: "TestAccCertificateManagerCertificate_certificateManagerSelfManagedCertificateWriteOnlyExample",
-		},
-		{
-			Name: "TestAccCertificateManagerCertificate_certificateManagerSelfManagedCertificateRegionalExample",
 		},
 		{
 			Name: "TestAccCertificateManagerCertificate_certificateManagerGoogleManagedCertificateIssuanceConfigAllRegionsExample",

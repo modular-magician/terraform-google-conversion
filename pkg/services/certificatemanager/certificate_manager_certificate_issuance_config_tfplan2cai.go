@@ -80,7 +80,7 @@ func CertificateManagerCertificateIssuanceConfigTfplan2caiConverter() cai.Tfplan
 }
 
 func GetCertificateManagerCertificateIssuanceConfigCaiAssets(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]caiasset.Asset, error) {
-	name, err := cai.AssetName(d, config, "//certificatemanager.googleapis.com/projects/{{project}}/locations/{{location}}/certificateIssuanceConfigs/{{name}}")
+	name, err := cai.AssetName(d, config, "//certificatemanager.googleapis.com/projects/{{project}}/locations/global/certificateIssuanceConfigs/{{name}}")
 	if err != nil {
 		return []caiasset.Asset{}, err
 	}
@@ -90,7 +90,7 @@ func GetCertificateManagerCertificateIssuanceConfigCaiAssets(d tpgresource.Terra
 			location = "global"
 		}
 		// Store the ID now
-		id, err := tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{location}}/certificateIssuanceConfigs/{{name}}")
+		id, err := tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/global/certificateIssuanceConfigs/{{name}}")
 		if err != nil {
 			return nil, fmt.Errorf("Error constructing id: %s", err)
 		}
