@@ -170,6 +170,12 @@ func GetDiscoveryEngineSearchEngineApiObject(d tpgresource.TerraformResourceData
 	} else if v, ok := d.GetOkExists("knowledge_graph_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(knowledgeGraphConfigProp)) && (ok || !reflect.DeepEqual(v, knowledgeGraphConfigProp)) {
 		obj["knowledgeGraphConfig"] = knowledgeGraphConfigProp
 	}
+	observabilityConfigProp, err := expandDiscoveryEngineSearchEngineObservabilityConfig(d.Get("observability_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("observability_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(observabilityConfigProp)) && (ok || !reflect.DeepEqual(v, observabilityConfigProp)) {
+		obj["observabilityConfig"] = observabilityConfigProp
+	}
 
 	return resourceDiscoveryEngineSearchEngineEncoder(d, config, obj)
 }
@@ -400,5 +406,42 @@ func expandDiscoveryEngineSearchEngineKnowledgeGraphConfigFeatureConfigDisablePr
 }
 
 func expandDiscoveryEngineSearchEngineKnowledgeGraphConfigFeatureConfigDisablePrivateKgQueryUiChips(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineSearchEngineObservabilityConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedObservabilityEnabled, err := expandDiscoveryEngineSearchEngineObservabilityConfigObservabilityEnabled(original["observability_enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedObservabilityEnabled); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["observabilityEnabled"] = transformedObservabilityEnabled
+	}
+
+	transformedSensitiveLoggingEnabled, err := expandDiscoveryEngineSearchEngineObservabilityConfigSensitiveLoggingEnabled(original["sensitive_logging_enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSensitiveLoggingEnabled); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["sensitiveLoggingEnabled"] = transformedSensitiveLoggingEnabled
+	}
+
+	return transformed, nil
+}
+
+func expandDiscoveryEngineSearchEngineObservabilityConfigObservabilityEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineSearchEngineObservabilityConfigSensitiveLoggingEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
