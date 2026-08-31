@@ -158,6 +158,12 @@ func GetChronicleEnvironmentApiObject(d tpgresource.TerraformResourceData, confi
 	} else if v, ok := d.GetOkExists("retention_duration"); !tpgresource.IsEmptyValue(reflect.ValueOf(retentionDurationProp)) && (ok || !reflect.DeepEqual(v, retentionDurationProp)) {
 		obj["retentionDuration"] = retentionDurationProp
 	}
+	environmentAllowedForAllUsersProp, err := expandChronicleEnvironmentEnvironmentAllowedForAllUsers(d.Get("environment_allowed_for_all_users"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("environment_allowed_for_all_users"); !tpgresource.IsEmptyValue(reflect.ValueOf(environmentAllowedForAllUsersProp)) && (ok || !reflect.DeepEqual(v, environmentAllowedForAllUsersProp)) {
+		obj["environmentAllowedForAllUsers"] = environmentAllowedForAllUsersProp
+	}
 
 	return obj, nil
 }
@@ -191,5 +197,9 @@ func expandChronicleEnvironmentDataAccessScopesJson(v interface{}, d tpgresource
 }
 
 func expandChronicleEnvironmentRetentionDuration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandChronicleEnvironmentEnvironmentAllowedForAllUsers(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
