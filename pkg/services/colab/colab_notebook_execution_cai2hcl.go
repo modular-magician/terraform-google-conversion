@@ -487,12 +487,51 @@ func flattenColabNotebookExecutionWorkbenchRuntime(v interface{}, d *schema.Reso
 	}
 	original := v.(map[string]interface{})
 	transformed := make(map[string]interface{})
+	transformed["custom_container_image"] =
+		flattenColabNotebookExecutionWorkbenchRuntimeCustomContainerImage(original["customContainerImage"], d, config)
 	transformed["vm_image"] =
 		flattenColabNotebookExecutionWorkbenchRuntimeVmImage(original["vmImage"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
 	return []interface{}{transformed}
+}
+
+func flattenColabNotebookExecutionWorkbenchRuntimeCustomContainerImage(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["repository"] =
+		flattenColabNotebookExecutionWorkbenchRuntimeCustomContainerImageRepository(original["repository"], d, config)
+	transformed["tag"] =
+		flattenColabNotebookExecutionWorkbenchRuntimeCustomContainerImageTag(original["tag"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenColabNotebookExecutionWorkbenchRuntimeCustomContainerImageRepository(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return "unknown"
+	}
+	transformed := v.(string)
+	if transformed == "" {
+		return "unknown"
+	}
+	return v
+}
+
+func flattenColabNotebookExecutionWorkbenchRuntimeCustomContainerImageTag(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
 }
 
 func flattenColabNotebookExecutionWorkbenchRuntimeVmImage(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

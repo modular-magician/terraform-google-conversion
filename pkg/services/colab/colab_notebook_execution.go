@@ -328,9 +328,33 @@ func ResourceColabNotebookExecution() *schema.Resource {
 				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"custom_container_image": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							ForceNew:    true,
+							Description: `Use a user-provided container image to run the notebook execution in. The notebook execution will run in a container based on this image.`,
+							MaxItems:    1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"repository": {
+										Type:        schema.TypeString,
+										Required:    true,
+										ForceNew:    true,
+										Description: `The path to the Container Registry or Artifact Registry image. For example: gcr.io/{project_id}/{image_name}`,
+									},
+									"tag": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										ForceNew:    true,
+										Description: `The tag of the container image. If not specified, this defaults to the latest tag.`,
+									},
+								},
+							},
+							ExactlyOneOf: []string{"workbench_runtime.0.custom_container_image", "workbench_runtime.0.vm_image"},
+						},
 						"vm_image": {
 							Type:        schema.TypeList,
-							Required:    true,
+							Optional:    true,
 							ForceNew:    true,
 							Description: `Custom Compute Engine VM image for the Workbench instance.`,
 							MaxItems:    1,
@@ -358,6 +382,7 @@ func ResourceColabNotebookExecution() *schema.Resource {
 									},
 								},
 							},
+							ExactlyOneOf: []string{"workbench_runtime.0.custom_container_image", "workbench_runtime.0.vm_image"},
 						},
 					},
 				},

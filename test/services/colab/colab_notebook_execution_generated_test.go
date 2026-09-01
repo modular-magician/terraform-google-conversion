@@ -36,6 +36,9 @@ func TestAccColabNotebookExecution(t *testing.T) {
 		{
 			Name: "TestAccColabNotebookExecution_colabNotebookExecutionWorkbenchRuntimeVmNameExample",
 		},
+		{
+			Name: "TestAccColabNotebookExecution_colabNotebookExecutionWorkbenchRuntimeContainerExample",
+		},
 	}
 
 	for _, tt := range tests {

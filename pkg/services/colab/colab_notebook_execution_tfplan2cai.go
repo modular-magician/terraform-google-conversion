@@ -533,6 +533,13 @@ func expandColabNotebookExecutionWorkbenchRuntime(v interface{}, d tpgresource.T
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
+	transformedCustomContainerImage, err := expandColabNotebookExecutionWorkbenchRuntimeCustomContainerImage(original["custom_container_image"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCustomContainerImage); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["customContainerImage"] = transformedCustomContainerImage
+	}
+
 	transformedVmImage, err := expandColabNotebookExecutionWorkbenchRuntimeVmImage(original["vm_image"], d, config)
 	if err != nil {
 		return nil, err
@@ -541,6 +548,43 @@ func expandColabNotebookExecutionWorkbenchRuntime(v interface{}, d tpgresource.T
 	}
 
 	return transformed, nil
+}
+
+func expandColabNotebookExecutionWorkbenchRuntimeCustomContainerImage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedRepository, err := expandColabNotebookExecutionWorkbenchRuntimeCustomContainerImageRepository(original["repository"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRepository); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["repository"] = transformedRepository
+	}
+
+	transformedTag, err := expandColabNotebookExecutionWorkbenchRuntimeCustomContainerImageTag(original["tag"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedTag); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["tag"] = transformedTag
+	}
+
+	return transformed, nil
+}
+
+func expandColabNotebookExecutionWorkbenchRuntimeCustomContainerImageRepository(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandColabNotebookExecutionWorkbenchRuntimeCustomContainerImageTag(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandColabNotebookExecutionWorkbenchRuntimeVmImage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
