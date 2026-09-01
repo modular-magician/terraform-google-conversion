@@ -122,6 +122,12 @@ func GetCESAppApiObject(d tpgresource.TerraformResourceData, config *transport_t
 	} else if v, ok := d.GetOkExists("pinned"); !tpgresource.IsEmptyValue(reflect.ValueOf(pinnedProp)) && (ok || !reflect.DeepEqual(v, pinnedProp)) {
 		obj["pinned"] = pinnedProp
 	}
+	dashboardSettingsProp, err := expandCESAppDashboardSettings(d.Get("dashboard_settings"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("dashboard_settings"); !tpgresource.IsEmptyValue(reflect.ValueOf(dashboardSettingsProp)) && (ok || !reflect.DeepEqual(v, dashboardSettingsProp)) {
+		obj["dashboardSettings"] = dashboardSettingsProp
+	}
 	dataStoreSettingsProp, err := expandCESAppDataStoreSettings(d.Get("data_store_settings"), d, config)
 	if err != nil {
 		return nil, err
@@ -146,11 +152,29 @@ func GetCESAppApiObject(d tpgresource.TerraformResourceData, config *transport_t
 	} else if v, ok := d.GetOkExists("display_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(displayNameProp)) && (ok || !reflect.DeepEqual(v, displayNameProp)) {
 		obj["displayName"] = displayNameProp
 	}
+	errorHandlingSettingsProp, err := expandCESAppErrorHandlingSettings(d.Get("error_handling_settings"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("error_handling_settings"); !tpgresource.IsEmptyValue(reflect.ValueOf(errorHandlingSettingsProp)) && (ok || !reflect.DeepEqual(v, errorHandlingSettingsProp)) {
+		obj["errorHandlingSettings"] = errorHandlingSettingsProp
+	}
 	evaluationMetricsThresholdsProp, err := expandCESAppEvaluationMetricsThresholds(d.Get("evaluation_metrics_thresholds"), d, config)
 	if err != nil {
 		return nil, err
 	} else if v, ok := d.GetOkExists("evaluation_metrics_thresholds"); !tpgresource.IsEmptyValue(reflect.ValueOf(evaluationMetricsThresholdsProp)) && (ok || !reflect.DeepEqual(v, evaluationMetricsThresholdsProp)) {
 		obj["evaluationMetricsThresholds"] = evaluationMetricsThresholdsProp
+	}
+	evaluationPersonasProp, err := expandCESAppEvaluationPersonas(d.Get("evaluation_personas"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("evaluation_personas"); !tpgresource.IsEmptyValue(reflect.ValueOf(evaluationPersonasProp)) && (ok || !reflect.DeepEqual(v, evaluationPersonasProp)) {
+		obj["evaluationPersonas"] = evaluationPersonasProp
+	}
+	evaluationSettingsProp, err := expandCESAppEvaluationSettings(d.Get("evaluation_settings"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("evaluation_settings"); !tpgresource.IsEmptyValue(reflect.ValueOf(evaluationSettingsProp)) && (ok || !reflect.DeepEqual(v, evaluationSettingsProp)) {
+		obj["evaluationSettings"] = evaluationSettingsProp
 	}
 	globalInstructionProp, err := expandCESAppGlobalInstruction(d.Get("global_instruction"), d, config)
 	if err != nil {
@@ -169,6 +193,12 @@ func GetCESAppApiObject(d tpgresource.TerraformResourceData, config *transport_t
 		return nil, err
 	} else if v, ok := d.GetOkExists("language_settings"); !tpgresource.IsEmptyValue(reflect.ValueOf(languageSettingsProp)) && (ok || !reflect.DeepEqual(v, languageSettingsProp)) {
 		obj["languageSettings"] = languageSettingsProp
+	}
+	lockedProp, err := expandCESAppLocked(d.Get("locked"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("locked"); !tpgresource.IsEmptyValue(reflect.ValueOf(lockedProp)) && (ok || !reflect.DeepEqual(v, lockedProp)) {
+		obj["locked"] = lockedProp
 	}
 	loggingSettingsProp, err := expandCESAppLoggingSettings(d.Get("logging_settings"), d, config)
 	if err != nil {
@@ -223,12 +253,6 @@ func GetCESAppApiObject(d tpgresource.TerraformResourceData, config *transport_t
 		return nil, err
 	} else if v, ok := d.GetOkExists("vpc_sc_settings"); !tpgresource.IsEmptyValue(reflect.ValueOf(vpcScSettingsProp)) && (ok || !reflect.DeepEqual(v, vpcScSettingsProp)) {
 		obj["vpcScSettings"] = vpcScSettingsProp
-	}
-	errorHandlingSettingsProp, err := expandCESAppErrorHandlingSettings(d.Get("error_handling_settings"), d, config)
-	if err != nil {
-		return nil, err
-	} else if v, ok := d.GetOkExists("error_handling_settings"); !tpgresource.IsEmptyValue(reflect.ValueOf(errorHandlingSettingsProp)) && (ok || !reflect.DeepEqual(v, errorHandlingSettingsProp)) {
-		obj["errorHandlingSettings"] = errorHandlingSettingsProp
 	}
 
 	return obj, nil
@@ -396,6 +420,32 @@ func expandCESAppAudioProcessingConfigSynthesizeSpeechConfigsSpeakingRate(v inte
 }
 
 func expandCESAppPinned(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppDashboardSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedDefaultDashboard, err := expandCESAppDashboardSettingsDefaultDashboard(original["default_dashboard"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDefaultDashboard); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["defaultDashboard"] = transformedDefaultDashboard
+	}
+
+	return transformed, nil
+}
+
+func expandCESAppDashboardSettingsDefaultDashboard(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -704,6 +754,116 @@ func expandCESAppDisplayName(v interface{}, d tpgresource.TerraformResourceData,
 	return v, nil
 }
 
+func expandCESAppErrorHandlingSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEndSessionConfig, err := expandCESAppErrorHandlingSettingsEndSessionConfig(original["end_session_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEndSessionConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["endSessionConfig"] = transformedEndSessionConfig
+	}
+
+	transformedErrorHandlingStrategy, err := expandCESAppErrorHandlingSettingsErrorHandlingStrategy(original["error_handling_strategy"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedErrorHandlingStrategy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["errorHandlingStrategy"] = transformedErrorHandlingStrategy
+	}
+
+	transformedFallbackResponseConfig, err := expandCESAppErrorHandlingSettingsFallbackResponseConfig(original["fallback_response_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedFallbackResponseConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["fallbackResponseConfig"] = transformedFallbackResponseConfig
+	}
+
+	return transformed, nil
+}
+
+func expandCESAppErrorHandlingSettingsEndSessionConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEscalateSession, err := expandCESAppErrorHandlingSettingsEndSessionConfigEscalateSession(original["escalate_session"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEscalateSession); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["escalateSession"] = transformedEscalateSession
+	}
+
+	return transformed, nil
+}
+
+func expandCESAppErrorHandlingSettingsEndSessionConfigEscalateSession(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppErrorHandlingSettingsErrorHandlingStrategy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppErrorHandlingSettingsFallbackResponseConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedCustomFallbackMessages, err := expandCESAppErrorHandlingSettingsFallbackResponseConfigCustomFallbackMessages(original["custom_fallback_messages"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCustomFallbackMessages); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["customFallbackMessages"] = transformedCustomFallbackMessages
+	}
+
+	transformedMaxFallbackAttempts, err := expandCESAppErrorHandlingSettingsFallbackResponseConfigMaxFallbackAttempts(original["max_fallback_attempts"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedMaxFallbackAttempts); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["maxFallbackAttempts"] = transformedMaxFallbackAttempts
+	}
+
+	return transformed, nil
+}
+
+func expandCESAppErrorHandlingSettingsFallbackResponseConfigCustomFallbackMessages(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
+}
+
+func expandCESAppErrorHandlingSettingsFallbackResponseConfigMaxFallbackAttempts(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandCESAppEvaluationMetricsThresholds(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -818,6 +978,226 @@ func expandCESAppEvaluationMetricsThresholdsGoldenEvaluationMetricsThresholdsTur
 	return v, nil
 }
 
+func expandCESAppEvaluationPersonas(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedDescription, err := expandCESAppEvaluationPersonasDescription(original["description"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDescription); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["description"] = transformedDescription
+		}
+
+		transformedDisplayName, err := expandCESAppEvaluationPersonasDisplayName(original["display_name"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDisplayName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["displayName"] = transformedDisplayName
+		}
+
+		transformedName, err := expandCESAppEvaluationPersonasName(original["name"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["name"] = transformedName
+		}
+
+		transformedPersonality, err := expandCESAppEvaluationPersonasPersonality(original["personality"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPersonality); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["personality"] = transformedPersonality
+		}
+
+		transformedSpeechConfig, err := expandCESAppEvaluationPersonasSpeechConfig(original["speech_config"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedSpeechConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["speechConfig"] = transformedSpeechConfig
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandCESAppEvaluationPersonasDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationPersonasDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationPersonasName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationPersonasPersonality(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationPersonasSpeechConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnvironment, err := expandCESAppEvaluationPersonasSpeechConfigEnvironment(original["environment"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEnvironment); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["environment"] = transformedEnvironment
+	}
+
+	transformedSpeakingRate, err := expandCESAppEvaluationPersonasSpeechConfigSpeakingRate(original["speaking_rate"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSpeakingRate); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["speakingRate"] = transformedSpeakingRate
+	}
+
+	transformedVoiceId, err := expandCESAppEvaluationPersonasSpeechConfigVoiceId(original["voice_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedVoiceId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["voiceId"] = transformedVoiceId
+	}
+
+	return transformed, nil
+}
+
+func expandCESAppEvaluationPersonasSpeechConfigEnvironment(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationPersonasSpeechConfigSpeakingRate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationPersonasSpeechConfigVoiceId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEvaluationRunCachingSettings, err := expandCESAppEvaluationSettingsEvaluationRunCachingSettings(original["evaluation_run_caching_settings"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEvaluationRunCachingSettings); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["evaluationRunCachingSettings"] = transformedEvaluationRunCachingSettings
+	}
+
+	transformedGoldenEvaluationToolCallBehaviour, err := expandCESAppEvaluationSettingsGoldenEvaluationToolCallBehaviour(original["golden_evaluation_tool_call_behaviour"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedGoldenEvaluationToolCallBehaviour); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["goldenEvaluationToolCallBehaviour"] = transformedGoldenEvaluationToolCallBehaviour
+	}
+
+	transformedGoldenRunMethod, err := expandCESAppEvaluationSettingsGoldenRunMethod(original["golden_run_method"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedGoldenRunMethod); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["goldenRunMethod"] = transformedGoldenRunMethod
+	}
+
+	transformedScenarioConversationInitiator, err := expandCESAppEvaluationSettingsScenarioConversationInitiator(original["scenario_conversation_initiator"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedScenarioConversationInitiator); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["scenarioConversationInitiator"] = transformedScenarioConversationInitiator
+	}
+
+	transformedScenarioEvaluationToolCallBehaviour, err := expandCESAppEvaluationSettingsScenarioEvaluationToolCallBehaviour(original["scenario_evaluation_tool_call_behaviour"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedScenarioEvaluationToolCallBehaviour); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["scenarioEvaluationToolCallBehaviour"] = transformedScenarioEvaluationToolCallBehaviour
+	}
+
+	transformedScenarioExecutionMode, err := expandCESAppEvaluationSettingsScenarioExecutionMode(original["scenario_execution_mode"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedScenarioExecutionMode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["scenarioExecutionMode"] = transformedScenarioExecutionMode
+	}
+
+	return transformed, nil
+}
+
+func expandCESAppEvaluationSettingsEvaluationRunCachingSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnableCaching, err := expandCESAppEvaluationSettingsEvaluationRunCachingSettingsEnableCaching(original["enable_caching"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEnableCaching); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["enableCaching"] = transformedEnableCaching
+	}
+
+	return transformed, nil
+}
+
+func expandCESAppEvaluationSettingsEvaluationRunCachingSettingsEnableCaching(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationSettingsGoldenEvaluationToolCallBehaviour(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationSettingsGoldenRunMethod(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationSettingsScenarioConversationInitiator(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationSettingsScenarioEvaluationToolCallBehaviour(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppEvaluationSettingsScenarioExecutionMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandCESAppGlobalInstruction(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -882,6 +1262,10 @@ func expandCESAppLanguageSettingsFallbackAction(v interface{}, d tpgresource.Ter
 }
 
 func expandCESAppLanguageSettingsSupportedLanguageCodes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCESAppLocked(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -1567,120 +1951,5 @@ func expandCESAppVpcScSettings(v interface{}, d tpgresource.TerraformResourceDat
 }
 
 func expandCESAppVpcScSettingsAllowedOrigins(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCESAppErrorHandlingSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedErrorHandlingStrategy, err := expandCESAppErrorHandlingSettingsErrorHandlingStrategy(original["error_handling_strategy"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedErrorHandlingStrategy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["errorHandlingStrategy"] = transformedErrorHandlingStrategy
-	}
-
-	transformedFallbackResponseConfig, err := expandCESAppErrorHandlingSettingsFallbackResponseConfig(original["fallback_response_config"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedFallbackResponseConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["fallbackResponseConfig"] = transformedFallbackResponseConfig
-	}
-
-	transformedEndSessionConfig, err := expandCESAppErrorHandlingSettingsEndSessionConfig(original["end_session_config"], d, config)
-	if err != nil {
-		return nil, err
-	} else {
-		transformed["endSessionConfig"] = transformedEndSessionConfig
-	}
-
-	return transformed, nil
-}
-
-func expandCESAppErrorHandlingSettingsErrorHandlingStrategy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCESAppErrorHandlingSettingsFallbackResponseConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedCustomFallbackMessages, err := expandCESAppErrorHandlingSettingsFallbackResponseConfigCustomFallbackMessages(original["custom_fallback_messages"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedCustomFallbackMessages); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["customFallbackMessages"] = transformedCustomFallbackMessages
-	}
-
-	transformedMaxFallbackAttempts, err := expandCESAppErrorHandlingSettingsFallbackResponseConfigMaxFallbackAttempts(original["max_fallback_attempts"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedMaxFallbackAttempts); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["maxFallbackAttempts"] = transformedMaxFallbackAttempts
-	}
-
-	return transformed, nil
-}
-
-func expandCESAppErrorHandlingSettingsFallbackResponseConfigCustomFallbackMessages(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
-	if v == nil {
-		return map[string]string{}, nil
-	}
-	m := make(map[string]string)
-	for k, val := range v.(map[string]interface{}) {
-		m[k] = val.(string)
-	}
-	return m, nil
-}
-
-func expandCESAppErrorHandlingSettingsFallbackResponseConfigMaxFallbackAttempts(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandCESAppErrorHandlingSettingsEndSessionConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-	l := v.([]interface{})
-	if len(l) == 0 {
-		return nil, nil
-	}
-
-	if l[0] == nil {
-		transformed := make(map[string]interface{})
-		return transformed, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedEscalateSession, err := expandCESAppErrorHandlingSettingsEndSessionConfigEscalateSession(original["escalate_session"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedEscalateSession); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["escalateSession"] = transformedEscalateSession
-	}
-
-	return transformed, nil
-}
-
-func expandCESAppErrorHandlingSettingsEndSessionConfigEscalateSession(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
