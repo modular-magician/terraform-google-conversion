@@ -80,7 +80,7 @@ func NetworkSecurityServerTlsPolicyTfplan2caiConverter() cai.Tfplan2caiConverter
 }
 
 func GetNetworkSecurityServerTlsPolicyCaiAssets(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]caiasset.Asset, error) {
-	name, err := cai.AssetName(d, config, "//networksecurity.googleapis.com/projects/{{project}}/locations/{{location}}/serverTlsPolicies/{{name}}")
+	name, err := cai.AssetName(d, config, "//networksecurity.googleapis.com/projects/{{project}}/locations/global/serverTlsPolicies/{{name}}")
 	if err != nil {
 		return []caiasset.Asset{}, err
 	}
@@ -90,7 +90,7 @@ func GetNetworkSecurityServerTlsPolicyCaiAssets(d tpgresource.TerraformResourceD
 			location = "global"
 		}
 		// Store the ID now
-		id, err := tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{location}}/serverTlsPolicies/{{name}}")
+		id, err := tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/global/serverTlsPolicies/{{name}}")
 		if err != nil {
 			return nil, fmt.Errorf("Error constructing id: %s", err)
 		}

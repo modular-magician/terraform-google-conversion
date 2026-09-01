@@ -134,7 +134,7 @@ func (c *NetworkSecurityServerTlsPolicyCai2hclConverter) convertResourceData(ass
 	hclData := make(map[string]interface{})
 
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_labels": struct{}{}, "terraform_labels": struct{}{}, "update_time": struct{}{}}
-	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/projects/{{project}}/locations/{{location}}/serverTlsPolicies/{{name}}", outputFields, hclData)
+	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//networksecurity.googleapis.com/projects/{{project}}/locations/global/serverTlsPolicies/{{name}}", outputFields, hclData)
 
 	hclData["labels"] = flattenNetworkSecurityServerTlsPolicyLabels(res["labels"], d, config)
 	hclData["description"] = flattenNetworkSecurityServerTlsPolicyDescription(res["description"], d, config)

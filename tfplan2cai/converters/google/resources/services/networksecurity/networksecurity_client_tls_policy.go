@@ -88,7 +88,7 @@ func ResourceConverterNetworkSecurityClientTlsPolicy() cai.ResourceConverter {
 }
 
 func GetNetworkSecurityClientTlsPolicyCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//networksecurity.googleapis.com/projects/{{project}}/locations/{{location}}/clientTlsPolicies/{{name}}")
+	name, err := cai.AssetName(d, config, "//networksecurity.googleapis.com/projects/{{project}}/locations/global/clientTlsPolicies/{{name}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}

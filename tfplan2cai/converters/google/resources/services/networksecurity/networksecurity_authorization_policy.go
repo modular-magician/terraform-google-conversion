@@ -88,7 +88,7 @@ func ResourceConverterNetworkSecurityAuthorizationPolicy() cai.ResourceConverter
 }
 
 func GetNetworkSecurityAuthorizationPolicyCaiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) ([]cai.Asset, error) {
-	name, err := cai.AssetName(d, config, "//networksecurity.googleapis.com/projects/{{project}}/locations/{{location}}/authorizationPolicies/{{name}}")
+	name, err := cai.AssetName(d, config, "//networksecurity.googleapis.com/projects/{{project}}/locations/global/authorizationPolicies/{{name}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
