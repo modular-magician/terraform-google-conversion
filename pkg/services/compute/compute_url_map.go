@@ -849,6 +849,40 @@ request's path is replaced by pathPrefixRewrite.
 The value must be between 1 and 1024 characters.`,
 										AtLeastOneOf: []string{"default_route_action.0.url_rewrite.0.host_rewrite", "default_route_action.0.url_rewrite.0.path_prefix_rewrite"},
 									},
+									"regex_rewrite": {
+										Type:        schema.TypeList,
+										Optional:    true,
+										Description: `The regex rewrite to be applied to the URL. Only one of pathPrefixRewrite, pathTemplateRewrite, or regexRewrite may be specified.`,
+										MaxItems:    1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"path_pattern": {
+													Type:     schema.TypeString,
+													Optional: true,
+													Description: `The regular expression used to match against the URL path.
+It uses RE2 syntax with the following constraints:
+ - Any single character operators
+ - Groups are allowed to have only submatch operator inside
+ - Groups are allowed only without any char repetition, e.g. .*
+ - Any char repetition, e.g. .*, is only allowed to be used in a single regex together with:
+     - Empty string operators
+     - Other repetitions
+     - Ranges
+     - Repetitions of ranges
+ - Ranges are only allowed to have:
+     - Character range
+     - Digits range
+     - Symbols listed in characters allowed for ranges`,
+												},
+												"path_substitution": {
+													Type:     schema.TypeString,
+													Optional: true,
+													Description: `Required when path pattern is specified. Used to rewrite matching parts of
+the path.`,
+												},
+											},
+										},
+									},
 								},
 							},
 							AtLeastOneOf: []string{"default_route_action.0.cache_policy", "default_route_action.0.cors_policy", "default_route_action.0.fault_injection_policy", "default_route_action.0.request_mirror_policy", "default_route_action.0.retry_policy", "default_route_action.0.timeout", "default_route_action.0.url_rewrite", "default_route_action.0.weighted_backend_services"},
@@ -1883,6 +1917,40 @@ request's path is replaced by pathPrefixRewrite.
 
 The value must be between 1 and 1024 characters.`,
 												},
+												"regex_rewrite": {
+													Type:        schema.TypeList,
+													Optional:    true,
+													Description: `The regex rewrite to be applied to the URL. Only one of pathPrefixRewrite, pathTemplateRewrite, or regexRewrite may be specified.`,
+													MaxItems:    1,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+															"path_pattern": {
+																Type:     schema.TypeString,
+																Optional: true,
+																Description: `The regular expression used to match against the URL path.
+It uses RE2 syntax with the following constraints:
+ - Any single character operators
+ - Groups are allowed to have only submatch operator inside
+ - Groups are allowed only without any char repetition, e.g. .*
+ - Any char repetition, e.g. .*, is only allowed to be used in a single regex together with:
+     - Empty string operators
+     - Other repetitions
+     - Ranges
+     - Repetitions of ranges
+ - Ranges are only allowed to have:
+     - Character range
+     - Digits range
+     - Symbols listed in characters allowed for ranges`,
+															},
+															"path_substitution": {
+																Type:     schema.TypeString,
+																Optional: true,
+																Description: `Required when path pattern is specified. Used to rewrite matching parts of
+the path.`,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -2914,6 +2982,40 @@ header is replaced with contents of hostRewrite. The value must be between 1 and
 																Description: `Prior to forwarding the request to the selected backend service, the matching
 portion of the request's path is replaced by pathPrefixRewrite. The value must
 be between 1 and 1024 characters.`,
+															},
+															"regex_rewrite": {
+																Type:        schema.TypeList,
+																Optional:    true,
+																Description: `The regex rewrite to be applied to the URL. Only one of pathPrefixRewrite, pathTemplateRewrite, or regexRewrite may be specified.`,
+																MaxItems:    1,
+																Elem: &schema.Resource{
+																	Schema: map[string]*schema.Schema{
+																		"path_pattern": {
+																			Type:     schema.TypeString,
+																			Optional: true,
+																			Description: `The regular expression used to match against the URL path.
+It uses RE2 syntax with the following constraints:
+ - Any single character operators
+ - Groups are allowed to have only submatch operator inside
+ - Groups are allowed only without any char repetition, e.g. .*
+ - Any char repetition, e.g. .*, is only allowed to be used in a single regex together with:
+     - Empty string operators
+     - Other repetitions
+     - Ranges
+     - Repetitions of ranges
+ - Ranges are only allowed to have:
+     - Character range
+     - Digits range
+     - Symbols listed in characters allowed for ranges`,
+																		},
+																		"path_substitution": {
+																			Type:     schema.TypeString,
+																			Optional: true,
+																			Description: `Required when path pattern is specified. Used to rewrite matching parts of
+the path.`,
+																		},
+																	},
+																},
 															},
 														},
 													},
@@ -4202,6 +4304,40 @@ MatchRules specify pathTemplate.
 
 Only one of pathPrefixRewrite and pathTemplateRewrite may be
 specified.`,
+															},
+															"regex_rewrite": {
+																Type:        schema.TypeList,
+																Optional:    true,
+																Description: `The regex rewrite to be applied to the URL. Only one of pathPrefixRewrite, pathTemplateRewrite, or regexRewrite may be specified.`,
+																MaxItems:    1,
+																Elem: &schema.Resource{
+																	Schema: map[string]*schema.Schema{
+																		"path_pattern": {
+																			Type:     schema.TypeString,
+																			Optional: true,
+																			Description: `The regular expression used to match against the URL path.
+It uses RE2 syntax with the following constraints:
+ - Any single character operators
+ - Groups are allowed to have only submatch operator inside
+ - Groups are allowed only without any char repetition, e.g. .*
+ - Any char repetition, e.g. .*, is only allowed to be used in a single regex together with:
+     - Empty string operators
+     - Other repetitions
+     - Ranges
+     - Repetitions of ranges
+ - Ranges are only allowed to have:
+     - Character range
+     - Digits range
+     - Symbols listed in characters allowed for ranges`,
+																		},
+																		"path_substitution": {
+																			Type:     schema.TypeString,
+																			Optional: true,
+																			Description: `Required when path pattern is specified. Used to rewrite matching parts of
+the path.`,
+																		},
+																	},
+																},
 															},
 														},
 													},
