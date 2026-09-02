@@ -599,6 +599,23 @@ projects/{project}/locations/{location}/namespaces/{namespace}/services/{service
 Please refer to the field 'effective_labels' for all of the labels present on the resource.`,
 				Elem: &schema.Schema{Type: schema.TypeString},
 			},
+			"secure_source_manager_instance_config": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: `Configuration for connections to an instance of Secure Source Manager.`,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"instance": {
+							Type:     schema.TypeString,
+							Required: true,
+							ForceNew: true,
+							Description: `Required. Immutable. The Secure Source Manager instance resource name,
+formatted as 'projects/*/locations/*/instances/*'.`,
+						},
+					},
+				},
+			},
 			"create_time": {
 				Type:        schema.TypeString,
 				Computed:    true,

@@ -148,6 +148,7 @@ func (c *DeveloperConnectConnectionCai2hclConverter) convertResourceData(asset c
 	hclData["gitlab_config"] = flattenDeveloperConnectConnectionGitlabConfig(res["gitlabConfig"], d, config)
 	hclData["http_config"] = flattenDeveloperConnectConnectionHttpConfig(res["httpConfig"], d, config)
 	hclData["crypto_key_config"] = flattenDeveloperConnectConnectionCryptoKeyConfig(res["cryptoKeyConfig"], d, config)
+	hclData["secure_source_manager_instance_config"] = flattenDeveloperConnectConnectionSecureSourceManagerInstanceConfig(res["secureSourceManagerInstanceConfig"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -928,6 +929,31 @@ func flattenDeveloperConnectConnectionCryptoKeyConfig(v interface{}, d *schema.R
 }
 
 func flattenDeveloperConnectConnectionCryptoKeyConfigKeyReference(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return "unknown"
+	}
+	transformed := v.(string)
+	if transformed == "" {
+		return "unknown"
+	}
+	return v
+}
+
+func flattenDeveloperConnectConnectionSecureSourceManagerInstanceConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["instance"] =
+		flattenDeveloperConnectConnectionSecureSourceManagerInstanceConfigInstance(original["instance"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenDeveloperConnectConnectionSecureSourceManagerInstanceConfigInstance(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return "unknown"
 	}

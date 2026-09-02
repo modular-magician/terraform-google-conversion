@@ -52,6 +52,9 @@ func TestAccDeveloperConnectConnection(t *testing.T) {
 			Name: "TestAccDeveloperConnectConnection_developerConnectConnectionHttpConnBearerExample",
 		},
 		{
+			Name: "TestAccDeveloperConnectConnection_developerConnectConnectionSecuresourcemanagerExample",
+		},
+		{
 			Name: "TestAccDeveloperConnectConnection_developerConnectConnectionGithubUpdate",
 		},
 		{

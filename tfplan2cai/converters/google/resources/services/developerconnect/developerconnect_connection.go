@@ -170,6 +170,12 @@ func GetDeveloperConnectConnectionApiObject(d tpgresource.TerraformResourceData,
 	} else if v, ok := d.GetOkExists("crypto_key_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(cryptoKeyConfigProp)) && (ok || !reflect.DeepEqual(v, cryptoKeyConfigProp)) {
 		obj["cryptoKeyConfig"] = cryptoKeyConfigProp
 	}
+	secureSourceManagerInstanceConfigProp, err := expandDeveloperConnectConnectionSecureSourceManagerInstanceConfig(d.Get("secure_source_manager_instance_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("secure_source_manager_instance_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(secureSourceManagerInstanceConfigProp)) && (ok || !reflect.DeepEqual(v, secureSourceManagerInstanceConfigProp)) {
+		obj["secureSourceManagerInstanceConfig"] = secureSourceManagerInstanceConfigProp
+	}
 	effectiveLabelsProp, err := expandDeveloperConnectConnectionEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -1202,6 +1208,32 @@ func expandDeveloperConnectConnectionCryptoKeyConfig(v interface{}, d tpgresourc
 }
 
 func expandDeveloperConnectConnectionCryptoKeyConfigKeyReference(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDeveloperConnectConnectionSecureSourceManagerInstanceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedInstance, err := expandDeveloperConnectConnectionSecureSourceManagerInstanceConfigInstance(original["instance"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedInstance); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["instance"] = transformedInstance
+	}
+
+	return transformed, nil
+}
+
+func expandDeveloperConnectConnectionSecureSourceManagerInstanceConfigInstance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
