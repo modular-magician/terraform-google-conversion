@@ -484,6 +484,9 @@ func TestAccComputeInstance(t *testing.T) {
 		{
 			Name: "TestAccComputeInstance_bootAndAttachedDisk_interface",
 		},
+		{
+			Name: "TestAccComputeInstance_schedulingExposeHostTopology",
+		},
 	}
 
 	for _, tt := range tests {
