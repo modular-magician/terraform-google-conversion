@@ -714,6 +714,9 @@ func TestAccContainerCluster(t *testing.T) {
 		{
 			Name: "TestAccContainerCluster_withHighScaleCheckpointingConfig",
 		},
+		{
+			Name: "TestAccContainerCluster_jwtAuthenticatorConfig",
+		},
 	}
 
 	for _, tt := range tests {
