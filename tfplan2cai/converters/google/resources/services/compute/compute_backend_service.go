@@ -499,6 +499,16 @@ func GetComputeBackendServiceApiObject(d tpgresource.TerraformResourceData, conf
 }
 
 func resourceComputeBackendServiceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
+	// Pass back the generated authentication config during updates when identity is set.
+	// This prevents sending an empty string which results in an API validation error.
+	if tlsSettings, ok := obj["tlsSettings"].(map[string]interface{}); ok {
+		if identity, ok := tlsSettings["identity"].(string); ok && identity != "" {
+			if generatedAuth, ok := d.Get("tls_settings.0.generated_authentication_config").(string); ok && generatedAuth != "" {
+				tlsSettings["authenticationConfig"] = generatedAuth
+			}
+		}
+	}
+
 	backendsRaw, ok := obj["backends"]
 	if !ok {
 		return obj, nil
@@ -2182,6 +2192,20 @@ func expandComputeBackendServiceTlsSettings(v interface{}, d tpgresource.Terrafo
 		transformed["authenticationConfig"] = transformedAuthenticationConfig
 	}
 
+	transformedIdentity, err := expandComputeBackendServiceTlsSettingsIdentity(original["identity"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedIdentity); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["identity"] = transformedIdentity
+	}
+
+	transformedGeneratedAuthenticationConfig, err := expandComputeBackendServiceTlsSettingsGeneratedAuthenticationConfig(original["generated_authentication_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedGeneratedAuthenticationConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["generatedAuthenticationConfig"] = transformedGeneratedAuthenticationConfig
+	}
+
 	return transformed, nil
 }
 
@@ -2230,6 +2254,14 @@ func expandComputeBackendServiceTlsSettingsSubjectAltNamesUniformResourceIdentif
 }
 
 func expandComputeBackendServiceTlsSettingsAuthenticationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeBackendServiceTlsSettingsIdentity(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeBackendServiceTlsSettingsGeneratedAuthenticationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

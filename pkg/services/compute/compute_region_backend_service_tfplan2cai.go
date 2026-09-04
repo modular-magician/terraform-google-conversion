@@ -319,6 +319,16 @@ func GetComputeRegionBackendServiceCaiObject(d tpgresource.TerraformResourceData
 }
 
 func resourceComputeRegionBackendServiceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
+	// Pass back the generated authentication config during updates when identity is set.
+	// This prevents sending an empty string which results in an API validation error.
+	if tlsSettings, ok := obj["tlsSettings"].(map[string]interface{}); ok {
+		if identity, ok := tlsSettings["identity"].(string); ok && identity != "" {
+			if generatedAuth, ok := d.Get("tls_settings.0.generated_authentication_config").(string); ok && generatedAuth != "" {
+				tlsSettings["authenticationConfig"] = generatedAuth
+			}
+		}
+	}
+
 	if d.Get("load_balancing_scheme").(string) == "EXTERNAL_MANAGED" || d.Get("load_balancing_scheme").(string) == "INTERNAL_MANAGED" || d.Get("load_balancing_scheme").(string) == "INTERNAL_SELF_MANAGED" {
 		return obj, nil
 	}
@@ -1886,6 +1896,13 @@ func expandComputeRegionBackendServiceTlsSettings(v interface{}, d tpgresource.T
 		transformed["authenticationConfig"] = transformedAuthenticationConfig
 	}
 
+	transformedIdentity, err := expandComputeRegionBackendServiceTlsSettingsIdentity(original["identity"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedIdentity); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["identity"] = transformedIdentity
+	}
+
 	return transformed, nil
 }
 
@@ -1934,6 +1951,10 @@ func expandComputeRegionBackendServiceTlsSettingsSubjectAltNamesUniformResourceI
 }
 
 func expandComputeRegionBackendServiceTlsSettingsAuthenticationConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionBackendServiceTlsSettingsIdentity(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

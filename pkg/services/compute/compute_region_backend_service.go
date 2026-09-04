@@ -1243,6 +1243,15 @@ The full range of timeout values allowed goes from 1 through 2,147,483,647 secon
 							Description: `Reference to the BackendAuthenticationConfig resource from the networksecurity.googleapis.com namespace.
 Can be used in authenticating TLS connections to the backend, as specified by the authenticationMode field.
 Can only be specified if authenticationMode is not NONE.`,
+							ConflictsWith: []string{},
+						},
+						"identity": {
+							Type:     schema.TypeString,
+							Optional: true,
+							ForceNew: true,
+							Description: `Assigns a managed workload identity to the backend service.
+For more information, refer to [Backend mTLS with managed workload identity](https://docs.cloud.google.com/load-balancing/docs/managed-workload-identities-load-balancers-overview).`,
+							ConflictsWith: []string{},
 						},
 						"sni": {
 							Type:     schema.TypeString,
@@ -1251,6 +1260,7 @@ Can only be specified if authenticationMode is not NONE.`,
 TLS connection to the backend, and requires that this string match a Subject Alternative Name (SAN) in the backend's
 server certificate. With a Regional Internet NEG backend, if the SNI is specified here, the load balancer uses it
 regardless of whether the Regional Internet NEG is specified with FQDN or IP address and port.`,
+							ConflictsWith: []string{},
 						},
 						"subject_alt_names": {
 							Type:     schema.TypeList,
@@ -1276,6 +1286,7 @@ subjectAltNames.`,
 									},
 								},
 							},
+							ConflictsWith: []string{},
 						},
 					},
 				},

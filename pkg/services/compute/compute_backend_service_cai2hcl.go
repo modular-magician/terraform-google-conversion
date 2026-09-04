@@ -1812,6 +1812,8 @@ func flattenComputeBackendServiceTlsSettings(v interface{}, d *schema.ResourceDa
 		flattenComputeBackendServiceTlsSettingsSubjectAltNames(original["subjectAltNames"], d, config)
 	transformed["authentication_config"] =
 		flattenComputeBackendServiceTlsSettingsAuthenticationConfig(original["authenticationConfig"], d, config)
+	transformed["identity"] =
+		flattenComputeBackendServiceTlsSettingsIdentity(original["identity"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -1869,6 +1871,16 @@ func flattenComputeBackendServiceTlsSettingsSubjectAltNamesUniformResourceIdenti
 }
 
 func flattenComputeBackendServiceTlsSettingsAuthenticationConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenComputeBackendServiceTlsSettingsIdentity(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
 	}
@@ -1971,6 +1983,17 @@ func resourceComputeBackendServiceDecoder(d *schema.ResourceData, meta interface
 		lbPolicy := v.(string)
 		if lbPolicy != "MAGLEV" && lbPolicy != "RING_HASH" {
 			delete(res, "consistentHash")
+		}
+	}
+
+	// Move authenticationConfig to generatedAuthenticationConfig and clear it when identity is set.
+	// This prevents diffs since the API generates this value automatically.
+	if tlsSettings, ok := res["tlsSettings"].(map[string]interface{}); ok {
+		if identity, ok := tlsSettings["identity"].(string); ok && identity != "" {
+			if authConfig, ok := tlsSettings["authenticationConfig"].(string); ok {
+				tlsSettings["generatedAuthenticationConfig"] = authConfig
+				delete(tlsSettings, "authenticationConfig")
+			}
 		}
 	}
 
