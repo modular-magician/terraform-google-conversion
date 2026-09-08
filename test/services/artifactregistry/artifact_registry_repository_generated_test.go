@@ -109,6 +109,9 @@ func TestAccArtifactRegistryRepository(t *testing.T) {
 			Name: "TestAccArtifactRegistryRepository_virtual",
 		},
 		{
+			Name: "TestAccArtifactRegistryRepository_virtualEmpty",
+		},
+		{
 			Name: "TestAccArtifactRegistryRepository_remote",
 		},
 		{
