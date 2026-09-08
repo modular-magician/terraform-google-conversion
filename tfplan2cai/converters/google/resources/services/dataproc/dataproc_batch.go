@@ -126,6 +126,12 @@ func GetDataprocBatchCaiObject(d tpgresource.TerraformResourceData, config *tran
 
 func GetDataprocBatchApiObject(d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	obj := make(map[string]interface{})
+	batchIdProp, err := expandDataprocBatchBatchId(d.Get("batch_id"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("batch_id"); !tpgresource.IsEmptyValue(reflect.ValueOf(batchIdProp)) && (ok || !reflect.DeepEqual(v, batchIdProp)) {
+		obj["batchId"] = batchIdProp
+	}
 	runtimeConfigProp, err := expandDataprocBatchRuntimeConfig(d.Get("runtime_config"), d, config)
 	if err != nil {
 		return nil, err
@@ -170,6 +176,10 @@ func GetDataprocBatchApiObject(d tpgresource.TerraformResourceData, config *tran
 	}
 
 	return obj, nil
+}
+
+func expandDataprocBatchBatchId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandDataprocBatchRuntimeConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

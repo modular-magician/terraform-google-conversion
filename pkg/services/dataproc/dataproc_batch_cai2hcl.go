@@ -136,6 +136,7 @@ func (c *DataprocBatchCai2hclConverter) convertResourceData(asset caiasset.Asset
 	outputFields := map[string]struct{}{"create_time": struct{}{}, "creator": struct{}{}, "effective_labels": struct{}{}, "name": struct{}{}, "operation": struct{}{}, "runtime_info": struct{}{}, "state": struct{}{}, "state_history": struct{}{}, "state_message": struct{}{}, "state_time": struct{}{}, "terraform_labels": struct{}{}, "uuid": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//dataproc.googleapis.com/projects/{{project}}/locations/{{location}}/batches/{{batch_id}}", outputFields, hclData)
 
+	hclData["batch_id"] = flattenDataprocBatchBatchId(res["batchId"], d, config)
 	hclData["labels"] = flattenDataprocBatchLabels(res["labels"], d, config)
 	hclData["runtime_config"] = flattenDataprocBatchRuntimeConfig(res["runtimeConfig"], d, config)
 	hclData["environment_config"] = flattenDataprocBatchEnvironmentConfig(res["environmentConfig"], d, config)
@@ -152,6 +153,11 @@ func (c *DataprocBatchCai2hclConverter) convertResourceData(asset caiasset.Asset
 		Labels: []string{c.name, hclBlockName},
 		Value:  ctyVal,
 	}, nil
+}
+
+func flattenDataprocBatchBatchId(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	parts := strings.Split(d.Get("name").(string), "/")
+	return parts[len(parts)-1]
 }
 
 func flattenDataprocBatchLabels(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

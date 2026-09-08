@@ -57,7 +57,6 @@ func TestAccDataprocBatch(t *testing.T) {
 			test.BidirectionalConversion(
 				t,
 				[]string{
-					"batch_id",
 					"count",
 					"deletion_protection",
 					"depends_on",

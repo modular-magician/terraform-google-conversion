@@ -95,6 +95,7 @@ func ResourceDataprocBatch() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"batch_id": {
 				Type:     schema.TypeString,
+				Computed: true,
 				Optional: true,
 				ForceNew: true,
 				Description: `The ID to use for the batch, which will become the final component of the batch's resource name.
