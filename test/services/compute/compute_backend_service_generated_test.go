@@ -101,6 +101,9 @@ func TestAccComputeBackendService(t *testing.T) {
 			Name: "TestAccComputeBackendService_withCdnPolicy",
 		},
 		{
+			Name: "TestAccComputeBackendService_cdnPolicyZeroTtl",
+		},
+		{
 			Name: "TestAccComputeBackendService_withSecurityPolicy",
 		},
 		{

@@ -1092,7 +1092,7 @@ func expandComputeBackendServiceCdnPolicy(v interface{}, d tpgresource.Terraform
 	transformedDefaultTtl, err := expandComputeBackendServiceCdnPolicyDefaultTtl(original["default_ttl"], d, config)
 	if err != nil {
 		return nil, err
-	} else if val := reflect.ValueOf(transformedDefaultTtl); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+	} else {
 		transformed["defaultTtl"] = transformedDefaultTtl
 	}
 
@@ -1106,7 +1106,7 @@ func expandComputeBackendServiceCdnPolicy(v interface{}, d tpgresource.Terraform
 	transformedClientTtl, err := expandComputeBackendServiceCdnPolicyClientTtl(original["client_ttl"], d, config)
 	if err != nil {
 		return nil, err
-	} else if val := reflect.ValueOf(transformedClientTtl); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+	} else {
 		transformed["clientTtl"] = transformedClientTtl
 	}
 
