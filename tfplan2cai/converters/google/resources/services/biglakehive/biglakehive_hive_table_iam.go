@@ -98,7 +98,7 @@ func newBiglakeHiveHiveTableIamAsset(
 		return []cai.Asset{}, fmt.Errorf("expanding bindings: %v", err)
 	}
 
-	name, err := cai.AssetName(d, config, "//biglake.googleapis.com/projects/{{project}}/catalogs/{{catalog}}/namespaces/{{database}}/tables/{{name}}")
+	name, err := cai.AssetName(d, config, "//biglake.googleapis.com/projects/{{project}}/catalogs/{{catalog}}/databases/{{database}}/tables/{{name}}")
 	if err != nil {
 		return []cai.Asset{}, err
 	}
@@ -128,7 +128,7 @@ func FetchBiglakeHiveHiveTableIamPolicy(d tpgresource.TerraformResourceData, con
 		BiglakeHiveHiveTableIamUpdaterProducer,
 		d,
 		config,
-		"//biglake.googleapis.com/projects/{{project}}/catalogs/{{catalog}}/namespaces/{{database}}/tables/{{name}}",
+		"//biglake.googleapis.com/projects/{{project}}/catalogs/{{catalog}}/databases/{{database}}/tables/{{name}}",
 		BiglakeHiveHiveTableIAMAssetType,
 	)
 }
