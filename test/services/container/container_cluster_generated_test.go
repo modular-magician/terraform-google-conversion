@@ -679,6 +679,9 @@ func TestAccContainerCluster(t *testing.T) {
 			Name: "TestAccContainerCluster_withNodeCreationConfig",
 		},
 		{
+			Name: "TestAccContainerCluster_withControlPlaneEgress",
+		},
+		{
 			Name: "TestAccContainerCluster_withCustomNodeInitGcs",
 		},
 		{
