@@ -49,6 +49,58 @@ import (
 	"google.golang.org/api/googleapi"
 )
 
+// lustreInstanceTargetVersionDiffSuppress suppresses target_version when the
+// requested upgrade is a no-op. The API clears the field once the upgrade
+// finishes, so the prior state value carries no information; compare the
+// request against effective_version/available_version instead.
+func lustreInstanceTargetVersionDiffSuppress(_, _, new string, d *schema.ResourceData) bool {
+	// "latest" resolves server-side to available_version; nothing available
+	// means there is nothing to upgrade to.
+	if strings.EqualFold(new, "latest") {
+		availableVersion, _ := d.Get("available_version").(string)
+		return availableVersion == ""
+	}
+	// Same-or-older than what is running is a no-op or a downgrade, both of
+	// which the API rejects. Lexicographic, matching the service's ordering.
+	effectiveVersion, _ := d.Get("effective_version").(string)
+	return effectiveVersion != "" && new <= effectiveVersion
+}
+
+// lustreInstanceVersionUpgradeCustomDiff rejects at plan time what the API
+// rejects at apply time: UpdateInstance does not support target_version
+// alongside a changed capacity_gib or maintenance_policy.
+func lustreInstanceVersionUpgradeCustomDiff(_ context.Context, diff *schema.ResourceDiff, meta interface{}) error {
+	// Update-only restriction, and on create every field reads as changed.
+	if diff.Id() == "" {
+		return nil
+	}
+	// separate func to allow unit testing
+	return lustreInstanceVersionUpgradeCustomDiffFunc(diff)
+}
+func lustreInstanceVersionUpgradeCustomDiffFunc(diff tpgresource.TerraformResourceDiff) error {
+	// HasChange is evaluated after diff suppression, so this is only true when
+	// an upgrade will actually be sent.
+	if !diff.HasChange("target_version") {
+		return nil
+	}
+	// The service only objects to capacity that actually moves; an unchanged
+	// capacity_gib in the same config is fine.
+	var conflicts []string
+	if diff.HasChange("capacity_gib") {
+		conflicts = append(conflicts, "capacity_gib")
+	}
+	if diff.HasChange("maintenance_policy") {
+		conflicts = append(conflicts, "maintenance_policy")
+	}
+	if len(conflicts) == 0 {
+		return nil
+	}
+	return fmt.Errorf("target_version cannot be changed in the same apply as %s: "+
+		"the Managed Lustre API does not support updating capacity or maintenance "+
+		"policy along with the version. Apply the version upgrade on its own first, "+
+		"then apply the other change", strings.Join(conflicts, " and "))
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
@@ -176,6 +228,12 @@ func GetLustreInstanceApiObject(d tpgresource.TerraformResourceData, config *tra
 	} else if v, ok := d.GetOkExists("placement_policy"); !tpgresource.IsEmptyValue(reflect.ValueOf(placementPolicyProp)) && (ok || !reflect.DeepEqual(v, placementPolicyProp)) {
 		obj["placementPolicy"] = placementPolicyProp
 	}
+	targetVersionProp, err := expandLustreInstanceTargetVersion(d.Get("target_version"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("target_version"); !tpgresource.IsEmptyValue(reflect.ValueOf(targetVersionProp)) && (ok || !reflect.DeepEqual(v, targetVersionProp)) {
+		obj["targetVersion"] = targetVersionProp
+	}
 	effectiveLabelsProp, err := expandLustreInstanceEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -183,6 +241,14 @@ func GetLustreInstanceApiObject(d tpgresource.TerraformResourceData, config *tra
 		obj["labels"] = effectiveLabelsProp
 	}
 
+	return resourceLustreInstanceEncoder(d, config, obj)
+}
+
+func resourceLustreInstanceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
+	// The API rejects target_version at create, and Terraform sends every
+	// configured property on create, so drop it here. This also covers the create
+	// half of a recreate.
+	delete(obj, "targetVersion")
 	return obj, nil
 }
 
@@ -665,6 +731,10 @@ func expandLustreInstancePerUnitStorageThroughput(v interface{}, d tpgresource.T
 }
 
 func expandLustreInstancePlacementPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandLustreInstanceTargetVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
