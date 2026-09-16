@@ -136,7 +136,7 @@ func GetDiscoveryEngineDataConnectorApiObject(d tpgresource.TerraformResourceDat
 	if err != nil {
 		return nil, err
 	} else if v, ok := d.GetOkExists("json_params"); !tpgresource.IsEmptyValue(reflect.ValueOf(jsonParamsProp)) && (ok || !reflect.DeepEqual(v, jsonParamsProp)) {
-		obj["jsonParams"] = jsonParamsProp
+		obj["params"] = jsonParamsProp
 	}
 	refreshIntervalProp, err := expandDiscoveryEngineDataConnectorRefreshInterval(d.Get("refresh_interval"), d, config)
 	if err != nil {
@@ -234,7 +234,15 @@ func expandDiscoveryEngineDataConnectorParams(v interface{}, d tpgresource.Terra
 }
 
 func expandDiscoveryEngineDataConnectorJsonParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func expandDiscoveryEngineDataConnectorRefreshInterval(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
