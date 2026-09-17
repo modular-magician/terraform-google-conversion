@@ -401,6 +401,9 @@ func TestAccComputeInstance(t *testing.T) {
 			Name: "TestAccComputeInstance_localSsdRecoveryTimeout_update",
 		},
 		{
+			Name: "TestAccComputeInstance_preemptionNoticeDuration",
+		},
+		{
 			Name: "TestAccComputeInstance_partnerMetadata",
 		},
 		{
@@ -444,9 +447,6 @@ func TestAccComputeInstance(t *testing.T) {
 		},
 		{
 			Name: "TestAccComputeInstance_schedulingSkipGuestOSShutdown",
-		},
-		{
-			Name: "TestAccComputeInstance_preemptionNoticeDuration",
 		},
 		{
 			Name: "TestAccComputeInstance_NetworkAttachment",
