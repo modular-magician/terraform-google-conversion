@@ -148,6 +148,12 @@ func TestAccContainerNodePool(t *testing.T) {
 			Name: "TestAccContainerNodePool_withGPU",
 		},
 		{
+			Name: "TestAccContainerNodePool_gpuSharingConfigUpdate",
+		},
+		{
+			Name: "TestAccContainerNodePool_gpuDriverInstallationConfigUpdate",
+		},
+		{
 			Name: "TestAccContainerNodePool_withRDMA",
 		},
 		{
