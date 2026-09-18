@@ -140,6 +140,12 @@ func GetVertexAIEndpointApiObject(d tpgresource.TerraformResourceData, config *t
 	} else if v, ok := d.GetOkExists("network"); !tpgresource.IsEmptyValue(reflect.ValueOf(networkProp)) && (ok || !reflect.DeepEqual(v, networkProp)) {
 		obj["network"] = networkProp
 	}
+	enablePrivateServiceConnectProp, err := expandVertexAIEndpointEnablePrivateServiceConnect(d.Get("enable_private_service_connect"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("enable_private_service_connect"); !tpgresource.IsEmptyValue(reflect.ValueOf(enablePrivateServiceConnectProp)) && (ok || !reflect.DeepEqual(v, enablePrivateServiceConnectProp)) {
+		obj["enablePrivateServiceConnect"] = enablePrivateServiceConnectProp
+	}
 	privateServiceConnectConfigProp, err := expandVertexAIEndpointPrivateServiceConnectConfig(d.Get("private_service_connect_config"), d, config)
 	if err != nil {
 		return nil, err
@@ -157,6 +163,24 @@ func GetVertexAIEndpointApiObject(d tpgresource.TerraformResourceData, config *t
 		return nil, err
 	} else if v, ok := d.GetOkExists("dedicated_endpoint_enabled"); !tpgresource.IsEmptyValue(reflect.ValueOf(dedicatedEndpointEnabledProp)) && (ok || !reflect.DeepEqual(v, dedicatedEndpointEnabledProp)) {
 		obj["dedicatedEndpointEnabled"] = dedicatedEndpointEnabledProp
+	}
+	clientConnectionConfigProp, err := expandVertexAIEndpointClientConnectionConfig(d.Get("client_connection_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("client_connection_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(clientConnectionConfigProp)) && (ok || !reflect.DeepEqual(v, clientConnectionConfigProp)) {
+		obj["clientConnectionConfig"] = clientConnectionConfigProp
+	}
+	gdcConfigProp, err := expandVertexAIEndpointGdcConfig(d.Get("gdc_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("gdc_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(gdcConfigProp)) && (ok || !reflect.DeepEqual(v, gdcConfigProp)) {
+		obj["gdcConfig"] = gdcConfigProp
+	}
+	genAiAdvancedFeaturesConfigProp, err := expandVertexAIEndpointGenAiAdvancedFeaturesConfig(d.Get("gen_ai_advanced_features_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("gen_ai_advanced_features_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(genAiAdvancedFeaturesConfigProp)) && (ok || !reflect.DeepEqual(v, genAiAdvancedFeaturesConfigProp)) {
+		obj["genAiAdvancedFeaturesConfig"] = genAiAdvancedFeaturesConfigProp
 	}
 	effectiveLabelsProp, err := expandVertexAIEndpointEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
@@ -215,6 +239,10 @@ func expandVertexAIEndpointEncryptionSpecKmsKeyName(v interface{}, d tpgresource
 }
 
 func expandVertexAIEndpointNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointEnablePrivateServiceConnect(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -428,6 +456,111 @@ func expandVertexAIEndpointPredictRequestResponseLoggingConfigBigqueryDestinatio
 }
 
 func expandVertexAIEndpointDedicatedEndpointEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointClientConnectionConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedInferenceTimeout, err := expandVertexAIEndpointClientConnectionConfigInferenceTimeout(original["inference_timeout"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedInferenceTimeout); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["inferenceTimeout"] = transformedInferenceTimeout
+	}
+
+	return transformed, nil
+}
+
+func expandVertexAIEndpointClientConnectionConfigInferenceTimeout(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointGdcConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedZone, err := expandVertexAIEndpointGdcConfigZone(original["zone"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedZone); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["zone"] = transformedZone
+	}
+
+	return transformed, nil
+}
+
+func expandVertexAIEndpointGdcConfigZone(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVertexAIEndpointGenAiAdvancedFeaturesConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedRagConfig, err := expandVertexAIEndpointGenAiAdvancedFeaturesConfigRagConfig(original["rag_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["ragConfig"] = transformedRagConfig
+	}
+
+	return transformed, nil
+}
+
+func expandVertexAIEndpointGenAiAdvancedFeaturesConfigRagConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 {
+		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnableRag, err := expandVertexAIEndpointGenAiAdvancedFeaturesConfigRagConfigEnableRag(original["enable_rag"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["enableRag"] = transformedEnableRag
+	}
+
+	return transformed, nil
+}
+
+func expandVertexAIEndpointGenAiAdvancedFeaturesConfigRagConfigEnableRag(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
