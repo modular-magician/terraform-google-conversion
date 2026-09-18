@@ -73,6 +73,9 @@ func TestAccBigQueryDataset(t *testing.T) {
 			Name: "TestAccBigQueryDataset_accessMixedCase_groupByEmail",
 		},
 		{
+			Name: "TestAccBigQueryDataset_accessNilVsEmptyStringPermadiff",
+		},
+		{
 			Name: "TestAccBigQueryDataset_regionalLocation",
 		},
 		{
