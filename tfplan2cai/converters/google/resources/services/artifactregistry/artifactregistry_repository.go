@@ -306,7 +306,7 @@ func GetArtifactRegistryRepositoryApiObject(d tpgresource.TerraformResourceData,
 	virtualRepositoryConfigProp, err := expandArtifactRegistryRepositoryVirtualRepositoryConfig(d.Get("virtual_repository_config"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("virtual_repository_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(virtualRepositoryConfigProp)) && (ok || !reflect.DeepEqual(v, virtualRepositoryConfigProp)) {
+	} else if v, ok := d.GetOkExists("virtual_repository_config"); ok || (v != nil && !reflect.DeepEqual(v, virtualRepositoryConfigProp)) {
 		obj["virtualRepositoryConfig"] = virtualRepositoryConfigProp
 	}
 	cleanupPoliciesProp, err := expandArtifactRegistryRepositoryCleanupPolicies(d.Get("cleanup_policies"), d, config)
@@ -461,7 +461,7 @@ func expandArtifactRegistryRepositoryVirtualRepositoryConfig(v interface{}, d tp
 	transformedUpstreamPolicies, err := expandArtifactRegistryRepositoryVirtualRepositoryConfigUpstreamPolicies(original["upstream_policies"], d, config)
 	if err != nil {
 		return nil, err
-	} else if val := reflect.ValueOf(transformedUpstreamPolicies); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+	} else {
 		transformed["upstreamPolicies"] = transformedUpstreamPolicies
 	}
 
