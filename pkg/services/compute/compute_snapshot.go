@@ -40,6 +40,23 @@ import (
 	"github.com/GoogleCloudPlatform/terraform-google-conversion/v7/pkg/verify"
 )
 
+// SnapshotKmsKeyDiffSuppress suppresses diffs between base KMS keys, self-links, and versioned keys
+func SnapshotKmsKeyDiffSuppress(_, old, new string, _ *schema.ResourceData) bool {
+	oldStripped, err := tpgresource.GetRelativePath(old)
+	if err != nil {
+		oldStripped = old
+	}
+	newStripped, err := tpgresource.GetRelativePath(new)
+	if err != nil {
+		newStripped = new
+	}
+
+	oldKey := strings.Split(oldStripped, "/cryptoKeyVersions")[0]
+	newKey := strings.Split(newStripped, "/cryptoKeyVersions")[0]
+
+	return oldKey == newKey
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
@@ -138,7 +155,6 @@ and values are in the format tagValues/456.`,
 			"snapshot_encryption_key": {
 				Type:     schema.TypeList,
 				Optional: true,
-				ForceNew: true,
 				Description: `Encrypts the snapshot using a customer-supplied encryption key.
 
 After you encrypt a snapshot using a customer-supplied key, you must
@@ -156,10 +172,14 @@ key and you do not need to provide a key to use the snapshot later.`,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"kms_key_self_link": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-							Description: `The name of the encryption key that is stored in Google Cloud KMS.`,
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SnapshotKmsKeyDiffSuppress,
+							Description: `The name of the encryption key that is stored in Google Cloud KMS.
+
+Note: Specify the Cloud KMS CryptoKey resource path without a version suffix
+(e.g. 'projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]').
+Rotating snapshot to a specific crypto key version is not supported via terraform.`,
 						},
 						"kms_key_service_account": {
 							Type:     schema.TypeString,

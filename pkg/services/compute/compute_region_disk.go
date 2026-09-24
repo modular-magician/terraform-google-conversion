@@ -144,7 +144,6 @@ you create the resource.`,
 			"disk_encryption_key": {
 				Type:     schema.TypeList,
 				Optional: true,
-				ForceNew: true,
 				Description: `Encrypts the disk using a customer-supplied encryption key.
 
 After you encrypt a disk with a customer-supplied key, you must
@@ -161,10 +160,14 @@ you do not need to provide a key to use the disk later.`,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"kms_key_name": {
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-							Description: `The name of the encryption key that is stored in Google Cloud KMS.`,
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: DiskKmsKeyDiffSuppress,
+							Description: `The name of the encryption key that is stored in Google Cloud KMS.
+
+Note: Specify the Cloud KMS CryptoKey resource path without a version suffix
+(e.g. 'projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]').
+Rotating disk to a specific crypto key version is not supported via terraform.`,
 						},
 						"raw_key": {
 							Type:     schema.TypeString,
