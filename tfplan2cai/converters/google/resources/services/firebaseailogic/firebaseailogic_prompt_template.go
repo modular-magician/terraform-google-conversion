@@ -122,6 +122,12 @@ func GetFirebaseAILogicPromptTemplateApiObject(d tpgresource.TerraformResourceDa
 	} else if v, ok := d.GetOkExists("display_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(displayNameProp)) && (ok || !reflect.DeepEqual(v, displayNameProp)) {
 		obj["displayName"] = displayNameProp
 	}
+	kmsKeyNameProp, err := expandFirebaseAILogicPromptTemplateKmsKeyName(d.Get("kms_key_name"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("kms_key_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(kmsKeyNameProp)) && (ok || !reflect.DeepEqual(v, kmsKeyNameProp)) {
+		obj["kmsKeyName"] = kmsKeyNameProp
+	}
 	templateStringProp, err := expandFirebaseAILogicPromptTemplateTemplateString(d.Get("template_string"), d, config)
 	if err != nil {
 		return nil, err
@@ -137,6 +143,10 @@ func expandFirebaseAILogicPromptTemplateTemplateId(v interface{}, d tpgresource.
 }
 
 func expandFirebaseAILogicPromptTemplateDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandFirebaseAILogicPromptTemplateKmsKeyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
