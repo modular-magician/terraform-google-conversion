@@ -29,6 +29,10 @@ func TestAccComputeUrlMap(t *testing.T) {
 			Skip: "Index mismatch in path_matcher due to test framework limitation",
 		},
 		{
+			Name: "TestAccComputeUrlMap_dynamicCompressionPolicyMultiLevelUpdate",
+			Skip: "Index mismatch in path_matcher due to test framework limitation",
+		},
+		{
 			Name: "TestAccComputeUrlMap_urlMapBucketAndServiceExample",
 		},
 		{
