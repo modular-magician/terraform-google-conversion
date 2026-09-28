@@ -2768,6 +2768,8 @@ func flattenComputeUrlMapPathMatcherRouteRulesRouteActionUrlRewrite(v interface{
 	transformed := make(map[string]interface{})
 	transformed["host_rewrite"] =
 		flattenComputeUrlMapPathMatcherRouteRulesRouteActionUrlRewriteHostRewrite(original["hostRewrite"], d, config)
+	transformed["regex_rewrite"] =
+		flattenComputeUrlMapPathMatcherRouteRulesRouteActionUrlRewriteRegexRewrite(original["regexRewrite"], d, config)
 	transformed["path_prefix_rewrite"] =
 		flattenComputeUrlMapPathMatcherRouteRulesRouteActionUrlRewritePathPrefixRewrite(original["pathPrefixRewrite"], d, config)
 	transformed["path_template_rewrite"] =
@@ -2779,6 +2781,42 @@ func flattenComputeUrlMapPathMatcherRouteRulesRouteActionUrlRewrite(v interface{
 }
 
 func flattenComputeUrlMapPathMatcherRouteRulesRouteActionUrlRewriteHostRewrite(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenComputeUrlMapPathMatcherRouteRulesRouteActionUrlRewriteRegexRewrite(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["path_pattern"] =
+		flattenComputeUrlMapPathMatcherRouteRulesRouteActionUrlRewriteRegexRewritePathPattern(original["pathPattern"], d, config)
+	transformed["path_substitution"] =
+		flattenComputeUrlMapPathMatcherRouteRulesRouteActionUrlRewriteRegexRewritePathSubstitution(original["pathSubstitution"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenComputeUrlMapPathMatcherRouteRulesRouteActionUrlRewriteRegexRewritePathPattern(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenComputeUrlMapPathMatcherRouteRulesRouteActionUrlRewriteRegexRewritePathSubstitution(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
 	}

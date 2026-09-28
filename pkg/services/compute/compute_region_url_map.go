@@ -2558,6 +2558,40 @@ MatchRules specify pathTemplate.
 Only one of pathPrefixRewrite and pathTemplateRewrite may be
 specified.`,
 															},
+															"regex_rewrite": {
+																Type:        schema.TypeList,
+																Optional:    true,
+																Description: `The regex rewrite to be applied to the URL. Only one of pathPrefixRewrite, pathTemplateRewrite, or regexRewrite may be specified.`,
+																MaxItems:    1,
+																Elem: &schema.Resource{
+																	Schema: map[string]*schema.Schema{
+																		"path_pattern": {
+																			Type:     schema.TypeString,
+																			Optional: true,
+																			Description: `The regular expression used to match against the URL path.
+It uses RE2 syntax with the following constraints:
+ - Any single character operators
+ - Groups are allowed to have only submatch operator inside
+ - Groups are allowed only without any char repetition, e.g. .*
+ - Any char repetition, e.g. .*, is only allowed to be used in a single regex together with:
+     - Empty string operators
+     - Other repetitions
+     - Ranges
+     - Repetitions of ranges
+ - Ranges are only allowed to have:
+     - Character range
+     - Digits range
+     - Symbols listed in characters allowed for ranges`,
+																		},
+																		"path_substitution": {
+																			Type:     schema.TypeString,
+																			Optional: true,
+																			Description: `Required when path pattern is specified. Used to rewrite matching parts of
+the path.`,
+																		},
+																	},
+																},
+															},
 														},
 													},
 												},
