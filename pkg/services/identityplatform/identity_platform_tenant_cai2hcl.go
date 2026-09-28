@@ -140,6 +140,7 @@ func (c *IdentityPlatformTenantCai2hclConverter) convertResourceData(asset caias
 	hclData["allow_password_signup"] = flattenIdentityPlatformTenantAllowPasswordSignup(res["allowPasswordSignup"], d, config)
 	hclData["enable_email_link_signin"] = flattenIdentityPlatformTenantEnableEmailLinkSignin(res["enableEmailLinkSignin"], d, config)
 	hclData["disable_auth"] = flattenIdentityPlatformTenantDisableAuth(res["disableAuth"], d, config)
+	hclData["password_policy_config"] = flattenIdentityPlatformTenantPasswordPolicyConfig(res["passwordPolicyConfig"], d, config)
 	hclData["client"] = flattenIdentityPlatformTenantClient(res["client"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
@@ -172,6 +173,125 @@ func flattenIdentityPlatformTenantEnableEmailLinkSignin(v interface{}, d *schema
 }
 
 func flattenIdentityPlatformTenantDisableAuth(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenIdentityPlatformTenantPasswordPolicyConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["password_policy_enforcement_state"] =
+		flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyEnforcementState(original["passwordPolicyEnforcementState"], d, config)
+	transformed["password_policy_versions"] =
+		flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersions(original["passwordPolicyVersions"], d, config)
+	transformed["force_upgrade_on_signin"] =
+		flattenIdentityPlatformTenantPasswordPolicyConfigForceUpgradeOnSignin(original["forceUpgradeOnSignin"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyEnforcementState(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersions(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return v
+	}
+	l := v.([]interface{})
+	transformed := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		original := raw.(map[string]interface{})
+		if len(original) < 1 {
+			// Do not include empty json objects coming back from the api
+			continue
+		}
+		transformed = append(transformed, map[string]interface{}{
+			"custom_strength_options": flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptions(original["customStrengthOptions"], d, config),
+		})
+	}
+	return transformed
+}
+
+func flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptions(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["min_password_length"] =
+		flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsMinPasswordLength(original["minPasswordLength"], d, config)
+	transformed["max_password_length"] =
+		flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsMaxPasswordLength(original["maxPasswordLength"], d, config)
+	transformed["contains_lowercase_character"] =
+		flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsLowercaseCharacter(original["containsLowercaseCharacter"], d, config)
+	transformed["contains_uppercase_character"] =
+		flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsUppercaseCharacter(original["containsUppercaseCharacter"], d, config)
+	transformed["contains_numeric_character"] =
+		flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsNumericCharacter(original["containsNumericCharacter"], d, config)
+	transformed["contains_non_alphanumeric_character"] =
+		flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsNonAlphanumericCharacter(original["containsNonAlphanumericCharacter"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsMinPasswordLength(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsMaxPasswordLength(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsLowercaseCharacter(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsUppercaseCharacter(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsNumericCharacter(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsNonAlphanumericCharacter(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenIdentityPlatformTenantPasswordPolicyConfigForceUpgradeOnSignin(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
