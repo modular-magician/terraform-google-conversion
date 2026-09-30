@@ -152,12 +152,12 @@ func (c *ComputeSslCertificateCai2hclConverter) convertResourceData(asset caiass
 }
 
 func flattenComputeSslCertificateCertificate(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return "unknown"
-	}
-	transformed := v.(string)
-	if transformed == "" {
-		return "unknown"
+	// Keep `certificate` empty in state when the value came from the `certificate_wo`
+	// write-only argument, otherwise the API value permadiffs against a null config.
+	// `certificate_wo_version` is checked because write-only values are never stored in
+	// state, and it is absent for data sources and import, which need the API value.
+	if woVersion, ok := d.GetOk("certificate_wo_version"); ok && woVersion != "" {
+		return d.Get("certificate")
 	}
 	return v
 }

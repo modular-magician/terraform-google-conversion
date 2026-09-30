@@ -54,6 +54,7 @@ func TestAccComputeSslCertificate(t *testing.T) {
 			test.BidirectionalConversion(
 				t,
 				[]string{
+					"certificate",
 					"count",
 					"deletion_protection",
 					"depends_on",
