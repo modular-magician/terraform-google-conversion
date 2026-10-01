@@ -332,6 +332,13 @@ func expandVmwareenginePrivateCloudManagementCluster(v interface{}, d tpgresourc
 		transformed["autoscalingSettings"] = transformedAutoscalingSettings
 	}
 
+	transformedVsanType, err := expandVmwareenginePrivateCloudManagementClusterVsanType(original["vsan_type"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedVsanType); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["vsanType"] = transformedVsanType
+	}
+
 	return transformed, nil
 }
 
@@ -640,6 +647,10 @@ func expandVmwareenginePrivateCloudManagementClusterAutoscalingSettingsMaxCluste
 }
 
 func expandVmwareenginePrivateCloudManagementClusterAutoscalingSettingsCoolDownPeriod(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVmwareenginePrivateCloudManagementClusterVsanType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
