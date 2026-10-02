@@ -222,6 +222,12 @@ func GetDiscoveryEngineDataConnectorApiObject(d tpgresource.TerraformResourceDat
 	} else if v, ok := d.GetOkExists("metadata"); !tpgresource.IsEmptyValue(reflect.ValueOf(metadataProp)) && (ok || !reflect.DeepEqual(v, metadataProp)) {
 		obj["metadata"] = metadataProp
 	}
+	federatedConfigProp, err := expandDiscoveryEngineDataConnectorFederatedConfig(d.Get("federated_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("federated_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(federatedConfigProp)) && (ok || !reflect.DeepEqual(v, federatedConfigProp)) {
+		obj["federatedConfig"] = federatedConfigProp
+	}
 
 	return obj, nil
 }
@@ -617,4 +623,57 @@ func expandDiscoveryEngineDataConnectorMetadataAuthor(v interface{}, d tpgresour
 
 func expandDiscoveryEngineDataConnectorMetadataNote(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandDiscoveryEngineDataConnectorFederatedConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedAuthParams, err := expandDiscoveryEngineDataConnectorFederatedConfigAuthParams(original["auth_params"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAuthParams); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["authParams"] = transformedAuthParams
+	}
+
+	transformedAdditionalParams, err := expandDiscoveryEngineDataConnectorFederatedConfigAdditionalParams(original["additional_params"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAdditionalParams); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["additionalParams"] = transformedAdditionalParams
+	}
+
+	return transformed, nil
+}
+
+func expandDiscoveryEngineDataConnectorFederatedConfigAuthParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func expandDiscoveryEngineDataConnectorFederatedConfigAdditionalParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
