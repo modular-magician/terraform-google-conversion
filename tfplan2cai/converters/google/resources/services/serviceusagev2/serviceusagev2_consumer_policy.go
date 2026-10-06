@@ -74,9 +74,15 @@ type ProposedPolicy struct {
 	EnableRules []map[string][]string `json:"enableRules"`
 }
 
-func NewAnalysisRequest(name string, services []string) map[string]any {
+func NewAnalysisRequest(name string, services []string, catalogs []string) map[string]any {
+	rule := map[string][]string{
+		"services": services,
+	}
+	if len(catalogs) > 0 {
+		rule["catalogs"] = catalogs
+	}
 	enableRules := []map[string][]string{
-		{"services": services},
+		rule,
 	}
 	return map[string]any{
 		"proposedPolicy": ProposedPolicy{Name: name, EnableRules: enableRules},
@@ -134,6 +140,27 @@ func getServices(rules interface{}) []string {
 			} else if servicesSlice, ok := services.([]interface{}); ok {
 				for _, service := range servicesSlice {
 					output = append(output, service.(string))
+				}
+			}
+		}
+	}
+	return output
+}
+
+func getCatalogs(rules interface{}) []string {
+	var output []string
+	for _, enableRules := range rules.([]interface{}) {
+		if enableRules == nil {
+			continue
+		}
+		if catalogs, ok := enableRules.(map[string]interface{})["catalogs"]; ok {
+			if catalogsSet, ok := catalogs.(*schema.Set); ok {
+				for _, catalog := range catalogsSet.List() {
+					output = append(output, catalog.(string))
+				}
+			} else if catalogsSlice, ok := catalogs.([]interface{}); ok {
+				for _, catalog := range catalogsSlice {
+					output = append(output, catalog.(string))
 				}
 			}
 		}
@@ -267,12 +294,24 @@ func expandServiceUsageV2ConsumerPolicyEnableRules(v interface{}, d tpgresource.
 			transformed["services"] = transformedServices
 		}
 
+		transformedCatalogs, err := expandServiceUsageV2ConsumerPolicyEnableRulesCatalogs(original["catalogs"], d, config)
+		if err != nil {
+			return nil, err
+		} else {
+			transformed["catalogs"] = transformedCatalogs
+		}
+
 		req = append(req, transformed)
 	}
 	return req, nil
 }
 
 func expandServiceUsageV2ConsumerPolicyEnableRulesServices(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	v = v.(*schema.Set).List()
+	return v, nil
+}
+
+func expandServiceUsageV2ConsumerPolicyEnableRulesCatalogs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
 	return v, nil
 }
