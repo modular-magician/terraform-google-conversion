@@ -474,7 +474,6 @@ you create the resource.`,
 			"disk_encryption_key": {
 				Type:     schema.TypeList,
 				Optional: true,
-				ForceNew: true,
 				Description: `Encrypts the disk using a customer-supplied encryption key.
 
 After you encrypt a disk with a customer-supplied key, you must
@@ -488,20 +487,24 @@ If you do not provide an encryption key when creating the disk, then
 the disk will be encrypted using an automatically generated key and
 you do not need to provide a key to use the disk later.
 
-~>**NOTE** Only changing 'kms_key_self_link' between Cloud KMS keys is
-done in place; other changes to this block recreate the disk.`,
+~>**NOTE** 'kms_key_self_link' can be added or changed in place.
+Removing it, or changing it while 'kms_key_service_account' is set,
+fails at plan time. Other changes to this block recreate the disk.`,
 				MaxItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"kms_key_self_link": {
 							Type:             schema.TypeString,
 							Optional:         true,
-							DiffSuppressFunc: tpgresource.CompareSelfLinkRelativePaths,
+							DiffSuppressFunc: tpgresource.CompareKmsKeyNames,
 							Description: `The self link of the encryption key used to encrypt the disk. Also called KmsKeyName
 in the cloud console. Your project's Compute Engine System service account
 ('service-{{PROJECT_NUMBER}}@compute-system.iam.gserviceaccount.com') must have
 'roles/cloudkms.cryptoKeyEncrypterDecrypter' to use this feature.
-See https://cloud.google.com/compute/docs/disks/customer-managed-encryption#encrypt_a_new_persistent_disk_with_your_own_keys`,
+See https://cloud.google.com/compute/docs/disks/customer-managed-encryption#encrypt_a_new_persistent_disk_with_your_own_keys
+
+Specify the key without a '/cryptoKeyVersions/' suffix. A version on
+the current key is ignored; a version on a different key fails at plan time.`,
 						},
 						"kms_key_service_account": {
 							Type:     schema.TypeString,
