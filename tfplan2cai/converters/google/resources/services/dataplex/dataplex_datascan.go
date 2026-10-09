@@ -1713,6 +1713,13 @@ func expandDataplexDatascanDataDocumentationSpec(v interface{}, d tpgresource.Te
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
+	transformedCustomInstructions, err := expandDataplexDatascanDataDocumentationSpecCustomInstructions(original["custom_instructions"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCustomInstructions); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["customInstructions"] = transformedCustomInstructions
+	}
+
 	transformedCatalogPublishingEnabled, err := expandDataplexDatascanDataDocumentationSpecCatalogPublishingEnabled(original["catalog_publishing_enabled"], d, config)
 	if err != nil {
 		return nil, err
@@ -1728,6 +1735,10 @@ func expandDataplexDatascanDataDocumentationSpec(v interface{}, d tpgresource.Te
 	}
 
 	return transformed, nil
+}
+
+func expandDataplexDatascanDataDocumentationSpecCustomInstructions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandDataplexDatascanDataDocumentationSpecCatalogPublishingEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
