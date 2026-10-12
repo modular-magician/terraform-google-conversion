@@ -177,6 +177,12 @@ func GetVmwareengineClusterApiObject(d tpgresource.TerraformResourceData, config
 	} else if v, ok := d.GetOkExists("autoscaling_settings"); !tpgresource.IsEmptyValue(reflect.ValueOf(autoscalingSettingsProp)) && (ok || !reflect.DeepEqual(v, autoscalingSettingsProp)) {
 		obj["autoscalingSettings"] = autoscalingSettingsProp
 	}
+	vsanTypeProp, err := expandVmwareengineClusterVsanType(d.Get("vsan_type"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("vsan_type"); !tpgresource.IsEmptyValue(reflect.ValueOf(vsanTypeProp)) && (ok || !reflect.DeepEqual(v, vsanTypeProp)) {
+		obj["vsanType"] = vsanTypeProp
+	}
 	datastoreMountConfigProp, err := expandVmwareengineClusterDatastoreMountConfig(d.Get("datastore_mount_config"), d, config)
 	if err != nil {
 		return nil, err
@@ -458,6 +464,10 @@ func expandVmwareengineClusterAutoscalingSettingsMaxClusterNodeCount(v interface
 }
 
 func expandVmwareengineClusterAutoscalingSettingsCoolDownPeriod(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandVmwareengineClusterVsanType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
