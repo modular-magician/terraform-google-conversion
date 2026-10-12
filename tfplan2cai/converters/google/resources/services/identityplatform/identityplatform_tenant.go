@@ -134,6 +134,12 @@ func GetIdentityPlatformTenantApiObject(d tpgresource.TerraformResourceData, con
 	} else if v, ok := d.GetOkExists("disable_auth"); !tpgresource.IsEmptyValue(reflect.ValueOf(disableAuthProp)) && (ok || !reflect.DeepEqual(v, disableAuthProp)) {
 		obj["disableAuth"] = disableAuthProp
 	}
+	passwordPolicyConfigProp, err := expandIdentityPlatformTenantPasswordPolicyConfig(d.Get("password_policy_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("password_policy_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(passwordPolicyConfigProp)) && (ok || !reflect.DeepEqual(v, passwordPolicyConfigProp)) {
+		obj["passwordPolicyConfig"] = passwordPolicyConfigProp
+	}
 	clientProp, err := expandIdentityPlatformTenantClient(d.Get("client"), d, config)
 	if err != nil {
 		return nil, err
@@ -157,6 +163,178 @@ func expandIdentityPlatformTenantEnableEmailLinkSignin(v interface{}, d tpgresou
 }
 
 func expandIdentityPlatformTenantDisableAuth(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedPasswordPolicyEnforcementState, err := expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyEnforcementState(original["password_policy_enforcement_state"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPasswordPolicyEnforcementState); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["passwordPolicyEnforcementState"] = transformedPasswordPolicyEnforcementState
+	}
+
+	transformedPasswordPolicyVersions, err := expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersions(original["password_policy_versions"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPasswordPolicyVersions); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["passwordPolicyVersions"] = transformedPasswordPolicyVersions
+	}
+
+	transformedForceUpgradeOnSignin, err := expandIdentityPlatformTenantPasswordPolicyConfigForceUpgradeOnSignin(original["force_upgrade_on_signin"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedForceUpgradeOnSignin); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["forceUpgradeOnSignin"] = transformedForceUpgradeOnSignin
+	}
+
+	transformedLastUpdateTime, err := expandIdentityPlatformTenantPasswordPolicyConfigLastUpdateTime(original["last_update_time"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedLastUpdateTime); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["lastUpdateTime"] = transformedLastUpdateTime
+	}
+
+	return transformed, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyEnforcementState(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedCustomStrengthOptions, err := expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptions(original["custom_strength_options"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedCustomStrengthOptions); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["customStrengthOptions"] = transformedCustomStrengthOptions
+		}
+
+		transformedSchemaVersion, err := expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsSchemaVersion(original["schema_version"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedSchemaVersion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["schemaVersion"] = transformedSchemaVersion
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedMinPasswordLength, err := expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsMinPasswordLength(original["min_password_length"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedMinPasswordLength); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["minPasswordLength"] = transformedMinPasswordLength
+	}
+
+	transformedMaxPasswordLength, err := expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsMaxPasswordLength(original["max_password_length"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedMaxPasswordLength); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["maxPasswordLength"] = transformedMaxPasswordLength
+	}
+
+	transformedContainsLowercaseCharacter, err := expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsLowercaseCharacter(original["contains_lowercase_character"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedContainsLowercaseCharacter); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["containsLowercaseCharacter"] = transformedContainsLowercaseCharacter
+	}
+
+	transformedContainsUppercaseCharacter, err := expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsUppercaseCharacter(original["contains_uppercase_character"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedContainsUppercaseCharacter); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["containsUppercaseCharacter"] = transformedContainsUppercaseCharacter
+	}
+
+	transformedContainsNumericCharacter, err := expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsNumericCharacter(original["contains_numeric_character"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedContainsNumericCharacter); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["containsNumericCharacter"] = transformedContainsNumericCharacter
+	}
+
+	transformedContainsNonAlphanumericCharacter, err := expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsNonAlphanumericCharacter(original["contains_non_alphanumeric_character"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedContainsNonAlphanumericCharacter); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["containsNonAlphanumericCharacter"] = transformedContainsNonAlphanumericCharacter
+	}
+
+	return transformed, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsMinPasswordLength(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsMaxPasswordLength(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsLowercaseCharacter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsUppercaseCharacter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsNumericCharacter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsCustomStrengthOptionsContainsNonAlphanumericCharacter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigPasswordPolicyVersionsSchemaVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigForceUpgradeOnSignin(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIdentityPlatformTenantPasswordPolicyConfigLastUpdateTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
