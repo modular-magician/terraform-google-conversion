@@ -157,6 +157,12 @@ func GetBillingBudgetsBudgetApiObject(d tpgresource.TerraformResourceData, confi
 	} else if v, ok := d.GetOkExists("ownership_scope"); !tpgresource.IsEmptyValue(reflect.ValueOf(ownershipScopeProp)) && (ok || !reflect.DeepEqual(v, ownershipScopeProp)) {
 		obj["ownershipScope"] = ownershipScopeProp
 	}
+	spendCapProp, err := expandBillingBudgetsBudgetSpendCap(d.Get("spend_cap"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("spend_cap"); !tpgresource.IsEmptyValue(reflect.ValueOf(spendCapProp)) && (ok || !reflect.DeepEqual(v, spendCapProp)) {
+		obj["spendCap"] = spendCapProp
+	}
 
 	return obj, nil
 }
@@ -605,5 +611,53 @@ func expandBillingBudgetsBudgetAllUpdatesRuleEnableProjectLevelRecipients(v inte
 }
 
 func expandBillingBudgetsBudgetOwnershipScope(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBillingBudgetsBudgetSpendCap(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedInputState, err := expandBillingBudgetsBudgetSpendCapInputState(original["input_state"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedInputState); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["inputState"] = transformedInputState
+	}
+
+	transformedOutputState, err := expandBillingBudgetsBudgetSpendCapOutputState(original["output_state"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedOutputState); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["outputState"] = transformedOutputState
+	}
+
+	transformedReconciling, err := expandBillingBudgetsBudgetSpendCapReconciling(original["reconciling"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedReconciling); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["reconciling"] = transformedReconciling
+	}
+
+	return transformed, nil
+}
+
+func expandBillingBudgetsBudgetSpendCapInputState(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBillingBudgetsBudgetSpendCapOutputState(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBillingBudgetsBudgetSpendCapReconciling(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
