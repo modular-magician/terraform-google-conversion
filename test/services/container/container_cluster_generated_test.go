@@ -529,6 +529,9 @@ func TestAccContainerCluster(t *testing.T) {
 			Name: "TestAccContainerCluster_withWorkloadALTSConfigAutopilot",
 		},
 		{
+			Name: "TestAccContainerCluster_withScheduleUpgradeConfig",
+		},
+		{
 			Name: "TestAccContainerCluster_WithCPAFeatures",
 		},
 		{
