@@ -150,10 +150,6 @@ func GetGKEBackupRestorePlanApiObject(d tpgresource.TerraformResourceData, confi
 	return obj, nil
 }
 
-func expandGKEBackupRestorePlanName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{location}}/restorePlans/{{name}}")
-}
-
 func expandGKEBackupRestorePlanDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

@@ -185,20 +185,6 @@ func GetCloudRunServiceApiObject(d tpgresource.TerraformResourceData, config *tr
 	return resourceCloudRunServiceEncoder(d, config, obj)
 }
 
-func resourceCloudRunServiceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	name := d.Get("name").(string)
-	if obj["metadata"] == nil {
-		obj["metadata"] = make(map[string]interface{})
-	}
-	metadata := obj["metadata"].(map[string]interface{})
-	metadata["name"] = name
-
-	// The only acceptable version/kind right now
-	obj["apiVersion"] = "serving.knative.dev/v1"
-	obj["kind"] = "Service"
-	return obj, nil
-}
-
 func expandCloudRunServiceSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	transformed := make(map[string]interface{})
 	transformedTraffic, err := expandCloudRunServiceSpecTraffic(d.Get("traffic"), d, config)
@@ -418,17 +404,6 @@ func expandCloudRunServiceSpecTemplateMetadataUid(v interface{}, d tpgresource.T
 	return v, nil
 }
 
-// If the property hasn't been explicitly set in config use the project defined by the provider or env.
-func expandCloudRunServiceSpecTemplateMetadataNamespace(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		project, err := tpgresource.GetProject(d, config)
-		if err != nil {
-			return project, nil
-		}
-	}
-	return v, nil
-}
-
 func expandCloudRunServiceSpecTemplateMetadataAnnotations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
 	if v == nil {
 		return map[string]string{}, nil
@@ -438,13 +413,6 @@ func expandCloudRunServiceSpecTemplateMetadataAnnotations(v interface{}, d tpgre
 		m[k] = val.(string)
 	}
 	return m, nil
-}
-
-func expandCloudRunServiceSpecTemplateMetadataName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if d.Get("autogenerate_revision_name") == true {
-		return nil, nil
-	}
-	return v, nil
 }
 
 func expandCloudRunServiceSpecTemplateSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -2071,17 +2039,6 @@ func expandCloudRunServiceMetadataSelfLink(v interface{}, d tpgresource.Terrafor
 }
 
 func expandCloudRunServiceMetadataUid(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-// If the property hasn't been explicitly set in config use the project defined by the provider or env.
-func expandCloudRunServiceMetadataNamespace(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		project, err := tpgresource.GetProject(d, config)
-		if err != nil {
-			return project, nil
-		}
-	}
 	return v, nil
 }
 

@@ -324,44 +324,6 @@ func GetComputeRegionBackendServiceCaiObject(d tpgresource.TerraformResourceData
 	return obj, nil
 }
 
-func resourceComputeRegionBackendServiceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	if d.Get("load_balancing_scheme").(string) == "EXTERNAL_MANAGED" || d.Get("load_balancing_scheme").(string) == "INTERNAL_MANAGED" || d.Get("load_balancing_scheme").(string) == "INTERNAL_SELF_MANAGED" {
-		return obj, nil
-	}
-
-	backendServiceOnlyManagedApiFieldNames := []string{
-		"capacityScaler",
-		"maxConnections",
-		"maxConnectionsPerInstance",
-		"maxConnectionsPerEndpoint",
-		"maxRate",
-		"maxRatePerInstance",
-		"maxRatePerEndpoint",
-		"maxUtilization",
-	}
-
-	var backends []interface{}
-	if lsV := obj["backends"]; lsV != nil {
-		backends = lsV.([]interface{})
-	}
-	for idx, v := range backends {
-		if v == nil {
-			continue
-		}
-		backend := v.(map[string]interface{})
-		// Remove fields from backends that cannot be sent for non-managed
-		// backend services
-		for _, k := range backendServiceOnlyManagedApiFieldNames {
-			log.Printf("[DEBUG] Removing field %q for request for non-managed backend service %s", k, d.Get("name"))
-			delete(backend, k)
-		}
-		backends[idx] = backend
-	}
-
-	obj["backends"] = backends
-	return obj, nil
-}
-
 func expandComputeRegionBackendServiceAffinityCookieTtlSec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -933,90 +895,6 @@ func expandComputeRegionBackendServiceCdnPolicyCacheKeyPolicyIncludeNamedCookies
 
 func expandComputeRegionBackendServiceCdnPolicySignedUrlCacheMaxAgeSec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-// expandComputeRegionBackendServiceCdnPolicyDefaultTtl uses raw config inspection so that an explicitly
-// configured `default_ttl = 0` reaches the API, while an unconfigured field stays out
-// of the request entirely.
-//
-// `default_ttl` is Optional + Computed, and 0 is the zero value for ints in Terraform
-// SDKv2, so resource data alone cannot distinguish "the practitioner asked for 0" from "the
-// practitioner said nothing". Neither of the two simple options works:
-//
-//   - Omitting every 0 (the default expander behavior) drops a configured 0, the API substitutes
-//     its own default, and the next plan shows a permanent diff.
-//   - Sending every 0 (send_empty_value) makes unconfigured TTLs explicit, which both overrides the
-//     API-side default and breaks cache modes that forbid TTLs, e.g. the API rejects
-//     "default_ttl cannot be specified with USE_ORIGIN_HEADERS cache_mode".
-//
-// Returning a *int64 threads the needle: a non-nil pointer is not an empty value, so a configured 0
-// is included in the request, while nil leaves the field out.
-func expandComputeRegionBackendServiceCdnPolicyDefaultTtl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	ttl, ok := v.(int)
-	if !ok {
-		return nil, nil
-	}
-	if ttl != 0 {
-		return ttl, nil
-	}
-
-	return nil, nil
-}
-
-// expandComputeRegionBackendServiceCdnPolicyMaxTtl uses raw config inspection so that an explicitly
-// configured `max_ttl = 0` reaches the API, while an unconfigured field stays out
-// of the request entirely.
-//
-// `max_ttl` is Optional + Computed, and 0 is the zero value for ints in Terraform
-// SDKv2, so resource data alone cannot distinguish "the practitioner asked for 0" from "the
-// practitioner said nothing". Neither of the two simple options works:
-//
-//   - Omitting every 0 (the default expander behavior) drops a configured 0, the API substitutes
-//     its own default, and the next plan shows a permanent diff.
-//   - Sending every 0 (send_empty_value) makes unconfigured TTLs explicit, which both overrides the
-//     API-side default and breaks cache modes that forbid TTLs, e.g. the API rejects
-//     "default_ttl cannot be specified with USE_ORIGIN_HEADERS cache_mode".
-//
-// Returning a *int64 threads the needle: a non-nil pointer is not an empty value, so a configured 0
-// is included in the request, while nil leaves the field out.
-func expandComputeRegionBackendServiceCdnPolicyMaxTtl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	ttl, ok := v.(int)
-	if !ok {
-		return nil, nil
-	}
-	if ttl != 0 {
-		return ttl, nil
-	}
-
-	return nil, nil
-}
-
-// expandComputeRegionBackendServiceCdnPolicyClientTtl uses raw config inspection so that an explicitly
-// configured `client_ttl = 0` reaches the API, while an unconfigured field stays out
-// of the request entirely.
-//
-// `client_ttl` is Optional + Computed, and 0 is the zero value for ints in Terraform
-// SDKv2, so resource data alone cannot distinguish "the practitioner asked for 0" from "the
-// practitioner said nothing". Neither of the two simple options works:
-//
-//   - Omitting every 0 (the default expander behavior) drops a configured 0, the API substitutes
-//     its own default, and the next plan shows a permanent diff.
-//   - Sending every 0 (send_empty_value) makes unconfigured TTLs explicit, which both overrides the
-//     API-side default and breaks cache modes that forbid TTLs, e.g. the API rejects
-//     "default_ttl cannot be specified with USE_ORIGIN_HEADERS cache_mode".
-//
-// Returning a *int64 threads the needle: a non-nil pointer is not an empty value, so a configured 0
-// is included in the request, while nil leaves the field out.
-func expandComputeRegionBackendServiceCdnPolicyClientTtl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	ttl, ok := v.(int)
-	if !ok {
-		return nil, nil
-	}
-	if ttl != 0 {
-		return ttl, nil
-	}
-
-	return nil, nil
 }
 
 func expandComputeRegionBackendServiceCdnPolicyNegativeCaching(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -1797,15 +1675,6 @@ func expandComputeRegionBackendServiceLogConfigResponseHeadersHeaderName(v inter
 	return v, nil
 }
 
-func expandComputeRegionBackendServiceNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("networks", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for network: %s", err)
-	}
-	url := tgcresource.GetFullUrl(config, f.RelativeLink(), "https://www.googleapis.com/compute/v1/")
-	return url, nil
-}
-
 func expandComputeRegionBackendServiceHaPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -2028,13 +1897,4 @@ func expandComputeRegionBackendServiceTlsSettingsAuthenticationConfig(v interfac
 
 func expandComputeRegionBackendServiceTlsSettingsIdentity(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandComputeRegionBackendServiceRegion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("regions", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for region: %s", err)
-	}
-	url := tgcresource.GetFullUrl(config, f.RelativeLink(), "https://www.googleapis.com/compute/v1/")
-	return url, nil
 }

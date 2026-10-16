@@ -282,55 +282,6 @@ func GetComputeDiskCaiObject(d tpgresource.TerraformResourceData, config *transp
 	return resourceComputeDiskTgcEncoder(d, config, obj)
 }
 
-func resourceComputeDiskEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	config := meta.(*transport_tpg.Config)
-
-	project, err := tpgresource.GetProject(d, config)
-	if err != nil {
-		return nil, err
-	}
-
-	userAgent, err := tpgresource.GenerateUserAgentString(d, config.UserAgent)
-	if err != nil {
-		return nil, err
-	}
-
-	if v, ok := d.GetOk("type"); ok {
-		log.Printf("[DEBUG] Loading disk type: %s", v.(string))
-		diskType, err := readDiskType(config, d, v.(string))
-		if err != nil {
-			return nil, fmt.Errorf(
-				"Error loading disk type '%s': %s",
-				v.(string), err)
-		}
-
-		obj["type"] = diskType.RelativeLink()
-	}
-
-	if v, ok := d.GetOk("image"); ok {
-		log.Printf("[DEBUG] Resolving image name: %s", v.(string))
-		imageUrl, err := ResolveImage(config, project, v.(string), userAgent)
-		if err != nil {
-			return nil, fmt.Errorf(
-				"Error resolving image name '%s': %s",
-				v.(string), err)
-		}
-
-		obj["sourceImage"] = imageUrl
-		log.Printf("[DEBUG] Image name resolved to: %s", imageUrl)
-	}
-
-	return obj, nil
-}
-
-func resourceComputeDiskTgcEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	config := meta.(*transport_tpg.Config)
-
-	obj["type"] = tgcresource.GetFullUrl(config, obj["type"], "https://www.googleapis.com/compute/v1/")
-
-	return obj, nil
-}
-
 func expandComputeDiskSourceImageEncryptionKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -518,15 +469,6 @@ func expandComputeDiskSourceDisk(v interface{}, d tpgresource.TerraformResourceD
 	return v, nil
 }
 
-func expandComputeDiskType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseZonalFieldValue("diskTypes", v.(string), "project", "zone", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for type: %s", err)
-	}
-	url := tgcresource.GetFullUrl(config, f.RelativeLink(), "https://www.googleapis.com/compute/v1/")
-	return url, nil
-}
-
 func expandComputeDiskImage(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -636,27 +578,6 @@ func expandComputeDiskGuestOsFeaturesType(v interface{}, d tpgresource.Terraform
 	return v, nil
 }
 
-func expandComputeDiskLicenses(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	req := make([]interface{}, 0, len(l))
-	for _, raw := range l {
-		if raw == nil {
-			return nil, fmt.Errorf("Invalid value for licenses: nil")
-		}
-		f, err := tpgresource.ParseGlobalFieldValue("licenses", raw.(string), "project", d, config, true)
-		if err != nil {
-			return nil, fmt.Errorf("Invalid value for licenses: %s", err)
-		}
-		url := tgcresource.GetFullUrl(config, f.RelativeLink(), "https://www.googleapis.com/compute/v1/")
-		req = append(req, url)
-	}
-	return req, nil
-}
-
-func expandComputeDiskStoragePool(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return ExpandStoragePoolUrl(v, d, config)
-}
-
 func expandComputeDiskAccessMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -670,22 +591,4 @@ func expandComputeDiskEffectiveLabels(v interface{}, d tpgresource.TerraformReso
 		m[k] = val.(string)
 	}
 	return m, nil
-}
-
-func expandComputeDiskZone(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("zones", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for zone: %s", err)
-	}
-	url := tgcresource.GetFullUrl(config, f.RelativeLink(), "https://www.googleapis.com/compute/v1/")
-	return url, nil
-}
-
-func expandComputeDiskSnapshot(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("snapshots", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for snapshot: %s", err)
-	}
-	url := tgcresource.GetFullUrl(config, f.RelativeLink(), "https://www.googleapis.com/compute/v1/")
-	return url, nil
 }

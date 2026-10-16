@@ -152,18 +152,6 @@ func expandDataplexAspectTypeDisplayName(v interface{}, d tpgresource.TerraformR
 	return v, nil
 }
 
-func expandDataplexAspectTypeMetadataTemplate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	b := []byte(v.(string))
-	if len(b) == 0 {
-		return nil, nil
-	}
-	m := make(map[string]interface{})
-	if err := json.Unmarshal(b, &m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func expandDataplexAspectTypeDataClassification(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

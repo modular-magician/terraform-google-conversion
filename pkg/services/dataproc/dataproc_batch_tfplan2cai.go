@@ -219,19 +219,6 @@ func expandDataprocBatchRuntimeConfigContainerImage(v interface{}, d tpgresource
 	return v, nil
 }
 
-func expandDataprocBatchRuntimeConfigProperties(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return map[string]string{}, nil
-	}
-	m := make(map[string]string)
-	for k, val := range v.(map[string]interface{}) {
-		// In CAI asset, the properties have prefix "spark:" (e.g. spark:spark.dynamicAllocation.enabled)
-		modifiedK := fmt.Sprintf("spark:%s", k)
-		m[modifiedK] = val.(string)
-	}
-	return m, nil
-}
-
 func expandDataprocBatchRuntimeConfigAutotuningConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil

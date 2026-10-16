@@ -126,10 +126,6 @@ func GetComposerUserWorkloadsConfigMapApiObject(d tpgresource.TerraformResourceD
 	return obj, nil
 }
 
-func expandComposerUserWorkloadsConfigMapName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{region}}/environments/{{environment}}/userWorkloadsConfigMaps/{{name}}")
-}
-
 func expandComposerUserWorkloadsConfigMapData(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
 	if v == nil {
 		return map[string]string{}, nil

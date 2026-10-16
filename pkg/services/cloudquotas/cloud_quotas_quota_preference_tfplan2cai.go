@@ -161,10 +161,6 @@ func GetCloudQuotasQuotaPreferenceCaiObject(d tpgresource.TerraformResourceData,
 	return obj, nil
 }
 
-func expandCloudQuotasQuotaPreferenceName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.GetResourceNameFromSelfLink(v.(string)), nil
-}
-
 func expandCloudQuotasQuotaPreferenceService(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

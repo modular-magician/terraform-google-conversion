@@ -144,10 +144,6 @@ func GetCloudIdsEndpointApiObject(d tpgresource.TerraformResourceData, config *t
 	return obj, nil
 }
 
-func expandCloudIdsEndpointName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{location}}/endpoints/{{name}}")
-}
-
 func expandCloudIdsEndpointNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

@@ -138,14 +138,6 @@ func GetSQLSourceRepresentationInstanceApiObject(d tpgresource.TerraformResource
 	return resourceSQLSourceRepresentationInstanceEncoder(d, config, obj)
 }
 
-func resourceSQLSourceRepresentationInstanceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	opc := obj["onPremisesConfiguration"].(map[string]interface{})
-	opc["hostPort"] = fmt.Sprintf("%v:%v", opc["host"], opc["port"])
-	delete(opc, "host")
-	delete(opc, "port")
-	return obj, nil
-}
-
 func expandSQLSourceRepresentationInstanceName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

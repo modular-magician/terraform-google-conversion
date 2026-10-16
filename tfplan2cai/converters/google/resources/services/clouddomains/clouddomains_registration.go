@@ -162,24 +162,6 @@ func GetClouddomainsRegistrationApiObject(d tpgresource.TerraformResourceData, c
 	return resourceClouddomainsRegistrationEncoder(d, config, obj)
 }
 
-func resourceClouddomainsRegistrationEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// Request body is registration object with additional fields
-	// See https://cloud.google.com/domains/docs/reference/rest/v1beta1/projects.locations.registrations/register
-
-	newObj := make(map[string]interface{})
-
-	newObj["domainNotices"] = obj["domainNotices"]
-	delete(obj, "domainNotices")
-	newObj["contactNotices"] = obj["contactNotices"]
-	delete(obj, "contactNotices")
-	newObj["yearlyPrice"] = obj["yearlyPrice"]
-	delete(obj, "yearlyPrice")
-
-	newObj["registration"] = obj
-
-	return newObj, nil
-}
-
 func expandClouddomainsRegistrationDomainNotices(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

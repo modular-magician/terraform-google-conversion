@@ -180,14 +180,6 @@ func expandComputeNodeGroupName(v interface{}, d tpgresource.TerraformResourceDa
 	return v, nil
 }
 
-func expandComputeNodeGroupNodeTemplate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseRegionalFieldValue("nodeTemplates", v.(string), "project", "region", "zone", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for node_template: %s", err)
-	}
-	return f.RelativeLink(), nil
-}
-
 func expandComputeNodeGroupMaintenancePolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -330,12 +322,4 @@ func expandComputeNodeGroupShareSettingsProjectMapProjectId(v interface{}, d tpg
 
 func expandComputeNodeGroupMaintenanceInterval(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandComputeNodeGroupZone(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("zones", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for zone: %s", err)
-	}
-	return f.RelativeLink(), nil
 }

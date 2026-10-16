@@ -426,38 +426,6 @@ func expandGKEHub2RolloutSequenceStagesClusterSelectorLabelSelector(v interface{
 	return v, nil
 }
 
-func expandGKEHub2RolloutSequenceStagesSoakDuration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-	val, ok := v.(string)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value is not string: %v", v)
-	}
-	if len(val) == 0 {
-		return nil, nil
-	}
-	n, err := strconv.Atoi(val[:len(val)-1])
-	if err != nil {
-		return nil, fmt.Errorf("unexpected value is not duration: %v", v)
-	}
-	// time.ParseDuration does not support 'd'
-	var seconds int
-	switch val[len(val)-1] {
-	case 's':
-		seconds = n
-	case 'm':
-		seconds = n * 60
-	case 'h':
-		seconds = n * 3600
-	case 'd':
-		seconds = n * 86400
-	default:
-		return nil, fmt.Errorf("unexpected duration has unknown unit: %c", val[len(val)-1])
-	}
-	return fmt.Sprintf("%ds", seconds), nil
-}
-
 func expandGKEHub2RolloutSequenceAutoUpgradeConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil

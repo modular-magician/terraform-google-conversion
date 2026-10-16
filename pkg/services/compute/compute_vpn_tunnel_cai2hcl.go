@@ -424,10 +424,3 @@ func flattenComputeVpnTunnelCipherSuitePhase2Integrity(v interface{}, d *schema.
 func flattenComputeVpnTunnelCipherSuitePhase2Pfs(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
-
-func flattenComputeVpnTunnelRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}

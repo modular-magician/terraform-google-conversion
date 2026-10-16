@@ -196,11 +196,6 @@ func GetComputeRegionNetworkFirewallPolicyWithRulesApiObject(d tpgresource.Terra
 	return resourceComputeRegionNetworkFirewallPolicyWithRulesEncoder(d, config, obj)
 }
 
-func resourceComputeRegionNetworkFirewallPolicyWithRulesEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	delete(obj, "rules") // Rules are not supported in the create API
-	return obj, nil
-}
-
 func expandComputeRegionNetworkFirewallPolicyWithRulesName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

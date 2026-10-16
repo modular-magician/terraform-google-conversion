@@ -294,8 +294,3 @@ func flattenComputeNetworkParams(v interface{}, d *schema.ResourceData, config *
 func flattenComputeNetworkParamsResourceManagerTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
-
-func resourceComputeNetworkDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
-	res["numericId"] = res["id"] // stores unique id into numericId attribute before it's changed to path format
-	return res, nil
-}

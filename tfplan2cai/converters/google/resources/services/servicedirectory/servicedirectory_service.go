@@ -120,11 +120,6 @@ func GetServiceDirectoryServiceApiObject(d tpgresource.TerraformResourceData, co
 	return resourceServiceDirectoryServiceEncoder(d, config, obj)
 }
 
-func resourceServiceDirectoryServiceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-
-	return obj, nil
-}
-
 func expandServiceDirectoryServiceMetadata(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
 	if v == nil {
 		return map[string]string{}, nil

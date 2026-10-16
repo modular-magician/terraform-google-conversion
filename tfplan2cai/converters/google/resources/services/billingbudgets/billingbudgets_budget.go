@@ -269,17 +269,6 @@ func expandBillingBudgetsBudgetBudgetFilterSubaccounts(v interface{}, d tpgresou
 	return v, nil
 }
 
-func expandBillingBudgetsBudgetBudgetFilterLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string][]string, error) {
-	if v == nil {
-		return map[string][]string{}, nil
-	}
-	m := make(map[string][]string)
-	for k, val := range v.(map[string]interface{}) {
-		m[k] = []string{val.(string)}
-	}
-	return m, nil
-}
-
 func expandBillingBudgetsBudgetBudgetFilterCalendarPeriod(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -484,14 +473,6 @@ func expandBillingBudgetsBudgetAmountSpecifiedAmountUnits(v interface{}, d tpgre
 
 func expandBillingBudgetsBudgetAmountSpecifiedAmountNanos(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandBillingBudgetsBudgetAmountLastPeriodAmount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil || !v.(bool) {
-		return nil, nil
-	}
-
-	return struct{}{}, nil
 }
 
 func expandBillingBudgetsBudgetThresholdRules(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

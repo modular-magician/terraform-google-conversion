@@ -136,17 +136,6 @@ func GetCloudRunDomainMappingApiObject(d tpgresource.TerraformResourceData, conf
 	return resourceCloudRunDomainMappingEncoder(d, config, obj)
 }
 
-func resourceCloudRunDomainMappingEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	name := d.Get("name").(string)
-	metadata := obj["metadata"].(map[string]interface{})
-	metadata["name"] = name
-
-	// The only acceptable version/kind right now
-	obj["apiVersion"] = "domains.cloudrun.com/v1"
-	obj["kind"] = "DomainMapping"
-	return obj, nil
-}
-
 func expandCloudRunDomainMappingSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -185,10 +174,6 @@ func expandCloudRunDomainMappingSpec(v interface{}, d tpgresource.TerraformResou
 
 func expandCloudRunDomainMappingSpecForceOverride(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandCloudRunDomainMappingSpecRouteName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.GetResourceNameFromSelfLink(v.(string)), nil
 }
 
 func expandCloudRunDomainMappingSpecCertificateMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

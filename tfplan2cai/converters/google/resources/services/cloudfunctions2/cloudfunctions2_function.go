@@ -171,28 +171,6 @@ func GetCloudfunctions2functionApiObject(d tpgresource.TerraformResourceData, co
 	return resourceCloudfunctions2functionEncoder(d, config, obj)
 }
 
-func resourceCloudfunctions2functionEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	if obj == nil || obj["buildConfig"] == nil {
-		return obj, nil
-	}
-
-	build_config := obj["buildConfig"].(map[string]interface{})
-
-	// Automatic Update policy is the default from API, unset it if the data
-	// contains the on-deploy policy.
-	if build_config["onDeployUpdatePolicy"] != nil {
-		delete(build_config, "automaticUpdatePolicy")
-	}
-
-	obj["buildConfig"] = build_config
-
-	return obj, nil
-}
-
-func expandCloudfunctions2functionName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{location}}/functions/{{name}}")
-}
-
 func expandCloudfunctions2functionDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

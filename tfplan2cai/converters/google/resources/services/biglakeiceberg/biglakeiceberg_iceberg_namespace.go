@@ -139,13 +139,6 @@ func GetBiglakeIcebergIcebergNamespaceApiObject(d tpgresource.TerraformResourceD
 	return obj, nil
 }
 
-func expandBiglakeIcebergIcebergNamespaceNamespaceId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-	return strings.Split(v.(string), "\x1f"), nil
-}
-
 func expandBiglakeIcebergIcebergNamespaceProperties(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
 	if v == nil {
 		return map[string]string{}, nil

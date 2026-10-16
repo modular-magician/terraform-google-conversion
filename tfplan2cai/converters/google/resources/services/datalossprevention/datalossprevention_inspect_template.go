@@ -138,16 +138,6 @@ func GetDataLossPreventionInspectTemplateApiObject(d tpgresource.TerraformResour
 	return resourceDataLossPreventionInspectTemplateEncoder(d, config, obj)
 }
 
-func resourceDataLossPreventionInspectTemplateEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	newObj := make(map[string]interface{})
-	newObj["inspectTemplate"] = obj
-	templateIdProp, ok := d.GetOk("template_id")
-	if ok && templateIdProp != nil {
-		newObj["templateId"] = templateIdProp
-	}
-	return newObj, nil
-}
-
 func expandDataLossPreventionInspectTemplateDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

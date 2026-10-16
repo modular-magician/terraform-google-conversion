@@ -449,25 +449,6 @@ func flattenDialogflowCXAgentGitIntegrationSettings(v interface{}, d *schema.Res
 	return []interface{}{transformed}
 }
 
-func flattenDialogflowCXAgentGitIntegrationSettingsGithubSettings(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	original := v.(map[string]interface{})
-	// ignore access_token, which is always returned as REDACTED
-	delete(original, "access_token")
-	if len(original) == 0 {
-		return nil
-	}
-	transformed := make(map[string]interface{})
-	transformed["display_name"] = original["displayName"]
-	transformed["repository_uri"] = original["repositoryUri"]
-	transformed["tracking_branch"] = original["trackingBranch"]
-	transformed["access_token"] = d.Get("git_integration_settings.0.github_settings.0.access_token")
-	transformed["branches"] = original["branches"]
-	return []interface{}{transformed}
-}
-
 func flattenDialogflowCXAgentTextToSpeechSettings(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -477,18 +458,6 @@ func flattenDialogflowCXAgentTextToSpeechSettings(v interface{}, d *schema.Resou
 	transformed["synthesize_speech_configs"] =
 		flattenDialogflowCXAgentTextToSpeechSettingsSynthesizeSpeechConfigs(original["synthesizeSpeechConfigs"], d, config)
 	return []interface{}{transformed}
-}
-
-func flattenDialogflowCXAgentTextToSpeechSettingsSynthesizeSpeechConfigs(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	b, err := json.Marshal(v)
-	if err != nil {
-		// TODO: return error once https://github.com/GoogleCloudPlatform/magic-modules/issues/3257 is fixed.
-		log.Printf("[ERROR] failed to marshal schema to JSON: %v", err)
-	}
-	return string(b)
 }
 
 func flattenDialogflowCXAgentGenAppBuilderSettings(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -564,18 +533,6 @@ func flattenDialogflowCXAgentPersonalizationSettings(v interface{}, d *schema.Re
 		return nil
 	}
 	return []interface{}{transformed}
-}
-
-func flattenDialogflowCXAgentPersonalizationSettingsDefaultEndUserMetadata(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	b, err := json.Marshal(v)
-	if err != nil {
-		// TODO: return error once https://github.com/GoogleCloudPlatform/magic-modules/issues/3257 is fixed.
-		log.Printf("[ERROR] failed to marshal schema to JSON: %v", err)
-	}
-	return string(b)
 }
 
 func flattenDialogflowCXAgentClientCertificateSettings(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

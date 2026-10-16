@@ -210,11 +210,6 @@ func GetCloudRunV2InstanceApiObject(d tpgresource.TerraformResourceData, config 
 	return resourceCloudRunV2InstanceEncoder(d, config, obj)
 }
 
-func resourceCloudRunV2InstanceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-
-	return obj, nil
-}
-
 func expandCloudRunV2InstanceClient(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

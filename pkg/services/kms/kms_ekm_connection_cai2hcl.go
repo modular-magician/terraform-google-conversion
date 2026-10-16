@@ -152,13 +152,6 @@ func (c *KMSEkmConnectionCai2hclConverter) convertResourceData(asset caiasset.As
 	}, nil
 }
 
-func flattenKMSEkmConnectionName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenKMSEkmConnectionServiceResolvers(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return v

@@ -386,14 +386,6 @@ func flattenComputeAutoscalerAutoscalingPolicyCpuUtilizationTarget(v interface{}
 	return v
 }
 
-func flattenComputeAutoscalerAutoscalingPolicyCpuUtilizationPredictiveMethod(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil || tpgresource.IsEmptyValue(reflect.ValueOf(v)) {
-		return "NONE"
-	}
-
-	return v
-}
-
 func flattenComputeAutoscalerAutoscalingPolicyMetric(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return v

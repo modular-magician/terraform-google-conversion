@@ -198,20 +198,6 @@ func GetArtifactRegistryRepositoryCaiObject(d tpgresource.TerraformResourceData,
 	return obj, nil
 }
 
-func resourceArtifactRegistryRepositoryEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	config := meta.(*transport_tpg.Config)
-	if _, ok := d.GetOk("location"); !ok {
-		location, err := tpgresource.GetRegion(d, config)
-		if err != nil {
-			return nil, fmt.Errorf("Cannot determine location: set in this resource, or set provider-level 'region' or 'zone'.")
-		}
-		if err := d.Set("location", location); err != nil {
-			return nil, fmt.Errorf("Error setting location: %s", err)
-		}
-	}
-	return obj, nil
-}
-
 func expandArtifactRegistryRepositoryFormat(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -488,70 +474,6 @@ func expandArtifactRegistryRepositoryCleanupPoliciesConditionVersionNamePrefixes
 
 func expandArtifactRegistryRepositoryCleanupPoliciesConditionPackageNamePrefixes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandArtifactRegistryRepositoryCleanupPoliciesConditionOlderThan(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-	val, ok := v.(string)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value is not string: %v", v)
-	}
-	if len(val) == 0 {
-		return nil, nil
-	}
-	n, err := strconv.Atoi(val[:len(val)-1])
-	if err != nil {
-		return nil, fmt.Errorf("unexpected value is not duration: %v", v)
-	}
-	// time.ParseDuration does not support 'd'
-	var seconds int
-	switch val[len(val)-1] {
-	case 's':
-		seconds = n
-	case 'm':
-		seconds = n * 60
-	case 'h':
-		seconds = n * 3600
-	case 'd':
-		seconds = n * 86400
-	default:
-		return nil, fmt.Errorf("unexpected duration has unknown unit: %c", val[len(val)-1])
-	}
-	return fmt.Sprintf("%ds", seconds), nil
-}
-
-func expandArtifactRegistryRepositoryCleanupPoliciesConditionNewerThan(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-	val, ok := v.(string)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value is not string: %v", v)
-	}
-	if len(val) == 0 {
-		return nil, nil
-	}
-	n, err := strconv.Atoi(val[:len(val)-1])
-	if err != nil {
-		return nil, fmt.Errorf("unexpected value is not duration: %v", v)
-	}
-	// time.ParseDuration does not support 'd'
-	var seconds int
-	switch val[len(val)-1] {
-	case 's':
-		seconds = n
-	case 'm':
-		seconds = n * 60
-	case 'h':
-		seconds = n * 3600
-	case 'd':
-		seconds = n * 86400
-	default:
-		return nil, fmt.Errorf("unexpected duration has unknown unit: %c", val[len(val)-1])
-	}
-	return fmt.Sprintf("%ds", seconds), nil
 }
 
 func expandArtifactRegistryRepositoryCleanupPoliciesMostRecentVersions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

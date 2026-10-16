@@ -183,20 +183,6 @@ func expandSpannerInstanceName(v interface{}, d tpgresource.TerraformResourceDat
 	return v, nil
 }
 
-func expandSpannerInstanceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	r := regexp.MustCompile("projects/(.+)/instanceConfigs/(.+)")
-	if r.MatchString(v.(string)) {
-		return v.(string), nil
-	}
-
-	project, err := tpgresource.GetProject(d, config)
-	if err != nil {
-		return nil, err
-	}
-
-	return fmt.Sprintf("projects/%s/instanceConfigs/%s", project, v.(string)), nil
-}
-
 func expandSpannerInstanceDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

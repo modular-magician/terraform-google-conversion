@@ -231,49 +231,8 @@ func GetSpannerInstanceApiObject(d tpgresource.TerraformResourceData, config *tr
 	return resourceSpannerInstanceEncoder(d, config, obj)
 }
 
-func resourceSpannerInstanceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	if obj["instanceType"] == "FREE_INSTANCE" {
-		// when provisioning a FREE_INSTANCE, the following fields cannot be specified
-		if obj["nodeCount"] != nil || obj["processingUnits"] != nil || obj["autoscalingConfig"] != nil {
-			return nil, fmt.Errorf("`num_nodes`, `processing_units`, and `autoscaling_config` cannot be specified when instance_type is FREE_INSTANCE")
-		}
-	} else {
-		// Temp Logic to accommodate autoscaling_config, processing_units and num_nodes
-		if obj["processingUnits"] == nil && obj["nodeCount"] == nil && obj["autoscalingConfig"] == nil && obj["instanceType"] != "FREE_INSTANCE" {
-			obj["nodeCount"] = 1
-		}
-	}
-
-	newObj := make(map[string]interface{})
-	newObj["instance"] = obj
-	if obj["name"] == nil {
-		if err := d.Set("name", id.PrefixedUniqueId("tfgen-spanid-")[:30]); err != nil {
-			return nil, fmt.Errorf("Error setting name: %s", err)
-		}
-		newObj["instanceId"] = d.Get("name").(string)
-	} else {
-		newObj["instanceId"] = obj["name"]
-	}
-	delete(obj, "name")
-	return newObj, nil
-}
-
 func expandSpannerInstanceName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandSpannerInstanceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	r := regexp.MustCompile("projects/(.+)/instanceConfigs/(.+)")
-	if r.MatchString(v.(string)) {
-		return v.(string), nil
-	}
-
-	project, err := tpgresource.GetProject(d, config)
-	if err != nil {
-		return nil, err
-	}
-
-	return fmt.Sprintf("projects/%s/instanceConfigs/%s", project, v.(string)), nil
 }
 
 func expandSpannerInstanceDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

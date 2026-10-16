@@ -153,13 +153,6 @@ func (c *CloudTasksQueueCai2hclConverter) convertResourceData(asset caiasset.Ass
 	}, nil
 }
 
-func flattenCloudTasksQueueName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenCloudTasksQueueAppEngineRoutingOverride(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil

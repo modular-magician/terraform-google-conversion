@@ -120,26 +120,6 @@ func GetComputeRegionDiskResourcePolicyAttachmentApiObject(d tpgresource.Terrafo
 	return resourceComputeRegionDiskResourcePolicyAttachmentEncoder(d, config, obj)
 }
 
-func resourceComputeRegionDiskResourcePolicyAttachmentEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	config := meta.(*transport_tpg.Config)
-	project, err := tpgresource.GetProject(d, config)
-	if err != nil {
-		return nil, err
-	}
-
-	region, err := tpgresource.GetRegion(d, config)
-	if err != nil {
-		return nil, err
-	}
-	if region == "" {
-		return nil, fmt.Errorf("region must be non-empty - set in resource or at provider-level")
-	}
-
-	obj["resourcePolicies"] = []interface{}{fmt.Sprintf("projects/%s/regions/%s/resourcePolicies/%s", project, region, obj["name"])}
-	delete(obj, "name")
-	return obj, nil
-}
-
 func expandComputeRegionDiskResourcePolicyAttachmentName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

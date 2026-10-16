@@ -180,15 +180,6 @@ func GetCloudRunV2WorkerPoolApiObject(d tpgresource.TerraformResourceData, confi
 	return resourceCloudRunV2WorkerPoolEncoder(d, config, obj)
 }
 
-func resourceCloudRunV2WorkerPoolEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	delete(obj, "name") // Field not allowed when creating.
-	return obj, nil
-}
-
-func expandCloudRunV2WorkerPoolName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.GetResourceNameFromSelfLink(v.(string)), nil
-}
-
 func expandCloudRunV2WorkerPoolDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

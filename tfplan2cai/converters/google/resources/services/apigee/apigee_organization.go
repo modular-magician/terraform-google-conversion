@@ -186,11 +186,6 @@ func GetApigeeOrganizationApiObject(d tpgresource.TerraformResourceData, config 
 	return resourceApigeeOrganizationEncoder(d, config, obj)
 }
 
-func resourceApigeeOrganizationEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	obj["name"] = d.Get("project_id").(string)
-	return obj, nil
-}
-
 func expandApigeeOrganizationDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

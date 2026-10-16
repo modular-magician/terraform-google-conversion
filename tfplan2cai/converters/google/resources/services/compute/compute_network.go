@@ -174,27 +174,6 @@ func GetComputeNetworkApiObject(d tpgresource.TerraformResourceData, config *tra
 	return resourceComputeNetworkEncoder(d, config, obj)
 }
 
-func resourceComputeNetworkEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	//  BGP always-compare-med
-	_, ok := obj["routingConfig"].(map[string]interface{})
-	if ok {
-		obj["routingConfig"].(map[string]interface{})["deleteBgpAlwaysCompareMed"] = d.Get("delete_bgp_always_compare_med").(bool)
-
-		bgpAlwaysCompareMed := d.Get("bgp_always_compare_med").(bool)
-		if d.Get("delete_bgp_always_compare_med").(bool) {
-			if bgpAlwaysCompareMed {
-				return nil, fmt.Errorf("Cannot set BgpAlwaysCompareMed to true while DeleteBgpAlwaysCompareMed is also true")
-			}
-			obj["routingConfig"].(map[string]interface{})["bgpAlwaysCompareMed"] = nil
-		} else if _, present := d.GetOkExists("bgp_always_compare_med"); present {
-			obj["routingConfig"].(map[string]interface{})["bgpAlwaysCompareMed"] = d.Get("bgp_always_compare_med").(bool)
-		}
-	}
-	// now clean up the rest
-	delete(obj, "numeric_id")
-	return obj, nil
-}
-
 func expandComputeNetworkDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

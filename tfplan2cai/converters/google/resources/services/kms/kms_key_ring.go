@@ -126,10 +126,6 @@ func GetKMSKeyRingApiObject(d tpgresource.TerraformResourceData, config *transpo
 	return resourceKMSKeyRingEncoder(d, config, obj)
 }
 
-func resourceKMSKeyRingEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	return nil, nil
-}
-
 func expandKMSKeyRingName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

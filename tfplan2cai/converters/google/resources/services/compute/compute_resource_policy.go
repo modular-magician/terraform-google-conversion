@@ -684,23 +684,6 @@ func expandComputeResourcePolicyInstanceSchedulePolicyExpirationTime(v interface
 	return v, nil
 }
 
-func expandComputeResourcePolicyDiskConsistencyGroupPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	if isEnabled, ok := original["enabled"]; ok {
-		if !isEnabled.(bool) {
-			return nil, nil
-		}
-	}
-	transformed := make(map[string]interface{})
-	return transformed, nil
-}
-
 func expandComputeResourcePolicyWorkloadPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -758,12 +741,4 @@ func expandComputeResourcePolicyWorkloadPolicyAcceleratorTopology(v interface{},
 
 func expandComputeResourcePolicyWorkloadPolicyAcceleratorTopologyMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandComputeResourcePolicyRegion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("regions", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for region: %s", err)
-	}
-	return f.RelativeLink(), nil
 }

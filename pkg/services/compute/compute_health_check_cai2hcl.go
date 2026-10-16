@@ -771,16 +771,3 @@ func flattenComputeHealthCheckGrpcTlsHealthCheckGrpcServiceName(v interface{}, d
 	}
 	return v
 }
-
-func flattenComputeHealthCheckLogConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	transformed := make(map[string]interface{})
-	if v == nil {
-		// Disabled by default, but API will not return object if value is false
-		transformed["enable"] = false
-		return []interface{}{transformed}
-	}
-
-	original := v.(map[string]interface{})
-	transformed["enable"] = original["enable"]
-	return []interface{}{transformed}
-}

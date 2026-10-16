@@ -338,26 +338,6 @@ func GetDataplexEntryApiObject(d tpgresource.TerraformResourceData, config *tran
 	return resourceDataplexEntryEncoder(d, config, obj)
 }
 
-func resourceDataplexEntryEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// The yaml file does not allow validation for Array fields.
-	// Therefore we add validation as a part of the encoding proecess.
-	aspects := obj["aspects"]
-	if aspects != nil {
-		_, errors := NumberOfAspectsValidation(aspects, "aspects")
-		if len(errors) > 0 {
-			return nil, errors[0]
-		}
-	}
-
-	err := TransformAspects(obj)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return obj, nil
-}
-
 func expandDataplexEntryEntryType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -462,18 +442,6 @@ func expandDataplexEntryAspectsAspectCreateTime(v interface{}, d tpgresource.Ter
 
 func expandDataplexEntryAspectsAspectUpdateTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandDataplexEntryAspectsAspectData(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	b := []byte(v.(string))
-	if len(b) == 0 {
-		return nil, nil
-	}
-	m := make(map[string]interface{})
-	if err := json.Unmarshal(b, &m); err != nil {
-		return nil, err
-	}
-	return m, nil
 }
 
 func expandDataplexEntryParentEntry(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

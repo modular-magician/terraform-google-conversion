@@ -162,12 +162,6 @@ func GetDataLossPreventionContentPolicyApiObject(d tpgresource.TerraformResource
 	return resourceDataLossPreventionContentPolicyEncoder(d, config, obj)
 }
 
-func resourceDataLossPreventionContentPolicyEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	newObj := make(map[string]interface{})
-	newObj["contentPolicy"] = obj
-	return newObj, nil
-}
-
 func expandDataLossPreventionContentPolicyDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

@@ -165,14 +165,6 @@ func flattenComputeAddressAddress(v interface{}, d *schema.ResourceData, config 
 	return v
 }
 
-func flattenComputeAddressAddressType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil || tpgresource.IsEmptyValue(reflect.ValueOf(v)) {
-		return "EXTERNAL"
-	}
-
-	return v
-}
-
 func flattenComputeAddressDescription(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -261,11 +253,4 @@ func flattenComputeAddressIpCollection(v interface{}, d *schema.ResourceData, co
 		return nil
 	}
 	return v
-}
-
-func flattenComputeAddressRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
 }

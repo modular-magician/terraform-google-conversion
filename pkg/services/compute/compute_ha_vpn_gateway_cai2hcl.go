@@ -188,22 +188,6 @@ func flattenComputeHaVpnGatewayNetwork(v interface{}, d *schema.ResourceData, co
 	return relative
 }
 
-func flattenComputeHaVpnGatewayStackType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil || tpgresource.IsEmptyValue(reflect.ValueOf(v)) {
-		return "IPV4_ONLY"
-	}
-
-	return v
-}
-
-func flattenComputeHaVpnGatewayGatewayIpVersion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil || tpgresource.IsEmptyValue(reflect.ValueOf(v)) {
-		return "IPV4"
-	}
-
-	return v
-}
-
 func flattenComputeHaVpnGatewayVpnInterfaces(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return v
@@ -272,11 +256,4 @@ func flattenComputeHaVpnGatewayParams(v interface{}, d *schema.ResourceData, con
 
 func flattenComputeHaVpnGatewayParamsResourceManagerTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func flattenComputeHaVpnGatewayRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
 }

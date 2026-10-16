@@ -125,29 +125,3 @@ func GetSecretManagerRegionalRegionalSecretVersionApiObject(d tpgresource.Terraf
 
 	return obj, nil
 }
-
-func expandSecretManagerRegionalRegionalSecretVersionEnabled(_ interface{}, _ tpgresource.TerraformResourceData, _ *transport_tpg.Config) (interface{}, error) {
-	return nil, nil
-}
-
-func expandSecretManagerRegionalRegionalSecretVersionPayload(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	transformed := make(map[string]interface{})
-	transformedSecretData, err := expandSecretManagerRegionalRegionalSecretVersionPayloadSecretData(d.Get("secret_data"), d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedSecretData); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["data"] = transformedSecretData
-	}
-	return transformed, nil
-}
-
-func expandSecretManagerRegionalRegionalSecretVersionPayloadSecretData(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-
-	if d.Get("is_secret_data_base64").(bool) {
-		return v, nil
-	}
-	return base64.StdEncoding.EncodeToString([]byte(v.(string))), nil
-}

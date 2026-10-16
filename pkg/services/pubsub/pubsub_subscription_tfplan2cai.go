@@ -227,32 +227,6 @@ func GetPubsubSubscriptionCaiObject(d tpgresource.TerraformResourceData, config 
 	return obj, nil
 }
 
-func expandPubsubSubscriptionName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/subscriptions/{{name}}")
-}
-
-func expandPubsubSubscriptionTopic(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	project, err := tpgresource.GetProject(d, config)
-	if err != nil {
-		return "", err
-	}
-
-	topic := d.Get("topic").(string)
-
-	re := regexp.MustCompile(`projects\/(.*)\/topics\/(.*)`)
-	match := re.FindStringSubmatch(topic)
-	if len(match) == 3 {
-		return topic, nil
-	} else {
-		// If no full topic given, we expand it to a full topic on the same project
-		fullTopic := fmt.Sprintf("projects/%s/topics/%s", project, topic)
-		if err := d.Set("topic", fullTopic); err != nil {
-			return nil, fmt.Errorf("Error setting topic: %s", err)
-		}
-		return fullTopic, nil
-	}
-}
-
 func expandPubsubSubscriptionBigqueryConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil

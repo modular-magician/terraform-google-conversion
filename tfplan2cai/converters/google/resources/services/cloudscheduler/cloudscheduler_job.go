@@ -287,15 +287,6 @@ func GetCloudSchedulerJobApiObject(d tpgresource.TerraformResourceData, config *
 	return resourceCloudSchedulerJobEncoder(d, config, obj)
 }
 
-func resourceCloudSchedulerJobEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	delete(obj, "paused") // Field doesn't exist in API
-	return obj, nil
-}
-
-func expandCloudSchedulerJobName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{region}}/jobs/{{name}}")
-}
-
 func expandCloudSchedulerJobDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

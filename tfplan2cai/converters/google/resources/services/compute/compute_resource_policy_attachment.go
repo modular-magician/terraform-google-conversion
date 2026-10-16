@@ -120,35 +120,6 @@ func GetComputeResourcePolicyAttachmentApiObject(d tpgresource.TerraformResource
 	return resourceComputeResourcePolicyAttachmentEncoder(d, config, obj)
 }
 
-func resourceComputeResourcePolicyAttachmentEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	config := meta.(*transport_tpg.Config)
-	project, err := tpgresource.GetProject(d, config)
-	if err != nil {
-		return nil, err
-	}
-
-	zone, err := tpgresource.GetZone(d, config)
-	if err != nil {
-		return nil, err
-	}
-	if zone == "" {
-		return nil, fmt.Errorf("zone must be non-empty - set in resource or at provider-level")
-	}
-
-	// resourcePolicies are referred to by region but affixed to zonal instances.
-	// We construct the regional name from the zone:
-	//
-	//	projects/{project}/regions/{region}/resourcePolicies/{resourceId}
-	region := tpgresource.GetRegionFromZone(zone)
-	if region == "" {
-		return nil, fmt.Errorf("invalid zone %q, unable to infer region from zone", zone)
-	}
-
-	obj["resourcePolicies"] = []interface{}{fmt.Sprintf("projects/%s/regions/%s/resourcePolicies/%s", project, region, obj["name"])}
-	delete(obj, "name")
-	return obj, nil
-}
-
 func expandComputeResourcePolicyAttachmentName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

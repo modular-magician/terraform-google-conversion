@@ -150,22 +150,6 @@ func GetApiGatewayApiConfigApiObject(d tpgresource.TerraformResourceData, config
 	return resourceApiGatewayApiConfigEncoder(d, config, obj)
 }
 
-func resourceApiGatewayApiConfigEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	var apiConfigId string
-	if v, ok := d.GetOk("api_config_id"); ok {
-		apiConfigId = v.(string)
-	} else if v, ok := d.GetOk("api_config_id_prefix"); ok {
-		apiConfigId = id.PrefixedUniqueId(v.(string))
-	} else {
-		apiConfigId = id.UniqueId()
-	}
-
-	if err := d.Set("api_config_id", apiConfigId); err != nil {
-		return nil, fmt.Errorf("Error setting api_config_id: %s", err)
-	}
-	return obj, nil
-}
-
 func expandApiGatewayApiConfigDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

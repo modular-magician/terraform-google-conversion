@@ -168,28 +168,6 @@ func GetMonitoringNotificationChannelCaiObject(d tpgresource.TerraformResourceDa
 	return obj, nil
 }
 
-func resourceMonitoringNotificationChannelEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	labelmap, ok := obj["labels"]
-	if !ok {
-		labelmap = make(map[string]string)
-	}
-
-	var labels map[string]string
-	labels = labelmap.(map[string]string)
-
-	for _, sl := range sensitiveLabels {
-		if auth, _ := d.GetOkExists("sensitive_labels.0." + sl); auth != "" {
-
-			labels[sl] = auth.(string)
-		}
-	}
-
-	obj["labels"] = labels
-	delete(obj, "sensitiveLabels")
-
-	return obj, nil
-}
-
 func expandMonitoringNotificationChannelLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
 	if v == nil {
 		return map[string]string{}, nil

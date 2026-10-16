@@ -248,7 +248,3 @@ func expandNetworkServicesAuthzExtensionEffectiveLabels(v interface{}, d tpgreso
 	}
 	return m, nil
 }
-
-func expandNetworkServicesAuthzExtensionName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return fmt.Sprintf("projects/%s/locations/%s/authzExtensions/%s", d.Get("project"), d.Get("location"), v), nil
-}

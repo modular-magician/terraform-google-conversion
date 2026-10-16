@@ -120,16 +120,6 @@ func GetComputeSnapshotSettingsApiObject(d tpgresource.TerraformResourceData, co
 	return resourceComputeSnapshotSettingsEncoder(d, config, obj)
 }
 
-func resourceComputeSnapshotSettingsEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	if storageLocation, ok := obj["storageLocation"].(map[string]interface{}); ok {
-		if _, ok := storageLocation["locations"]; !ok {
-			storageLocation["locations"] = nil
-		}
-	}
-
-	return obj, nil
-}
-
 func expandComputeSnapshotSettingsStorageLocation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil

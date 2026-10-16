@@ -545,11 +545,3 @@ func expandComputeFirewallPolicyRuleTargetSecureTagsState(v interface{}, d tpgre
 func expandComputeFirewallPolicyRuleDisabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
-
-func expandComputeFirewallPolicyRuleFirewallPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	firewallPolicyId := tpgresource.GetResourceNameFromSelfLink(v.(string))
-	if err := d.Set("firewall_policy", firewallPolicyId); err != nil {
-		return nil, fmt.Errorf("Error setting firewall_policy: %s", err)
-	}
-	return firewallPolicyId, nil
-}

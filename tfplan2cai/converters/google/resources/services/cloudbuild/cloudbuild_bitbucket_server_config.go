@@ -156,12 +156,6 @@ func GetCloudBuildBitbucketServerConfigApiObject(d tpgresource.TerraformResource
 	return resourceCloudBuildBitbucketServerConfigEncoder(d, config, obj)
 }
 
-func resourceCloudBuildBitbucketServerConfigEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// connectedRepositories is needed for batchCreate on the config after creation.
-	delete(obj, "connectedRepositories")
-	return obj, nil
-}
-
 func expandCloudBuildBitbucketServerConfigHostUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

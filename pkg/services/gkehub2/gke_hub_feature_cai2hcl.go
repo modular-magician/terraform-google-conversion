@@ -1125,18 +1125,3 @@ func flattenGKEHub2FeatureFleetDefaultMemberConfigPolicycontrollerPolicyControll
 func flattenGKEHub2FeatureFleetDefaultMemberConfigPolicycontrollerPolicyControllerHubConfigPolicyContentBundlesExemptedNamespaces(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
-
-func resourceGKEHub2FeatureTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	// GKE Hub Feature custom decoder.
-	// upstreamFleets is a required field in the Terraform schema for clusterupgrade,
-	// but it may be omitted in the CAI asset if empty. We default it to an empty list
-	// to satisfy the schema requirements during conversion.
-	if spec, ok := res["spec"].(map[string]interface{}); ok {
-		if clusterupgrade, ok := spec["clusterupgrade"].(map[string]interface{}); ok {
-			if _, ok := clusterupgrade["upstreamFleets"]; !ok {
-				clusterupgrade["upstreamFleets"] = []interface{}{}
-			}
-		}
-	}
-	return res, hclData, nil
-}

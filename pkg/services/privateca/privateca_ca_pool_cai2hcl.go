@@ -408,26 +408,6 @@ func flattenPrivatecaCaPoolIssuancePolicyIdentityConstraintsCelExpressionLocatio
 	return v
 }
 
-func flattenPrivatecaCaPoolIssuancePolicyBaselineValues(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	original := v.(map[string]interface{})
-	transformed := make(map[string]interface{})
-	transformed["additional_extensions"] =
-		flattenPrivatecaCertificateConfigX509ConfigAdditionalExtensions(original["additionalExtensions"], d, config)
-	transformed["policy_ids"] =
-		flattenPrivatecaCertificateConfigX509ConfigPolicyIds(original["policyIds"], d, config)
-	transformed["aia_ocsp_servers"] = flattenPrivatecaCertificateConfigX509ConfigAiaOcspServers(original["aiaOcspServers"], d, config)
-	transformed["ca_options"] =
-		flattenPrivatecaCertificateConfigX509ConfigCaOptions(original["caOptions"], d, config)
-	transformed["key_usage"] =
-		flattenPrivatecaCertificateConfigX509ConfigKeyUsage(original["keyUsage"], d, config)
-	transformed["name_constraints"] =
-		flattenPrivatecaCertificateConfigX509ConfigNameConstraints(original["nameConstraints"], d, config)
-	return []interface{}{transformed}
-}
-
 func flattenPrivatecaCaPoolPublishingOptions(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -490,27 +470,4 @@ func flattenPrivatecaCaPoolEncryptionSpecCloudKmsKey(v interface{}, d *schema.Re
 		return nil
 	}
 	return v
-}
-
-func resourcePrivatecaCaPoolTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	if ip, ok := res["issuancePolicy"]; ok && ip != nil {
-		if ipMap, ok := ip.(map[string]interface{}); ok {
-			if bv, ok := ipMap["baselineValues"]; ok && bv != nil {
-				if bvMap, ok := bv.(map[string]interface{}); ok {
-					if ae, ok := bvMap["additionalExtensions"]; ok && ae != nil {
-						if aeList, ok := ae.([]interface{}); ok {
-							for _, item := range aeList {
-								if itemMap, ok := item.(map[string]interface{}); ok {
-									if _, ok := itemMap["critical"]; !ok {
-										itemMap["critical"] = false
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	return res, hclData, nil
 }

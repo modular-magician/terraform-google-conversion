@@ -150,24 +150,6 @@ func GetSpannerBackupScheduleApiObject(d tpgresource.TerraformResourceData, conf
 	return resourceSpannerBackupScheduleEncoder(d, config, obj)
 }
 
-func resourceSpannerBackupScheduleEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	obj["name"] = d.Get("name").(string)
-	if obj["name"] == nil || obj["name"] == "" {
-		if err := d.Set("name", id.PrefixedUniqueId("tfgen-spanid-")[:30]); err != nil {
-			return nil, fmt.Errorf("Error setting name: %s", err)
-		}
-	}
-	config := meta.(*transport_tpg.Config)
-	var err error
-	obj["name"], err = tpgresource.ReplaceVars(d, config, "projects/{{project}}/instances/{{instance}}/databases/{{database}}/backupSchedules/{{name}}")
-	if err != nil {
-		return obj, err
-	}
-	delete(obj, "instance")
-	delete(obj, "database")
-	return obj, nil
-}
-
 func expandSpannerBackupScheduleName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

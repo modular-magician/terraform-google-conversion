@@ -156,10 +156,6 @@ func GetNetworkConnectivityHubApiObject(d tpgresource.TerraformResourceData, con
 	return obj, nil
 }
 
-func expandNetworkConnectivityHubName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.GetResourceNameFromSelfLink(v.(string)), nil
-}
-
 func expandNetworkConnectivityHubDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

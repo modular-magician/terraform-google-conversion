@@ -150,13 +150,6 @@ func (c *BinaryAuthorizationAttestorCai2hclConverter) convertResourceData(asset 
 	}, nil
 }
 
-func flattenBinaryAuthorizationAttestorName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenBinaryAuthorizationAttestorDescription(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil

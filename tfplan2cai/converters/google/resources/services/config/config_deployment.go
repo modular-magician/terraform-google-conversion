@@ -285,27 +285,6 @@ func expandConfigDeploymentTerraformBlueprintInputValues(v interface{}, d tpgres
 	return m, nil
 }
 
-func expandConfigDeploymentTerraformBlueprintInputValuesInputValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-
-	s, ok := v.(string)
-	if !ok {
-		return nil, fmt.Errorf("expected InputValue to be a string")
-	}
-	if s == "" {
-		return nil, nil
-	}
-
-	var out interface{}
-	if err := json.Unmarshal([]byte(s), &out); err != nil {
-		return nil, fmt.Errorf("InputValue must be valid JSON: %w", err)
-	}
-
-	return out, nil
-}
-
 func expandConfigDeploymentTfVersionConstraint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

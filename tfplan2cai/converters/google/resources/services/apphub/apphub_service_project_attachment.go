@@ -124,10 +124,3 @@ func GetApphubServiceProjectAttachmentApiObject(d tpgresource.TerraformResourceD
 
 	return obj, nil
 }
-
-func expandApphubServiceProjectAttachmentServiceProject(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-
-	service_project := "projects/" + d.Get("service_project_attachment_id").(string)
-
-	return service_project, nil
-}

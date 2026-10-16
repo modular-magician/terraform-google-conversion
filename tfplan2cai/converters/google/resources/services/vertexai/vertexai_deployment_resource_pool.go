@@ -126,16 +126,6 @@ func GetVertexAIDeploymentResourcePoolApiObject(d tpgresource.TerraformResourceD
 	return resourceVertexAIDeploymentResourcePoolEncoder(d, config, obj)
 }
 
-func resourceVertexAIDeploymentResourcePoolEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	newObj := make(map[string]interface{})
-	newObj["deploymentResourcePool"] = obj
-	nameProp, ok := d.GetOk("name")
-	if ok && nameProp != nil {
-		newObj["deploymentResourcePoolId"] = nameProp
-	}
-	return newObj, nil
-}
-
 func expandVertexAIDeploymentResourcePoolName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

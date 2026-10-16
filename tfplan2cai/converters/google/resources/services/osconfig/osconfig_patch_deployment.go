@@ -156,37 +156,6 @@ func GetOSConfigPatchDeploymentApiObject(d tpgresource.TerraformResourceData, co
 	return resourceOSConfigPatchDeploymentEncoder(d, config, obj)
 }
 
-func resourceOSConfigPatchDeploymentEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	if obj["recurringSchedule"] != nil {
-		schedule := obj["recurringSchedule"].(map[string]interface{})
-		if schedule["monthly"] != nil {
-			obj["recurringSchedule"].(map[string]interface{})["frequency"] = "MONTHLY"
-		} else if schedule["weekly"] != nil {
-			obj["recurringSchedule"].(map[string]interface{})["frequency"] = "WEEKLY"
-		} else {
-			obj["recurringSchedule"].(map[string]interface{})["frequency"] = "DAILY"
-		}
-	}
-
-	if obj["patchConfig"] != nil {
-		patchConfig := obj["patchConfig"].(map[string]interface{})
-		if patchConfig["goo"] != nil {
-			goo := patchConfig["goo"].(map[string]interface{})
-
-			if goo["enabled"] == true {
-				delete(goo, "enabled")
-				patchConfig["goo"] = goo
-			} else {
-				delete(patchConfig, "goo")
-			}
-
-			obj["patchConfig"] = patchConfig
-		}
-	}
-
-	return obj, nil
-}
-
 func expandOSConfigPatchDeploymentDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

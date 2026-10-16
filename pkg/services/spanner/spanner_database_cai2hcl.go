@@ -191,55 +191,10 @@ func flattenSpannerDatabaseEncryptionConfigKmsKeyName(v interface{}, d *schema.R
 	return v
 }
 
-func flattenSpannerDatabaseEncryptionConfigKmsKeyNames(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	// Ignore `kms_key_names` if `kms_key_name` is set, because that field takes precedence.
-	_, kmsNameSet := d.GetOk("encryption_config.0.kms_key_name")
-	if kmsNameSet {
-		return nil
-	}
-
-	rawConfigValue := d.Get("encryption_config.0.kms_key_names")
-
-	// Convert config value to []string
-	configValue, err := tpgresource.InterfaceSliceToStringSlice(rawConfigValue)
-	if err != nil {
-		log.Printf("[ERROR] Failed to convert config value: %s", err)
-		return v
-	}
-
-	// Convert v to []string
-	apiStringValue, err := tpgresource.InterfaceSliceToStringSlice(v)
-	if err != nil {
-		log.Printf("[ERROR] Failed to convert API value: %s", err)
-		return v
-	}
-
-	sortedStrings, err := tpgresource.SortStringsByConfigOrder(configValue, apiStringValue)
-	if err != nil {
-		log.Printf("[ERROR] Could not sort API response value: %s", err)
-		return v
-	}
-
-	return sortedStrings
-}
-
 func flattenSpannerDatabaseDatabaseDialect(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
 func flattenSpannerDatabaseEnableDropProtection(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func resourceSpannerDatabaseTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	// Ignore `kms_key_names` if `kms_key_name` is set, because that field takes precedence.
-	if raw, ok := res["encryptionConfig"]; ok {
-		v := raw.(map[string]interface{})
-		if _, ok := v["kmsKeyName"]; ok {
-			v["kmsKeyNames"] = nil
-		}
-		res["encryptionConfig"] = v
-	}
-
-	return res, hclData, nil
 }

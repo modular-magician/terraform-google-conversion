@@ -154,13 +154,6 @@ func (c *CloudQuotasQuotaPreferenceCai2hclConverter) convertResourceData(asset c
 	}, nil
 }
 
-func flattenCloudQuotasQuotaPreferenceName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenCloudQuotasQuotaPreferenceService(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return "unknown"
@@ -208,11 +201,6 @@ func flattenCloudQuotasQuotaPreferenceQuotaConfigPreferredValue(v interface{}, d
 		return "unknown"
 	}
 	return v
-}
-
-func flattenCloudQuotasQuotaPreferenceQuotaConfigAnnotations(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	// ignore read on this field
-	return d.Get("quota_config.0.annotations")
 }
 
 func flattenCloudQuotasQuotaPreferenceDimensions(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

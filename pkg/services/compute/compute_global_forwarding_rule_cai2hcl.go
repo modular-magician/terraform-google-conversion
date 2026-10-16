@@ -315,19 +315,6 @@ func flattenComputeGlobalForwardingRuleTarget(v interface{}, d *schema.ResourceD
 	return v
 }
 
-// The GCP API sometimes returns "INVALID_NETWORK_TIER" as a default or unspecified placeholder value.
-// We intercept and map this structural enum to nil to prevent spurious diffs
-// and schema validation errors when converting CAI payloads to Terraform HCL.
-func flattenComputeGlobalForwardingRuleNetworkTier(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	if v.(string) == "INVALID_NETWORK_TIER" {
-		return nil
-	}
-	return v
-}
-
 func flattenComputeGlobalForwardingRuleExternalManagedBackendBucketMigrationState(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }

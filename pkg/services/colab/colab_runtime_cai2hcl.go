@@ -217,10 +217,3 @@ func flattenColabRuntimeDescription(v interface{}, d *schema.ResourceData, confi
 	}
 	return v
 }
-
-func resourceColabRuntimeDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
-	if v, ok := res["name"].(string); ok && v != "" {
-		res["name"] = tpgresource.GetResourceNameFromSelfLink(v)
-	}
-	return res, nil
-}

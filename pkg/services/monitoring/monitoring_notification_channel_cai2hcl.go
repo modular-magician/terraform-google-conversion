@@ -254,39 +254,3 @@ func flattenMonitoringNotificationChannelDisplayName(v interface{}, d *schema.Re
 func flattenMonitoringNotificationChannelEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
-
-func resourceMonitoringNotificationChannelDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
-	labels, ok := res["labels"].(map[string]interface{})
-	if !ok {
-		return res, nil
-	}
-
-	sensitiveLabelsRaw := d.Get("sensitive_labels")
-	if sensitiveLabelsRaw != nil {
-		if sensitiveLabelsArr, ok := sensitiveLabelsRaw.([]interface{}); ok && len(sensitiveLabelsArr) > 0 {
-			if configuredSensitiveLabels, ok := sensitiveLabelsArr[0].(map[string]interface{}); ok && len(configuredSensitiveLabels) > 0 {
-				sensitiveLabels := make(map[string]interface{})
-
-				for configKey, configVal := range configuredSensitiveLabels {
-					apiField := strings.TrimSuffix(configKey, "_wo")
-					delete(labels, apiField)
-					sensitiveLabels[configKey] = configVal
-				}
-
-				return res, nil
-			}
-		}
-	}
-
-	// Replace obfuscated API values with configured values to prevent a diff
-	// Scenario where end-user uses "sensitive" labels directly in "labels" block
-	if configuredLabels, ok := d.Get("labels").(map[string]interface{}); ok {
-		for _, field := range []string{"auth_token", "password", "service_key"} {
-			if configVal, exists := configuredLabels[field]; exists && configVal != nil && configVal != "" {
-				labels[field] = configVal
-			}
-		}
-	}
-
-	return res, nil
-}

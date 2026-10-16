@@ -226,14 +226,6 @@ func flattenArtifactRegistryRepositoryMavenConfigAllowSnapshotOverwrites(v inter
 	return v
 }
 
-func flattenArtifactRegistryRepositoryMavenConfigVersionPolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil || tpgresource.IsEmptyValue(reflect.ValueOf(v)) {
-		return "VERSION_POLICY_UNSPECIFIED"
-	}
-
-	return v
-}
-
 func flattenArtifactRegistryRepositoryMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
@@ -812,10 +804,6 @@ func flattenArtifactRegistryRepositoryRemoteRepositoryConfigUpstreamCredentialsU
 		return nil
 	}
 	return v
-}
-
-func flattenArtifactRegistryRepositoryRemoteRepositoryConfigDisableUpstreamValidation(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return d.Get("remote_repository_config.0.disable_upstream_validation")
 }
 
 func flattenArtifactRegistryRepositoryRemoteRepositoryConfigNoCache(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

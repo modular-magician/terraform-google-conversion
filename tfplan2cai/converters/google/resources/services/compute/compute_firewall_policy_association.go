@@ -139,11 +139,3 @@ func expandComputeFirewallPolicyAssociationName(v interface{}, d tpgresource.Ter
 func expandComputeFirewallPolicyAssociationAttachmentTarget(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
-
-func expandComputeFirewallPolicyAssociationFirewallPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	firewallPolicyId := tpgresource.GetResourceNameFromSelfLink(v.(string))
-	if err := d.Set("firewall_policy", firewallPolicyId); err != nil {
-		return nil, fmt.Errorf("Error setting firewall_policy: %s", err)
-	}
-	return firewallPolicyId, nil
-}

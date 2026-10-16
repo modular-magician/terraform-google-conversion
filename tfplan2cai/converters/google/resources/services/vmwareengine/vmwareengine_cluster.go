@@ -187,13 +187,6 @@ func GetVmwareengineClusterApiObject(d tpgresource.TerraformResourceData, config
 	return resourceVmwareengineClusterEncoder(d, config, obj)
 }
 
-func resourceVmwareengineClusterEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// datastoreMountConfig is sent as post_create and post_update but not sent during create and update methods.
-	delete(obj, "datastoreMountConfig")
-	log.Printf("[DEBUG] After removal of datastoreMountConfig Cluster request %q: %#v", d.Id(), obj)
-	return obj, nil
-}
-
 func expandVmwareengineClusterNodeTypeConfigs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
 	if v == nil {
 		return map[string]interface{}{}, nil

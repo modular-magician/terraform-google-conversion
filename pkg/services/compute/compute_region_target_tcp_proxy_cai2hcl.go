@@ -197,10 +197,3 @@ func flattenComputeRegionTargetTcpProxyProxyBind(v interface{}, d *schema.Resour
 func flattenComputeRegionTargetTcpProxyLoadBalancingScheme(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
-
-func flattenComputeRegionTargetTcpProxyRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}

@@ -150,12 +150,6 @@ func GetChronicleWatchlistApiObject(d tpgresource.TerraformResourceData, config 
 	return resourceChronicleWatchlistEncoder(d, config, obj)
 }
 
-func resourceChronicleWatchlistEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// watchlist_id is needed to qualify the URL but cannot be sent in the body
-	delete(obj, "watchlistId")
-	return obj, nil
-}
-
 func expandChronicleWatchlistMultiplyingFactor(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

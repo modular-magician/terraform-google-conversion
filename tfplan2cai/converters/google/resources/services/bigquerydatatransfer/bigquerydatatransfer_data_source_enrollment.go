@@ -113,9 +113,3 @@ func GetBigqueryDataTransferDataSourceEnrollmentApiObject(d tpgresource.Terrafor
 
 	return resourceBigqueryDataTransferDataSourceEnrollmentEncoder(d, config, obj)
 }
-
-func resourceBigqueryDataTransferDataSourceEnrollmentEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	return map[string]interface{}{
-		"dataSourceIds": []string{d.Get("data_source_id").(string)},
-	}, nil
-}

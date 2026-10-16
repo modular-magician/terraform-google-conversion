@@ -119,7 +119,3 @@ func GetFirestoreUserCredsApiObject(d tpgresource.TerraformResourceData, config 
 
 	return obj, nil
 }
-
-func expandFirestoreUserCredsName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/databases/{{database}}/userCreds/{{name}}")
-}

@@ -144,12 +144,6 @@ func GetDiscoveryEngineChatEngineApiObject(d tpgresource.TerraformResourceData, 
 	return resourceDiscoveryEngineChatEngineEncoder(d, config, obj)
 }
 
-func resourceDiscoveryEngineChatEngineEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// hard code solutionType to "SOLUTION_TYPE_CHAT" for chat engine resource
-	obj["solutionType"] = "SOLUTION_TYPE_CHAT"
-	return obj, nil
-}
-
 func expandDiscoveryEngineChatEngineIndustryVertical(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

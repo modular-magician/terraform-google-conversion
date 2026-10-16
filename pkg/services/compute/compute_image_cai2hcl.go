@@ -249,14 +249,6 @@ func flattenComputeImageImageEncryptionKey(v interface{}, d *schema.ResourceData
 	return []interface{}{transformed}
 }
 
-func flattenComputeImageImageEncryptionKeyKmsKeySelfLink(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	vStr := v.(string)
-	return strings.Split(vStr, "/cryptoKeyVersions/")[0]
-}
-
 func flattenComputeImageImageEncryptionKeyKmsKeyServiceAccount(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -421,14 +413,6 @@ func flattenComputeImageSourceDiskEncryptionKeyRsaEncryptedKey(v interface{}, d 
 	return v
 }
 
-func flattenComputeImageSourceDiskEncryptionKeyKmsKeySelfLink(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	vStr := v.(string)
-	return strings.Split(vStr, "/cryptoKeyVersions/")[0]
-}
-
 func flattenComputeImageSourceDiskEncryptionKeyKmsKeyServiceAccount(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -488,14 +472,6 @@ func flattenComputeImageSourceImageEncryptionKeyRsaEncryptedKey(v interface{}, d
 		return nil
 	}
 	return v
-}
-
-func flattenComputeImageSourceImageEncryptionKeyKmsKeySelfLink(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	vStr := v.(string)
-	return strings.Split(vStr, "/cryptoKeyVersions/")[0]
 }
 
 func flattenComputeImageSourceImageEncryptionKeyKmsKeyServiceAccount(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -737,14 +713,6 @@ func flattenComputeImageSourceSnapshotEncryptionKeyRsaEncryptedKey(v interface{}
 		return nil
 	}
 	return v
-}
-
-func flattenComputeImageSourceSnapshotEncryptionKeyKmsKeySelfLink(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	vStr := v.(string)
-	return strings.Split(vStr, "/cryptoKeyVersions/")[0]
 }
 
 func flattenComputeImageSourceSnapshotEncryptionKeyKmsKeyServiceAccount(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

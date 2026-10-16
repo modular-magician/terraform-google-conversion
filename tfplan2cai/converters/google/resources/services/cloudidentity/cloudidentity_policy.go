@@ -256,31 +256,3 @@ func expandCloudIdentityPolicySetting(v interface{}, d tpgresource.TerraformReso
 func expandCloudIdentityPolicySettingType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
-
-func expandCloudIdentityPolicySettingValueJson(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-
-	s, ok := v.(string)
-	if !ok {
-		return nil, fmt.Errorf("expected ValueJson to be a string")
-	}
-	if s == "" {
-		return nil, fmt.Errorf("ValueJson cannot be empty")
-	}
-
-	// The API field is google.protobuf.Struct (JSON object).
-	var out interface{}
-	if err := json.Unmarshal([]byte(s), &out); err != nil {
-		return nil, fmt.Errorf("ValueJson must be valid JSON: %w", err)
-	}
-
-	// protobuf Struct must be a JSOM obect (not array/string/number/bool/null)
-	m, ok := out.(map[string]interface{})
-	if !ok {
-		return nil, fmt.Errorf("ValueJson must be a JSON object (e.g. {\"key\":\"value\"})")
-	}
-
-	return m, nil
-}

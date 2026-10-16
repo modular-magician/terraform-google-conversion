@@ -156,12 +156,6 @@ func GetDataLossPreventionDiscoveryConfigApiObject(d tpgresource.TerraformResour
 	return resourceDataLossPreventionDiscoveryConfigEncoder(d, config, obj)
 }
 
-func resourceDataLossPreventionDiscoveryConfigEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	newObj := make(map[string]interface{})
-	newObj["discoveryConfig"] = obj
-	return newObj, nil
-}
-
 func expandDataLossPreventionDiscoveryConfigDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

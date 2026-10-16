@@ -181,25 +181,6 @@ func flattenDatabaseMigrationServiceMigrationJobStopOnWarnings(v interface{}, d 
 	return v
 }
 
-func flattenDatabaseMigrationServiceMigrationJobDesiredState(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return "NOT_STARTED"
-	}
-
-	switch v.(string) {
-	case "DRAFT", "NOT_STARTED":
-		return "NOT_STARTED"
-	case "FAILED":
-		if phase, ok := d.Get("phase").(string); ok && phase == "PROMOTE_IN_PROGRESS" {
-			return "RUNNING"
-		}
-		return "NOT_STARTED"
-	default:
-		// Map all other active states (RUNNING, COMPLETED, STOPPED, etc.) to RUNNING
-		return "RUNNING"
-	}
-}
-
 func flattenDatabaseMigrationServiceMigrationJobType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }

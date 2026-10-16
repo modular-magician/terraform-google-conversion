@@ -231,23 +231,6 @@ func GetSpannerDatabaseApiObject(d tpgresource.TerraformResourceData, config *tr
 	return resourceSpannerDatabaseEncoder(d, config, obj)
 }
 
-func resourceSpannerDatabaseEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	obj["createStatement"] = fmt.Sprintf("CREATE DATABASE `%s`", obj["name"])
-	if dialect, ok := obj["databaseDialect"]; ok && dialect == "POSTGRESQL" {
-		obj["createStatement"] = fmt.Sprintf("CREATE DATABASE \"%s\"", obj["name"])
-	}
-
-	// Extra DDL statements are removed from the create request and instead applied to the database in
-	// a post-create action, to accommodate retrictions when creating PostgreSQL-enabled databases.
-	// https://cloud.google.com/spanner/docs/create-manage-databases#create_a_database
-	log.Printf("[DEBUG] Preparing to create new Database. Any extra DDL statements will be applied to the Database in a separate API call")
-
-	delete(obj, "name")
-	delete(obj, "instance")
-
-	return obj, nil
-}
-
 func expandSpannerDatabaseName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -303,12 +286,4 @@ func expandSpannerDatabaseDatabaseDialect(v interface{}, d tpgresource.Terraform
 
 func expandSpannerDatabaseEnableDropProtection(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandSpannerDatabaseInstance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("instances", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for instance: %s", err)
-	}
-	return f.RelativeLink(), nil
 }

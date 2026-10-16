@@ -149,14 +149,6 @@ func expandParameterManagerParameterVersionPayload(v interface{}, d tpgresource.
 	return transformed, nil
 }
 
-func expandParameterManagerParameterVersionPayloadParameterData(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-
-	return base64.StdEncoding.EncodeToString([]byte(v.(string))), nil
-}
-
 func expandParameterManagerParameterVersionPayloadDataCrc32c(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

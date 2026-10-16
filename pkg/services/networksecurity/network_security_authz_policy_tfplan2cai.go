@@ -2742,23 +2742,6 @@ func expandNetworkSecurityAuthzPolicyCustomProvider(v interface{}, d tpgresource
 	return transformed, nil
 }
 
-func expandNetworkSecurityAuthzPolicyCustomProviderCloudIap(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	if isEnabled, ok := original["enabled"]; ok {
-		if !isEnabled.(bool) {
-			return nil, nil
-		}
-	}
-	transformed := make(map[string]interface{})
-	return transformed, nil
-}
-
 func expandNetworkSecurityAuthzPolicyCustomProviderAuthzExtension(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -2794,8 +2777,4 @@ func expandNetworkSecurityAuthzPolicyEffectiveLabels(v interface{}, d tpgresourc
 		m[k] = val.(string)
 	}
 	return m, nil
-}
-
-func expandNetworkSecurityAuthzPolicyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return fmt.Sprintf("projects/%s/locations/%s/authzPolicies/%s", d.Get("project"), d.Get("location"), v), nil
 }

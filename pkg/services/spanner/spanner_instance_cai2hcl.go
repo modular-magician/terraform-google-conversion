@@ -162,13 +162,6 @@ func (c *SpannerInstanceCai2hclConverter) convertResourceData(asset caiasset.Ass
 	}, nil
 }
 
-func flattenSpannerInstanceName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenSpannerInstanceConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return v
@@ -611,18 +604,4 @@ func flattenSpannerInstanceInstanceType(v interface{}, d *schema.ResourceData, c
 
 func flattenSpannerInstanceDefaultBackupScheduleType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func resourceSpannerInstanceTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	// If autoscalingConfig is set, ignore  processingUnits and nodeCount.
-	// If nodeCount is set, ignore  processingUnits.
-	// Those fields conflict with each other.
-	if _, ok := res["autoscalingConfig"]; ok {
-		res["processingUnits"] = nil
-		res["nodeCount"] = nil
-	} else if _, ok := res["nodeCount"]; ok {
-		res["processingUnits"] = nil
-	}
-
-	return res, hclData, nil
 }

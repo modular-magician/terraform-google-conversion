@@ -251,10 +251,3 @@ func flattenComputeStoragePoolParams(v interface{}, d *schema.ResourceData, conf
 func flattenComputeStoragePoolParamsResourceManagerTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
-
-func flattenComputeStoragePoolZone(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}

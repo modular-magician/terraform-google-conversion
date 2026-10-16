@@ -131,15 +131,6 @@ func GetBigQueryJobApiObject(d tpgresource.TerraformResourceData, config *transp
 	return resourceBigQueryJobEncoder(d, config, obj)
 }
 
-func resourceBigQueryJobEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	project, err := tpgresource.GetProject(d, meta.(*transport_tpg.Config))
-	if err != nil {
-		return nil, err
-	}
-	obj["jobReference"].(map[string]interface{})["project"] = project
-	return obj, nil
-}
-
 func expandBigQueryJobConfiguration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	transformed := make(map[string]interface{})
 	transformedJobType, err := expandBigQueryJobConfigurationJobType(d.Get("job_type"), d, config)
@@ -361,53 +352,6 @@ func expandBigQueryJobConfigurationQueryQuery(v interface{}, d tpgresource.Terra
 	return v, nil
 }
 
-func expandBigQueryJobConfigurationQueryDestinationTable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedProjectId := original["project_id"]
-	if val := reflect.ValueOf(transformedProjectId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["projectId"] = transformedProjectId
-	}
-
-	transformedDatasetId := original["dataset_id"]
-	if val := reflect.ValueOf(transformedDatasetId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["datasetId"] = transformedDatasetId
-	}
-
-	transformedTableId := original["table_id"]
-	if val := reflect.ValueOf(transformedTableId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["tableId"] = transformedTableId
-	}
-
-	if parts := bigqueryTableRegexp.FindStringSubmatch(transformedTableId.(string)); parts != nil {
-		transformed["projectId"] = parts[1]
-		transformed["datasetId"] = parts[2]
-		transformed["tableId"] = parts[3]
-	}
-
-	configError := "Invalid BigQuery job destination_table configuration. You must either:\n" +
-		"1. Set all of project_id, dataset_id, and table_id separately, or\n" +
-		"2. Provide table_id in the form 'projects/{{project}}/datasets/{{dataset_id}}/tables/{{table_id}}'"
-
-	// Validate required fields
-	if projectId, ok := transformed["projectId"]; !ok || projectId == nil ||
-		reflect.ValueOf(projectId).IsZero() {
-		return nil, fmt.Errorf("%s\nMissing or empty projectId", configError)
-	}
-
-	if datasetId, ok := transformed["datasetId"]; !ok || datasetId == nil ||
-		reflect.ValueOf(datasetId).IsZero() {
-		return nil, fmt.Errorf("%s\nMissing or empty datasetId", configError)
-	}
-	return transformed, nil
-}
-
 func expandBigQueryJobConfigurationQueryUserDefinedFunctionResources(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -454,33 +398,6 @@ func expandBigQueryJobConfigurationQueryCreateDisposition(v interface{}, d tpgre
 
 func expandBigQueryJobConfigurationQueryWriteDisposition(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandBigQueryJobConfigurationQueryDefaultDataset(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedProjectId := original["project_id"]
-	if val := reflect.ValueOf(transformedProjectId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["projectId"] = transformedProjectId
-	}
-
-	transformedDatasetId := original["dataset_id"]
-	if val := reflect.ValueOf(transformedDatasetId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["datasetId"] = transformedDatasetId
-	}
-
-	if parts := bigqueryDatasetRegexp.FindStringSubmatch(transformedDatasetId.(string)); parts != nil {
-		transformed["projectId"] = parts[1]
-		transformed["datasetId"] = parts[2]
-	}
-
-	return transformed, nil
 }
 
 func expandBigQueryJobConfigurationQueryPriority(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -814,53 +731,6 @@ func expandBigQueryJobConfigurationLoadSourceUris(v interface{}, d tpgresource.T
 	return v, nil
 }
 
-func expandBigQueryJobConfigurationLoadDestinationTable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedProjectId := original["project_id"]
-	if val := reflect.ValueOf(transformedProjectId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["projectId"] = transformedProjectId
-	}
-
-	transformedDatasetId := original["dataset_id"]
-	if val := reflect.ValueOf(transformedDatasetId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["datasetId"] = transformedDatasetId
-	}
-
-	transformedTableId := original["table_id"]
-	if val := reflect.ValueOf(transformedTableId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["tableId"] = transformedTableId
-	}
-
-	if parts := bigqueryTableRegexp.FindStringSubmatch(transformedTableId.(string)); parts != nil {
-		transformed["projectId"] = parts[1]
-		transformed["datasetId"] = parts[2]
-		transformed["tableId"] = parts[3]
-	}
-
-	configError := "Invalid BigQuery job destination_table configuration. You must either:\n" +
-		"1. Set all of project_id, dataset_id, and table_id separately, or\n" +
-		"2. Provide table_id in the form 'projects/{{project}}/datasets/{{dataset_id}}/tables/{{table_id}}'"
-
-	// Validate required fields
-	if projectId, ok := transformed["projectId"]; !ok || projectId == nil ||
-		reflect.ValueOf(projectId).IsZero() {
-		return nil, fmt.Errorf("%s\nMissing or empty projectId", configError)
-	}
-
-	if datasetId, ok := transformed["datasetId"]; !ok || datasetId == nil ||
-		reflect.ValueOf(datasetId).IsZero() {
-		return nil, fmt.Errorf("%s\nMissing or empty datasetId", configError)
-	}
-	return transformed, nil
-}
-
 func expandBigQueryJobConfigurationLoadCreateDisposition(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -1097,90 +967,6 @@ func expandBigQueryJobConfigurationCopy(v interface{}, d tpgresource.TerraformRe
 	return transformed, nil
 }
 
-func expandBigQueryJobConfigurationCopySourceTables(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	req := make([]interface{}, 0, len(l))
-	for _, raw := range l {
-		if raw == nil {
-			continue
-		}
-		original := raw.(map[string]interface{})
-		transformed := make(map[string]interface{})
-
-		transformedProjectId := original["project_id"]
-		if val := reflect.ValueOf(transformedProjectId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["projectId"] = transformedProjectId
-		}
-
-		transformedDatasetId := original["dataset_id"]
-		if val := reflect.ValueOf(transformedDatasetId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["datasetId"] = transformedDatasetId
-		}
-
-		transformedTableId := original["table_id"]
-		if val := reflect.ValueOf(transformedTableId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-			transformed["tableId"] = transformedTableId
-		}
-
-		tableRef := regexp.MustCompile("projects/(.+)/datasets/(.+)/tables/(.+)")
-		if parts := tableRef.FindStringSubmatch(transformedTableId.(string)); parts != nil {
-			transformed["projectId"] = parts[1]
-			transformed["datasetId"] = parts[2]
-			transformed["tableId"] = parts[3]
-		}
-
-		req = append(req, transformed)
-	}
-	return req, nil
-}
-
-func expandBigQueryJobConfigurationCopyDestinationTable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedProjectId := original["project_id"]
-	if val := reflect.ValueOf(transformedProjectId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["projectId"] = transformedProjectId
-	}
-
-	transformedDatasetId := original["dataset_id"]
-	if val := reflect.ValueOf(transformedDatasetId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["datasetId"] = transformedDatasetId
-	}
-
-	transformedTableId := original["table_id"]
-	if val := reflect.ValueOf(transformedTableId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["tableId"] = transformedTableId
-	}
-
-	if parts := bigqueryTableRegexp.FindStringSubmatch(transformedTableId.(string)); parts != nil {
-		transformed["projectId"] = parts[1]
-		transformed["datasetId"] = parts[2]
-		transformed["tableId"] = parts[3]
-	}
-
-	configError := "Invalid BigQuery job destination_table configuration. You must either:\n" +
-		"1. Set all of project_id, dataset_id, and table_id separately, or\n" +
-		"2. Provide table_id in the form 'projects/{{project}}/datasets/{{dataset_id}}/tables/{{table_id}}'"
-
-	// Validate required fields
-	if projectId, ok := transformed["projectId"]; !ok || projectId == nil ||
-		reflect.ValueOf(projectId).IsZero() {
-		return nil, fmt.Errorf("%s\nMissing or empty projectId", configError)
-	}
-
-	if datasetId, ok := transformed["datasetId"]; !ok || datasetId == nil ||
-		reflect.ValueOf(datasetId).IsZero() {
-		return nil, fmt.Errorf("%s\nMissing or empty datasetId", configError)
-	}
-	return transformed, nil
-}
-
 func expandBigQueryJobConfigurationCopyCreateDisposition(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -1319,53 +1105,6 @@ func expandBigQueryJobConfigurationExtractCompression(v interface{}, d tpgresour
 
 func expandBigQueryJobConfigurationExtractUseAvroLogicalTypes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandBigQueryJobConfigurationExtractSourceTable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedProjectId := original["project_id"]
-	if val := reflect.ValueOf(transformedProjectId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["projectId"] = transformedProjectId
-	}
-
-	transformedDatasetId := original["dataset_id"]
-	if val := reflect.ValueOf(transformedDatasetId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["datasetId"] = transformedDatasetId
-	}
-
-	transformedTableId := original["table_id"]
-	if val := reflect.ValueOf(transformedTableId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["tableId"] = transformedTableId
-	}
-
-	if parts := bigqueryTableRegexp.FindStringSubmatch(transformedTableId.(string)); parts != nil {
-		transformed["projectId"] = parts[1]
-		transformed["datasetId"] = parts[2]
-		transformed["tableId"] = parts[3]
-	}
-
-	configError := "Invalid BigQuery job destination_table configuration. You must either:\n" +
-		"1. Set all of project_id, dataset_id, and table_id separately, or\n" +
-		"2. Provide table_id in the form 'projects/{{project}}/datasets/{{dataset_id}}/tables/{{table_id}}'"
-
-	// Validate required fields
-	if projectId, ok := transformed["projectId"]; !ok || projectId == nil ||
-		reflect.ValueOf(projectId).IsZero() {
-		return nil, fmt.Errorf("%s\nMissing or empty projectId", configError)
-	}
-
-	if datasetId, ok := transformed["datasetId"]; !ok || datasetId == nil ||
-		reflect.ValueOf(datasetId).IsZero() {
-		return nil, fmt.Errorf("%s\nMissing or empty datasetId", configError)
-	}
-	return transformed, nil
 }
 
 func expandBigQueryJobConfigurationExtractSourceModel(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

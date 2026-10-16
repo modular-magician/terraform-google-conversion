@@ -268,13 +268,6 @@ func flattenComputeRegionBackendServiceBackendFailover(v interface{}, d *schema.
 	return v
 }
 
-func flattenComputeRegionBackendServiceBackendGroup(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.ConvertSelfLinkToV1(v.(string))
-}
-
 func flattenComputeRegionBackendServiceBackendMaxConnections(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
@@ -927,13 +920,6 @@ func flattenComputeRegionBackendServiceFailoverPolicyFailoverRatio(v interface{}
 
 func flattenComputeRegionBackendServiceEnableCDN(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func flattenComputeRegionBackendServiceHealthChecks(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.ConvertAndMapStringArr(v.([]interface{}), tpgresource.ConvertSelfLinkToV1)
 }
 
 func flattenComputeRegionBackendServiceIap(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -1838,42 +1824,4 @@ func flattenComputeRegionBackendServiceTlsSettingsIdentity(v interface{}, d *sch
 		return nil
 	}
 	return v
-}
-
-func flattenComputeRegionBackendServiceRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
-func resourceComputeRegionBackendServiceTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	// When haPolicy is present, it conflicts with several other fields in the Terraform schema.
-	// We aggressively delete sessionAffinity, connectionTrackingPolicy, failoverPolicy, and healthChecks
-	// to prevent "Invalid combination of arguments" or unsupported field errors during cai2hcl conversion.
-	if _, ok := res["haPolicy"]; ok {
-		delete(res, "sessionAffinity")
-		delete(res, "connectionTrackingPolicy")
-		delete(res, "failoverPolicy")
-		delete(res, "healthChecks")
-	}
-
-	return res, hclData, nil
-}
-func resourceComputeRegionBackendServiceDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
-
-	// Requests with consistentHash will error for specific values of
-	// localityLbPolicy. However, the API will not remove it if the backend
-	// service is updated to from supporting to non-supporting localityLbPolicy
-	// (e.g. RING_HASH to RANDOM), which causes an error on subsequent update.
-	// In order to prevent errors, we ignore any consistentHash returned
-	// from the API when the localityLbPolicy doesn't support it.
-	if v, ok := res["localityLbPolicy"]; ok {
-		lbPolicy := v.(string)
-		if lbPolicy != "MAGLEV" && lbPolicy != "RING_HASH" {
-			delete(res, "consistentHash")
-		}
-	}
-
-	return res, nil
 }

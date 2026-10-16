@@ -514,18 +514,3 @@ func flattenComputeReservationZone(v interface{}, d *schema.ResourceData, config
 	}
 	return relative
 }
-
-func resourceComputeReservationTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	if sr, ok := res["specificReservation"].(map[string]interface{}); ok {
-		if sourceTemplate, ok := sr["sourceInstanceTemplate"].(string); ok && sourceTemplate != "" {
-			// The API returns both expanded instance properties and the source template.
-			// Suppress instanceProperties to avoid an exactly_one_of conflict in Terraform.
-			delete(sr, "instanceProperties")
-		}
-	}
-	return res, hclData, nil
-}
-func resourceComputeReservationDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
-
-	return res, nil
-}

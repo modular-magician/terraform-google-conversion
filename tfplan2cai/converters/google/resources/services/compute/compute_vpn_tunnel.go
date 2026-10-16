@@ -340,25 +340,6 @@ func GetComputeVpnTunnelApiObject(d tpgresource.TerraformResourceData, config *t
 	return resourceComputeVpnTunnelEncoder(d, config, obj)
 }
 
-func resourceComputeVpnTunnelEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	config := meta.(*transport_tpg.Config)
-	f, err := tpgresource.ParseRegionalFieldValue("targetVpnGateways", d.Get("target_vpn_gateway").(string), "project", "region", "zone", d, config, true)
-	if err != nil {
-		return nil, err
-	}
-	if _, ok := d.GetOk("project"); !ok {
-		if err := d.Set("project", f.Project); err != nil {
-			return nil, fmt.Errorf("Error setting project: %s", err)
-		}
-	}
-	if _, ok := d.GetOk("region"); !ok {
-		if err := d.Set("region", f.Region); err != nil {
-			return nil, fmt.Errorf("Error setting region: %s", err)
-		}
-	}
-	return obj, nil
-}
-
 func expandComputeVpnTunnelName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -367,61 +348,12 @@ func expandComputeVpnTunnelDescription(v interface{}, d tpgresource.TerraformRes
 	return v, nil
 }
 
-func expandComputeVpnTunnelTargetVpnGateway(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseRegionalFieldValue("targetVpnGateways", v.(string), "project", "region", "zone", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for target_vpn_gateway: %s", err)
-	}
-	return f.RelativeLink(), nil
-}
-
-func expandComputeVpnTunnelVpnGateway(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseRegionalFieldValue("vpnGateways", v.(string), "project", "region", "zone", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for vpn_gateway: %s", err)
-	}
-	return f.RelativeLink(), nil
-}
-
 func expandComputeVpnTunnelVpnGatewayInterface(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
-func expandComputeVpnTunnelPeerExternalGateway(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("externalVpnGateways", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for peer_external_gateway: %s", err)
-	}
-	return f.RelativeLink(), nil
-}
-
 func expandComputeVpnTunnelPeerExternalGatewayInterface(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandComputeVpnTunnelPeerGcpGateway(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseRegionalFieldValue("vpnGateways", v.(string), "project", "region", "zone", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for peer_gcp_gateway: %s", err)
-	}
-	return f.RelativeLink(), nil
-}
-
-func expandComputeVpnTunnelRouter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil || v.(string) == "" {
-		return "", nil
-	}
-	f, err := tpgresource.ParseRegionalFieldValue("routers", v.(string), "project", "region", "zone", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for router: %s", err)
-	}
-
-	url, err := tpgresource.ReplaceVars(d, config, "{{ComputeBasePath}}"+f.RelativeLink())
-	if err != nil {
-		return nil, err
-	}
-
-	return url, nil
 }
 
 func expandComputeVpnTunnelPeerIp(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -628,12 +560,4 @@ func expandComputeVpnTunnelEffectiveLabels(v interface{}, d tpgresource.Terrafor
 		m[k] = val.(string)
 	}
 	return m, nil
-}
-
-func expandComputeVpnTunnelRegion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("regions", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for region: %s", err)
-	}
-	return f.RelativeLink(), nil
 }

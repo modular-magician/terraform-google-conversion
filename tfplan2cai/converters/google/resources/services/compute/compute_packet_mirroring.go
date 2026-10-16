@@ -202,14 +202,6 @@ func expandComputePacketMirroringNetwork(v interface{}, d tpgresource.TerraformR
 	return transformed, nil
 }
 
-func expandComputePacketMirroringNetworkUrl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("networks", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for url: %s", err)
-	}
-	return f.RelativeLink(), nil
-}
-
 func expandComputePacketMirroringPriority(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -234,14 +226,6 @@ func expandComputePacketMirroringCollectorIlb(v interface{}, d tpgresource.Terra
 	}
 
 	return transformed, nil
-}
-
-func expandComputePacketMirroringCollectorIlbUrl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseRegionalFieldValue("forwardingRules", v.(string), "project", "region", "zone", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for url: %s", err)
-	}
-	return f.RelativeLink(), nil
 }
 
 func expandComputePacketMirroringFilter(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -354,14 +338,6 @@ func expandComputePacketMirroringMirroredResourcesSubnetworks(v interface{}, d t
 	return req, nil
 }
 
-func expandComputePacketMirroringMirroredResourcesSubnetworksUrl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseRegionalFieldValue("subnetworks", v.(string), "project", "region", "zone", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for url: %s", err)
-	}
-	return f.RelativeLink(), nil
-}
-
 func expandComputePacketMirroringMirroredResourcesInstances(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
 	if v == nil {
@@ -386,14 +362,6 @@ func expandComputePacketMirroringMirroredResourcesInstances(v interface{}, d tpg
 		req = append(req, transformed)
 	}
 	return req, nil
-}
-
-func expandComputePacketMirroringMirroredResourcesInstancesUrl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseZonalFieldValue("instances", v.(string), "project", "zone", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for url: %s", err)
-	}
-	return f.RelativeLink(), nil
 }
 
 func expandComputePacketMirroringMirroredResourcesTags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

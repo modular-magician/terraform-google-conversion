@@ -611,15 +611,6 @@ func flattenComputeResourcePolicyInstanceSchedulePolicyExpirationTime(v interfac
 	return v
 }
 
-func flattenComputeResourcePolicyDiskConsistencyGroupPolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	transformed := make(map[string]interface{})
-	transformed["enabled"] = true
-	return []interface{}{transformed}
-}
-
 func flattenComputeResourcePolicyWorkloadPolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil

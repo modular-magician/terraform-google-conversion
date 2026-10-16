@@ -160,13 +160,6 @@ func (c *VPCAccessConnectorCai2hclConverter) convertResourceData(asset caiasset.
 	}, nil
 }
 
-func flattenVPCAccessConnectorNetwork(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenVPCAccessConnectorIpCidrRange(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -277,23 +270,4 @@ func flattenVPCAccessConnectorSubnetName(v interface{}, d *schema.ResourceData, 
 
 func flattenVPCAccessConnectorSubnetProjectId(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func resourceVPCAccessConnectorTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	// When converting from CAI to HCL, both network and subnet may be present in the Asset.
-	// However, Terraform schema requires exactly one of them.
-	// We prefer 'subnet' if it's present and valid.
-	if _, ok := res["subnet"]; ok {
-		delete(res, "network")
-	}
-
-	// Similarly for instances vs throughput. Prefer instances as throughput is discouraged.
-	if _, ok := res["minInstances"]; ok {
-		delete(res, "minThroughput")
-	}
-	if _, ok := res["maxInstances"]; ok {
-		delete(res, "maxThroughput")
-	}
-
-	return res, hclData, nil
 }

@@ -150,8 +150,3 @@ func (c *KMSKeyRingCai2hclConverter) convertResourceData(asset caiasset.Asset, o
 		Value:  ctyVal,
 	}, nil
 }
-
-func resourceKMSKeyRingTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	// To avoid the errors "declared and not used" for res, config, d
-	return res, hclData, nil
-}

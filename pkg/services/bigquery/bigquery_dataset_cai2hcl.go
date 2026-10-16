@@ -209,14 +209,6 @@ func flattenBigQueryDatasetAccessDomain(v interface{}, d *schema.ResourceData, c
 	return v
 }
 
-func flattenBigQueryDatasetAccessGroupByEmail(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-
-	return strings.ToLower(v.(string))
-}
-
 func flattenBigQueryDatasetAccessRole(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -245,14 +237,6 @@ func flattenBigQueryDatasetAccessIamMember(v interface{}, d *schema.ResourceData
 		return nil
 	}
 	return v
-}
-
-func flattenBigQueryDatasetAccessUserByEmail(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-
-	return strings.ToLower(v.(string))
 }
 
 func flattenBigQueryDatasetAccessView(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -589,16 +573,6 @@ func flattenBigQueryDatasetFriendlyName(v interface{}, d *schema.ResourceData, c
 
 func flattenBigQueryDatasetLabels(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return tgcresource.RemoveTerraformAttributionLabel(v)
-}
-
-// Older Datasets in BigQuery have no Location set in the API response. This may be an issue when importing
-// datasets created before BigQuery was available in multiple zones. We can safely assume that these datasets
-// are in the US, as this was the default at the time.
-func flattenBigQueryDatasetLocation(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return "US"
-	}
-	return v
 }
 
 func flattenBigQueryDatasetDefaultEncryptionConfiguration(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

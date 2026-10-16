@@ -168,10 +168,6 @@ func GetEventarcTriggerApiObject(d tpgresource.TerraformResourceData, config *tr
 	return obj, nil
 }
 
-func expandEventarcTriggerName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return expandToRegionalLongForm("projects/%s/locations/%s/triggers/%s", v, d, config)
-}
-
 func expandEventarcTriggerMatchingCriteria(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	v = v.(*schema.Set).List()
 	if v == nil {
@@ -407,10 +403,6 @@ func expandEventarcTriggerDestinationGkePath(v interface{}, d tpgresource.Terraf
 	return v, nil
 }
 
-func expandEventarcTriggerDestinationWorkflow(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return expandToRegionalLongForm("projects/%s/locations/%s/workflows/%s", v, d, config)
-}
-
 func expandEventarcTriggerDestinationHttpEndpoint(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -512,10 +504,6 @@ func expandEventarcTriggerTransportPubsub(v interface{}, d tpgresource.Terraform
 	}
 
 	return transformed, nil
-}
-
-func expandEventarcTriggerTransportPubsubTopic(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return expandToLongForm("projects/%s/topics/%s", v, d, config)
 }
 
 func expandEventarcTriggerTransportPubsubSubscription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

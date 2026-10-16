@@ -158,10 +158,6 @@ func GetCloudTasksQueueApiObject(d tpgresource.TerraformResourceData, config *tr
 	return obj, nil
 }
 
-func expandCloudTasksQueueName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{location}}/queues/{{name}}")
-}
-
 func expandCloudTasksQueueAppEngineRoutingOverride(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil

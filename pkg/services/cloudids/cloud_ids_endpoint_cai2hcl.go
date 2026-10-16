@@ -152,11 +152,6 @@ func (c *CloudIdsEndpointCai2hclConverter) convertResourceData(asset caiasset.As
 	}, nil
 }
 
-func flattenCloudIdsEndpointName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	parts := strings.Split(d.Get("name").(string), "/")
-	return parts[len(parts)-1]
-}
-
 func flattenCloudIdsEndpointNetwork(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return "unknown"

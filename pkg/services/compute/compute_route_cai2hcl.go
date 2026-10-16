@@ -304,28 +304,3 @@ func flattenComputeRouteParams(v interface{}, d *schema.ResourceData, config *tr
 func flattenComputeRouteParamsResourceManagerTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
-
-func resourceComputeRouteTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	// next_hop_ip is Computed + Optional and conflict with next_hop_ilb
-	if _, ok := res["nextHopIp"]; ok {
-		if _, ok := res["nextHopIlb"]; ok {
-			delete(res, "nextHopIp")
-		}
-	}
-
-	return res, hclData, nil
-}
-func resourceComputeRouteDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
-	if v, ok := res["nextHopInstance"]; ok {
-		val, err := tpgresource.ParseZonalFieldValue("instances", v.(string), "project", "next_hop_instance_zone", d, meta.(*transport_tpg.Config), true)
-		if err != nil {
-			return nil, err
-		}
-		if err := d.Set("next_hop_instance_zone", val.Zone); err != nil {
-			return nil, fmt.Errorf("Error setting next_hop_instance_zone: %s", err)
-		}
-		res["nextHopInstance"] = val.RelativeLink()
-	}
-
-	return res, nil
-}

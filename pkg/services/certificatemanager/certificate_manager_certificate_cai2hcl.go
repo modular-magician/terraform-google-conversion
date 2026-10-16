@@ -270,15 +270,3 @@ func flattenCertificateManagerCertificateManagedIssuanceConfig(v interface{}, d 
 	}
 	return v
 }
-
-func resourceCertificateManagerCertificateTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	if sm, ok := res["selfManaged"].(map[string]interface{}); ok {
-		sm["pemCertificate"] = res["pemCertificate"]
-		sm["pemPrivateKey"] = "unknown"
-	}
-	if vStr, ok := res["scope"].(string); ok && vStr == "DEFAULT" {
-		// Omit the default value.
-		delete(res, "scope")
-	}
-	return res, hclData, nil
-}

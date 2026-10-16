@@ -150,13 +150,6 @@ func GetActiveDirectoryDomainTrustApiObject(d tpgresource.TerraformResourceData,
 	return resourceActiveDirectoryDomainTrustEncoder(d, config, obj)
 }
 
-func resourceActiveDirectoryDomainTrustEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	wrappedReq := map[string]interface{}{
-		"trust": obj,
-	}
-	return wrappedReq, nil
-}
-
 func expandActiveDirectoryDomainTrustTargetDomainName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

@@ -180,12 +180,6 @@ func GetDiscoveryEngineSearchEngineApiObject(d tpgresource.TerraformResourceData
 	return resourceDiscoveryEngineSearchEngineEncoder(d, config, obj)
 }
 
-func resourceDiscoveryEngineSearchEngineEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// hard code solutionType to "SOLUTION_TYPE_SEARCH" for search engine resource
-	obj["solutionType"] = "SOLUTION_TYPE_SEARCH"
-	return obj, nil
-}
-
 func expandDiscoveryEngineSearchEngineIndustryVertical(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

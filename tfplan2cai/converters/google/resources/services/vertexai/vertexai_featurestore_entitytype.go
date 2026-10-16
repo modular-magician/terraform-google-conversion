@@ -138,17 +138,6 @@ func GetVertexAIFeaturestoreEntitytypeApiObject(d tpgresource.TerraformResourceD
 	return resourceVertexAIFeaturestoreEntitytypeEncoder(d, config, obj)
 }
 
-func resourceVertexAIFeaturestoreEntitytypeEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	if v, ok := d.GetOk("featurestore"); ok {
-		re := regexp.MustCompile("projects/(.+)/locations/(.+)/featurestores/(.+)$")
-		if parts := re.FindStringSubmatch(v.(string)); parts != nil {
-			d.Set("region", parts[2])
-		}
-	}
-
-	return obj, nil
-}
-
 func expandVertexAIFeaturestoreEntitytypeDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

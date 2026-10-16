@@ -120,17 +120,6 @@ func GetCloudBillingProjectInfoApiObject(d tpgresource.TerraformResourceData, co
 	return resourceCloudBillingProjectInfoEncoder(d, config, obj)
 }
 
-func resourceCloudBillingProjectInfoEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	ba := d.Get("billing_account").(string)
-	if ba == "" {
-		obj["billingAccountName"] = ""
-	} else {
-		obj["billingAccountName"] = "billingAccounts/" + ba
-	}
-	delete(obj, "billing_account")
-	return obj, nil
-}
-
 func expandCloudBillingProjectInfoBillingAccount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

@@ -150,15 +150,6 @@ func GetBigqueryDatapolicyv2DataPolicyApiObject(d tpgresource.TerraformResourceD
 	return resourceBigqueryDatapolicyv2DataPolicyEncoder(d, config, obj)
 }
 
-func resourceBigqueryDatapolicyv2DataPolicyEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// The create request is not in the same format as the resource.
-	// The API request needs resource to be nested inside the "data_policy" field.
-	newObj := make(map[string]interface{})
-	newObj["dataPolicy"] = obj
-	newObj["dataPolicyId"] = obj["dataPolicyId"].(string)
-	return newObj, nil
-}
-
 func expandBigqueryDatapolicyv2DataPolicyDataMaskingPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil

@@ -194,14 +194,6 @@ func expandComputeRouterDescription(v interface{}, d tpgresource.TerraformResour
 	return v, nil
 }
 
-func expandComputeRouterNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("networks", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for network: %s", err)
-	}
-	return f.RelativeLink(), nil
-}
-
 func expandComputeRouterBgp(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -361,25 +353,6 @@ func expandComputeRouterMd5AuthenticationKeysKey(v interface{}, d tpgresource.Te
 	return v, nil
 }
 
-func expandComputeRouterNccGateway(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	// This method returns a full self link from a partial self link.
-	if v == nil || v.(string) == "" {
-		// It does not try to construct anything from empty.
-		return "", nil
-	} else if strings.HasPrefix(v.(string), "https://") {
-		// Anything that starts with a URL scheme is assumed to be a self link worth using.
-		return v, nil
-	}
-	// Anything else is assumed to be a regional resource, with a partial link that begins with the resource name.
-	// This isn't very likely - it's a last-ditch effort to extract something useful here.  We can do a better job
-	// as soon as MultiResourceRefs are working since we'll know the types that this field is supposed to point to.
-	url, err := tpgresource.ReplaceVars(d, config, "{{NetworkConnectivityBasePath}}")
-	if err != nil {
-		return nil, err
-	}
-	return url + v.(string), nil
-}
-
 func expandComputeRouterParams(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -411,12 +384,4 @@ func expandComputeRouterParamsResourceManagerTags(v interface{}, d tpgresource.T
 		m[k] = val.(string)
 	}
 	return m, nil
-}
-
-func expandComputeRouterRegion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("regions", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for region: %s", err)
-	}
-	return f.RelativeLink(), nil
 }

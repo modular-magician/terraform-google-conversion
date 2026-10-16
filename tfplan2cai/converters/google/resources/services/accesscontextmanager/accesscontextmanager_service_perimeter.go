@@ -280,11 +280,6 @@ func GetAccessContextManagerServicePerimeterApiObject(d tpgresource.TerraformRes
 	return resourceAccessContextManagerServicePerimeterEncoder(d, config, obj)
 }
 
-func resourceAccessContextManagerServicePerimeterEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	delete(obj, "parent")
-	return obj, nil
-}
-
 func expandAccessContextManagerServicePerimeterTitle(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

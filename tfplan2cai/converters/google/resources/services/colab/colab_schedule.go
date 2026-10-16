@@ -193,42 +193,6 @@ func GetColabScheduleApiObject(d tpgresource.TerraformResourceData, config *tran
 	return resourceColabScheduleEncoder(d, config, obj)
 }
 
-func resourceColabScheduleEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	config := meta.(*transport_tpg.Config)
-	project, err := tpgresource.GetProject(d, config)
-	if err != nil {
-		return nil, err
-	}
-
-	location, err := tpgresource.GetRegion(d, config)
-	if err != nil {
-		return nil, err
-	}
-
-	// Handle parent injection for creation requests if parent is not explicitly provided
-	if obj["createNotebookExecutionJobRequest"] != nil {
-		jobRequest, ok := obj["createNotebookExecutionJobRequest"].(map[string]interface{})
-		if !ok {
-			return nil, fmt.Errorf("createNotebookExecutionJobRequest is not of type map[string]interface{} or is nil")
-		}
-		if jobRequest["parent"] == nil || jobRequest["parent"] == "" {
-			jobRequest["parent"] = fmt.Sprintf("projects/%s/locations/%s", project, location)
-		}
-	}
-
-	if obj["createPipelineJobRequest"] != nil {
-		pipelineRequest, ok := obj["createPipelineJobRequest"].(map[string]interface{})
-		if !ok {
-			return nil, fmt.Errorf("createPipelineJobRequest is not of type map[string]interface{} or is nil")
-		}
-		if pipelineRequest["parent"] == nil || pipelineRequest["parent"] == "" {
-			pipelineRequest["parent"] = fmt.Sprintf("projects/%s/locations/%s", project, location)
-		}
-	}
-
-	return obj, nil
-}
-
 func expandColabScheduleDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -1119,18 +1083,6 @@ func expandColabScheduleCreatePipelineJobRequestPipelineJobName(v interface{}, d
 
 func expandColabScheduleCreatePipelineJobRequestPipelineJobNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandColabScheduleCreatePipelineJobRequestPipelineJobPipelineSpec(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	b := []byte(v.(string))
-	if len(b) == 0 {
-		return nil, nil
-	}
-	var j interface{}
-	if err := json.Unmarshal(b, &j); err != nil {
-		return nil, err
-	}
-	return j, nil
 }
 
 func expandColabScheduleCreatePipelineJobRequestPipelineJobPreflightValidations(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

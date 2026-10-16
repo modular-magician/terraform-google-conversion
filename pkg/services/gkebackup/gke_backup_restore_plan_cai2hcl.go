@@ -153,13 +153,6 @@ func (c *GKEBackupRestorePlanCai2hclConverter) convertResourceData(asset caiasse
 	}, nil
 }
 
-func flattenGKEBackupRestorePlanName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenGKEBackupRestorePlanDescription(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil

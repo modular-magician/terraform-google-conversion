@@ -194,14 +194,6 @@ func flattenComputeInterconnectAttachmentDescription(v interface{}, d *schema.Re
 	return v
 }
 
-func flattenComputeInterconnectAttachmentMtu(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	// Handles int given in float64 format
-	if floatVal, ok := v.(float64); ok {
-		return fmt.Sprintf("%d", int(floatVal))
-	}
-	return v
-}
-
 func flattenComputeInterconnectAttachmentParams(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -280,14 +272,6 @@ func flattenComputeInterconnectAttachmentIpsecInternalAddresses(v interface{}, d
 		return v
 	}
 	return tpgresource.ConvertAndMapStringArr(v.([]interface{}), tpgresource.ConvertSelfLinkToV1)
-}
-
-func flattenComputeInterconnectAttachmentEncryption(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil || tpgresource.IsEmptyValue(reflect.ValueOf(v)) {
-		return "NONE"
-	}
-
-	return v
 }
 
 func flattenComputeInterconnectAttachmentStackType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -437,46 +421,6 @@ func flattenComputeInterconnectAttachmentL2ForwardingGeneveHeaderVni(v interface
 	}
 
 	return v // let terraform core handle it otherwise
-}
-
-func flattenComputeInterconnectAttachmentL2ForwardingApplianceMappings(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	m := v.(map[string]interface{})
-	l := make([]interface{}, 0, len(m))
-	for key, raw := range m {
-		original := raw.(map[string]interface{})
-		transformed := make(map[string]interface{})
-
-		transformed["vlan_id"] = key
-
-		if v, ok := original["name"]; ok {
-			transformed["name"] = v
-		}
-		if v, ok := original["applianceIpAddress"]; ok {
-			transformed["appliance_ip_address"] = v
-		}
-
-		if v, ok := original["innerVlanToApplianceMappings"]; ok {
-			innerList := v.([]interface{})
-			transformedInnerList := make([]interface{}, 0, len(innerList))
-			for _, itemRaw := range innerList {
-				item := itemRaw.(map[string]interface{})
-				transformedItem := make(map[string]interface{})
-				if ip, ok := item["innerApplianceIpAddress"]; ok {
-					transformedItem["inner_appliance_ip_address"] = ip
-				}
-				if tags, ok := item["innerVlanTags"]; ok {
-					transformedItem["inner_vlan_tags"] = tags
-				}
-				transformedInnerList = append(transformedInnerList, transformedItem)
-			}
-			transformed["inner_vlan_to_appliance_mappings"] = transformedInnerList
-		}
-		l = append(l, transformed)
-	}
-	return l
 }
 
 func flattenComputeInterconnectAttachmentRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

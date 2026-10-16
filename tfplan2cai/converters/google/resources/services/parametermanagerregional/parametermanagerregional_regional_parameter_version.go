@@ -149,14 +149,6 @@ func expandParameterManagerRegionalRegionalParameterVersionPayload(v interface{}
 	return transformed, nil
 }
 
-func expandParameterManagerRegionalRegionalParameterVersionPayloadParameterData(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-
-	return base64.StdEncoding.EncodeToString([]byte(v.(string))), nil
-}
-
 func expandParameterManagerRegionalRegionalParameterVersionPayloadDataCrc32c(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

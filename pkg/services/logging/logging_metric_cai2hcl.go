@@ -278,14 +278,6 @@ func flattenLoggingMetricMetricDescriptorLabelsDescription(v interface{}, d *sch
 	return v
 }
 
-func flattenLoggingMetricMetricDescriptorLabelsValueType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil || tpgresource.IsEmptyValue(reflect.ValueOf(v)) {
-		return "STRING"
-	}
-
-	return v
-}
-
 func flattenLoggingMetricMetricDescriptorDisplayName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil

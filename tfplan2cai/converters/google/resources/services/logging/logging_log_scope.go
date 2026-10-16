@@ -132,29 +132,6 @@ func GetLoggingLogScopeApiObject(d tpgresource.TerraformResourceData, config *tr
 	return resourceLoggingLogScopeEncoder(d, config, obj)
 }
 
-func resourceLoggingLogScopeEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// Extract any empty fields from the bucket field.
-	// Extract parent, location from name
-	parent := d.Get("parent").(string)
-	name := d.Get("name").(string)
-	parent, err := tpgresource.ExtractFieldByPattern("parent", parent, name, "((projects|folders|organizations|billingAccounts)/[a-z0-9A-Z-]*)/locations/.*")
-	if err != nil {
-		return nil, fmt.Errorf("error extracting parent field: %s", err)
-	}
-	location := d.Get("location").(string)
-	location, err = tpgresource.ExtractFieldByPattern("location", location, name, "[a-zA-Z]*/[a-z0-9A-Z-]*/locations/([a-z0-9-]*)/logScopes/.*")
-	if err != nil {
-		return nil, fmt.Errorf("error extracting location field: %s", err)
-	}
-	// Set parent to the extracted value.
-	d.Set("parent", parent)
-	// Set all the other fields to their short forms before forming url and setting ID.
-	name = tpgresource.GetResourceNameFromSelfLink(name)
-	d.Set("location", location)
-	d.Set("name", name)
-	return obj, nil
-}
-
 func expandLoggingLogScopeName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

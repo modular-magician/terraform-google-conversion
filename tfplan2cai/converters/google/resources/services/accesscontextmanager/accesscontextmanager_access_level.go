@@ -150,11 +150,6 @@ func GetAccessContextManagerAccessLevelApiObject(d tpgresource.TerraformResource
 	return resourceAccessContextManagerAccessLevelEncoder(d, config, obj)
 }
 
-func resourceAccessContextManagerAccessLevelEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	delete(obj, "parent")
-	return obj, nil
-}
-
 func expandAccessContextManagerAccessLevelTitle(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

@@ -268,10 +268,3 @@ func flattenCloudAssetOrganizationFeedConditionLocation(v interface{}, d *schema
 	}
 	return v
 }
-
-func resourceCloudAssetOrganizationFeedTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	// billing_project is the required url_param_only property, but is not in CAI asset name or data
-	// TODO: handle it in a generic way
-	hclData["billing_project"] = "unknown"
-	return res, hclData, nil
-}

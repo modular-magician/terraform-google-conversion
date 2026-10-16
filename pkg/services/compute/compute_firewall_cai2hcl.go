@@ -252,25 +252,6 @@ func flattenComputeFirewallDisabled(v interface{}, d *schema.ResourceData, confi
 	return v
 }
 
-func flattenComputeFirewallLogConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	original := v.(map[string]interface{})
-	if len(original) == 0 {
-		return nil
-	}
-
-	v, ok := original["enable"]
-	if ok && !v.(bool) {
-		return nil
-	}
-
-	transformed := make(map[string]interface{})
-	transformed["metadata"] = original["metadata"]
-	return []interface{}{transformed}
-}
-
 func flattenComputeFirewallName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return "unknown"

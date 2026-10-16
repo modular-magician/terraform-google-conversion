@@ -321,10 +321,3 @@ func flattenComputeNodeGroupShareSettingsProjectMapProjectId(v interface{}, d *s
 	}
 	return v
 }
-
-func flattenComputeNodeGroupZone(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}

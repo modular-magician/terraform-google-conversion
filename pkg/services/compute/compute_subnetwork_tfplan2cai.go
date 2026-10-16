@@ -255,15 +255,6 @@ func expandComputeSubnetworkName(v interface{}, d tpgresource.TerraformResourceD
 	return v, nil
 }
 
-func expandComputeSubnetworkNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("networks", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for network: %s", err)
-	}
-	url := tgcresource.GetFullUrl(config, f.RelativeLink(), "https://www.googleapis.com/compute/v1/")
-	return url, nil
-}
-
 func expandComputeSubnetworkPurpose(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -329,47 +320,6 @@ func expandComputeSubnetworkPrivateIpGoogleAccess(v interface{}, d tpgresource.T
 
 func expandComputeSubnetworkPrivateIpv6GoogleAccess(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandComputeSubnetworkRegion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("regions", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for region: %s", err)
-	}
-	url := tgcresource.GetFullUrl(config, f.RelativeLink(), "https://www.googleapis.com/compute/v1/")
-	return url, nil
-}
-
-func expandComputeSubnetworkLogConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	transformed := make(map[string]interface{})
-	if len(l) == 0 || l[0] == nil {
-		purpose, ok := d.GetOkExists("purpose")
-
-		if ok && (purpose.(string) == "REGIONAL_MANAGED_PROXY" || purpose.(string) == "GLOBAL_MANAGED_PROXY" || purpose.(string) == "INTERNAL_HTTPS_LOAD_BALANCER") {
-			// Subnetworks for regional L7 ILB/XLB or cross-regional L7 ILB do not accept any values for logConfig
-			return nil, nil
-		}
-
-		// send enable = false to ensure logging is disabled if there is no config
-		transformed["enable"] = false
-		return transformed, nil
-	}
-
-	raw := l[0]
-	original := raw.(map[string]interface{})
-
-	// The log_config block is specified, so logging should be enabled
-	transformed["enable"] = true
-	transformed["aggregationInterval"] = original["aggregation_interval"]
-	transformed["flowSampling"] = original["flow_sampling"]
-	transformed["metadata"] = original["metadata"]
-	transformed["filterExpr"] = original["filter_expr"]
-
-	// make it JSON marshallable
-	transformed["metadataFields"] = original["metadata_fields"].(*schema.Set).List()
-
-	return transformed, nil
 }
 
 func expandComputeSubnetworkStackType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

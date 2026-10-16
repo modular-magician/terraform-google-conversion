@@ -1263,20 +1263,3 @@ func flattenDataplexDatascanDataDocumentationSpecCatalogPublishingEnabled(v inte
 func flattenDataplexDatascanDataDocumentationSpecSqlDialect(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
-
-func resourceDataplexDatascanTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	// Custom decoder for Dataplex Datascan to handle cases where CAIS data drops
-	// dataDocumentationSpec or dataQualitySpec for specific scan types.
-	// This prevents conversion failures due to missing required blocks in HCL.
-	if vType, ok := res["type"].(string); ok && vType == "DATA_DOCUMENTATION" {
-		if _, ok := res["dataDocumentationSpec"]; !ok {
-			res["dataDocumentationSpec"] = map[string]interface{}{}
-		}
-	}
-	if vType, ok := res["type"].(string); ok && vType == "DATA_QUALITY" {
-		if _, ok := res["dataQualitySpec"]; !ok {
-			res["dataQualitySpec"] = map[string]interface{}{}
-		}
-	}
-	return res, hclData, nil
-}

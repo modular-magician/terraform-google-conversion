@@ -153,26 +153,6 @@ func (c *PrivatecaCertificateTemplateCai2hclConverter) convertResourceData(asset
 	}, nil
 }
 
-func flattenPrivatecaCertificateTemplatePredefinedValues(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		v = make(map[string]interface{})
-	}
-	original := v.(map[string]interface{})
-	transformed := make(map[string]interface{})
-	transformed["additional_extensions"] =
-		flattenPrivatecaCertificateConfigX509ConfigAdditionalExtensions(original["additionalExtensions"], d, config)
-	transformed["policy_ids"] =
-		flattenPrivatecaCertificateConfigX509ConfigPolicyIds(original["policyIds"], d, config)
-	transformed["aia_ocsp_servers"] = flattenPrivatecaCertificateConfigX509ConfigAiaOcspServers(original["aiaOcspServers"], d, config)
-	transformed["ca_options"] =
-		flattenPrivatecaCertificateTemplateConfigX509ConfigCaOptions(original["caOptions"], d, config)
-	transformed["key_usage"] =
-		flattenPrivatecaCertificateConfigX509ConfigKeyUsage(original["keyUsage"], d, config)
-	transformed["name_constraints"] =
-		flattenPrivatecaCertificateConfigX509ConfigNameConstraints(original["nameConstraints"], d, config)
-	return []interface{}{transformed}
-}
-
 func flattenPrivatecaCertificateTemplateIdentityConstraints(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil

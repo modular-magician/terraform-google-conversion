@@ -156,57 +156,6 @@ func expandNetworkConnectivityMulticloudDataTransferConfigDescription(v interfac
 	return v, nil
 }
 
-func expandNetworkConnectivityMulticloudDataTransferConfigServices(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return make(map[string]interface{}), nil
-	}
-
-	l := v.(*schema.Set).List()
-
-	req := make(map[string]interface{})
-	for _, raw := range l {
-		if raw == nil {
-			continue
-		}
-
-		original, ok := raw.(map[string]interface{})
-		if !ok {
-			return nil, fmt.Errorf("expected a service item to be a map, got %T", raw)
-		}
-
-		serviceName, ok := original["service_name"].(string)
-		if !ok || serviceName == "" {
-			// Skip items without a valid service name
-			continue
-		}
-
-		var apiStates []interface{}
-		if states, ok := original["states"].([]interface{}); ok {
-			for _, stateRaw := range states {
-				state, ok := stateRaw.(map[string]interface{})
-				if !ok {
-					continue
-				}
-
-				apiState := make(map[string]interface{})
-				if s, ok := state["state"].(string); ok {
-					apiState["state"] = s
-				}
-				if et, ok := state["effective_time"].(string); ok {
-					apiState["effectiveTime"] = et
-				}
-				apiStates = append(apiStates, apiState)
-			}
-		}
-
-		req[serviceName] = map[string]interface{}{
-			"states": apiStates,
-		}
-	}
-
-	return req, nil
-}
-
 func expandNetworkConnectivityMulticloudDataTransferConfigEffectiveLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
 	if v == nil {
 		return map[string]string{}, nil

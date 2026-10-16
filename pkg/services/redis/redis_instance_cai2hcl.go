@@ -206,13 +206,6 @@ func flattenRedisInstanceLocationId(v interface{}, d *schema.ResourceData, confi
 	return v
 }
 
-func flattenRedisInstanceName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenRedisInstancePersistenceConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil

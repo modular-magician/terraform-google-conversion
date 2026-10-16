@@ -138,10 +138,6 @@ func GetEventarcChannelApiObject(d tpgresource.TerraformResourceData, config *tr
 	return obj, nil
 }
 
-func expandEventarcChannelName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return expandToRegionalLongForm("projects/%s/locations/%s/channels/%s", v, d, config)
-}
-
 func expandEventarcChannelThirdPartyProvider(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

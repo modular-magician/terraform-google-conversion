@@ -177,17 +177,8 @@ func GetVPCAccessConnectorApiObject(d tpgresource.TerraformResourceData, config 
 	return resourceVPCAccessConnectorEncoder(d, config, obj)
 }
 
-func resourceVPCAccessConnectorEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	delete(obj, "name")
-	return obj, nil
-}
-
 func expandVPCAccessConnectorName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandVPCAccessConnectorNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.GetResourceNameFromSelfLink(v.(string)), nil
 }
 
 func expandVPCAccessConnectorIpCidrRange(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

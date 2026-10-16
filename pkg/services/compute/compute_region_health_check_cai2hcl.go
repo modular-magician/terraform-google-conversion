@@ -767,23 +767,3 @@ func flattenComputeRegionHealthCheckGrpcTlsHealthCheckGrpcServiceName(v interfac
 	}
 	return v
 }
-
-func flattenComputeRegionHealthCheckLogConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	transformed := make(map[string]interface{})
-	if v == nil {
-		// Disabled by default, but API will not return object if value is false
-		transformed["enable"] = false
-		return []interface{}{transformed}
-	}
-
-	original := v.(map[string]interface{})
-	transformed["enable"] = original["enable"]
-	return []interface{}{transformed}
-}
-
-func flattenComputeRegionHealthCheckRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}

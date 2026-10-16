@@ -269,20 +269,6 @@ func flattenComputeRouterBgpAdvertisedIpRangesDescription(v interface{}, d *sche
 	return v
 }
 
-func flattenComputeRouterBgpKeepaliveInterval(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil || tpgresource.IsEmptyValue(reflect.ValueOf(v)) {
-		return 20
-	}
-	// Handles the string fixed64 format
-	if strVal, ok := v.(string); ok {
-		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
-			return intVal
-		} // let terraform core handle it if we can't convert the string to an int.
-	}
-
-	return v
-}
-
 func flattenComputeRouterBgpIdentifierRange(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
@@ -356,11 +342,4 @@ func flattenComputeRouterParams(v interface{}, d *schema.ResourceData, config *t
 
 func flattenComputeRouterParamsResourceManagerTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func flattenComputeRouterRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
 }

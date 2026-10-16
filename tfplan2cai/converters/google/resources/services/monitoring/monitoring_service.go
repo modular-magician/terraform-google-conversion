@@ -138,19 +138,6 @@ func GetMonitoringServiceApiObject(d tpgresource.TerraformResourceData, config *
 	return resourceMonitoringServiceEncoder(d, config, obj)
 }
 
-func resourceMonitoringServiceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// Currently only CUSTOM service types can be created, but the
-	// custom identifier block does not actually have fields right now.
-	// Set to empty to indicate manually-created service type is CUSTOM.
-	if _, ok := obj["custom"]; !ok {
-		obj["custom"] = map[string]interface{}{}
-	}
-	// Name/Service ID is a query parameter only
-	delete(obj, "name")
-
-	return obj, nil
-}
-
 func expandMonitoringServiceDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

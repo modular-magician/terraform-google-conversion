@@ -194,20 +194,6 @@ func flattenDataprocBatchRuntimeConfigContainerImage(v interface{}, d *schema.Re
 	return v
 }
 
-func flattenDataprocBatchRuntimeConfigProperties(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if properties, ok := v.(map[string]interface{}); ok {
-		propertiesCopy := make(map[string]interface{})
-		for k, v := range properties {
-			// Remove the prefix "spark:" from the properties. Otherwise, terraform apply will fail with the error from API.
-			modifiedK := strings.TrimPrefix(k, "spark:")
-			propertiesCopy[modifiedK] = v
-		}
-		return propertiesCopy
-	}
-
-	return v
-}
-
 func flattenDataprocBatchRuntimeConfigAutotuningConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil

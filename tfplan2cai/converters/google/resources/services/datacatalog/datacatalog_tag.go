@@ -132,26 +132,6 @@ func GetDataCatalogTagApiObject(d tpgresource.TerraformResourceData, config *tra
 	return resourceDataCatalogTagEncoder(d, config, obj)
 }
 
-func resourceDataCatalogTagEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	if obj["fields"] != nil {
-		// IsEmptyValue() does not work for a boolean as it shows
-		// false when it is 'empty'. Filter boolValue here based on
-		// the rule api does not take more than 1 'value'
-		fields := obj["fields"].(map[string]interface{})
-		for _, elements := range fields {
-			values := elements.(map[string]interface{})
-			if len(values) > 1 {
-				for val := range values {
-					if val == "boolValue" {
-						delete(values, "boolValue")
-					}
-				}
-			}
-		}
-	}
-	return obj, nil
-}
-
 func expandDataCatalogTagTemplate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -245,17 +225,6 @@ func expandDataCatalogTagFieldsBoolValue(v interface{}, d tpgresource.TerraformR
 
 func expandDataCatalogTagFieldsTimestampValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandDataCatalogTagFieldsEnumValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	// we flattened the original["enum_value"]["display_name"] object to be just original["enum_value"] so here,
-	// v is the value we want from the config
-	transformed := make(map[string]interface{})
-	if val := reflect.ValueOf(v); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["displayName"] = v
-	}
-
-	return transformed, nil
 }
 
 func expandDataCatalogTagColumn(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

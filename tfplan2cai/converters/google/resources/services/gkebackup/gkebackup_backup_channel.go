@@ -138,10 +138,6 @@ func GetGKEBackupBackupChannelApiObject(d tpgresource.TerraformResourceData, con
 	return obj, nil
 }
 
-func expandGKEBackupBackupChannelName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{location}}/backupChannels/{{name}}")
-}
-
 func expandGKEBackupBackupChannelDestinationProject(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

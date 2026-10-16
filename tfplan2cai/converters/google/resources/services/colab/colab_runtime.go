@@ -157,16 +157,6 @@ func GetColabRuntimeApiObject(d tpgresource.TerraformResourceData, config *trans
 	return resourceColabRuntimeEncoder(d, config, obj)
 }
 
-func resourceColabRuntimeEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	newObj := make(map[string]interface{})
-	newObj["notebookRuntimeTemplate"], _ = d.GetOk("notebook_runtime_template_ref.0.notebook_runtime_template")
-
-	delete(obj, "notebookRuntimeTemplateRef")
-
-	newObj["notebookRuntime"] = obj
-	return newObj, nil
-}
-
 func expandColabRuntimeNotebookRuntimeTemplateRef(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil

@@ -312,14 +312,6 @@ func expandBigQueryDatasetAccessDomain(v interface{}, d tpgresource.TerraformRes
 	return v, nil
 }
 
-func expandBigQueryDatasetAccessGroupByEmail(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-
-	return strings.ToLower(v.(string)), nil
-}
-
 func expandBigQueryDatasetAccessRole(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -330,14 +322,6 @@ func expandBigQueryDatasetAccessSpecialGroup(v interface{}, d tpgresource.Terraf
 
 func expandBigQueryDatasetAccessIamMember(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandBigQueryDatasetAccessUserByEmail(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-
-	return strings.ToLower(v.(string)), nil
 }
 
 func expandBigQueryDatasetAccessView(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -665,16 +649,6 @@ func expandBigQueryDatasetDefaultEncryptionConfigurationKmsKeyName(v interface{}
 }
 
 func expandBigQueryDatasetIsCaseInsensitive(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandBigQueryDatasetDefaultCollation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if rd, ok := d.(*schema.ResourceData); ok {
-		conf := rd.GetRawConfig()
-		if !conf.IsNull() && conf.GetAttr("default_collation").IsKnown() && !conf.GetAttr("default_collation").IsNull() {
-			return conf.GetAttr("default_collation").AsString(), nil
-		}
-	}
 	return v, nil
 }
 

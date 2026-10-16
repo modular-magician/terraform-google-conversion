@@ -252,32 +252,12 @@ func GetRedisInstanceCaiObject(d tpgresource.TerraformResourceData, config *tran
 	return obj, nil
 }
 
-func resourceRedisInstanceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	config := meta.(*transport_tpg.Config)
-	region, err := tpgresource.GetRegionFromSchema("region", "location_id", d, config)
-	if err != nil {
-		return nil, err
-	}
-	if err := d.Set("region", region); err != nil {
-		return nil, fmt.Errorf("Error setting region: %s", err)
-	}
-	return obj, nil
-}
-
 func expandRedisInstanceAlternativeLocationId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
 func expandRedisInstanceAuthEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandRedisInstanceAuthorizedNetwork(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	fv, err := tpgresource.ParseNetworkFieldValue(v.(string), d, config)
-	if err != nil {
-		return nil, err
-	}
-	return fv.RelativeLink(), nil
 }
 
 func expandRedisInstanceConnectMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -301,10 +281,6 @@ func expandRedisInstanceRedisConfigs(v interface{}, d tpgresource.TerraformResou
 
 func expandRedisInstanceLocationId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandRedisInstanceName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{region}}/instances/{{name}}")
 }
 
 func expandRedisInstancePersistenceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

@@ -261,13 +261,6 @@ func GetDatastreamStreamApiObject(d tpgresource.TerraformResourceData, config *t
 	return resourceDatastreamStreamEncoder(d, config, obj)
 }
 
-func resourceDatastreamStreamEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	if d.HasChange("desired_state") {
-		obj["state"] = d.Get("desired_state")
-	}
-	return obj, nil
-}
-
 func expandDatastreamStreamDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -3492,19 +3485,6 @@ func expandDatastreamStreamDestinationConfigBigqueryDestinationConfigSingleTarge
 	}
 
 	return transformed, nil
-}
-
-func expandDatastreamStreamDestinationConfigBigqueryDestinationConfigSingleTargetDatasetDatasetId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	s := v.(string)
-	re := regexp.MustCompile(`projects/(.+)/datasets/([^\.\?\#]+)`)
-	paths := re.FindStringSubmatch(s)
-	if len(paths) == 3 {
-		project := paths[1]
-		datasetId := paths[2]
-		return fmt.Sprintf("%s:%s", project, datasetId), nil
-	}
-
-	return s, nil
 }
 
 func expandDatastreamStreamDestinationConfigBigqueryDestinationConfigSourceHierarchyDatasets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

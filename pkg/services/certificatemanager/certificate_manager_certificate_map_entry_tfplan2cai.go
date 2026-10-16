@@ -181,7 +181,3 @@ func expandCertificateManagerCertificateMapEntryEffectiveLabels(v interface{}, d
 	}
 	return m, nil
 }
-
-func expandCertificateManagerCertificateMapEntryName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.GetResourceNameFromSelfLink(v.(string)), nil
-}

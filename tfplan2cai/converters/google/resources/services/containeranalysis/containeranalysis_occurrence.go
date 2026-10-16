@@ -138,33 +138,6 @@ func GetContainerAnalysisOccurrenceApiObject(d tpgresource.TerraformResourceData
 	return resourceContainerAnalysisOccurrenceEncoder(d, config, obj)
 }
 
-func resourceContainerAnalysisOccurrenceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// Resource object was flattened in GA API
-	if resourceuri, ok := obj["resourceUri"]; ok {
-		obj["resource"] = map[string]interface{}{
-			"uri": resourceuri,
-		}
-		delete(obj, "resourceUri")
-	}
-
-	// Beta `attestation.genericSignedAttestation` was flattened to just
-	// `attestation` (no contentType) in GA
-	if v, ok := obj["attestation"]; ok && v != nil {
-		gaAtt := v.(map[string]interface{})
-		obj["attestation"] = map[string]interface{}{
-			"attestation": map[string]interface{}{
-				"genericSignedAttestation": map[string]interface{}{
-					"contentType":       "SIMPLE_SIGNING_JSON",
-					"serializedPayload": gaAtt["serializedPayload"],
-					"signatures":        gaAtt["signatures"],
-				},
-			},
-		}
-	}
-
-	return obj, nil
-}
-
 func expandContainerAnalysisOccurrenceResourceUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

@@ -205,24 +205,6 @@ func GetMonitoringUptimeCheckConfigApiObject(d tpgresource.TerraformResourceData
 	return resourceMonitoringUptimeCheckConfigEncoder(d, config, obj)
 }
 
-func resourceMonitoringUptimeCheckConfigEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// remove passwordWoVersion from the request body
-	if v, ok := obj["httpCheck"]; ok {
-		httpCheck := v.(map[string]interface{})
-		if authInfo, ok := httpCheck["authInfo"].(map[string]interface{}); ok {
-			delete(authInfo, "passwordWoVersion")
-			if len(authInfo) > 0 {
-				httpCheck["authInfo"] = authInfo
-			} else {
-				delete(httpCheck, "authInfo")
-			}
-			obj["httpCheck"] = httpCheck
-		}
-	}
-
-	return obj, nil
-}
-
 func expandMonitoringUptimeCheckConfigDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -721,10 +703,6 @@ func expandMonitoringUptimeCheckConfigResourceGroup(v interface{}, d tpgresource
 
 func expandMonitoringUptimeCheckConfigResourceGroupResourceType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandMonitoringUptimeCheckConfigResourceGroupGroupId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.GetResourceNameFromSelfLink(v.(string)), nil
 }
 
 func expandMonitoringUptimeCheckConfigMonitoredResource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

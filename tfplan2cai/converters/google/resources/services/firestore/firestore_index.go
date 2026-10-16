@@ -199,16 +199,6 @@ func GetFirestoreIndexApiObject(d tpgresource.TerraformResourceData, config *tra
 	return resourceFirestoreIndexEncoder(d, config, obj)
 }
 
-func resourceFirestoreIndexEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// We've added project / database / collection as split fields of the name, but
-	// the API doesn't expect them.  Make sure we remove them from any requests.
-
-	delete(obj, "project")
-	delete(obj, "database")
-	delete(obj, "collection")
-	return obj, nil
-}
-
 func expandFirestoreIndexDatabase(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

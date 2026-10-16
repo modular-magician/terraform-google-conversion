@@ -126,12 +126,6 @@ func GetApigeeNatAddressApiObject(d tpgresource.TerraformResourceData, config *t
 	return resourceApigeeNatAddressEncoder(d, config, obj)
 }
 
-func resourceApigeeNatAddressEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// cannot include activate prop in the body
-	delete(obj, "activate")
-	return obj, nil
-}
-
 func expandApigeeNatAddressName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

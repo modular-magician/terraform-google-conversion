@@ -150,15 +150,6 @@ func GetSpannerInstancePartitionApiObject(d tpgresource.TerraformResourceData, c
 	return resourceSpannerInstancePartitionEncoder(d, config, obj)
 }
 
-func resourceSpannerInstancePartitionEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// Wrap the request body in an instancePartition field
-	wrapped := make(map[string]interface{})
-	wrapped["instancePartitionId"] = obj["name"]
-	wrapped["instancePartition"] = obj
-	delete(obj, "name")
-	return wrapped, nil
-}
-
 func expandSpannerInstancePartitionName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -309,18 +300,4 @@ func expandSpannerInstancePartitionAutoscalingConfigAutoscalingTargetsStorageUti
 
 func expandSpannerInstancePartitionAutoscalingConfigAutoscalingTargetsTotalCpuUtilizationPercent(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandSpannerInstancePartitionConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	r := regexp.MustCompile("projects/(.+)/instanceConfigs/(.+)")
-	if r.MatchString(v.(string)) {
-		return v.(string), nil
-	}
-
-	project, err := tpgresource.GetProject(d, config)
-	if err != nil {
-		return nil, err
-	}
-
-	return fmt.Sprintf("projects/%s/instanceConfigs/%s", project, v.(string)), nil
 }

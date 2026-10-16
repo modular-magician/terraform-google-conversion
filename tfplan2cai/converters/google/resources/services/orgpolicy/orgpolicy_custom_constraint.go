@@ -156,10 +156,6 @@ func GetOrgPolicyCustomConstraintApiObject(d tpgresource.TerraformResourceData, 
 	return obj, nil
 }
 
-func expandOrgPolicyCustomConstraintName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "{{parent}}/customConstraints/{{name}}")
-}
-
 func expandOrgPolicyCustomConstraintDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

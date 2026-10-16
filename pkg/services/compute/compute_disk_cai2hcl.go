@@ -427,13 +427,6 @@ func flattenComputeDiskSourceDisk(v interface{}, d *schema.ResourceData, config 
 	return v
 }
 
-func flattenComputeDiskType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenComputeDiskImage(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -572,22 +565,8 @@ func flattenComputeDiskLicenses(v interface{}, d *schema.ResourceData, config *t
 	return tpgresource.ConvertAndMapStringArr(v.([]interface{}), tpgresource.ConvertSelfLinkToV1)
 }
 
-func flattenComputeDiskStoragePool(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenComputeDiskAccessMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func flattenComputeDiskZone(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
 }
 
 func flattenComputeDiskSnapshot(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -599,69 +578,4 @@ func flattenComputeDiskSnapshot(v interface{}, d *schema.ResourceData, config *t
 		return v
 	}
 	return relative
-}
-
-func resourceComputeDiskDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
-	if v, ok := res["diskEncryptionKey"]; ok {
-		original := v.(map[string]interface{})
-		transformed := make(map[string]interface{})
-		// The raw key won't be returned, so we need to use the original.
-		transformed["rawKey"] = d.Get("disk_encryption_key.0.raw_key")
-		transformed["rsaEncryptedKey"] = d.Get("disk_encryption_key.0.rsa_encrypted_key")
-		transformed["sha256"] = original["sha256"]
-
-		if kmsKeyName, ok := original["kmsKeyName"]; ok {
-			// The response for crypto keys often includes the version of the key which needs to be removed
-			// format: projects/<project>/locations/<region>/keyRings/<keyring>/cryptoKeys/<key>/cryptoKeyVersions/1
-			transformed["kmsKeyName"] = strings.Split(kmsKeyName.(string), "/cryptoKeyVersions")[0]
-		}
-
-		if kmsKeyServiceAccount, ok := original["kmsKeyServiceAccount"]; ok {
-			transformed["kmsKeyServiceAccount"] = kmsKeyServiceAccount
-		}
-
-		res["diskEncryptionKey"] = transformed
-	}
-
-	if v, ok := res["sourceImageEncryptionKey"]; ok {
-		original := v.(map[string]interface{})
-		transformed := make(map[string]interface{})
-		// The raw key won't be returned, so we need to use the original.
-		transformed["rawKey"] = d.Get("source_image_encryption_key.0.raw_key")
-		transformed["sha256"] = original["sha256"]
-
-		if kmsKeyName, ok := original["kmsKeyName"]; ok {
-			// The response for crypto keys often includes the version of the key which needs to be removed
-			// format: projects/<project>/locations/<region>/keyRings/<keyring>/cryptoKeys/<key>/cryptoKeyVersions/1
-			transformed["kmsKeyName"] = strings.Split(kmsKeyName.(string), "/cryptoKeyVersions")[0]
-		}
-
-		if kmsKeyServiceAccount, ok := original["kmsKeyServiceAccount"]; ok {
-			transformed["kmsKeyServiceAccount"] = kmsKeyServiceAccount
-		}
-
-		res["sourceImageEncryptionKey"] = transformed
-	}
-
-	if v, ok := res["sourceSnapshotEncryptionKey"]; ok {
-		original := v.(map[string]interface{})
-		transformed := make(map[string]interface{})
-		// The raw key won't be returned, so we need to use the original.
-		transformed["rawKey"] = d.Get("source_snapshot_encryption_key.0.raw_key")
-		transformed["sha256"] = original["sha256"]
-
-		if kmsKeyName, ok := original["kmsKeyName"]; ok {
-			// The response for crypto keys often includes the version of the key which needs to be removed
-			// format: projects/<project>/locations/<region>/keyRings/<keyring>/cryptoKeys/<key>/cryptoKeyVersions/1
-			transformed["kmsKeyName"] = strings.Split(kmsKeyName.(string), "/cryptoKeyVersions")[0]
-		}
-
-		if kmsKeyServiceAccount, ok := original["kmsKeyServiceAccount"]; ok {
-			transformed["kmsKeyServiceAccount"] = kmsKeyServiceAccount
-		}
-
-		res["sourceSnapshotEncryptionKey"] = transformed
-	}
-
-	return res, nil
 }

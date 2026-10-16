@@ -243,42 +243,6 @@ func GetBigqueryDataTransferConfigApiObject(d tpgresource.TerraformResourceData,
 	return resourceBigqueryDataTransferConfigEncoder(d, config, obj)
 }
 
-func resourceBigqueryDataTransferConfigEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	paramMap, ok := obj["params"]
-	if !ok {
-		paramMap = make(map[string]string)
-	}
-
-	params := map[string]interface{}{}
-
-	for k, v := range paramMap.(map[string]string) {
-		var value interface{}
-		if err := json.Unmarshal([]byte(v), &value); err != nil {
-			// If the value is a string, don't convert it to anything.
-			params[k] = v
-		} else {
-			switch value.(type) {
-			case float64:
-				// If the value is a number, keep the string representation.
-				params[k] = v
-			default:
-				// If the value is another JSON type, keep the unmarshalled type as is.
-				params[k] = value
-			}
-		}
-	}
-
-	for _, sp := range sensitiveParams {
-		if auth, _ := d.GetOkExists("sensitive_params.0." + sp); auth != "" {
-			params[sp] = auth.(string)
-		}
-	}
-
-	obj["params"] = params
-
-	return obj, nil
-}
-
 func expandBigqueryDataTransferConfigDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

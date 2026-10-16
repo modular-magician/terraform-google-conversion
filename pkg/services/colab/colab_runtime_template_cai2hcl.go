@@ -160,13 +160,6 @@ func (c *ColabRuntimeTemplateCai2hclConverter) convertResourceData(asset caiasse
 	}, nil
 }
 
-func flattenColabRuntimeTemplateName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenColabRuntimeTemplateDisplayName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return "unknown"

@@ -138,18 +138,6 @@ func GetSecurityCenterManagementOrganizationEventThreatDetectionCustomModuleApiO
 	return obj, nil
 }
 
-func expandSecurityCenterManagementOrganizationEventThreatDetectionCustomModuleConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	b := []byte(v.(string))
-	if len(b) == 0 {
-		return nil, nil
-	}
-	m := make(map[string]interface{})
-	if err := json.Unmarshal(b, &m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func expandSecurityCenterManagementOrganizationEventThreatDetectionCustomModuleEnablementState(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

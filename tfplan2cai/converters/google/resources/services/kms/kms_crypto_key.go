@@ -162,29 +162,6 @@ func GetKMSCryptoKeyApiObject(d tpgresource.TerraformResourceData, config *trans
 	return resourceKMSCryptoKeyEncoder(d, config, obj)
 }
 
-func resourceKMSCryptoKeyEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// if rotationPeriod is set, nextRotationTime must also be set.
-	if d.Get("rotation_period") != "" {
-		rotationPeriod := d.Get("rotation_period").(string)
-		nextRotation, err := kmsCryptoKeyNextRotation(time.Now(), rotationPeriod)
-
-		if err != nil {
-			return nil, fmt.Errorf("Error setting CryptoKey rotation period: %s", err.Error())
-		}
-
-		obj["nextRotationTime"] = nextRotation
-	}
-
-	// set to false if it is not true explicitly
-	if !(d.Get("skip_initial_version_creation").(bool)) {
-		if err := d.Set("skip_initial_version_creation", false); err != nil {
-			return nil, fmt.Errorf("Error setting skip_initial_version_creation: %s", err)
-		}
-	}
-
-	return obj, nil
-}
-
 func expandKMSCryptoKeyPurpose(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

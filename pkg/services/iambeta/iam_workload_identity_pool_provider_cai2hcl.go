@@ -389,28 +389,3 @@ func flattenIAMBetaWorkloadIdentityPoolProviderX509TrustStoreIntermediateCasPemC
 	}
 	return v
 }
-
-func resourceIAMBetaWorkloadIdentityPoolProviderTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	// These fields are missing in CAI assets, but requried in Terraform
-	if x509, ok := res["x509"].(map[string]interface{}); ok {
-		if trustStore, ok := x509["trustStore"].(map[string]interface{}); ok {
-			if trustAnchors, ok := trustStore["trustAnchors"].([]interface{}); ok {
-				// trust_anchors is missing in CAI assets, but requried in Terraform
-				for _, trustAnchorRaw := range trustAnchors {
-					if trustAnchor, ok := trustAnchorRaw.(map[string]interface{}); ok {
-						trustAnchor["pemCertificate"] = "unknown"
-					}
-				}
-			}
-		}
-	}
-
-	return res, hclData, nil
-}
-func resourceIAMBetaWorkloadIdentityPoolProviderDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
-	if v := res["state"]; v == "DELETED" {
-		return nil, nil
-	}
-
-	return res, nil
-}

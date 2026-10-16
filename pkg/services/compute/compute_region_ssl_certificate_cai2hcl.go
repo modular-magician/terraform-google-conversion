@@ -187,10 +187,3 @@ func flattenComputeRegionSslCertificatePrivateKey(v interface{}, d *schema.Resou
 	}
 	return v
 }
-
-func flattenComputeRegionSslCertificateRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}

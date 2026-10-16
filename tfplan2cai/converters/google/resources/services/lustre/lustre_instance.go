@@ -209,14 +209,6 @@ func GetLustreInstanceApiObject(d tpgresource.TerraformResourceData, config *tra
 	return resourceLustreInstanceEncoder(d, config, obj)
 }
 
-func resourceLustreInstanceEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// The API rejects target_version at create, and Terraform sends every
-	// configured property on create, so drop it here. This also covers the create
-	// half of a recreate.
-	delete(obj, "targetVersion")
-	return obj, nil
-}
-
 func expandLustreInstanceAccessRulesOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil

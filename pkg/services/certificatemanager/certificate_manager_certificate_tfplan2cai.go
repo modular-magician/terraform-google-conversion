@@ -149,16 +149,6 @@ func GetCertificateManagerCertificateCaiObject(d tpgresource.TerraformResourceDa
 	return resourceCertificateManagerCertificateTgcEncoder(d, config, obj)
 }
 
-func resourceCertificateManagerCertificateTgcEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	if _, ok := d.GetOk("self_managed"); ok {
-		// self_managed.pem_certificate goes in root level of cai asset data.
-		selfManagedPemCertificateProp := d.Get("self_managed.0.pem_certificate")
-		obj["pemCertificate"] = selfManagedPemCertificateProp.(string)
-	}
-
-	return obj, nil
-}
-
 func expandCertificateManagerCertificateDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

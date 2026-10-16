@@ -165,13 +165,6 @@ func (c *PubsubSubscriptionCai2hclConverter) convertResourceData(asset caiasset.
 	}, nil
 }
 
-func flattenPubsubSubscriptionName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenPubsubSubscriptionTopic(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return v
@@ -576,23 +569,6 @@ func flattenPubsubSubscriptionPushConfigPushEndpoint(v interface{}, d *schema.Re
 
 func flattenPubsubSubscriptionPushConfigAttributes(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func flattenPubsubSubscriptionPushConfigNoWrapper(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-
-	original := v.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	if original["writeMetadata"] == nil {
-		transformed["write_metadata"] = false
-	} else {
-		transformed["write_metadata"] = original["writeMetadata"]
-	}
-
-	return []interface{}{transformed}
 }
 
 func flattenPubsubSubscriptionAckDeadlineSeconds(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

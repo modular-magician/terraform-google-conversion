@@ -210,14 +210,6 @@ func expandComputeStoragePoolLabelFingerprint(v interface{}, d tpgresource.Terra
 	return v, nil
 }
 
-func expandComputeStoragePoolStoragePoolType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseZonalFieldValue("storagePoolTypes", v.(string), "project", "zone", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for storage_pool_type: %s", err)
-	}
-	return f.RelativeLink(), nil
-}
-
 func expandComputeStoragePoolCapacityProvisioningType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -268,12 +260,4 @@ func expandComputeStoragePoolEffectiveLabels(v interface{}, d tpgresource.Terraf
 		m[k] = val.(string)
 	}
 	return m, nil
-}
-
-func expandComputeStoragePoolZone(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("zones", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for zone: %s", err)
-	}
-	return f.RelativeLink(), nil
 }

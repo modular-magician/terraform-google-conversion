@@ -156,12 +156,6 @@ func GetAlloydbBackupApiObject(d tpgresource.TerraformResourceData, config *tran
 	return resourceAlloydbBackupEncoder(d, config, obj)
 }
 
-func resourceAlloydbBackupEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// The only other available type is AUTOMATED which cannot be set manually
-	obj["type"] = "ON_DEMAND"
-	return obj, nil
-}
-
 func expandAlloydbBackupDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

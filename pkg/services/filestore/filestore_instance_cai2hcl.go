@@ -181,14 +181,6 @@ func flattenFilestoreInstanceTier(v interface{}, d *schema.ResourceData, config 
 	return v
 }
 
-func flattenFilestoreInstanceProtocol(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil || tpgresource.IsEmptyValue(reflect.ValueOf(v)) {
-		return "NFS_V3"
-	}
-
-	return v
-}
-
 func flattenFilestoreInstanceLabels(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return tgcresource.RemoveTerraformAttributionLabel(v)
 }
@@ -386,14 +378,6 @@ func flattenFilestoreInstanceNetworksModes(v interface{}, d *schema.ResourceData
 }
 
 func flattenFilestoreInstanceNetworksReservedIpRange(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
-}
-
-func flattenFilestoreInstanceNetworksConnectMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil || tpgresource.IsEmptyValue(reflect.ValueOf(v)) {
-		return "DIRECT_PEERING"
-	}
-
 	return v
 }
 

@@ -271,13 +271,6 @@ func flattenComputeBackendServiceBackendDescription(v interface{}, d *schema.Res
 	return v
 }
 
-func flattenComputeBackendServiceBackendGroup(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.ConvertSelfLinkToV1(v.(string))
-}
-
 func flattenComputeBackendServiceBackendMaxConnections(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
@@ -746,27 +739,6 @@ func flattenComputeBackendServiceCdnPolicyCacheKeyPolicyIncludeNamedCookies(v in
 	return v
 }
 
-func flattenComputeBackendServiceCdnPolicySignedUrlCacheMaxAgeSec(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return 3600
-	}
-
-	// Handles the string fixed64 format
-	if strVal, ok := v.(string); ok {
-		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
-			return intVal
-		}
-	}
-
-	// number values are represented as float64
-	if floatVal, ok := v.(float64); ok {
-		intVal := int(floatVal)
-		return intVal
-	}
-
-	return v // let terraform core handle it otherwise
-}
-
 func flattenComputeBackendServiceCdnPolicyDefaultTtl(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
@@ -984,13 +956,6 @@ func flattenComputeBackendServiceDescription(v interface{}, d *schema.ResourceDa
 
 func flattenComputeBackendServiceEnableCDN(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func flattenComputeBackendServiceHealthChecks(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.ConvertAndMapStringArr(v.([]interface{}), tpgresource.ConvertSelfLinkToV1)
 }
 
 func flattenComputeBackendServiceIap(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -1950,41 +1915,4 @@ func flattenComputeBackendServiceParams(v interface{}, d *schema.ResourceData, c
 
 func flattenComputeBackendServiceParamsResourceManagerTags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func resourceComputeBackendServiceTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	if v, ok := res["backends"]; ok {
-		backends := v.([]interface{})
-		for _, vBackend := range backends {
-			backend := vBackend.(map[string]interface{})
-			if vCms, ok := backend["customMetrics"]; ok {
-				cms := vCms.([]interface{})
-				for _, vCm := range cms {
-					cm := vCm.(map[string]interface{})
-					if vMu, ok := cm["maxUtilization"]; ok {
-						mu := vMu.(float64)
-						cm["maxUtilization"] = fmt.Sprintf("%.1f", mu)
-					}
-				}
-			}
-		}
-	}
-
-	return res, hclData, nil
-}
-func resourceComputeBackendServiceDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
-	// Requests with consistentHash will error for specific values of
-	// localityLbPolicy. However, the API will not remove it if the backend
-	// service is updated to from supporting to non-supporting localityLbPolicy
-	// (e.g. RING_HASH to RANDOM), which causes an error on subsequent update.
-	// In order to prevent errors, we ignore any consistentHash returned
-	// from the API when the localityLbPolicy doesn't support it.
-	if v, ok := res["localityLbPolicy"]; ok {
-		lbPolicy := v.(string)
-		if lbPolicy != "MAGLEV" && lbPolicy != "RING_HASH" {
-			delete(res, "consistentHash")
-		}
-	}
-
-	return res, nil
 }

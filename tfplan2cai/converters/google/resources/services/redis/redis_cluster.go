@@ -240,18 +240,6 @@ func GetRedisClusterApiObject(d tpgresource.TerraformResourceData, config *trans
 	return resourceRedisClusterEncoder(d, config, obj)
 }
 
-func resourceRedisClusterEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-
-	// if the automated_backup_config is not defined, automatedBackupMode needs to be passed and set to DISABLED in the expand
-	if obj["automatedBackupConfig"] == nil {
-		config := meta.(*transport_tpg.Config)
-		automatedBackupConfigProp, _ := expandRedisClusterAutomatedBackupConfig(d.Get("automated_backup_config"), d, config)
-		obj["automatedBackupConfig"] = automatedBackupConfigProp
-	}
-
-	return obj, nil
-}
-
 func expandRedisClusterGcsSource(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -302,85 +290,6 @@ func expandRedisClusterManagedBackupSource(v interface{}, d tpgresource.Terrafor
 }
 
 func expandRedisClusterManagedBackupSourceBackup(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandRedisClusterAutomatedBackupConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	// The automated_backup_config block is not specified, so automatedBackupMode should be DISABLED
-	transformed := make(map[string]interface{})
-	if len(d.Get("automated_backup_config").([]interface{})) < 1 {
-		transformed["automatedBackupMode"] = "DISABLED"
-		return transformed, nil
-	}
-
-	// The automated_backup_config block is specified, so automatedBackupMode should be ENALBED
-	transformed["automatedBackupMode"] = "ENABLED"
-	transformedFixedFrequencySchedule, err := expandRedisClusterAutomatedBackupConfigFixedFrequencySchedule(original["fixed_frequency_schedule"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedFixedFrequencySchedule); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["fixedFrequencySchedule"] = transformedFixedFrequencySchedule
-	}
-
-	transformedRetention, err := expandRedisClusterAutomatedBackupConfigRetention(original["retention"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedRetention); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["retention"] = transformedRetention
-	}
-
-	return transformed, nil
-}
-
-func expandRedisClusterAutomatedBackupConfigFixedFrequencySchedule(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedStartTime, err := expandRedisClusterAutomatedBackupConfigFixedFrequencyScheduleStartTime(original["start_time"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedStartTime); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["startTime"] = transformedStartTime
-	}
-
-	return transformed, nil
-}
-
-func expandRedisClusterAutomatedBackupConfigFixedFrequencyScheduleStartTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	transformed := make(map[string]interface{})
-
-	transformedHours, err := expandRedisClusterAutomatedBackupConfigFixedFrequencyScheduleStartTimeHours(original["hours"], d, config)
-	if err != nil {
-		return nil, err
-	} else if val := reflect.ValueOf(transformedHours); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["hours"] = transformedHours
-	}
-
-	return transformed, nil
-}
-
-func expandRedisClusterAutomatedBackupConfigFixedFrequencyScheduleStartTimeHours(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return v, nil
-}
-
-func expandRedisClusterAutomatedBackupConfigRetention(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

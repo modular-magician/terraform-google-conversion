@@ -239,10 +239,6 @@ func GetDataFusionInstanceCaiObject(d tpgresource.TerraformResourceData, config 
 	return obj, nil
 }
 
-func expandDataFusionInstanceName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{region}}/instances/{{name}}")
-}
-
 func expandDataFusionInstanceDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

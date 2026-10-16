@@ -144,20 +144,8 @@ func GetBigtableAppProfileApiObject(d tpgresource.TerraformResourceData, config 
 	return resourceBigtableAppProfileEncoder(d, config, obj)
 }
 
-func resourceBigtableAppProfileEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// Instance is a URL parameter only, so replace self-link/path with resource name only.
-	if err := d.Set("instance", tpgresource.GetResourceNameFromSelfLink(d.Get("instance").(string))); err != nil {
-		return nil, fmt.Errorf("Error setting instance: %s", err)
-	}
-	return obj, nil
-}
-
 func expandBigtableAppProfileDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandBigtableAppProfileMultiClusterRoutingUseAny(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return internalExpandBigtableAppProfileMultiClusterRoutingUseAny(v, d, config)
 }
 
 func expandBigtableAppProfileSingleClusterRouting(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

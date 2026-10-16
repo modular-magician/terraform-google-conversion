@@ -186,15 +186,6 @@ func expandGKEHubMembershipEndpointGkeCluster(v interface{}, d tpgresource.Terra
 	return transformed, nil
 }
 
-func expandGKEHubMembershipEndpointGkeClusterResourceLink(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if strings.HasPrefix(v.(string), "//") {
-		return v, nil
-	} else {
-		v = "//container.googleapis.com/" + v.(string)
-		return v, nil
-	}
-}
-
 func expandGKEHubMembershipAuthority(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil

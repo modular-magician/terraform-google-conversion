@@ -151,13 +151,6 @@ func (c *NetworkConnectivityGroupCai2hclConverter) convertResourceData(asset cai
 	}, nil
 }
 
-func flattenNetworkConnectivityGroupName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenNetworkConnectivityGroupLabels(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return tgcresource.RemoveTerraformAttributionLabel(v)
 }

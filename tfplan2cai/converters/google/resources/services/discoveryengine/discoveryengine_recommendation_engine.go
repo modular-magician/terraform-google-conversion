@@ -144,12 +144,6 @@ func GetDiscoveryEngineRecommendationEngineApiObject(d tpgresource.TerraformReso
 	return resourceDiscoveryEngineRecommendationEngineEncoder(d, config, obj)
 }
 
-func resourceDiscoveryEngineRecommendationEngineEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// hard code solutionType to "SOLUTION_TYPE_RECOMMENDATION" for recommendation engine resource
-	obj["solutionType"] = "SOLUTION_TYPE_RECOMMENDATION"
-	return obj, nil
-}
-
 func expandDiscoveryEngineRecommendationEngineDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

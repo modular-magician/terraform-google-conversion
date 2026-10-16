@@ -186,28 +186,6 @@ func GetWorkflowsWorkflowCaiObject(d tpgresource.TerraformResourceData, config *
 	return obj, nil
 }
 
-func resourceWorkflowsWorkflowEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	var ResName string
-	if v, ok := d.GetOk("name"); ok {
-		ResName = v.(string)
-	} else if v, ok := d.GetOk("name_prefix"); ok {
-		prefix := v.(string)
-		if len(prefix) > 37 {
-			ResName = tpgresource.ReducedPrefixedUniqueId(prefix)
-		} else {
-			ResName = id.PrefixedUniqueId(prefix)
-		}
-	} else {
-		ResName = id.UniqueId()
-	}
-
-	if err := d.Set("name", ResName); err != nil {
-		return nil, fmt.Errorf("Error setting name: %s", err)
-	}
-
-	return obj, nil
-}
-
 func expandWorkflowsWorkflowName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

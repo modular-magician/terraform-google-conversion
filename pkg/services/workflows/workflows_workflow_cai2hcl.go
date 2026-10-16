@@ -157,13 +157,6 @@ func (c *WorkflowsWorkflowCai2hclConverter) convertResourceData(asset caiasset.A
 	}, nil
 }
 
-func flattenWorkflowsWorkflowName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
 func flattenWorkflowsWorkflowDescription(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }

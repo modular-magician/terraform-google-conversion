@@ -156,12 +156,6 @@ func GetContainerAnalysisNoteApiObject(d tpgresource.TerraformResourceData, conf
 	return resourceContainerAnalysisNoteEncoder(d, config, obj)
 }
 
-func resourceContainerAnalysisNoteEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// encoder logic only in GA provider
-
-	return obj, nil
-}
-
 func expandContainerAnalysisNoteName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

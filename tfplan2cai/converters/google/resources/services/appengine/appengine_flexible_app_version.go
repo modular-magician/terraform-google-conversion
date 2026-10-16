@@ -270,11 +270,6 @@ func GetAppEngineFlexibleAppVersionApiObject(d tpgresource.TerraformResourceData
 	return resourceAppEngineFlexibleAppVersionEncoder(d, config, obj)
 }
 
-func resourceAppEngineFlexibleAppVersionEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	obj["env"] = "flex"
-	return obj, nil
-}
-
 func expandAppEngineFlexibleAppVersionVersionId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

@@ -137,10 +137,6 @@ func GetBinaryAuthorizationAttestorCaiObject(d tpgresource.TerraformResourceData
 	return obj, nil
 }
 
-func expandBinaryAuthorizationAttestorName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/attestors/{{name}}")
-}
-
 func expandBinaryAuthorizationAttestorDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -172,20 +168,6 @@ func expandBinaryAuthorizationAttestorAttestationAuthorityNote(v interface{}, d 
 	}
 
 	return transformed, nil
-}
-
-func expandBinaryAuthorizationAttestorAttestationAuthorityNoteNoteReference(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	r := regexp.MustCompile("projects/(.+)/notes/(.+)")
-	if r.MatchString(v.(string)) {
-		return v.(string), nil
-	}
-
-	project, err := tpgresource.GetProject(d, config)
-	if err != nil {
-		return nil, err
-	}
-
-	return fmt.Sprintf("projects/%s/notes/%s", project, v.(string)), nil
 }
 
 func expandBinaryAuthorizationAttestorAttestationAuthorityNotePublicKeys(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

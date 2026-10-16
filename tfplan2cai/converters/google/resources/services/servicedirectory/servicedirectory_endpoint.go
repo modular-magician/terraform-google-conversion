@@ -227,11 +227,6 @@ func GetServiceDirectoryEndpointApiObject(d tpgresource.TerraformResourceData, c
 	return resourceServiceDirectoryEndpointEncoder(d, config, obj)
 }
 
-func resourceServiceDirectoryEndpointEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-
-	return obj, nil
-}
-
 func expandServiceDirectoryEndpointAddress(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

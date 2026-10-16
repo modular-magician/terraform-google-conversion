@@ -193,10 +193,3 @@ func flattenComputeRegionSslPolicyCustomFeatures(v interface{}, d *schema.Resour
 func flattenComputeRegionSslPolicyPostQuantumKeyExchange(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
-
-func flattenComputeRegionSslPolicyRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}

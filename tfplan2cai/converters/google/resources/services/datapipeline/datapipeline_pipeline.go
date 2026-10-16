@@ -162,10 +162,6 @@ func GetDataPipelinePipelineApiObject(d tpgresource.TerraformResourceData, confi
 	return obj, nil
 }
 
-func expandDataPipelinePipelineName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/locations/{{region}}/pipelines/{{name}}")
-}
-
 func expandDataPipelinePipelineDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

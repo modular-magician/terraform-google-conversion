@@ -144,14 +144,6 @@ func GetComputeNetworkPeeringRoutesConfigApiObject(d tpgresource.TerraformResour
 	return resourceComputeNetworkPeeringRoutesConfigEncoder(d, config, obj)
 }
 
-func resourceComputeNetworkPeeringRoutesConfigEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// Stick request in a networkPeering block as in
-	// https://cloud.google.com/compute/docs/reference/rest/v1/networks/updatePeering
-	newObj := make(map[string]interface{})
-	newObj["networkPeering"] = obj
-	return newObj, nil
-}
-
 func expandComputeNetworkPeeringRoutesConfigPeering(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

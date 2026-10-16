@@ -150,11 +150,6 @@ func GetAccessContextManagerAuthorizedOrgsDescApiObject(d tpgresource.TerraformR
 	return resourceAccessContextManagerAuthorizedOrgsDescEncoder(d, config, obj)
 }
 
-func resourceAccessContextManagerAuthorizedOrgsDescEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	delete(obj, "parent")
-	return obj, nil
-}
-
 func expandAccessContextManagerAuthorizedOrgsDescParent(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

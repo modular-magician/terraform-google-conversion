@@ -204,15 +204,6 @@ func GetAgenticApplicationsAnalystAgentPersonaApiObject(d tpgresource.TerraformR
 	return resourceAgenticApplicationsAnalystAgentPersonaEncoder(d, config, obj)
 }
 
-func resourceAgenticApplicationsAnalystAgentPersonaEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	name, err := tpgresource.ReplaceVars(d, meta.(*transport_tpg.Config), "projects/{{project}}/locations/{{location}}/analystAgentPersonas/{{analyst_agent_persona_id}}")
-	if err != nil {
-		return nil, err
-	}
-	obj["name"] = name
-	return obj, nil
-}
-
 func expandAgenticApplicationsAnalystAgentPersonaArtifactExamples(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil

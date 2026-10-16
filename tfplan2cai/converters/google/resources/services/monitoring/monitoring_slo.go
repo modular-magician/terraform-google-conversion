@@ -171,56 +171,12 @@ func GetMonitoringSloApiObject(d tpgresource.TerraformResourceData, config *tran
 	return resourceMonitoringSloEncoder(d, config, obj)
 }
 
-func resourceMonitoringSloEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// Name/Service Level Objective ID is a query parameter and cannot
-	// be given in data
-	delete(obj, "sloId")
-	Sli := obj["serviceLevelIndicator"].(map[string]interface{})
-	if basicSli, ok := Sli["basicSli"].(map[string]interface{}); ok {
-		//Removing the dummy `enabled` attribute
-		if availability, ok := basicSli["availability"]; ok {
-			transAvailability := availability.(map[string]interface{})
-			delete(transAvailability, "enabled")
-			basicSli["availability"] = transAvailability
-		}
-	}
-
-	if windowBasedSli, ok := Sli["windowsBased"].(map[string]interface{}); ok {
-		if goodTotalRatioThreshold, ok := windowBasedSli["goodTotalRatioThreshold"].(map[string]interface{}); ok {
-			if basicSli, ok := goodTotalRatioThreshold["basicSliPerformance"].(map[string]interface{}); ok {
-				//Removing the dummy `enabled` attribute
-				if availability, ok := basicSli["availability"]; ok {
-					transAvailability := availability.(map[string]interface{})
-					delete(transAvailability, "enabled")
-					basicSli["availability"] = transAvailability
-				}
-			}
-		}
-	}
-
-	return obj, nil
-}
-
 func expandMonitoringSloDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
 func expandMonitoringSloGoal(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func flattenMonitoringSloRollingPeriodDays(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	if v.(string) == "" {
-		return nil
-	}
-	dur, err := time.ParseDuration(v.(string))
-	if err != nil {
-		return nil
-	}
-	return int(dur / (time.Hour * 24))
 }
 
 func expandMonitoringSloCalendarPeriod(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

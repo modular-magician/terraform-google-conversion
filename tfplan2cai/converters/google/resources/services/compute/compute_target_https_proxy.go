@@ -192,27 +192,6 @@ func GetComputeTargetHttpsProxyApiObject(d tpgresource.TerraformResourceData, co
 	return resourceComputeTargetHttpsProxyEncoder(d, config, obj)
 }
 
-func resourceComputeTargetHttpsProxyEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-
-	if _, ok := obj["certificateManagerCertificates"]; ok {
-		// The field certificateManagerCertificates should not be included in the API request, and it should be renamed to `sslCertificates`
-		// The API does not allow using both certificate manager certificates and sslCertificates. If that changes
-		// in the future, the encoder logic should change accordingly because this will mean that both fields are no longer mutual exclusive.
-		log.Printf("[DEBUG] converting the field CertificateManagerCertificates to sslCertificates before sending the request")
-		obj["sslCertificates"] = obj["certificateManagerCertificates"]
-		delete(obj, "certificateManagerCertificates")
-	}
-
-	// Send null if serverTlsPolicy is not set. Without this, Terraform would not send any value for `serverTlsPolicy`
-	// in the "PATCH" payload so if you were to remove a server TLS policy from a target HTTPS proxy, it would NOT remove
-	// the association.
-	if _, ok := obj["serverTlsPolicy"]; !ok {
-		obj["serverTlsPolicy"] = nil
-	}
-
-	return obj, nil
-}
-
 func expandComputeTargetHttpsProxyDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -229,65 +208,8 @@ func expandComputeTargetHttpsProxyTlsEarlyData(v interface{}, d tpgresource.Terr
 	return v, nil
 }
 
-func expandComputeTargetHttpsProxyCertificateManagerCertificates(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return nil, nil
-	}
-	l := v.([]interface{})
-	req := make([]interface{}, 0, len(l))
-	for _, raw := range l {
-		if raw == nil {
-			return nil, fmt.Errorf("Invalid value for certificate_manager_certificates: nil")
-		}
-		if strings.HasPrefix(raw.(string), "//") || strings.HasPrefix(raw.(string), "https://") {
-			// Any full URL will be passed to the API request (regardless of the resource type). This is to allow self_links of CertificateManagerCeritificate resources.
-			// If the full URL is an invalid reference, that should be handled by the API.
-			req = append(req, raw.(string))
-		} else if reg, _ := regexp.Compile("projects/(.*)/locations/(.*)/certificates/(.*)"); reg.MatchString(raw.(string)) {
-			// If the input is the id pattern of CertificateManagerCertificate resource, a prefix will be added to construct the full URL before constructing the API request.
-			self_link := "https://certificatemanager.googleapis.com/v1/" + raw.(string)
-			req = append(req, self_link)
-		} else {
-			return nil, fmt.Errorf("Invalid value for certificate_manager_certificates: %v is an invalid format for a certificateManagerCertificate resource", raw.(string))
-		}
-	}
-	return req, nil
-}
-
-func expandComputeTargetHttpsProxySslCertificates(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	l := v.([]interface{})
-	req := make([]interface{}, 0, len(l))
-	for _, raw := range l {
-		if raw == nil {
-			return nil, fmt.Errorf("Invalid value for ssl_certificates: nil")
-		}
-		f, err := tpgresource.ParseGlobalFieldValue("sslCertificates", raw.(string), "project", d, config, true)
-		if err != nil {
-			return nil, fmt.Errorf("Invalid value for ssl_certificates: %s", err)
-		}
-		req = append(req, f.RelativeLink())
-	}
-	return req, nil
-}
-
 func expandComputeTargetHttpsProxyCertificateMap(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandComputeTargetHttpsProxySslPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("sslPolicies", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for ssl_policy: %s", err)
-	}
-	return f.RelativeLink(), nil
-}
-
-func expandComputeTargetHttpsProxyUrlMap(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("urlMaps", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for url_map: %s", err)
-	}
-	return f.RelativeLink(), nil
 }
 
 func expandComputeTargetHttpsProxyProxyBind(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

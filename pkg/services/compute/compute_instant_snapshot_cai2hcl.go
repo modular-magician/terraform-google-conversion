@@ -206,10 +206,3 @@ func flattenComputeInstantSnapshotSourceDisk(v interface{}, d *schema.ResourceDa
 	}
 	return relative
 }
-
-func flattenComputeInstantSnapshotZone(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}

@@ -210,17 +210,6 @@ func GetComputeServiceAttachmentCaiObject(d tpgresource.TerraformResourceData, c
 	return obj, nil
 }
 
-func resourceComputeServiceAttachmentEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	propagatedConnectionLimitProp := d.Get("propagated_connection_limit")
-	if sv, ok := d.GetOk("send_propagated_connection_limit_if_zero"); ok && sv.(bool) {
-		if v, ok := d.GetOkExists("propagated_connection_limit"); ok || !reflect.DeepEqual(v, propagatedConnectionLimitProp) {
-			obj["propagatedConnectionLimit"] = propagatedConnectionLimitProp
-		}
-	}
-
-	return obj, nil
-}
-
 func expandComputeServiceAttachmentName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
@@ -235,33 +224,6 @@ func expandComputeServiceAttachmentFingerprint(v interface{}, d tpgresource.Terr
 
 func expandComputeServiceAttachmentConnectionPreference(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandComputeServiceAttachmentTargetService(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	resource := strings.Split(v.(string), "/")
-	if len(resource) < 4 {
-		return nil, fmt.Errorf("invalid value for target_service")
-	}
-
-	return v, nil
-}
-
-func expandComputeServiceAttachmentNatSubnets(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	v = v.(*schema.Set).List()
-	l := v.([]interface{})
-	req := make([]interface{}, 0, len(l))
-	for _, raw := range l {
-		if raw == nil {
-			return nil, fmt.Errorf("Invalid value for nat_subnets: nil")
-		}
-		f, err := tpgresource.ParseRegionalFieldValue("subnetworks", raw.(string), "project", "region", "zone", d, config, true)
-		if err != nil {
-			return nil, fmt.Errorf("Invalid value for nat_subnets: %s", err)
-		}
-		url := tgcresource.GetFullUrl(config, f.RelativeLink(), "https://www.googleapis.com/compute/v1/")
-		req = append(req, url)
-	}
-	return req, nil
 }
 
 func expandComputeServiceAttachmentEnableProxyProtocol(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -350,13 +312,4 @@ func expandComputeServiceAttachmentReconcileConnections(v interface{}, d tpgreso
 
 func expandComputeServiceAttachmentPropagatedConnectionLimit(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
-}
-
-func expandComputeServiceAttachmentRegion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	f, err := tpgresource.ParseGlobalFieldValue("regions", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for region: %s", err)
-	}
-	url := tgcresource.GetFullUrl(config, f.RelativeLink(), "https://www.googleapis.com/compute/v1/")
-	return url, nil
 }

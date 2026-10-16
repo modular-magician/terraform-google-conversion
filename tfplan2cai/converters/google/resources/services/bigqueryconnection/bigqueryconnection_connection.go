@@ -180,12 +180,6 @@ func GetBigqueryConnectionConnectionApiObject(d tpgresource.TerraformResourceDat
 	return resourceBigqueryConnectionConnectionEncoder(d, config, obj)
 }
 
-func resourceBigqueryConnectionConnectionEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	// connectionId is needed to qualify the URL but cannot be sent in the body
-	delete(obj, "connectionId")
-	return obj, nil
-}
-
 func expandBigqueryConnectionConnectionConnectionId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

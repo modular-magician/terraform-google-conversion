@@ -656,18 +656,6 @@ func expandDialogflowCXAgentTextToSpeechSettings(v interface{}, d tpgresource.Te
 	return transformed, nil
 }
 
-func expandDialogflowCXAgentTextToSpeechSettingsSynthesizeSpeechConfigs(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	b := []byte(v.(string))
-	if len(b) == 0 {
-		return nil, nil
-	}
-	m := make(map[string]interface{})
-	if err := json.Unmarshal(b, &m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func expandDialogflowCXAgentGenAppBuilderSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -752,18 +740,6 @@ func expandDialogflowCXAgentPersonalizationSettings(v interface{}, d tpgresource
 	}
 
 	return transformed, nil
-}
-
-func expandDialogflowCXAgentPersonalizationSettingsDefaultEndUserMetadata(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	b := []byte(v.(string))
-	if len(b) == 0 {
-		return nil, nil
-	}
-	m := make(map[string]interface{})
-	if err := json.Unmarshal(b, &m); err != nil {
-		return nil, err
-	}
-	return m, nil
 }
 
 func expandDialogflowCXAgentClientCertificateSettings(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

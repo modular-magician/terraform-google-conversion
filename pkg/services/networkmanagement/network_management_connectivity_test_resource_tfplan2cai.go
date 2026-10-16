@@ -173,15 +173,6 @@ func GetNetworkManagementConnectivityTestCaiObject(d tpgresource.TerraformResour
 	return obj, nil
 }
 
-func expandNetworkManagementConnectivityTestName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	// projects/X/tests/Y - note not "connectivityTests"
-	f, err := tpgresource.ParseGlobalFieldValue("tests", v.(string), "project", d, config, true)
-	if err != nil {
-		return nil, fmt.Errorf("Invalid value for zone: %s", err)
-	}
-	return f.RelativeLink(), nil
-}
-
 func expandNetworkManagementConnectivityTestDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

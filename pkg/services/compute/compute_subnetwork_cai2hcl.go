@@ -182,30 +182,6 @@ func flattenComputeSubnetworkDescription(v interface{}, d *schema.ResourceData, 
 	return v
 }
 
-// flattenComputeSubnetworkIpCidrRange handles empty strings for IpCidrRange which occur in IPV6_ONLY subnets.
-// Terraform validation fails on empty string, so we convert it to nil.
-func flattenComputeSubnetworkIpCidrRange(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	if s, ok := v.(string); ok && s == "" {
-		return nil
-	}
-	return v
-}
-
-func flattenComputeSubnetworkReservedInternalRange(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	// Normalize the URL to the prefixed format: networkconnectivity.googleapis.com/projects/...
-	path, err := tpgresource.GetRelativePath(v.(string))
-	if err != nil {
-		return v
-	}
-	return "networkconnectivity.googleapis.com/" + path
-}
-
 func flattenComputeSubnetworkName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return "unknown"
@@ -272,64 +248,12 @@ func flattenComputeSubnetworkSecondaryIpRangeIpCidrRange(v interface{}, d *schem
 	return v
 }
 
-func flattenComputeSubnetworkSecondaryIpRangeReservedInternalRange(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	// Normalize the URL to the prefixed format: networkconnectivity.googleapis.com/projects/...
-	path, err := tpgresource.GetRelativePath(v.(string))
-	if err != nil {
-		return v
-	}
-	return "networkconnectivity.googleapis.com/" + path
-}
-
 func flattenComputeSubnetworkPrivateIpGoogleAccess(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
 func flattenComputeSubnetworkPrivateIpv6GoogleAccess(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func flattenComputeSubnetworkRegion(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
-	}
-	return tpgresource.GetResourceNameFromSelfLink(v.(string))
-}
-
-func flattenComputeSubnetworkLogConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	original := v.(map[string]interface{})
-	if len(original) == 0 {
-		return nil
-	}
-
-	v, ok := original["enable"]
-	if ok && !v.(bool) {
-		return nil
-	}
-
-	transformed := make(map[string]interface{})
-	transformed["flow_sampling"] = original["flowSampling"]
-	transformed["aggregation_interval"] = original["aggregationInterval"]
-	transformed["metadata"] = original["metadata"]
-	if original["metadata"].(string) == "CUSTOM_METADATA" {
-		transformed["metadata_fields"] = original["metadataFields"]
-	} else {
-		// MetadataFields can only be set when metadata is CUSTOM_METADATA. However, when updating
-		// from custom to include/exclude, the API will return the previous values of the metadata fields,
-		// despite not actually having any custom fields at the moment. The API team has confirmed
-		// this as WAI (b/162771344), so we work around it by clearing the response if metadata is
-		// not custom.
-		transformed["metadata_fields"] = nil
-	}
-	transformed["filter_expr"] = original["filterExpr"]
-
-	return []interface{}{transformed}
 }
 
 func flattenComputeSubnetworkStackType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -382,18 +306,4 @@ func flattenComputeSubnetworkParamsResourceManagerTags(v interface{}, d *schema.
 
 func flattenComputeSubnetworkResolveSubnetMask(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func resourceComputeSubnetworkTgcDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}, hclData map[string]interface{}) (map[string]interface{}, map[string]interface{}, error) {
-	// In the GET API response, the field stackType is not present.
-	// In CAI asset,  "stackType" has value "UNSPECIFIED_STACK_TYPE"
-	// So set the value to empty string in this case.
-	if raw, ok := res["stackType"]; ok {
-		v := raw.(string)
-		if v == "UNSPECIFIED_STACK_TYPE" {
-			res["stackType"] = ""
-		}
-	}
-
-	return res, hclData, nil
 }

@@ -343,10 +343,6 @@ func flattenMonitoringUptimeCheckConfigHttpCheckAuthInfo(v interface{}, d *schem
 	return []interface{}{transformed}
 }
 
-func flattenMonitoringUptimeCheckConfigHttpCheckAuthInfoPassword(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return d.Get("http_check.0.auth_info.0.password")
-}
-
 func flattenMonitoringUptimeCheckConfigHttpCheckAuthInfoUsername(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return "unknown"
@@ -586,11 +582,6 @@ func flattenMonitoringUptimeCheckConfigResourceGroup(v interface{}, d *schema.Re
 
 func flattenMonitoringUptimeCheckConfigResourceGroupResourceType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
-}
-
-func flattenMonitoringUptimeCheckConfigResourceGroupGroupId(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	project := d.Get("project").(string)
-	return fmt.Sprintf("projects/%s/groups/%s", project, v)
 }
 
 func flattenMonitoringUptimeCheckConfigMonitoredResource(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

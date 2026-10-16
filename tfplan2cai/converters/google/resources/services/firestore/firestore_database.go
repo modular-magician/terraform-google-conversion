@@ -198,10 +198,6 @@ func GetFirestoreDatabaseApiObject(d tpgresource.TerraformResourceData, config *
 	return obj, nil
 }
 
-func expandFirestoreDatabaseName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	return tpgresource.ReplaceVars(d, config, "projects/{{project}}/databases/{{name}}")
-}
-
 func expandFirestoreDatabaseLocationId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

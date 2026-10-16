@@ -168,16 +168,6 @@ func GetVertexAIIndexEndpointDeployedIndexApiObject(d tpgresource.TerraformResou
 	return resourceVertexAIIndexEndpointDeployedIndexEncoder(d, config, obj)
 }
 
-func resourceVertexAIIndexEndpointDeployedIndexEncoder(d tpgresource.TerraformResourceData, meta interface{}, obj map[string]interface{}) (map[string]interface{}, error) {
-	req := make(map[string]interface{})
-	obj["id"] = d.Get("deployed_index_id")
-	delete(obj, "deployedIndexId")
-	delete(obj, "name")
-	delete(obj, "indexEndpoint")
-	req["deployedIndex"] = obj
-	return req, nil
-}
-
 func expandVertexAIIndexEndpointDeployedIndexDeployedIndexId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

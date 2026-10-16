@@ -163,14 +163,6 @@ func (c *SecretManagerSecretVersionCai2hclConverter) convertResourceData(asset c
 	}, nil
 }
 
-func flattenSecretManagerSecretVersionEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v.(string) == "ENABLED" {
-		return true
-	}
-
-	return false
-}
-
 func flattenSecretManagerSecretVersionPayload(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	original := make(map[string]interface{}, 0)
 	if v != nil {
@@ -194,12 +186,4 @@ func flattenSecretManagerSecretVersionPayloadSecretData(v interface{}, d *schema
 		return "unknown"
 	}
 	return v
-}
-
-func resourceSecretManagerSecretVersionDecoder(d *schema.ResourceData, meta interface{}, res map[string]interface{}) (map[string]interface{}, error) {
-	if v := res["state"]; v == "DESTROYED" {
-		return nil, nil
-	}
-
-	return res, nil
 }

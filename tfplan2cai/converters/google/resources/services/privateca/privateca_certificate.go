@@ -209,59 +209,6 @@ func expandPrivatecaCertificateConfig(v interface{}, d tpgresource.TerraformReso
 	return transformed, nil
 }
 
-func expandPrivatecaCertificateConfigX509Config(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
-	if v == nil {
-		return v, nil
-	}
-	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
-		return nil, nil
-	}
-	raw := l[0]
-	original := raw.(map[string]interface{})
-	if len(original) == 0 {
-		return nil, nil
-	}
-	transformed := make(map[string]interface{})
-
-	caOptions, err := expandPrivatecaCertificateConfigX509ConfigCaOptions(original["ca_options"], d, config)
-	if err != nil {
-		return nil, err
-	}
-	transformed["caOptions"] = caOptions
-
-	keyUsage, err := expandPrivatecaCertificateConfigX509ConfigKeyUsage(original["key_usage"], d, config)
-	if err != nil {
-		return nil, err
-	}
-	transformed["keyUsage"] = keyUsage
-
-	policyIds, err := expandPrivatecaCertificateConfigX509ConfigPolicyIds(original["policy_ids"], d, config)
-	if err != nil {
-		return nil, err
-	}
-	transformed["policyIds"] = policyIds
-
-	aiaOcspServers, err := expandPrivatecaCertificateConfigX509ConfigAiaOcspServers(original["aia_ocsp_servers"], d, config)
-	if err != nil {
-		return nil, err
-	}
-	transformed["aiaOcspServers"] = aiaOcspServers
-
-	addExts, err := expandPrivatecaCertificateConfigX509ConfigAdditionalExtensions(original["additional_extensions"], d, config)
-	if err != nil {
-		return nil, err
-	}
-	transformed["additionalExtensions"] = addExts
-
-	nameConstraints, err := expandPrivatecaCertificateConfigX509ConfigNameConstraints(original["name_constraints"], d, config)
-	if err != nil {
-		return nil, err
-	}
-	transformed["nameConstraints"] = nameConstraints
-	return transformed, nil
-}
-
 func expandPrivatecaCertificateConfigSubjectConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
