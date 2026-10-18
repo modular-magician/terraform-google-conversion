@@ -36,6 +36,9 @@ func TestAccComputeInterconnect(t *testing.T) {
 		{
 			Name: "TestAccComputeInterconnect_resourceManagerTags",
 		},
+		{
+			Name: "TestAccComputeInterconnect_rename",
+		},
 	}
 
 	for _, tt := range tests {

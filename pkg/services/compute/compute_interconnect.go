@@ -113,7 +113,6 @@ Specifies the location inside Google's Networks.`,
 			"name": {
 				Type:         schema.TypeString,
 				Required:     true,
-				ForceNew:     true,
 				ValidateFunc: verify.ValidateRegexp(`^[a-z]([-a-z0-9]*[a-z0-9])?$`),
 				Description: `Name of the resource. Provided by the client when the resource is created. The name must be
 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters
@@ -245,6 +244,7 @@ federation.`,
 						"resource_manager_tags": {
 							Type:     schema.TypeMap,
 							Optional: true,
+							ForceNew: true,
 							Description: `Resource manager tags to be bound to the interconnect. Tag keys and values have the
 same definition as resource manager tags. Keys must be in the format tagKeys/{tag_key_id},
 and values are in the format tagValues/456.`,
