@@ -696,11 +696,11 @@ func expandAppEngineStandardAppVersionVpcAccess(v interface{}, d tpgresource.Ter
 	original := raw.(map[string]interface{})
 	transformed := make(map[string]interface{})
 
-	transformedEgressSetting, err := expandAppEngineStandardAppVersionVpcAccessEgressSetting(original["egress_setting"], d, config)
+	transformedVpcEgress, err := expandAppEngineStandardAppVersionVpcAccessVpcEgress(original["vpc_egress"], d, config)
 	if err != nil {
 		return nil, err
-	} else if val := reflect.ValueOf(transformedEgressSetting); val.IsValid() && !tpgresource.IsEmptyValue(val) {
-		transformed["vpcEgress"] = transformedEgressSetting
+	} else if val := reflect.ValueOf(transformedVpcEgress); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["vpcEgress"] = transformedVpcEgress
 	}
 
 	transformedNetworkInterfaces, err := expandAppEngineStandardAppVersionVpcAccessNetworkInterfaces(original["network_interfaces"], d, config)
@@ -713,7 +713,7 @@ func expandAppEngineStandardAppVersionVpcAccess(v interface{}, d tpgresource.Ter
 	return transformed, nil
 }
 
-func expandAppEngineStandardAppVersionVpcAccessEgressSetting(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+func expandAppEngineStandardAppVersionVpcAccessVpcEgress(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
