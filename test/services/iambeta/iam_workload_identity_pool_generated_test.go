@@ -45,6 +45,9 @@ func TestAccIAMBetaWorkloadIdentityPool(t *testing.T) {
 		{
 			Name: "TestAccIAMBetaWorkloadIdentityPool_update",
 		},
+		{
+			Name: "TestAccIAMBetaWorkloadIdentityPool_undeleteOnCreate",
+		},
 	}
 
 	for _, tt := range tests {
