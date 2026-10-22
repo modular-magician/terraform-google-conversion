@@ -473,6 +473,13 @@ func expandCloudRunV2ServiceTemplate(v interface{}, d tpgresource.TerraformResou
 		transformed["encryptionKey"] = transformedEncryptionKey
 	}
 
+	transformedEncryptionKeyRevocationAction, err := expandCloudRunV2ServiceTemplateEncryptionKeyRevocationAction(original["encryption_key_revocation_action"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEncryptionKeyRevocationAction); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["encryptionKeyRevocationAction"] = transformedEncryptionKeyRevocationAction
+	}
+
 	transformedMaxInstanceRequestConcurrency, err := expandCloudRunV2ServiceTemplateMaxInstanceRequestConcurrency(original["max_instance_request_concurrency"], d, config)
 	if err != nil {
 		return nil, err
@@ -2184,6 +2191,10 @@ func expandCloudRunV2ServiceTemplateExecutionEnvironment(v interface{}, d tpgres
 }
 
 func expandCloudRunV2ServiceTemplateEncryptionKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudRunV2ServiceTemplateEncryptionKeyRevocationAction(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
