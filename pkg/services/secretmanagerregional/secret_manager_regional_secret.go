@@ -162,7 +162,7 @@ Please refer to the field 'effective_labels' for all of the labels present on th
 				Optional: true,
 				Description: `The rotation time and period for a regional secret. At 'next_rotation_time', Secret Manager
 will send a Pub/Sub notification to the topics configured on the Secret. 'topics' must be
-set to configure rotation.`,
+set to configure rotation, unless 'secret_type' is 'CLOUD_SQL_DB_CREDENTIALS'.`,
 				MaxItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
@@ -184,14 +184,22 @@ automatically sends rotation notifications.`,
 						},
 					},
 				},
-				RequiredWith: []string{"topics"},
 			},
 			"secret_type": {
 				Type:     schema.TypeString,
 				Optional: true,
 				ForceNew: true,
 				Description: `This defines the type of the secret. Enforces certain structural requirements on the SecretVersions.
-For secret of type UNSPECIFIED, the SecretVersions can be of any type.`,
+For secret of type UNSPECIFIED, the SecretVersions can be of any type.
+Supported values are:
+* 'CLOUD_SQL_DB_CREDENTIALS': Secrets used for managed rotation of Cloud SQL single-user
+  credentials. Managed rotation can be enabled on these secrets using the
+  'google_secret_manager_regional_secret_managed_sql_rotation' resource. Secret versions cannot
+  be added manually to secrets of this type.
+* 'OTHER_DB_CREDENTIALS': Secrets where the payload contains database credentials.
+* 'ACCESS_KEY': Secrets where the payload contains an access key.
+* 'CERTIFICATE': Secrets where the payload contains a certificate.
+* 'OTHER': Secrets whose type doesn't belong to any of the above types.`,
 			},
 			"tags": {
 				Type:     schema.TypeMap,
@@ -270,6 +278,15 @@ the actual destruction happens after this TTL expires. It must be atleast 24h.`,
 				Computed: true,
 				Description: `The resource name of the regional secret. Format:
 'projects/{{project}}/locations/{{location}}/secrets/{{secret_id}}'`,
+			},
+			"policy_member": {
+				Type:     schema.TypeList,
+				Computed: true,
+				Description: `An object containing a unique resource identity tied to the regional secret. This identity can be
+granted the permissions required by features such as managed rotation.`,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{},
+				},
 			},
 			"terraform_labels": {
 				Type:     schema.TypeMap,

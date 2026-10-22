@@ -43,6 +43,9 @@ func TestAccSecretManagerRegionalRegionalSecret(t *testing.T) {
 			Name: "TestAccSecretManagerRegionalRegionalSecret_regionalSecretWithVersionDestroyTtlExample",
 		},
 		{
+			Name: "TestAccSecretManagerRegionalRegionalSecret_regionalSecretCloudSqlDbCredentialsExample",
+		},
+		{
 			Name: "TestAccSecretManagerRegionalRegionalSecret_import",
 		},
 		{
