@@ -319,6 +319,12 @@ Cloud Storage bucket (//storage.googleapis.com/projects/PROJECT_ID/buckets/BUCKE
 							Optional:    true,
 							Description: `If set, the latest DataScan job result will be published to Knowledge Catalog.`,
 						},
+						"custom_instructions": {
+							Type:     schema.TypeString,
+							Optional: true,
+							Description: `Specifies optional custom instructions for generating documentation scan.
+The maximum length is 2,048 characters.`,
+						},
 						"sql_dialect": {
 							Type:         schema.TypeString,
 							Computed:     true,
