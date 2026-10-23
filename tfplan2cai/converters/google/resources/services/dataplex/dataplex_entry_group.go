@@ -122,6 +122,12 @@ func GetDataplexEntryGroupApiObject(d tpgresource.TerraformResourceData, config 
 	} else if v, ok := d.GetOkExists("display_name"); !tpgresource.IsEmptyValue(reflect.ValueOf(displayNameProp)) && (ok || !reflect.DeepEqual(v, displayNameProp)) {
 		obj["displayName"] = displayNameProp
 	}
+	changeRequestConfigProp, err := expandDataplexEntryGroupChangeRequestConfig(d.Get("change_request_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("change_request_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(changeRequestConfigProp)) && (ok || !reflect.DeepEqual(v, changeRequestConfigProp)) {
+		obj["changeRequestConfig"] = changeRequestConfigProp
+	}
 	effectiveLabelsProp, err := expandDataplexEntryGroupEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -137,6 +143,32 @@ func expandDataplexEntryGroupDescription(v interface{}, d tpgresource.TerraformR
 }
 
 func expandDataplexEntryGroupDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDataplexEntryGroupChangeRequestConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedApproverEmails, err := expandDataplexEntryGroupChangeRequestConfigApproverEmails(original["approver_emails"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedApproverEmails); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["approverEmails"] = transformedApproverEmails
+	}
+
+	return transformed, nil
+}
+
+func expandDataplexEntryGroupChangeRequestConfigApproverEmails(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
