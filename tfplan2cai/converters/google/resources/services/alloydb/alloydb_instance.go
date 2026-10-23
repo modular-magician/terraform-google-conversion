@@ -386,7 +386,6 @@ func expandAlloydbInstanceObservabilityConfig(v interface{}, d tpgresource.Terra
 	} else if transformedTrackActiveQueries != nil {
 		transformed["trackActiveQueries"] = transformedTrackActiveQueries
 	}
-
 	transformedTrackClientAddress, err := expandAlloydbInstanceObservabilityConfigTrackClientAddress(original["track_client_address"], d, config)
 	if err != nil {
 		return nil, err
@@ -435,7 +434,6 @@ func expandAlloydbInstanceObservabilityConfigQueryPlansPerMinute(v interface{}, 
 func expandAlloydbInstanceObservabilityConfigTrackActiveQueries(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
-
 func expandAlloydbInstanceObservabilityConfigTrackClientAddress(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }

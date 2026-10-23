@@ -303,6 +303,65 @@ the same instance.`,
 					},
 				},
 			},
+			"observability_config": {
+				Type:        schema.TypeList,
+				Computed:    true,
+				Optional:    true,
+				Description: `Configuration for enhanced query insights.`,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"enabled": {
+							Type:        schema.TypeBool,
+							Computed:    true,
+							Optional:    true,
+							Description: `Observability feature status for an instance.`,
+						},
+						"max_query_string_length": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Optional:    true,
+							Description: `Query string length. The default value is 10240. Any integer between 1024 and 100000 is considered valid.`,
+						},
+						"preserve_comments": {
+							Type:        schema.TypeBool,
+							Computed:    true,
+							Optional:    true,
+							Description: `Preserve comments in the query string.`,
+						},
+						"query_plans_per_minute": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Optional:    true,
+							Description: `Number of query execution plans captured by Insights per minute for all queries combined. The default value is 5. Any integer between 0 and 200 is considered valid.`,
+						},
+						"record_application_tags": {
+							Type:        schema.TypeBool,
+							Computed:    true,
+							Optional:    true,
+							Description: `Record application tags for an instance. This flag is turned "on" by default.`,
+						},
+						"track_active_queries": {
+							Type:        schema.TypeBool,
+							Computed:    true,
+							Optional:    true,
+							Description: `Track actively running queries. If not set, default value is "off".`,
+						},
+						"track_wait_event_types": {
+							Type:        schema.TypeBool,
+							Computed:    true,
+							Optional:    true,
+							Description: `Record wait event types during query execution for an instance.`,
+						},
+						"track_wait_events": {
+							Type:        schema.TypeBool,
+							Computed:    true,
+							Optional:    true,
+							Description: `Record wait events during query execution for an instance.`,
+						},
+					},
+				},
+			},
 			"psc_instance_config": {
 				Type:        schema.TypeList,
 				Computed:    true,
@@ -439,6 +498,14 @@ The network attachment must be in the same region as the instance.`,
 				Computed:    true,
 				Description: `The name of the instance resource.`,
 			},
+			"observability_instance_info": {
+				Type:        schema.TypeList,
+				Computed:    true,
+				Description: `Instance level observability information, contains the effective values of observability settings for this instance, by merging customer's provided ObservabilityInstanceConfig with the Observability defaults.`,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{},
+				},
+			},
 			"outbound_public_ip_addresses": {
 				Type:     schema.TypeList,
 				Computed: true,
@@ -455,6 +522,14 @@ for outbound connections.`,
 				Description: `The public IP addresses for the Instance. This is available ONLY when
 networkConfig.enablePublicIp is set to true. This is the connection
 endpoint for an end-user application.`,
+			},
+			"query_insights_info": {
+				Type:        schema.TypeList,
+				Computed:    true,
+				Description: `Instance level Query Insights information, which is read-only and available in the output only. Contains the effective query insights settings for this instance, by merging customer's provided QueryInsightsInstanceConfig with the Query Insights defaults.`,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{},
+				},
 			},
 			"reconciling": {
 				Type:        schema.TypeBool,
