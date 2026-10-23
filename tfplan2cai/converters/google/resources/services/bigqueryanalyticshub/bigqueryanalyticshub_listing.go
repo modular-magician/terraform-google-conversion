@@ -200,6 +200,12 @@ func GetBigqueryAnalyticsHubListingApiObject(d tpgresource.TerraformResourceData
 	} else if v, ok := d.GetOkExists("allow_only_metadata_sharing"); !tpgresource.IsEmptyValue(reflect.ValueOf(allowOnlyMetadataSharingProp)) && (ok || !reflect.DeepEqual(v, allowOnlyMetadataSharingProp)) {
 		obj["allowOnlyMetadataSharing"] = allowOnlyMetadataSharingProp
 	}
+	storedProcedureConfigProp, err := expandBigqueryAnalyticsHubListingStoredProcedureConfig(d.Get("stored_procedure_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("stored_procedure_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(storedProcedureConfigProp)) && (ok || !reflect.DeepEqual(v, storedProcedureConfigProp)) {
+		obj["storedProcedureConfig"] = storedProcedureConfigProp
+	}
 
 	return obj, nil
 }
@@ -346,6 +352,13 @@ func expandBigqueryAnalyticsHubListingBigqueryDataset(v interface{}, d tpgresour
 		transformed["effectiveReplicas"] = transformedEffectiveReplicas
 	}
 
+	transformedRestrictedExportPolicy, err := expandBigqueryAnalyticsHubListingBigqueryDatasetRestrictedExportPolicy(original["restricted_export_policy"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRestrictedExportPolicy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["restrictedExportPolicy"] = transformedRestrictedExportPolicy
+	}
+
 	return transformed, nil
 }
 
@@ -449,6 +462,54 @@ func expandBigqueryAnalyticsHubListingBigqueryDatasetEffectiveReplicasPrimarySta
 	return v, nil
 }
 
+func expandBigqueryAnalyticsHubListingBigqueryDatasetRestrictedExportPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnabled, err := expandBigqueryAnalyticsHubListingBigqueryDatasetRestrictedExportPolicyEnabled(original["enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["enabled"] = transformedEnabled
+	}
+
+	transformedRestrictDirectTableAccess, err := expandBigqueryAnalyticsHubListingBigqueryDatasetRestrictedExportPolicyRestrictDirectTableAccess(original["restrict_direct_table_access"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRestrictDirectTableAccess); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["restrictDirectTableAccess"] = transformedRestrictDirectTableAccess
+	}
+
+	transformedRestrictQueryResult, err := expandBigqueryAnalyticsHubListingBigqueryDatasetRestrictedExportPolicyRestrictQueryResult(original["restrict_query_result"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRestrictQueryResult); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["restrictQueryResult"] = transformedRestrictQueryResult
+	}
+
+	return transformed, nil
+}
+
+func expandBigqueryAnalyticsHubListingBigqueryDatasetRestrictedExportPolicyEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBigqueryAnalyticsHubListingBigqueryDatasetRestrictedExportPolicyRestrictDirectTableAccess(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBigqueryAnalyticsHubListingBigqueryDatasetRestrictedExportPolicyRestrictQueryResult(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandBigqueryAnalyticsHubListingPubsubTopic(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -544,5 +605,42 @@ func expandBigqueryAnalyticsHubListingDiscoveryType(v interface{}, d tpgresource
 }
 
 func expandBigqueryAnalyticsHubListingAllowOnlyMetadataSharing(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBigqueryAnalyticsHubListingStoredProcedureConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnabled, err := expandBigqueryAnalyticsHubListingStoredProcedureConfigEnabled(original["enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["enabled"] = transformedEnabled
+	}
+
+	transformedAllowedStoredProcedureTypes, err := expandBigqueryAnalyticsHubListingStoredProcedureConfigAllowedStoredProcedureTypes(original["allowed_stored_procedure_types"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAllowedStoredProcedureTypes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["allowedStoredProcedureTypes"] = transformedAllowedStoredProcedureTypes
+	}
+
+	return transformed, nil
+}
+
+func expandBigqueryAnalyticsHubListingStoredProcedureConfigEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBigqueryAnalyticsHubListingStoredProcedureConfigAllowedStoredProcedureTypes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
