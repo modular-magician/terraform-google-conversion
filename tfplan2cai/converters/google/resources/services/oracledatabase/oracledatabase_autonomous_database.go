@@ -205,6 +205,34 @@ func expandOracleDatabaseAutonomousDatabaseProperties(v interface{}, d tpgresour
 		transformed["ocid"] = transformedOcid
 	}
 
+	transformedEncryptionKey, err := expandOracleDatabaseAutonomousDatabasePropertiesEncryptionKey(original["encryption_key"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEncryptionKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["encryptionKey"] = transformedEncryptionKey
+	}
+
+	transformedLocalDataGuardEnabled, err := expandOracleDatabaseAutonomousDatabasePropertiesLocalDataGuardEnabled(original["local_data_guard_enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedLocalDataGuardEnabled); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["localDataGuardEnabled"] = transformedLocalDataGuardEnabled
+	}
+
+	transformedLocalAdgAutoFailoverMaxDataLossLimitDuration, err := expandOracleDatabaseAutonomousDatabasePropertiesLocalAdgAutoFailoverMaxDataLossLimitDuration(original["local_adg_auto_failover_max_data_loss_limit_duration"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedLocalAdgAutoFailoverMaxDataLossLimitDuration); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["localAdgAutoFailoverMaxDataLossLimitDuration"] = transformedLocalAdgAutoFailoverMaxDataLossLimitDuration
+	}
+
+	transformedRefreshableClone, err := expandOracleDatabaseAutonomousDatabasePropertiesRefreshableClone(original["refreshable_clone"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRefreshableClone); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["refreshableClone"] = transformedRefreshableClone
+	}
+
 	transformedComputeCount, err := expandOracleDatabaseAutonomousDatabasePropertiesComputeCount(original["compute_count"], d, config)
 	if err != nil {
 		return nil, err
@@ -601,6 +629,55 @@ func expandOracleDatabaseAutonomousDatabaseProperties(v interface{}, d tpgresour
 }
 
 func expandOracleDatabaseAutonomousDatabasePropertiesOcid(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandOracleDatabaseAutonomousDatabasePropertiesEncryptionKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedProvider, err := expandOracleDatabaseAutonomousDatabasePropertiesEncryptionKeyProvider(original["provider"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedProvider); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["provider"] = transformedProvider
+	}
+
+	transformedKmsKey, err := expandOracleDatabaseAutonomousDatabasePropertiesEncryptionKeyKmsKey(original["kms_key"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedKmsKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["kmsKey"] = transformedKmsKey
+	}
+
+	return transformed, nil
+}
+
+func expandOracleDatabaseAutonomousDatabasePropertiesEncryptionKeyProvider(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandOracleDatabaseAutonomousDatabasePropertiesEncryptionKeyKmsKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandOracleDatabaseAutonomousDatabasePropertiesLocalDataGuardEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandOracleDatabaseAutonomousDatabasePropertiesLocalAdgAutoFailoverMaxDataLossLimitDuration(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandOracleDatabaseAutonomousDatabasePropertiesRefreshableClone(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
