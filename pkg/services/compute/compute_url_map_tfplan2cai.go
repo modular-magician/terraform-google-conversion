@@ -1042,6 +1042,13 @@ func expandComputeUrlMapPathMatcherPathRuleRouteAction(v interface{}, d tpgresou
 		transformed["cachePolicy"] = transformedCachePolicy
 	}
 
+	transformedImageOptimizationPolicy, err := expandComputeUrlMapPathMatcherPathRuleRouteActionImageOptimizationPolicy(original["image_optimization_policy"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedImageOptimizationPolicy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["imageOptimizationPolicy"] = transformedImageOptimizationPolicy
+	}
+
 	return transformed, nil
 }
 
@@ -2183,6 +2190,32 @@ func expandComputeUrlMapPathMatcherPathRuleRouteActionCachePolicyCacheKeyPolicyI
 	return v, nil
 }
 
+func expandComputeUrlMapPathMatcherPathRuleRouteActionImageOptimizationPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedQueryParameterInterpretation, err := expandComputeUrlMapPathMatcherPathRuleRouteActionImageOptimizationPolicyQueryParameterInterpretation(original["query_parameter_interpretation"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedQueryParameterInterpretation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["queryParameterInterpretation"] = transformedQueryParameterInterpretation
+	}
+
+	return transformed, nil
+}
+
+func expandComputeUrlMapPathMatcherPathRuleRouteActionImageOptimizationPolicyQueryParameterInterpretation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandComputeUrlMapPathMatcherPathRuleUrlRedirect(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -2964,6 +2997,13 @@ func expandComputeUrlMapPathMatcherRouteRulesRouteAction(v interface{}, d tpgres
 		return nil, err
 	} else if val := reflect.ValueOf(transformedCachePolicy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 		transformed["cachePolicy"] = transformedCachePolicy
+	}
+
+	transformedImageOptimizationPolicy, err := expandComputeUrlMapPathMatcherRouteRulesRouteActionImageOptimizationPolicy(original["image_optimization_policy"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedImageOptimizationPolicy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["imageOptimizationPolicy"] = transformedImageOptimizationPolicy
 	}
 
 	return transformed, nil
@@ -4162,6 +4202,32 @@ func expandComputeUrlMapPathMatcherRouteRulesRouteActionCachePolicyCacheKeyPolic
 	return v, nil
 }
 
+func expandComputeUrlMapPathMatcherRouteRulesRouteActionImageOptimizationPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedQueryParameterInterpretation, err := expandComputeUrlMapPathMatcherRouteRulesRouteActionImageOptimizationPolicyQueryParameterInterpretation(original["query_parameter_interpretation"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedQueryParameterInterpretation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["queryParameterInterpretation"] = transformedQueryParameterInterpretation
+	}
+
+	return transformed, nil
+}
+
+func expandComputeUrlMapPathMatcherRouteRulesRouteActionImageOptimizationPolicyQueryParameterInterpretation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandComputeUrlMapPathMatcherRouteRulesUrlRedirect(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -4481,6 +4547,13 @@ func expandComputeUrlMapPathMatcherDefaultRouteAction(v interface{}, d tpgresour
 		return nil, err
 	} else if val := reflect.ValueOf(transformedCachePolicy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 		transformed["cachePolicy"] = transformedCachePolicy
+	}
+
+	transformedImageOptimizationPolicy, err := expandComputeUrlMapPathMatcherDefaultRouteActionImageOptimizationPolicy(original["image_optimization_policy"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedImageOptimizationPolicy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["imageOptimizationPolicy"] = transformedImageOptimizationPolicy
 	}
 
 	return transformed, nil
@@ -5624,6 +5697,32 @@ func expandComputeUrlMapPathMatcherDefaultRouteActionCachePolicyCacheKeyPolicyIn
 	return v, nil
 }
 
+func expandComputeUrlMapPathMatcherDefaultRouteActionImageOptimizationPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedQueryParameterInterpretation, err := expandComputeUrlMapPathMatcherDefaultRouteActionImageOptimizationPolicyQueryParameterInterpretation(original["query_parameter_interpretation"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedQueryParameterInterpretation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["queryParameterInterpretation"] = transformedQueryParameterInterpretation
+	}
+
+	return transformed, nil
+}
+
+func expandComputeUrlMapPathMatcherDefaultRouteActionImageOptimizationPolicyQueryParameterInterpretation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
 func expandComputeUrlMapDefaultCustomErrorResponsePolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	if v == nil {
 		return nil, nil
@@ -6021,6 +6120,13 @@ func expandComputeUrlMapDefaultRouteAction(v interface{}, d tpgresource.Terrafor
 		return nil, err
 	} else if val := reflect.ValueOf(transformedCachePolicy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 		transformed["cachePolicy"] = transformedCachePolicy
+	}
+
+	transformedImageOptimizationPolicy, err := expandComputeUrlMapDefaultRouteActionImageOptimizationPolicy(original["image_optimization_policy"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedImageOptimizationPolicy); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["imageOptimizationPolicy"] = transformedImageOptimizationPolicy
 	}
 
 	return transformed, nil
@@ -7161,5 +7267,31 @@ func expandComputeUrlMapDefaultRouteActionCachePolicyCacheKeyPolicyIncludedHeade
 }
 
 func expandComputeUrlMapDefaultRouteActionCachePolicyCacheKeyPolicyIncludedCookieNames(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeUrlMapDefaultRouteActionImageOptimizationPolicy(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedQueryParameterInterpretation, err := expandComputeUrlMapDefaultRouteActionImageOptimizationPolicyQueryParameterInterpretation(original["query_parameter_interpretation"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedQueryParameterInterpretation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["queryParameterInterpretation"] = transformedQueryParameterInterpretation
+	}
+
+	return transformed, nil
+}
+
+func expandComputeUrlMapDefaultRouteActionImageOptimizationPolicyQueryParameterInterpretation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
