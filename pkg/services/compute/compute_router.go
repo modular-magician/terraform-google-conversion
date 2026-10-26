@@ -58,6 +58,22 @@ func resourceComputeRouterCustomDiff(_ context.Context, diff *schema.ResourceDif
 	return nil
 }
 
+// mergeComputeRouterMd5AuthenticationKeys returns the router's md5AuthenticationKeys
+// with newKey in place of the key previously managed by google_compute_router (oldName).
+// All other keys belong to google_compute_router_peer and are sent with only their
+// name, which tells the API to keep their current value.
+func mergeComputeRouterMd5AuthenticationKeys(current []interface{}, oldName interface{}, newKey map[string]interface{}) []interface{} {
+	merged := make([]interface{}, 0, len(current)+1)
+	for _, raw := range current {
+		key, ok := raw.(map[string]interface{})
+		if !ok || key["name"] == oldName || key["name"] == newKey["name"] {
+			continue
+		}
+		merged = append(merged, map[string]interface{}{"name": key["name"]})
+	}
+	return append(merged, newKey)
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
@@ -196,16 +212,19 @@ The default is 20.`,
 attachments (interconnectAttachments).`,
 			},
 			"md5_authentication_keys": {
-				Type:        schema.TypeList,
-				Optional:    true,
-				Description: `Keys used for MD5 authentication.`,
-				MaxItems:    1,
+				Type:     schema.TypeList,
+				Optional: true,
+				Description: `Keys used for MD5 authentication. Keys used by BGP peers managed with
+'google_compute_router_peer' are configured on that resource with
+'md5_authentication_key', and are kept when this key is updated.`,
+				MaxItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"key": {
 							Type:        schema.TypeString,
 							Required:    true,
 							Description: `Value of the key used for MD5 authentication.`,
+							Sensitive:   true,
 						},
 						"name": {
 							Type:     schema.TypeString,
