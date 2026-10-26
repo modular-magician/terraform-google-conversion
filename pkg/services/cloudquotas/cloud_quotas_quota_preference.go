@@ -49,6 +49,21 @@ func QuotaPreferredValueDiffSuppress(k, old, new string, d *schema.ResourceData)
 	return (oldEmpty && n == "0") || (o == "0" && newEmpty)
 }
 
+// ignore_safety_checks and ignore_safety_checks_set both map to the same
+// ignoreSafetyChecks query parameter and cannot be combined. ConflictsWith
+// is not generated for url_param_only parameters, so the conflict is
+// enforced here at plan time instead.
+func quotaPreferenceSafetyChecksConflictDiff(_ context.Context, diff *schema.ResourceDiff, v interface{}) error {
+	rawConfig := diff.GetRawConfig()
+	if rawConfig.IsNull() {
+		return nil
+	}
+	if !rawConfig.GetAttr("ignore_safety_checks").IsNull() && !rawConfig.GetAttr("ignore_safety_checks_set").IsNull() {
+		return fmt.Errorf("\"ignore_safety_checks\": conflicts with ignore_safety_checks_set")
+	}
+	return nil
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
@@ -151,9 +166,20 @@ Example: '{"provider": "Foo Inc"}' where "provider" is a service specific dimens
 			"ignore_safety_checks": {
 				Type:         schema.TypeString,
 				Optional:     true,
+				Deprecated:   "`ignore_safety_checks` is deprecated and will be removed in a future major release. Use `ignore_safety_checks_set` instead, which supports ignoring multiple safety checks at once.",
 				ValidateFunc: verify.ValidateEnum([]string{"QUOTA_SAFETY_CHECK_UNSPECIFIED", "QUOTA_DECREASE_BELOW_USAGE", "QUOTA_DECREASE_PERCENTAGE_TOO_HIGH", ""}),
-				Description:  `The list of quota safety checks to be ignored. Default value: "QUOTA_SAFETY_CHECK_UNSPECIFIED" Possible values: ["QUOTA_SAFETY_CHECK_UNSPECIFIED", "QUOTA_DECREASE_BELOW_USAGE", "QUOTA_DECREASE_PERCENTAGE_TOO_HIGH"]`,
+				Description:  `The quota safety check to be ignored. Cannot be used with 'ignore_safety_checks_set'. Default value: "QUOTA_SAFETY_CHECK_UNSPECIFIED" Possible values: ["QUOTA_SAFETY_CHECK_UNSPECIFIED", "QUOTA_DECREASE_BELOW_USAGE", "QUOTA_DECREASE_PERCENTAGE_TOO_HIGH"]`,
 				Default:      "QUOTA_SAFETY_CHECK_UNSPECIFIED",
+			},
+			"ignore_safety_checks_set": {
+				Type:        schema.TypeSet,
+				Optional:    true,
+				Description: `The set of quota safety checks to be ignored. Cannot be used with 'ignore_safety_checks'. Possible values: ["QUOTA_DECREASE_BELOW_USAGE", "QUOTA_DECREASE_PERCENTAGE_TOO_HIGH"]`,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: verify.ValidateEnum([]string{"QUOTA_DECREASE_BELOW_USAGE", "QUOTA_DECREASE_PERCENTAGE_TOO_HIGH"}),
+				},
+				Set: schema.HashString,
 			},
 			"justification": {
 				Type:        schema.TypeString,

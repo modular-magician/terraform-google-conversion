@@ -49,6 +49,7 @@ func TestAccCloudQuotasQuotaPreference(t *testing.T) {
 					"dynamic",
 					"for_each",
 					"ignore_safety_checks",
+					"ignore_safety_checks_set",
 					"justification",
 					"lifecycle",
 					"parent",
