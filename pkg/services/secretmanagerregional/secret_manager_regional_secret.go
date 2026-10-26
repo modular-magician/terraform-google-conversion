@@ -191,7 +191,12 @@ automatically sends rotation notifications.`,
 				Optional: true,
 				ForceNew: true,
 				Description: `This defines the type of the secret. Enforces certain structural requirements on the SecretVersions.
-For secret of type UNSPECIFIED, the SecretVersions can be of any type.`,
+For secret of type UNSPECIFIED, the SecretVersions can be of any type.
+Possible values include 'CLOUD_SQL_DB_CREDENTIALS', 'OTHER_DB_CREDENTIALS', 'ACCESS_KEY',
+'CERTIFICATE' and 'OTHER'. Secret versions can't be added manually to a 'CLOUD_SQL_DB_CREDENTIALS'
+secret; use 'google_secret_manager_regional_secret_managed_rotation' to have Secret Manager
+create them. See the [API documentation](https://cloud.google.com/secret-manager/regional-secrets/set-up-automatic-rotation-for-cloudsql-secrets-rs)
+for details.`,
 			},
 			"tags": {
 				Type:     schema.TypeMap,
@@ -270,6 +275,16 @@ the actual destruction happens after this TTL expires. It must be atleast 24h.`,
 				Computed: true,
 				Description: `The resource name of the regional secret. Format:
 'projects/{{project}}/locations/{{location}}/secrets/{{secret_id}}'`,
+			},
+			"policy_member": {
+				Type:     schema.TypeList,
+				Computed: true,
+				Description: `The IAM principal that represents this regional secret. Grant roles to this principal when a
+feature acts on other resources on behalf of the secret, for example the Cloud SQL permissions
+required by 'google_secret_manager_regional_secret_managed_rotation'.`,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{},
+				},
 			},
 			"terraform_labels": {
 				Type:     schema.TypeMap,

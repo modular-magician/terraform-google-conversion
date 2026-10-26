@@ -37,6 +37,9 @@ func TestAccSecretManagerSecret(t *testing.T) {
 			Name: "TestAccSecretManagerSecret_secretWithAutomaticCmekExample",
 		},
 		{
+			Name: "TestAccSecretManagerSecret_secretWithSecretTypeExample",
+		},
+		{
 			Name: "TestAccSecretManagerSecret_import",
 		},
 		{

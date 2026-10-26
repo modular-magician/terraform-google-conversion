@@ -133,7 +133,7 @@ func (c *SecretManagerRegionalRegionalSecretCai2hclConverter) convertResourceDat
 	}
 	hclData := make(map[string]interface{})
 
-	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_annotations": struct{}{}, "effective_labels": struct{}{}, "name": struct{}{}, "terraform_labels": struct{}{}}
+	outputFields := map[string]struct{}{"create_time": struct{}{}, "effective_annotations": struct{}{}, "effective_labels": struct{}{}, "name": struct{}{}, "policy_member": struct{}{}, "terraform_labels": struct{}{}}
 	utils.ParseUrlParamValuesFromAssetName(asset.Name, "//secretmanager.googleapis.com/projects/{{project}}/locations/{{location}}/secrets/{{secret_id}}", outputFields, hclData)
 
 	hclData["labels"] = flattenSecretManagerRegionalRegionalSecretLabels(res["labels"], d, config)
@@ -229,36 +229,22 @@ func flattenSecretManagerRegionalRegionalSecretRotation(v interface{}, d *schema
 	if v == nil {
 		return nil
 	}
-	original := v.(map[string]interface{})
+	original, ok := v.(map[string]interface{})
+	if !ok {
+		return nil
+	}
+	// Once managed rotation is enabled the API returns rotation.managedRotationStatus even when no
+	// user-configured schedule exists. Only surface the block when a schedule field is present,
+	// otherwise secrets without a rotation block would show a permanent diff.
+	nextRotationTime, hasNext := original["nextRotationTime"]
+	rotationPeriod, hasPeriod := original["rotationPeriod"]
+	if !hasNext && !hasPeriod {
+		return nil
+	}
 	transformed := make(map[string]interface{})
-	transformed["next_rotation_time"] =
-		flattenSecretManagerRegionalRegionalSecretRotationNextRotationTime(original["nextRotationTime"], d, config)
-	transformed["rotation_period"] =
-		flattenSecretManagerRegionalRegionalSecretRotationRotationPeriod(original["rotationPeriod"], d, config)
-	if tgcresource.AllValuesAreNil(transformed) {
-		return nil
-	}
+	transformed["next_rotation_time"] = nextRotationTime
+	transformed["rotation_period"] = rotationPeriod
 	return []interface{}{transformed}
-}
-
-func flattenSecretManagerRegionalRegionalSecretRotationNextRotationTime(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	if strVal, ok := v.(string); ok && strVal == "" {
-		return nil
-	}
-	return v
-}
-
-func flattenSecretManagerRegionalRegionalSecretRotationRotationPeriod(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	if strVal, ok := v.(string); ok && strVal == "" {
-		return nil
-	}
-	return v
 }
 
 func flattenSecretManagerRegionalRegionalSecretExpireTime(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
