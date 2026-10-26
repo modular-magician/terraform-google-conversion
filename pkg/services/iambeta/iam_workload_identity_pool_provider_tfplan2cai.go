@@ -157,6 +157,12 @@ func GetIAMBetaWorkloadIdentityPoolProviderCaiObject(d tpgresource.TerraformReso
 	} else if v, ok := d.GetOkExists("oidc"); !tpgresource.IsEmptyValue(reflect.ValueOf(oidcProp)) && (ok || !reflect.DeepEqual(v, oidcProp)) {
 		obj["oidc"] = oidcProp
 	}
+	actorProvidersProp, err := expandIAMBetaWorkloadIdentityPoolProviderActorProviders(d.Get("actor_providers"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("actor_providers"); !tpgresource.IsEmptyValue(reflect.ValueOf(actorProvidersProp)) && (ok || !reflect.DeepEqual(v, actorProvidersProp)) {
+		obj["actorProviders"] = actorProvidersProp
+	}
 	samlProp, err := expandIAMBetaWorkloadIdentityPoolProviderSaml(d.Get("saml"), d, config)
 	if err != nil {
 		return nil, err
@@ -259,6 +265,13 @@ func expandIAMBetaWorkloadIdentityPoolProviderOidc(v interface{}, d tpgresource.
 		transformed["jwksJson"] = transformedJwksJson
 	}
 
+	transformedDiscoveryUri, err := expandIAMBetaWorkloadIdentityPoolProviderOidcDiscoveryUri(original["discovery_uri"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDiscoveryUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["discoveryUri"] = transformedDiscoveryUri
+	}
+
 	return transformed, nil
 }
 
@@ -271,6 +284,14 @@ func expandIAMBetaWorkloadIdentityPoolProviderOidcIssuerUri(v interface{}, d tpg
 }
 
 func expandIAMBetaWorkloadIdentityPoolProviderOidcJwksJson(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIAMBetaWorkloadIdentityPoolProviderOidcDiscoveryUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandIAMBetaWorkloadIdentityPoolProviderActorProviders(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

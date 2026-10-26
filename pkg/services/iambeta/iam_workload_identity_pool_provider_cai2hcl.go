@@ -158,6 +158,7 @@ func (c *IAMBetaWorkloadIdentityPoolProviderCai2hclConverter) convertResourceDat
 	hclData["attribute_condition"] = flattenIAMBetaWorkloadIdentityPoolProviderAttributeCondition(res["attributeCondition"], d, config)
 	hclData["aws"] = flattenIAMBetaWorkloadIdentityPoolProviderAws(res["aws"], d, config)
 	hclData["oidc"] = flattenIAMBetaWorkloadIdentityPoolProviderOidc(res["oidc"], d, config)
+	hclData["actor_providers"] = flattenIAMBetaWorkloadIdentityPoolProviderActorProviders(res["actorProviders"], d, config)
 	hclData["saml"] = flattenIAMBetaWorkloadIdentityPoolProviderSaml(res["saml"], d, config)
 	hclData["x509"] = flattenIAMBetaWorkloadIdentityPoolProviderX509(res["x509"], d, config)
 
@@ -246,6 +247,8 @@ func flattenIAMBetaWorkloadIdentityPoolProviderOidc(v interface{}, d *schema.Res
 		flattenIAMBetaWorkloadIdentityPoolProviderOidcIssuerUri(original["issuerUri"], d, config)
 	transformed["jwks_json"] =
 		flattenIAMBetaWorkloadIdentityPoolProviderOidcJwksJson(original["jwksJson"], d, config)
+	transformed["discovery_uri"] =
+		flattenIAMBetaWorkloadIdentityPoolProviderOidcDiscoveryUri(original["discoveryUri"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -274,6 +277,20 @@ func flattenIAMBetaWorkloadIdentityPoolProviderOidcJwksJson(v interface{}, d *sc
 	if strVal, ok := v.(string); ok && strVal == "" {
 		return nil
 	}
+	return v
+}
+
+func flattenIAMBetaWorkloadIdentityPoolProviderOidcDiscoveryUri(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenIAMBetaWorkloadIdentityPoolProviderActorProviders(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
