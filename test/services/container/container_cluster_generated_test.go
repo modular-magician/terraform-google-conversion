@@ -637,6 +637,9 @@ func TestAccContainerCluster(t *testing.T) {
 			Name: "TestAccContainerCluster_disableControlPlaneIP",
 		},
 		{
+			Name: "TestAccContainerCluster_disableControlPlaneIPWithPrivateEndpointSubnetwork",
+		},
+		{
 			Name: "TestAccContainerCluster_withAdvancedMachineFeaturesPMU_Standard",
 		},
 		{
