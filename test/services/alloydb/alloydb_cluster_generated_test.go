@@ -100,6 +100,9 @@ func TestAccAlloydbCluster(t *testing.T) {
 			Name: "TestAccAlloydbCluster_withMaintenanceWindows",
 		},
 		{
+			Name: "TestAccAlloydbCluster_withDenyMaintenancePeriods",
+		},
+		{
 			Name: "TestAccAlloydbCluster_withMaintenanceWindowsMissingFields",
 		},
 		{

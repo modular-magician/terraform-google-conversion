@@ -772,6 +772,8 @@ func flattenAlloydbClusterMaintenanceUpdatePolicy(v interface{}, d *schema.Resou
 	transformed := make(map[string]interface{})
 	transformed["maintenance_windows"] =
 		flattenAlloydbClusterMaintenanceUpdatePolicyMaintenanceWindows(original["maintenanceWindows"], d, config)
+	transformed["deny_maintenance_periods"] =
+		flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriods(original["denyMaintenancePeriods"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -877,6 +879,262 @@ func flattenAlloydbClusterMaintenanceUpdatePolicyMaintenanceWindowsStartTimeSeco
 }
 
 func flattenAlloydbClusterMaintenanceUpdatePolicyMaintenanceWindowsStartTimeNanos(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriods(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return v
+	}
+	l := v.([]interface{})
+	transformed := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		original := raw.(map[string]interface{})
+		if len(original) < 1 {
+			// Do not include empty json objects coming back from the api
+			continue
+		}
+		transformed = append(transformed, map[string]interface{}{
+			"start_date": flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsStartDate(original["startDate"], d, config),
+			"end_date":   flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsEndDate(original["endDate"], d, config),
+			"time":       flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsTime(original["time"], d, config),
+		})
+	}
+	return transformed
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsStartDate(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["year"] =
+		flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsStartDateYear(original["year"], d, config)
+	transformed["month"] =
+		flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsStartDateMonth(original["month"], d, config)
+	transformed["day"] =
+		flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsStartDateDay(original["day"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsStartDateYear(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsStartDateMonth(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+	if v == nil {
+		return 0
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsStartDateDay(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+	if v == nil {
+		return 0
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsEndDate(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["year"] =
+		flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsEndDateYear(original["year"], d, config)
+	transformed["month"] =
+		flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsEndDateMonth(original["month"], d, config)
+	transformed["day"] =
+		flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsEndDateDay(original["day"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsEndDateYear(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsEndDateMonth(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+	if v == nil {
+		return 0
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsEndDateDay(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+	if v == nil {
+		return 0
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsTime(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["hours"] =
+		flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsTimeHours(original["hours"], d, config)
+	transformed["minutes"] =
+		flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsTimeMinutes(original["minutes"], d, config)
+	transformed["seconds"] =
+		flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsTimeSeconds(original["seconds"], d, config)
+	transformed["nanos"] =
+		flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsTimeNanos(original["nanos"], d, config)
+	return []interface{}{transformed}
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsTimeHours(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsTimeMinutes(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsTimeSeconds(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbClusterMaintenanceUpdatePolicyDenyMaintenancePeriodsTimeNanos(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	// Handles the string fixed64 format
 	if strVal, ok := v.(string); ok {
 		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {

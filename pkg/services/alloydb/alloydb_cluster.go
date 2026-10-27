@@ -374,6 +374,102 @@ Please refer to the field 'effective_labels' for all of the labels present on th
 				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"deny_maintenance_periods": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: `Periods to deny maintenance. Currently limited to 1.`,
+							MaxItems:    1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"end_date": {
+										Type:     schema.TypeList,
+										Required: true,
+										Description: `Deny period end date. This can be:
+* A full date, with non-zero year, month and day values OR
+* A month and day value, with a zero year for recurring`,
+										MaxItems: 1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"day": {
+													Type:        schema.TypeInt,
+													Required:    true,
+													Description: `Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.`,
+												},
+												"month": {
+													Type:        schema.TypeInt,
+													Required:    true,
+													Description: `Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.`,
+												},
+												"year": {
+													Type:        schema.TypeInt,
+													Optional:    true,
+													Description: `Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.`,
+												},
+											},
+										},
+									},
+									"start_date": {
+										Type:     schema.TypeList,
+										Required: true,
+										Description: `Deny period start date. This can be:
+* A full date, with non-zero year, month and day values OR
+* A month and day value, with a zero year for recurring`,
+										MaxItems: 1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"day": {
+													Type:        schema.TypeInt,
+													Required:    true,
+													Description: `Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.`,
+												},
+												"month": {
+													Type:        schema.TypeInt,
+													Required:    true,
+													Description: `Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.`,
+												},
+												"year": {
+													Type:        schema.TypeInt,
+													Optional:    true,
+													Description: `Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.`,
+												},
+											},
+										},
+									},
+									"time": {
+										Type:     schema.TypeList,
+										Required: true,
+										Description: `Time in UTC when the deny period starts on start_date and ends on end_date. This can be:
+* Full time OR
+* All zeros for 00:00:00 UTC`,
+										MaxItems: 1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"hours": {
+													Type:        schema.TypeInt,
+													Optional:    true,
+													Description: `Hours of day in 24 hour format. Should be from 0 to 23.`,
+												},
+												"minutes": {
+													Type:        schema.TypeInt,
+													Optional:    true,
+													Description: `Minutes of hour of day. Must be from 0 to 59.`,
+												},
+												"nanos": {
+													Type:        schema.TypeInt,
+													Optional:    true,
+													Description: `Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.`,
+												},
+												"seconds": {
+													Type:        schema.TypeInt,
+													Optional:    true,
+													Description: `Seconds of minutes of the time. Must normally be from 0 to 59.`,
+												},
+											},
+										},
+									},
+								},
+							},
+						},
 						"maintenance_windows": {
 							Type:        schema.TypeList,
 							Optional:    true,
