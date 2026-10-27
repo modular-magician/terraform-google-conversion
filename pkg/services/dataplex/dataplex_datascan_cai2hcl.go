@@ -1297,6 +1297,8 @@ func flattenDataplexDatascanDataDocumentationSpec(v interface{}, d *schema.Resou
 	}
 	original := v.(map[string]interface{})
 	transformed := make(map[string]interface{})
+	transformed["custom_instructions"] =
+		flattenDataplexDatascanDataDocumentationSpecCustomInstructions(original["customInstructions"], d, config)
 	transformed["catalog_publishing_enabled"] =
 		flattenDataplexDatascanDataDocumentationSpecCatalogPublishingEnabled(original["catalogPublishingEnabled"], d, config)
 	transformed["sql_dialect"] =
@@ -1304,6 +1306,16 @@ func flattenDataplexDatascanDataDocumentationSpec(v interface{}, d *schema.Resou
 	transformed["generation_scopes"] =
 		flattenDataplexDatascanDataDocumentationSpecGenerationScopes(original["generationScopes"], d, config)
 	return []interface{}{transformed}
+}
+
+func flattenDataplexDatascanDataDocumentationSpecCustomInstructions(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
 }
 
 func flattenDataplexDatascanDataDocumentationSpecCatalogPublishingEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
