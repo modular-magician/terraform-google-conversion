@@ -158,6 +158,12 @@ func GetDiscoveryEngineDataStoreApiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("document_processing_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(documentProcessingConfigProp)) && (ok || !reflect.DeepEqual(v, documentProcessingConfigProp)) {
 		obj["documentProcessingConfig"] = documentProcessingConfigProp
 	}
+	federatedSearchConfigProp, err := expandDiscoveryEngineDataStoreFederatedSearchConfig(d.Get("federated_search_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("federated_search_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(federatedSearchConfigProp)) && (ok || !reflect.DeepEqual(v, federatedSearchConfigProp)) {
+		obj["federatedSearchConfig"] = federatedSearchConfigProp
+	}
 
 	return obj, nil
 }
@@ -710,5 +716,53 @@ func expandDiscoveryEngineDataStoreDocumentProcessingConfigParsingConfigOverride
 }
 
 func expandDiscoveryEngineDataStoreDocumentProcessingConfigParsingConfigOverridesLayoutParsingConfigExcludeHtmlIds(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDiscoveryEngineDataStoreFederatedSearchConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedNotebooklmConfig, err := expandDiscoveryEngineDataStoreFederatedSearchConfigNotebooklmConfig(original["notebooklm_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedNotebooklmConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["notebooklmConfig"] = transformedNotebooklmConfig
+	}
+
+	return transformed, nil
+}
+
+func expandDiscoveryEngineDataStoreFederatedSearchConfigNotebooklmConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedSearchConfig, err := expandDiscoveryEngineDataStoreFederatedSearchConfigNotebooklmConfigSearchConfig(original["search_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSearchConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["searchConfig"] = transformedSearchConfig
+	}
+
+	return transformed, nil
+}
+
+func expandDiscoveryEngineDataStoreFederatedSearchConfigNotebooklmConfigSearchConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
