@@ -1812,6 +1812,91 @@ https://www.postgresql.org/docs/current/datatype.html`,
 								},
 							},
 						},
+						"saas_excluded_objects": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: `SaaS data source objects to avoid backfilling.`,
+							MaxItems:    1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"objects": {
+										Type:        schema.TypeList,
+										Required:    true,
+										Description: `Source objects in the catalog.`,
+										MinItems:    1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"object_name": {
+													Type:        schema.TypeString,
+													Required:    true,
+													Description: `The object name.`,
+												},
+												"properties": {
+													Type:     schema.TypeList,
+													Optional: true,
+													Description: `Source properties. When unspecified as part of include objects, includes
+everything, when unspecified as part of exclude objects, excludes nothing.`,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+															"property_name": {
+																Type:        schema.TypeString,
+																Required:    true,
+																Description: `The property name.`,
+															},
+															"primary_key": {
+																Type:        schema.TypeBool,
+																Optional:    true,
+																Description: `Whether or not the property is a primary key.`,
+															},
+															"properties": {
+																Type:     schema.TypeList,
+																Optional: true,
+																Description: `Source properties. When specified, it means that the current property
+contains nested properties of its own.`,
+																Elem: &schema.Resource{
+																	Schema: map[string]*schema.Schema{
+																		"property_name": {
+																			Type:        schema.TypeString,
+																			Required:    true,
+																			Description: `The property name.`,
+																		},
+																		"primary_key": {
+																			Type:        schema.TypeBool,
+																			Optional:    true,
+																			Description: `Whether or not the property is a primary key.`,
+																		},
+																		"properties": {
+																			Type:     schema.TypeList,
+																			Optional: true,
+																			Description: `Source properties. When specified, it means that the current property
+contains nested properties of its own.`,
+																			Elem: &schema.Resource{
+																				Schema: map[string]*schema.Schema{
+																					"property_name": {
+																						Type:        schema.TypeString,
+																						Required:    true,
+																						Description: `The property name.`,
+																					},
+																					"primary_key": {
+																						Type:        schema.TypeBool,
+																						Optional:    true,
+																						Description: `Whether or not the property is a primary key.`,
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+						},
 						"salesforce_excluded_objects": {
 							Type:        schema.TypeList,
 							Optional:    true,

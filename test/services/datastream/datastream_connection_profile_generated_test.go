@@ -50,6 +50,18 @@ func TestAccDatastreamConnectionProfile(t *testing.T) {
 		{
 			Name: "TestAccDatastreamConnectionProfile_mongoDb",
 		},
+		{
+			Name: "TestAccDatastreamConnectionProfile_dataverse",
+		},
+		{
+			Name: "TestAccDatastreamConnectionProfile_salesforceMarketingCloud",
+		},
+		{
+			Name: "TestAccDatastreamConnectionProfile_serviceNow",
+		},
+		{
+			Name: "TestAccDatastreamConnectionProfile_serviceNowOauth2SecretManager",
+		},
 	}
 
 	for _, tt := range tests {

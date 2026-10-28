@@ -3233,6 +3233,13 @@ func expandDatastreamStreamBackfillAll(v interface{}, d tpgresource.TerraformRes
 		transformed["mongodbExcludedObjects"] = transformedMongodbExcludedObjects
 	}
 
+	transformedSaasExcludedObjects, err := expandDatastreamStreamBackfillAllSaasExcludedObjects(original["saas_excluded_objects"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSaasExcludedObjects); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["saasExcludedObjects"] = transformedSaasExcludedObjects
+	}
+
 	return transformed, nil
 }
 
@@ -4179,6 +4186,198 @@ func expandDatastreamStreamBackfillAllMongodbExcludedObjectsDatabasesCollections
 }
 
 func expandDatastreamStreamBackfillAllMongodbExcludedObjectsDatabasesCollectionsFieldsField(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjects(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedObjects, err := expandDatastreamStreamBackfillAllSaasExcludedObjectsObjects(original["objects"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedObjects); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["objects"] = transformedObjects
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjectsObjects(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedObjectName, err := expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsObjectName(original["object_name"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedObjectName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["objectName"] = transformedObjectName
+		}
+
+		transformedProperties, err := expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsProperties(original["properties"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedProperties); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["properties"] = transformedProperties
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsObjectName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsProperties(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedPropertyName, err := expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertyName(original["property_name"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPropertyName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["propertyName"] = transformedPropertyName
+		}
+
+		transformedPrimaryKey, err := expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPrimaryKey(original["primary_key"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPrimaryKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["primaryKey"] = transformedPrimaryKey
+		}
+
+		transformedProperties, err := expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesProperties(original["properties"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedProperties); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["properties"] = transformedProperties
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPrimaryKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesProperties(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedPropertyName, err := expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertiesPropertyName(original["property_name"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPropertyName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["propertyName"] = transformedPropertyName
+		}
+
+		transformedPrimaryKey, err := expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertiesPrimaryKey(original["primary_key"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPrimaryKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["primaryKey"] = transformedPrimaryKey
+		}
+
+		transformedProperties, err := expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertiesProperties(original["properties"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedProperties); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["properties"] = transformedProperties
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertiesPropertyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertiesPrimaryKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertiesProperties(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedPropertyName, err := expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertiesPropertiesPropertyName(original["property_name"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPropertyName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["propertyName"] = transformedPropertyName
+		}
+
+		transformedPrimaryKey, err := expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertiesPropertiesPrimaryKey(original["primary_key"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPrimaryKey); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["primaryKey"] = transformedPrimaryKey
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertiesPropertiesPropertyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamBackfillAllSaasExcludedObjectsObjectsPropertiesPropertiesPropertiesPrimaryKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

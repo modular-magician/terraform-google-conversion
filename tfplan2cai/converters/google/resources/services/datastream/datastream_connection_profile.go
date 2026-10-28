@@ -181,6 +181,24 @@ func GetDatastreamConnectionProfileApiObject(d tpgresource.TerraformResourceData
 	} else if v, ok := d.GetOkExists("mongodb_profile"); !tpgresource.IsEmptyValue(reflect.ValueOf(mongodbProfileProp)) && (ok || !reflect.DeepEqual(v, mongodbProfileProp)) {
 		obj["mongodbProfile"] = mongodbProfileProp
 	}
+	dataverseProfileProp, err := expandDatastreamConnectionProfileDataverseProfile(d.Get("dataverse_profile"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("dataverse_profile"); !tpgresource.IsEmptyValue(reflect.ValueOf(dataverseProfileProp)) && (ok || !reflect.DeepEqual(v, dataverseProfileProp)) {
+		obj["dataverseProfile"] = dataverseProfileProp
+	}
+	salesforceMarketingCloudProfileProp, err := expandDatastreamConnectionProfileSalesforceMarketingCloudProfile(d.Get("salesforce_marketing_cloud_profile"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("salesforce_marketing_cloud_profile"); !tpgresource.IsEmptyValue(reflect.ValueOf(salesforceMarketingCloudProfileProp)) && (ok || !reflect.DeepEqual(v, salesforceMarketingCloudProfileProp)) {
+		obj["salesforceMarketingCloudProfile"] = salesforceMarketingCloudProfileProp
+	}
+	serviceNowProfileProp, err := expandDatastreamConnectionProfileServiceNowProfile(d.Get("service_now_profile"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("service_now_profile"); !tpgresource.IsEmptyValue(reflect.ValueOf(serviceNowProfileProp)) && (ok || !reflect.DeepEqual(v, serviceNowProfileProp)) {
+		obj["serviceNowProfile"] = serviceNowProfileProp
+	}
 	forwardSshConnectivityProp, err := expandDatastreamConnectionProfileForwardSshConnectivity(d.Get("forward_ssh_connectivity"), d, config)
 	if err != nil {
 		return nil, err
@@ -1269,6 +1287,403 @@ func expandDatastreamConnectionProfileMongodbProfileStandardConnectionFormat(v i
 }
 
 func expandDatastreamConnectionProfileMongodbProfileStandardConnectionFormatDirectConnection(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileDataverseProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedTenantId, err := expandDatastreamConnectionProfileDataverseProfileTenantId(original["tenant_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedTenantId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["tenantId"] = transformedTenantId
+	}
+
+	transformedEnvironmentUrl, err := expandDatastreamConnectionProfileDataverseProfileEnvironmentUrl(original["environment_url"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedEnvironmentUrl); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["environmentUrl"] = transformedEnvironmentUrl
+	}
+
+	transformedOauthClientCredentials, err := expandDatastreamConnectionProfileDataverseProfileOauthClientCredentials(original["oauth_client_credentials"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedOauthClientCredentials); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["oauthClientCredentials"] = transformedOauthClientCredentials
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileDataverseProfileTenantId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileDataverseProfileEnvironmentUrl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileDataverseProfileOauthClientCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedClientId, err := expandDatastreamConnectionProfileDataverseProfileOauthClientCredentialsClientId(original["client_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientId"] = transformedClientId
+	}
+
+	transformedClientSecret, err := expandDatastreamConnectionProfileDataverseProfileOauthClientCredentialsClientSecret(original["client_secret"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientSecret); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientSecret"] = transformedClientSecret
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileDataverseProfileOauthClientCredentialsClientId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileDataverseProfileOauthClientCredentialsClientSecret(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedRawValue, err := expandDatastreamConnectionProfileDataverseProfileOauthClientCredentialsClientSecretRawValue(original["raw_value"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRawValue); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["rawValue"] = transformedRawValue
+	}
+
+	transformedSecretVersion, err := expandDatastreamConnectionProfileDataverseProfileOauthClientCredentialsClientSecretSecretVersion(original["secret_version"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSecretVersion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["secretVersion"] = transformedSecretVersion
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileDataverseProfileOauthClientCredentialsClientSecretRawValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileDataverseProfileOauthClientCredentialsClientSecretSecretVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileSalesforceMarketingCloudProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedSubdomain, err := expandDatastreamConnectionProfileSalesforceMarketingCloudProfileSubdomain(original["subdomain"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSubdomain); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["subdomain"] = transformedSubdomain
+	}
+
+	transformedOauthClientCredentials, err := expandDatastreamConnectionProfileSalesforceMarketingCloudProfileOauthClientCredentials(original["oauth_client_credentials"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedOauthClientCredentials); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["oauthClientCredentials"] = transformedOauthClientCredentials
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileSalesforceMarketingCloudProfileSubdomain(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileSalesforceMarketingCloudProfileOauthClientCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedClientId, err := expandDatastreamConnectionProfileSalesforceMarketingCloudProfileOauthClientCredentialsClientId(original["client_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientId"] = transformedClientId
+	}
+
+	transformedClientSecret, err := expandDatastreamConnectionProfileSalesforceMarketingCloudProfileOauthClientCredentialsClientSecret(original["client_secret"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientSecret); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientSecret"] = transformedClientSecret
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileSalesforceMarketingCloudProfileOauthClientCredentialsClientId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileSalesforceMarketingCloudProfileOauthClientCredentialsClientSecret(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedRawValue, err := expandDatastreamConnectionProfileSalesforceMarketingCloudProfileOauthClientCredentialsClientSecretRawValue(original["raw_value"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRawValue); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["rawValue"] = transformedRawValue
+	}
+
+	transformedSecretVersion, err := expandDatastreamConnectionProfileSalesforceMarketingCloudProfileOauthClientCredentialsClientSecretSecretVersion(original["secret_version"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSecretVersion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["secretVersion"] = transformedSecretVersion
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileSalesforceMarketingCloudProfileOauthClientCredentialsClientSecretRawValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileSalesforceMarketingCloudProfileOauthClientCredentialsClientSecretSecretVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedInstance, err := expandDatastreamConnectionProfileServiceNowProfileInstance(original["instance"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedInstance); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["instance"] = transformedInstance
+	}
+
+	transformedUserPasswordCredentials, err := expandDatastreamConnectionProfileServiceNowProfileUserPasswordCredentials(original["user_password_credentials"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUserPasswordCredentials); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["userPasswordCredentials"] = transformedUserPasswordCredentials
+	}
+
+	transformedOauthClientCredentials, err := expandDatastreamConnectionProfileServiceNowProfileOauthClientCredentials(original["oauth_client_credentials"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedOauthClientCredentials); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["oauthClientCredentials"] = transformedOauthClientCredentials
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfileInstance(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfileUserPasswordCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedUsername, err := expandDatastreamConnectionProfileServiceNowProfileUserPasswordCredentialsUsername(original["username"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUsername); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["username"] = transformedUsername
+	}
+
+	transformedPassword, err := expandDatastreamConnectionProfileServiceNowProfileUserPasswordCredentialsPassword(original["password"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPassword); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["password"] = transformedPassword
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfileUserPasswordCredentialsUsername(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfileUserPasswordCredentialsPassword(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedRawValue, err := expandDatastreamConnectionProfileServiceNowProfileUserPasswordCredentialsPasswordRawValue(original["raw_value"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRawValue); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["rawValue"] = transformedRawValue
+	}
+
+	transformedSecretVersion, err := expandDatastreamConnectionProfileServiceNowProfileUserPasswordCredentialsPasswordSecretVersion(original["secret_version"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSecretVersion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["secretVersion"] = transformedSecretVersion
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfileUserPasswordCredentialsPasswordRawValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfileUserPasswordCredentialsPasswordSecretVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfileOauthClientCredentials(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedClientId, err := expandDatastreamConnectionProfileServiceNowProfileOauthClientCredentialsClientId(original["client_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientId"] = transformedClientId
+	}
+
+	transformedClientSecret, err := expandDatastreamConnectionProfileServiceNowProfileOauthClientCredentialsClientSecret(original["client_secret"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientSecret); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientSecret"] = transformedClientSecret
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfileOauthClientCredentialsClientId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfileOauthClientCredentialsClientSecret(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedRawValue, err := expandDatastreamConnectionProfileServiceNowProfileOauthClientCredentialsClientSecretRawValue(original["raw_value"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRawValue); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["rawValue"] = transformedRawValue
+	}
+
+	transformedSecretVersion, err := expandDatastreamConnectionProfileServiceNowProfileOauthClientCredentialsClientSecretSecretVersion(original["secret_version"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSecretVersion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["secretVersion"] = transformedSecretVersion
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfileOauthClientCredentialsClientSecretRawValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileServiceNowProfileOauthClientCredentialsClientSecretSecretVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
