@@ -50,6 +50,9 @@ func TestAccDatastreamConnectionProfile(t *testing.T) {
 		{
 			Name: "TestAccDatastreamConnectionProfile_mongoDb",
 		},
+		{
+			Name: "TestAccDatastreamConnectionProfile_oracleAsmConfig",
+		},
 	}
 
 	for _, tt := range tests {

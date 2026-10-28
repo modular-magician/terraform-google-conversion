@@ -49,6 +49,9 @@ func TestAccDatastreamStream(t *testing.T) {
 		{
 			Name: "TestAccDatastreamStream_update",
 		},
+		{
+			Name: "TestAccDatastreamStream_oracleCdcMethods",
+		},
 	}
 
 	for _, tt := range tests {

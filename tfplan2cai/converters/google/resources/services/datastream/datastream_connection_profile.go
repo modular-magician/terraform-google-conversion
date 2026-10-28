@@ -268,6 +268,13 @@ func expandDatastreamConnectionProfileOracleProfile(v interface{}, d tpgresource
 		transformed["connectionAttributes"] = transformedConnectionAttributes
 	}
 
+	transformedOracleAsmConfig, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfig(original["oracle_asm_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedOracleAsmConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["oracleAsmConfig"] = transformedOracleAsmConfig
+	}
+
 	return transformed, nil
 }
 
@@ -304,6 +311,160 @@ func expandDatastreamConnectionProfileOracleProfileConnectionAttributes(v interf
 		m[k] = val.(string)
 	}
 	return m, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedHostname, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfigHostname(original["hostname"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedHostname); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["hostname"] = transformedHostname
+	}
+
+	transformedPort, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfigPort(original["port"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPort); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["port"] = transformedPort
+	}
+
+	transformedUsername, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfigUsername(original["username"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedUsername); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["username"] = transformedUsername
+	}
+
+	transformedPassword, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfigPassword(original["password"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPassword); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["password"] = transformedPassword
+	}
+
+	transformedSecretManagerStoredPassword, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfigSecretManagerStoredPassword(original["secret_manager_stored_password"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSecretManagerStoredPassword); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["secretManagerStoredPassword"] = transformedSecretManagerStoredPassword
+	}
+
+	transformedAsmService, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfigAsmService(original["asm_service"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAsmService); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["asmService"] = transformedAsmService
+	}
+
+	transformedConnectionAttributes, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfigConnectionAttributes(original["connection_attributes"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedConnectionAttributes); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["connectionAttributes"] = transformedConnectionAttributes
+	}
+
+	transformedOracleSslConfig, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfigOracleSslConfig(original["oracle_ssl_config"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedOracleSslConfig); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["oracleSslConfig"] = transformedOracleSslConfig
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfigHostname(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfigPort(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfigUsername(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfigPassword(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfigSecretManagerStoredPassword(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfigAsmService(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfigConnectionAttributes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfigOracleSslConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedCaCertificate, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfigOracleSslConfigCaCertificate(original["ca_certificate"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCaCertificate); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["caCertificate"] = transformedCaCertificate
+	}
+
+	transformedCaCertificateSet, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfigOracleSslConfigCaCertificateSet(original["ca_certificate_set"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCaCertificateSet); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["caCertificateSet"] = transformedCaCertificateSet
+	}
+
+	transformedServerCertificateDistinguishedName, err := expandDatastreamConnectionProfileOracleProfileOracleAsmConfigOracleSslConfigServerCertificateDistinguishedName(original["server_certificate_distinguished_name"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedServerCertificateDistinguishedName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["serverCertificateDistinguishedName"] = transformedServerCertificateDistinguishedName
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfigOracleSslConfigCaCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfigOracleSslConfigCaCertificateSet(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfileOracleProfileOracleAsmConfigOracleSslConfigServerCertificateDistinguishedName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandDatastreamConnectionProfileGcsProfile(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

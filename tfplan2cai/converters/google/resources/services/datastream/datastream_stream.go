@@ -890,6 +890,20 @@ func expandDatastreamStreamSourceConfigOracleSourceConfig(v interface{}, d tpgre
 		transformed["streamLargeObjects"] = transformedStreamLargeObjects
 	}
 
+	transformedLogMiner, err := expandDatastreamStreamSourceConfigOracleSourceConfigLogMiner(original["log_miner"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["logMiner"] = transformedLogMiner
+	}
+
+	transformedBinaryLogParser, err := expandDatastreamStreamSourceConfigOracleSourceConfigBinaryLogParser(original["binary_log_parser"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedBinaryLogParser); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["binaryLogParser"] = transformedBinaryLogParser
+	}
+
 	return transformed, nil
 }
 
@@ -1357,6 +1371,108 @@ func expandDatastreamStreamSourceConfigOracleSourceConfigStreamLargeObjects(v in
 	transformed := make(map[string]interface{})
 
 	return transformed, nil
+}
+
+func expandDatastreamStreamSourceConfigOracleSourceConfigLogMiner(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 {
+		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
+	}
+	transformed := make(map[string]interface{})
+
+	return transformed, nil
+}
+
+func expandDatastreamStreamSourceConfigOracleSourceConfigBinaryLogParser(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedOracleAsmLogFileAccess, err := expandDatastreamStreamSourceConfigOracleSourceConfigBinaryLogParserOracleAsmLogFileAccess(original["oracle_asm_log_file_access"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["oracleAsmLogFileAccess"] = transformedOracleAsmLogFileAccess
+	}
+
+	transformedLogFileDirectories, err := expandDatastreamStreamSourceConfigOracleSourceConfigBinaryLogParserLogFileDirectories(original["log_file_directories"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedLogFileDirectories); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["logFileDirectories"] = transformedLogFileDirectories
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamStreamSourceConfigOracleSourceConfigBinaryLogParserOracleAsmLogFileAccess(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 {
+		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
+	}
+	transformed := make(map[string]interface{})
+
+	return transformed, nil
+}
+
+func expandDatastreamStreamSourceConfigOracleSourceConfigBinaryLogParserLogFileDirectories(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedOnlineLogDirectory, err := expandDatastreamStreamSourceConfigOracleSourceConfigBinaryLogParserLogFileDirectoriesOnlineLogDirectory(original["online_log_directory"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedOnlineLogDirectory); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["onlineLogDirectory"] = transformedOnlineLogDirectory
+	}
+
+	transformedArchivedLogDirectory, err := expandDatastreamStreamSourceConfigOracleSourceConfigBinaryLogParserLogFileDirectoriesArchivedLogDirectory(original["archived_log_directory"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedArchivedLogDirectory); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["archivedLogDirectory"] = transformedArchivedLogDirectory
+	}
+
+	return transformed, nil
+}
+
+func expandDatastreamStreamSourceConfigOracleSourceConfigBinaryLogParserLogFileDirectoriesOnlineLogDirectory(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamSourceConfigOracleSourceConfigBinaryLogParserLogFileDirectoriesArchivedLogDirectory(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
 
 func expandDatastreamStreamSourceConfigPostgresqlSourceConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
