@@ -55,6 +55,7 @@ var metadataDefaults = map[string]string{
 	"enable-opencode":         "true",
 	"enable-opencode-web":     "true",
 	"enable-antigravity":      "true",
+	"enable-antigravity-hub":  "true",
 }
 
 var WorkbenchInstanceSettableUnmodifiableDefaultMetadata = []string{
