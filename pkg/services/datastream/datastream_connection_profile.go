@@ -113,7 +113,7 @@ func ResourceDatastreamConnectionProfile() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{},
 				},
-				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "sql_server_profile"},
+				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "salesforce_profile", "spanner_profile", "sql_server_profile"},
 			},
 			"create_without_validation": {
 				Type:             schema.TypeBool,
@@ -184,7 +184,7 @@ func ResourceDatastreamConnectionProfile() *schema.Resource {
 						},
 					},
 				},
-				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "sql_server_profile"},
+				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "salesforce_profile", "spanner_profile", "sql_server_profile"},
 			},
 			"labels": {
 				Type:     schema.TypeMap,
@@ -329,7 +329,7 @@ host[:port] in the connection URI.`,
 						},
 					},
 				},
-				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "sql_server_profile"},
+				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "salesforce_profile", "spanner_profile", "sql_server_profile"},
 			},
 			"mysql_profile": {
 				Type:        schema.TypeList,
@@ -404,7 +404,7 @@ If this field is used then the 'client_certificate' and the
 						},
 					},
 				},
-				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "sql_server_profile"},
+				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "salesforce_profile", "spanner_profile", "sql_server_profile"},
 			},
 			"oracle_profile": {
 				Type:        schema.TypeList,
@@ -453,7 +453,7 @@ If this field is used then the 'client_certificate' and the
 						},
 					},
 				},
-				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "sql_server_profile"},
+				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "salesforce_profile", "spanner_profile", "sql_server_profile"},
 			},
 			"postgresql_profile": {
 				Type:        schema.TypeList,
@@ -565,7 +565,7 @@ and the server identity will be authenticated.`,
 						},
 					},
 				},
-				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "sql_server_profile"},
+				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "salesforce_profile", "spanner_profile", "sql_server_profile"},
 			},
 			"private_connectivity": {
 				Type:        schema.TypeList,
@@ -582,6 +582,75 @@ and the server identity will be authenticated.`,
 					},
 				},
 				ConflictsWith: []string{"forward_ssh_connectivity"},
+			},
+			"salesforce_profile": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: `Salesforce profile.`,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"domain": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: `Domain for the Salesforce Org.`,
+						},
+						"oauth2_client_credentials": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: `OAuth credentials to use for Salesforce authentication.`,
+							MaxItems:    1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"client_id": {
+										Type:        schema.TypeString,
+										Required:    true,
+										Description: `Client ID to use for authentication.`,
+									},
+									"client_secret": {
+										Type:         schema.TypeString,
+										Optional:     true,
+										Description:  `Client secret to use for authentication.`,
+										Sensitive:    true,
+										ExactlyOneOf: []string{"salesforce_profile.0.oauth2_client_credentials.0.client_secret", "salesforce_profile.0.oauth2_client_credentials.0.secret_manager_stored_client_secret"},
+									},
+									"secret_manager_stored_client_secret": {
+										Type:         schema.TypeString,
+										Optional:     true,
+										Description:  `A reference to a Secret Manager resource name storing the client secret.`,
+										ExactlyOneOf: []string{"salesforce_profile.0.oauth2_client_credentials.0.client_secret", "salesforce_profile.0.oauth2_client_credentials.0.secret_manager_stored_client_secret"},
+									},
+								},
+							},
+							ExactlyOneOf: []string{"salesforce_profile.0.oauth2_client_credentials"},
+						},
+					},
+				},
+				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "salesforce_profile", "spanner_profile", "sql_server_profile"},
+			},
+			"spanner_profile": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: `Spanner profile.`,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"database": {
+							Type:     schema.TypeString,
+							Required: true,
+							ForceNew: true,
+							Description: `The full project and resource path for Spanner database. Format:
+projects/{project}/instances/{instance}/databases/{database}.`,
+						},
+						"host": {
+							Type:     schema.TypeString,
+							Optional: true,
+							Description: `The regional Spanner endpoint. Format:
+https://spanner.{region}.rep.googleapis.com.`,
+						},
+					},
+				},
+				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "salesforce_profile", "spanner_profile", "sql_server_profile"},
 			},
 			"sql_server_profile": {
 				Type:        schema.TypeList,
@@ -624,7 +693,7 @@ and the server identity will be authenticated.`,
 						},
 					},
 				},
-				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "sql_server_profile"},
+				ExactlyOneOf: []string{"bigquery_profile", "gcs_profile", "mongodb_profile", "mysql_profile", "oracle_profile", "postgresql_profile", "salesforce_profile", "spanner_profile", "sql_server_profile"},
 			},
 			"effective_labels": {
 				Type:        schema.TypeMap,

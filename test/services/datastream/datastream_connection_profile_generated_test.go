@@ -50,6 +50,12 @@ func TestAccDatastreamConnectionProfile(t *testing.T) {
 		{
 			Name: "TestAccDatastreamConnectionProfile_mongoDb",
 		},
+		{
+			Name: "TestAccDatastreamConnectionProfile_salesforce",
+		},
+		{
+			Name: "TestAccDatastreamConnectionProfile_spanner",
+		},
 	}
 
 	for _, tt := range tests {
@@ -91,6 +97,7 @@ func TestAccDatastreamConnectionProfile(t *testing.T) {
 					"postgresql_profile.ssl_config.server_and_client_verification.client_key",
 					"postgresql_profile.ssl_config.server_verification.ca_certificate",
 					"provider",
+					"salesforce_profile.oauth2_client_credentials.client_secret",
 					"timeouts",
 				},
 				"google_datastream_connection_profile",

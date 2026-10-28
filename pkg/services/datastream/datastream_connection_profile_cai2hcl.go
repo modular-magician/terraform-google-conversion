@@ -143,6 +143,8 @@ func (c *DatastreamConnectionProfileCai2hclConverter) convertResourceData(asset 
 	hclData["mysql_profile"] = flattenDatastreamConnectionProfileMysqlProfile(res["mysqlProfile"], d, config)
 	hclData["bigquery_profile"] = flattenDatastreamConnectionProfileBigqueryProfile(res["bigqueryProfile"], d, config)
 	hclData["postgresql_profile"] = flattenDatastreamConnectionProfilePostgresqlProfile(res["postgresqlProfile"], d, config)
+	hclData["salesforce_profile"] = flattenDatastreamConnectionProfileSalesforceProfile(res["salesforceProfile"], d, config)
+	hclData["spanner_profile"] = flattenDatastreamConnectionProfileSpannerProfile(res["spannerProfile"], d, config)
 	hclData["sql_server_profile"] = flattenDatastreamConnectionProfileSqlServerProfile(res["sqlServerProfile"], d, config)
 	hclData["mongodb_profile"] = flattenDatastreamConnectionProfileMongodbProfile(res["mongodbProfile"], d, config)
 	hclData["forward_ssh_connectivity"] = flattenDatastreamConnectionProfileForwardSshConnectivity(res["forwardSshConnectivity"], d, config)
@@ -633,6 +635,119 @@ func flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClient
 	transformed := v.(string)
 	if transformed == "" {
 		return "unknown"
+	}
+	return v
+}
+
+func flattenDatastreamConnectionProfileSalesforceProfile(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["domain"] =
+		flattenDatastreamConnectionProfileSalesforceProfileDomain(original["domain"], d, config)
+	transformed["oauth2_client_credentials"] =
+		flattenDatastreamConnectionProfileSalesforceProfileOauth2ClientCredentials(original["oauth2ClientCredentials"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenDatastreamConnectionProfileSalesforceProfileDomain(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return "unknown"
+	}
+	transformed := v.(string)
+	if transformed == "" {
+		return "unknown"
+	}
+	return v
+}
+
+func flattenDatastreamConnectionProfileSalesforceProfileOauth2ClientCredentials(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["client_id"] =
+		flattenDatastreamConnectionProfileSalesforceProfileOauth2ClientCredentialsClientId(original["clientId"], d, config)
+	transformed["client_secret"] =
+		flattenDatastreamConnectionProfileSalesforceProfileOauth2ClientCredentialsClientSecret(original["clientSecret"], d, config)
+	transformed["secret_manager_stored_client_secret"] =
+		flattenDatastreamConnectionProfileSalesforceProfileOauth2ClientCredentialsSecretManagerStoredClientSecret(original["secretManagerStoredClientSecret"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenDatastreamConnectionProfileSalesforceProfileOauth2ClientCredentialsClientId(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return "unknown"
+	}
+	transformed := v.(string)
+	if transformed == "" {
+		return "unknown"
+	}
+	return v
+}
+
+func flattenDatastreamConnectionProfileSalesforceProfileOauth2ClientCredentialsClientSecret(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenDatastreamConnectionProfileSalesforceProfileOauth2ClientCredentialsSecretManagerStoredClientSecret(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenDatastreamConnectionProfileSpannerProfile(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["database"] =
+		flattenDatastreamConnectionProfileSpannerProfileDatabase(original["database"], d, config)
+	transformed["host"] =
+		flattenDatastreamConnectionProfileSpannerProfileHost(original["host"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenDatastreamConnectionProfileSpannerProfileDatabase(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return "unknown"
+	}
+	transformed := v.(string)
+	if transformed == "" {
+		return "unknown"
+	}
+	return v
+}
+
+func flattenDatastreamConnectionProfileSpannerProfileHost(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
 	}
 	return v
 }
