@@ -434,6 +434,33 @@ If this field is used then the 'client_certificate' and the
 							Description: `Connection string attributes`,
 							Elem:        &schema.Schema{Type: schema.TypeString},
 						},
+						"oracle_ssl_config": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: `Optional. SSL configuration for the Oracle connection.`,
+							MaxItems:    1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"ca_certificate": {
+										Type:     schema.TypeString,
+										Optional: true,
+										ForceNew: true,
+										Description: `PEM-encoded certificate of the CA that signed the source database
+server's certificate.`,
+										Sensitive: true,
+									},
+									"server_certificate_distinguished_name": {
+										Type:     schema.TypeString,
+										Optional: true,
+										Description: `The distinguished name (DN) mentioned in the server
+certificate. This corresponds to SSL_SERVER_CERT_DN sqlnet parameter.
+Refer
+https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/local-naming-parameters-in-the-tnsnames-ora-file.html#GUID-70AB0695-A9AA-4A94-B141-4C605236EEB7
+If this field is not provided, the DN matching is not enforced.`,
+									},
+								},
+							},
+						},
 						"password": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -537,9 +564,16 @@ the PostgreSQL server to authenticate the client's identity,
 i.e. identity of the stream.`,
 													Sensitive: true,
 												},
+												"server_certificate_hostname": {
+													Type:     schema.TypeString,
+													Optional: true,
+													Description: `The hostname mentioned in the Subject or the Subject Alternative Name
+field of the server certificate. If this field is not provided, the
+hostname in the server certificate is not validated.`,
+												},
 											},
 										},
-										ExactlyOneOf: []string{},
+										ExactlyOneOf: []string{"postgresql_profile.0.ssl_config.0.server_and_client_verification", "postgresql_profile.0.ssl_config.0.server_verification"},
 									},
 									"server_verification": {
 										Type:     schema.TypeList,
@@ -556,9 +590,16 @@ and the server identity will be authenticated.`,
 													Description: `PEM-encoded server root CA certificate.`,
 													Sensitive:   true,
 												},
+												"server_certificate_hostname": {
+													Type:     schema.TypeString,
+													Optional: true,
+													Description: `The hostname mentioned in the Subject or the Subject Alternative Name
+field of the server certificate. If this field is not provided, the
+hostname in the server certificate is not validated.`,
+												},
 											},
 										},
-										ExactlyOneOf: []string{},
+										ExactlyOneOf: []string{"postgresql_profile.0.ssl_config.0.server_and_client_verification", "postgresql_profile.0.ssl_config.0.server_verification"},
 									},
 								},
 							},
@@ -621,6 +662,66 @@ and the server identity will be authenticated.`,
 							Type:        schema.TypeString,
 							Optional:    true,
 							Description: `A reference to a Secret Manager resource name storing the user's password.`,
+						},
+						"ssl_config": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: `SSL configuration for the SQL Server connection.`,
+							MaxItems:    1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"basic_encryption": {
+										Type:     schema.TypeList,
+										Optional: true,
+										Description: `If this field is set, the communication will be encrypted with TLS
+encryption, without validating the server certificate.`,
+										MaxItems: 1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{},
+										},
+										ExactlyOneOf: []string{"sql_server_profile.0.ssl_config.0.basic_encryption", "sql_server_profile.0.ssl_config.0.encryption_and_server_validation", "sql_server_profile.0.ssl_config.0.encryption_not_enforced"},
+									},
+									"encryption_and_server_validation": {
+										Type:     schema.TypeList,
+										Optional: true,
+										Description: `If this field is set, the communication will be encrypted with TLS
+encryption and the server identity will be authenticated using the Common
+Name (CN) and/or Subject Alternative Name (SAN) fields in the server
+certificate.`,
+										MaxItems: 1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"ca_certificate": {
+													Type:     schema.TypeString,
+													Optional: true,
+													Description: `PEM-encoded certificate of the CA that signed the source database
+server's certificate.`,
+													Sensitive: true,
+												},
+												"server_certificate_hostname": {
+													Type:     schema.TypeString,
+													Optional: true,
+													Description: `The hostname mentioned in the Subject or the Subject Alternative Name
+field of the server certificate.`,
+												},
+											},
+										},
+										ExactlyOneOf: []string{"sql_server_profile.0.ssl_config.0.basic_encryption", "sql_server_profile.0.ssl_config.0.encryption_and_server_validation", "sql_server_profile.0.ssl_config.0.encryption_not_enforced"},
+									},
+									"encryption_not_enforced": {
+										Type:     schema.TypeList,
+										Optional: true,
+										Description: `If this field is set, Datastream will not enforce encryption for
+communication with the database server. Encryption will be used only if
+the database server forces it, without validating the server certificate.`,
+										MaxItems: 1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{},
+										},
+										ExactlyOneOf: []string{"sql_server_profile.0.ssl_config.0.basic_encryption", "sql_server_profile.0.ssl_config.0.encryption_and_server_validation", "sql_server_profile.0.ssl_config.0.encryption_not_enforced"},
+									},
+								},
+							},
 						},
 					},
 				},

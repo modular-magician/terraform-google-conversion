@@ -193,6 +193,8 @@ func flattenDatastreamConnectionProfileOracleProfile(v interface{}, d *schema.Re
 		flattenDatastreamConnectionProfileOracleProfileDatabaseService(original["databaseService"], d, config)
 	transformed["connection_attributes"] =
 		flattenDatastreamConnectionProfileOracleProfileConnectionAttributes(original["connectionAttributes"], d, config)
+	transformed["oracle_ssl_config"] =
+		flattenDatastreamConnectionProfileOracleProfileOracleSslConfig(original["oracleSslConfig"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -270,6 +272,42 @@ func flattenDatastreamConnectionProfileOracleProfileDatabaseService(v interface{
 }
 
 func flattenDatastreamConnectionProfileOracleProfileConnectionAttributes(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenDatastreamConnectionProfileOracleProfileOracleSslConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["ca_certificate"] =
+		flattenDatastreamConnectionProfileOracleProfileOracleSslConfigCaCertificate(original["caCertificate"], d, config)
+	transformed["server_certificate_distinguished_name"] =
+		flattenDatastreamConnectionProfileOracleProfileOracleSslConfigServerCertificateDistinguishedName(original["serverCertificateDistinguishedName"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenDatastreamConnectionProfileOracleProfileOracleSslConfigCaCertificate(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenDatastreamConnectionProfileOracleProfileOracleSslConfigServerCertificateDistinguishedName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
 	return v
 }
 
@@ -569,6 +607,8 @@ func flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerVerificat
 	transformed := make(map[string]interface{})
 	transformed["ca_certificate"] =
 		flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerVerificationCaCertificate(original["caCertificate"], d, config)
+	transformed["server_certificate_hostname"] =
+		flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerVerificationServerCertificateHostname(original["serverCertificateHostname"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -586,6 +626,16 @@ func flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerVerificat
 	return v
 }
 
+func flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerVerificationServerCertificateHostname(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
 func flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClientVerification(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -598,6 +648,8 @@ func flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClient
 		flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClientVerificationClientKey(original["clientKey"], d, config)
 	transformed["ca_certificate"] =
 		flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClientVerificationCaCertificate(original["caCertificate"], d, config)
+	transformed["server_certificate_hostname"] =
+		flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClientVerificationServerCertificateHostname(original["serverCertificateHostname"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -637,6 +689,16 @@ func flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClient
 	return v
 }
 
+func flattenDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClientVerificationServerCertificateHostname(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
 func flattenDatastreamConnectionProfileSqlServerProfile(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	if v == nil {
 		return nil
@@ -655,6 +717,8 @@ func flattenDatastreamConnectionProfileSqlServerProfile(v interface{}, d *schema
 		flattenDatastreamConnectionProfileSqlServerProfileSecretManagerStoredPassword(original["secretManagerStoredPassword"], d, config)
 	transformed["database"] =
 		flattenDatastreamConnectionProfileSqlServerProfileDatabase(original["database"], d, config)
+	transformed["ssl_config"] =
+		flattenDatastreamConnectionProfileSqlServerProfileSslConfig(original["sslConfig"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -727,6 +791,76 @@ func flattenDatastreamConnectionProfileSqlServerProfileDatabase(v interface{}, d
 	transformed := v.(string)
 	if transformed == "" {
 		return "unknown"
+	}
+	return v
+}
+
+func flattenDatastreamConnectionProfileSqlServerProfileSslConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["encryption_not_enforced"] =
+		flattenDatastreamConnectionProfileSqlServerProfileSslConfigEncryptionNotEnforced(original["encryptionNotEnforced"], d, config)
+	transformed["basic_encryption"] =
+		flattenDatastreamConnectionProfileSqlServerProfileSslConfigBasicEncryption(original["basicEncryption"], d, config)
+	transformed["encryption_and_server_validation"] =
+		flattenDatastreamConnectionProfileSqlServerProfileSslConfigEncryptionAndServerValidation(original["encryptionAndServerValidation"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenDatastreamConnectionProfileSqlServerProfileSslConfigEncryptionNotEnforced(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	transformed := make(map[string]interface{})
+	return []interface{}{transformed}
+}
+
+func flattenDatastreamConnectionProfileSqlServerProfileSslConfigBasicEncryption(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	transformed := make(map[string]interface{})
+	return []interface{}{transformed}
+}
+
+func flattenDatastreamConnectionProfileSqlServerProfileSslConfigEncryptionAndServerValidation(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["ca_certificate"] =
+		flattenDatastreamConnectionProfileSqlServerProfileSslConfigEncryptionAndServerValidationCaCertificate(original["caCertificate"], d, config)
+	transformed["server_certificate_hostname"] =
+		flattenDatastreamConnectionProfileSqlServerProfileSslConfigEncryptionAndServerValidationServerCertificateHostname(original["serverCertificateHostname"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenDatastreamConnectionProfileSqlServerProfileSslConfigEncryptionAndServerValidationCaCertificate(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenDatastreamConnectionProfileSqlServerProfileSslConfigEncryptionAndServerValidationServerCertificateHostname(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
 	}
 	return v
 }
