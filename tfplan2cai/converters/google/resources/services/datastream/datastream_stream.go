@@ -537,6 +537,20 @@ func expandDatastreamStreamSourceConfigMysqlSourceConfigIncludeObjectsMysqlDatab
 			transformed["length"] = transformedLength
 		}
 
+		transformedPrecision, err := expandDatastreamStreamSourceConfigMysqlSourceConfigIncludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsPrecision(original["precision"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPrecision); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["precision"] = transformedPrecision
+		}
+
+		transformedScale, err := expandDatastreamStreamSourceConfigMysqlSourceConfigIncludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsScale(original["scale"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedScale); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["scale"] = transformedScale
+		}
+
 		transformedCollation, err := expandDatastreamStreamSourceConfigMysqlSourceConfigIncludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsCollation(original["collation"], d, config)
 		if err != nil {
 			return nil, err
@@ -579,6 +593,14 @@ func expandDatastreamStreamSourceConfigMysqlSourceConfigIncludeObjectsMysqlDatab
 }
 
 func expandDatastreamStreamSourceConfigMysqlSourceConfigIncludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsLength(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamSourceConfigMysqlSourceConfigIncludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsPrecision(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamSourceConfigMysqlSourceConfigIncludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsScale(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -726,6 +748,20 @@ func expandDatastreamStreamSourceConfigMysqlSourceConfigExcludeObjectsMysqlDatab
 			transformed["length"] = transformedLength
 		}
 
+		transformedPrecision, err := expandDatastreamStreamSourceConfigMysqlSourceConfigExcludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsPrecision(original["precision"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPrecision); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["precision"] = transformedPrecision
+		}
+
+		transformedScale, err := expandDatastreamStreamSourceConfigMysqlSourceConfigExcludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsScale(original["scale"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedScale); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["scale"] = transformedScale
+		}
+
 		transformedCollation, err := expandDatastreamStreamSourceConfigMysqlSourceConfigExcludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsCollation(original["collation"], d, config)
 		if err != nil {
 			return nil, err
@@ -768,6 +804,14 @@ func expandDatastreamStreamSourceConfigMysqlSourceConfigExcludeObjectsMysqlDatab
 }
 
 func expandDatastreamStreamSourceConfigMysqlSourceConfigExcludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsLength(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamSourceConfigMysqlSourceConfigExcludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsPrecision(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamSourceConfigMysqlSourceConfigExcludeObjectsMysqlDatabasesMysqlTablesMysqlColumnsScale(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -2451,12 +2495,34 @@ func expandDatastreamStreamSourceConfigSalesforceSourceConfigIncludeObjectsObjec
 			transformed["name"] = transformedName
 		}
 
+		transformedDataType, err := expandDatastreamStreamSourceConfigSalesforceSourceConfigIncludeObjectsObjectsFieldsDataType(original["data_type"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDataType); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["dataType"] = transformedDataType
+		}
+
+		transformedNillable, err := expandDatastreamStreamSourceConfigSalesforceSourceConfigIncludeObjectsObjectsFieldsNillable(original["nillable"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedNillable); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["nillable"] = transformedNillable
+		}
+
 		req = append(req, transformed)
 	}
 	return req, nil
 }
 
 func expandDatastreamStreamSourceConfigSalesforceSourceConfigIncludeObjectsObjectsFieldsName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamSourceConfigSalesforceSourceConfigIncludeObjectsObjectsFieldsDataType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamSourceConfigSalesforceSourceConfigIncludeObjectsObjectsFieldsNillable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -2538,12 +2604,34 @@ func expandDatastreamStreamSourceConfigSalesforceSourceConfigExcludeObjectsObjec
 			transformed["name"] = transformedName
 		}
 
+		transformedDataType, err := expandDatastreamStreamSourceConfigSalesforceSourceConfigExcludeObjectsObjectsFieldsDataType(original["data_type"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDataType); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["dataType"] = transformedDataType
+		}
+
+		transformedNillable, err := expandDatastreamStreamSourceConfigSalesforceSourceConfigExcludeObjectsObjectsFieldsNillable(original["nillable"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedNillable); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["nillable"] = transformedNillable
+		}
+
 		req = append(req, transformed)
 	}
 	return req, nil
 }
 
 func expandDatastreamStreamSourceConfigSalesforceSourceConfigExcludeObjectsObjectsFieldsName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamSourceConfigSalesforceSourceConfigExcludeObjectsObjectsFieldsDataType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamSourceConfigSalesforceSourceConfigExcludeObjectsObjectsFieldsNillable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -3001,6 +3089,13 @@ func expandDatastreamStreamSourceConfigMongodbSourceConfig(v interface{}, d tpgr
 		transformed["maxConcurrentBackfillTasks"] = transformedMaxConcurrentBackfillTasks
 	}
 
+	transformedJsonMode, err := expandDatastreamStreamSourceConfigMongodbSourceConfigJsonMode(original["json_mode"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedJsonMode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["jsonMode"] = transformedJsonMode
+	}
+
 	return transformed, nil
 }
 
@@ -3251,6 +3346,10 @@ func expandDatastreamStreamSourceConfigMongodbSourceConfigExcludeObjectsDatabase
 }
 
 func expandDatastreamStreamSourceConfigMongodbSourceConfigMaxConcurrentBackfillTasks(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamSourceConfigMongodbSourceConfigJsonMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -3891,6 +3990,20 @@ func expandDatastreamStreamBackfillAllMysqlExcludedObjectsMysqlDatabasesMysqlTab
 			transformed["length"] = transformedLength
 		}
 
+		transformedPrecision, err := expandDatastreamStreamBackfillAllMysqlExcludedObjectsMysqlDatabasesMysqlTablesMysqlColumnsPrecision(original["precision"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedPrecision); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["precision"] = transformedPrecision
+		}
+
+		transformedScale, err := expandDatastreamStreamBackfillAllMysqlExcludedObjectsMysqlDatabasesMysqlTablesMysqlColumnsScale(original["scale"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedScale); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["scale"] = transformedScale
+		}
+
 		transformedCollation, err := expandDatastreamStreamBackfillAllMysqlExcludedObjectsMysqlDatabasesMysqlTablesMysqlColumnsCollation(original["collation"], d, config)
 		if err != nil {
 			return nil, err
@@ -3933,6 +4046,14 @@ func expandDatastreamStreamBackfillAllMysqlExcludedObjectsMysqlDatabasesMysqlTab
 }
 
 func expandDatastreamStreamBackfillAllMysqlExcludedObjectsMysqlDatabasesMysqlTablesMysqlColumnsLength(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamBackfillAllMysqlExcludedObjectsMysqlDatabasesMysqlTablesMysqlColumnsPrecision(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamBackfillAllMysqlExcludedObjectsMysqlDatabasesMysqlTablesMysqlColumnsScale(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -4641,12 +4762,34 @@ func expandDatastreamStreamBackfillAllSalesforceExcludedObjectsObjectsFields(v i
 			transformed["name"] = transformedName
 		}
 
+		transformedDataType, err := expandDatastreamStreamBackfillAllSalesforceExcludedObjectsObjectsFieldsDataType(original["data_type"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDataType); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["dataType"] = transformedDataType
+		}
+
+		transformedNillable, err := expandDatastreamStreamBackfillAllSalesforceExcludedObjectsObjectsFieldsNillable(original["nillable"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedNillable); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["nillable"] = transformedNillable
+		}
+
 		req = append(req, transformed)
 	}
 	return req, nil
 }
 
 func expandDatastreamStreamBackfillAllSalesforceExcludedObjectsObjectsFieldsName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamBackfillAllSalesforceExcludedObjectsObjectsFieldsDataType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamBackfillAllSalesforceExcludedObjectsObjectsFieldsNillable(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

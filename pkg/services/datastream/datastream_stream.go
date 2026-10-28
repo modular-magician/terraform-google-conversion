@@ -537,6 +537,14 @@ A duration in seconds with up to nine fractional digits, terminated by 's'. Exam
 											},
 										},
 									},
+									"json_mode": {
+										Type:         schema.TypeString,
+										Computed:     true,
+										Optional:     true,
+										ForceNew:     true,
+										ValidateFunc: verify.ValidateEnum([]string{"STRICT", "CANONICAL", ""}),
+										Description:  `Optional. JSON mode for the stream. Possible values: ["STRICT", "CANONICAL"]`,
+									},
 									"max_concurrent_backfill_tasks": {
 										Type:     schema.TypeInt,
 										Optional: true,

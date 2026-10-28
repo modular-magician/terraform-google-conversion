@@ -2023,6 +2023,8 @@ func flattenDatastreamStreamSourceConfigMongodbSourceConfig(v interface{}, d *sc
 		flattenDatastreamStreamSourceConfigMongodbSourceConfigExcludeObjects(original["excludeObjects"], d, config)
 	transformed["max_concurrent_backfill_tasks"] =
 		flattenDatastreamStreamSourceConfigMongodbSourceConfigMaxConcurrentBackfillTasks(original["maxConcurrentBackfillTasks"], d, config)
+	transformed["json_mode"] =
+		flattenDatastreamStreamSourceConfigMongodbSourceConfigJsonMode(original["jsonMode"], d, config)
 	return []interface{}{transformed}
 }
 
@@ -2247,6 +2249,10 @@ func flattenDatastreamStreamSourceConfigMongodbSourceConfigMaxConcurrentBackfill
 	}
 
 	return v // let terraform core handle it otherwise
+}
+
+func flattenDatastreamStreamSourceConfigMongodbSourceConfigJsonMode(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
 }
 
 func flattenDatastreamStreamDestinationConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {

@@ -2474,6 +2474,13 @@ func expandDatastreamStreamSourceConfigMongodbSourceConfig(v interface{}, d tpgr
 		transformed["maxConcurrentBackfillTasks"] = transformedMaxConcurrentBackfillTasks
 	}
 
+	transformedJsonMode, err := expandDatastreamStreamSourceConfigMongodbSourceConfigJsonMode(original["json_mode"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedJsonMode); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["jsonMode"] = transformedJsonMode
+	}
+
 	return transformed, nil
 }
 
@@ -2724,6 +2731,10 @@ func expandDatastreamStreamSourceConfigMongodbSourceConfigExcludeObjectsDatabase
 }
 
 func expandDatastreamStreamSourceConfigMongodbSourceConfigMaxConcurrentBackfillTasks(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamStreamSourceConfigMongodbSourceConfigJsonMode(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
