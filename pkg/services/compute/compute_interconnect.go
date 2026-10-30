@@ -44,6 +44,36 @@ func InterconnectTypeDiffSuppress(k, old, new string, d *schema.ResourceData) bo
 	return old == "IT_PRIVATE" && new == "DEDICATED"
 }
 
+// computeInterconnectKeyGroupDiffSuppress treats two InterconnectKeyGroup references as equal when
+// they name the same key group: full URL vs relative name, and project number vs project ID.
+func computeInterconnectKeyGroupDiffSuppress(_, old, new string, _ *schema.ResourceData) bool {
+	if old == new {
+		return true
+	}
+	parse := func(s string) []string {
+		if i := strings.Index(s, "projects/"); i >= 0 {
+			s = s[i:]
+		}
+		return strings.Split(strings.Trim(s, "/"), "/")
+	}
+	o, n := parse(old), parse(new)
+	valid := func(p []string) bool {
+		return len(p) == 6 && p[0] == "projects" && p[2] == "locations" && p[4] == "interconnectKeyGroups"
+	}
+	if !valid(o) || !valid(n) || o[3] != n[3] || o[5] != n[5] {
+		return false
+	}
+	if o[1] == n[1] {
+		return true
+	}
+	// The API may return the project number where the config uses the project ID, or vice versa.
+	isNumber := func(s string) bool {
+		_, err := strconv.ParseUint(s, 10, 64)
+		return err == nil
+	}
+	return isNumber(o[1]) != isNumber(n[1])
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
@@ -166,9 +196,18 @@ Interconnect connection between Google and your on-premises router.`,
 				MaxItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"fail_open": {
+							Type:     schema.TypeBool,
+							Optional: true,
+							Description: `If set to true, the Interconnect connection is configured with a should-secure
+MACsec security policy, that allows the Google router to fallback to cleartext
+traffic if the MKA session cannot be established. By default, the Interconnect
+connection is configured with a must-secure security policy that drops all traffic
+if the MKA session cannot be established with your router.`,
+						},
 						"pre_shared_keys": {
 							Type:     schema.TypeList,
-							Required: true,
+							Optional: true,
 							Description: `A keychain placeholder describing a set of named key objects along with their
 start times. A MACsec CKN/CAK is generated for each key in the key chain.
 Google router automatically picks the key with the most recent startTime when establishing
@@ -206,15 +245,6 @@ hours apart.`,
 									},
 								},
 							},
-						},
-						"fail_open": {
-							Type:     schema.TypeBool,
-							Optional: true,
-							Description: `If set to true, the Interconnect connection is configured with a should-secure
-MACsec security policy, that allows the Google router to fallback to cleartext
-traffic if the MKA session cannot be established. By default, the Interconnect
-connection is configured with a must-secure security policy that drops all traffic
-if the MKA session cannot be established with your router.`,
 						},
 					},
 				},

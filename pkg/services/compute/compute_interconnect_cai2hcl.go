@@ -268,70 +268,40 @@ func flattenComputeInterconnectLabels(v interface{}, d *schema.ResourceData, con
 	return tgcresource.RemoveTerraformAttributionLabel(v)
 }
 
+// After MACsec configuration is removed (pre-shared keys and key group cleared), the API keeps
+// returning an empty `macsec` object with `failOpen: false`. Treat that as "no macsec block" so
+// that a config without a macsec block doesn't show a permanent diff.
 func flattenComputeInterconnectMacsec(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
+	original, ok := v.(map[string]interface{})
+	if !ok || len(original) == 0 {
 		return nil
 	}
-	original := v.(map[string]interface{})
-	transformed := make(map[string]interface{})
-	transformed["pre_shared_keys"] =
-		flattenComputeInterconnectMacsecPreSharedKeys(original["preSharedKeys"], d, config)
-	transformed["fail_open"] =
-		flattenComputeInterconnectMacsecFailOpen(original["failOpen"], d, config)
-	if tgcresource.AllValuesAreNil(transformed) {
+	psks, _ := original["preSharedKeys"].([]interface{})
+	failOpen, _ := original["failOpen"].(bool)
+	kg, _ := original["interconnectKeyGroup"].(string)
+	if len(psks) == 0 && kg == "" && !failOpen {
 		return nil
 	}
-	return []interface{}{transformed}
-}
-
-func flattenComputeInterconnectMacsecPreSharedKeys(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return v
+	transformed := map[string]interface{}{
+		"fail_open": failOpen,
 	}
-	l := v.([]interface{})
-	transformed := make([]interface{}, 0, len(l))
-	for _, raw := range l {
-		original := raw.(map[string]interface{})
-		if len(original) < 1 {
-			// Do not include empty json objects coming back from the api
+	pskList := make([]interface{}, 0, len(psks))
+	for _, raw := range psks {
+		p, ok := raw.(map[string]interface{})
+		if !ok || len(p) == 0 {
 			continue
 		}
-		transformed = append(transformed, map[string]interface{}{
-			"name":       flattenComputeInterconnectMacsecPreSharedKeysName(original["name"], d, config),
-			"start_time": flattenComputeInterconnectMacsecPreSharedKeysStartTime(original["startTime"], d, config),
-			"fail_open":  flattenComputeInterconnectMacsecPreSharedKeysFailOpen(original["failOpen"], d, config),
-		})
+		psk := map[string]interface{}{
+			"name":       p["name"],
+			"start_time": p["startTime"],
+		}
+		if fo, ok := p["failOpen"]; ok {
+			psk["fail_open"] = fo
+		}
+		pskList = append(pskList, psk)
 	}
-	return transformed
-}
-
-func flattenComputeInterconnectMacsecPreSharedKeysName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return "unknown"
-	}
-	transformed := v.(string)
-	if transformed == "" {
-		return "unknown"
-	}
-	return v
-}
-
-func flattenComputeInterconnectMacsecPreSharedKeysStartTime(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	if v == nil {
-		return nil
-	}
-	if strVal, ok := v.(string); ok && strVal == "" {
-		return nil
-	}
-	return v
-}
-
-func flattenComputeInterconnectMacsecPreSharedKeysFailOpen(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
-}
-
-func flattenComputeInterconnectMacsecFailOpen(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
-	return v
+	transformed["pre_shared_keys"] = pskList
+	return []interface{}{transformed}
 }
 
 func flattenComputeInterconnectMacsecEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
