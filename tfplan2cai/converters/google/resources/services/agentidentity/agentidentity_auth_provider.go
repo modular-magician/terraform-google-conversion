@@ -51,22 +51,21 @@ import (
 )
 
 // This customizeDiff recreates the resource if changing between different auth provider types
-// (api_key, two_legged_oauth, three_legged_oauth), as changing the type via PATCH is rejected by the API.
+// (api_key, two_legged_oauth, three_legged_oauth, xaa_auth_provider, connector_reference_auth_provider),
+// as changing the type via PATCH is rejected by the API.
 func agentIdentityAuthProviderCustomizeDiffFunc(diff tpgresource.TerraformResourceDiff) error {
-	oldApiKey, newApiKey := diff.GetChange("auth_provider_type_params.0.api_key")
-	oldTwoLegged, newTwoLegged := diff.GetChange("auth_provider_type_params.0.two_legged_oauth")
-	oldThreeLegged, newThreeLegged := diff.GetChange("auth_provider_type_params.0.three_legged_oauth")
-	if !tpgresource.IsEmptyValue(reflect.ValueOf(oldApiKey)) && tpgresource.IsEmptyValue(reflect.ValueOf(newApiKey)) {
-		diff.ForceNew("auth_provider_type_params.0.api_key")
-		return nil
-	}
-	if !tpgresource.IsEmptyValue(reflect.ValueOf(oldTwoLegged)) && tpgresource.IsEmptyValue(reflect.ValueOf(newTwoLegged)) {
-		diff.ForceNew("auth_provider_type_params.0.two_legged_oauth")
-		return nil
-	}
-	if !tpgresource.IsEmptyValue(reflect.ValueOf(oldThreeLegged)) && tpgresource.IsEmptyValue(reflect.ValueOf(newThreeLegged)) {
-		diff.ForceNew("auth_provider_type_params.0.three_legged_oauth")
-		return nil
+	for _, typeField := range []string{
+		"auth_provider_type_params.0.api_key",
+		"auth_provider_type_params.0.two_legged_oauth",
+		"auth_provider_type_params.0.three_legged_oauth",
+		"auth_provider_type_params.0.xaa_auth_provider",
+		"auth_provider_type_params.0.connector_reference_auth_provider",
+	} {
+		oldVal, newVal := diff.GetChange(typeField)
+		if !tpgresource.IsEmptyValue(reflect.ValueOf(oldVal)) && tpgresource.IsEmptyValue(reflect.ValueOf(newVal)) {
+			diff.ForceNew(typeField)
+			return nil
+		}
 	}
 	return nil
 }
@@ -200,6 +199,13 @@ func expandAgentIdentityAuthProviderAuthProviderTypeParams(v interface{}, d tpgr
 		transformed["apiKey"] = transformedApiKey
 	}
 
+	transformedConnectorReferenceAuthProvider, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsConnectorReferenceAuthProvider(original["connector_reference_auth_provider"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedConnectorReferenceAuthProvider); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["connectorReferenceAuthProvider"] = transformedConnectorReferenceAuthProvider
+	}
+
 	transformedGeAuthProvider, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsGeAuthProvider(original["ge_auth_provider"], d, config)
 	if err != nil {
 		return nil, err
@@ -219,6 +225,13 @@ func expandAgentIdentityAuthProviderAuthProviderTypeParams(v interface{}, d tpgr
 		return nil, err
 	} else if val := reflect.ValueOf(transformedTwoLeggedOauth); val.IsValid() && !tpgresource.IsEmptyValue(val) {
 		transformed["twoLeggedOauth"] = transformedTwoLeggedOauth
+	}
+
+	transformedXaaAuthProvider, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProvider(original["xaa_auth_provider"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedXaaAuthProvider); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["xaaAuthProvider"] = transformedXaaAuthProvider
 	}
 
 	return transformed, nil
@@ -248,6 +261,51 @@ func expandAgentIdentityAuthProviderAuthProviderTypeParamsApiKey(v interface{}, 
 
 func expandAgentIdentityAuthProviderAuthProviderTypeParamsApiKeyApiKey(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsConnectorReferenceAuthProvider(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedConnector, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsConnectorReferenceAuthProviderConnector(original["connector"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedConnector); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["connector"] = transformedConnector
+	}
+
+	transformedAuthorizationDetails, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsConnectorReferenceAuthProviderAuthorizationDetails(original["authorization_details"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAuthorizationDetails); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["authorizationDetails"] = transformedAuthorizationDetails
+	}
+
+	return transformed, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsConnectorReferenceAuthProviderConnector(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsConnectorReferenceAuthProviderAuthorizationDetails(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	var j interface{}
+	if err := json.Unmarshal(b, &j); err != nil {
+		return nil, err
+	}
+	return j, nil
 }
 
 func expandAgentIdentityAuthProviderAuthProviderTypeParamsGeAuthProvider(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -406,6 +464,312 @@ func expandAgentIdentityAuthProviderAuthProviderTypeParamsTwoLeggedOauthClientSe
 
 func expandAgentIdentityAuthProviderAuthProviderTypeParamsTwoLeggedOauthTokenUrl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProvider(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedAdditionalParameters, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderAdditionalParameters(original["additional_parameters"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedAdditionalParameters); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["additionalParameters"] = transformedAdditionalParameters
+	}
+
+	transformedClientAssertionJwtAuth, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderClientAssertionJwtAuth(original["client_assertion_jwt_auth"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientAssertionJwtAuth); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientAssertionJwtAuth"] = transformedClientAssertionJwtAuth
+	}
+
+	transformedClientSecretAuth, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderClientSecretAuth(original["client_secret_auth"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientSecretAuth); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientSecretAuth"] = transformedClientSecretAuth
+	}
+
+	transformedCustomIssuer, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderCustomIssuer(original["custom_issuer"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedCustomIssuer); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["customIssuer"] = transformedCustomIssuer
+	}
+
+	transformedGoogleAccount, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderGoogleAccount(original["google_account"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["googleAccount"] = transformedGoogleAccount
+	}
+
+	transformedIdJagInput, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderIdJagInput(original["id_jag_input"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["idJagInput"] = transformedIdJagInput
+	}
+
+	transformedIdTokenInput, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderIdTokenInput(original["id_token_input"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedIdTokenInput); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["idTokenInput"] = transformedIdTokenInput
+	}
+
+	transformedWorkforceIdentityFederation, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderWorkforceIdentityFederation(original["workforce_identity_federation"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["workforceIdentityFederation"] = transformedWorkforceIdentityFederation
+	}
+
+	return transformed, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderAdditionalParameters(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderClientAssertionJwtAuth(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedClientId, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderClientAssertionJwtAuthClientId(original["client_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientId"] = transformedClientId
+	}
+
+	return transformed, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderClientAssertionJwtAuthClientId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderClientSecretAuth(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedClientId, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderClientSecretAuthClientId(original["client_id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientId"] = transformedClientId
+	}
+
+	transformedClientSecret, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderClientSecretAuthClientSecret(original["client_secret"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedClientSecret); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["clientSecret"] = transformedClientSecret
+	}
+
+	return transformed, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderClientSecretAuthClientId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderClientSecretAuthClientSecret(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderCustomIssuer(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedIssuer, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderCustomIssuerIssuer(original["issuer"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedIssuer); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["issuer"] = transformedIssuer
+	}
+
+	transformedTokenUrl, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderCustomIssuerTokenUrl(original["token_url"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedTokenUrl); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["tokenUrl"] = transformedTokenUrl
+	}
+
+	return transformed, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderCustomIssuerIssuer(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderCustomIssuerTokenUrl(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderGoogleAccount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 {
+		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
+	}
+	transformed := make(map[string]interface{})
+
+	return transformed, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderIdJagInput(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 {
+		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
+	}
+	transformed := make(map[string]interface{})
+
+	return transformed, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderIdTokenInput(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedAgentIdentityPool, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderIdTokenInputAgentIdentityPool(original["agent_identity_pool"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["agentIdentityPool"] = transformedAgentIdentityPool
+	}
+
+	transformedIdJagAdditionalClaims, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderIdTokenInputIdJagAdditionalClaims(original["id_jag_additional_claims"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedIdJagAdditionalClaims); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["idJagAdditionalClaims"] = transformedIdJagAdditionalClaims
+	}
+
+	transformedIdJagAuthProvider, err := expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderIdTokenInputIdJagAuthProvider(original["id_jag_auth_provider"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedIdJagAuthProvider); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["idJagAuthProvider"] = transformedIdJagAuthProvider
+	}
+
+	return transformed, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderIdTokenInputAgentIdentityPool(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 {
+		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
+	}
+	transformed := make(map[string]interface{})
+
+	return transformed, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderIdTokenInputIdJagAdditionalClaims(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	b := []byte(v.(string))
+	if len(b) == 0 {
+		return nil, nil
+	}
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderIdTokenInputIdJagAuthProvider(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandAgentIdentityAuthProviderAuthProviderTypeParamsXaaAuthProviderWorkforceIdentityFederation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 {
+		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
+	}
+	transformed := make(map[string]interface{})
+
+	return transformed, nil
 }
 
 func expandAgentIdentityAuthProviderBlockedScopes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
