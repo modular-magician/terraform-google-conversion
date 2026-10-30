@@ -42,6 +42,9 @@ func TestAccBackupDRBackupPlan(t *testing.T) {
 		{
 			Name: "TestAccBackupDRBackupPlan_diskUpdate",
 		},
+		{
+			Name: "TestAccBackupDRBackupPlan_mvbp",
+		},
 	}
 
 	for _, tt := range tests {
