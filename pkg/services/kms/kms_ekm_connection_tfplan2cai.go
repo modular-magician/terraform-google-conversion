@@ -229,12 +229,23 @@ func expandKMSEkmConnectionServiceResolversServerCertificates(v interface{}, d t
 			transformed["rawDer"] = transformedRawDer
 		}
 
+		transformedSubjectAlternativeDnsNames, err := expandKMSEkmConnectionServiceResolversServerCertificatesSubjectAlternativeDnsNames(original["subject_alternative_dns_names"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedSubjectAlternativeDnsNames); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["subjectAlternativeDnsNames"] = transformedSubjectAlternativeDnsNames
+		}
+
 		req = append(req, transformed)
 	}
 	return req, nil
 }
 
 func expandKMSEkmConnectionServiceResolversServerCertificatesRawDer(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandKMSEkmConnectionServiceResolversServerCertificatesSubjectAlternativeDnsNames(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

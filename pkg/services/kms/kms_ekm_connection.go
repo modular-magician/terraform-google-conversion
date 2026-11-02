@@ -113,6 +113,15 @@ A full list of valid locations can be found by running 'gcloud kms locations lis
 										Required:    true,
 										Description: `Required. The raw certificate bytes in DER format. A base64-encoded string.`,
 									},
+									"subject_alternative_dns_names": {
+										Type:        schema.TypeList,
+										Computed:    true,
+										Optional:    true,
+										Description: `Output only. The subject Alternative DNS names. Only present if parsed is true.`,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+									},
 								},
 							},
 						},

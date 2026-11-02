@@ -216,7 +216,8 @@ func flattenKMSEkmConnectionServiceResolversServerCertificates(v interface{}, d 
 			continue
 		}
 		transformed = append(transformed, map[string]interface{}{
-			"raw_der": flattenKMSEkmConnectionServiceResolversServerCertificatesRawDer(original["rawDer"], d, config),
+			"raw_der":                       flattenKMSEkmConnectionServiceResolversServerCertificatesRawDer(original["rawDer"], d, config),
+			"subject_alternative_dns_names": flattenKMSEkmConnectionServiceResolversServerCertificatesSubjectAlternativeDnsNames(original["subjectAlternativeDnsNames"], d, config),
 		})
 	}
 	return transformed
@@ -230,6 +231,10 @@ func flattenKMSEkmConnectionServiceResolversServerCertificatesRawDer(v interface
 	if transformed == "" {
 		return "unknown"
 	}
+	return v
+}
+
+func flattenKMSEkmConnectionServiceResolversServerCertificatesSubjectAlternativeDnsNames(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 
