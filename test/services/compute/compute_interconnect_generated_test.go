@@ -31,6 +31,9 @@ func TestAccComputeInterconnect(t *testing.T) {
 			Name: "TestAccComputeInterconnect_computeInterconnectBasicTestExample_update",
 		},
 		{
+			Name: "TestAccComputeInterconnect_interconnectKeyGroup",
+		},
+		{
 			Name: "TestAccComputeInterconnect_computeInterconnectMacsecTest",
 		},
 		{

@@ -54,6 +54,36 @@ func InterconnectTypeDiffSuppress(k, old, new string, d *schema.ResourceData) bo
 	return old == "IT_PRIVATE" && new == "DEDICATED"
 }
 
+// computeInterconnectKeyGroupDiffSuppress treats two InterconnectKeyGroup references as equal when
+// they name the same key group: full URL vs relative name, and project number vs project ID.
+func computeInterconnectKeyGroupDiffSuppress(_, old, new string, _ *schema.ResourceData) bool {
+	if old == new {
+		return true
+	}
+	parse := func(s string) []string {
+		if i := strings.Index(s, "projects/"); i >= 0 {
+			s = s[i:]
+		}
+		return strings.Split(strings.Trim(s, "/"), "/")
+	}
+	o, n := parse(old), parse(new)
+	valid := func(p []string) bool {
+		return len(p) == 6 && p[0] == "projects" && p[2] == "locations" && p[4] == "interconnectKeyGroups"
+	}
+	if !valid(o) || !valid(n) || o[3] != n[3] || o[5] != n[5] {
+		return false
+	}
+	if o[1] == n[1] {
+		return true
+	}
+	// The API may return the project number where the config uses the project ID, or vice versa.
+	isNumber := func(s string) bool {
+		_, err := strconv.ParseUint(s, 10, 64)
+		return err == nil
+	}
+	return isNumber(o[1]) != isNumber(n[1])
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
@@ -327,6 +357,13 @@ func expandComputeInterconnectMacsec(v interface{}, d tpgresource.TerraformResou
 		transformed["failOpen"] = transformedFailOpen
 	}
 
+	transformedInterconnectKeyGroup, err := expandComputeInterconnectMacsecInterconnectKeyGroup(original["interconnect_key_group"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedInterconnectKeyGroup); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["interconnectKeyGroup"] = transformedInterconnectKeyGroup
+	}
+
 	return transformed, nil
 }
 
@@ -382,6 +419,10 @@ func expandComputeInterconnectMacsecPreSharedKeysFailOpen(v interface{}, d tpgre
 }
 
 func expandComputeInterconnectMacsecFailOpen(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeInterconnectMacsecInterconnectKeyGroup(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
