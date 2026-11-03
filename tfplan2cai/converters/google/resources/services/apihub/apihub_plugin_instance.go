@@ -142,6 +142,18 @@ func GetApihubPluginInstanceApiObject(d tpgresource.TerraformResourceData, confi
 	} else if v, ok := d.GetOkExists("actions"); !tpgresource.IsEmptyValue(reflect.ValueOf(actionsProp)) && (ok || !reflect.DeepEqual(v, actionsProp)) {
 		obj["actions"] = actionsProp
 	}
+	additionalConfigProp, err := expandApihubPluginInstanceAdditionalConfig(d.Get("additional_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("additional_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(additionalConfigProp)) && (ok || !reflect.DeepEqual(v, additionalConfigProp)) {
+		obj["additionalConfig"] = additionalConfigProp
+	}
+	sourceEnvironmentsConfigProp, err := expandApihubPluginInstanceSourceEnvironmentsConfig(d.Get("source_environments_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("source_environments_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(sourceEnvironmentsConfigProp)) && (ok || !reflect.DeepEqual(v, sourceEnvironmentsConfigProp)) {
+		obj["sourceEnvironmentsConfig"] = sourceEnvironmentsConfigProp
+	}
 
 	return obj, nil
 }
@@ -481,6 +493,13 @@ func expandApihubPluginInstanceActions(v interface{}, d tpgresource.TerraformRes
 			transformed["scheduleTimeZone"] = transformedScheduleTimeZone
 		}
 
+		transformedServiceAccount, err := expandApihubPluginInstanceActionsServiceAccount(original["service_account"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedServiceAccount); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["serviceAccount"] = transformedServiceAccount
+		}
+
 		req = append(req, transformed)
 	}
 	return req, nil
@@ -650,5 +669,368 @@ func expandApihubPluginInstanceActionsCurationConfigCurationType(v interface{}, 
 }
 
 func expandApihubPluginInstanceActionsScheduleTimeZone(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceActionsServiceAccount(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
+	if v == nil {
+		return map[string]interface{}{}, nil
+	}
+	m := make(map[string]interface{})
+	for _, raw := range v.(*schema.Set).List() {
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedStringValue, err := expandApihubPluginInstanceAdditionalConfigStringValue(original["string_value"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedStringValue); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["stringValue"] = transformedStringValue
+		}
+
+		transformedIntValue, err := expandApihubPluginInstanceAdditionalConfigIntValue(original["int_value"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedIntValue); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["intValue"] = transformedIntValue
+		}
+
+		transformedBoolValue, err := expandApihubPluginInstanceAdditionalConfigBoolValue(original["bool_value"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedBoolValue); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["boolValue"] = transformedBoolValue
+		}
+
+		transformedSecretValue, err := expandApihubPluginInstanceAdditionalConfigSecretValue(original["secret_value"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedSecretValue); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["secretValue"] = transformedSecretValue
+		}
+
+		transformedEnumValue, err := expandApihubPluginInstanceAdditionalConfigEnumValue(original["enum_value"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedEnumValue); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["enumValue"] = transformedEnumValue
+		}
+
+		transformedMultiSelectValues, err := expandApihubPluginInstanceAdditionalConfigMultiSelectValues(original["multi_select_values"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedMultiSelectValues); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["multiSelectValues"] = transformedMultiSelectValues
+		}
+
+		transformedMultiStringValues, err := expandApihubPluginInstanceAdditionalConfigMultiStringValues(original["multi_string_values"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedMultiStringValues); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["multiStringValues"] = transformedMultiStringValues
+		}
+
+		transformedMultiIntValues, err := expandApihubPluginInstanceAdditionalConfigMultiIntValues(original["multi_int_values"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedMultiIntValues); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["multiIntValues"] = transformedMultiIntValues
+		}
+
+		// ConfigVariable uses a protobuf oneof across its value fields, and the API
+		// requires `{"boolValue": false}` rather than `{}` for false boolean variables.
+		// Because additional_config is a TypeSet, SDKv2 populates `original["bool_value"] = false`
+		// on every entry (including string/int/enum entries), so `send_empty_value: true`
+		// on boolValue would send `"boolValue": false` alongside other oneof fields and
+		// fail proto oneof unmarshaling. Only send `"boolValue": false` when no other
+		// oneof field populated `transformed`.
+		if len(transformed) == 0 {
+			if b, ok := original["bool_value"].(bool); ok && !b {
+				transformed["boolValue"] = false
+			}
+		}
+
+		transformedKey, err := tpgresource.ExpandString(original["key"], d, config)
+		if err != nil {
+			return nil, err
+		}
+		m[transformedKey] = transformed
+	}
+	return m, nil
+}
+func expandApihubPluginInstanceAdditionalConfigStringValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigIntValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigBoolValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigSecretValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedSecretVersion, err := expandApihubPluginInstanceAdditionalConfigSecretValueSecretVersion(original["secret_version"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSecretVersion); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["secretVersion"] = transformedSecretVersion
+	}
+
+	return transformed, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigSecretValueSecretVersion(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigEnumValue(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedId, err := expandApihubPluginInstanceAdditionalConfigEnumValueId(original["id"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["id"] = transformedId
+	}
+
+	transformedDisplayName, err := expandApihubPluginInstanceAdditionalConfigEnumValueDisplayName(original["display_name"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDisplayName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["displayName"] = transformedDisplayName
+	}
+
+	transformedDescription, err := expandApihubPluginInstanceAdditionalConfigEnumValueDescription(original["description"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedDescription); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["description"] = transformedDescription
+	}
+
+	return transformed, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigEnumValueId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigEnumValueDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigEnumValueDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigMultiSelectValues(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedValues, err := expandApihubPluginInstanceAdditionalConfigMultiSelectValuesValues(original["values"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedValues); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["values"] = transformedValues
+	}
+
+	return transformed, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigMultiSelectValuesValues(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedId, err := expandApihubPluginInstanceAdditionalConfigMultiSelectValuesValuesId(original["id"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedId); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["id"] = transformedId
+		}
+
+		transformedDisplayName, err := expandApihubPluginInstanceAdditionalConfigMultiSelectValuesValuesDisplayName(original["display_name"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDisplayName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["displayName"] = transformedDisplayName
+		}
+
+		transformedDescription, err := expandApihubPluginInstanceAdditionalConfigMultiSelectValuesValuesDescription(original["description"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedDescription); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["description"] = transformedDescription
+		}
+
+		req = append(req, transformed)
+	}
+	return req, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigMultiSelectValuesValuesId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigMultiSelectValuesValuesDisplayName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigMultiSelectValuesValuesDescription(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigMultiStringValues(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedValues, err := expandApihubPluginInstanceAdditionalConfigMultiStringValuesValues(original["values"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedValues); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["values"] = transformedValues
+	}
+
+	return transformed, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigMultiStringValuesValues(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigMultiIntValues(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedValues, err := expandApihubPluginInstanceAdditionalConfigMultiIntValuesValues(original["values"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedValues); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["values"] = transformedValues
+	}
+
+	return transformed, nil
+}
+
+func expandApihubPluginInstanceAdditionalConfigMultiIntValuesValues(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceSourceEnvironmentsConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]interface{}, error) {
+	if v == nil {
+		return map[string]interface{}{}, nil
+	}
+	m := make(map[string]interface{})
+	for _, raw := range v.(*schema.Set).List() {
+		original := raw.(map[string]interface{})
+		transformed := make(map[string]interface{})
+
+		transformedSourceEnvironment, err := expandApihubPluginInstanceSourceEnvironmentsConfigSourceEnvironment(original["source_environment"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedSourceEnvironment); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["sourceEnvironment"] = transformedSourceEnvironment
+		}
+
+		transformedSourceEnvironmentUri, err := expandApihubPluginInstanceSourceEnvironmentsConfigSourceEnvironmentUri(original["source_environment_uri"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedSourceEnvironmentUri); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["sourceEnvironmentUri"] = transformedSourceEnvironmentUri
+		}
+
+		transformedCreateTime, err := expandApihubPluginInstanceSourceEnvironmentsConfigCreateTime(original["create_time"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedCreateTime); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["createTime"] = transformedCreateTime
+		}
+
+		transformedUpdateTime, err := expandApihubPluginInstanceSourceEnvironmentsConfigUpdateTime(original["update_time"], d, config)
+		if err != nil {
+			return nil, err
+		} else if val := reflect.ValueOf(transformedUpdateTime); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+			transformed["updateTime"] = transformedUpdateTime
+		}
+
+		transformedKey, err := tpgresource.ExpandString(original["key"], d, config)
+		if err != nil {
+			return nil, err
+		}
+		m[transformedKey] = transformed
+	}
+	return m, nil
+}
+
+func expandApihubPluginInstanceSourceEnvironmentsConfigSourceEnvironment(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceSourceEnvironmentsConfigSourceEnvironmentUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceSourceEnvironmentsConfigCreateTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandApihubPluginInstanceSourceEnvironmentsConfigUpdateTime(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
