@@ -35,6 +35,9 @@ func TestAccComputeInstance(t *testing.T) {
 			Name: "TestAccComputeInstance_basic1",
 		},
 		{
+			Name: "TestAccComputeInstance_stockoutRetry",
+		},
+		{
 			Name: "TestAccComputeInstance_basic2",
 		},
 		{
