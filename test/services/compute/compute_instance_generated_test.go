@@ -77,6 +77,12 @@ func TestAccComputeInstance(t *testing.T) {
 			Name: "TestAccComputeInstance_workloadIdentity_identityType",
 		},
 		{
+			Name: "TestAccComputeInstance_workloadIdentity_agentIdentity",
+		},
+		{
+			Name: "TestAccComputeInstance_workloadIdentity_serviceAccount",
+		},
+		{
 			Name: "TestAccComputeInstance_IP",
 		},
 		{
