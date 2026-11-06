@@ -287,6 +287,9 @@ func TestAccComputeInstance(t *testing.T) {
 			Name: "TestAccComputeInstanceConfidentialInstanceConfigMain",
 		},
 		{
+			Name: "TestAccComputeInstance_confidentialParavisorConfig",
+		},
+		{
 			Name: "TestAccComputeInstance_confidentialHyperDiskBootDisk",
 		},
 		{
