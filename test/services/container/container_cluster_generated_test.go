@@ -723,6 +723,12 @@ func TestAccContainerCluster(t *testing.T) {
 		{
 			Name: "TestAccContainerCluster_nodePoolAdditionalNodeNetworkConfigsStackType",
 		},
+		{
+			Name: "TestAccContainerCluster_kubeletConfigReservedSystemCpus",
+		},
+		{
+			Name: "TestAccContainerCluster_inlineNodePoolKubeletConfigReservedSystemCpus",
+		},
 	}
 
 	for _, tt := range tests {

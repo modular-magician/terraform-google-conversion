@@ -312,6 +312,9 @@ func TestAccContainerNodePool(t *testing.T) {
 		{
 			Name: "TestAccContainerNodePool_bestEffortProvisioning",
 		},
+		{
+			Name: "TestAccContainerNodePool_kubeletConfigReservedSystemCpus",
+		},
 	}
 
 	for _, tt := range tests {
