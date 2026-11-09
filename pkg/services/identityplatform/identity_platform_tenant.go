@@ -129,6 +129,76 @@ are not able to manage its users.`,
 				Optional:    true,
 				Description: `Whether to enable email link user authentication.`,
 			},
+			"password_policy_config": {
+				Type:        schema.TypeList,
+				Optional:    true,
+				Description: `The configuration for the password policy on the tenant.`,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"force_upgrade_on_signin": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Description: `Users must have a password compliant with the password policy to sign-in.`,
+						},
+						"password_policy_enforcement_state": {
+							Type:         schema.TypeString,
+							Optional:     true,
+							ValidateFunc: verify.ValidateEnum([]string{"OFF", "ENFORCE", ""}),
+							Description:  `Which enforcement mode to use for the password policy. Possible values: ["OFF", "ENFORCE"]`,
+						},
+						"password_policy_versions": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: `Must be of length 1. Contains the strength attributes for the password policy.`,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"custom_strength_options": {
+										Type:        schema.TypeList,
+										Optional:    true,
+										Description: `The custom strength options enforced by the password policy.`,
+										MaxItems:    1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"contains_lowercase_character": {
+													Type:        schema.TypeBool,
+													Optional:    true,
+													Description: `The password must contain a lower case character.`,
+												},
+												"contains_non_alphanumeric_character": {
+													Type:        schema.TypeBool,
+													Optional:    true,
+													Description: `The password must contain a non alpha numeric character.`,
+												},
+												"contains_numeric_character": {
+													Type:        schema.TypeBool,
+													Optional:    true,
+													Description: `The password must contain a number.`,
+												},
+												"contains_uppercase_character": {
+													Type:        schema.TypeBool,
+													Optional:    true,
+													Description: `The password must contain an upper case character.`,
+												},
+												"max_password_length": {
+													Type:        schema.TypeInt,
+													Optional:    true,
+													Description: `Maximum password length. No default max length.`,
+												},
+												"min_password_length": {
+													Type:        schema.TypeInt,
+													Optional:    true,
+													Description: `Minimum password length. Range from 6 to 30.`,
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 			"name": {
 				Type:        schema.TypeString,
 				Computed:    true,
