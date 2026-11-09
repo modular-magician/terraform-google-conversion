@@ -669,6 +669,57 @@ responses.`,
 				Optional:    true,
 				Description: `An optional description of this resource.`,
 			},
+			"dynamic_forwarding": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Description: `Dynamic forwarding configuration. This field is used to configure the backend service with dynamic forwarding
+feature which together with Service Extension allows customized and complex routing logic.`,
+				MaxItems: 1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"forward_proxy": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							ForceNew:    true,
+							Description: `Dynamic Forwarding Proxy configuration.`,
+							MaxItems:    1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"enabled": {
+										Type:        schema.TypeBool,
+										Required:    true,
+										ForceNew:    true,
+										Description: `A boolean flag enabling dynamic forwarding proxy.`,
+									},
+									"proxy_mode": {
+										Type:         schema.TypeString,
+										Required:     true,
+										ForceNew:     true,
+										ValidateFunc: verify.ValidateEnum([]string{"DIRECT_FORWARDING", "CLOUD_RUN"}),
+										Description:  `Determines the dynamic forwarding proxy mode Possible values: ["DIRECT_FORWARDING", "CLOUD_RUN"]`,
+									},
+								},
+							},
+						},
+						"ip_port_selection": {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Description: `IP:PORT based dynamic forwarding configuration.`,
+							MaxItems:    1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"enabled": {
+										Type:        schema.TypeBool,
+										Optional:    true,
+										ForceNew:    true,
+										Description: `A boolean flag enabling IP:PORT based dynamic forwarding.`,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 			"edge_security_policy": {
 				Type:             schema.TypeString,
 				Optional:         true,
