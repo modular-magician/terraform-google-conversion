@@ -221,7 +221,7 @@ func GetComputeReservationApiObject(d tpgresource.TerraformResourceData, config 
 	enableEmergentMaintenanceProp, err := expandComputeReservationEnableEmergentMaintenance(d.Get("enable_emergent_maintenance"), d, config)
 	if err != nil {
 		return nil, err
-	} else if v, ok := d.GetOkExists("enable_emergent_maintenance"); !tpgresource.IsEmptyValue(reflect.ValueOf(enableEmergentMaintenanceProp)) && (ok || !reflect.DeepEqual(v, enableEmergentMaintenanceProp)) {
+	} else if v, ok := d.GetOkExists("enable_emergent_maintenance"); ok || (v != nil && !reflect.DeepEqual(v, enableEmergentMaintenanceProp)) {
 		obj["enableEmergentMaintenance"] = enableEmergentMaintenanceProp
 	}
 	paramsProp, err := expandComputeReservationParams(d.Get("params"), d, config)
