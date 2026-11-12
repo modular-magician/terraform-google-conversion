@@ -470,6 +470,9 @@ func TestAccComputeInstance(t *testing.T) {
 			Name: "TestAccComputeInstance_dynamicNic",
 		},
 		{
+			Name: "TestAccComputeInstance_dynamicNicNonDynamicForceNew",
+		},
+		{
 			Name: "TestAccComputeInstance_VSSWindowsDefault",
 		},
 		{
