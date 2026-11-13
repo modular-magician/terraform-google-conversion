@@ -29,13 +29,13 @@ func TestAccFilestoreInstance(t *testing.T) {
 			Skip: "Test data has mismatched steps",
 		},
 		{
+			Name: "TestAccFilestoreInstance_filestoreInstanceProtocolExample",
+		},
+		{
 			Name: "TestAccFilestoreInstance_filestoreInstanceBasicExample",
 		},
 		{
 			Name: "TestAccFilestoreInstance_filestoreInstanceFullExample",
-		},
-		{
-			Name: "TestAccFilestoreInstance_filestoreInstanceProtocolExample",
 		},
 		{
 			Name: "TestAccFilestoreInstance_update",
