@@ -729,6 +729,12 @@ func TestAccContainerCluster(t *testing.T) {
 		{
 			Name: "TestAccContainerCluster_nodePoolEphemeralStorageLocalSsdConfigWithEphemeralCapacityGb",
 		},
+		{
+			Name: "TestAccContainerCluster_withWizSensorConfig",
+		},
+		{
+			Name: "TestAccContainerCluster_withWizSensorConfigEnableSecretSyncInPlace",
+		},
 	}
 
 	for _, tt := range tests {
