@@ -50,6 +50,71 @@ import (
 	"google.golang.org/api/googleapi"
 )
 
+// spannerBackupReferencesInstancePartition reports whether a backup stores data in
+// the instance partition with the given ID. The backup must belong to the
+// partition's instance, because only the ID is compared.
+func spannerBackupReferencesInstancePartition(backup map[string]interface{}, partitionId string) bool {
+	refs, _ := backup["instancePartitions"].([]interface{})
+	for _, raw := range refs {
+		ref, _ := raw.(map[string]interface{})
+		name, _ := ref["instancePartition"].(string)
+		if tpgresource.GetResourceNameFromSelfLink(name) == partitionId {
+			return true
+		}
+	}
+	return false
+}
+
+func deleteBackupsReferencingSpannerInstancePartition(d *schema.ResourceData, config *transport_tpg.Config, userAgent, billingProject string) error {
+	listUrl, err := tpgresource.ReplaceVars(d, config, transport_tpg.BaseUrl(Product, config)+"projects/{{project}}/instances/{{instance}}/backups")
+	if err != nil {
+		return err
+	}
+	partitionId := d.Get("name").(string)
+
+	// List every page before deleting, so that deletions cannot shift later pages.
+	var backups []interface{}
+	pageToken := ""
+	for {
+		url := listUrl
+		if pageToken != "" {
+			url, err = transport_tpg.AddQueryParams(listUrl, map[string]string{"pageToken": pageToken})
+			if err != nil {
+				return err
+			}
+		}
+		res, err := transport_tpg.SendRequest(transport_tpg.SendRequestOptions{
+			Config:    config,
+			Method:    "GET",
+			Project:   billingProject,
+			RawURL:    url,
+			UserAgent: userAgent,
+			Timeout:   d.Timeout(schema.TimeoutDelete),
+		})
+		if err != nil {
+			// The instance is gone, and its backups with it.
+			if transport_tpg.IsGoogleApiErrorWithCode(err, 404) {
+				return nil
+			}
+			return fmt.Errorf("Error listing backups that reference InstancePartition %q: %s", d.Id(), err)
+		}
+
+		items, _ := res["backups"].([]interface{})
+		for _, raw := range items {
+			if backup, ok := raw.(map[string]interface{}); ok && spannerBackupReferencesInstancePartition(backup, partitionId) {
+				backups = append(backups, backup)
+			}
+		}
+
+		pageToken, _ = res["nextPageToken"].(string)
+		if pageToken == "" {
+			break
+		}
+	}
+
+	return deleteSpannerBackups(d, config, map[string]interface{}{"backups": backups}, userAgent, billingProject)
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
