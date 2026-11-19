@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewIAMBetaWorkloadIdentityPoolIamBindingResource returns the google_iam_workload_identity_pool_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewIAMBetaWorkloadIdentityPoolIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		IAMBetaWorkloadIdentityPoolIamSchema,
+		IAMBetaWorkloadIdentityPoolIamUpdaterProducer,
+		IAMBetaWorkloadIdentityPoolIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(IAMBetaWorkloadIdentityPoolIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewIAMBetaWorkloadIdentityPoolIamMemberResource returns the google_iam_workload_identity_pool_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

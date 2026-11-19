@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewContainerAnalysisNoteIamBindingResource returns the google_container_analysis_note_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewContainerAnalysisNoteIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ContainerAnalysisNoteIamSchema,
+		ContainerAnalysisNoteIamUpdaterProducer,
+		ContainerAnalysisNoteIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ContainerAnalysisNoteIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewContainerAnalysisNoteIamMemberResource returns the google_container_analysis_note_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

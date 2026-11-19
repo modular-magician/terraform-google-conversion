@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewBiglakeIcebergIcebergNamespaceIamBindingResource returns the google_biglake_iceberg_namespace_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewBiglakeIcebergIcebergNamespaceIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		BiglakeIcebergIcebergNamespaceIamSchema,
+		BiglakeIcebergIcebergNamespaceIamUpdaterProducer,
+		BiglakeIcebergIcebergNamespaceIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(BiglakeIcebergIcebergNamespaceIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewBiglakeIcebergIcebergNamespaceIamMemberResource returns the google_biglake_iceberg_namespace_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

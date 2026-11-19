@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewEventarcPipelineIamBindingResource returns the google_eventarc_pipeline_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewEventarcPipelineIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		EventarcPipelineIamSchema,
+		EventarcPipelineIamUpdaterProducer,
+		EventarcPipelineIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(EventarcPipelineIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewEventarcPipelineIamMemberResource returns the google_eventarc_pipeline_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

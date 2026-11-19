@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewSecretManagerSecretIamBindingResource returns the google_secret_manager_secret_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewSecretManagerSecretIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		SecretManagerSecretIamSchema,
+		SecretManagerSecretIamUpdaterProducer,
+		SecretManagerSecretIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(SecretManagerSecretIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewSecretManagerSecretIamMemberResource returns the google_secret_manager_secret_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

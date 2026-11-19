@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewClouddeployTargetIamBindingResource returns the google_clouddeploy_target_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewClouddeployTargetIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ClouddeployTargetIamSchema,
+		ClouddeployTargetIamUpdaterProducer,
+		ClouddeployTargetIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ClouddeployTargetIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewClouddeployTargetIamMemberResource returns the google_clouddeploy_target_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

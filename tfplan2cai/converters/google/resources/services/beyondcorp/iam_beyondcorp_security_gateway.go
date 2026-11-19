@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewBeyondcorpSecurityGatewayIamBindingResource returns the google_beyondcorp_security_gateway_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewBeyondcorpSecurityGatewayIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		BeyondcorpSecurityGatewayIamSchema,
+		BeyondcorpSecurityGatewayIamUpdaterProducer,
+		BeyondcorpSecurityGatewayIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(BeyondcorpSecurityGatewayIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewBeyondcorpSecurityGatewayIamMemberResource returns the google_beyondcorp_security_gateway_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

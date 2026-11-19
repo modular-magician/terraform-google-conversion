@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewDataprocMetastoreServiceIamBindingResource returns the google_dataproc_metastore_service_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewDataprocMetastoreServiceIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		DataprocMetastoreServiceIamSchema,
+		DataprocMetastoreServiceIamUpdaterProducer,
+		DataprocMetastoreServiceIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(DataprocMetastoreServiceIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewDataprocMetastoreServiceIamMemberResource returns the google_dataproc_metastore_service_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

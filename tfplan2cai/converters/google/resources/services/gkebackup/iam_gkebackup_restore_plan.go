@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewGKEBackupRestorePlanIamBindingResource returns the google_gke_backup_restore_plan_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewGKEBackupRestorePlanIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		GKEBackupRestorePlanIamSchema,
+		GKEBackupRestorePlanIamUpdaterProducer,
+		GKEBackupRestorePlanIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(GKEBackupRestorePlanIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewGKEBackupRestorePlanIamMemberResource returns the google_gke_backup_restore_plan_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

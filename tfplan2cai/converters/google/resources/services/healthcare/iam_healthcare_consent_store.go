@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewHealthcareConsentStoreIamBindingResource returns the google_healthcare_consent_store_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewHealthcareConsentStoreIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		HealthcareConsentStoreIamSchema,
+		HealthcareConsentStoreIamUpdaterProducer,
+		HealthcareConsentStoreIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(HealthcareConsentStoreIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewHealthcareConsentStoreIamMemberResource returns the google_healthcare_consent_store_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

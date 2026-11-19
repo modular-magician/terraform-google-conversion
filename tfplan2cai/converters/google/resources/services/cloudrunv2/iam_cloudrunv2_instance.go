@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewCloudRunV2InstanceIamBindingResource returns the google_cloud_run_v2_instance_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewCloudRunV2InstanceIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		CloudRunV2InstanceIamSchema,
+		CloudRunV2InstanceIamUpdaterProducer,
+		CloudRunV2InstanceIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(CloudRunV2InstanceIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewCloudRunV2InstanceIamMemberResource returns the google_cloud_run_v2_instance_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

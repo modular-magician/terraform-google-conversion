@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewIapTunnelIamBindingResource returns the google_iap_tunnel_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewIapTunnelIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		IapTunnelIamSchema,
+		IapTunnelIamUpdaterProducer,
+		IapTunnelIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(IapTunnelIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewIapTunnelIamMemberResource returns the google_iap_tunnel_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

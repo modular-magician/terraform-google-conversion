@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewBigQueryTableIamBindingResource returns the google_bigquery_table_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewBigQueryTableIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		BigQueryTableIamSchema,
+		BigQueryTableIamUpdaterProducer,
+		BigQueryTableIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(BigQueryTableIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewBigQueryTableIamMemberResource returns the google_bigquery_table_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

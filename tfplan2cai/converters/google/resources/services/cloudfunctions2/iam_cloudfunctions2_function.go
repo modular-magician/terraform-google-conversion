@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewCloudfunctions2functionIamBindingResource returns the google_cloudfunctions2_function_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewCloudfunctions2functionIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		Cloudfunctions2functionIamSchema,
+		Cloudfunctions2functionIamUpdaterProducer,
+		Cloudfunctions2functionIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(Cloudfunctions2functionIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewCloudfunctions2functionIamMemberResource returns the google_cloudfunctions2_function_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

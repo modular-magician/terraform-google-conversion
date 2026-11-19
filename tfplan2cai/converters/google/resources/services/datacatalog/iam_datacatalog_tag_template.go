@@ -35,6 +35,19 @@ var (
 	_ = schema.Noop
 )
 
+// NewDataCatalogTagTemplateIamBindingResource returns the google_data_catalog_tag_template_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewDataCatalogTagTemplateIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		DataCatalogTagTemplateIamSchema,
+		DataCatalogTagTemplateIamUpdaterProducer,
+		DataCatalogTagTemplateIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(DataCatalogTagTemplateIamParentParentResourceIdentityParser),
+		tpgiamresource.IamWithDeprecationMessage("The parent resource has been deprecated: `google_data_catalog_tag_template` is deprecated and will be removed in a future major release. Use `google_dataplex_aspect_type` instead. For steps to transition your Data Catalog users, workloads, and content to Dataplex Catalog, see https://cloud.google.com/dataplex/docs/transition-to-dataplex-catalog."),
+	)
+}
+
 // NewDataCatalogTagTemplateIamMemberResource returns the google_data_catalog_tag_template_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewComputeFirewallPolicyIamBindingResource returns the google_compute_firewall_policy_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewComputeFirewallPolicyIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ComputeFirewallPolicyIamSchema,
+		ComputeFirewallPolicyIamUpdaterProducer,
+		ComputeFirewallPolicyIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ComputeFirewallPolicyIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewComputeFirewallPolicyIamMemberResource returns the google_compute_firewall_policy_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

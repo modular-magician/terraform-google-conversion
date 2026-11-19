@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewBigqueryDatapolicyv2DataPolicyIamBindingResource returns the google_bigquery_datapolicyv2_data_policy_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewBigqueryDatapolicyv2DataPolicyIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		BigqueryDatapolicyv2DataPolicyIamSchema,
+		BigqueryDatapolicyv2DataPolicyIamUpdaterProducer,
+		BigqueryDatapolicyv2DataPolicyIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(BigqueryDatapolicyv2DataPolicyIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewBigqueryDatapolicyv2DataPolicyIamMemberResource returns the google_bigquery_datapolicyv2_data_policy_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

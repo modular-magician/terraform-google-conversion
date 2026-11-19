@@ -35,6 +35,19 @@ var (
 	_ = schema.Noop
 )
 
+// NewDataplexEntryGroupIamBindingResource returns the google_dataplex_entry_group_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewDataplexEntryGroupIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		DataplexEntryGroupIamSchema,
+		DataplexEntryGroupIamUpdaterProducer,
+		DataplexEntryGroupIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(DataplexEntryGroupIamParentParentResourceIdentityParser),
+		tpgiamresource.IamWithMaxBackoffSeconds(1200),
+	)
+}
+
 // NewDataplexEntryGroupIamMemberResource returns the google_dataplex_entry_group_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

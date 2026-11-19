@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewGKEHub2ScopeIamBindingResource returns the google_gke_hub_scope_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewGKEHub2ScopeIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		GKEHub2ScopeIamSchema,
+		GKEHub2ScopeIamUpdaterProducer,
+		GKEHub2ScopeIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(GKEHub2ScopeIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewGKEHub2ScopeIamMemberResource returns the google_gke_hub_scope_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

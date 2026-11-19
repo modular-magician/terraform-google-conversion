@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewKMSEkmConnectionIamBindingResource returns the google_kms_ekm_connection_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewKMSEkmConnectionIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		KMSEkmConnectionIamSchema,
+		KMSEkmConnectionIamUpdaterProducer,
+		KMSEkmConnectionIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(KMSEkmConnectionIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewKMSEkmConnectionIamMemberResource returns the google_kms_ekm_connection_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

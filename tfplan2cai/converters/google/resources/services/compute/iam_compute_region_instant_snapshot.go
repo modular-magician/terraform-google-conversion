@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewComputeRegionInstantSnapshotIamBindingResource returns the google_compute_region_instant_snapshot_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewComputeRegionInstantSnapshotIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ComputeRegionInstantSnapshotIamSchema,
+		ComputeRegionInstantSnapshotIamUpdaterProducer,
+		ComputeRegionInstantSnapshotIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ComputeRegionInstantSnapshotIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewComputeRegionInstantSnapshotIamMemberResource returns the google_compute_region_instant_snapshot_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

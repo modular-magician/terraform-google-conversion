@@ -35,6 +35,19 @@ var (
 	_ = schema.Noop
 )
 
+// NewDataplexDataProductIamBindingResource returns the google_dataplex_data_product_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewDataplexDataProductIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		DataplexDataProductIamSchema,
+		DataplexDataProductIamUpdaterProducer,
+		DataplexDataProductIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(DataplexDataProductIamParentParentResourceIdentityParser),
+		tpgiamresource.IamWithMaxBackoffSeconds(1200),
+	)
+}
+
 // NewDataplexDataProductIamMemberResource returns the google_dataplex_data_product_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

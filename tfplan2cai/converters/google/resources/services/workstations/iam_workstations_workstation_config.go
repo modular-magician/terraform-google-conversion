@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewWorkstationsWorkstationConfigIamBindingResource returns the google_workstations_workstation_config_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewWorkstationsWorkstationConfigIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		WorkstationsWorkstationConfigIamSchema,
+		WorkstationsWorkstationConfigIamUpdaterProducer,
+		WorkstationsWorkstationConfigIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(WorkstationsWorkstationConfigIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewWorkstationsWorkstationConfigIamMemberResource returns the google_workstations_workstation_config_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

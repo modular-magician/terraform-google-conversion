@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewApiGatewayGatewayIamBindingResource returns the google_api_gateway_gateway_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewApiGatewayGatewayIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ApiGatewayGatewayIamSchema,
+		ApiGatewayGatewayIamUpdaterProducer,
+		ApiGatewayGatewayIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ApiGatewayGatewayIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewApiGatewayGatewayIamMemberResource returns the google_api_gateway_gateway_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

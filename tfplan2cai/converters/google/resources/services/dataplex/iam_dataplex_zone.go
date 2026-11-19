@@ -35,6 +35,19 @@ var (
 	_ = schema.Noop
 )
 
+// NewDataplexZoneIamBindingResource returns the google_dataplex_zone_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewDataplexZoneIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		DataplexZoneIamSchema,
+		DataplexZoneIamUpdaterProducer,
+		DataplexZoneIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(DataplexZoneIamParentParentResourceIdentityParser),
+		tpgiamresource.IamWithMaxBackoffSeconds(1200),
+	)
+}
+
 // NewDataplexZoneIamMemberResource returns the google_dataplex_zone_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

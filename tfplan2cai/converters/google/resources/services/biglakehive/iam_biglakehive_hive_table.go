@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewBiglakeHiveHiveTableIamBindingResource returns the google_biglake_hive_table_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewBiglakeHiveHiveTableIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		BiglakeHiveHiveTableIamSchema,
+		BiglakeHiveHiveTableIamUpdaterProducer,
+		BiglakeHiveHiveTableIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(BiglakeHiveHiveTableIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewBiglakeHiveHiveTableIamMemberResource returns the google_biglake_hive_table_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

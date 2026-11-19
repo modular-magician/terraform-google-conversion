@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewBinaryAuthorizationAttestorIamBindingResource returns the google_binary_authorization_attestor_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewBinaryAuthorizationAttestorIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		BinaryAuthorizationAttestorIamSchema,
+		BinaryAuthorizationAttestorIamUpdaterProducer,
+		BinaryAuthorizationAttestorIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(BinaryAuthorizationAttestorIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewBinaryAuthorizationAttestorIamMemberResource returns the google_binary_authorization_attestor_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

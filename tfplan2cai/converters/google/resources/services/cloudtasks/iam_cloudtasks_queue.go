@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewCloudTasksQueueIamBindingResource returns the google_cloud_tasks_queue_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewCloudTasksQueueIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		CloudTasksQueueIamSchema,
+		CloudTasksQueueIamUpdaterProducer,
+		CloudTasksQueueIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(CloudTasksQueueIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewCloudTasksQueueIamMemberResource returns the google_cloud_tasks_queue_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

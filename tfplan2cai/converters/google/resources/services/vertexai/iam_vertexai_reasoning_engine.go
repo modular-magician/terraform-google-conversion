@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewVertexAIReasoningEngineIamBindingResource returns the google_vertex_ai_reasoning_engine_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewVertexAIReasoningEngineIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		VertexAIReasoningEngineIamSchema,
+		VertexAIReasoningEngineIamUpdaterProducer,
+		VertexAIReasoningEngineIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(VertexAIReasoningEngineIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewVertexAIReasoningEngineIamMemberResource returns the google_vertex_ai_reasoning_engine_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

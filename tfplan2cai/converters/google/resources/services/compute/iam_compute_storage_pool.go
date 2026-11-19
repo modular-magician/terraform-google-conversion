@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewComputeStoragePoolIamBindingResource returns the google_compute_storage_pool_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewComputeStoragePoolIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ComputeStoragePoolIamSchema,
+		ComputeStoragePoolIamUpdaterProducer,
+		ComputeStoragePoolIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ComputeStoragePoolIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewComputeStoragePoolIamMemberResource returns the google_compute_storage_pool_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

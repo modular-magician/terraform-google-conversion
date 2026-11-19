@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewWorkbenchInstanceIamBindingResource returns the google_workbench_instance_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewWorkbenchInstanceIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		WorkbenchInstanceIamSchema,
+		WorkbenchInstanceIamUpdaterProducer,
+		WorkbenchInstanceIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(WorkbenchInstanceIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewWorkbenchInstanceIamMemberResource returns the google_workbench_instance_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

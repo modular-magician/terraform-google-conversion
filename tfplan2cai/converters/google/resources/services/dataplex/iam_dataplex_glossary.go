@@ -35,6 +35,19 @@ var (
 	_ = schema.Noop
 )
 
+// NewDataplexGlossaryIamBindingResource returns the google_dataplex_glossary_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewDataplexGlossaryIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		DataplexGlossaryIamSchema,
+		DataplexGlossaryIamUpdaterProducer,
+		DataplexGlossaryIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(DataplexGlossaryIamParentParentResourceIdentityParser),
+		tpgiamresource.IamWithMaxBackoffSeconds(1200),
+	)
+}
+
 // NewDataplexGlossaryIamMemberResource returns the google_dataplex_glossary_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

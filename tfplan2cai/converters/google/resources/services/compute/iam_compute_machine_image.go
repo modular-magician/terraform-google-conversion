@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewComputeMachineImageIamBindingResource returns the google_compute_machine_image_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewComputeMachineImageIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ComputeMachineImageIamSchema,
+		ComputeMachineImageIamUpdaterProducer,
+		ComputeMachineImageIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ComputeMachineImageIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewComputeMachineImageIamMemberResource returns the google_compute_machine_image_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

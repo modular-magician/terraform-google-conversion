@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewApigeeEnvironmentIamBindingResource returns the google_apigee_environment_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewApigeeEnvironmentIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ApigeeEnvironmentIamSchema,
+		ApigeeEnvironmentIamUpdaterProducer,
+		ApigeeEnvironmentIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ApigeeEnvironmentIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewApigeeEnvironmentIamMemberResource returns the google_apigee_environment_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

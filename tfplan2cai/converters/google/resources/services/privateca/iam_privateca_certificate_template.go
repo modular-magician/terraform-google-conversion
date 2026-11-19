@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewPrivatecaCertificateTemplateIamBindingResource returns the google_privateca_certificate_template_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewPrivatecaCertificateTemplateIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		PrivatecaCertificateTemplateIamSchema,
+		PrivatecaCertificateTemplateIamUpdaterProducer,
+		PrivatecaCertificateTemplateIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(PrivatecaCertificateTemplateIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewPrivatecaCertificateTemplateIamMemberResource returns the google_privateca_certificate_template_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

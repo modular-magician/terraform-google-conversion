@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewDataprocAutoscalingPolicyIamBindingResource returns the google_dataproc_autoscaling_policy_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewDataprocAutoscalingPolicyIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		DataprocAutoscalingPolicyIamSchema,
+		DataprocAutoscalingPolicyIamUpdaterProducer,
+		DataprocAutoscalingPolicyIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(DataprocAutoscalingPolicyIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewDataprocAutoscalingPolicyIamMemberResource returns the google_dataproc_autoscaling_policy_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

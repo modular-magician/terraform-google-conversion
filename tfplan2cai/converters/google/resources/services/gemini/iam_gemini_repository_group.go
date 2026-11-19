@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewGeminiRepositoryGroupIamBindingResource returns the google_gemini_repository_group_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewGeminiRepositoryGroupIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		GeminiRepositoryGroupIamSchema,
+		GeminiRepositoryGroupIamUpdaterProducer,
+		GeminiRepositoryGroupIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(GeminiRepositoryGroupIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewGeminiRepositoryGroupIamMemberResource returns the google_gemini_repository_group_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

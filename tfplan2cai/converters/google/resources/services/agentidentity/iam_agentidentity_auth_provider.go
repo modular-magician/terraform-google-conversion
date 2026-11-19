@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewAgentIdentityAuthProviderIamBindingResource returns the google_agent_identity_auth_provider_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewAgentIdentityAuthProviderIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		AgentIdentityAuthProviderIamSchema,
+		AgentIdentityAuthProviderIamUpdaterProducer,
+		AgentIdentityAuthProviderIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(AgentIdentityAuthProviderIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewAgentIdentityAuthProviderIamMemberResource returns the google_agent_identity_auth_provider_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

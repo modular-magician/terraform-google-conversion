@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewDesignCenterSpaceIamBindingResource returns the google_design_center_space_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewDesignCenterSpaceIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		DesignCenterSpaceIamSchema,
+		DesignCenterSpaceIamUpdaterProducer,
+		DesignCenterSpaceIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(DesignCenterSpaceIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewDesignCenterSpaceIamMemberResource returns the google_design_center_space_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

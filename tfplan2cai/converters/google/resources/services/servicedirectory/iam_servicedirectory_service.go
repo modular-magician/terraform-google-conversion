@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewServiceDirectoryServiceIamBindingResource returns the google_service_directory_service_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewServiceDirectoryServiceIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ServiceDirectoryServiceIamSchema,
+		ServiceDirectoryServiceIamUpdaterProducer,
+		ServiceDirectoryServiceIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ServiceDirectoryServiceIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewServiceDirectoryServiceIamMemberResource returns the google_service_directory_service_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

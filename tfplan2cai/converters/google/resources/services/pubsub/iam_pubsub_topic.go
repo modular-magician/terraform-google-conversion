@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewPubsubTopicIamBindingResource returns the google_pubsub_topic_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewPubsubTopicIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		PubsubTopicIamSchema,
+		PubsubTopicIamUpdaterProducer,
+		PubsubTopicIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(PubsubTopicIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewPubsubTopicIamMemberResource returns the google_pubsub_topic_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

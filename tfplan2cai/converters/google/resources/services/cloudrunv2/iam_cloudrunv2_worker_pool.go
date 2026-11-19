@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewCloudRunV2WorkerPoolIamBindingResource returns the google_cloud_run_v2_worker_pool_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewCloudRunV2WorkerPoolIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		CloudRunV2WorkerPoolIamSchema,
+		CloudRunV2WorkerPoolIamUpdaterProducer,
+		CloudRunV2WorkerPoolIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(CloudRunV2WorkerPoolIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewCloudRunV2WorkerPoolIamMemberResource returns the google_cloud_run_v2_worker_pool_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

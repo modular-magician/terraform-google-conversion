@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewGKEHub2FeatureIamBindingResource returns the google_gke_hub_feature_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewGKEHub2FeatureIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		GKEHub2FeatureIamSchema,
+		GKEHub2FeatureIamUpdaterProducer,
+		GKEHub2FeatureIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(GKEHub2FeatureIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewGKEHub2FeatureIamMemberResource returns the google_gke_hub_feature_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

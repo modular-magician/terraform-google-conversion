@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewDiscoveryEngineSearchEngineIamBindingResource returns the google_discovery_engine_search_engine_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewDiscoveryEngineSearchEngineIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		DiscoveryEngineSearchEngineIamSchema,
+		DiscoveryEngineSearchEngineIamUpdaterProducer,
+		DiscoveryEngineSearchEngineIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(DiscoveryEngineSearchEngineIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewDiscoveryEngineSearchEngineIamMemberResource returns the google_discovery_engine_search_engine_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

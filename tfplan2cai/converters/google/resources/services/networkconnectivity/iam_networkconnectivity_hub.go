@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewNetworkConnectivityHubIamBindingResource returns the google_network_connectivity_hub_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewNetworkConnectivityHubIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		NetworkConnectivityHubIamSchema,
+		NetworkConnectivityHubIamUpdaterProducer,
+		NetworkConnectivityHubIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(NetworkConnectivityHubIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewNetworkConnectivityHubIamMemberResource returns the google_network_connectivity_hub_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

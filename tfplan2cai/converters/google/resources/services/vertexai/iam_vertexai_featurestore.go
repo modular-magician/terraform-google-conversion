@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewVertexAIFeaturestoreIamBindingResource returns the google_vertex_ai_featurestore_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewVertexAIFeaturestoreIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		VertexAIFeaturestoreIamSchema,
+		VertexAIFeaturestoreIamUpdaterProducer,
+		VertexAIFeaturestoreIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(VertexAIFeaturestoreIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewVertexAIFeaturestoreIamMemberResource returns the google_vertex_ai_featurestore_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

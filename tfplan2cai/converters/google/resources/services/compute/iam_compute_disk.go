@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewComputeDiskIamBindingResource returns the google_compute_disk_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewComputeDiskIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ComputeDiskIamSchema,
+		ComputeDiskIamUpdaterProducer,
+		ComputeDiskIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ComputeDiskIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewComputeDiskIamMemberResource returns the google_compute_disk_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

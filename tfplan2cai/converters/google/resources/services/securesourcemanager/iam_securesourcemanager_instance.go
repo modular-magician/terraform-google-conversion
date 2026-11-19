@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewSecureSourceManagerInstanceIamBindingResource returns the google_secure_source_manager_instance_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewSecureSourceManagerInstanceIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		SecureSourceManagerInstanceIamSchema,
+		SecureSourceManagerInstanceIamUpdaterProducer,
+		SecureSourceManagerInstanceIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(SecureSourceManagerInstanceIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewSecureSourceManagerInstanceIamMemberResource returns the google_secure_source_manager_instance_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

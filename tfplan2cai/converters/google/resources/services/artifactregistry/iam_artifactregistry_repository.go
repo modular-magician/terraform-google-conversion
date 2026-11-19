@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewArtifactRegistryRepositoryIamBindingResource returns the google_artifact_registry_repository_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewArtifactRegistryRepositoryIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ArtifactRegistryRepositoryIamSchema,
+		ArtifactRegistryRepositoryIamUpdaterProducer,
+		ArtifactRegistryRepositoryIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ArtifactRegistryRepositoryIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewArtifactRegistryRepositoryIamMemberResource returns the google_artifact_registry_repository_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

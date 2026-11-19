@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewGeminiDataAnalyticsDataAgentIamBindingResource returns the google_gemini_data_analytics_data_agent_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewGeminiDataAnalyticsDataAgentIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		GeminiDataAnalyticsDataAgentIamSchema,
+		GeminiDataAnalyticsDataAgentIamUpdaterProducer,
+		GeminiDataAnalyticsDataAgentIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(GeminiDataAnalyticsDataAgentIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewGeminiDataAnalyticsDataAgentIamMemberResource returns the google_gemini_data_analytics_data_agent_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

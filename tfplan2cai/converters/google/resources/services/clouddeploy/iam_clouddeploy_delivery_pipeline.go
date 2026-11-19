@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewClouddeployDeliveryPipelineIamBindingResource returns the google_clouddeploy_delivery_pipeline_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewClouddeployDeliveryPipelineIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ClouddeployDeliveryPipelineIamSchema,
+		ClouddeployDeliveryPipelineIamUpdaterProducer,
+		ClouddeployDeliveryPipelineIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ClouddeployDeliveryPipelineIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewClouddeployDeliveryPipelineIamMemberResource returns the google_clouddeploy_delivery_pipeline_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

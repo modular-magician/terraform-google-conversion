@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewDataCatalogTaxonomyIamBindingResource returns the google_data_catalog_taxonomy_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewDataCatalogTaxonomyIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		DataCatalogTaxonomyIamSchema,
+		DataCatalogTaxonomyIamUpdaterProducer,
+		DataCatalogTaxonomyIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(DataCatalogTaxonomyIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewDataCatalogTaxonomyIamMemberResource returns the google_data_catalog_taxonomy_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.

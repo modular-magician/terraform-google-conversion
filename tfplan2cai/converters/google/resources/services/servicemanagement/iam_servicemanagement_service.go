@@ -35,6 +35,18 @@ var (
 	_ = schema.Noop
 )
 
+// NewServiceManagementServiceIamBindingResource returns the google_endpoints_service_iam_binding
+// managed resource. It is shared by the managed resource registration and the
+// list resource, so both stay in sync.
+func NewServiceManagementServiceIamBindingResource() *schema.Resource {
+	return tpgiamresource.ResourceIamBinding(
+		ServiceManagementServiceIamSchema,
+		ServiceManagementServiceIamUpdaterProducer,
+		ServiceManagementServiceIdParseFunc,
+		tpgiamresource.IamWithParentResourceIdentity(ServiceManagementServiceIamParentParentResourceIdentityParser),
+	)
+}
+
 // NewServiceManagementServiceIamMemberResource returns the google_endpoints_service_iam_member
 // managed resource. It is shared by the managed resource registration and the
 // list resource, so both stay in sync.
