@@ -157,6 +157,8 @@ func (c *BigQueryDatasetCai2hclConverter) convertResourceData(asset caiasset.Ass
 	hclData["storage_billing_model"] = flattenBigQueryDatasetStorageBillingModel(res["storageBillingModel"], d, config)
 	hclData["resource_tags"] = flattenBigQueryDatasetResourceTags(res["resourceTags"], d, config)
 	hclData["external_catalog_dataset_options"] = flattenBigQueryDatasetExternalCatalogDatasetOptions(res["externalCatalogDatasetOptions"], d, config)
+	hclData["failover_reservation_id"] = flattenBigQueryDatasetFailoverReservationId(res["failoverReservationId"], d, config)
+	hclData["replicas"] = flattenBigQueryDatasetReplicas(res["replicas"], d, config)
 
 	ctyVal, err := utils.MapToCtyValWithSchema(hclData, c.schema)
 	if err != nil {
@@ -675,4 +677,115 @@ func flattenBigQueryDatasetExternalCatalogDatasetOptionsDefaultStorageLocationUr
 		return nil
 	}
 	return v
+}
+
+func flattenBigQueryDatasetFailoverReservationId(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenBigQueryDatasetReplicas(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return v
+	}
+	l, ok := v.([]interface{})
+	if !ok {
+		return v
+	}
+
+	type replicaKey struct {
+		id       string
+		location string
+	}
+	type replicaConfigState struct {
+		location       string
+		replicaOptions interface{}
+	}
+	priorByKey := make(map[replicaKey]replicaConfigState)
+	if d != nil {
+		populateFromSet := func(sourceSet *schema.Set) {
+			if sourceSet == nil {
+				return
+			}
+			for _, rawExisting := range sourceSet.List() {
+				existingMap, ok := rawExisting.(map[string]interface{})
+				if !ok {
+					continue
+				}
+				existingID, _ := existingMap["id"].(string)
+				existingLoc, _ := existingMap["location"].(string)
+				if existingID != "" && existingLoc != "" {
+					key := replicaKey{
+						id:       existingID,
+						location: strings.ToLower(existingLoc),
+					}
+					priorByKey[key] = replicaConfigState{
+						location:       existingLoc,
+						replicaOptions: existingMap["replica_options"],
+					}
+				}
+			}
+		}
+		if oldVal, _ := d.GetChange("replicas"); oldVal != nil {
+			// Load prior state first so write-only replica_options and user-configured
+			// location casing are preserved when SetNewComputed("replicas") blanks
+			// d.Get("replicas") during Update -> Read.
+			if oldSet, ok := oldVal.(*schema.Set); ok && oldSet != nil && oldSet.Len() > 0 {
+				populateFromSet(oldSet)
+			}
+		}
+		if existingSet, ok := d.Get("replicas").(*schema.Set); ok && existingSet != nil && existingSet.Len() > 0 {
+			populateFromSet(existingSet)
+		}
+	}
+
+	transformed := schema.NewSet(resourceBigqueryDatasetReplicasHash, []interface{}{})
+	for _, raw := range l {
+		original, ok := raw.(map[string]interface{})
+		if !ok || len(original) < 1 {
+			// Do not include empty json objects coming back from the api
+			continue
+		}
+
+		replicaID, _ := original["id"].(string)
+		replicaLocation, _ := original["location"].(string)
+		lookupKey := replicaKey{
+			id:       replicaID,
+			location: strings.ToLower(replicaLocation),
+		}
+
+		var flattenedReplicaOptions interface{}
+		if rawOpts, ok := original["replicaOptions"].(map[string]interface{}); ok && len(rawOpts) > 0 {
+			if kmsKey, ok := rawOpts["defaultKmsKeyName"].(string); ok && kmsKey != "" {
+				flattenedReplicaOptions = []interface{}{
+					map[string]interface{}{
+						"default_kms_key_name": kmsKey,
+					},
+				}
+			}
+		}
+		if flattenedReplicaOptions == nil {
+			if prior, exists := priorByKey[lookupKey]; exists {
+				if priorOpts, ok := prior.replicaOptions.([]interface{}); ok && len(priorOpts) > 0 {
+					flattenedReplicaOptions = priorOpts
+				}
+			}
+		}
+
+		if prior, exists := priorByKey[lookupKey]; exists && prior.location != "" {
+			replicaLocation = prior.location
+		}
+
+		transformed.Add(map[string]interface{}{
+			"id":              original["id"],
+			"location":        replicaLocation,
+			"replica_options": flattenedReplicaOptions,
+		})
+	}
+	return transformed
 }

@@ -72,6 +72,23 @@ func validateDefaultTableExpirationMs(v interface{}, k string) (ws []string, err
 	return
 }
 
+// resourceBigqueryDatasetReplicasHash normalizes the 'location' field to lowercase
+// before hashing so case-insensitive BigQuery locations (e.g. "us" vs "US") hash identically.
+func resourceBigqueryDatasetReplicasHash(v interface{}) int {
+	m, ok := v.(map[string]interface{})
+	if !ok {
+		return 0
+	}
+	normalized := make(map[string]interface{}, len(m))
+	for k, val := range m {
+		normalized[k] = val
+	}
+	if loc, ok := normalized["location"].(string); ok && loc != "" {
+		normalized["location"] = strings.ToLower(loc)
+	}
+	return schema.HashResource(bigqueryDatasetReplicasSchema())(normalized)
+}
+
 // bigqueryDatasetAccessHash is a custom hash function for the access block.
 // It normalizes
 // 1) the 'role' field before hashing, treating legacy roles
@@ -293,6 +310,14 @@ Format: projects/{projectId}/locations/{locationId}/connections/{connectionId}`,
 					},
 				},
 			},
+			"failover_reservation_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Description: `The failover reservation associated with the dataset, in regionless format.
+For example, '{admin_project}.{failover_reservation}'.
+See [Managed disaster recovery overview](https://cloud.google.com/bigquery/docs/managed-disaster-recovery#overview)
+for more information.`,
+			},
 			"friendly_name": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -337,6 +362,17 @@ Changing this forces a new resource to be created.`,
 				Computed:    true,
 				Optional:    true,
 				Description: `Defines the time travel window in hours. The value can be from 48 to 168 hours (2 to 7 days).`,
+			},
+			"replicas": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Optional: true,
+				Description: `The list of replicas in a cross-region replicated or disaster recovery dataset.
+When adding replicas, the primary replica in the dataset's location must be included.
+Once a dataset has replicas configured, the primary replica cannot be dropped; to drop
+all secondary replicas, specify only the primary replica in 'replicas'.`,
+				Elem: bigqueryDatasetReplicasSchema(),
+				Set:  resourceBigqueryDatasetReplicasHash,
 			},
 			"resource_tags": {
 				Type:     schema.TypeMap,
@@ -586,6 +622,50 @@ needs to be granted again via an update operation.`,
 							Description: `The ID of the table. The ID must contain only letters (a-z,
 A-Z), numbers (0-9), or underscores (_). The maximum length
 is 1,024 characters.`,
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func bigqueryDatasetReplicasSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"id": {
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: `The user-visible string identifier for this dataset replica. For example, 'us-east4-replica'.`,
+			},
+			"location": {
+				Type:             schema.TypeString,
+				Required:         true,
+				DiffSuppressFunc: tpgresource.CaseDiffSuppress,
+				Description: `The logical BigQuery region where this replica is located. This is uppercase if 'US' or 'EU',
+otherwise a lowercase cloud region like 'asia-northeast1'.
+See [Dataset locations](https://cloud.google.com/bigquery/docs/locations) for more information.`,
+			},
+			"replica_options": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Description: `Contains modification options for the replica when creating or adding the replica,
+such as setting a Cloud KMS encryption key. These options are write-only in the
+BigQuery API (not populated on 'terraform import' or 'google_bigquery_dataset'
+data source reads) and immutable after the replica is created.`,
+				MaxItems: 1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"default_kms_key_name": {
+							Type:     schema.TypeString,
+							Optional: true,
+							Description: `The default Cloud KMS encryption key resource name for the replica.
+When 'default_encryption_configuration' is set on the dataset, a KMS key
+must be provided for each replica being added; otherwise this field must
+not be set. This value is immutable after the replica is created (changing
+it on an existing replica forces dataset replacement) and write-only in the
+BigQuery API (not returned on 'terraform import' or 'google_bigquery_dataset'
+data source reads).`,
 						},
 					},
 				},
