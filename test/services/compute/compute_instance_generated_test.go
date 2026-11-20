@@ -29,6 +29,18 @@ func TestAccComputeInstance(t *testing.T) {
 			Skip: "data issue with this test",
 		},
 		{
+			Name: "TestAccComputeInstance_workloadIdentity_identityType",
+			Skip: "The test exercises beta-only field workload_identity_config.identity_type",
+		},
+		{
+			Name: "TestAccComputeInstance_workloadIdentity_agentIdentity",
+			Skip: "The test exercises beta-only field workload_identity_config.identity_type",
+		},
+		{
+			Name: "TestAccComputeInstance_workloadIdentity_serviceAccount",
+			Skip: "The test exercises beta-only field workload_identity_config.identity_type",
+		},
+		{
 			Name: "TestAccComputeInstance_instanceBasicExample",
 		},
 		{
