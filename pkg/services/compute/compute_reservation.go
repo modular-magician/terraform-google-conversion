@@ -254,6 +254,14 @@ Cannot be used with delete_after_duration.`,
 				ForceNew:    true,
 				Description: `An optional description of this resource.`,
 			},
+			"enable_emergent_maintenance": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Description: `Indicates if this group of VMs have emergent maintenance enabled.
+In-place updates are only supported by Compute Engine on Hypercompute
+Cluster reservations; standard zonal reservations ignore this field on
+creation and reject updates.`,
+			},
 			"params": {
 				Type:        schema.TypeList,
 				Optional:    true,

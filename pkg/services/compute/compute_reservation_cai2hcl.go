@@ -159,6 +159,7 @@ func (c *ComputeReservationCai2hclConverter) convertResourceData(asset caiasset.
 	hclData["delete_at_time"] = flattenComputeReservationDeleteAtTime(res["deleteAtTime"], d, config)
 	hclData["delete_after_duration"] = flattenComputeReservationDeleteAfterDuration(res["deleteAfterDuration"], d, config)
 	hclData["reservation_sharing_policy"] = flattenComputeReservationReservationSharingPolicy(res["reservationSharingPolicy"], d, config)
+	hclData["enable_emergent_maintenance"] = flattenComputeReservationEnableEmergentMaintenance(res["enableEmergentMaintenance"], d, config)
 	hclData["params"] = flattenComputeReservationParams(res["params"], d, config)
 	hclData["zone"] = flattenComputeReservationZone(res["zone"], d, config)
 
@@ -483,6 +484,10 @@ func flattenComputeReservationReservationSharingPolicy(v interface{}, d *schema.
 }
 
 func flattenComputeReservationReservationSharingPolicyServiceShareType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenComputeReservationEnableEmergentMaintenance(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 

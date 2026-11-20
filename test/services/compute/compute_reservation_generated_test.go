@@ -48,6 +48,9 @@ func TestAccComputeReservation(t *testing.T) {
 		{
 			Name: "TestAccComputeReservation_resourceManagerTags",
 		},
+		{
+			Name: "TestAccComputeReservation_enableEmergentMaintenance",
+		},
 	}
 
 	for _, tt := range tests {
@@ -69,6 +72,7 @@ func TestAccComputeReservation(t *testing.T) {
 					"deletion_protection",
 					"depends_on",
 					"dynamic",
+					"enable_emergent_maintenance",
 					"for_each",
 					"lifecycle",
 					"params",
