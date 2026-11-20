@@ -403,6 +403,8 @@ func flattenComputeRegionSecurityPolicyRulesMatch(v interface{}, d *schema.Resou
 		flattenComputeRegionSecurityPolicyRulesMatchExpr(original["expr"], d, config)
 	transformed["config"] =
 		flattenComputeRegionSecurityPolicyRulesMatchConfig(original["config"], d, config)
+	transformed["expr_options"] =
+		flattenComputeRegionSecurityPolicyRulesMatchExprOptions(original["exprOptions"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -453,6 +455,44 @@ func flattenComputeRegionSecurityPolicyRulesMatchConfig(v interface{}, d *schema
 }
 
 func flattenComputeRegionSecurityPolicyRulesMatchConfigSrcIpRanges(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenComputeRegionSecurityPolicyRulesMatchExprOptions(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["recaptcha_options"] =
+		flattenComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptions(original["recaptchaOptions"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptions(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["action_token_site_keys"] =
+		flattenComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptionsActionTokenSiteKeys(original["actionTokenSiteKeys"], d, config)
+	transformed["session_token_site_keys"] =
+		flattenComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptionsSessionTokenSiteKeys(original["sessionTokenSiteKeys"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptionsActionTokenSiteKeys(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptionsSessionTokenSiteKeys(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 

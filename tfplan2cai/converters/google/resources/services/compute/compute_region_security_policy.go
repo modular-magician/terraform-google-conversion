@@ -494,6 +494,13 @@ func expandComputeRegionSecurityPolicyRulesMatch(v interface{}, d tpgresource.Te
 		transformed["config"] = transformedConfig
 	}
 
+	transformedExprOptions, err := expandComputeRegionSecurityPolicyRulesMatchExprOptions(original["expr_options"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedExprOptions); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["exprOptions"] = transformedExprOptions
+	}
+
 	return transformed, nil
 }
 
@@ -550,6 +557,65 @@ func expandComputeRegionSecurityPolicyRulesMatchConfig(v interface{}, d tpgresou
 }
 
 func expandComputeRegionSecurityPolicyRulesMatchConfigSrcIpRanges(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionSecurityPolicyRulesMatchExprOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedRecaptchaOptions, err := expandComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptions(original["recaptcha_options"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedRecaptchaOptions); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["recaptchaOptions"] = transformedRecaptchaOptions
+	}
+
+	return transformed, nil
+}
+
+func expandComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptions(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedActionTokenSiteKeys, err := expandComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptionsActionTokenSiteKeys(original["action_token_site_keys"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedActionTokenSiteKeys); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["actionTokenSiteKeys"] = transformedActionTokenSiteKeys
+	}
+
+	transformedSessionTokenSiteKeys, err := expandComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptionsSessionTokenSiteKeys(original["session_token_site_keys"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSessionTokenSiteKeys); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["sessionTokenSiteKeys"] = transformedSessionTokenSiteKeys
+	}
+
+	return transformed, nil
+}
+
+func expandComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptionsActionTokenSiteKeys(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionSecurityPolicyRulesMatchExprOptionsRecaptchaOptionsSessionTokenSiteKeys(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

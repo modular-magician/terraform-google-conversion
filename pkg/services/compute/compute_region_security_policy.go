@@ -274,6 +274,42 @@ This field must be specified if versionedExpr is specified and cannot be specifi
 											},
 										},
 									},
+									"expr_options": {
+										Type:        schema.TypeList,
+										Optional:    true,
+										Description: `The configuration options available when specifying a user defined CEVAL expression (i.e., 'expr').`,
+										MaxItems:    1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"recaptcha_options": {
+													Type:        schema.TypeList,
+													Optional:    true,
+													Description: `reCAPTCHA configuration options to be applied for the rule. If the rule does not evaluate reCAPTCHA tokens, this field has no effect.`,
+													MaxItems:    1,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+															"action_token_site_keys": {
+																Type:        schema.TypeList,
+																Optional:    true,
+																Description: `A list of site keys to be used during the validation of reCAPTCHA action-tokens. The provided site keys need to be created from reCAPTCHA API under the same project where the security policy is created.`,
+																Elem: &schema.Schema{
+																	Type: schema.TypeString,
+																},
+															},
+															"session_token_site_keys": {
+																Type:        schema.TypeList,
+																Optional:    true,
+																Description: `A list of site keys to be used during the validation of reCAPTCHA session-tokens. The provided site keys need to be created from reCAPTCHA API under the same project where the security policy is created.`,
+																Elem: &schema.Schema{
+																	Type: schema.TypeString,
+																},
+															},
+														},
+													},
+												},
+											},
+										},
+									},
 									"versioned_expr": {
 										Type:         schema.TypeString,
 										Optional:     true,
