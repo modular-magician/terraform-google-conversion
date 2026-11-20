@@ -130,6 +130,12 @@ func GetMonitoringGenericServiceApiObject(d tpgresource.TerraformResourceData, c
 	} else if v, ok := d.GetOkExists("basic_service"); !tpgresource.IsEmptyValue(reflect.ValueOf(basicServiceProp)) && (ok || !reflect.DeepEqual(v, basicServiceProp)) {
 		obj["basicService"] = basicServiceProp
 	}
+	cloudRunProp, err := expandMonitoringGenericServiceCloudRun(d.Get("cloud_run"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("cloud_run"); !tpgresource.IsEmptyValue(reflect.ValueOf(cloudRunProp)) && (ok || !reflect.DeepEqual(v, cloudRunProp)) {
+		obj["cloudRun"] = cloudRunProp
+	}
 
 	return obj, nil
 }
@@ -191,4 +197,41 @@ func expandMonitoringGenericServiceBasicServiceServiceLabels(v interface{}, d tp
 		m[k] = val.(string)
 	}
 	return m, nil
+}
+
+func expandMonitoringGenericServiceCloudRun(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedServiceName, err := expandMonitoringGenericServiceCloudRunServiceName(original["service_name"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedServiceName); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["serviceName"] = transformedServiceName
+	}
+
+	transformedLocation, err := expandMonitoringGenericServiceCloudRunLocation(original["location"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedLocation); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["location"] = transformedLocation
+	}
+
+	return transformed, nil
+}
+
+func expandMonitoringGenericServiceCloudRunServiceName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandMonitoringGenericServiceCloudRunLocation(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
 }
