@@ -148,6 +148,7 @@ func (c *ComputeRegionTargetHttpsProxyCai2hclConverter) convertResourceData(asse
 
 	hclData["description"] = flattenComputeRegionTargetHttpsProxyDescription(res["description"], d, config)
 	hclData["name"] = flattenComputeRegionTargetHttpsProxyName(res["name"], d, config)
+	hclData["tls_early_data"] = flattenComputeRegionTargetHttpsProxyTlsEarlyData(res["tlsEarlyData"], d, config)
 	hclData["certificate_manager_certificates"] = flattenComputeRegionTargetHttpsProxyCertificateManagerCertificates(res["certificateManagerCertificates"], d, config)
 	hclData["ssl_certificates"] = flattenComputeRegionTargetHttpsProxySslCertificates(res["sslCertificates"], d, config)
 	hclData["ssl_policy"] = flattenComputeRegionTargetHttpsProxySslPolicy(res["sslPolicy"], d, config)
@@ -184,6 +185,10 @@ func flattenComputeRegionTargetHttpsProxyName(v interface{}, d *schema.ResourceD
 	if transformed == "" {
 		return "unknown"
 	}
+	return v
+}
+
+func flattenComputeRegionTargetHttpsProxyTlsEarlyData(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 

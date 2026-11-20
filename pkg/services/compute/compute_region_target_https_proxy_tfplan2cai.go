@@ -129,6 +129,12 @@ func GetComputeRegionTargetHttpsProxyCaiObject(d tpgresource.TerraformResourceDa
 	} else if v, ok := d.GetOkExists("name"); !tpgresource.IsEmptyValue(reflect.ValueOf(nameProp)) && (ok || !reflect.DeepEqual(v, nameProp)) {
 		obj["name"] = nameProp
 	}
+	tlsEarlyDataProp, err := expandComputeRegionTargetHttpsProxyTlsEarlyData(d.Get("tls_early_data"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("tls_early_data"); !tpgresource.IsEmptyValue(reflect.ValueOf(tlsEarlyDataProp)) && (ok || !reflect.DeepEqual(v, tlsEarlyDataProp)) {
+		obj["tlsEarlyData"] = tlsEarlyDataProp
+	}
 	certificateManagerCertificatesProp, err := expandComputeRegionTargetHttpsProxyCertificateManagerCertificates(d.Get("certificate_manager_certificates"), d, config)
 	if err != nil {
 		return nil, err
@@ -208,6 +214,10 @@ func expandComputeRegionTargetHttpsProxyDescription(v interface{}, d tpgresource
 }
 
 func expandComputeRegionTargetHttpsProxyName(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandComputeRegionTargetHttpsProxyTlsEarlyData(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

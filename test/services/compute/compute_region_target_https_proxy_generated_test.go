@@ -34,6 +34,9 @@ func TestAccComputeRegionTargetHttpsProxy(t *testing.T) {
 			Name: "TestAccComputeRegionTargetHttpsProxy_regionTargetHttpsProxyCertificateManagerCertificateExample",
 		},
 		{
+			Name: "TestAccComputeRegionTargetHttpsProxy_regionTargetHttpsProxyTlsEarlyDataExample",
+		},
+		{
 			Name: "TestAccComputeRegionTargetHttpsProxy_update",
 		},
 		{
