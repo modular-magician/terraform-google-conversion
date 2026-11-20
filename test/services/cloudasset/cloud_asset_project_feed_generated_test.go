@@ -27,6 +27,9 @@ func TestAccCloudAssetProjectFeed(t *testing.T) {
 		{
 			Name: "TestAccCloudAssetProjectFeed_cloudAssetProjectFeedExample",
 		},
+		{
+			Name: "TestAccCloudAssetProjectFeed_cloudAssetProjectFeedRelationshipExample",
+		},
 	}
 
 	for _, tt := range tests {

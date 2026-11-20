@@ -139,6 +139,7 @@ func (c *CloudAssetProjectFeedCai2hclConverter) convertResourceData(asset caiass
 	hclData["asset_names"] = flattenCloudAssetProjectFeedAssetNames(res["assetNames"], d, config)
 	hclData["asset_types"] = flattenCloudAssetProjectFeedAssetTypes(res["assetTypes"], d, config)
 	hclData["content_type"] = flattenCloudAssetProjectFeedContentType(res["contentType"], d, config)
+	hclData["relationship_types"] = flattenCloudAssetProjectFeedRelationshipTypes(res["relationshipTypes"], d, config)
 	hclData["feed_output_config"] = flattenCloudAssetProjectFeedFeedOutputConfig(res["feedOutputConfig"], d, config)
 	hclData["condition"] = flattenCloudAssetProjectFeedCondition(res["condition"], d, config)
 
@@ -161,6 +162,10 @@ func flattenCloudAssetProjectFeedAssetTypes(v interface{}, d *schema.ResourceDat
 }
 
 func flattenCloudAssetProjectFeedContentType(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenCloudAssetProjectFeedRelationshipTypes(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return v
 }
 

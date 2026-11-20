@@ -130,6 +130,12 @@ func GetCloudAssetProjectFeedApiObject(d tpgresource.TerraformResourceData, conf
 	} else if v, ok := d.GetOkExists("content_type"); !tpgresource.IsEmptyValue(reflect.ValueOf(contentTypeProp)) && (ok || !reflect.DeepEqual(v, contentTypeProp)) {
 		obj["contentType"] = contentTypeProp
 	}
+	relationshipTypesProp, err := expandCloudAssetProjectFeedRelationshipTypes(d.Get("relationship_types"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("relationship_types"); !tpgresource.IsEmptyValue(reflect.ValueOf(relationshipTypesProp)) && (ok || !reflect.DeepEqual(v, relationshipTypesProp)) {
+		obj["relationshipTypes"] = relationshipTypesProp
+	}
 	feedOutputConfigProp, err := expandCloudAssetProjectFeedFeedOutputConfig(d.Get("feed_output_config"), d, config)
 	if err != nil {
 		return nil, err
@@ -168,6 +174,10 @@ func expandCloudAssetProjectFeedAssetTypes(v interface{}, d tpgresource.Terrafor
 }
 
 func expandCloudAssetProjectFeedContentType(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandCloudAssetProjectFeedRelationshipTypes(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
