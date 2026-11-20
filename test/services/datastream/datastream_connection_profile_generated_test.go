@@ -50,6 +50,9 @@ func TestAccDatastreamConnectionProfile(t *testing.T) {
 		{
 			Name: "TestAccDatastreamConnectionProfile_mongoDb",
 		},
+		{
+			Name: "TestAccDatastreamConnectionProfile_postgresqlSslConfig",
+		},
 	}
 
 	for _, tt := range tests {
@@ -85,7 +88,6 @@ func TestAccDatastreamConnectionProfile(t *testing.T) {
 					"mongodb_profile.ssl_config.secret_manager_stored_client_key",
 					"mysql_profile.password",
 					"postgresql_profile.password",
-					"postgresql_profile.ssl_config.server_and_client_verification",
 					"postgresql_profile.ssl_config.server_and_client_verification.ca_certificate",
 					"postgresql_profile.ssl_config.server_and_client_verification.client_certificate",
 					"postgresql_profile.ssl_config.server_and_client_verification.client_key",

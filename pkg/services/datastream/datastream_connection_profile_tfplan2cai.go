@@ -592,8 +592,13 @@ func expandDatastreamConnectionProfilePostgresqlProfileSslConfigServerVerificati
 		return nil, nil
 	}
 	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
+	if len(l) == 0 {
 		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
 	}
 	raw := l[0]
 	original := raw.(map[string]interface{})
@@ -606,10 +611,21 @@ func expandDatastreamConnectionProfilePostgresqlProfileSslConfigServerVerificati
 		transformed["caCertificate"] = transformedCaCertificate
 	}
 
+	transformedServerCertificateHostname, err := expandDatastreamConnectionProfilePostgresqlProfileSslConfigServerVerificationServerCertificateHostname(original["server_certificate_hostname"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedServerCertificateHostname); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["serverCertificateHostname"] = transformedServerCertificateHostname
+	}
+
 	return transformed, nil
 }
 
 func expandDatastreamConnectionProfilePostgresqlProfileSslConfigServerVerificationCaCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfilePostgresqlProfileSslConfigServerVerificationServerCertificateHostname(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
@@ -618,8 +634,13 @@ func expandDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClientV
 		return nil, nil
 	}
 	l := v.([]interface{})
-	if len(l) == 0 || l[0] == nil {
+	if len(l) == 0 {
 		return nil, nil
+	}
+
+	if l[0] == nil {
+		transformed := make(map[string]interface{})
+		return transformed, nil
 	}
 	raw := l[0]
 	original := raw.(map[string]interface{})
@@ -646,6 +667,13 @@ func expandDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClientV
 		transformed["caCertificate"] = transformedCaCertificate
 	}
 
+	transformedServerCertificateHostname, err := expandDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClientVerificationServerCertificateHostname(original["server_certificate_hostname"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedServerCertificateHostname); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["serverCertificateHostname"] = transformedServerCertificateHostname
+	}
+
 	return transformed, nil
 }
 
@@ -658,6 +686,10 @@ func expandDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClientV
 }
 
 func expandDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClientVerificationCaCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandDatastreamConnectionProfilePostgresqlProfileSslConfigServerAndClientVerificationServerCertificateHostname(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
