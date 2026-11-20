@@ -25,6 +25,10 @@ func TestAccAlloydbCluster(t *testing.T) {
 
 	tests := []test.TestCase{
 		{
+			Name: "TestAccAlloydbCluster_expressUpgrade",
+			Skip: "beta-only test; express_config is not in the GA provider",
+		},
+		{
 			Name: "TestAccAlloydbCluster_alloydbClusterBasicExample",
 		},
 		{
