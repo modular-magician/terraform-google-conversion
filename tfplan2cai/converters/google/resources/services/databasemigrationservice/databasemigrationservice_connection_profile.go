@@ -296,6 +296,13 @@ func expandDatabaseMigrationServiceConnectionProfileMysqlSsl(v interface{}, d tp
 		transformed["caCertificate"] = transformedCaCertificate
 	}
 
+	transformedSslFlags, err := expandDatabaseMigrationServiceConnectionProfileMysqlSslSslFlags(original["ssl_flags"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSslFlags); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["sslFlags"] = transformedSslFlags
+	}
+
 	return transformed, nil
 }
 
@@ -313,6 +320,17 @@ func expandDatabaseMigrationServiceConnectionProfileMysqlSslClientCertificate(v 
 
 func expandDatabaseMigrationServiceConnectionProfileMysqlSslCaCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandDatabaseMigrationServiceConnectionProfileMysqlSslSslFlags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
 
 func expandDatabaseMigrationServiceConnectionProfileMysqlCloudSqlId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -475,6 +493,13 @@ func expandDatabaseMigrationServiceConnectionProfilePostgresqlSsl(v interface{},
 		transformed["caCertificate"] = transformedCaCertificate
 	}
 
+	transformedSslFlags, err := expandDatabaseMigrationServiceConnectionProfilePostgresqlSslSslFlags(original["ssl_flags"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSslFlags); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["sslFlags"] = transformedSslFlags
+	}
+
 	return transformed, nil
 }
 
@@ -492,6 +517,17 @@ func expandDatabaseMigrationServiceConnectionProfilePostgresqlSslClientCertifica
 
 func expandDatabaseMigrationServiceConnectionProfilePostgresqlSslCaCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandDatabaseMigrationServiceConnectionProfilePostgresqlSslSslFlags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
 
 func expandDatabaseMigrationServiceConnectionProfilePostgresqlCloudSqlId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
@@ -681,6 +717,13 @@ func expandDatabaseMigrationServiceConnectionProfileOracleSsl(v interface{}, d t
 		transformed["caCertificate"] = transformedCaCertificate
 	}
 
+	transformedSslFlags, err := expandDatabaseMigrationServiceConnectionProfileOracleSslSslFlags(original["ssl_flags"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedSslFlags); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["sslFlags"] = transformedSslFlags
+	}
+
 	return transformed, nil
 }
 
@@ -698,6 +741,17 @@ func expandDatabaseMigrationServiceConnectionProfileOracleSslClientCertificate(v
 
 func expandDatabaseMigrationServiceConnectionProfileOracleSslCaCertificate(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandDatabaseMigrationServiceConnectionProfileOracleSslSslFlags(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
+	if v == nil {
+		return map[string]string{}, nil
+	}
+	m := make(map[string]string)
+	for k, val := range v.(map[string]interface{}) {
+		m[k] = val.(string)
+	}
+	return m, nil
 }
 
 func expandDatabaseMigrationServiceConnectionProfileOracleStaticServiceIpConnectivity(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {

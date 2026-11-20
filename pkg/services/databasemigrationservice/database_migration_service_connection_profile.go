@@ -434,6 +434,14 @@ If this field is used then the 'clientKey' field is mandatory`,
 If this field is used then the 'clientCertificate' field is mandatory.`,
 										Sensitive: true,
 									},
+									"ssl_flags": {
+										Type:     schema.TypeMap,
+										Optional: true,
+										Description: `SSL flags used for establishing SSL connection to the source database. Only source specific flags are supported.
+An object containing a list of "key": "value" pairs.
+Examples: { "server_certificate_dn": "CN=server.com,OU=RDS,O=Amazon.com,C=US"} or { "server_certificate_hostname": "server.com"}.`,
+										Elem: &schema.Schema{Type: schema.TypeString},
+									},
 									"type": {
 										Type:         schema.TypeString,
 										Optional:     true,
@@ -575,6 +583,14 @@ If this field is used then the 'clientKey' field is mandatory`,
 If this field is used then the 'clientCertificate' field is mandatory.`,
 										Sensitive: true,
 									},
+									"ssl_flags": {
+										Type:     schema.TypeMap,
+										Optional: true,
+										Description: `SSL flags used for establishing SSL connection to the source database. Only source specific flags are supported.
+An object containing a list of "key": "value" pairs.
+Examples: { "server_certificate_dn": "CN=server.com,OU=RDS,O=Amazon.com,C=US"} or { "server_certificate_hostname": "server.com"}.`,
+										Elem: &schema.Schema{Type: schema.TypeString},
+									},
 								},
 							},
 						},
@@ -682,6 +698,14 @@ If this field is used then the 'clientKey' field is mandatory`,
 										Description: `Input only. The unencrypted PKCS#1 or PKCS#8 PEM-encoded private key associated with the Client Certificate.
 If this field is used then the 'clientCertificate' field is mandatory.`,
 										Sensitive: true,
+									},
+									"ssl_flags": {
+										Type:     schema.TypeMap,
+										Optional: true,
+										Description: `SSL flags used for establishing SSL connection to the source database. Only source specific flags are supported.
+An object containing a list of "key": "value" pairs.
+Examples: { "server_certificate_dn": "CN=server.com,OU=RDS,O=Amazon.com,C=US"} or { "server_certificate_hostname": "server.com"}.`,
+										Elem: &schema.Schema{Type: schema.TypeString},
 									},
 									"type": {
 										Type:         schema.TypeString,

@@ -37,6 +37,9 @@ func TestAccDatabaseMigrationServiceConnectionProfile(t *testing.T) {
 			Name: "TestAccDatabaseMigrationServiceConnectionProfile_databaseMigrationServiceConnectionProfilePostgresRequiredSslExample",
 		},
 		{
+			Name: "TestAccDatabaseMigrationServiceConnectionProfile_databaseMigrationServiceConnectionProfilePostgresSslFlagsExample",
+		},
+		{
 			Name: "TestAccDatabaseMigrationServiceConnectionProfile_databaseMigrationServiceConnectionProfileExistingMysqlExample",
 		},
 		{
@@ -50,6 +53,9 @@ func TestAccDatabaseMigrationServiceConnectionProfile(t *testing.T) {
 		},
 		{
 			Name: "TestAccDatabaseMigrationServiceConnectionProfile_databaseMigrationServiceConnectionProfileAlloydb",
+		},
+		{
+			Name: "TestAccDatabaseMigrationServiceConnectionProfile_oracleSslFlags",
 		},
 	}
 

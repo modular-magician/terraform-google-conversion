@@ -257,6 +257,8 @@ func flattenDatabaseMigrationServiceConnectionProfileMysqlSsl(v interface{}, d *
 		flattenDatabaseMigrationServiceConnectionProfileMysqlSslClientCertificate(original["clientCertificate"], d, config)
 	transformed["ca_certificate"] =
 		flattenDatabaseMigrationServiceConnectionProfileMysqlSslCaCertificate(original["caCertificate"], d, config)
+	transformed["ssl_flags"] =
+		flattenDatabaseMigrationServiceConnectionProfileMysqlSslSslFlags(original["sslFlags"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -277,6 +279,10 @@ func flattenDatabaseMigrationServiceConnectionProfileMysqlSslClientCertificate(v
 
 func flattenDatabaseMigrationServiceConnectionProfileMysqlSslCaCertificate(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return d.Get("mysql.0.ssl.0.ca_certificate")
+}
+
+func flattenDatabaseMigrationServiceConnectionProfileMysqlSslSslFlags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
 }
 
 func flattenDatabaseMigrationServiceConnectionProfileMysqlCloudSqlId(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -378,6 +384,8 @@ func flattenDatabaseMigrationServiceConnectionProfilePostgresqlSsl(v interface{}
 		flattenDatabaseMigrationServiceConnectionProfilePostgresqlSslClientCertificate(original["clientCertificate"], d, config)
 	transformed["ca_certificate"] =
 		flattenDatabaseMigrationServiceConnectionProfilePostgresqlSslCaCertificate(original["caCertificate"], d, config)
+	transformed["ssl_flags"] =
+		flattenDatabaseMigrationServiceConnectionProfilePostgresqlSslSslFlags(original["sslFlags"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -398,6 +406,10 @@ func flattenDatabaseMigrationServiceConnectionProfilePostgresqlSslClientCertific
 
 func flattenDatabaseMigrationServiceConnectionProfilePostgresqlSslCaCertificate(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return d.Get("postgresql.0.ssl.0.ca_certificate")
+}
+
+func flattenDatabaseMigrationServiceConnectionProfilePostgresqlSslSslFlags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
 }
 
 func flattenDatabaseMigrationServiceConnectionProfilePostgresqlCloudSqlId(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
@@ -544,6 +556,8 @@ func flattenDatabaseMigrationServiceConnectionProfileOracleSsl(v interface{}, d 
 		flattenDatabaseMigrationServiceConnectionProfileOracleSslClientCertificate(original["clientCertificate"], d, config)
 	transformed["ca_certificate"] =
 		flattenDatabaseMigrationServiceConnectionProfileOracleSslCaCertificate(original["caCertificate"], d, config)
+	transformed["ssl_flags"] =
+		flattenDatabaseMigrationServiceConnectionProfileOracleSslSslFlags(original["sslFlags"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -560,6 +574,10 @@ func flattenDatabaseMigrationServiceConnectionProfileOracleSslClientCertificate(
 
 func flattenDatabaseMigrationServiceConnectionProfileOracleSslCaCertificate(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
 	return d.Get("oracle.0.ssl.0.ca_certificate")
+}
+
+func flattenDatabaseMigrationServiceConnectionProfileOracleSslSslFlags(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
 }
 
 func flattenDatabaseMigrationServiceConnectionProfileOracleStaticServiceIpConnectivity(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
