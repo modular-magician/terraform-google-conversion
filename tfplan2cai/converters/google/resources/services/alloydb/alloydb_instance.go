@@ -51,13 +51,16 @@ import (
 )
 
 // Retry when the AlloyDB API returns a 400 that the instance is currently undergoing another update operation
-// or a 409 that it is unable to queue the operation.
+// or background instant-provisioning setup is still in progress, or a 409 that it is unable to queue the operation.
 func IsAlloyDbInstanceUpdatingError(err error) (bool, string) {
 	if gerr, ok := err.(*googleapi.Error); ok {
 		bodyLower := strings.ToLower(gerr.Body)
 		msgLower := strings.ToLower(gerr.Message)
 		if gerr.Code == 400 && (strings.Contains(bodyLower, "the instance is currently undergoing another update operation") || strings.Contains(msgLower, "the instance is currently undergoing another update operation")) {
 			return true, "Instance is undergoing another update operation"
+		}
+		if gerr.Code == 400 && (strings.Contains(bodyLower, "background setup in progress") || strings.Contains(msgLower, "background setup in progress")) {
+			return true, "Waiting for background setup to finish"
 		}
 		if gerr.Code == 409 && (strings.Contains(bodyLower, "unable to queue the operation") || strings.Contains(msgLower, "unable to queue the operation")) {
 			return true, "Waiting for other enqueued operations to finish"
@@ -68,6 +71,9 @@ func IsAlloyDbInstanceUpdatingError(err error) (bool, string) {
 		errLower := strings.ToLower(err.Error())
 		if strings.Contains(errLower, "the instance is currently undergoing another update operation") {
 			return true, "Instance is undergoing another update operation"
+		}
+		if strings.Contains(errLower, "background setup in progress") {
+			return true, "Waiting for background setup to finish"
 		}
 		if strings.Contains(errLower, "unable to queue the operation") {
 			return true, "Waiting for other enqueued operations to finish"
@@ -856,6 +862,13 @@ func expandAlloydbInstanceNetworkConfig(v interface{}, d tpgresource.TerraformRe
 		transformed["enableOutboundPublicIp"] = transformedEnableOutboundPublicIp
 	}
 
+	transformedPublicDnsEnabled, err := expandAlloydbInstanceNetworkConfigPublicDnsEnabled(original["public_dns_enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else if val := reflect.ValueOf(transformedPublicDnsEnabled); val.IsValid() && !tpgresource.IsEmptyValue(val) {
+		transformed["publicDnsEnabled"] = transformedPublicDnsEnabled
+	}
+
 	transformedAllocatedIpRangeOverride, err := expandAlloydbInstanceNetworkConfigAllocatedIpRangeOverride(original["allocated_ip_range_override"], d, config)
 	if err != nil {
 		return nil, err
@@ -900,6 +913,10 @@ func expandAlloydbInstanceNetworkConfigEnablePublicIp(v interface{}, d tpgresour
 }
 
 func expandAlloydbInstanceNetworkConfigEnableOutboundPublicIp(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandAlloydbInstanceNetworkConfigPublicDnsEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 

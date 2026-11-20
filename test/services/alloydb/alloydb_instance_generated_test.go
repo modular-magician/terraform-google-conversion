@@ -29,6 +29,10 @@ func TestAccAlloydbInstance(t *testing.T) {
 			Skip: "fix it after the next release, as connection_pool_config will be in the next release",
 		},
 		{
+			Name: "TestAccAlloydbInstance_expressPublicDns",
+			Skip: "beta-only test; express_config and public_dns_enabled are not in the GA provider",
+		},
+		{
 			Name: "TestAccAlloydbInstance_alloydbInstanceBasicTestExample",
 		},
 		{
