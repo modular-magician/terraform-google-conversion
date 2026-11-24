@@ -31,6 +31,9 @@ func TestAccComputeInterconnect(t *testing.T) {
 			Name: "TestAccComputeInterconnect_computeInterconnectBasicTestExample_update",
 		},
 		{
+			Name: "TestAccComputeInterconnect_crossSiteNetwork",
+		},
+		{
 			Name: "TestAccComputeInterconnect_computeInterconnectMacsecTest",
 		},
 		{
