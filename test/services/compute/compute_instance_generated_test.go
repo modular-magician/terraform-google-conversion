@@ -487,6 +487,15 @@ func TestAccComputeInstance(t *testing.T) {
 		{
 			Name: "TestAccComputeInstance_bootAndAttachedDisk_interface",
 		},
+		{
+			Name: "TestAccComputeInstance_workloadIdentity_identityType",
+		},
+		{
+			Name: "TestAccComputeInstance_workloadIdentity_agentIdentity",
+		},
+		{
+			Name: "TestAccComputeInstance_workloadIdentity_serviceAccount",
+		},
 	}
 
 	for _, tt := range tests {
@@ -554,6 +563,7 @@ func TestAccComputeInstance(t *testing.T) {
 					"scheduling.graceful_shutdown.max_duration.nanos",
 					"service_account.scopes",
 					"timeouts",
+					"workload_identity_config.identity_type",
 				},
 				"google_compute_instance",
 			)
