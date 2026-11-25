@@ -102,6 +102,15 @@ func TestAccBigQueryDataset(t *testing.T) {
 		{
 			Name: "TestAccBigQueryDataset_defaultRoundingModeUpdate",
 		},
+		{
+			Name: "TestAccBigQueryDataset_replicasLifecycle",
+		},
+		{
+			Name: "TestAccBigQueryDataset_replicasCmek",
+		},
+		{
+			Name: "TestAccBigQueryDataset_failoverReservation",
+		},
 	}
 
 	for _, tt := range tests {
@@ -126,6 +135,7 @@ func TestAccBigQueryDataset(t *testing.T) {
 					"for_each",
 					"lifecycle",
 					"provider",
+					"replicas.replica_options",
 					"timeouts",
 				},
 				"google_bigquery_dataset",

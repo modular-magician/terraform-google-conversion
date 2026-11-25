@@ -240,6 +240,18 @@ func GetBigQueryDatasetApiObject(d tpgresource.TerraformResourceData, config *tr
 	} else if v, ok := d.GetOkExists("external_catalog_dataset_options"); !tpgresource.IsEmptyValue(reflect.ValueOf(externalCatalogDatasetOptionsProp)) && (ok || !reflect.DeepEqual(v, externalCatalogDatasetOptionsProp)) {
 		obj["externalCatalogDatasetOptions"] = externalCatalogDatasetOptionsProp
 	}
+	failoverReservationIdProp, err := expandBigQueryDatasetFailoverReservationId(d.Get("failover_reservation_id"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("failover_reservation_id"); !tpgresource.IsEmptyValue(reflect.ValueOf(failoverReservationIdProp)) && (ok || !reflect.DeepEqual(v, failoverReservationIdProp)) {
+		obj["failoverReservationId"] = failoverReservationIdProp
+	}
+	replicasProp, err := expandBigQueryDatasetReplicas(d.Get("replicas"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("replicas"); !tpgresource.IsEmptyValue(reflect.ValueOf(replicasProp)) && (ok || !reflect.DeepEqual(v, replicasProp)) {
+		obj["replicas"] = replicasProp
+	}
 	effectiveLabelsProp, err := expandBigQueryDatasetEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
 		return nil, err
@@ -774,6 +786,58 @@ func expandBigQueryDatasetExternalCatalogDatasetOptionsParameters(v interface{},
 
 func expandBigQueryDatasetExternalCatalogDatasetOptionsDefaultStorageLocationUri(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
+}
+
+func expandBigQueryDatasetFailoverReservationId(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandBigQueryDatasetReplicas(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	var l []interface{}
+	switch typed := v.(type) {
+	case *schema.Set:
+		if typed == nil {
+			return nil, nil
+		}
+		l = typed.List()
+	case []interface{}:
+		l = typed
+	default:
+		return nil, nil
+	}
+	req := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		if raw == nil {
+			continue
+		}
+		original, ok := raw.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		transformed := make(map[string]interface{})
+		if id, ok := original["id"].(string); ok && id != "" {
+			transformed["id"] = id
+		}
+		if loc, ok := original["location"].(string); ok && loc != "" {
+			transformed["location"] = loc
+		}
+		if optsRaw, ok := original["replica_options"].([]interface{}); ok && len(optsRaw) > 0 && optsRaw[0] != nil {
+			if optsMap, ok := optsRaw[0].(map[string]interface{}); ok {
+				if kmsKey, ok := optsMap["default_kms_key_name"].(string); ok && kmsKey != "" {
+					transformed["replicaOptions"] = map[string]interface{}{
+						"defaultKmsKeyName": kmsKey,
+					}
+				}
+			}
+		}
+		if len(transformed) > 0 {
+			req = append(req, transformed)
+		}
+	}
+	return req, nil
 }
 
 func expandBigQueryDatasetEffectiveLabels(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (map[string]string, error) {
