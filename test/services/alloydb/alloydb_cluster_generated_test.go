@@ -127,6 +127,9 @@ func TestAccAlloydbCluster(t *testing.T) {
 			Name: "TestAccAlloydbCluster_withDataplexConfigDisabled",
 		},
 		{
+			Name: "TestAccAlloydbCluster_expressUpgrade",
+		},
+		{
 			Name: "TestAccAlloydbCluster_restore",
 		},
 		{

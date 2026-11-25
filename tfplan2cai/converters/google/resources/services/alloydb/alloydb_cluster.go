@@ -50,6 +50,20 @@ import (
 	"google.golang.org/api/googleapi"
 )
 
+// alloydbClusterExpressConfigCustomizeDiff forces a new cluster when express_config.0.enabled
+// changes from false to true. AlloyDB can upgrade an Express cluster to a standard cluster in
+// place, but it can't convert a standard cluster to an Express cluster.
+func alloydbClusterExpressConfigCustomizeDiff(_ context.Context, diff *schema.ResourceDiff, meta interface{}) error {
+	if diff.Id() == "" || !diff.HasChange("express_config.0.enabled") {
+		return nil
+	}
+	oldEnabled, newEnabled := diff.GetChange("express_config.0.enabled")
+	if !oldEnabled.(bool) && newEnabled.(bool) {
+		return diff.ForceNew("express_config.0.enabled")
+	}
+	return nil
+}
+
 var (
 	_ = bytes.Clone
 	_ = context.WithCancel
@@ -219,6 +233,12 @@ func GetAlloydbClusterApiObject(d tpgresource.TerraformResourceData, config *tra
 		return nil, err
 	} else if v, ok := d.GetOkExists("dataplex_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(dataplexConfigProp)) && (ok || !reflect.DeepEqual(v, dataplexConfigProp)) {
 		obj["dataplexConfig"] = dataplexConfigProp
+	}
+	expressConfigProp, err := expandAlloydbClusterExpressConfig(d.Get("express_config"), d, config)
+	if err != nil {
+		return nil, err
+	} else if v, ok := d.GetOkExists("express_config"); !tpgresource.IsEmptyValue(reflect.ValueOf(expressConfigProp)) && (ok || !reflect.DeepEqual(v, expressConfigProp)) {
+		obj["expressConfig"] = expressConfigProp
 	}
 	effectiveLabelsProp, err := expandAlloydbClusterEffectiveLabels(d.Get("effective_labels"), d, config)
 	if err != nil {
@@ -1022,6 +1042,32 @@ func expandAlloydbClusterDataplexConfig(v interface{}, d tpgresource.TerraformRe
 }
 
 func expandAlloydbClusterDataplexConfigEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	return v, nil
+}
+
+func expandAlloydbClusterExpressConfig(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
+	if v == nil {
+		return nil, nil
+	}
+	l := v.([]interface{})
+	if len(l) == 0 || l[0] == nil {
+		return nil, nil
+	}
+	raw := l[0]
+	original := raw.(map[string]interface{})
+	transformed := make(map[string]interface{})
+
+	transformedEnabled, err := expandAlloydbClusterExpressConfigEnabled(original["enabled"], d, config)
+	if err != nil {
+		return nil, err
+	} else {
+		transformed["enabled"] = transformedEnabled
+	}
+
+	return transformed, nil
+}
+
+func expandAlloydbClusterExpressConfigEnabled(v interface{}, d tpgresource.TerraformResourceData, config *transport_tpg.Config) (interface{}, error) {
 	return v, nil
 }
 
