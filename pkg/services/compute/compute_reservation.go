@@ -251,6 +251,13 @@ Cannot be used with delete_after_duration.`,
 				ForceNew:    true,
 				Description: `An optional description of this resource.`,
 			},
+			"enable_emergent_maintenance": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Description: `Indicates if this group of VMs have emergent maintenance enabled.
+
+~> **Note:** Compute Engine only allows updating 'enable_emergent_maintenance' in place on Hypercompute Cluster reservations ('deployment_type = "DENSE"'). On standard reservations ('deployment_type' unset), changing this field forces recreation of the reservation.`,
+			},
 			"params": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -346,6 +353,11 @@ reservations that are tied to a commitment.`,
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: `Creation timestamp in RFC3339 text format.`,
+			},
+			"deployment_type": {
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: `Specifies the deployment strategy for this reservation. Possible values include 'DENSE' and 'FLEXIBLE'.`,
 			},
 			"id": {
 				Type:        schema.TypeString,
