@@ -48,6 +48,9 @@ func TestAccComputeReservation(t *testing.T) {
 		{
 			Name: "TestAccComputeReservation_resourceManagerTags",
 		},
+		{
+			Name: "TestAccComputeReservation_updatePathsFields",
+		},
 	}
 
 	for _, tt := range tests {
