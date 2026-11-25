@@ -420,6 +420,127 @@ The network attachment must be in the same region as the instance.`,
 				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"auto_scaling_config": {
+							Type:     schema.TypeList,
+							Optional: true,
+							Description: `Autoscaling configuration for the read pool instance. If not set, the
+read pool instance will not be autoscaled.`,
+							MaxItems: 1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"policy": {
+										Type:        schema.TypeList,
+										Optional:    true,
+										Description: `Policy for the MIG autoscaler.`,
+										MaxItems:    1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"connections_count": {
+													Type:     schema.TypeList,
+													Optional: true,
+													Description: `Connections count policy for the autoscaler. If not set, the
+autoscaler will not use connection count for scaling.`,
+													MaxItems: 1,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+															"target_count": {
+																Type:     schema.TypeInt,
+																Optional: true,
+																Description: `The target number of connections for the autoscaler to scale the
+instance to.`,
+															},
+														},
+													},
+												},
+												"cool_down_period_sec": {
+													Type:     schema.TypeInt,
+													Computed: true,
+													Optional: true,
+													Description: `The period of time in seconds after a new node is created before the
+autoscaler will incorporate its resource usage (e.g. CPU utilization)
+into the autoscaling recommendation algorithm.`,
+												},
+												"cpu_utilization": {
+													Type:        schema.TypeList,
+													Optional:    true,
+													Description: `CPU utilization policy for the autoscaler.`,
+													MaxItems:    1,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+															"utilization_target": {
+																Type:        schema.TypeFloat,
+																Optional:    true,
+																Description: `Target CPU utilization as a float between 0 and 1.`,
+															},
+														},
+													},
+												},
+												"enabled": {
+													Type:     schema.TypeBool,
+													Optional: true,
+													Description: `If true, autoscaling is enabled for the instance. If not set, the
+default value is false.`,
+												},
+												"max_node_count": {
+													Type:        schema.TypeInt,
+													Optional:    true,
+													Description: `Maximum number of nodes for the autoscaler.`,
+												},
+											},
+										},
+									},
+									"schedules": {
+										Type:     schema.TypeList,
+										Optional: true,
+										Description: `Optional list of schedules for the MIG autoscaler. If not set, no
+schedules are created.`,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"cron_expression": {
+													Type:     schema.TypeString,
+													Optional: true,
+													Description: `Cron expression for the triggering the schedule. See
+https://cloud.google.com/compute/docs/autoscaler/scaling-schedules#cron_expressions
+for the syntax.`,
+												},
+												"description": {
+													Type:        schema.TypeString,
+													Optional:    true,
+													Description: `Description of the schedule.`,
+												},
+												"disabled": {
+													Type:        schema.TypeBool,
+													Optional:    true,
+													Description: `If true, the schedule is disabled.`,
+												},
+												"duration_sec": {
+													Type:        schema.TypeInt,
+													Optional:    true,
+													Description: `Duration of the schedule.`,
+												},
+												"min_node_count": {
+													Type:        schema.TypeInt,
+													Optional:    true,
+													Description: `Minimum number of nodes in while the schedule is active.`,
+												},
+												"name": {
+													Type:        schema.TypeString,
+													Optional:    true,
+													Description: `Name of the schedule.`,
+												},
+												"time_zone": {
+													Type:     schema.TypeString,
+													Computed: true,
+													Optional: true,
+													Description: `The location-based IANA time zone for interpreting the schedule's start
+time. If no time zone is provided, UTC is used by default.`,
+												},
+											},
+										},
+									},
+								},
+							},
+						},
 						"node_count": {
 							Type:        schema.TypeInt,
 							Optional:    true,

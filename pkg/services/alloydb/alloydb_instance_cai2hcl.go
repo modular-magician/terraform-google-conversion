@@ -276,6 +276,8 @@ func flattenAlloydbInstanceReadPoolConfig(v interface{}, d *schema.ResourceData,
 	transformed := make(map[string]interface{})
 	transformed["node_count"] =
 		flattenAlloydbInstanceReadPoolConfigNodeCount(original["nodeCount"], d, config)
+	transformed["auto_scaling_config"] =
+		flattenAlloydbInstanceReadPoolConfigAutoScalingConfig(original["autoScalingConfig"], d, config)
 	if tgcresource.AllValuesAreNil(transformed) {
 		return nil
 	}
@@ -297,6 +299,228 @@ func flattenAlloydbInstanceReadPoolConfigNodeCount(v interface{}, d *schema.Reso
 	}
 
 	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["policy"] =
+		flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicy(original["policy"], d, config)
+	transformed["schedules"] =
+		flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedules(original["schedules"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicy(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["enabled"] =
+		flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyEnabled(original["enabled"], d, config)
+	transformed["max_node_count"] =
+		flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyMaxNodeCount(original["maxNodeCount"], d, config)
+	transformed["cool_down_period_sec"] =
+		flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyCoolDownPeriodSec(original["coolDownPeriodSec"], d, config)
+	transformed["cpu_utilization"] =
+		flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyCpuUtilization(original["cpuUtilization"], d, config)
+	transformed["connections_count"] =
+		flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyConnectionsCount(original["connectionsCount"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyEnabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyMaxNodeCount(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyCoolDownPeriodSec(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyCpuUtilization(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["utilization_target"] =
+		flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyCpuUtilizationUtilizationTarget(original["utilizationTarget"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyCpuUtilizationUtilizationTarget(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyConnectionsCount(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	original := v.(map[string]interface{})
+	transformed := make(map[string]interface{})
+	transformed["target_count"] =
+		flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyConnectionsCountTargetCount(original["targetCount"], d, config)
+	if tgcresource.AllValuesAreNil(transformed) {
+		return nil
+	}
+	return []interface{}{transformed}
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigPolicyConnectionsCountTargetCount(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedules(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return v
+	}
+	l := v.([]interface{})
+	transformed := make([]interface{}, 0, len(l))
+	for _, raw := range l {
+		original := raw.(map[string]interface{})
+		if len(original) < 1 {
+			// Do not include empty json objects coming back from the api
+			continue
+		}
+		transformed = append(transformed, map[string]interface{}{
+			"name":            flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesName(original["name"], d, config),
+			"cron_expression": flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesCronExpression(original["cronExpression"], d, config),
+			"duration_sec":    flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesDurationSec(original["durationSec"], d, config),
+			"min_node_count":  flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesMinNodeCount(original["minNodeCount"], d, config),
+			"time_zone":       flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesTimeZone(original["timeZone"], d, config),
+			"disabled":        flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesDisabled(original["disabled"], d, config),
+			"description":     flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesDescription(original["description"], d, config),
+		})
+	}
+	return transformed
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesName(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesCronExpression(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesDurationSec(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesMinNodeCount(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	// Handles the string fixed64 format
+	if strVal, ok := v.(string); ok {
+		if intVal, err := tpgresource.StringToFixed64(strVal); err == nil {
+			return intVal
+		}
+	}
+
+	// number values are represented as float64
+	if floatVal, ok := v.(float64); ok {
+		intVal := int(floatVal)
+		return intVal
+	}
+
+	return v // let terraform core handle it otherwise
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesTimeZone(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesDisabled(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	return v
+}
+
+func flattenAlloydbInstanceReadPoolConfigAutoScalingConfigSchedulesDescription(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
+	if v == nil {
+		return nil
+	}
+	if strVal, ok := v.(string); ok && strVal == "" {
+		return nil
+	}
+	return v
 }
 
 func flattenAlloydbInstanceMachineConfig(v interface{}, d *schema.ResourceData, config *transport_tpg.Config) interface{} {
