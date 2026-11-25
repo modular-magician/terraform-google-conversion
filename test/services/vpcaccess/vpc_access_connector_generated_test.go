@@ -72,7 +72,6 @@ func TestAccVPCAccessConnector(t *testing.T) {
 					"lifecycle",
 					"provider",
 					"region",
-					"self_link",
 					"timeouts",
 				},
 				"google_vpc_access_connector",
