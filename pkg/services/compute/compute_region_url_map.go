@@ -430,7 +430,7 @@ After a backend service is identified and before forwarding the request to the b
 										Type:             schema.TypeString,
 										Optional:         true,
 										DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
-										Description:      `The full or partial URL to the default BackendService resource. Before forwarding the request to backendService, the load balancer applies any relevant headerActions specified as part of this backendServiceWeight.`,
+										Description:      `The full or partial URL to the default RegionBackendService resource. Before forwarding the request to backendService, the load balancer applies any relevant headerActions specified as part of this backendServiceWeight.`,
 									},
 									"header_action": {
 										Type:     schema.TypeList,
@@ -540,7 +540,8 @@ routing actions like URL Rewrites, etc. take effect prior to sending the request
 backend. However, if defaultService is specified, defaultRouteAction cannot contain any
 weightedBackendServices. Conversely, if routeAction specifies any
 weightedBackendServices, service must not be specified.  Only one of defaultService,
-defaultUrlRedirect or defaultRouteAction.weightedBackendService must be set.`,
+defaultUrlRedirect or defaultRouteAction.weightedBackendService must be set.
+Can refer to a RegionBackendService or RegionBackendBucket.`,
 				ExactlyOneOf: []string{"default_route_action.0.weighted_backend_services", "default_service", "default_url_redirect"},
 			},
 			"default_url_redirect": {
@@ -924,7 +925,7 @@ the host / authority header is suffixed with -shadow.`,
 													Type:             schema.TypeString,
 													Required:         true,
 													DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
-													Description:      `The full or partial URL to the BackendService resource being mirrored to.`,
+													Description:      `The full or partial URL to the RegionBackendService resource being mirrored to.`,
 												},
 												"mirror_percent": {
 													Type:         schema.TypeFloat,
@@ -1089,7 +1090,7 @@ additional settings specified in this HttpRouteAction.`,
 													Type:             schema.TypeString,
 													Optional:         true,
 													DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
-													Description: `The full or partial URL to the default BackendService resource. Before forwarding the
+													Description: `The full or partial URL to the default RegionBackendService resource. Before forwarding the
 request to backendService, the loadbalancer applies any relevant headerActions
 specified as part of this backendServiceWeight.`,
 												},
@@ -1200,7 +1201,7 @@ The value must be between 0 and 1000`,
 							Type:             schema.TypeString,
 							Optional:         true,
 							DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
-							Description: `A reference to a RegionBackendService resource. This will be used if
+							Description: `A reference to a RegionBackendService or RegionBackendBucket resource. This will be used if
 none of the pathRules defined by this PathMatcher is matched by
 the URL's path portion.`,
 						},
@@ -1818,7 +1819,7 @@ prior to sending the response back to the client.`,
 										Type:             schema.TypeString,
 										Optional:         true,
 										DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
-										Description: `The region backend service resource to which traffic is
+										Description: `The RegionBackendService or RegionBackendBucket resource to which traffic is
 directed if this rule is matched. If routeAction is additionally specified,
 advanced routing actions like URL Rewrites, etc. take effect prior to sending
 the request to the backend. However, if service is specified, routeAction cannot
@@ -2750,7 +2751,7 @@ prior to sending the response back to the client.`,
 										Type:             schema.TypeString,
 										Optional:         true,
 										DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
-										Description: `The region backend service resource to which traffic is
+										Description: `The RegionBackendService or RegionBackendBucket resource to which traffic is
 directed if this rule is matched. If routeAction is additionally specified,
 advanced routing actions like URL Rewrites, etc. take effect prior to sending
 the request to the backend. However, if service is specified, routeAction cannot
@@ -2867,7 +2868,7 @@ succeed only if all of the test cases pass.`,
 							Type:             schema.TypeString,
 							Required:         true,
 							DiffSuppressFunc: tpgresource.CompareSelfLinkOrResourceName,
-							Description:      `A reference to expected RegionBackendService resource the given URL should be mapped to.`,
+							Description:      `A reference to expected RegionBackendService or RegionBackendBucket resource the given URL should be mapped to.`,
 						},
 						"description": {
 							Type:        schema.TypeString,
